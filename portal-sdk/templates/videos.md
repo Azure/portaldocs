@@ -13,7 +13,6 @@ Watch this tutorial to understand, implement debug forms using EditScope
 [![Working with EditScope](../media/videos/editscope.png)](https://auxdocs.blob.core.windows.net/videos/EditScope_H264_4500kbps_AAC_und_ch2_128kbps.mp4)
 
 [Learn More](./articles/portalfx-forms-working-with-edit-scopes)
-[PowerPoint](https://auxdocs.blob.core.windows.net/videos/editscope20150312.pptx)
 
 ## Debugging
 
@@ -26,4 +25,3 @@ Watch this tutorial to understand, implement debug forms using EditScope
 [![Performance brownbag](../media/videos/performancebrownbag.png)](https://auxdocs.blob.core.windows.net/videos/IbizaExtensionPerfandReliabilityBrownBag20150826_H264_4500kbps_AAC_und_ch2_128kbps.mp4)
 
 [Learn More](./articles/portalfx-performance)
-[PowerPoint](https://auxdocs.blob.core.windows.net/videos/PerfBrownbag_8_26_2015.pptx)
