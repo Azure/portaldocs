@@ -1,0 +1,38 @@
+<properties title="" pageTitle="Open Browse Sample" description="" authors="" />
+
+# Open Browse Sample
+Although we recommend that you use deep links to open your extension's resources directly, sometimes you may want to open your extension's resource via the browse flyout.  
+
+# Open the browse flyout
+In order to open the browse flyout, you can access the portal instance's **sidebar** class, call the **sidebar.OpenBrowseFlyout()** function, and then verify that the browse flyout has opened successfully.
+
+```cs
+{"gitdown": "include-section", "file": "../SampleCSTestsFiles/BrowseTest.cs", "section": "config#openBrowseItem"}
+```
+
+# Make sure the grid has loaded all expected columns
+The browse blade may take some time before it is ready.  Interacting with the blade before hand may cause unpredicable behavior in the test if items are shifting around.  To alleviate this issue, we wait for all expected column headers to be loaded before continuing.
+
+```cs
+{"gitdown": "include-section", "file": "../SampleCSTestsFiles/BrowseTest.cs", "section": "config#waitForGridToLoadAllColumns"}
+```
+
+# Choosing columns in the browse blade
+One thing that you may want to verify are the columns that show up in the browse blade.  We start by finding the command bar and clicking the Column command using the **blade.FindCommandBar().ClickCommandBaritem()** API.  That opens the column choose blade which contains a list of columns.  Since the list is actually represented by a grid (you can check the DOM to see this), we want to find the grid first and then search its cells for the specific checkbox we want to enable.  Once the columns we have selected the columns we want to enable, we click the update button to apply our changes.
+
+```cs
+{"gitdown": "include-section", "file": "../SampleCSTestsFiles/BrowseTest.cs", "section": "config#chooseColumns"}
+```
+
+# Verifying the columns
+As with any test, we always want to verify that our action was successful.  In this case, we go back to the browse blade and verify the headers are what we expect.
+
+```cs
+{"gitdown": "include-section", "file": "../SampleCSTestsFiles/BrowseTest.cs", "section": "config#verifyNewColumns"}
+```
+
+# Full Browse Sample
+
+```cs
+    {"gitdown": "include", "file": "../SampleCSTestsFiles/BrowseTest.cs"}
+```
