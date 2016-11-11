@@ -180,12 +180,36 @@ interface ResourceMenuConfig {
 }
 ```
 
-The 'groups' property is how items are defined. An array of groups needs to be specified and each group contains an array of menu items. Each of the items will then open a blade.
-The 'defaultItemId' is the identifier of which item that is selected by default, the ID must match an ID of menu item defined within one of the groups.
-The 'options' are the optional framework menu items; Tags, RBAC, New support request, Audit logs, Troubleshoot and Resource health. You can opt in/out of any of the
-functionality, some have smart defaults that will opt your resource in by default
+| Property        | Description |
+|-----------------|-------------|
+| `groups`        | Array of groups and menu items within each group that will open a blade |
+| `defaultItemId` | ID of the menu item (defined in `groups`) to be selected by default |
+| `options`       | Flags to show/hide common menu items |
 
-In this case let's assume your resource has an item with the ID 'overview' and has also on-boarded onto support and can opt into all the framework options.
+The following options are available:
+
+| Option                        | Exit criter | Enabled by default | Scenario |
+|-------------------------------|-------------|--------------------|----------|
+| `enableAlerts`                | No  | No | Create, view, and update alert rules. |
+| `enableAppInsights`           | No  | No | View Application Insights monitoring. |
+| `enableDiagnostics`           | No  | No | View monitoring diagnostics. |
+| `enableExportTemplate`        | Yes | Resources, resource groups | Export a template of the resource group to automate redeployments. RPs must provide [template schemas](http://aka.ms/armschema) for this. Does not support classic resources. |
+| `enableLocks`                 | Yes | Resources, resource groups, subscriptions | Lock resources to avoid accidental deletion and/or editing. |
+| `enableLogAnalytics`          | No  | No | View OMS workspace. |
+| `enableLogSearch`             | No  | No | Search logs. |
+| `enableMetrics`               | No  | No | View monitoring metrics. |
+| `enableProperties`            | No  | No | Generic properties blade for resources. Only includes standard ARM properties today, but may be integrated with the supplemental data, if needed. (Please file a [partner request](http://aka.ms/portalfx/request).) Does not support non-tracked resources. |
+| `enableRbac`                  | Yes | All ARM resource types | Manage user/role assignments for this resource. |
+| `enableSupportEventLogs`      | Yes | Resources, resource groups, subscriptions | View all operations and events |
+| `enableSupportHelpRequest`    | Yes | All ARM resource types | Create a support request for this resource, resource group, or subscription. |
+| `enableSupportResourceHealth` | Yes | No | Check resource for common health issues (e.g. connectivity) and recommend fixes. |
+| `enableSupportTroubleshoot`   | No  | No | **Deprecated. Do not use.** Legacy support only. Moved to a new design with improved usability scores. |
+| `enableSupportTroubleshootV2` | Yes | No | Troubleshoot possible availability/reliability issues (e.g. connectivity). |
+| `enableTags`                  | Yes | Resources, resource groups, subscriptions | Tag resource with key/value pairs to group/organize related resources. RP must support PATCH operations to update tags. Does not support classic resources. |
+| `showAppInsightsFirst`        | No  | No | View Application Insights monitoring. `enableAppInsights` must be set to `true`. |
+
+In this case let's assume your resource has an item with the ID 'overview' and has also onboarded support, getting
+export template, locks, RBAC, Activity Log, new support request, and tags automatically:
 
 ```ts
 public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): MsPortalFx.Base.PromiseV<MsPortalFx.Assets.ResourceMenuConfig> {
@@ -193,14 +217,12 @@ public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): MsPor
         <MsPortalFx.Assets.ResourceMenuConfig>{
             defaultItemId: "overview",
             options: {
-                enableRbac: true,
-                enableSupportHelpRequest: true,
                 enableSupportTroubleshoot: true,
-                enableSupportResourceHealth: true,
-                enableSupportEventLogs: true,
-                enableTags: true
+                enableSupportResourceHealth: true
             },
-            groups: <FxMenuBlade.MenuGroup[]>[]
+            groups: <FxMenuBlade.MenuGroup[]>[
+                ...
+            ]
         }
     );
 }
@@ -264,12 +286,8 @@ public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): MsPor
         <MsPortalFx.Assets.ResourceMenuConfig>{
             defaultItemId: "overview",
             options: {
-                enableRbac: true,
-                enableSupportHelpRequest: true,
                 enableSupportTroubleshoot: true,
-                enableSupportResourceHealth: true,
-                enableSupportEventLogs: true,
-                enableTags: true
+                enableSupportResourceHealth: true
             },
             groups: <FxMenuBlade.MenuGroup[]>[
                 {
@@ -346,4 +364,3 @@ Next Steps:
 
 * If there are any issues please reach out to [ibiza Menu Blade](mailto:ibiza-menu-blade@microsoft.com) 
 
-	

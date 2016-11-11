@@ -122,9 +122,14 @@ issues caused by anti-patterns and inconsistencies that block usability, perform
 
 Ready to write your first Azure portal extension? Here are a few resources to get you started:
  
+1. **Join the right groups**:
+   - PMs should join [ibizapartners-pm](http://igroup/join/ibizapartners-pm)
+   - Devs should join [ibizapartners-dev](http://igroup/join/ibizapartners-dev)
+   - To be notified about upcoming breaking changes, join [ibizabeak](http://igroup/join/ibizabreak)
+
 1. **[Download the SDK](http://aka.ms/portalfx/download)**
 
-2. **[Read the docs](http://aka.ms/portalfx/documents)**
+1. **[Read the docs](http://aka.ms/portalfx/documents)**
 
    Our doc site provides the technical details while you are building your extension. The
    [Getting Started](/portal-sdk/generated/index-portalfx-extension-development.md#getting-started)
@@ -139,12 +144,7 @@ Ready to write your first Azure portal extension? Here are a few resources to g
    Before starting to build your extension, please setup time to review your design and ensure your desired outcome is
    feasible.
 
-5. **Join the right groups**:
-   - PMs should join [ibizapartners-pm](http://igroup/join/ibizapartners-pm)
-   - Devs should join [ibizapartners-dev](http://igroup/join/ibizapartners-dev)
-   - To be notified about upcoming breaking changes, join [ibizabeak](http://igroup/join/ibizabreak)
-
-6. **[Ask questions on //stackoverflow](https://stackoverflow.microsoft.com)**
+1. **[Ask questions on //stackoverflow](https://stackoverflow.microsoft.com)**
 
    Join the community in https://stackoverflow.microsoft.com and let us know if you have any questions. (Don't forget to
    tag questions with "ibiza" or related tag.)
@@ -163,11 +163,68 @@ Ready to write your first Azure portal extension? Here are a few resources to g
 
    **DOGFOOD**: Use AzureGallery.exe to upload items to DOGFOOD using the following command:
 
-```
-AzureGallery.exe upload -p ..\path\to\package.azpkg -h [optional hide key]
-```
+   `AzureGallery.exe upload -p ..\path\to\package.azpkg -h [optional hide key]`
 
    In order to use the gallery loader you will need to set some values in the AzureGallery.exe.config file for details see [AzureGallery.exe docs](/documentation/articles/gallery-items#gallery-package-management). For dev/test scenarios see [Test In Prod](/documentation/articles/gallery-development)
+
+1. **Recommended patterns**
+
+   The following patterns are recommended for every extension based on customer feedback and usability studies, but are
+   not required:
+
+   - **Menu blade**
+
+     All services should use the menu blade instead of the Settings blade. ARM resources should opt in to the resource
+     menu for a simpler, streamlined menu.
+
+     See also:
+     - [#ibiza-blades-parts on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-blades-parts) for menu blade questions
+     - [#ibiza-resources on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-resources) for resource menu questions
+     - [Ask a menu blade question](https://stackoverflow.microsoft.com/questions/ask?tags=ibiza-blades-parts)
+     - [Ask a resource menu question](https://stackoverflow.microsoft.com/questions/ask?tags=ibiza-resources)
+
+   - **Activity logs** (Stakeholder: [Rajesh Ramabathiran](mailto:ibiza-activity-logs@microsoft.com))
+
+      Activity/event/operation/audit logs should be available from the menu for all services. Subscription-based
+      resources (not just tracked resources) get this for free when implementing the resource menu. All other services
+      should add the equivalent experience for their service.
+
+   - **Create blades**
+
+     All Create blades should be a single blade. **Do not use wizards or picker blades.** Use form sections and
+     dropdowns. Subscription-based resources should use the built-in subscription, resource group, location, and
+     pricing dropdowns; especially in Create blades. These each cover common scenarios that will save time and avoid
+     deployment failures. The subscription, resource group, and location picker blades have been deprecated.
+
+     Every service should also expose a way to get scripts to automate provisioning. Automation options should include
+     CLI, PowerShell, .NET, Java, Node, Python, Ruby, PHP, and REST (in that order). ARM-based services that use
+     template deployment are opted in by default.
+
+     See also:
+     - [Create documentation](/portal-sdk/generated/index-portalfx-extension-development.md#common-scenarios-building-create-experiences)
+     - [#ibiza-create on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-create)
+     - [Ask a question](https://stackoverflow.microsoft.com/questions/ask?tags=ibiza-create)
+
+   - **Browse (resource list) blades**
+
+      All Browse blades should have:
+      - "Add" command to help customers create new resources quickly
+      - Context menu commands in the "..." menu for each row
+      - Show all resource properties in the column chooser
+
+      See also:
+      - [Browse documentation](/documentation/articles/portalfx-browse)
+      - [Asset documentation](/documentation/articles/portalfx-assets)
+      - [#ibiza-browse on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-browse)
+      - [Ask a question](https://stackoverflow.microsoft.com/questions/ask?tags=ibiza-browse)
+
+   - **Export template / RP schema**
+
+     ARM RPs must provide a schema for all tracked and nested resource types to ensure they support the export template
+     capability. Export template is enabled by default from the resource menu.
+
+     See also:
+     - [RP schema documentation](http://aka.ms/rpschema)
 
 0. **Register your extension**
 
@@ -179,9 +236,7 @@ AzureGallery.exe upload -p ..\path\to\package.azpkg -h [optional hide key]
    (e.g. `Contoso_Azure_{extension}` or `Microsoft_Azure_{extension}`). Set the extension name in `extension.pdl` as
    follows:
 
-```xml
-<Extension Name="Company_BrandOrSuite_ProductOrComponent" Preview="true">
-```
+   `<Extension Name="Company_BrandOrSuite_ProductOrComponent" Preview="true">`
 
    Extension URLs must use a standard CNAME pattern. Create CNAMEs using
    [Microsoft's DNS](http://msinterface/form.aspx?ID=4260) (use any Azure property as the identity).
@@ -209,6 +264,6 @@ AzureGallery.exe upload -p ..\path\to\package.azpkg -h [optional hide key]
 
 1. **[Exit criteria + quality metrics](/documentation/articles/portalfx-onboarding-exitcriteria)**
 
-   Every extension must meet required [exit criteria / quality metrics before it will be enabled.
+   Every extension must meet required exit criteria / quality metrics before it will be enabled.
 
 For any other questions, don’t hesitate to ask us on [https://stackoverflow.microsoft.com](https://stackoverflow.microsoft.com).

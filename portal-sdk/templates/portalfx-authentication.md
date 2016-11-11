@@ -55,7 +55,7 @@ Calling alternate resources involves AAD Onboarding that can take 5-6 weeks so w
 
 #### From client
 Only ibiza has the authority to mint tokens so in order to call external resourses extension developers need to request Ibiza to create the AAD and register the resources with Ibiza.
- 
+
 Here is an example that walks you through on how to enable Contoso_Extension, a sample extension, that can query Graph APIs from extension client :
 
 1. To query graph API's, an extension owner would submit [RDTask](http://aka.ms/portalfx/newextension) to onboard AAD Application with the portal.AAD Onboarding can take 5-6 weeks so we recommend extension developers to think about this scenarios early in the design phase.
@@ -72,10 +72,10 @@ Here is an example that walks you through on how to enable Contoso_Extension, a 
     "resourceAccess": [{
         "name": "",
         "resource": "https://management.core.windows.net/"
-    }, {
+        }, {
         "name": "graph",
         "resource": "https://graph.windows.net"
-    }]
+        }]
 }
 ```
 
@@ -106,10 +106,6 @@ new MsPortalFx.ViewModels.FileDownloadCommand({
     }
 });
 ```
-
-
-**NOTE:** MsPortalFx.Base.Security.getAuthorizationToken(), MsPortalFx.Base.Net2.ajax(), MsPortalFx.ViewModels.FileDownloadCommand, and MsPortalFx.ViewModels.FileDownloadButton.ViewModel
-provide the ability to request authorization tokens for named resources other than the default Azure Resource Manager
 
 #### From Controller or Server-Side
 
@@ -142,9 +138,9 @@ Sample code for exchanging toke:
 
 Add an extra parameter to ajax calls (setAuthorizationHeader = { resourceName: "self" }
 
-Which means give me a token to myself and Ill exchange that token later
+Which means give me a token to myself and I’ll exchange that token later
 
-```cs
+```cs 
     MsPortalFx.Base.Net2.ajax({
         uri: "MyController/MyAction",
         setAuthorizationHeader: { resourceName: "self" }
@@ -154,52 +150,82 @@ Which means give me a token to myself and Ill exchange that token later
 ```
 
 Controller code.
-
+ 
 ```cs
     // Get the token passed to the controller
     var portalAuthorizationHeader = PortalRequestContext.Current.GetCorrelationData<AuthorizationCorrelationProvider>();
     if (portalAuthorizationHeader == null) {
-     // This should never happen, the auth module should have returned 401 if there wasnt a valid header present
-     throw new HttpException(401, "Unauthorized");
+        // This should never happen, the auth module should have returned 401 if there wasn’t a valid header present
+        throw new HttpException(401, "Unauthorized");
     }
-
+ 
     // Exchange it for the token that should pass to downstream services
     var exchangedAuthorizationHeader = GetExchangedToken(portalAuthorizationHeader, intuneClientId, intuneClientCert, "https://graph.windows.net/");
-
+ 
     // Call downstream service with exchanged header
     var headers = new NameValueCollection();
     headers.Add("Authorization", exchangedAuthorizationHeader);
     webApiClient.GetAsync(uri, "MyOperation", headers);
-
+ 
     // Helper method to exchange tokens
     string GetExchangedToken(string portalAuthorizationHeader, string clientId, X509Certificate2 clientCertificate, string resource) {
 
         // proof that the intune extension is making the token request
-     var clientAssertion = new ClientAssertionCertificate(clientId, clientCertificate);
-    
-     // proof that the request originated from the portal and is on behalf of a valid user
-     var accessToken = GetAccessTokenFromAuthorizationHeader(portalAuthorizationHeader);
-     var userAssertion = new UserAssertion(accessToken, "urn:ietf:params:oauth:grant-type:jwt-bearer"); 
-    
-     // the actual token exchange
-     var exchangedToken = authContext.AcquireToken(resource, clientAssertion, userAssertion); 
-    
-     return exchangedToken.GetAuthorizationHeader();
+        var clientAssertion = new ClientAssertionCertificate(clientId, clientCertificate);
+     
+        // proof that the request originated from the portal and is on behalf of a valid user
+        var accessToken = GetAccessTokenFromAuthorizationHeader(portalAuthorizationHeader);
+        var userAssertion = new UserAssertion(accessToken, "urn:ietf:params:oauth:grant-type:jwt-bearer"); 
+     
+        // the actual token exchange
+        var exchangedToken = authContext.AcquireToken(resource, clientAssertion, userAssertion); 
+     
+        return exchangedToken.GetAuthorizationHeader();
     }
-
+ 
     string GetAccessTokenFromAuthorizationHeader(string authorizationHeader) {
-     // The header will be in the form "Bearer eyMZ"
-     // The access token in the last part of the header
-     var separator = new char[] { ' ' };
-     var accessToken = authorizationHeader.Split(separator, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
-    
-     return accessToken;
+        // The header will be in the form "Bearer ey……MZ"
+        // The access token in the last part of the header
+        var separator = new char[] { ' ' };
+        var accessToken = authorizationHeader.Split(separator, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+     
+        return accessToken;
     }
 ```
 
-### Accessing claims from your server
+### Accessing claims
 
-The token used to communicate with your server contains claims (key/value pairs) that identify the target and destination systems as well as the calling user. Reading claims can be accomplished from the server using the [ASP.NET claims API](http://msdn.microsoft.com/en-us/library/ee517271.aspx). To simplify development, the [HttpContext.User](http://msdn.microsoft.com/library/system.web.httpcontext.user.aspx) has been augmented with the most commonly used claims.
+Tokens received from AAD contain a set of claims (key/value pairs) with information about user, including
+personally-identifiable information (PII). Note that PII will only be available to extension who fall under the
+[Azure privacy policy](https://www.microsoft.com/TrustCenter/Privacy). Extensions that don't fall under this policy
+(e.g. share PII with third-parties) will not have access to the token or its claims. This is due to the fact that
+Microsoft can be sued for abuse/misuse of PII as outlined by the privacy policy. Any exceptions need to be approved by
+[Ibiza LCA](mailto:ibiza-lca@microsoft.com).
+
+#### Accessing claims from the client
+Extensions that do have access to claims can use the `getUserInfo()` API to retrieve common claims from the client. Note
+that secondary claims, like name and email, may not always be available and cannot be guarranteed. Token claims may
+change over time as AAD evolves. Do not make hard dependencies on claims and never extract claims yourself. Instead,
+call Graph to get required user information.
+
+```ts
+MsPortalFx.Base.Security.getUserInfo() : PromiseV<MsPortalFx.Base.Security.UserInfo>
+
+interface UserInfo {
+    email: string;          // Guest accounts not homed in the current directory will have a UPN and not a valid email address
+    givenName: string;      // Name may be empty if not provided in the token
+    surname: string;        // Name may be empty if not provided in the token
+    directoryId: string;
+    directoryName: string;  // Directory name may be empty if calling Graph fails
+    domainName: string;     // Directory domain may be empty if calling Graph fails
+}
+```
+
+#### Accessing claims from your server
+While not recommended, the token used to communicate with your server also contains claims that can be read from the
+server using the [ASP.NET claims API](http://msdn.microsoft.com/en-us/library/ee517271.aspx). To simplify development,
+the [HttpContext.User](http://msdn.microsoft.com/library/system.web.httpcontext.user.aspx) has been augmented with the
+most commonly used claims.
 
 First, reference the following assemblies:
 

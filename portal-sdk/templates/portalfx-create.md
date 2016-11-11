@@ -80,7 +80,7 @@ for each of these. Refer to the EngineV3 Create sample
 
 ##### Subscriptions dropdown
 ```ts
-*`MsPortalFx.Azure.Subscriptions.DropDown`
+* `MsPortalFx.Azure.Subscriptions.DropDown`
 
 // The subscriptions drop down.
 var subscriptionsDropDownOptions: SubscriptionsDropDown.Options = {
@@ -106,7 +106,7 @@ this.subscriptionsDropDown = new SubscriptionsDropDown(container, subscriptionsD
 ```
 ##### Resource groups dropdown
 ```ts
-*`MsPortalFx.Azure.ResourceGroups.DropDown`
+* `MsPortalFx.Azure.ResourceGroups.DropDown`
 
 var resourceGroupsDropDownOptions: ResourceGroups.DropDown.Options = {
     options: ko.observableArray([]),
@@ -140,7 +140,8 @@ this.resourceGroupDropDown = new ResourceGroups.DropDown(container, resourceGrou
 ```
 ##### Locations dropdown
 ```ts
-*`MsPortalFx.Azure.Locations.DropDown`
+* `MsPortalFx.Azure.Locations.DropDown`
+* [`Fx/Specs/DropDown`](/portal-sdk/generated/portalfx-extension-development.md#portalfx-extension-pricing-tier)
 
   // The locations drop down.
  var locationsDropDownOptions: LocationsDropDown.Options = {

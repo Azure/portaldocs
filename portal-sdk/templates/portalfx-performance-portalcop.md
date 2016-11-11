@@ -1,5 +1,3 @@
-<properties title="" pageTitle="Performance PortalCop" description="" authors="gurua" />
-
 ## PortalCop
 The Portal Framework team has built a tool called PortalCop that can help reduce code size and remove redundant RESX entries.
 

@@ -29,6 +29,7 @@
 {"gitdown": "include-file", "file": "../templates/portalfx-subscriptions.md"}
 {"gitdown": "include-file", "file": "../templates/portalfx-tags.md"}
 {"gitdown": "include-file", "file": "../templates/portalfx-resourcemove.md"}
+{"gitdown": "include-file", "file": "../templates/portalfx-extension-pricing-tier.md"}
 
 # Debugging
 {"gitdown": "include-file", "file": "../templates/portalfx-debugging.md"}
@@ -37,4 +38,4 @@
 
 # Other
 {"gitdown": "include-file", "file": "../templates/portalfx-binding-reference.md"}
-{"gitdown": "include-file", "file": "../templates/portalfx-view-model-best-practices.md"}
+{"gitdown": "include-file", "file": "../templates/portalfx-blade-viewmodel.md"}

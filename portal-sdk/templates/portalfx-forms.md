@@ -14,8 +14,8 @@ The SDK includes extensive support for displaying and managing user input. Forms
 
 To get started using forms, pick from one of the following topics:
 
+* [Layouting out UI](/documentation/articles/portalfx-forms-sections)
 * [Building a form](/documentation/articles/portalfx-forms-construction)
-* [Form Sections](/documentation/articles/portalfx-forms-sections)
 * [Validation](/documentation/articles/portalfx-forms-field-validation)
 * [Edit Scopes](/documentation/articles/portalfx-forms-working-with-edit-scopes)
 * [Command integration](/documentation/articles/portalfx-forms-integrating-with-commands)
