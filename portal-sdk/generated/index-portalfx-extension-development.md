@@ -2541,6 +2541,16 @@ Template blades can store settings, define how they behave when pinned to the da
 <a name="basic-concepts-blades-templateblade-advanced-options"></a>
 ### TemplateBlade Advanced Options
 
+<a name="basic-concepts-blades-deep-linking"></a>
+### Deep linking
+
+"Deep linking" is the feature where the portal URL is updated when a blade is opened (giving the user a URL to directly navigate to the new blade).
+By design only certain blades are deep linkable. Blades that aren't deep linkable are those that can't be opened independent of some parent 
+blade or part, like blades that return values to their caller. Think of these non-deep linkable blades as web pages in the middle of an website's
+check-out experience.
+
+One of the easiest ways to make your blade deep linkable is to mark your TemplateBlade as pinnable. See more information about pinning [here](#basic-concepts-blades-pinning-your-blade).
+
 <a name="basic-concepts-blades-showing-a-shield-loading-status-in-your-blade"></a>
 ### Showing a shield / loading status in your blade
 
@@ -2632,7 +2642,7 @@ this.statusBar(statusBar);
 <a name="basic-concepts-blades-pinning-your-blade"></a>
 ### Pinning your blade
 
-Blades can be pinned to the dashboard by default. To prevent blades to be pinned, you need to set `Pinnable="false"` in the blade's PDL definition.
+You can mark your blades as able to be pinned to the dashboard by setting `Pinnable="true"` in the TemplateBlade's PDL definition.
 
 By default blades are pinned as button parts to the dashboard.
 
