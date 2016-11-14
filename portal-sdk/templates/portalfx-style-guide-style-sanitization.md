@@ -18,3 +18,7 @@ The following properties are sanitized out:
 * font
 * font-family
 * list-style
+
+Certain properties have inconsistent behavior across browsers, or full support requires vendor prefixes. To enable them in a supported way, use the Framework style class instead.
+
+* user-select: use class 'msportalfx-unselectable'
