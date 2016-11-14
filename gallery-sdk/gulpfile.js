@@ -2,12 +2,12 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+var gulpCommon = require('../gulpcommon.js');
 var fs = require('fs');
 var Q = require('q');
 var gulp = require('gulp');
 var path = require('path');
 var ncp = require('ncp');
-var gulpCommon = require('../gulpcommon.js');
 
 //directories have to work within both AzureUx-PortalFx and portalfx-docs-pr repos.
 const sdkDir = __dirname;

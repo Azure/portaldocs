@@ -2,6 +2,15 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+//workaround no support for Visual Studio Online url format
+var fs = require('fs');
+var utilFilePath = process.cwd() + '\\node_modules\\gitinfo\\dist\\utils.js';
+if(fs.existsSync(utilFilePath)) {
+    var utilContent = fs.readFileSync(utilFilePath, { 'encoding': 'utf8' });
+    var result = utilContent.replace(/url.length !== 2/g, 'url.length < 2');
+    fs.writeFileSync(utilFilePath, result, { 'encoding': 'utf8' });
+}
+
 var gitdownIncludeHelper = require('gitdown/dist/helpers/include.js');
 var fs = require('fs');
 var gitdown = require('gitdown');
@@ -11,6 +20,8 @@ var util = require('util');
 var deadlink = require('deadlink');
 var chalk = require('chalk');
 var urlExt = require('url-extractor');
+var findup = require('findup');
+var gitPath = findup.sync(process.cwd(), '.git\\HEAD');
 
 var self = module.exports = {
     /**
@@ -43,6 +54,7 @@ var self = module.exports = {
     processFile: function (inputFile, outDir, config, relativeLinkToHash) {
         console.log("processing: " + inputFile);
         var gd = gitdown.readFile(path.resolve(inputFile));
+        config.gitinfo = config.gitinfo || { gitPath: gitPath};
         gd.setConfig(config);
 
         //register a custom helper that injects h1 anchor tags per document

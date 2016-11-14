@@ -2,23 +2,14 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
-//workaround no support for Visual Studio Online url format
+var gulpCommon = require('../gulpcommon.js');
 var fs = require('fs');
-var utilFilePath = process.cwd() + '\\node_modules\\gitinfo\\dist\\utils.js';
-if(fs.existsSync(utilFilePath)) {
-    var utilContent = fs.readFileSync(utilFilePath, { 'encoding': 'utf8' });
-    var result = utilContent.replace(/url.length !== 2/g, 'url.length < 2');
-    fs.writeFileSync(utilFilePath, result, { 'encoding': 'utf8' });
-}
-
 var storage = require('azure-storage');
 var Q = require('q');
-
 var gulp = require('gulp');
 var path = require('path');
 var util = require('util');
 var ncp = require('ncp');
-var gulpCommon = require('../gulpcommon.js');
 
 //directories have to work within both AzureUx-PortalFx and portalfx-docs-pr repos.
 const sdkDir = __dirname;
