@@ -20,8 +20,8 @@ We have partnered with the IaaS team to develop an open-source typescript test f
 Comparison of test-frameworks:
 
 - Maturity (Number of Selector APIs) : C# > typescript
-- (Built on Selenium webdriver open standard)[http://www.seleniumhq.org/projects/webdriver/] : Both Supported by Ibiza
-- Documentation for Typescript test framework is more upto date than C# test framework
+- [Built on Selenium webdriver open standard](http://www.seleniumhq.org/projects/webdriver/) : Both Supported by Ibiza
+- Documentation for Typescript test framework is more up to date than C# test framework
 - Test Execution Speed: typescript is 20% faster
-- Distributed independently from SDK: Typescript
+- Distributed independently from SDK: Both
 - Open Source contribution Model: Actively working on moving Typescript based test-fx to open source contribution model. We are investigating dev work to move C# based test-fx to open source contribution Model.
