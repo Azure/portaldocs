@@ -15,24 +15,17 @@ var ncp = require('ncp');
 const sdkDir = __dirname;
 const generatedDir = path.resolve(sdkDir, 'generated');
 const templatesDir = path.resolve(sdkDir, 'templates');
-const articlesDir = path.resolve(process.cwd(), 'articles');
 const mediaSourceDir = path.resolve(sdkDir, 'media');
-const mediaAuxDocsLegacyDir = path.resolve(articlesDir, 'media');
 const fourMonthsAgo = new Date(new Date().setMonth(new Date().getMonth() - 4));
 
 /**  
  * generates docs for ux design team
  */
 gulp.task('ux', function () {
-    return gulpCommon.processDirectory(templatesDir, articlesDir, "^portalfx-ux.+\.md").then(function () {
-        if (!fs.existsSync(generatedDir)){            
-            fs.mkdirSync(generatedDir);
-        }
-        return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-ux.md"), generatedDir, {}, true);
-    }).then(function () {
-        //DPS does not support ref to media folder in the root, so until we deprecate auxdocs.azurewebsites.net media folder has to be dulplicated to /root        
-        return ncp(mediaSourceDir, mediaAuxDocsLegacyDir);
-    });
+    if (!fs.existsSync(generatedDir)){
+        fs.mkdirSync(generatedDir);
+    }
+    return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-ux.md"), generatedDir, {}, true);
 });
 
 /**  
@@ -43,11 +36,8 @@ gulp.task('portal', function () {
     gulpCommon.createSymlink("portal-sdk/samples/SamplesExtension","../src/SDK/AcceptanceTests/Extensions/SamplesExtension" );
     gulpCommon.createSymlink("portal-sdk/samples/InternalSamplesExtension", "../src/SDK/AcceptanceTests/Extensions/InternalSamplesExtension");
 
-    //generates legacy auxdocs.azurewebsites.net content
-    return gulpCommon.processDirectory(templatesDir, articlesDir, "^.+\.md").then(function () {
-        //generate new master readme.md that appears in the root of the github repo that contains all sections
-        return gulpCommon.processFile(path.resolve(templatesDir, "README.md"), process.cwd(), {}, true);
-    }).then(function () {  //generate root level docs for each section
+    //generate new master readme.md that appears in the root of the github repo that contains all sections
+    return gulpCommon.processFile(path.resolve(templatesDir, "README.md"), process.cwd(), {}, true).then(function () {  //generate root level docs for each section
         if (!fs.existsSync(generatedDir)){            
             fs.mkdirSync(generatedDir);
         }
@@ -72,9 +62,6 @@ gulp.task('portal', function () {
         return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-extension-QnA.md"), generatedDir, {}, true);
     }).then(function () {
         return gulpCommon.processFile(path.resolve(templatesDir, "index-videos.md"), generatedDir, {}, true);
-    }).then(function () {
-        //DPS does not support ref to media folder in the root, so until we deprecate auxdocs.azurewebsites.net media folder has to be dulplicated to /root        
-        return ncp(mediaSourceDir, mediaAuxDocsLegacyDir);
     }).then(function () {
         var checkLinkPromises = [Q()];
         if(process.argv.indexOf("--verify") > 0) {
