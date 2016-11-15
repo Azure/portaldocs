@@ -33,51 +33,39 @@ gulp.task('ux', function () {
  */
 gulp.task('portal', function () {
     //required for short path to SamplesExtension
-    gulpCommon.createSymlink("portal-sdk/samples/SamplesExtension","../src/SDK/AcceptanceTests/Extensions/SamplesExtension" );
+    gulpCommon.createSymlink("portal-sdk/samples/SamplesExtension", "../src/SDK/AcceptanceTests/Extensions/SamplesExtension");
     gulpCommon.createSymlink("portal-sdk/samples/InternalSamplesExtension", "../src/SDK/AcceptanceTests/Extensions/InternalSamplesExtension");
+
+    if (!fs.existsSync(generatedDir)) {
+        fs.mkdirSync(generatedDir);
+    }
+
+    var indexDocNames = ["index-portalfx.md",
+        "index-portalfx-extension-development.md",
+        "index-portalfx-extension-sharing-pde.md",
+        "index-portalfx-extension-accessibility.md",
+        "index-portalfx-extension-deployment.md",
+        "index-portalfx-extension-onboarding.md",
+        "index-portalfx-extension-monitor.md",
+        "index-portalfx-extension-test.md",
+        "index-portalfx-extension-QnA.md",
+        "index-videos.md"];
 
     //generate new master readme.md that appears in the root of the github repo that contains all sections
     return gulpCommon.processFile(path.resolve(templatesDir, "README.md"), process.cwd(), {}, true).then(function () {  //generate root level docs for each section
-        if (!fs.existsSync(generatedDir)){            
-            fs.mkdirSync(generatedDir);
-        }
-        return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx.md"), generatedDir, {}, true);
-    }).then(function () {
-        return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-extension-development.md"), generatedDir, {}, true);
-    }).then(function () {
-        return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-extension-sharing-pde.md"), generatedDir, {}, true);
-    }).then(function () {
-        return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-extension-localization-globalization.md"), generatedDir, {}, true);
-    }).then(function () {
-        return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-extension-accessibility.md"), generatedDir, {}, true);
-    }).then(function () {
-        return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-extension-deployment.md"), generatedDir, {}, true);
-    }).then(function () {
-        return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-extension-onboarding.md"), generatedDir, {}, true);
-    }).then(function () {
-        return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-extension-monitor.md"), generatedDir, {}, true);
-    }).then(function () {
-        return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-extension-test.md"), generatedDir, {}, true);
-    }).then(function () {
-        return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-extension-QnA.md"), generatedDir, {}, true);
-    }).then(function () {
-        return gulpCommon.processFile(path.resolve(templatesDir, "index-videos.md"), generatedDir, {}, true);
+        var indexDocGenerationPromises = indexDocNames.map(function (indexFileName) {
+            return gulpCommon.processFile(path.resolve(templatesDir, indexFileName), generatedDir, {}, true);
+        });
+
+        return Q.all(indexDocGenerationPromises);
     }).then(function () {
         var checkLinkPromises = [Q()];
-        if(process.argv.indexOf("--verify") > 0) {
-            checkLinkPromises = [gulpCommon.checkLinks(path.resolve(generatedDir, "index-portalfx.md")),
-                                    gulpCommon.checkLinks(path.resolve(generatedDir, "index-portalfx-extension-development.md")),
-                                    gulpCommon.checkLinks(path.resolve(generatedDir, "index-portalfx-extension-sharing-pde.md")),
-                                    gulpCommon.checkLinks(path.resolve(generatedDir, "index-portalfx-extension-localization-globalization.md")),
-                                    gulpCommon.checkLinks(path.resolve(generatedDir, "index-portalfx-extension-accessibility.md")),
-                                    gulpCommon.checkLinks(path.resolve(generatedDir, "index-portalfx-extension-deployment.md")),
-                                    gulpCommon.checkLinks(path.resolve(generatedDir, "index-portalfx-extension-onboarding.md")),
-                                    gulpCommon.checkLinks(path.resolve(generatedDir, "index-portalfx-extension-monitor.md")),
-                                    gulpCommon.checkLinks(path.resolve(generatedDir, "index-portalfx-extension-test.md")),
-                                    gulpCommon.checkLinks(path.resolve(generatedDir, "index-portalfx-extension-QnA.md")),
-                                    gulpCommon.checkLinks(path.resolve(generatedDir, "index-videos.md"))];
+        if (process.argv.indexOf("--verify") > 0) {
+            checkLinkPromises  = indexDocNames.map(function (indexFileName) {
+                return gulpCommon.checkLinks(path.resolve(generatedDir, indexFileName));
+            });
         }
-            return Q.all(checkLinkPromises);
+        return Q.all(checkLinkPromises);
     });
 });
 
