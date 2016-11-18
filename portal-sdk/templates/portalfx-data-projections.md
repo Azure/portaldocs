@@ -1,3 +1,4 @@
+<a name="data-shaping"></a>
 ## Shaping and filtering data
 
 ### Understanding observable map() and mapInto()
