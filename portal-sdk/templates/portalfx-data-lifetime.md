@@ -13,7 +13,7 @@ lifetime managers it should be noted that `pureComputed()` does *not* take a lif
 as efficiently as possible by design and generally any computed you create in a `map()` should be a pureComputed (as opposed to a 
 `ko.reactor`). More info on pureComputeds is available [below](#lifetime-pureComputed).
 
-For this example let's say you have some data in a dad cache and for each item you want to display a row in a grid and separately 
+For this example let's say you have some data in a data cache and for each item you want to display a row in a grid and separately 
 display a button in a Section located below the grid. We'll use the `mapInto()` function to map the items in the data cache into 
 grid items and in the map function create a button and add it to the section:
 

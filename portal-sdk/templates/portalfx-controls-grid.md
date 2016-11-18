@@ -288,7 +288,7 @@ The reordering can be automatic or handled by the extension using the ``reorderR
 [Reorderable Grid Sample][ReorderSample]
 
 ### Dynamic Grid Definitiona
-In some cases an extension my not know grid columns or other properties in advance.
+In some cases an extension may not know grid columns or other properties in advance.
 In these sceanarios the extension author must define and create the grid at run-time.
 There are several options for dynamic definition of a grid.
 
