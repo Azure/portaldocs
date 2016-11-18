@@ -8,13 +8,14 @@ subscriptions (e.g. users). As an example, subscriptions, resource groups, and d
 
 Assets are used for the following experiences:
 
-* [Notifications](/documentation//articles/portalfx-notifications) should be linked to an asset
-* The [Browse menu](/documentation//articles/portalfx-browse) lists browseable asset types
+* [Notifications](/documentation/articles/portalfx-notifications) should be linked to an asset
+* The [Browse menu](/documentation/articles/portalfx-browse) lists browseable asset types
 * Browse > Recent only shows assets based on the asset type specified on a blade
 * The All Resources view only shows resources that have asset types that implement Browse v2
 * The resource group list only shows resources that have asset types with a defined `ResourceType`
-* Defining [permissions](/documentation//articles/portalfx-permissions) in PDL requires asset types
+* Defining [permissions](/documentation/articles/portalfx-permissions) in PDL requires asset types
 * References to deleted assets can be cleaned up with `notifyAssetDeleted()`
+* Overriding behavior for [resource kinds](#resource-kinds)
 
 All asset types have the following requirements:
 
@@ -94,29 +95,80 @@ Every blade, part, and command that represents or acts on a single asset instanc
 
 If a blade, part, or command represents or acts on multiple assets, use the primary asset type/id based on the context. For instance, when displaying information about a child asset that also obtains information about the parent, use the child's asset type/id.
 
-### Showing up in the Browse menu
+### Showing up in the Browse ("More services") menu
 To show up in the Browse menu, your asset type must specify the `<Browse Type="" />` node. The `Type` informs the Browse menu 
-how to interact with your asset type. Learn more about [Browse integration]/documentation/articles/portalfx-browse).
+how to interact with your asset type. Learn more about [Browse integration](/documentation/articles/portalfx-browse).
+
+Services that use [resource kinds](#resource-kinds) can also be added to the Browse menu, but that must be configured by the Fx team. To do this, [create a partner request](http://aka.ms/portalfx/request) with the asset type name and kind value.
 
 ### Showing up in Browse > Recent
 The Recent list in the Browse menu shows asset instances that have been interacted with. The portal tracks this via the 
 `AssetType` and `AssetIdProperty` on each blade that is launched. See [Blades, parts, and commands](#blades-parts-commands) 
 above for more information.
 
-### Showing up in All Resources
-The All Resources blade shows all asset types that are subscription resources and use Browse v2. Subscription resources that aren't assets aren't displayed since they don't have a blade.
+### Showing up in All Resources and resource group resources
+The All Resources and resource group blades show all resources except alert rules, autoscale settings, and dashboards. Resources that aren't backed by an asset type use a very basic resource menu blade that exposes properties, RBAC, tags, locks, and activity log.
 
-To implement the most basic asset type that will surface in All Resources, add the asset type definition (including display names, icon, blade, and part), add `<Browse Type="ResourceType" />` for no-code Browse, and then include a `<ResourceType ResourceTypeName="" ApiVersion="" />` declaration.
+To implement the most basic asset type, add the asset type definition (including display names, icon, blade, and part), add `<Browse Type="ResourceType" />` for [no-code Browse](/documentation/articles/portalfx-browse), and then include a `<ResourceType ResourceTypeName="" ApiVersion="" />` declaration.
 
 ### Handling permissions for RBAC
-To ensure your blades, parts, and commands react to the user not having access, you can add an `AssetType`, `AssetIdProperty`, and required `Permissions` to your blades, parts, and commands. Learn more about [Permissions](/documentation//articles/portalfx-permissions).
+To ensure your blades, parts, and commands react to the user not having access, you can add an `AssetType`, `AssetIdProperty`, and required `Permissions` to your blades, parts, and commands. Learn more about [Permissions](/documentation/articles/portalfx-permissions).
+
+<a name="resource-kinds"></a>
+### Special-casing ARM resource kinds
+The portal supports overriding the following default behaviors based on the resource kind value:
+
+* Hiding resources in Browse and resource groups
+* Displaying separate icons throughout the portal
+* Launching different blades when an asset is opened
+
+Kinds can also be used to
+
+The kind value can be whatever value makes sense for your scenarios. Just add supported kinds to the `AssetType` PDL:
+
+```xml
+<AssetType ...>
+  ...
+  <ResourceType ...>
+    <Kind Name="kind1" />
+    <Kind Name="kind2" />
+    <Kind Name="kind3" />
+  </ResourceType>
+</AssetType>
+```
+
+`Name` is the only required attribute. None of the other attributes for kinds are required. Simply specify the 
+behaviors you want to override from your asset type and you're done.
+
+| Attribute | Description |
+|-----------|-------------|
+| Name | (Required) Kind value assigned to resource types. |
+| `IsDefault` | (Optional) Ignores the `Name` value and applies overrides to the default (empty) kind value. Teams are recommended to avoid this, if possible. |
+| `BladeName` | (Optional) Specifies the blade to launch when this kind is opened from a Fx resource list. |
+| `CompositeDisplayName` | (Optional) Overrides the type name shown in resource lists. The `ComposityDisplayName` is a convention-based reference to multiple RESX strings. For instance, `CompositeDisplayName="MyAsset"` would map to the following 4 RESX strings: `MyAsset_pluralDisplayName`, `MyAsset_singularDisplayName`, `MyAsset_lowerPluralDisplayName`, and `MyAsset_lowerSingularDisplayName`. |
+| `Icon` | (Optional) Overrides the asset type's icon. |
+| `IsPreview` | (Optional) Indicates a preview label should be shown in the Browse (More services) menu, if applicable. |
+| `Keywords` | (Optional) Specifies the keywords to use when filtering in the Browse (More services) menu, if applicable. |
+| `MarketplaceItemId` | (Optional) Specifies the Marketplace item id (aka gallery package id) to launch from the "Add" command on the resource type Browse blade, if applicable. |
+| `MarketplaceMenuItemId` | (Optional) Specifies the Marketplace menu item to launch from the "Add" command on the resource type Browse blade, if applicable. |
+| `ServiceDisplayName` | (Optional) Overrides the text to use in the Browse (More services) menu, if applicable. |
+| `UseResourceMenu` | (Optional) Overrides the asset type's `UseResourceMenu` flag. |
+| `Visibility` | (Optional) Indicates whether the kind should be hidden from resource lists. Values: `Hidden`. |
+
+If different kinds need to opt in to a static resource menu overview item, add the `<StaticOverview />` node.
+
+```xml
+<Kind ...>
+  <StaticOverview />
+</Kind>
+```
 
 <a name='notify-asset-deleted'></a>
 ### Handling deleted resources
-The portal includes many references to assets, like pinned parts on the Startboard, journeys in the Active hub, recent items in the 
-Browse menu, and more. All of these references are persisted to user settings and available when the user signs in again. When an 
-asset is deleted, the portal needs to be notified that these references need to be cleaned up. To do that, simply call 
-`MsPortalFx.UI.AssetManager.notifyAssetDeleted()`. The portal will then remove all references.
+The portal includes many references to assets, like pinned parts on the dashboard, recent items, and more. All references 
+are persisted to user settings and available when the user signs in again. When an asset is deleted, the portal needs to be 
+notified that these references need to be cleaned up. To do that, simply call 
+`MsPortalFx.UI.AssetManager.notifyAssetDeleted()`.
 
 It's important to note that assets can obviously be deleted outside the portal. When an asset is deleted outside of the portal and `notifyAssetDeleted()` cannot be called, these references will not be cleaned up. When the user signs in again, they will still see pinned parts, for instance. These parts will most likely fail to load due to a 404 from your back-end service due to the asset not existing anymore. When you get a 404 for an asset id, always call `notifyAssetDeleted()` to ensure the portal has a chance to clean up.
 
@@ -136,7 +188,7 @@ MsPortalFx.Hubs.Notifications.ClientNotification.publish({
 });
 ```
 
-Learn more about [notifications](/documentation//articles/portalfx-notifications).
+Learn more about [notifications](/documentation/articles/portalfx-notifications).
 
 ### ARM RP and resource type metadata
 Every ARM resource provider (RP) should have a default RP icon as well as a resource type icon specified in the RP manifest to support the following scenarios:
@@ -199,41 +251,3 @@ To specify a resource type icons, add the same snippet to each resource type def
 Icons can be either SVG XML or a standard HTTPS URL. SVG XML is preferred for scalability and rendering performance; however, HTTPS URLs are better if your RP manifest is too large.
 
 To retrieve RP manifests for a subscription, call `GET /subscriptions/###/providers?$expand=metadata`.
-
-<a name="resource-kinds"></a>
-### Special casing ARM resource kinds
-The portal supports overriding the following default behaviors based on the resource kind value:
-
-* Hiding resources in Browse and resource groups
-* Displaying separate icons throughout the portal
-* Launching different blades when an asset is opened
-
-The kind value can be whatever value makes sense for your scenarios. Just specify the exact kind value in portal metadata for the resource type and specify the additional config:
-
-```ts
-{
-    "namespace": "rp.namespace",
-    ...
-    "resourceTypes": [
-        {
-            "resourceType": "instances",
-            "metadata": {
-                "portal": {
-                    ...
-                    "kinds": [{
-                        "kind": "myHiddenKind",
-                        "browseConfig": { "visibility": "hidden" }
-                    },{
-                        "kind": "mySpecialKind",
-                        "icon": "<svg>...</svg>",
-                        "blade": { "name": "MySpecialKindBlade", "extension": "MyExtension" }
-                    }]
-                }
-            },
-            ...
-        },
-        ...
-    ],
-    ...
-}
-```
