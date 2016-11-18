@@ -19,6 +19,7 @@ Sounds interesting. Want to become a partner?   [Onboard Ibiza](/portal-sdk/gene
 
 1. [Downloads](/portal-sdk/generated/downloads.md), [Release Notes](/portal-sdk/generated/release-notes.md), [Breaking Changes](/portal-sdk/generated/breaking-changes.md)
 1. [Development](/portal-sdk/generated/index-portalfx-extension-development.md)
+1. [Style Guide](/portal-sdk/generated/index-portalfx-extension-style-guide.md)
 1. [Test](/portal-sdk/generated/index-portalfx-extension-test.md)
 1. [Monitor](/portal-sdk/generated/index-portalfx-extension-monitor.md) 
 1. [Deploy](/portal-sdk/generated/index-portalfx-extension-deployment.md)
