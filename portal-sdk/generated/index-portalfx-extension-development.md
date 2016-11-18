@@ -18,7 +18,7 @@
     * [Writing code that reacts to a blade being closed](#closing-blades-programatically-writing-code-that-reacts-to-a-blade-being-closed)
 * [Developing Forms](#developing-forms)
     * [Loading, editing and saving data](#developing-forms-loading-editing-and-saving-data)
-    * [Utilizing form sections](#developing-forms-utilizing-form-sections)
+    * [Laying out your UI on the blade](#developing-forms-laying-out-your-ui-on-the-blade)
     * [Field Validation](#developing-forms-field-validation)
     * [Working with Edit Scopes](#developing-forms-working-with-edit-scopes)
     * [Integrating Forms with Commands](#developing-forms-integrating-forms-with-commands)
@@ -71,7 +71,9 @@
     * [Marking automated tests as test/synthetic traffic](#debugging-marking-automated-tests-as-test-synthetic-traffic)
 * [Other](#other)
     * [PDL Binding Quick Reference](#other-pdl-binding-quick-reference)
-    * [View Model Best Practices](#other-view-model-best-practices)
+    * [Blade initialization](#other-blade-initialization)
+    * [How to expose config settings for consumption in the client](#other-how-to-expose-config-settings-for-consumption-in-the-client)
+* [Step by step walkthrough](#step-by-step-walkthrough)
 
 
  <h1 name="portalfx-extension-development"></h1>
@@ -866,7 +868,7 @@ for each of these. Refer to the EngineV3 Create sample
 <a name="common-scenarios-building-create-experiences-create-a-template-blade-standard-arm-fields-subscriptions-dropdown"></a>
 ##### Subscriptions dropdown
 ```ts
-*`MsPortalFx.Azure.Subscriptions.DropDown`
+* `MsPortalFx.Azure.Subscriptions.DropDown`
 
 // The subscriptions drop down.
 var subscriptionsDropDownOptions: SubscriptionsDropDown.Options = {
@@ -893,7 +895,7 @@ this.subscriptionsDropDown = new SubscriptionsDropDown(container, subscriptionsD
 <a name="common-scenarios-building-create-experiences-create-a-template-blade-standard-arm-fields-resource-groups-dropdown"></a>
 ##### Resource groups dropdown
 ```ts
-*`MsPortalFx.Azure.ResourceGroups.DropDown`
+* `MsPortalFx.Azure.ResourceGroups.DropDown`
 
 var resourceGroupsDropDownOptions: ResourceGroups.DropDown.Options = {
     options: ko.observableArray([]),
@@ -928,7 +930,8 @@ this.resourceGroupDropDown = new ResourceGroups.DropDown(container, resourceGrou
 <a name="common-scenarios-building-create-experiences-create-a-template-blade-standard-arm-fields-locations-dropdown"></a>
 ##### Locations dropdown
 ```ts
-*`MsPortalFx.Azure.Locations.DropDown`
+* `MsPortalFx.Azure.Locations.DropDown`
+* [`Fx/Specs/DropDown`](/portal-sdk/generated/portalfx-extension-development.md#portalfx-extension-pricing-tier)
 
   // The locations drop down.
  var locationsDropDownOptions: LocationsDropDown.Options = {
@@ -2843,6 +2846,15 @@ export class SampleMenuBlade extends FxMenuBlade.ViewModel {
                                     // Intentionally blank. The launched blade is responsible for the create operation.
                                 }
                             });
+                        },
+                    },
+                    // Menu item that demonstrates opting out of full width.
+                    {
+                        id: "fullwidthoptout",
+                        displayText: ClientResources.SampleMenuBlade.optOut,
+                        icon: null,
+                        supplyBladeReference: () => {
+                            return new BladeReferences.BladeWidthSmallBladeReference({bladeTitle: ClientResources.SampleMenuBlade.optOut});
                         },
                     },
                 ],
@@ -4875,8 +4887,8 @@ The SDK includes extensive support for displaying and managing user input. Forms
 
 To get started using forms, pick from one of the following topics:
 
+* [Layouting out UI](#portalfx-forms-sections)
 * [Building a form](#portalfx-forms-construction)
-* [Form Sections](#portalfx-forms-sections)
 * [Validation](#portalfx-forms-field-validation)
 * [Edit Scopes](#portalfx-forms-working-with-edit-scopes)
 * [Command integration](#portalfx-forms-integrating-with-commands)
@@ -5056,11 +5068,21 @@ to trigger the right action.
  <h1 name="portalfx-forms-sections"></h1>
  <properties title="" pageTitle="Forms sections" description="" authors="andrewbi" />
 
-<a name="developing-forms-utilizing-form-sections"></a>
-## Utilizing form sections
+<a name="developing-forms-laying-out-your-ui-on-the-blade"></a>
+## Laying out your UI on the blade
 
-Sections are used to autogenerate the layout of multiple controls on a blade. The simpliest thing to do is to create a section view model and add all the controls you would like
-displayed to the `children` observable on the section. This will lay them out one after the other on a blade. 
+While blade templates allow you to layout your controls as particular DOM elements we generally recommend an alternative approach
+of binding a section view model into the DOM and then adding control view models to the section's `children` observable array.
+The section provides default styling in terms of spacing and margins and an easier way to deal with dynamically adding/removing controls.
+You can even use the CustomHtml control to author HTML in the middle of an autogenerated layout. A large majority of blades can use these
+two controls to avoid having to put much HTML in your blade template but of course placing the controls in the DOM yourself is always
+an option if needed.
+
+As mentioned above to use a section you'll need to create a section view model and bind it into the DOM in your blade template using the 
+'pcControl' binding handler. Then add all the controls you would like to be displayed to the `children` observable on the section. 
+By default this lays them out one after the other on a blade. By using the section's `style` property you can achieve other layouts 
+as well such as a table layout with controls in multiple rows and columns, a list of tabs or a combination of layouts.
+
 Follow [this link](http://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/formsallup) and then click on 'Basic Create Form' for an example and this of what it looks like.
 This is the code to create the section:
 
@@ -6722,7 +6744,7 @@ Calling alternate resources involves AAD Onboarding that can take 5-6 weeks so w
 <a name="authentication-calling-alternate-resources-from-client"></a>
 #### From client
 Only ibiza has the authority to mint tokens so in order to call external resourses extension developers need to request Ibiza to create the AAD and register the resources with Ibiza.
- 
+
 Here is an example that walks you through on how to enable Contoso_Extension, a sample extension, that can query Graph APIs from extension client :
 
 1. To query graph API's, an extension owner would submit [RDTask](http://aka.ms/portalfx/newextension) to onboard AAD Application with the portal.AAD Onboarding can take 5-6 weeks so we recommend extension developers to think about this scenarios early in the design phase.
@@ -6739,10 +6761,10 @@ Here is an example that walks you through on how to enable Contoso_Extension, a 
     "resourceAccess": [{
         "name": "",
         "resource": "https://management.core.windows.net/"
-    }, {
+        }, {
         "name": "graph",
         "resource": "https://graph.windows.net"
-    }]
+        }]
 }
 ```
 
@@ -6773,10 +6795,6 @@ new MsPortalFx.ViewModels.FileDownloadCommand({
     }
 });
 ```
-
-
-**NOTE:** MsPortalFx.Base.Security.getAuthorizationToken(), MsPortalFx.Base.Net2.ajax(), MsPortalFx.ViewModels.FileDownloadCommand, and MsPortalFx.ViewModels.FileDownloadButton.ViewModel
-provide the ability to request authorization tokens for named resources other than the default Azure Resource Manager
 
 <a name="authentication-calling-alternate-resources-from-controller-or-server-side"></a>
 #### From Controller or Server-Side
@@ -6810,9 +6828,9 @@ Sample code for exchanging toke:
 
 Add an extra parameter to ajax calls (setAuthorizationHeader = { resourceName: "self" }
 
-Which means give me a token to myself and Ill exchange that token later
+Which means give me a token to myself and I�ll exchange that token later
 
-```cs
+```cs�
     MsPortalFx.Base.Net2.ajax({
         uri: "MyController/MyAction",
         setAuthorizationHeader: { resourceName: "self" }
@@ -6822,53 +6840,85 @@ Which means give me a token to myself and Ill exchange that token later
 ```
 
 Controller code.
-
+�
 ```cs
     // Get the token passed to the controller
     var portalAuthorizationHeader = PortalRequestContext.Current.GetCorrelationData<AuthorizationCorrelationProvider>();
     if (portalAuthorizationHeader == null) {
-     // This should never happen, the auth module should have returned 401 if there wasnt a valid header present
-     throw new HttpException(401, "Unauthorized");
+    ��� // This should never happen, the auth module should have returned 401 if there wasn�t a valid header present
+    ��� throw new HttpException(401, "Unauthorized");
     }
-
+�
     // Exchange it for the token that should pass to downstream services
     var exchangedAuthorizationHeader = GetExchangedToken(portalAuthorizationHeader, intuneClientId, intuneClientCert, "https://graph.windows.net/");
-
+�
     // Call downstream service with exchanged header
     var headers = new NameValueCollection();
     headers.Add("Authorization", exchangedAuthorizationHeader);
     webApiClient.GetAsync(uri, "MyOperation", headers);
-
+�
     // Helper method to exchange tokens
     string GetExchangedToken(string portalAuthorizationHeader, string clientId, X509Certificate2 clientCertificate, string resource) {
 
         // proof that the intune extension is making the token request
-     var clientAssertion = new ClientAssertionCertificate(clientId, clientCertificate);
-    
-     // proof that the request originated from the portal and is on behalf of a valid user
-     var accessToken = GetAccessTokenFromAuthorizationHeader(portalAuthorizationHeader);
-     var userAssertion = new UserAssertion(accessToken, "urn:ietf:params:oauth:grant-type:jwt-bearer"); 
-    
-     // the actual token exchange
-     var exchangedToken = authContext.AcquireToken(resource, clientAssertion, userAssertion); 
-    
-     return exchangedToken.GetAuthorizationHeader();
+    ��� var clientAssertion = new ClientAssertionCertificate(clientId, clientCertificate);
+    �
+    ��� // proof that the request originated from the portal and is on behalf of a valid user
+    ��� var accessToken = GetAccessTokenFromAuthorizationHeader(portalAuthorizationHeader);
+    ��� var userAssertion = new UserAssertion(accessToken, "urn:ietf:params:oauth:grant-type:jwt-bearer"); 
+    �
+    ��� // the actual token exchange
+    ��� var exchangedToken = authContext.AcquireToken(resource, clientAssertion, userAssertion); 
+    �
+    ��� return exchangedToken.GetAuthorizationHeader();
     }
-
+�
     string GetAccessTokenFromAuthorizationHeader(string authorizationHeader) {
-     // The header will be in the form "Bearer eyMZ"
-     // The access token in the last part of the header
-     var separator = new char[] { ' ' };
-     var accessToken = authorizationHeader.Split(separator, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
-    
-     return accessToken;
+    ��� // The header will be in the form "Bearer ey��MZ"
+    ��� // The access token in the last part of the header
+    ��� var separator = new char[] { ' ' };
+    ��� var accessToken = authorizationHeader.Split(separator, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+    �
+    ��� return accessToken;
     }
 ```
 
-<a name="authentication-calling-alternate-resources-accessing-claims-from-your-server"></a>
-### Accessing claims from your server
+<a name="authentication-calling-alternate-resources-accessing-claims"></a>
+### Accessing claims
 
-The token used to communicate with your server contains claims (key/value pairs) that identify the target and destination systems as well as the calling user. Reading claims can be accomplished from the server using the [ASP.NET claims API](http://msdn.microsoft.com/en-us/library/ee517271.aspx). To simplify development, the [HttpContext.User](http://msdn.microsoft.com/library/system.web.httpcontext.user.aspx) has been augmented with the most commonly used claims.
+Tokens received from AAD contain a set of claims (key/value pairs) with information about user, including
+personally-identifiable information (PII). Note that PII will only be available to extension who fall under the
+[Azure privacy policy](https://www.microsoft.com/TrustCenter/Privacy). Extensions that don't fall under this policy
+(e.g. share PII with third-parties) will not have access to the token or its claims. This is due to the fact that
+Microsoft can be sued for abuse/misuse of PII as outlined by the privacy policy. Any exceptions need to be approved by
+[Ibiza LCA](mailto:ibiza-lca@microsoft.com).
+
+<a name="authentication-calling-alternate-resources-accessing-claims-accessing-claims-from-the-client"></a>
+#### Accessing claims from the client
+Extensions that do have access to claims can use the `getUserInfo()` API to retrieve common claims from the client. Note
+that secondary claims, like name and email, may not always be available and cannot be guarranteed. Token claims may
+change over time as AAD evolves. Do not make hard dependencies on claims and never extract claims yourself. Instead,
+call Graph to get required user information.
+
+```ts
+MsPortalFx.Base.Security.getUserInfo() : PromiseV<MsPortalFx.Base.Security.UserInfo>
+
+interface UserInfo {
+    email: string;          // Guest accounts not homed in the current directory will have a UPN and not a valid email address
+    givenName: string;      // Name may be empty if not provided in the token
+    surname: string;        // Name may be empty if not provided in the token
+    directoryId: string;
+    directoryName: string;  // Directory name may be empty if calling Graph fails
+    domainName: string;     // Directory domain may be empty if calling Graph fails
+}
+```
+
+<a name="authentication-calling-alternate-resources-accessing-claims-accessing-claims-from-your-server"></a>
+#### Accessing claims from your server
+While not recommended, the token used to communicate with your server also contains claims that can be read from the
+server using the [ASP.NET claims API](http://msdn.microsoft.com/en-us/library/ee517271.aspx). To simplify development,
+the [HttpContext.User](http://msdn.microsoft.com/library/system.web.httpcontext.user.aspx) has been augmented with the
+most commonly used claims.
 
 First, reference the following assemblies:
 
@@ -10072,12 +10122,36 @@ interface ResourceMenuConfig {
 }
 ```
 
-The 'groups' property is how items are defined. An array of groups needs to be specified and each group contains an array of menu items. Each of the items will then open a blade.
-The 'defaultItemId' is the identifier of which item that is selected by default, the ID must match an ID of menu item defined within one of the groups.
-The 'options' are the optional framework menu items; Tags, RBAC, New support request, Audit logs, Troubleshoot and Resource health. You can opt in/out of any of the
-functionality, some have smart defaults that will opt your resource in by default
+| Property        | Description |
+|-----------------|-------------|
+| `groups`        | Array of groups and menu items within each group that will open a blade |
+| `defaultItemId` | ID of the menu item (defined in `groups`) to be selected by default |
+| `options`       | Flags to show/hide common menu items |
 
-In this case let's assume your resource has an item with the ID 'overview' and has also on-boarded onto support and can opt into all the framework options.
+The following options are available:
+
+| Option                        | Exit criter | Enabled by default | Scenario |
+|-------------------------------|-------------|--------------------|----------|
+| `enableAlerts`                | No  | No | Create, view, and update alert rules. |
+| `enableAppInsights`           | No  | No | View Application Insights monitoring. |
+| `enableDiagnostics`           | No  | No | View monitoring diagnostics. |
+| `enableExportTemplate`        | Yes | Resources, resource groups | Export a template of the resource group to automate redeployments. RPs must provide [template schemas](http://aka.ms/armschema) for this. Does not support classic resources. |
+| `enableLocks`                 | Yes | Resources, resource groups, subscriptions | Lock resources to avoid accidental deletion and/or editing. |
+| `enableLogAnalytics`          | No  | No | View OMS workspace. |
+| `enableLogSearch`             | No  | No | Search logs. |
+| `enableMetrics`               | No  | No | View monitoring metrics. |
+| `enableProperties`            | No  | No | Generic properties blade for resources. Only includes standard ARM properties today, but may be integrated with the supplemental data, if needed. (Please file a [partner request](http://aka.ms/portalfx/request).) Does not support non-tracked resources. |
+| `enableRbac`                  | Yes | All ARM resource types | Manage user/role assignments for this resource. |
+| `enableSupportEventLogs`      | Yes | Resources, resource groups, subscriptions | View all operations and events |
+| `enableSupportHelpRequest`    | Yes | All ARM resource types | Create a support request for this resource, resource group, or subscription. |
+| `enableSupportResourceHealth` | Yes | No | Check resource for common health issues (e.g. connectivity) and recommend fixes. |
+| `enableSupportTroubleshoot`   | No  | No | **Deprecated. Do not use.** Legacy support only. Moved to a new design with improved usability scores. |
+| `enableSupportTroubleshootV2` | Yes | No | Troubleshoot possible availability/reliability issues (e.g. connectivity). |
+| `enableTags`                  | Yes | Resources, resource groups, subscriptions | Tag resource with key/value pairs to group/organize related resources. RP must support PATCH operations to update tags. Does not support classic resources. |
+| `showAppInsightsFirst`        | No  | No | View Application Insights monitoring. `enableAppInsights` must be set to `true`. |
+
+In this case let's assume your resource has an item with the ID 'overview' and has also onboarded support, getting
+export template, locks, RBAC, Activity Log, new support request, and tags automatically:
 
 ```ts
 public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): MsPortalFx.Base.PromiseV<MsPortalFx.Assets.ResourceMenuConfig> {
@@ -10085,14 +10159,12 @@ public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): MsPor
         <MsPortalFx.Assets.ResourceMenuConfig>{
             defaultItemId: "overview",
             options: {
-                enableRbac: true,
-                enableSupportHelpRequest: true,
                 enableSupportTroubleshoot: true,
-                enableSupportResourceHealth: true,
-                enableSupportEventLogs: true,
-                enableTags: true
+                enableSupportResourceHealth: true
             },
-            groups: <FxMenuBlade.MenuGroup[]>[]
+            groups: <FxMenuBlade.MenuGroup[]>[
+                ...
+            ]
         }
     );
 }
@@ -10156,12 +10228,8 @@ public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): MsPor
         <MsPortalFx.Assets.ResourceMenuConfig>{
             defaultItemId: "overview",
             options: {
-                enableRbac: true,
-                enableSupportHelpRequest: true,
                 enableSupportTroubleshoot: true,
-                enableSupportResourceHealth: true,
-                enableSupportEventLogs: true,
-                enableTags: true
+                enableSupportResourceHealth: true
             },
             groups: <FxMenuBlade.MenuGroup[]>[
                 {
@@ -10658,7 +10726,7 @@ Next Steps:
 
 * If there are any issues please reach out to [ibiza Menu Blade](mailto:ibiza-menu-blade@microsoft.com) 
 
-	
+
  <h1 name="portalfx-permissions"></h1>
  <properties title="" pageTitle="Defining permissions" description="" authors="flanakin" />
 
@@ -11364,6 +11432,309 @@ var resourceSummaryOptions = <MsPortalFx.ViewModels.Parts.ResourceSummary.Option
 }
 ```
 
+ <h1 name="portalfx-extension-pricing-tier"></h1>
+ ## Pricing Tier
+<a name="resource-management-resource-moves-consuming-the-spec-picker-blade"></a>
+### Consuming the Spec Picker Blade
+The spec picker has a three controls (dropdown, infobox, and selector) for getting the data from the spec picker blades. The best way is to use the Spec Picker dropdown in your create blades.
+
+```typescript
+
+// The spec picker initial data observable.
+var initialDataObservable = ko.observable<SpecPicker.InitialData>({
+    selectedSpecId: "A0",
+    entityId: "",
+    recommendedSpecIds: ["small_basic", "large_standard"],
+    recentSpecIds: ["large_basic", "medium_basic"],
+    selectRecommendedView: false,
+    subscriptionId: "subscriptionId",
+    regionId: "regionId",
+    options: { test: "DirectEA" },
+    disabledSpecs: [
+        {
+            specId: "medium_standard",
+            message: ClientResources.robotPricingTierLauncherDisabledSpecMessage,
+            helpBalloonMessage: ClientResources.robotPricingTierLauncherDisabledSpecHelpBalloonMessage,
+            helpBalloonLinkText: ClientResources.robotPricingTierLauncherDisabledSpecLinkText,
+            helpBalloonLinkUri: ClientResources.robotPricingTierLauncherDisabledSpecLinkUri
+        }
+    ]
+});
+this.specDropDown = new Specs.DropDown(container, {
+    form: this,
+    accessor: this.createEditScopeAccessor((data: CreateEngineDataModel) => {
+        return data.spec;
+    }),
+    initialData: initialDataObservable,
+    // This extender should be the same extender view model used for the spec picker blade.
+    // You may need to extend your data context or share your data context between your
+    // create area and you spec picker area to use the extender with the current datacontext.
+    specPickerExtender: new BillingSpecPickerExtender.BillingSpecPickerV3Extender(container, initialDataObservable(), dataContext),
+    pricingBlade: {
+        detailBlade: "BillingSpecPickerV3",
+        detailBladeInputs: {},
+        hotspot: "EngineSpecDropdown1"
+    }
+});
+
+```
+
+<a name="resource-management-resource-moves-spec-picker-blade"></a>
+### Spec Picker Blade
+To create a pricing tier blade you'll need to first create the blade in pdl using the `SpecPickerV3` template,
+```xml
+
+<azurefx:SpecPickerBladeV3 Name="RobotSpecPickerV3"
+                        BladeViewModel="RobotSpecPickerV3BladeViewModel"
+                        PartExtenderViewModel="RobotSpecPickerV3Extender" />
+
+```
+a blade view model,
+```typescript
+
+/**
+* The view model that drives the Virtual Machines specific spec picker blade.
+*/
+export class RobotSpecPickerV3BladeViewModel extends MsPortalFx.ViewModels.Blade {
+   /**
+    * Creates the view model for the spec picker blade.
+    *
+    * @param container The view model for the blade container.
+    * @param initialState The initial state for the blade view model.
+    * @param dataContext The data context for the Create area.
+    */
+   constructor(container: MsPortalFx.ViewModels.ContainerContract, initialState: any, dataContext: HubsArea.DataContext) {
+       super();
+       this.title(ClientResources.vmSpecPickerBladeTitle);
+       this.subtitle(ClientResources.vmSpecPickerBladeSubtitle);
+   }
+}
+
+```
+and an extender viewModel,
+```typescript
+
+/**
+* The sample extender for the robot spec picker blade.
+*/
+export class RobotSpecPickerV3Extender implements HubsExtension.Azure.SpecPicker.SpecPickerExtender {
+   /**
+    * See SpecPickerExtender interface.
+    */
+   public input = ko.observable<SpecPicker.SpecPickerExtenderInput>();
+
+   /**
+    * See SpecPickerExtender interface.
+    */
+   public output = ko.observable<SpecPicker.SpecPickerExtenderOutput>();
+   
+   /**
+    * See SpecPickerExtender interface.
+    */
+   public selectionMode: Lists.ListView.SelectionMode;
+
+   /**
+    * See SpecPickerExtender interface.
+    */
+   public filterControls: KnockoutObservableArray<SpecPicker.FilterControl>;
+
+   private _specDataView: MsPortalFx.Data.EntityView<SpecPicker.SpecData, any>;
+
+   private _specData = ko.observable<SpecPicker.SpecData>();
+
+   /**
+    * Extender constructor.
+    *
+    * @param container The view model for the part container.
+    * @param initialState The initial state for the part.
+    * @param dataContext The data context.
+    */
+   constructor(container: MsPortalFx.ViewModels.ContainerContract, initialState: any, dataContext: HubsArea.DataContext, selectionMode?: Lists.ListView.SelectionMode) {
+       
+```
+
+Inside of the constructor of the extender view model you'll have to setup the input and output observables for the extender.
+```typescript
+
+// The spec picker can return one or many specs. Specify if you want the user to be able to select multiple specs.
+this.selectionMode = selectionMode || Lists.ListView.SelectionMode.Single;
+
+// Perform the initial fetch to load data into the view from your own controllers
+//config#specPickerData
+this._specDataView = dataContext.robotData.specDataEntity.createView(container);
+this._specDataView.fetch({}).then(
+    () => {
+        var specData = ko.toJS(this._specDataView.item());
+        // Pass the spec data into an observable
+        this._specData(specData);
+    },
+    () => {
+        // Implement custom error handling logic
+        throw new Error("Fetch spec data failed.");
+    }
+);
+//config#specPickerData
+
+// a computed which returns an array of spec ids which will determine what specs will be shown
+var filteredSpecIds = ko.computed(container, () => {
+    var input = this.input();
+    if (!input) {
+        return [];
+    }
+    // Options is a property passed in as part of the blade inputs. Defaults to any type
+    var options = input.options;
+    var filterFeatures: string[] = options && options.filterFeatures || [];
+    
+    // React to the input availableSpecData observable. This observable is updated
+    // when billing information returns from the server and contains specs which have not
+    // been filtered out by the billing calls.
+    return input.availableSpecData().filter((spec) => {
+        // This will filter out any spec which contains the feature in input.options.filterFeatures
+        return !spec.features.first((feature) => !!~filterFeatures.indexOf(feature.displayValue));
+    }).map((spec) => spec.id)
+});
+ko.reactor(container, () => {
+    // react to inputs and specData observables being updated
+    var input = this.input(),
+        specData = this._specData();
+
+    if (!input || !specData) {
+        return;
+    }
+
+    var output: SpecPicker.SpecPickerExtenderOutput = {
+        specData: specData,
+        //disabledSpecs: [],
+        //failureMessage: "",
+        //recentSpecIds: [],
+        filteredSpecIds: filteredSpecIds
+    };
+    // Update the output observable to give all the spec data back to the spec picker blade
+    this.output(output);
+});
+
+```
+
+The data fetching part is where you're code will bring all of the spec picker data into the output.
+```typescript
+
+this._specDataView = dataContext.robotData.specDataEntity.createView(container);
+this._specDataView.fetch({}).then(
+    () => {
+        var specData = ko.toJS(this._specDataView.item());
+        // Pass the spec data into an observable
+        this._specData(specData);
+    },
+    () => {
+        // Implement custom error handling logic
+        throw new Error("Fetch spec data failed.");
+    }
+);
+
+```
+
+The data in here will have the information that will be shown on the specs and as well as the `ResourceMap` information used to look up pricing from billing.
+
+<a name="resource-management-resource-moves-sample-spec-data"></a>
+### Sample Spec Data
+Sample Spec
+```typescript
+
+{
+    "id": "Standard_D15_v2",
+    "colorScheme": "mediumBlue", //available colors: "mediumBlue", "yellowGreen", "darkOrchid", "orange""
+    "title": "Standard",
+    "specCode": "D15_v2",
+    "promotedFeatures": [
+        {
+            "id": "cores",
+            "value": "20",
+            "unitDescription": "Cores"
+        },
+        {
+            "id": "ram",
+            "value": "140",
+            "unitDescription": "GB"
+        }
+    ],
+    "features": [
+        {
+            "id": "disks",
+            "displayValue": "40"
+        },
+        {
+            "id": "iops",
+            "displayValue": "40x500"
+        },
+        {
+            "id": "ssdCache",
+            "displayValue": "1000 GB"
+        },
+        {
+            "id": "loadBalancing",
+            "displayValue": ""
+        },
+        {
+            "id": "autoScale",
+            "displayValue": ""
+        }
+    ],
+    "cost": {
+        "currencyCode": "USD",
+        "caption": "{0}/Month (Estimated)"
+    }
+},
+
+```
+Sample Features
+```typescript
+
+{
+    "id": "disks",
+    "displayName": "Data disks",
+    "iconSvgData": "<svg viewBox=\"0 0 50 50\" class=\"msportalfx-svg-placeholder\" > <path d=\"M50,37.198c0,5.001-11.194,9.054-25,9.054S0,42.199,0,37.198v-4.88h50V37.198z\" class=\"msportalfx-svg-c14\"/> <path d=\"M50,32.318c0,5.001-11.194,9.054-25,9.054S0,37.319,0,32.318c0-5,11.193-9.054,25-9.054S50,27.318,50,32.318 \" class=\"msportalfx-svg-c13\"/> <path d=\"M33.013,31.797c0,1.33-3.588,2.407-8.014,2.407s-8.015-1.077-8.015-2.407s3.589-2.407,8.015-2.407 S33.013,30.468,33.013,31.797\" class=\"msportalfx-svg-c14\"/> <path opacity=\"0.25\" d=\"M43.071,26.115c-3.502-1.327-8.104-2.269-13.279-2.633l-3.244,6.004 c1.596,0.094,3.023,0.329,4.127,0.662L43.071,26.115z\" class=\"msportalfx-svg-c01\"/> <path opacity=\"0.25\" d=\"M5.902,38.208c3.601,1.543,8.598,2.643,14.288,3.045l3.793-7.02 c-1.579-0.06-3.014-0.257-4.168-0.552L5.902,38.208z\" class=\"msportalfx-svg-c01\"/> <path d=\"M50,17.682c0,5.001-11.194,9.054-25,9.054S0,22.682,0,17.682v-4.88h50V17.682z\" class=\"msportalfx-svg-c19\"/> <path d=\"M50,12.802c0,5.001-11.194,9.054-25,9.054S0,17.802,0,12.802s11.193-9.054,25-9.054S50,7.801,50,12.802\" class=\"msportalfx-svg-c15\"/> <path d=\"M33.013,12.281c0,1.33-3.588,2.407-8.014,2.407s-8.015-1.077-8.015-2.407s3.589-2.407,8.015-2.407 S33.013,10.951,33.013,12.281\" class=\"msportalfx-svg-c19\"/> <path opacity=\"0.25\" d=\"M43.071,6.549c-3.502-1.327-8.104-2.269-13.279-2.633L26.548,9.92 c1.596,0.094,3.023,0.329,4.127,0.662L43.071,6.549z\" class=\"msportalfx-svg-c01\"/> <path opacity=\"0.25\" d=\"M5.902,18.642c3.601,1.543,8.598,2.643,14.288,3.045l3.793-7.02 c-1.579-0.06-3.014-0.257-4.168-0.552L5.902,18.642z\" class=\"msportalfx-svg-c01\"/> </svg>"
+},
+{
+    "id": "iops",
+    "displayName": "Max IOPS",
+    "iconName": "Monitoring"
+},
+
+```
+Sample Resource Map
+```typescript
+
+"default": [
+    {
+        "id": "Standard_D15_v2",
+        "firstParty": [
+            {
+                "id": "STANDARD_D15_V2",
+                "resourceId": "4naypwzhqsu7yaeruxj3fpqa5ah5p9ax4nayrti71j3x5pdwtc7y4imyqeyy6a",
+                "quantity": 744
+            }
+        ],
+        "thirdParty": [
+            {
+                "id": "samplecloudconnect:sample:samplebackup",
+                "publisherId": "sample",
+                "offerId": "samplecloudconnect",
+                "planId": "samplebackup",
+                "promotionCode": "",
+                "meters": [
+                    {
+                        "meterId": "20core",
+                        "quantity": 744
+                    }
+                ]
+            }
+        ]
+    },
+    
+```
+
+For the resourceIds in the resource map, you'll need to cooridanate with billing to add any new resource ids in your spec picker.
+The `default` resource map will be used if no region is specified as part of the spec picker blade inputs.
 
 <a name="debugging"></a>
 # Debugging
@@ -11942,47 +12313,272 @@ You need to allow the Azure Portal to frame your extension URL. For more informa
 </tbody>
 </table>
 
- <h1 name="portalfx-view-model-best-practices"></h1>
- <properties title="" pageTitle="View Model Best Practices" description="" authors="LiangMingChen" />
+ <h1 name="portalfx-blade-viewmodel"></h1>
+ # Understanding the blade view model
 
-<a name="other-view-model-best-practices"></a>
-## View Model Best Practices
+The portal uses a view model abstraction to allow extensions to author UI in the portal. This allows extensions to deal with data
+and manipulate UI without worrying about the differences in DOM events across browsers or having to remember to include the right 
+accessiblity attributes (these are encapsulated in the widgets provided by the portal). Remember the architecture of portal puts
+the DOM in an iframe controlled by the portal (the 'shell' iframe) and extension in a separate iframe (the 'extension' iframe).
+The shell iframe and the extension iframe communicate through view models (often using knockout observable values). It's important
+for you as an extension author to understand these interactions because they will have a performance impact on the blades you create.
 
-This document is a WIP.
+We'll start with the blade view model. When a blade is opened by the user the portal will call into the iframe for the extension 
+that owns the blade and request the view model for that blade. That blade view model will be composed of 
+other view models like textbox view models, button view models & other widgets. These widget view models are the way the extension 
+communicates with user  (by displaying or collecting information). The blade view model handles plumbing the data to and from 
+the widget view models and coordinates the interactions between the widgets on the blade.
 
-<a name="other-view-model-best-practices-2-15-01-pm-msportalfx-base-diagnostics-errorreporter-1-typeerror-can-t-add-property-name-object-is-not-extensible"></a>
-### 2:15:01 PM MsPortalFx.Base.Diagnostics.ErrorReporter 1 TypeError: Can&#39;t add property <name>, object is not extensible
+To help you understand what code belongs where we'll look at a simple example blade. The blade will load a person object from the 
+server and display it to the user in some readonly textboxes. To make the scenario more dynamic we won't show a textbox for the 
+person's smartphone if the string is empty. Our UI will either look like this:
 
- _adapter and _restManager properties are set to null as shown below. This allows the properties to be defined on the object and not be dynamically added before the framework calls freeze on the javascript object.
+![Person](../media/portalfx-blade-viewmodel/SmartPhone.png)
 
-```ts
-export class AzureMediaServices implements Sdk.AzureMediaServices {
-..
-private _adapter: BreezeAdapter = null;
-private _restManager: breeze.EntityManager = null;
-..
-}
+Or this:
+
+![Person no smartphone](../media/portalfx-blade-viewmodel/NoSmartPhone.png)
+
+For reference here are the properties we'll put on the blade view model to create this blade:
+
+```typescript
+
+/**
+ * Textbox control containing the user's name.
+ */
+public nameTextBox: TextBox.ViewModel;
+
+/**
+ * Observable containing either a numeric textbox or a textbox.
+ */
+public smartPhone: KnockoutObservable<TextBox.ViewModel>
+
+/**
+ * OK button for submitting updated user data back to server.
+ */
+public okButton: SimpleButton.ViewModel;
+
+/**
+ * EntityView containing the person being edited
+ */
+private _view: MsPortalFx.Data.EntityView<Person, any>;
 
 ```
 
-<a name="other-view-model-best-practices-work-with-knockout-data-driven-model-and-iframe-communication-in-mind"></a>
-### Work with Knockout (Data driven model) and Iframe communication in mind
+One important thing to note here is the EntityView object is named `_view`. The reason for this is it's not directly used in the 
+rendering of the blade (it doesn't appear in the blade template) and thus does not need to be proxied to the shell iframe. The
+proxied observable layer does not transfer private members of the blade view model (properties whose name starts with an underscore) 
+to the other iframe. If you are not careful about what data you are proxing to the shell you can cause greatly slow down the 
+performance of your blade.
 
-1. Less Change Notification is always better.
-    1. You don't know who is listening to your ko.obserable.  The more change-notification, the more code will get executed!!
-        - If you have 10 change to do, you should try to batch them and change-notify once. (Especially for Array. -- See Array Mutation Performance warning - below)
-    1. Weary about the properties that bind to UI elements.
-        - Cost!!  Proxied need to send all the data over, Dom update delete the element and re-render!!!
-        - If your react to noisy-change-notification, you are update the UI multiple times.
-            - Identify which dependency is noisy.
-            - Fix the root cause -Find out why your dependencies are  noisy-change-notification.
-                - Array Mutation Performance warning: (below).
-            - If you can't fix the root cause Possible solution:
-                - Work hard to keep the items --- Reuse them as much as possible (Knockout map, filter etc.)
-                    } You might get lucky that no item actually changed, thus the UI will not react to it.
-                    } That's said, that still cause change-notification over the iFrame (even though data is not changed. :()
-                - Keep them is not possible, you should looking into knockout rate limited.  https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=Knockoutjs+ratelimit
-1. Reactor, computed and pureComputed
+The template for this blade is:
+
+```xml
+
+<div data-bind="pcControl: nameTextBox"></div>
+<div data-bind="pcControl: smartPhone"></div>
+<div data-bind="pcControl: okButton"></div>
+
+```
+
+(As an aside we generally recommend using a section control to layout your controls rather than directly putting them in the 
+template like we've done above because it provides default styling and an easier way to deal with dynamically adding/removing 
+control but doing it this way is useful for this example)
+
+<a name="other-blade-initialization"></a>
+## Blade initialization
+
+<a name="other-blade-initialization-blade-constructor"></a>
+### Blade constructor
+
+When a blade is opened the first thing that happens is the portal creates a blade with loading UI and shows it to the users while 
+the view model for the blade is requested from the extension. The first thing that happens in the extension is the constructor 
+for the blade view model will run. This is the place to create view models for your UI and do as much initialization as you can. 
+In our example we know we'll always need a readonly textbox for the name and a OK button to close the blade so we'll create those 
+now. Note we don't know what the value of the name textbox will be yet (we'll only  know that after the data is retrieved) but 
+we can still create the textbox now and update the value later because the `value` property of the textbox view model is observable.
+Here's what our blade view model constructor looks like:
+
+```typescript
+
+this._view = dataContext.personData.peopleEntities.createView(container);
+
+this.nameTextBox = new TextBox.ViewModel(container, {
+    readonly: true,
+    label: ko.observable("Name")
+});
+
+this.smartPhone = ko.observable<TextBox.ViewModel>();
+
+this.okButton = new SimpleButton.ViewModel(container, {
+    text: "OK",
+    onClick: () => {
+        container.closeChildBlade();
+    }
+});
+
+```
+
+This is where it's important to understand the different between observables and non-observable. Observable values can be updated 
+after their creation. Any properties that are not observable cannot be *observably* updated after the proxied observable layer has 
+mirrored the view model in the other iframe. That means you could write code like:
+
+```ts
+viewModel.readonly = false;
+```
+
+But this new value will never be propogated to the shell side and thus will never take effect. However if you write a new value to 
+an observable:
+
+```ts
+viewModel.value("updated");
+```
+
+The proxied observable layer will be notified of the change in the value and will reflect the change in the other iframe. Let's take 
+a look at what we did and didn't make observable in our constructor (remember changes to non-observable values won't show up in the 
+shell iframe). Only one of the properties on the blade, `smartPhone`, is an observable. The others are non-observable 
+values because, even though we might update properties on the `nameTextBox` for example , we won't remove or replace the actual textbox 
+view model itself. It's value is static for the lifetime of the blade. With `smartPhone` however we won't know if we want to create 
+the textbox control until we get the data (after the `onInputsSet` function finishes running) so we need to make the property observable.
+
+The same applies for properties on widget view models. For example, when we create the `okButton` view model we specify a static string
+for the `text` property. Since it is not an observable value we won't be able to update the button text later. If you look at the 
+type signature for the `text` property however you'll see it is a union type. It accepts both a `string` and a `KnockoutObservable<string>`.
+In case we want to revisit the decision of making the property dynamic or such that it can be updated later then we can achieve that by 
+defining an observable at construction time:
+
+```ts
+this._buttonText = ko.observable("OK");
+this.smartPhone = new SimpleButton.ViewModel(container, {
+    text: this._buttonText,
+    ...
+});
+```
+
+And then at any point later updated the text by writing to that observable:
+
+```ts
+this._buttonText("New button text");
+```
+
+The question then becomes 'why not make every property observable just in case you want to update it later?'. The reason is performance.
+Using an observable string instead of a string increases the size of your view model. It also means the proxied observable layer has 
+to do extra work to hook up listeners to the observable in case it is ever updated. Both these things will hurt your blade reveal 
+performance for literally no benefit if you never update the observable. Anywhere you can provide an observable or non-observable value 
+you should provide the non-observable value if possible. (Unfortunately there are still many places where framework view models
+accept only observable values so you must provide an observable even if you never plan on updating the value. We are currently working 
+on that).
+
+<a name="other-blade-initialization-blade-oninputsset"></a>
+### Blade onInputsSet
+
+When the input values for your blade are ready the framework will call your onInputsSet method. This is often when you'll fetch the 
+data for blade and update the view models you created in your constructor. When the promise you return from the onInputsSet method 
+is resolved your blade is considered 'loaded' the loading UI will be removed from your blade. Here's the code for our example's 
+onInputsSet method:
+
+```typescript
+
+return this._view.fetch(inputs.id).then(() => {
+    let person = this._view.data;
+
+    // populate name textbox value
+    this.nameTextBox.value(person.name());
+
+    // if smartphone has a value create a control to display it
+    // otherwise leave it empty
+    let smartPhone = person.smartPhone();
+    if (smartPhone) {
+        let textBox = new TextBox.ViewModel(this._container, {
+            readonly: true,
+            label: ko.observable("Smart phone"),
+            defaultValue: ko.observable(smartPhone)
+        });
+        this.smartPhone(textBox);
+    }
+});
+
+```
+
+Based on the inputs provided to us by the framework we'll start a `fetch()` to get data from the server. The return value for our
+onInputSet is the promise returned to us by the fetch call because our blade is ready to be displayed as soon as the data is loaded. 
+We also hook up a `then()` on the fetch promise so we can populate the dynamic pieces of our blade.
+
+The first thing we do is update the value of the name textbox with the name of the person we got from the server by writing to the 
+`value` observable on the textbox. If we hadn't marked the textbox as read only we could also subscribe to the value observable and 
+observe any changes the user makes to the textbox in the subscription callback.
+
+The other thing we do is decide whether or not to populate the blade's `smartPhone` observable with a textbox view model. Observables 
+aren't limited to just primative types. When the textbox view model is written to the `smartPhone` observable the `pcControl` binding 
+handler in the blade template observes the new view model and constructs a textbox widget. If we don't populate the observable the 
+`<div>` in our template stays empty and nothing is displayed on the blade.
+
+As mentioned before there are other cases besides optional UI elements for populating an observable (or the section control's 
+`children` observable array). The grid control, for example, has a boolean option in it's constructor that controls whether column headers 
+should be shown or not. Since it's not an observable boolean this can't be changed after the grid view model is created. If this 
+decision depends on some data that you get from the server you'll have to delay constructing the grid until you know that information.
+If proxied observables has already frozen your view model by the time you get your data you can get around this restriction by putting 
+the grid view model in an observable.
+
+<a name="other-blade-initialization-best-practices-when-using-observables"></a>
+### Best practices when using observables
+
+* Proper naming of view model properties
+  - The easiest thing you can do to improve performance is make sure proxied observables is 
+not copying data to the shell that is only needed in the extension iframe. The shell will warn you when it sees certain types of 
+objects (like an editscope) being sent to the shell but it can't guard against everything. It is on the extension author to review 
+their view model and ensure the right data is public vs private. Any private member name should start with an underscore so that 
+proxied observables knows not to send the property to the shell.
+
+* Avoid observables when possible
+  - As mentioned above it is much more efficient and performant to use non-observables values. 
+Whenever possible specifying a string instead of a KnockoutObservable<string> or a boolean instead of a KnockoutObservable<boolean> 
+will improve performance. The performance between transfering a single string and KnockoutObservable<string> isn't huge but if 
+a blade can make tens or hundreds of such savings they will add up.
+
+* Efficient mutation of observable arrays
+  - While doing:
+
+  ```ts
+  let numbers = ko.observable([]);
+  for (i = 0; i < 100; i++) {
+      numbers.push(i);
+  }
+  ```
+
+  and
+
+  ```ts
+  let tempArray = [];
+  for (i = 0; i < 100; i++) {
+      tempArray.push(i);
+  }
+  let numbers = ko.observable(tempArray);
+  ```
+
+  Might look more or less equivalent the first example above can lead to SEVERE performance problems. In terms of observable 
+  changes the first example queues 100 observable updates of one item each. The second example queues a single observable update 
+  with 100 items.
+
+  This is obviously a fictional example but let's say we were pushing data points to a series displayed on a chart that had 
+  auto-scaling of it's axes turned on. Let's assume it takes 0.01 seconds to render an extra data point but 0.5 seconds to 
+  recalcuate the scale of the x-axis and the y-axis every time the data is updated.
+
+  In this case the first example would take 100 * (0.01 + 0.5) = 51 seconds to process all the changes. The second example 
+  would take (100 * 0.01) + 0.5 = 1.5 seconds to process the changes. That is a *3400% difference*. Obviously this is a made up 
+  example but we have seen this mistake made by extension authors again and again that results in real performance problems.
+
+  This is such a common problem the framework attempts to detect when an extension writes this type of code and warns them 
+  with the message:
+
+  Performance warning: A proxied observable array is mutated inefficiently.
+
+  Generally this means you have somewhere in your code doing a repeated push() on an observable array (although there are a few
+  other inefficient array mutations it attempts to catch). If you ever see this warning in the console please take them time 
+  to figure out what is going on and address the issue.
+
+* ko.reactor() / ko.computed() / ko.pureComputed() and observable dependencies
+  - Knockout computeds/reactors are conv
     1. Explicitly know what  dependencies the code will subscribe to.
         - Avoid call to utility function which direct access any ko.observable.
         - Alternatively, utility function should use .peek() to avoid accidentally take on the dependency.
@@ -11990,99 +12586,13 @@ private _restManager: breeze.EntityManager = null;
             - Be ware that subscribe doesn't call the first time.  Computed is called the first time.  pureComputed only get computed when someone subscribe to it.
     1. Small is better, Knock out will cache value for you.
         - Break down the big compute to smaller computes which will isolate the code dependency and Knockout will cache compute value for unchanged portion of the dependencies for you.  Thus reduce the computation cost.
-    1. For array, leverage  Knock out projection map and filter.
+    1. For array, leverage knockout [projection map and filter](#portalfx-data-projections).
         - More items stay, less communication is required to transmit to the other iframe.
             - By default, knockout/proxiedobserable will only send the difference between the array contents.
-        - Leverage the childLifetime in the call back function --- your call back will know when "delete" happen, not just the "add"
-            - You will be notify when the "delete" happen by adding the following
+        - Leverage the childLifetime in the call back function --- your call back will know when "delete" happens, not just the "add"
+            - You will be notified when the "delete" happens by adding the following
 
-```ts
-    childLifetime.registerForDispose({
-    dispose: () => { console.log("this item is deleted");}
-});
-
-```
-    1. By default, make your property prefix with "_" which prevent it from ship over to the other Iframe
-        - Every property is ship over, Proxied layer will subscribe to the item, queue the change etc.
-        - Method will be ship over as well.
-        - Avoid to use getter and setter as mean to not to proxied over the iframe.
-            -This means that proxied layer have to ask every properties whether the property is getter or setter, which is costly. We are trying hard to optimized the performance with it.
-
-<a name="other-view-model-best-practices-performance-warning-a-proxied-observable-array-is-mutated-inefficiently-what-is-is-and-how-to-fix-it"></a>
-### Performance warning: A proxied observable array is mutated inefficiently. -- What is is and how to fix it.
- 1. What does this means?
-    - As our above discussion on performance in the code.  One area that we identify is array mutation function can be very noisy.  The impact to the proxied communication between iframe and the domino effect on the code get executes on the both side are quite significant. The transportation layer doesn't have contextal knowledge on what either side need to perform. It will accumlate all changes and notification and reply in the other side.
-    - Cost and Imapcts: Reduce from 10 notifications to 1 notification will mean 9 repeated code paths are eliminated.
- 1. How to Decipher the error message In the below sample message:
-    - id ( this will show what object it is.  In this example, is a object that's send from Extension "Microsoft_Azure_Insights" to "Fx" the object property is been perform on is Obj.children[2].innerViewModel.items[0].parentData.profiles
-    - It is an observable array which is already been proxied.
-    - Pattern:4N4N4N4N:  The array mutation pattern is 4N4N4N4N.
-      - The number mean the operation corresponding to legend in the next sentence: Legend:pop:0;push:1;reverse:2;shift:3;splice:4;unshift:5;reset:6
-      - "N" stand for Array Change Notification is fired.
-      - 4N4N4N4N means that splice-Notify-splice-Notify-splice-Notify-splice-Notify is been performed on this Array.  4 Notification(s) will be fired from one frame to the other.
-    - Notice that we currently only fire this warning when 4+ Change-Notification in the tight loop to trigger this performance warning.
-      - if there is only 2 or 3, yes, there are still room to improve, but still those are not the biggest chunk to avoid.
-    - Now you have been notified. You have works cut out for you: Thus the next:
-      - Consider to rework by accumulating all changes in a new array and set to proxied observable array once to avoid unnecessary change notification.
-    - Attach the call stack for you to inspect.
-      - You typically want to get as bottom in the stack as possible.
-        - The higher the stack, it is likely to be the tailing of the domino effect.
-        - The callstack will typically reflect the pattern 4N4N4N4N, is the splice- notification.  Thus the call stack on top will have a splice method
-           - Function.ko.utils.arrayForEach.ko.observableArray.fn.(anonymous function) [as splice]
-    - Since you are on 4+ pattern. You likely want to look at what happens in prior call stack to get to this repeated 4+ time pattern:
-      - To identify the source of performce issue, use ?trace=poarraymutation to log all proxied observable array muntations
-      - ?trace=poarraymutation is very powerful but ...
-        - It is vary noisy. It will report all array mutation in the console log as warning. Such it is recommanded to narrow it down to right before this performance warning happens then open the F12.
-        - You want to pay special attention to Id that match your point of insterest.  In this case. id === Microsoft_Azure_Insights-fx-0_1-1406-children.2.innerViewModel.items.0.parentData.profiles.
-    - In the following example we try down the issue in MergeEntityOnlyVisitor.MergeVisitor._mergeArray
-      - Note that, it is a Framework bug in this case.
-      - We analysis the result and come up with a fix to bring the Change-Notification down to less than 4.
-    - What if there is a trade off for this performance drawback at this place verse the other.
-      - Well, in the perfect world, we love for you to fix this if possible.  Consider that if this observable is been proxied. The likelyhood that this is somehow tie to UI is very high.  Anyway to reduce the change-notification will be better in performance.
-      - But, there are aways trade-off to make.  In some case, if your team can justify the balance of the performance goal, say, you would like to optimize for initial load-showup trade off later cached-record to be multiple-time slower. There is a way to opt out at cost of more coding and comments to justify it.
-        - There is way to do this. Performance is no difference than try to manage water crisis for water drought. If you have to do extra work or money to get more resource, then likelyhood of people violate the conservation is less.
-  1. Avoid to use ko.obsersvableArray build-in method if this observableArray is already proxied.  Most if not all method (push,push, reverse,shift,splice,unshift, remove) is noisy notification. Notify per operation.
-    - Try to have utility function take a array instead of 1 arguments.
-      - For example, we have to deprecate the MsPortalFx.ViewModels.Parts.Properties.ViewModel.AddProperty and in favor of MsPortalFx.ViewModels.Parts.Properties.ViewModel.SetProperties
-    - It is case by case secnario. You have more context on what you are doing and how to better avoid the repeated code paths to be triggered.
-
-```
-    [Microsoft_Azure_Insights]  11:38:55 AM MsPortalFx/Base/Base.ProxiedObservables 1 Performance warning: A proxied observable array with id(Microsoft_Azure_Insights-fx-0_1-1406-children.2.innerViewModel.items.0.parentData.profiles), is mutated inefficiently. Pattern:4N4N4N4N. Legend:pop:0;push:1;reverse:2;shift:3;splice:4;unshift:5.
-Consider reworking to accumulate all changes in a new array and set to proxied observable array once to avoid unnecessary change notification.
-To identify the source of performce issue, use ?trace=poarraymutation to log all proxied observable array muntations.
-The error occured in:
-    at Array.arrayMutationFuncNames.forEach.prototype.(anonymous function) (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Base/Base.ProxiedObservables.js:874:80)
-    at Function.ko.utils.arrayForEach.ko.observableArray.fn.(anonymous function) [as splice] (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/_oss/knockout-3.2.0.debug.js:1392:60)
-    at https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.MergeVisitor.js:194:57
-    at Array.forEach (native)
-    at MergeEntityOnlyVisitor.MergeVisitor._mergeArray (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.MergeVisitor.js:191:127)
-    at MergeEntityOnlyVisitor.MergeVisitor.visitArray (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.MergeVisitor.js:134:37)
-    at MergeEntityOnlyVisitor.Visitor.visitNonEntityArray (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.Visitor.js:56:44)
-    at MergeEntityOnlyVisitor.Visitor._visitArrayDispatch (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.Visitor.js:206:48)
-    at MergeEntityOnlyVisitor.MergeVisitor.visitObjectPropertyValue (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.MergeVisitor.js:90:43)
-    at MergeEntityOnlyVisitor.MergeVisitor.visitNonEntityTypedObjectPropertyValue (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.MergeVisitor.js:79:44)
-    at MergeEntityOnlyVisitor.Visitor.visitObjectPropertyValueDispatch (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.Visitor.js:180:48)
-    at MergeEntityOnlyVisitor.MergeVisitor.visitObjectPropertyValueDispatch (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.MergeVisitor.js:60:84)
-    at https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.MergeVisitor.js:50:38
-    at Array.every (native)
-    at MergeEntityOnlyVisitor.MergeVisitor.visitObject (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.MergeVisitor.js:49:88)
-    at MergeEntityOnlyVisitor.Visitor.visitEntity (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.Visitor.js:81:44)
-    at MergeEntityOnlyVisitor.Visitor._visitObjectDispatch (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.Visitor.js:212:48)
-    at MergeEntityOnlyVisitor.Visitor._visit (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.Visitor.js:188:37)
-    at MergeEntityOnlyVisitor.MergeVisitor.merge (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.MergeVisitor.js:36:58)
-    at MergeEntityOnlyVisitor.mergeEntity (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Data.EditScope.js:1776:44)
-    at InputIsOriginalEditScope.EditScopeBase._revertEntity (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Data.EditScope.js:832:58)
-    at InputIsOriginalEditScope.EditScopeBase.revert (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Data.EditScope.js:414:26)
-    at Object.EditScopeBase._createRevertAllVisitor.EditableVisitor._createVisitorCallbacks.visitEntity (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Data.EditScope.js:920:35)
-    at EditableVisitor.Visitor._visitObjectDispatch (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.Visitor.js:212:48)
-    at EditableVisitor.Visitor._visit (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.Visitor.js:188:37)
-    at EditableVisitor.Visitor.visit (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Internal/Internal.Data.Visitor.js:44:33)
-    at InputIsOriginalEditScope.EditScopeBase._revertAll (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Data.EditScope.js:898:44)
-    at InputIsOriginalEditScope.EditScopeBase.revertAll (https://shell-s2-portal.azurecomcdn.net/Content/5.0.302.9531526.150908-1021/Scripts/MsPortalFx/Data/Data.EditScope.js:422:26)
-    at DiscardScaleSettingCommand.execute (https://onestb.cloudapp.net:8443/insights/Content/Scripts/InsightsExtension/Client/Scales/Commands/DiscardScaleSettingCommand.js:30:50)
-```
-
-<a name="other-view-model-best-practices-performance-warning-this-computed-has-high-depenenciescount-what-it-is-and-how-to-fix-it"></a>
+<a name="other-blade-initialization-performance-warning-this-computed-has-high-depenenciescount-what-it-is-and-how-to-fix-it"></a>
 ### Performance warning: This computed has high depenenciesCount. -- What it is and how to fix it.
  1. What is it?
        It means that a computed or reactor has a lot of dependencies (30 as of March 2016).
@@ -12098,44 +12608,128 @@ The error occured in:
           1. If you use ko projection map or filter. Note that it will not only pick up dependency on "arrayChanges", anything that map/filter call back will pick up as dependency. Consider to use koObservableArray.mapInto intstead, which will only subscribe to "arrayChange" event and not any dependencies that might caused by map function
       1. Consider to break down your computed/reactor to smaller computed
           1. child computed have several benfits.
-              1. it cache the previous result.  For example, you need to do the same caculation for 10 rows of grid data.  If you breaks down this computed to per-row subcomputed. When Row10 is updated, only Row10 will re-caculated. Previous 9 row merely pick up the "cached" value.
+              1. it caches the previous result.  For example, let's say you need to do the same caculation for 10 rows of grid data. If you separate this computed into per-row subcomputed then when Row10 is updated, only Row10 will re-caculated.
               2. You can in additon leverage the childLifetimeManager just like projection map does.
 
- 1. Sample:
-      1. Note that changeCount means this computed is executed/updated 916 times.
-      1. callback is the function body for the computed/reactor  that you provided. Mostly are anonymous (lambda expression.) Function name is typically "".  Thus we provide the function.toString() for you to track down it.
-      1. dependenciesCount for the current computed dependencies
+ <h1 name="portalfx-load-configuration"></h1>
+ <properties title="" pageTitle="how to expose config settings for consumption in the client" description="" authors="lixinxu" />
 
- ```
-Base.Diagnostics.js:384 [fx]  6:05:59 PM MsPortalFx/Base/Base.KnockoutExtensions Base.KnockoutExtensions: Performance Error: This computed has depenenciesCount: 36 is higher than expected limit: 30
-Consider to breakdown the computed to smaller piece. For detail suggestion:  http://aka.ms/portalfx/vmbp
-changeCount:916
-callback:function () {
-                    _this._checkForChartUpdate();
-                    return _this._chartDataImmediateUpdatedCounter = (_this._chartDataImmediateUpdatedCounter + 1) & 0xfff;
-                }
+<tags
+    ms.service="portalfx"
+    ms.workload="portalfx"
+    ms.tgt_pltfrm="portalfx"
+    ms.devlang="portalfx"
+    ms.topic="get-started-article"
+    ms.date="12/26/2015"
+    ms.author="lixinxu"/>    
+
+<a name="other-how-to-expose-config-settings-for-consumption-in-the-client"></a>
+## How to expose config settings for consumption in the client
+
+Configuration settings are commonly used to control an application's behavior. For example, using timeout values, page size, endpoints, ARM version number, etc. Using the .NET framework, managed code can load config easily but in the case of portal extensions most of the extensions implementation is JavaScript running on client side.  By allowing the client code in extensions to gain access to configuration settings the portal framework provides a way to get the configuration and expose it in `window.fx.environment`. The following steps detail how it works:
+
+1. Portal framework will initialize the instance of the class ApplicationConfiguration (it is under Configuration folder in your project). It will try to populate all properties by finding configuration in web.config appSettings section. 
+For each property, portal framework will use the key "{ApplicationConfiguration class full name}.{property name}" unless you give a different name in the associated "ConfigurationSetting" attribute applied that property in your ApplicationConfiguration.
+
+1. Portal framework will create an instance of "window.fx.environment" for client script. It uses the mapping in ExtensionConfiguration dictionary which created by Definition.cs under the Controllers folder.
+
+1. Client script loads the configuration from "window.fx.environment" which implements the interface "FxEnvironment". To declare the new configuration entry, the file FxEnvironmentExtensions.d.ts under Definitions folder should be updated for each property you want exposed to the client.
+
+<a name="step-by-step-walkthrough"></a>
+# Step by step walkthrough
+Suppose you created a portal extension called "MyExtension" the following steps describe how to add a new configuration called "PageSize".
+
+1. Open the "ApplicationConfiguration.cs" file under "Configuration" folder.
+
+1. Add a new property called "PageSize"
+
+```csharp
+
+/// <summary>
+/// The configuration for co-admin management.
+/// </summary>
+[Export(typeof(ArmConfiguration))]
+[Export(typeof(ConfigurationSettings))]
+public class ArmConfiguration : ConfigurationSettings
+{
+    /// <summary>
+    /// Gets the ARM/CSM endpoint
+    /// </summary>
+    [ConfigurationSetting]
+    public Uri ArmEndpoint
+    {
+        get;
+        private set;
+    }
+
+    /// <summary>
+    /// Gets the Portal ARM/CSM endpoint
+    /// </summary>
+    [ConfigurationSetting]
+    public string PortalArmEndpoint
+    {
+        get;
+        private set;
+    }
+}
+
 ```
 
-     1. Open a bug and optout as temporary measure. Note that the first and last lines below should be specified exactly as below.
+1. Save the file
 
-```
-            executeInDevelopmentModeOnly(() => {
-                // RDBug 6005470:[Performance]: CsmTopology.ts have a computed take on High count of computed dependency
-                const markIgnoreHighDependenciesCount = MsPortalFx.Base.KnockoutExtensions.markIgnoreHighDependenciesCount;
-                markIgnoreHighDependenciesCount && markIgnoreHighDependenciesCount(this._nodes);
-            }); // executeInDevelopmentModeOnly
-```
+1. You will notice the namespace is "Microsoft.Portal.Extensions.MyExtension". So the full name of the class is "Microsoft.Portal.Extensions.MyExtension.ApplicationConfiguration". Since the property is "PageSize" so the configuration key should be "Microsoft.Portal.Extensions.MyExtension.ApplicationConfiguration.PageSize".
 
-  1. Another Sample:
-      1. RDBug 6033418 [Perf] Selection.ts computed accidently pick up a lot of computed dependencies due to use of the pass-in function for compare
-      1. The reason, the constructor take a custom item comparer function.  The problem is that the caller provide the comparer function doesn't know it will be used inside a compute. As result, in Grid, after 2 "load more", this compute dependency grows from 11 to 242 dependencies.
-      1. The fix : wrap the unsafe custom item comparer function within ko.ignoreDependency
+1. Open web.config of your extension.
 
-```
-             // itemMatchesSelection is given function, require to wrapped around ko.ignoreDependencies to avoid pick up unwantted dependency
-            const ignoreKOItemMatchesSelection: typeof itemMatchesSelection = function (item: T, selection: U): boolean {
-                return ko.ignoreDependencies(() => itemMatchesSelection(item, selection));
+1. Locate the "appSettings" section. Add a new entry for PageSize
+
+    ```xml
+    ...
+      <appSettings>
+            ...
+            <add key="Microsoft.Portal.Extensions.MyExtension.ApplicationConfiguration.PageSize" value="20"/>
+      </appSettings>
+      ...
+    ```
+
+1. Save and close the web.config file
+
+1. Open "Definition.cs" from "Controllers" folder. Add a new mapping in "ExtensionConfiguration" property
+
+    ```csharp
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Definition"/> class.
+        /// </summary>
+        /// <param name="applicationConfiguration">The application configuration.</param>
+        [ImportingConstructor]
+        public Definition(ApplicationConfiguration applicationConfiguration)
+        {
+            this.ExtensionConfiguration = new Dictionary<string, object>()
+            {
+                ...
+                { "pageSize", applicationConfiguration.PageSize },
             };
-```
+            ...
+        }
+    ```
 
+1. Open "FxEnvironmentExtensions.d.ts" file from "Definitions" folder and add "pageSize" property in the environment interface
+
+    ```ts
+        interface FxEnvironment {
+            ...
+            pageSize?: number;
+        } 
+    ```
+
+1. Now new configuration entry has been defined. To use the configuration, add the code like this in script:
+
+    ```JavaScript
+        var pageSize = window.fx.environment && window.fx.environment.pageSize || 10;
+    ```
+
+If you have any questions, reach out to Ibiza team on: [https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza](https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza).
+
+An extended version of the above is used to transfer domain based configuration (such as correctly formatted FwLinks) to the client.
+For details and examples, please see [Domain based configuration](#portalfx-domain-based-configuration).
 

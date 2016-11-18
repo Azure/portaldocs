@@ -9,7 +9,6 @@
 * [Error Distribution](#error-distribution)
 * [Next Steps:](#next-steps)
 * [Create Troubleshooting](#create-troubleshooting)
-    * [Overview](#create-troubleshooting-overview)
     * [Types of Create Failures](#create-troubleshooting-types-of-create-failures)
     * [Debugging Alerts](#create-troubleshooting-debugging-alerts)
 * [Performance](#performance)
@@ -25,7 +24,6 @@
     * [Extension HomePage Caching](#performance-extension-homepage-caching)
     * [Persistent Caching of scripts across extension updates](#performance-persistent-caching-of-scripts-across-extension-updates)
     * [Run portalcop to identify and resolve common performance issues](#performance-run-portalcop-to-identify-and-resolve-common-performance-issues)
-    * [PortalCop](#performance-portalcop)
     * [Performance alerting](#performance-performance-alerting)
 * [Reliability](#reliability)
     * [Overview](#reliability-overview)
@@ -1071,10 +1069,7 @@ ClientTelemetry
 <a name="create-troubleshooting"></a>
 # Create Troubleshooting
  <h1 name="portalfx-create-troubleshooting"></h1>
- <properties title="" pageTitle="Troubleshooting create failures and regressions" description="" authors="asgar" />
-
-<a name="create-troubleshooting-overview"></a>
-## Overview
+ ## Overview
 
 Creates are when a user tries to provision a resource using the portal.  The goal of the Create Flow Regressions alert is to  generate awareness when our create reliability seems to be degrading.  This can happen for a number of reasons, this alert does not attempt to distinguish the reasons why.
 
@@ -2104,13 +2099,10 @@ web.config
 ## Run portalcop to identify and resolve common performance issues
 
  <h1 name="portalfx-performance-portalcop"></h1>
- <properties title="" pageTitle="Performance PortalCop" description="" authors="gurua" />
-
-<a name="performance-portalcop"></a>
-## PortalCop
+ ## PortalCop
 The Portal Framework team has built a tool called PortalCop that can help reduce code size and remove redundant RESX entries.
 
-<a name="performance-portalcop-installing-portalcop"></a>
+<a name="performance-run-portalcop-to-identify-and-resolve-common-performance-issues-installing-portalcop"></a>
 ### Installing PortalCop
 
 Run the following command in the NuGet Package Manager Console.
@@ -2125,10 +2117,10 @@ Or run the following in a Windows command prompt.
 nuget install PortalFx.PortalCop -Source https://msazure.pkgs.visualstudio.com/DefaultCollection/_packaging/Official/nuget/v3/index.json -Version 1.0.0.339
 ```
 
-<a name="performance-portalcop-running-portalcop"></a>
+<a name="performance-run-portalcop-to-identify-and-resolve-common-performance-issues-running-portalcop"></a>
 ### Running PortalCop
 
-<a name="performance-portalcop-running-portalcop-namespace-mode"></a>
+<a name="performance-run-portalcop-to-identify-and-resolve-common-performance-issues-running-portalcop-namespace-mode"></a>
 #### Namespace Mode
 
 NOTE: If you do not use AMD, please do not run this mode in your codebase.
@@ -2152,7 +2144,7 @@ Review the changes after running the tool. Especially, be wary of string content
    portalcop Namespace
 ```
 
-<a name="performance-portalcop-running-portalcop-resx"></a>
+<a name="performance-run-portalcop-to-identify-and-resolve-common-performance-issues-running-portalcop-resx"></a>
 #### Resx
 
 To reduce code size and save on localization costs, you can use the PortalCop RESX mode to find unused/redundant resx strings. 

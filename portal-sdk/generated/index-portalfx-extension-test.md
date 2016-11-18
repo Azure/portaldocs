@@ -1,12 +1,10 @@
 * [Choosing the right test Framework](#choosing-the-right-test-framework)
-* [Portal Test Framework](#portal-test-framework)
-    * [Overview](#portal-test-framework-overview)
-    * [Testing Parts and Blades](#portal-test-framework-testing-parts-and-blades)
-    * [Testing: Filling Out Forms](#portal-test-framework-testing-filling-out-forms)
-    * [Testing Commands](#portal-test-framework-testing-commands)
-    * [Taking Screenshots while Testings](#portal-test-framework-taking-screenshots-while-testings)
-    * [Loading a Subset of Extensions](#portal-test-framework-loading-a-subset-of-extensions)
-    * [Testing Best Practices](#portal-test-framework-testing-best-practices)
+    * [Testing Parts and Blades](#choosing-the-right-test-framework-testing-parts-and-blades)
+    * [Testing: Filling Out Forms](#choosing-the-right-test-framework-testing-filling-out-forms)
+    * [Testing Commands](#choosing-the-right-test-framework-testing-commands)
+    * [Taking Screenshots while Testings](#choosing-the-right-test-framework-taking-screenshots-while-testings)
+    * [Loading a Subset of Extensions](#choosing-the-right-test-framework-loading-a-subset-of-extensions)
+    * [Testing Best Practices](#choosing-the-right-test-framework-testing-best-practices)
 * [msportalfx-test](#msportalfx-test)
     * [Overview](#msportalfx-test-overview)
     * [Getting Started](#msportalfx-test-getting-started)
@@ -45,43 +43,44 @@ We have partnered with the IaaS team to develop an open-source typescript test f
 Comparison of test-frameworks:
 
 - Maturity (Number of Selector APIs) : C# > typescript
-- (Built on Selenium webdriver open standard)[http://www.seleniumhq.org/projects/webdriver/] : Both Supported by Ibiza
-- Documentation for Typescript test framework is more upto date than C# test framework
+- [Built on Selenium webdriver open standard](http://www.seleniumhq.org/projects/webdriver/) : Both Supported by Ibiza
+- Documentation for Typescript test framework is more up to date than C# test framework
 - Test Execution Speed: typescript is 20% faster
-- Distributed independently from SDK: Typescript
+- Distributed independently from SDK: Both
 - Open Source contribution Model: Actively working on moving Typescript based test-fx to open source contribution model. We are investigating dev work to move C# based test-fx to open source contribution Model.
  <h1 name="portalfx-test"></h1>
- <properties title="Portal Test Framework" pageTitle="Portal Test Framework" description="" authors="julioct" />
-
-<a name="portal-test-framework"></a>
-# Portal Test Framework
+ #  Portal Test Framework
 
 Please use the following links for info on how to use the Portal Test Framework:
 
-[Writing UI test cases](#portalfx-testing-ui-test-cases)
- 
-[Parts and blades](#portalfx-testing-parts-and-blades)
+ <h1 name="portalfx-testing-move-cstestfx"></h1>
+ ## NOTICE: Changes to C# Test Framework nuget
 
-[Filling forms](#portalfx-testing-filling-forms)
+<a name="choosing-the-right-test-framework-what"></a>
+### What
+The Ibiza Portal’s C# Test Framework is being moved to a separate repository.  This will empower partners to iterate faster without depending on the Portal Teams SDK ship cycle.  You may contribute directly or creating your own forks of the Test Framework.
 
-[Using commands](#portalfx-testing-using-commands)
+<a name="choosing-the-right-test-framework-when"></a>
+### When
+The new repository is already available for you to enlist into now.   An email will be sent when the Microsoft.Portal.TestFramework nuget contains the changes.
 
-[Taking screenshots](#portalfx-testing-taking-screenshots)
+<a name="choosing-the-right-test-framework-getting-the-new-test-framework"></a>
+### Getting the new test framework:
+If you are currently using the [Microsoft.Portal.TestFramework NuGet](https://msazure.visualstudio.com/DefaultCollection/One/_apps/hub/ms.feed.feed-hub?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.testframework&packageVersion=5.0.302.542&_a=view) (recommended), then there should be minimal changes required.  Most likely you will just need to update your NuGet version and it should pull down the new dependencies.  If you did any custom copying of dlls then please note that some unnecessary DLLs have been removed.  The Microsoft.Portal.TestFramework nuget will continue to be tied with Portal releases and will stamped with the same version as the portal framework it was built with.
 
-[Loading a subset of extensions](#portalfx-loading-a-subset-of-extensions)
+If you wish to pick up the absolute latest Test Framework bits, a nuget package called [Microsoft.Portal.TestFramework.CSharp](https://msazure.visualstudio.com/DefaultCollection/One/_apps/hub/ms.feed.feed-hub?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.testframework.csharp&packageVersion=1.0.8.8&_a=view) (not the same as Microsoft.Portal.TestFramework) is available via the [MsAzure Official feed](https://msazure.pkgs.visualstudio.com/_packaging/Official/nuget/v3/index.json) and [wanuget official](http://wanuget/Official/nuget).
+This package only contains the necessary DLLs for building the test framework, not running it.  You will need include some additional Portal framework DLLs (put them in the same directory as the running tests) in order to properly run tests (these DLLs are automatically included in the Microsoft.Portal.TestFramework nuget).  The specific DLLs are listed in the Microsoft.Portal.TestFramework.CSharp’s readme.txt file.  
 
-[Best practices](#portalfx-testing-best-practices)
-
+<a name="choosing-the-right-test-framework-viewing-the-source-code-and-contributing-back"></a>
+### Viewing the source code and contributing back
+If you wish to view the source code and possibly contribute fixes back to the Test Framework then please see [the contribution article](#portalfx-testing-contributing).
 
  <h1 name="portalfx-testing-ui-test-cases"></h1>
- <properties title="" pageTitle="UI Test Cases" description="" authors="" />
-
-<a name="portal-test-framework-overview"></a>
-## Overview
+ ## Overview
 
 You write UI based test cases using Visual Studio and the Portal Test Framework which is part of the Portal SDK.
 
-<a name="portal-test-framework-overview-creating-the-test-project"></a>
+<a name="choosing-the-right-test-framework-creating-the-test-project"></a>
 ### Creating the Test Project
 To create a test project that can use the Portal Test Framwork:
 
@@ -90,7 +89,6 @@ To create a test project that can use the Portal Test Framwork:
 3. If your test cases involve the Azure Marketplace, also install the Microsoft.Portal.TestFramework.MarketplaceUtilities package from [here](https://msazure.visualstudio.com/DefaultCollection/One/_apps/hub/ms.feed.feed-hub?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.testframework.marketplaceutilities), which contains Selenium classes for elements in the Azure Marketplace.
 4. Add an app.config file to your test project and define the basic Test Framework settings under appSettings. For example:
 
-```xml
     ```xml
 
 <appSettings>
@@ -112,14 +110,12 @@ To create a test project that can use the Portal Test Framwork:
 </appSettings>
 
 ```
-```
 
 5. Add a new Unit Test class and start writing your test case
 
 ### Navigating to the Portal
 To navigate to the Portal, you first must supply the Portal's uri.  We recommend setting the value in the app.config file as shown above.  Once you have the Portal uri, you can use the **WebDriverFactory.Create** method to create an instance of the WebDriver object and then use the **PortalAuthentication** class to login, navigate to the Portal in the browser.
 
-```cs
     ```csharp
 
 // Get the specified Portal Uri from the configuration file
@@ -145,15 +141,13 @@ portalAuth.SignInAndSkipPostValidation(userName: "", /** The account login to us
     fragment: "#" /** The hash fragment, use this to optionally navigate directly to your resource on sign in. **/);
 
 ```
-```
 
 Please note that multi factor authentication (MFA) is not supported, you must use an account that does not require MFA.  If you are part of the Microsoft Azure organization please see (Azure Security Guidelines)[https://microsoft.sharepoint.com/teams/azure2fa/SitePages/FAQ%20on%20Use%20of%20MSA%20on%20Azure%20Subsriptions.aspx] for details on how to request an exception for an MSA/OrgID account.  You can not use a service account to login to the Azure Portal.
 
-<a name="portal-test-framework-overview-side-loading-an-extension-via-test-framework"></a>
+<a name="choosing-the-right-test-framework-side-loading-an-extension-via-test-framework"></a>
 ### Side Loading An Extension via Test Framework
 The Portal provides options for side loading your extension for testing.  If you wish to side load your extension (either a localhost or deployed one) you can set the appropriate query strings and execute the registerTestExtension function for deployed extensions.  For a localhost extension you can just set a query string.  See (Testing in Production)[#Testing in production] for details.
 
-```cs
     ```csharp
 
 // Sign into the portal
@@ -177,20 +171,17 @@ Portal.CheckAndClickExtensionTrustPrompt(webDriver);
 portal = Portal.FindPortal(webDriver, false);
 
 ```
-```
 
 Finally, you should dispose the WebDriver to cleanup:
 
-```cs
     ```csharp
 
 // Clean up the webdriver after
 webDriver.Dispose();
 
 ```
-```
 
-<a name="portal-test-framework-overview-managing-authentication-credentials-unsupported"></a>
+<a name="choosing-the-right-test-framework-managing-authentication-credentials-unsupported"></a>
 ### Managing authentication credentials (unsupported)
 While the test framework does not provide any support for managing login credentials, there are some recommendations:
 1.  If you are in the Azure org, please see (Azure Security guidelines)[https://microsoft.sharepoint.com/teams/azure2fa/SitePages/FAQ%20on%20Use%20of%20MSA%20on%20Azure%20Subsriptions.aspx]
@@ -201,9 +192,8 @@ While the test framework does not provide any support for managing login credent
     1.  Using Azure Key Vault.
     1.  Write your own service for providing credentials.
 
-<a name="portal-test-framework-overview-full-sample-code"></a>
+<a name="choosing-the-right-test-framework-full-sample-code"></a>
 ### Full Sample Code
-```cs
     ﻿//------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
@@ -270,11 +260,10 @@ namespace DocSampleTest
     }
 }
 
-```
  <h1 name="portalfx-testing-parts-and-blades"></h1>
  <properties title="" pageTitle="Testing Parts and Blades" description="" authors="" />
 
-<a name="portal-test-framework-testing-parts-and-blades"></a>
+<a name="choosing-the-right-test-framework-testing-parts-and-blades"></a>
 ## Testing Parts and Blades
 
 Once you have an instance of the Portal object you can find parts on the StartBoard using the **Portal.StartBoard.FindSinglePartByTitle** method. The method will give you a an instance of the Part class that you can use to perform actions on the part, like clicking on it:
@@ -318,7 +307,7 @@ webDriver.WaitUntil(() => errorPart.FindElement(By.TagName("button")),
 	     .Click();
 ```
 
-<a name="portal-test-framework-testing-parts-and-blades-full-example"></a>
+<a name="choosing-the-right-test-framework-testing-parts-and-blades-full-example"></a>
 #### Full example
 
 ```cs
@@ -404,7 +393,7 @@ namespace SamplesExtensionTests
  <h1 name="portalfx-testing-filling-forms"></h1>
  <properties title="" pageTitle="Testing: Filling Out Forms" description="" authors="" />
 
-<a name="portal-test-framework-testing-filling-out-forms"></a>
+<a name="choosing-the-right-test-framework-testing-filling-out-forms"></a>
 ## Testing: Filling Out Forms
 
 You can find form fields using the **FindField** method of the **FormSection** class. First, let's find the form:
@@ -466,7 +455,7 @@ createActionBar.ClickOk();
 portal.FindSingleBladeByTitle(contactName);
 ```
 
-<a name="portal-test-framework-testing-filling-out-forms-full-example"></a>
+<a name="choosing-the-right-test-framework-testing-filling-out-forms-full-example"></a>
 ### Full Example
 ```cs
 using System;
@@ -582,12 +571,12 @@ namespace SamplesExtensionTests
  <h1 name="portalfx-testing-using-commands"></h1>
  <properties title="" pageTitle="Testing Commands" description="" authors="" />
 
-<a name="portal-test-framework-testing-commands"></a>
+<a name="choosing-the-right-test-framework-testing-commands"></a>
 ## Testing Commands
 
 The Test Framework provides objects to interact with commands both from the command bar and context menus.
 
-<a name="portal-test-framework-testing-commands-to-use-commands-from-the-command-bar"></a>
+<a name="choosing-the-right-test-framework-testing-commands-to-use-commands-from-the-command-bar"></a>
 ### To use commands from the command bar
 Use the **Blade.FindCommandBar** method to get an instance of the Command Bar and then the **CommandBar.FindCommandBarItem** method to find the relevant command:
 
@@ -608,7 +597,7 @@ commandBar.FindMessageBox("Delete contact").ClickButton("Yes");
 webDriver.WaitUntil(() => !commandBar.HasMessageBox, "There is still a message box in the command bar.");
 ```
 
-<a name="portal-test-framework-testing-commands-to-use-commands-from-context-menus"></a>
+<a name="choosing-the-right-test-framework-testing-commands-to-use-commands-from-context-menus"></a>
 ### To use commands from context menus
 To do this you can first use Selenium's **Actions** class to perform a contextual click on the desired web element. Let's first find a grid row where we want to open the context menu:
 
@@ -654,7 +643,7 @@ webDriver.WaitUntil(() => !portal.HasMessageBox, "There is still a message box i
 portal.StartBoard.FindSinglePartByTitle("Deleted");
 ```
 
-<a name="portal-test-framework-testing-commands-full-example"></a>
+<a name="choosing-the-right-test-framework-testing-commands-full-example"></a>
 ### Full example
 ```cs
 using System;
@@ -821,7 +810,7 @@ namespace SamplesExtensionTests
  <h1 name="portalfx-testing-taking-screenshots"></h1>
  <properties title="" pageTitle="Taking Screenshots while Testings" description="" authors="" />
 
-<a name="portal-test-framework-taking-screenshots-while-testings"></a>
+<a name="choosing-the-right-test-framework-taking-screenshots-while-testings"></a>
 ## Taking Screenshots while Testings
 
 The Test Framework provides built in support for taking screenshots from test cases. You can use the **WebDriver.TakeScreenshot** method to take the screenshot and save it as a PNG file to the local disk. You can do this at any point within the test case, but a typical approach is to do it at least in the test CleanUp method when the outcome of the test case is not "Passed".
@@ -842,7 +831,7 @@ public void TestCleanup()
 }
 ```
 
-<a name="portal-test-framework-taking-screenshots-while-testings-full-example"></a>
+<a name="choosing-the-right-test-framework-taking-screenshots-while-testings-full-example"></a>
 ### Full example
 
 ```cs
@@ -920,7 +909,7 @@ namespace SamplesExtensionTests
  <h1 name="portalfx-loading-a-subset-of-extensions"></h1>
  <properties title="" pageTitle="Loading a subset extensions" description="" authors="madjos,nickharris" />
 
-<a name="portal-test-framework-loading-a-subset-of-extensions"></a>
+<a name="choosing-the-right-test-framework-loading-a-subset-of-extensions"></a>
 ## Loading a Subset of Extensions
 There are some instances during test where you may want to only load your extension or a subset of extensions within the portal. You can do this using the feature.DisableExtensions feature flag. 
 
@@ -938,12 +927,12 @@ Usage:
  <h1 name="portalfx-testing-best-practices"></h1>
  <properties title="" pageTitle="Testing Best Practices" description="" authors="" />
 
-<a name="portal-test-framework-testing-best-practices"></a>
+<a name="choosing-the-right-test-framework-testing-best-practices"></a>
 ## Testing Best Practices
 
 As you write UI based test cases using the Portal Test Framework it is recommended you follow a few best practices to ensure maximum reliability and to get the best value from your tests.
 
-<a name="portal-test-framework-testing-best-practices-always-verify-that-every-action-completed-as-expected"></a>
+<a name="choosing-the-right-test-framework-testing-best-practices-always-verify-that-every-action-completed-as-expected"></a>
 ### Always verify that every action completed as expected
 In many cases the browser is not as fast as the test execution, so if you don't wait until expected conditions have completed your tests could easily fail. For example:
 
@@ -954,7 +943,7 @@ webDriver.WaitUntil(() => !commandBar.HasMessageBox, "There is still a message b
 
 Here, the "Yes" button of a message box is clicked and you would expect it to go away as soon as the button is clicked. However this might not happen as fast as you think. Therefore we wait until the CommandBar.HasMessageBox property reports 'false' before proceeding, which ensures the message box is gone and will not interfere with the next action.
 
-<a name="portal-test-framework-testing-best-practices-log-everything"></a>
+<a name="choosing-the-right-test-framework-testing-best-practices-log-everything"></a>
 ### Log everything
 It can be very difficult to diagnose a failed test case without some good logging. An easy way to write these logs is to use the **TestContext.WriteLine** method:
 
@@ -962,7 +951,7 @@ It can be very difficult to diagnose a failed test case without some good loggin
 TestContext.WriteLine("Starting provisioning from the StartBoard...");
 ```
 
-<a name="portal-test-framework-testing-best-practices-use-built-in-test-framework-methods"></a>
+<a name="choosing-the-right-test-framework-testing-best-practices-use-built-in-test-framework-methods"></a>
 ### Use built in Test Framework methods
 The Portal Test Framework provides many built in methods to perform actions on Portal web elements and it is recommended to use them for maximum test maintainability and reliability. For example, one way to find a StartBoard part by it's title is this:
 
@@ -987,11 +976,11 @@ BaseElement also contains an extension method that wraps the webDriver.WaitUntil
 var part = blade.WaitForAndFindElement<Part>(p => p.PartTitle.Equals("TheTitle"));
 ```
 
-<a name="portal-test-framework-testing-best-practices-use-waituntil-for-retrying-actions-and-waiting-for-conditions"></a>
+<a name="choosing-the-right-test-framework-testing-best-practices-use-waituntil-for-retrying-actions-and-waiting-for-conditions"></a>
 ### Use WaitUntil for retrying actions and waiting for conditions
 WaitUntil can also be used to retry an action since it just takes a lambda function which could be an action and then a verification step afterwards.  WaitUntil will return when a "truthy" (not false or null value) is returned.  This can be useful if the particular action is flakey.  Please be careful to only use actions that are idempotent when trying to use WaitUntil in this pattern.
 
-<a name="portal-test-framework-testing-best-practices-prefer-waituntil-to-assert-for-non-instantaneous-conditions"></a>
+<a name="choosing-the-right-test-framework-testing-best-practices-prefer-waituntil-to-assert-for-non-instantaneous-conditions"></a>
 ### Prefer WaitUntil to Assert for non instantaneous conditions
 The traditional way to verify conditions within test cases is by using **Assert** methods. However, when dealing with conditions that won't be satisfied immediately you should instead use **WebDriver.WaitUntil**:
 
@@ -1003,13 +992,13 @@ webDriver.WaitUntil(() => field.IsValid, "The 'contactName' field did not pass v
 
 In this example, if we would have instead used Assert to verify the IsValid propery the test would most like have failed since the TextBox field has a custom async validation that will perform a request to the backend server to perform the required validation, and this is expected to take at least a second.
 
-<a name="portal-test-framework-testing-best-practices-create-proper-wrapper-abstractions-for-commonly-used-patterns"></a>
+<a name="choosing-the-right-test-framework-testing-best-practices-create-proper-wrapper-abstractions-for-commonly-used-patterns"></a>
 ### Create proper wrapper/abstractions for commonly used patterns
 A good practice is to create wrappers and abstractions for common patterns of code you use (eg when writing a WaitUntil, you may want to wrap it in a function that describes its actual intent).  This makes your test code clear in its intent by hiding the actual details to the abstraction's implementation.  It also helps with dealing with breaking changes as you can just modify your abstraction rather than every single test.  
 
 If you think an abstraction you wrote would be generic and useful to the test framework, feel free to contribute it!
 
-<a name="portal-test-framework-testing-best-practices-clear-user-settings-before-starting-a-test"></a>
+<a name="choosing-the-right-test-framework-testing-best-practices-clear-user-settings-before-starting-a-test"></a>
 ### Clear user settings before starting a test
 As you may know, the Portal keeps good track of all user customizations via persistent user settings. This behavior might not be ideal for test cases since each test case could potentially find a Portal with different customizations each time. To avoid this you can use the **portal.ResetDesktopState** method.  Note that the method will force a reload of the Portal.
 
@@ -1017,7 +1006,7 @@ As you may know, the Portal keeps good track of all user customizations via pers
 portal.ResetDesktopState();
 ```
 
-<a name="portal-test-framework-testing-best-practices-use-findelements-to-verify-the-absence-of-elements"></a>
+<a name="choosing-the-right-test-framework-testing-best-practices-use-findelements-to-verify-the-absence-of-elements"></a>
 ### Use FindElements to verify the absence of elements
 Sometimes you are not trying to find a web element but instead you want to verify that the element is not there. In these cases you can use the **FindElements** method in combination with Linq methods to verify if the element is there:
 
@@ -1029,7 +1018,7 @@ webDriver.WaitUntil(() => portal.StartBoard.FindElements<Part>()
 
 In the example, we are verifying that there is no part with title 'John Doe' in the StartBoard.
 
-<a name="portal-test-framework-testing-best-practices-prefer-cssselector-to-xpath"></a>
+<a name="choosing-the-right-test-framework-testing-best-practices-prefer-cssselector-to-xpath"></a>
 ### Prefer CssSelector to Xpath
 You will eventually be faced with the choice of using either CSS selectors or XPath to find some web elements in the Portal. As a general rule the preferred approach is to use CSS selectors because:
 
@@ -1047,6 +1036,35 @@ grid.FindElements(By.CssSelector("[aria-selected=true]"))
 
 If you think the element you found would be a useful abstraction, feel free to contribute it back to the test framework!
 
+ <h1 name="portalfx-testing-contributing"></h1>
+ ## Contributing
+
+Contributions that improve the Test Framework are welcome as they keep the code base healthy.  If you have improvements you wish to contribute back to the Test Framework, see below for steps on enlisting and submitting a pull request.  Please note that this is currently only available to Microsft employees.
+
+<a name="choosing-the-right-test-framework-testing-best-practices-enlisting"></a>
+### Enlisting
+The repo uses a build environment called CoreXt.  Please be sure to follow the Cloud Engineering Service’s instructions for [Enlisting into an Existing repo](https://microsoft.sharepoint.com/teams/WAG/EngSys/Implement/OneBranch/Home.aspx) if this is your first time using CoreXt5.
+
+The git repository is available at the following URL (Microsoft employees only):
+https://msazure.visualstudio.com/DefaultCollection/One/_git/AzureUX-PortalFx-CSTestFx
+
+The code can be viewed via the solution file <repoRoot>\src\TestFramework\TestFramework.sln.
+
+<a name="choosing-the-right-test-framework-testing-best-practices-building"></a>
+### Building
+In order to build, you will need to [initialize the CoreXt environment for the repository](https://microsoft.sharepoint.com/teams/WAG/EngSys/Implement/OneBranch/Open%20Development%20Environment.aspx).  Once that is complete, you can call "build" at the repository root.  The build output will be available under <repoRoot>\out.
+
+<a name="choosing-the-right-test-framework-testing-best-practices-testing"></a>
+### Testing
+Once you have a build, the nuget package Microsoft.Portal.TestFramework.CSharp will be available under the <repoRoot>\out\debug-AMD64\.  You can copy the binaries to your local test suites and then run your tests to verify the fix.
+
+<a name="choosing-the-right-test-framework-testing-best-practices-submitting"></a>
+### Submitting
+To contribute back to the Test Framework, please submit a [pull request](https://msazure.visualstudio.com/DefaultCollection/One/_git/AzureUX-PortalFx-CSTestFx/pullrequestcreate).  Note that we may test your code changes with our internal repository's test suites before accepting your pull request.
+
+<a name="choosing-the-right-test-framework-testing-best-practices-troubleshooting"></a>
+### Troubleshooting
+If you run into issues, please search the [internal Microsoft stack overflow](http://stackoverflow.microsoft.com) first.  If you are unable to find an answer, ask a new question and tag it with "ibiza-test".
 
  <h1 name="msportalfx-test"></h1>
  <a name="msportalfx-test"></a>
