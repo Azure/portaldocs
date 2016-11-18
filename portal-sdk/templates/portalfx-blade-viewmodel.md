@@ -178,7 +178,7 @@ a blade can make tens or hundreds of such savings they will add up.
   recalcuate the scale of the x-axis and the y-axis every time the data is updated.
 
   In this case the first example would take 100 * (0.01 + 0.5) = 51 seconds to process all the changes. The second example 
-  would take (100 * 0.01) + 0.5 = 1.5 seconds to process the changes. That is a *3400% difference*. Obviously this is a made up 
+  would take (100 * 0.01) + 0.5 = 1.5 seconds to process the changes. That is a *3400% difference*. Again, this is a made up 
   example but we have seen this mistake made by extension authors again and again that results in real performance problems.
 
   This is such a common problem the framework attempts to detect when an extension writes this type of code and warns them 
@@ -190,35 +190,106 @@ a blade can make tens or hundreds of such savings they will add up.
   other inefficient array mutations it attempts to catch). If you ever see this warning in the console please take them time 
   to figure out what is going on and address the issue.
 
-* ko.reactor() / ko.computed() / ko.pureComputed() and observable dependencies
-  - Knockout computeds/reactors are conv
-    1. Explicitly know what  dependencies the code will subscribe to.
-        - Avoid call to utility function which direct access any ko.observable.
-        - Alternatively, utility function should use .peek() to avoid accidentally take on the dependency.
-        - Some change to use subscribe over the computed for the reason that the precise one depedency.
-            - Be ware that subscribe doesn't call the first time.  Computed is called the first time.  pureComputed only get computed when someone subscribe to it.
-    1. Small is better, Knock out will cache value for you.
-        - Break down the big compute to smaller computes which will isolate the code dependency and Knockout will cache compute value for unchanged portion of the dependencies for you.  Thus reduce the computation cost.
-    1. For array, leverage knockout [projection map and filter](#portalfx-data-projections).
-        - More items stay, less communication is required to transmit to the other iframe.
-            - By default, knockout/proxiedobserable will only send the difference between the array contents.
-        - Leverage the childLifetime in the call back function --- your call back will know when "delete" happens, not just the "add"
-            - You will be notified when the "delete" happens by adding the following
+<a name="data-pureComputed">
+### ko.pureComputed()
 
-### Performance warning: This computed has high depenenciesCount. -- What it is and how to fix it.
- 1. What is it?
-       It means that a computed or reactor has a lot of dependencies (30 as of March 2016).
-       When a computed/reactor have high dependencies count, that means the potential that this computed will get executed a lot of times when any of the depenency changes.
-       Any subscribers to this computed  or reactor update some obserable will get trigger change notification.  It starts a huge dominos effect.  It is potential drag down the performance of the portal.
-       Any computed will re-accumulate all the dependency.  With this amount of dependency, you are looking at array of depdencies's subsbscribers will be update.  Reset all prior dependencies's subscriptions list.etc
-       It is expensive not to mention execute a lot of times.
- 1. How can I fix it.
-      1. Check if the computed/reactor accidentally picks up these other dependencies.  Inspect your helper functions.
-          1. Instead of observable(). Change to use observable.peek() as it will not pick up this dependency
-              1. Note that ko.util.unwrap(observable) will pick up the dependency.
-          1. If it calls a helper function, you might want to wrap it with ko.ignoreDependencies(helperfunction()) such that dependencies in the helperFunction access doesn't count as your dependency.
-          1. If you use ko projection map or filter. Note that it will not only pick up dependency on "arrayChanges", anything that map/filter call back will pick up as dependency. Consider to use koObservableArray.mapInto intstead, which will only subscribe to "arrayChange" event and not any dependencies that might caused by map function
-      1. Consider to break down your computed/reactor to smaller computed
-          1. child computed have several benfits.
-              1. it caches the previous result.  For example, let's say you need to do the same caculation for 10 rows of grid data. If you separate this computed into per-row subcomputed then when Row10 is updated, only Row10 will re-caculated.
-              2. You can in additon leverage the childLifetimeManager just like projection map does.
+You might have noticed unlike `ko.reactor` or knockout's observable subscribe method the portal's version of the knockout 
+`pureComputed()` has not been modified to take a lifetime manager. Knockout has some good documentation on pureComputeds 
+[here]("http://knockoutjs.com/documentation/computed-pure.html") but in a nut shell
+the reason is that any knockout dependencies (which are the things that will pin a computed or observable in memory) associated 
+with the pureComputed are allocated only when someone is listening to the pureComputed and are cleaned up as soon everyone stops 
+listening to the pureComputed. This works great for 'pure' functions where there are no side effects which applies to the vast majority
+of cases where you would like to create a computed so you should always try to use a pureComputed as opposed to a ko.reactor. Here's an 
+example to help you understand the difference between the two so you know when you need to use a reactor as opposed to a pureComputed:
+
+```ts
+let obsNum = ko.observable(0);
+let pureComputedCounter = 0;
+let reactorCounter = 0;
+
+let pure = ko.pureComputed(() => {
+    pureComputedCounter++;
+    return obsNum() + 1;
+});
+
+let reactor = ko.reactor(lifetime, () => {
+    reactorCounter++;
+    return obsNum() + 2;
+});
+
+obsNum(10);
+obsNum(3);
+obsNum(5);
+
+console.log("According to pureComputed obsNum changed " + pureComputedCounter + " times");
+console.log("According to reactor obsNum changed " + reactorCounter + " times");
+```
+
+The output of the above will be:
+
+```
+According to pureComputed obsNum changed 0 times
+According to reactor obsNum changed 3 times
+```
+
+Here incrementing `pureComputedCounter` or `reactorCounter` is a side-effect because it has no bearing on the value of the observables 
+produced by the functions (`pure` and `reactor`). If you need a side effect use `ko.reactor()`. If you don't use `ko.pureComputed()`. 
+(Note: if we had added `pure.subscribe(lifetime, (val) => console.log(val.toString()))` right after creating `pure` then `pureComputedCounter`
+would have been incremented to 3 as well because the pureComputed becomes live as soon as a listener is attached).
+
+### ko.reactor()
+
+Any observables read in the function passed to `ko.reactor()` will become a dependency for that reactor and the reactor will recompute 
+whenever *any* of those observable values change. The same goes for `ko.pureComputed()` and the observable array's `map()` and `mapInto()`
+functions (for map and mapInto this information is covered in more detail [here](#data-shaping)). This can very easily lead to a situation 
+where a computed is recalculating at times you never intended. Whenever you write a pureComputed or a reactor it's always a good idea 
+to put a breakpoint in the computed function and see when and why. We have seen computed functions that should run once actually run 
+30+ time and waste CPU time recalcuating things that didn't need to be recalculated. If another computed takes a dependency on that computed
+the problem grows expontentially.
+
+This is actually such a common problem the framework has code that attempts to detect problematic computed functions. When a computed 
+is created that has dependencies on 30 or more other observables the shell will output an error to the console. This should be an 
+indication to the extension author the computed has likely picked up unnecessary dependencies and is wasting time recomputing when 
+those dependencies change.
+
+There are a few strategies you can use to ensure your computed only calculates when you intend it to:
+
+* Try to avoid calling other functions in your computed method. When the entire implementation of the computed is visible in one place 
+it's not too hard to scan the code and figure out what observables are dependencies of the function. If you write something like:
+
+```ts
+let computed = ko.pureComputed(() => {
+    let foo = this.foo();
+    this._processfoo(foo);
+});
+```
+
+And `_processFoo()` calls three more helper methods it becomes a lot of work to figure out which observables will cause `computed()` to 
+recalculate.
+
+* Use the explicit dependency overload of ko.reactor()/ko.pureComputed(). There is an overload of those functions that takes as a second 
+parameter a list of observables to subscribe to. When this overload is used an observable that is read is the computed function will 
+not become a dependency. No matter what code is called inside the body of the computed you can be sure it will only recalculate when 
+the observables you listed as dependencies are changed.
+
+* Use ko.ignoreDependencies() inside your computed function. Doing:
+
+```ts
+let computed = ko.reactor(lifetime, () => {
+    let foo = this.foo();
+    let bar = this.bar();
+    ko.ignoreDependencies(() => {
+        this._processFoo(foo, bar);
+    });
+});
+```
+
+Is equivalent to doing:
+
+```ts
+let computed = ko.reactor(lifetime, [this.foo, this.bar], (foo, bar) => {
+    this._processFoo(foo, bar);
+});
+```
+
+(The second just looks a lot cleaner).
