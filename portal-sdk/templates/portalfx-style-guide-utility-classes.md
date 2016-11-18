@@ -1,8 +1,4 @@
-<properties title="" pageTitle="Style Guide: Utility Classes" description="" authors="" />
-
-[Portal FX](/documentation/sections/portalfx) > [UI](/documentation/sections/portalfx#ui) > [Style Guide](/documentation/articles/portalfx-style-guide) > Utility Classes
-
-# Style Guide: Utility Classes
+## Style Guide: Utility Classes
 
 There are several built-in classes that make working with the portal just a little bit easier.
 

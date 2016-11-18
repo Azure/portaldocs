@@ -1,10 +1,153 @@
-## Style Guide: Color Palette
+* [<a name="statuscolortext"></a>Coloring to convey status](#a-name-statuscolortext-a-coloring-to-convey-status)
+* [<a name="bgcolortext"></a>Coloring to differentiate data](#a-name-bgcolortext-a-coloring-to-differentiate-data)
+* [<a name="svgcolortext"></a>Coloring SVG](#a-name-svgcolortext-a-coloring-svg)
+
+
+ <h1 name="portalfx-extension-style-guide"></h1>
+  <h1 name="portalfx-style-guide"></h1>
+ # Style Guide
+
+The portal includes a built in list of CSS classes that may be used inside of your templates.
+
+Browse the following topics to learn about portal styling:
+
+ <h1 name="portalfx-style-guide-custom-css-file"></h1>
+ ## Style Guide: Custom CSS Files
+
+Extension developers may choose to combine commonly used classes into a CSS file. CSS styles defined in stylesheets are sanitized using the same rules as the style attribute (see below). All custom class names must start with the `.ext-` prefix, identifying classes which are owned by the extension. First,
+add a new CSS file to your extension:
+
+`\Client\Parts\Custom\Styles\ExampleStyles.css`
+
+```css
+.ext-too-many-clicks-box {
+    color: red;
+    border: 2px dotted red;
+    padding: 8px;
+    text-align: center;
+}
+```
+
+CSS files can then be referenced from any PDL file, inside of the `Definition` element:
+
+`\Client\Parts\Custom\CustomParts.pdl`
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<Definition xmlns="http://schemas.microsoft.com/aux/2013/pdl" Area="Parts">
+  <!--
+    The following sample demonstrates the use of custom parts. Custom parts
+    supply HTML templates and can be styled with custom style sheets.
+  -->
+  <StyleSheet Source="{Css Source='Styles\\ExampleStyles.css'}" />
+  ...
+</Definition>
+```
+
+The styles included in the CSS file may now be used inside HTML templates:
+
+`\Client\Parts\Custom\Templates\ExampleCustomPart.html`
+
+```html
+<div class="ext-too-many-clicks-box" data-bind="visible: !allowMoreClicks()">
+    That's too many clicks!
+    <button data-bind="click: resetClickCount">Reset</button>
+</div>
+```
+
+ <h1 name="portalfx-style-guide-style-sanitization"></h1>
+ ## Style Guide: Style Sanitization
+
+To ensure a consistent and sandboxed experience in the portal, CSS is analyzed at runtime to filter out disallowed properties or values. A typical example of a disallowed style is "`position: fixed;`", which would allow developers to move content outside of their parts.
+
+All CSS properties should be allowed with a few exceptions documented at the end of this article. As the analysis is whitelist based, you may encounter CSS properties being erroneously filtered out. Shall this occur, report the issue on [Stack Overflow](https://stackoverflow.microsoft.com/).
+
+The following properties only allow the specified values:
+
+1. position: [ static | relative | absolute ]
+1. text-transform: [ none | uppercase | lowercase ]
+
+The following properties are sanitized out:
+
+1. font
+1. font-family
+1. list-style
+
+Certain properties have inconsistent behavior across browsers, or full support requires vendor prefixes. To enable them in a supported way, use the Framework style class instead.
+
+* user-select: use class 'msportalfx-unselectable'
+
+ <h1 name="portalfx-style-guide-themed-color-classes"></h1>
+ ## Style Guide: Themed Color Classes
+
+Base colors within the portal have been outfitted to change based on user-chosen themes. Since the actual hex values of these colors are determined by the theme definitions themselves, acceptable contrast between elements must be maintained by framework. In order to react to theme changes and maintain readability, the following classes have been made available to extension authors:
+
+<a name="text-color-classes"></a>
+### Text color classes
+```css
+// Suited for main text, will render with the highest contrast
+msportalfx-text-default
+
+// Suited for labels, subheaders, or any secondary text
+msportalfx-text-muted-50
+
+// Suited for links, or call to action text
+msportalfx-link-primary
+
+// Suited for highlighting searched text
+msportalfx-highlight
+```
+
+ <h1 name="portalfx-style-guide-utility-classes"></h1>
+ ## Style Guide: Utility Classes
+
+There are several built-in classes that make working with the portal just a little bit easier.
+
+<a name="code-formatting"></a>
+### Code Formatting
+
+```html
+<pre class="msportalfx-code"><code>// this is code</code></pre>
+```
+
+In addition to using the `msportalfx-code` class, text blocks may be set to use a monospace style font:
+
+```html
+<div class="msportalfx-font-monospace">msportalfx-font-monospace</div>
+```
+
+<a name="utility-classes"></a>
+### Utility Classes
+
+**msportalfx-removeTableBorders** \- Removes all borders from a TABLE element.
+
+**msportalfx-boxsizing-borderbox** \- Changes layout to include padding and borders in its width and height.
+
+**msportalfx-removeDefaultListStyle** \- Remove bullets from a `ul` or `ol` element.
+
+**msportalfx-lineheight-reset** \- Reset the line height back to the default of the current font size.
+
+**msportalfx-removepartpadding** \- Remove default padding on a part template.
+
+**msportalfx-removepartpaddingside** \- Remove padding on the side only of a part template.
+
+**msportalfx-partdivider** \- Sets up a horizontal side to side divider within the part.
+
+**msportalfx-clearfix** \- Applied to a container that contains floated elements, ensures the container gets a size and that DOM element following the container flows the document normally with no overlap.
+
+**msportalfx-gridcolumn-asseticon** \- Applied as the css class name for a grid column which is showing an asset SVG icon.
+
+**msportalfx-gridcolumn-statusicon** \- Applied as the css class name for a grid column which is showing a status SVG icon.
+
+ <h1 name="portalfx-style-guide-color-palette"></h1>
+ ## Style Guide: Color Palette
 The portal offers a built-in set of coloring classes based on a core palette. Using these classes ensures a consistent experience for all users. This is especially important when the color conveys meaning, or differentiating data.
 
 1. [Coloring to convey status](#statuscolortext)
 1. [Coloring to differentiate data](#bgcolortext)
 1. [Coloring SVG](#svgcolortext)
 
+<a name="a-name-statuscolortext-a-coloring-to-convey-status"></a>
 ## <a name="statuscolortext"></a>Coloring to convey status
 When conveying status, use these classes to relevant UI in your design. These classes ensure any future changes to the status colors will automatically apply to your content.
 
@@ -55,6 +198,7 @@ Error
 </div>
 </div>
 
+<a name="a-name-bgcolortext-a-coloring-to-differentiate-data"></a>
 ## <a name="bgcolortext"></a>Coloring to differentiate data
 When representing data, differentiating with color is a common technique. For example, drawing lines in a chart, or coloring pie chart sections. The following sets of classes are provided to specify a background color on your elements. They also define a contrasted color for the text. They don't change appearance between themes.
 
@@ -163,6 +307,7 @@ Tint 3
 </div>
 </div>
 
+<a name="a-name-svgcolortext-a-coloring-svg"></a>
 ## <a name="svgcolortext"></a>Coloring SVG
 Certain types of custom SVG content should adhere to the color palette. This is mostly for custom controls that use color to differentiate data, like charts. Iconography does not have this requirement, and instead you should refer to the [Icons](/documentation/sections/portalfx-icons) documentation to color those.
 
@@ -585,3 +730,5 @@ To use the palette within SVG content, use the same class names as the one for [
     color: #ffffff;
   }
 </style>
+
+
