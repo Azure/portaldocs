@@ -144,7 +144,7 @@ var self = module.exports = {
             var contentCleanedLinks = originalContent.replace(relativeRegEx, '$1#$3');
 
             // inject a h1 anchor for each document as it is injected using the include-file gitdown extension.
-            return `<!-- gitdown: off --> <h1 name="${path.basename(config.file, '.md')}"></h1><!-- gitdown: on -->\n ${contentCleanedLinks}`;
+            return '<!-- gitdown: off --> <h1 name="' + path.basename(config.file, '.md') + '"></h1><!-- gitdown: on -->\n ' + contentCleanedLinks;
         } else {
             console.log(extName);
             return originalContent;
