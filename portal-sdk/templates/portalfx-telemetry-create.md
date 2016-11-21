@@ -1,4 +1,4 @@
-# Create Telemetry
+#  Ibiza Create Flow PowerBi dashboard
 
 The **Ibiza Create Flow PowerBi dashboard** gives you live access to your extension's create flow telemetry.
 To view the Ibiza Create Flow PowerBi dashboard follow this link:
