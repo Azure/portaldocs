@@ -3,7 +3,7 @@
 ## Create Flow Telemetry Dashboards
 
 * PowerBi Dashboard: https://msit.powerbi.com/groups/me/dashboards/73368590-6a29-4a85-b534-69791580be4a
-* Documentation: https://github.com/Azure/portaldocs/blob/master/documentation/articles/portalfx-telemetry-createFlowDashboard
+* Documentation: https://github.com/Azure/portaldocs/blob/master/portal-sdk/templates/portalfx-telemetry-createFlowDashboard.md
   
 ## Create Flow table
 
