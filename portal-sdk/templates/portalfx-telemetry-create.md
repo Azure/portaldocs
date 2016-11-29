@@ -26,12 +26,12 @@ Accessible through using the function: **GetCreateFlows(startDate: datetime, end
 # <a name="GetCreateFlows"></a>GetCreateFlows(startDate: datetime, endDate: datetime)
 
 ## Summary
-This function returns the list of Ibiza Portal Azure service deployment lifecycles, also known as 'create flows', for a given time range.
-* Each create flow represents the lifecycle of a create with the beginning being marked by the moment the create blade is opened and ending the moment that the create has been concluded and logged by the Ibiza Portal.
-* Data for each create is curated and joined between Ibiza Portal data logs and available ARM deployment data logs.
+This function returns the list of Portal Azure service deployment lifecycles, also known as 'create flows', for a given time range.
+* Each create flow represents the lifecycle of a create with the beginning being marked by the moment the create blade is opened and ending the moment that the create has been concluded and logged by the Portal.
+* Data for each create is curated and joined between Portal data logs and available ARM deployment data logs.
 
 ## Common Use Cases
-* Identifying the number of creates completed for a given Ibiza Extension or for a particular Azure marketplace gallery package.
+* Identifying the number of creates completed for a given Extension or for a particular Azure marketplace gallery package.
 * Calculating the percentage of successful creates initiated by an Extension's create blade.
 * Debugging failed deployments by retrieving error message information logged for failed creates.
 * Calculating the number of creates that were abandoned by the user before being initiated and completed.
@@ -40,11 +40,11 @@ This function returns the list of Ibiza Portal Azure service deployment lifecycl
 
 ## Underlying Function Resources 
 * `cluster("Azportal").database("AzPtlCosmos").CreateFlows`
-  * The source of the Azure Ibiza create lifecycle deployment information.
+  * The source of the Azure create lifecycle deployment information.
 * `cluster("Armprod").database("ARMProd").Deployments`
   * The source of the ARM deployment information
 * `cluster("Armprod").database("ARMProd").HttpIncomingRequests`
-  * Used to identify which of the ARM deployments are requests made from the Ibiza Portal.
+  * Used to identify which of the ARM deployments are requests made from the Portal.
 * `cluster("Armprod").database("ARMProd").EventServiceEntries`
   * The source of the ARM deployment failed logs error information.
 
@@ -57,7 +57,7 @@ This function returns the list of Ibiza Portal Azure service deployment lifecycl
   * Time of which the create blade was opened
   * When the create flow launched event is logged by the server
 * TelemetryId
-  * The unique identifier of this Azure Ibiza Portal create flow.
+  * The unique identifier of this Azure Portal create flow.
 * Extension
   * The extension which initiated the deployment.
 * Blade
@@ -69,18 +69,18 @@ This function returns the list of Ibiza Portal Azure service deployment lifecycl
   * Possible execution statuses
     * Succeeded
       * The create was successfully completed.
-      * If ARMExecutionStatus is "Succeeded" or if ARMExecutionStatus is blank and IbizaExecutionStatus is "Succeeded"
+      * If ARMExecutionStatus is "Succeeded" or if ARMExecutionStatus is blank and PortalExecutionStatus is "Succeeded"
     * Canceled
       * The create was canceled before completion
-      * If ARMExecutionStatus is "Canceled" or if ARMExecutionStatus is blank and IbizaExecutionStatus is "Canceled"
+      * If ARMExecutionStatus is "Canceled" or if ARMExecutionStatus is blank and PortalExecutionStatus is "Canceled"
     * Failed
       * The create failed to complete.
-      * If ARMExecutionStatus is "Failed" or if ARMExecutionStatus is blank and IbizaExecutionStatus is "Failed"
+      * If ARMExecutionStatus is "Failed" or if ARMExecutionStatus is blank and PortalExecutionStatus is "Failed"
     * BillingError
       * The create failed to completed because of the error, "We could not find a credit card on file for your azure subscription. Please make sure your azure subscription has a credit card."
     * Unknown
       * The status of the create is unable to be determined.
-      * If ARMExecutionStatus is blank and IbizaExecutionStatus is blank
+      * If ARMExecutionStatus is blank and PortalExecutionStatus is blank
     * Abandoned 
       * The create blade was closed before a create was initialized.
 * Excluded
@@ -93,7 +93,7 @@ This function returns the list of Ibiza Portal Azure service deployment lifecycl
 * ArmExecutionStatus
   * The result of the deployment from ARM.
 * PortalExecutionStatus
-  * The result of the deployment execution logged by Ibiza.
+  * The result of the deployment execution logged by the Portal.
 * ArmStatusCode
   * The ARM status code of the deployment .
 * ArmErrorCode
@@ -101,9 +101,9 @@ This function returns the list of Ibiza Portal Azure service deployment lifecycl
 * ArmErrorMessage
   * The error message of a failed deployment logged by ARM.
 * PortalErrorCode
-  * The error code of a failed deployment logged by Ibiza.
+  * The error code of a failed deployment logged by the Portal.
 * PortalErrorMessage
-  * The error message of a failed deployment logged by Ibiza.
+  * The error message of a failed deployment logged by the Portal.
 * CreateBladeOpened
   * Boolean representing if the create blade was opened.
   * Logged as a CreateFlowLaunched event at the time that the create blade is opened and logged by the Portal.
@@ -155,7 +155,7 @@ This function returns the list of Ibiza Portal Azure service deployment lifecycl
 * Data
   * The entire collection of logged create events' telemetry data in JSON format.
 * BuildNumber
-  * The Ibiza SDK and environment in which the deployment was initiated.
+  * The Portal SDK and environment in which the deployment was initiated.
 * DataCenterId
   * The data center in which the deployment telemetry originated.
 * SessionId
@@ -171,7 +171,7 @@ This function returns the list of Ibiza Portal Azure service deployment lifecycl
 * OldCreateApi
   * Boolean representing if the deployment was initiated using the latest supported Provisioning API.
 * CustomDeployment
-  * Boolean representing if the deployment was initiated using the Ibiza ARM Provisioning Manager.
+  * Boolean representing if the deployment was initiated using the Portal ARM Provisioning Manager.
 
 # <a name="GetCreateFunnel"></a>GetCreateFunnel(startDate: datetime, endDate: datetime)
 
