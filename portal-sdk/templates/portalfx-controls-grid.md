@@ -16,6 +16,9 @@ To create a grid you will need to provide data, column definitions, plugins, and
 
 ### Plugins
 There are many plugins for the grid control to add behaviors.
+Grid plugins are called "extensions" in the API.
+The "extension" terminology can be confusing to portal "extension" authors.
+So, in this document the grid extensions will be referred to as plugins.
 
 - [SelectableRow](#selection-and-activation) - Plugin to have selectable rows.
 - [ResizableColumn]()                        - Plugin to have resizable columns.
@@ -32,13 +35,21 @@ There are many plugins for the grid control to add behaviors.
 - [Hoverable]()                              - Plugin to enable hover index communication with other parts.
 
 Plugins are enabled in three ways.
-- by default.
 - with bit flags passed to the ViewModel constructor.
-It is important that you combine the bit flags with the "|" or "+" operator.
-A common pitfall is to use "&" which results in no plugins.
--  by dependency.
-Some plugins have dependencies on other plugins.
-The dependencies will also be enabled when a plugin is enabled.
+- by default.
+- as a dependency of an enabled plugin.
+
+To enable a plugin you need to do two things.
+First, you must set the appropriate bit flag when you construct the grid.
+It is important that you combine the bit flags with the "|" or "+" operator. 
+*A common pitfall is to use "&" which results in no plugins.*
+Second, you must provide plugin options.
+
+The following sample shows a simple method of enabling the plugins:
+
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Controls/Grid/ViewModels/ScrollableGridWithFilteringAndSorting.ts", "section": "grid#enablingplugins"}
+
+Plugin compatibility:
 
 ![No-code Browse grid](../media/portalfx-controls/gridchart.png)
 
@@ -275,6 +286,17 @@ The grid reorder row plugin allows users to reorder the items in the grid with d
 The reordering can be automatic or handled by the extension using the ``reorderRow`` event.
 
 [Reorderable Grid Sample][ReorderSample]
+
+### Dynamic Grid Definitiona
+In some cases an extension may not know grid columns or other properties in advance.
+In these sceanarios the extension author must define and create the grid at run-time.
+There are several options for dynamic definition of a grid.
+
+1. Create and add columns when data is available.  The columns property is an observable array and allows changes as needed.
+2. Make the grid view model property on your part/blade observable. Instead of declaring `public grid: Grid.ViewModel<T>;` declare the grid as `public grid: KnockoutObservable<Grid.ViewModel<T>>;`. This makes your view model property observable so you can set it whenever you want.  You can also clear it by setting it to null. The template would be the same `<div data-bind="pcControl: grid"></div>`.
+3. Use sections for layout.  If you are using sections you can add the grid to the section children dynamically.
+4. CustomHtml control has an updatable inner viewmodel.
+5. htmlTemplate binding allows you to dynamically specify both the view model and the template `<div data-bind="htmlTemplate: { data: viewModel, html: template }"></div>`
 
 ### Further Resources
 - [All Grid Samples][GridSamples]

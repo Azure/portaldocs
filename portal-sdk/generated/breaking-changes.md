@@ -1,4 +1,4 @@
-# Breaking Changes from 7/15/2016 
+# Breaking Changes from 7/30/2016 
 * Additional Q&A about breaking changes can be found [here](./breaking-changes.md) 
 * To ask a question about breaking changes [use this](https://aka.ms/ask/ibiza-breaking-change)  
 
@@ -8,6 +8,3 @@
 
 ## 5.0.302.523
 <table><tr><td><a href='http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7488094'>7488094</a></td><td><a href='http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7488094'>[ErrorTracker] content.valid writing to a read only observable</a><p>Previously the valid observable was not typed correctly so you would not get a compiler error when trying to write to it (instead it would show up at runtime as an MDS error). Now we're typing valid as read only so the compiler will flag issues in extension code. This does not change behavior at all since previously any writes to the valid() observable on controls were discarded and did nothing.</p></td></tr></table>
-
-## 5.0.302.440
-<table><tr><td><a href='http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=6725007'>6725007</a></td><td><a href='http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=6725007'>Launch notice blade when resource type does not support move operation</a><p>No description available for this breaking change.</p></td></tr></table>

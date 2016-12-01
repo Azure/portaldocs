@@ -176,6 +176,19 @@ in the [How to step through your code](https://developers.google.com/web/tools/c
 
 To learn more about debugging JavaScript check [Debugging tools for the Web](https://vimeo.com/157292748).
 
+### Debugging the data stack
+
+If you're having trouble figuring out why your edit scope changes aren't showing up in your query cache or why a row in the grid was 
+suddenly updated here are tips on how to debug the data stack:
+
+* If you're working with a QueryCache or an EntityCache you can use the `dump()` method to inspect the contents of the cache at any 
+point. By default it will print the data to the console but you can get the data returned as objects using `dump(true)` so you can 
+do things like `queryCache.dump(true)[0].name()`.
+
+* The edited data contained in an EditScope is accessible via the `root` property on the EditScope (if you're using an EditScopeView
+then it's available at `editScopeView.editScope().root` after the editScope() observable is populated). You can view the original data 
+as well using the `getOriginal()` method so to view the original root object you can do `editScope.getOriginal(editScope.root)`.
+
 ### Debugging Knockout
 
 #### ko.dataFor and $0
