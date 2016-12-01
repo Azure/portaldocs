@@ -2,14 +2,40 @@
 * [Available Power BI Dashboards](#available-power-bi-dashboards)
 * [Collecting Feedback From Your Users](#collecting-feedback-from-your-users)
 * [How to view Live Telemetry](#how-to-view-live-telemetry)
-* [Prerequisites](#prerequisites)
-* [Create Flow Funnel](#create-flow-funnel)
-* [Create Flow Origins](#create-flow-origins)
-* [Create Flow Errors](#create-flow-errors)
-* [Error Distribution](#error-distribution)
-* [Next Steps:](#next-steps)
+* [Create Flow Telemetry Dashboards](#create-flow-telemetry-dashboards)
+* [Create Flow table](#create-flow-table)
+* [Create Flow Functions](#create-flow-functions)
+* [<a name="GetCreateFlows"></a>GetCreateFlows(startDate: datetime, endDate: datetime)](#a-name-getcreateflows-a-getcreateflows-startdate-datetime-enddate-datetime)
+    * [Summary](#a-name-getcreateflows-a-getcreateflows-startdate-datetime-enddate-datetime-summary)
+    * [Common Use Cases](#a-name-getcreateflows-a-getcreateflows-startdate-datetime-enddate-datetime-common-use-cases)
+    * [Underlying Function Resources](#a-name-getcreateflows-a-getcreateflows-startdate-datetime-enddate-datetime-underlying-function-resources)
+    * [Parameters](#a-name-getcreateflows-a-getcreateflows-startdate-datetime-enddate-datetime-parameters)
+    * [Output Columns](#a-name-getcreateflows-a-getcreateflows-startdate-datetime-enddate-datetime-output-columns)
+* [<a name="GetCreateFunnel"></a>GetCreateFunnel(startDate: datetime, endDate: datetime)](#a-name-getcreatefunnel-a-getcreatefunnel-startdate-datetime-enddate-datetime)
+    * [Summary](#a-name-getcreatefunnel-a-getcreatefunnel-startdate-datetime-enddate-datetime-summary)
+    * [Common Use Cases](#a-name-getcreatefunnel-a-getcreatefunnel-startdate-datetime-enddate-datetime-common-use-cases)
+    * [Underlying Function Resources](#a-name-getcreatefunnel-a-getcreatefunnel-startdate-datetime-enddate-datetime-underlying-function-resources)
+    * [Parameters](#a-name-getcreatefunnel-a-getcreatefunnel-startdate-datetime-enddate-datetime-parameters)
+    * [Output Columns](#a-name-getcreatefunnel-a-getcreatefunnel-startdate-datetime-enddate-datetime-output-columns)
+* [<a name="GetCreateFunnelByDay"></a>GetCreateFunnelByDay(startDate: datetime, endDate: datetime)](#a-name-getcreatefunnelbyday-a-getcreatefunnelbyday-startdate-datetime-enddate-datetime)
+    * [Summary](#a-name-getcreatefunnelbyday-a-getcreatefunnelbyday-startdate-datetime-enddate-datetime-summary)
+    * [Common Use Cases](#a-name-getcreatefunnelbyday-a-getcreatefunnelbyday-startdate-datetime-enddate-datetime-common-use-cases)
+    * [Underlying Function Resources](#a-name-getcreatefunnelbyday-a-getcreatefunnelbyday-startdate-datetime-enddate-datetime-underlying-function-resources)
+    * [Parameters](#a-name-getcreatefunnelbyday-a-getcreatefunnelbyday-startdate-datetime-enddate-datetime-parameters)
+    * [Output Columns](#a-name-getcreatefunnelbyday-a-getcreatefunnelbyday-startdate-datetime-enddate-datetime-output-columns)
+* [<a name="GetCreateFunnelByGalleryPackageId"></a>GetCreateFunnelByGalleryPackageId(startDate: datetime, endDate: datetime)](#a-name-getcreatefunnelbygallerypackageid-a-getcreatefunnelbygallerypackageid-startdate-datetime-enddate-datetime)
+    * [Summary](#a-name-getcreatefunnelbygallerypackageid-a-getcreatefunnelbygallerypackageid-startdate-datetime-enddate-datetime-summary)
+    * [Common Use Cases](#a-name-getcreatefunnelbygallerypackageid-a-getcreatefunnelbygallerypackageid-startdate-datetime-enddate-datetime-common-use-cases)
+    * [Underlying Function Resources](#a-name-getcreatefunnelbygallerypackageid-a-getcreatefunnelbygallerypackageid-startdate-datetime-enddate-datetime-underlying-function-resources)
+    * [Parameters](#a-name-getcreatefunnelbygallerypackageid-a-getcreatefunnelbygallerypackageid-startdate-datetime-enddate-datetime-parameters)
+    * [Output Columns](#a-name-getcreatefunnelbygallerypackageid-a-getcreatefunnelbygallerypackageid-startdate-datetime-enddate-datetime-output-columns)
+* [<a name="GetCombinedCreateFunnel"></a>GetCombinedCreateFunnel(startDate: datetime, endDate: datetime)](#a-name-getcombinedcreatefunnel-a-getcombinedcreatefunnel-startdate-datetime-enddate-datetime)
+    * [Summary](#a-name-getcombinedcreatefunnel-a-getcombinedcreatefunnel-startdate-datetime-enddate-datetime-summary)
+    * [Common Use Cases](#a-name-getcombinedcreatefunnel-a-getcombinedcreatefunnel-startdate-datetime-enddate-datetime-common-use-cases)
+    * [Underlying Function Resources](#a-name-getcombinedcreatefunnel-a-getcombinedcreatefunnel-startdate-datetime-enddate-datetime-underlying-function-resources)
+    * [Parameters](#a-name-getcombinedcreatefunnel-a-getcombinedcreatefunnel-startdate-datetime-enddate-datetime-parameters)
+    * [Output Columns](#a-name-getcombinedcreatefunnel-a-getcombinedcreatefunnel-startdate-datetime-enddate-datetime-output-columns)
 * [Create Troubleshooting](#create-troubleshooting)
-    * [Overview](#create-troubleshooting-overview)
     * [Types of Create Failures](#create-troubleshooting-types-of-create-failures)
     * [Debugging Alerts](#create-troubleshooting-debugging-alerts)
 * [Performance](#performance)
@@ -25,7 +51,6 @@
     * [Extension HomePage Caching](#performance-extension-homepage-caching)
     * [Persistent Caching of scripts across extension updates](#performance-persistent-caching-of-scripts-across-extension-updates)
     * [Run portalcop to identify and resolve common performance issues](#performance-run-portalcop-to-identify-and-resolve-common-performance-issues)
-    * [PortalCop](#performance-portalcop)
     * [Performance alerting](#performance-performance-alerting)
 * [Reliability](#reliability)
     * [Overview](#reliability-overview)
@@ -667,414 +692,464 @@ Another useful chart is the "Last 24 Hours Error Summary", which shows the error
 - Currently, we refresh automatically the dashboard 8 times a day (the maximum number of scheduled refreshes allowed by PowerBI), during working hours: 8:00 AM, 9:30 AM, 11:00 AM, 12:30 PM, 2:00 PM, 3:30 PM, 5:00 PM and 6:30 PM (Pacific Time).
 
  <h1 name="portalfx-telemetry-create"></h1>
- # Create Telemetry
+ # Create Telemetry 
 
-The **Ibiza Create Flow PowerBi dashboard** gives you live access to your extension's create flow telemetry.
-To view the Ibiza Create Flow PowerBi dashboard follow this link:
-[Ibiza Create Flow PowerBi dashboard](https://msit.powerbi.com/groups/me/dashboards/73368590-6a29-4a85-b534-69791580be4a)
+<a name="create-flow-telemetry-dashboards"></a>
+## Create Flow Telemetry Dashboards
 
-<a name="prerequisites"></a>
-## Prerequisites
+* PowerBi Dashboard: https://msit.powerbi.com/groups/me/dashboards/73368590-6a29-4a85-b534-69791580be4a
+* Documentation: https://github.com/Azure/portaldocs/blob/master/portal-sdk/templates/portalfx-telemetry-createFlowDashboard.md
+  
+<a name="create-flow-table"></a>
+## Create Flow table
 
-<a name="prerequisites-getting-access-to-the-ibiza-create-flow-dashboard"></a>
-#### Getting access to the Ibiza Create Flow Dashboard
+CreateFlow table in Kusto database **AzPtlCosmos** called **CreateFlows**
 
-In order to get acess to the Create Flow Dashbaord, you will need to get access to the [Security Group 'Azure Portal Data' (auxdatapartners)](http://idwebelements/GroupManagement.aspx?Group=auxdatapartners&Operation=join).
+Accessible through using the function: **GetCreateFlows(startDate: datetime, endDate: datetime)**
 
-<a name="prerequisites-optional-running-or-creating-modified-kusto-queries"></a>
-#### Optional: Running or Creating Modified Kusto Queries
+<a name="create-flow-functions"></a>
+## Create Flow Functions
 
-If you want to run or create modified versions of the Kusto queries provided below in the code samples then you will need access to our *Kusto data tables*. How to get setup using Kusto and getting access is explained here: [PortalFx Telemetry - Getting Started](https://auxdocs.azurewebsites.net/en-us/documentation/articles/portalfx-telemetry-getting-started)
+[GetCreateFlows](#GetCreateFlows)
 
-All queries performed here are against the **AzurePortal.AzPtlCosmos** database and we will assume you understand the ClientTelemetry table. To get up to speed on the ClientTelemtry table in the AzPtlComos database check out: [PortalFx Telemetry - Kusto Databases](https://auxdocs.azurewebsites.net/en-us/documentation/articles/portalfx-telemetry-getting-started)
+[GetCreateFunnel](#GetCreateFunnel)
 
-<a name="create-flow-funnel"></a>
-## Create Flow Funnel
+[GetCreateFunnelByDay](#GetCreateFunnelByDay)
 
-<a name="create-flow-funnel-overview"></a>
-### Overview
+[GetCreateFunnelByGalleryPackageId](#GetCreateFunnelByGalleryPackageId)
 
-This report gives you ability to look at your extensions live create flow telemetry which gives you a overview of your create blade's usage and deployment success numbers.
-    
-<a name="create-flow-funnel-description-of-data-fields"></a>
-### Description of data fields
+[GetCombinedCreateFunnel](#GetCombinedCreateFunnel)
 
-- **Create Flow Launched** - The number of times your create blade has been opened by users.
-- **Deployment Started** - The number of times that a create has been started by your create blade.
-- **Deployment Started %** - A percentage representing how often your create blade being opened leads to a create being started. 
-- **Deployment Succeeded** - The number of successful create deployements.
-- **Deployment Succeeded %** - The percentage of creates that led to a successful deployment. Unsunsuccessful deployments would include cancellations and failures.
-- **Old Create API**
-    - If true, this means that your create blade is using the old deprecated Parameter Collector (Parameter Collector V1 or V2) and therefore your create telemetry is not dependable and is potentially innacurrate. 
-    - It is recommended to get this field to 'false', by updating your create blade to use the new Parameter Collector (Parameter Collector V3).
-        - [Parameter Collector V3 - Getting Started](#portalfx-parameter-collection-getting-started)
-- **Custom Deployment**
-    - If true, this means that your create does not go through the official Arm Provisioner and therefore you only receive limited telemetry reporting.
-    - If your experience's create deployments go through Arm but you are not using the Arm Provisioning then please refer to the Create Engine documentation
-        - [Create Engine](#portalfx-create-engine-sample)
+<a name="a-name-getcreateflows-a-getcreateflows-startdate-datetime-enddate-datetime"></a>
+# <a name="GetCreateFlows"></a>GetCreateFlows(startDate: datetime, endDate: datetime)
 
-<a name="create-flow-funnel-how-these-numbers-are-generated"></a>
-### How these numbers are generated
+<a name="a-name-getcreateflows-a-getcreateflows-startdate-datetime-enddate-datetime-summary"></a>
+## Summary
+This function returns the list of Portal Azure service deployment lifecycles, also known as 'create flows', for a given time range.
+* Each create flow represents the lifecycle of a create with the beginning being marked by the moment the create blade is opened and ending the moment that the create has been concluded and logged by the Portal.
+* Data for each create is curated and joined between Portal data logs and available ARM deployment data logs.
 
-<a name="create-flow-funnel-how-these-numbers-are-generated-create-flow-funnel-kusto-query"></a>
-#### Create Flow Funnel - Kusto Query
+<a name="a-name-getcreateflows-a-getcreateflows-startdate-datetime-enddate-datetime-common-use-cases"></a>
+## Common Use Cases
+* Identifying the number of creates completed for a given Extension or for a particular Azure marketplace gallery package.
+* Calculating the percentage of successful creates initiated by an Extension's create blade.
+* Debugging failed deployments by retrieving error message information logged for failed creates.
+* Calculating the number of creates that were abandoned by the user before being initiated and completed.
+* Identifying creates initiated by a given user id.
+* Calculating the average create duration by data center.
 
-```js
-let timeSpan = 30d;
-let startDate = GetStartDateForLastNDays(timeSpan);
-let endDate = GetEndDateForTimeSpanQueries();
-GetCreateFunnel(startDate, endDate)
-```
+<a name="a-name-getcreateflows-a-getcreateflows-startdate-datetime-enddate-datetime-underlying-function-resources"></a>
+## Underlying Function Resources
+* `cluster("Azportal").database("AzPtlCosmos").CreateFlows`
+  * The source of the Azure create lifecycle deployment information.
+* `cluster("Armprod").database("ARMProd").Deployments`
+  * The source of the ARM deployment information
+* `cluster("Armprod").database("ARMProd").HttpIncomingRequests`
+  * Used to identify which of the ARM deployments are requests made from the Portal.
+* `cluster("Armprod").database("ARMProd").EventServiceEntries`
+  * The source of the ARM deployment failed logs error information.
 
-<a name="create-flow-funnel-how-these-numbers-are-generated-create-flow-funnel-by-resource-name-kusto-query"></a>
-#### Create Flow Funnel By Resource Name - Kusto Query
+<a name="a-name-getcreateflows-a-getcreateflows-startdate-datetime-enddate-datetime-parameters"></a>
+## Parameters
+* startDate: The date to mark the inclusive start of the time range.
+* endDate: The date to mark the exclusive end of the time range.
 
-```js
-let timeSpan = 30d;
-let startDate = GetStartDateForLastNDays(timeSpan);
-let endDate = GetEndDateForTimeSpanQueries();
-GetCreateFunnelByResourceName(startDate, endDate)
-```
+<a name="a-name-getcreateflows-a-getcreateflows-startdate-datetime-enddate-datetime-output-columns"></a>
+## Output Columns
+* PreciseTimeStamp
+  * Time of which the create blade was opened
+  * When the create flow launched event is logged by the server
+* TelemetryId
+  * The unique identifier of this Azure Portal create flow.
+* Extension
+  * The extension which initiated the deployment.
+* Blade
+  * The name of the blade which was used to initiated the deployment.
+* GalleryPackageId
+  * The Azure service market place gallery package that was created.
+* ExecutionStatus
+  * The final result of the create execution.
+  * Possible execution statuses
+    * Succeeded
+      * The create was successfully completed.
+      * If ARMExecutionStatus is "Succeeded" or if ARMExecutionStatus is blank and PortalExecutionStatus is "Succeeded"
+    * Canceled
+      * The create was canceled before completion
+      * If ARMExecutionStatus is "Canceled" or if ARMExecutionStatus is blank and PortalExecutionStatus is "Canceled"
+    * Failed
+      * The create failed to complete.
+      * If ARMExecutionStatus is "Failed" or if ARMExecutionStatus is blank and PortalExecutionStatus is "Failed"
+    * BillingError
+      * The create failed to completed because of the error, "We could not find a credit card on file for your azure subscription. Please make sure your azure subscription has a credit card."
+    * Unknown
+      * The status of the create is unable to be determined.
+      * If ARMExecutionStatus is blank and PortalExecutionStatus is blank
+    * Abandoned 
+      * The create blade was closed before a create was initialized.
+* Excluded
+  * Boolean which represents if this Create Flow is to be excluded from create funnel KPI calculations.
+  * A Create Flow is marked Excluded = true if ExecutionStatus is "Canceled", "CommerceError", or "Unknown".
+* CorrelationId
+  * The unique ARM identifier of this deployment.
+* ArmDeploymentName
+  * The name of the resource group deployment from ARM.
+* ArmExecutionStatus
+  * The result of the deployment from ARM.
+* PortalExecutionStatus
+  * The result of the deployment execution logged by the Portal.
+* ArmStatusCode
+  * The ARM status code of the deployment .
+* ArmErrorCode
+  * The error code of a failed deployment logged by ARM.
+* ArmErrorMessage
+  * The error message of a failed deployment logged by ARM.
+* PortalErrorCode
+  * The error code of a failed deployment logged by the Portal.
+* PortalErrorMessage
+  * The error message of a failed deployment logged by the Portal.
+* CreateBladeOpened
+  * Boolean representing if the create blade was opened.
+  * Logged as a CreateFlowLaunched event at the time that the create blade is opened and logged by the Portal.
+* CreateBladeOpened_ActionModifier
+  * Context for CreateBladeOpened.
+* CreateBladeOpened_TimeStamp
+  * Time when the create blade was opened.
+* PortalCreateStarted
+  * Boolean representing if a Portal create was started for this create flow.
+  * Logged by a ProvisioningStarted event when the create is initiated.
+* PortalCreateStarted_ActionModifier
+  * Context for PortalCreateStarted.
+* PortalCreateStarted_TimeStamp
+  * Time when the Portal create was started and logged by the Portal.
+* ArmDeploymentStarted
+  * Boolean representing if a deployment request was accepted by ARM.
+  * Logged when the deployment request is acknowledged by ARM and a CreateDeploymentStart event was logged by the Portal.
+* ArmDeploymentStarted_ActionModifier
+  * Context for the ArmDeploymentStarted.
+* ArmDeploymentStarted_TimeStamp
+  * The time when the ARM deployment request response was logged by the Portal.
+* ArmDeploymentEnded
+  * Boolean representing if a deployment was completed by ARM.
+  * Logged when ARM has completed status for the deployment and a CreateDeploymentEnd event was logged by the Portal.
+* ArmDeploymentEnded_ActionModifier
+  * Context for ArmDeploymentEnded.
+* ArmDeploymentEnded_TimeStamp
+  * The time when the CreateDeploymetEnd event was logged.
+* PortalCreateEnded
+  * Boolean representing if a Portal create was completed for this create flow.
+  * Logged when all operations relating to the create have completed and a ProvisioningEnded event was logged by the Portal.
+* PortalCreateEnded_ActionModifier
+  * Context for PortalCreateEnded.
+* ProvisioningEnded_TimeStamp
+  * Time when the Portal create was completed and logged by the Portal.
+* ArmPreciseStartTime
+  * Start time of the deployment through ARM
+* ArmPreciseEndTime
+  * End time of the deployment through ARM.
+* ArmPreciseDuration
+  * Duration of the deployment through ARM.
+* PortalCreateStartTime
+  * Start time of the Portal create.
+* PortalCreateEndTime
+  * End time of the Portal create.
+* PortalCreateDuration
+  * Duration of the Portal create.
+  * PortalCreateDuration = PortalCreateEndTime - PortalCreateStartTime
+* Data
+  * The entire collection of logged create events' telemetry data in JSON format.
+* BuildNumber
+  * The Portal SDK and environment in which the deployment was initiated.
+* DataCenterId
+  * The data center in which the deployment telemetry originated.
+* SessionId
+  * The session in which the deployment was initiated.
+* UserId
+  * The user identification which initiated the deployment.
+* SubscriptionId
+  * The subscription Id
+* TenantId
+  * The tenant Id
+* Template
+  * The type of the create template used.
+* OldCreateApi
+  * Boolean representing if the deployment was initiated using the latest supported Provisioning API.
+* CustomDeployment
+  * Boolean representing if the deployment was initiated using the Portal ARM Provisioning Manager.
 
-<a name="create-flow-funnel-how-these-numbers-are-generated-create-flow-funnel-success-rate-kusto-query"></a>
-#### Create Flow Funnel Success Rate - Kusto Query
+<a name="a-name-getcreatefunnel-a-getcreatefunnel-startdate-datetime-enddate-datetime"></a>
+# <a name="GetCreateFunnel"></a>GetCreateFunnel(startDate: datetime, endDate: datetime)
 
-```js
-let timeSpan = 30d;
-let startDate = GetStartDateForLastNDays(timeSpan);
-let endDate = GetEndDateForTimeSpanQueries();
-GetCreateFunnelByDay(startDate, endDate)
-| extend DeploymentSucceededPerc = iff(DeploymentStarted == 0, 0.0, todouble(DeploymentSucceeded)/DeploymentStarted)
-| project Date, ExtensionName, CreateBladeName, DeploymentSucceededPerc 
-```
+<a name="a-name-getcreatefunnel-a-getcreatefunnel-startdate-datetime-enddate-datetime-summary"></a>
+## Summary
+This functions calculates the create funnel KPI's for each extension's create blade for a given time range.
 
-<a name="create-flow-funnel-how-these-numbers-are-generated-create-flow-funnel-weekly-deployment-success-kusto-query"></a>
-#### Create Flow Funnel Weekly Deployment Success - Kusto Query
+<a name="a-name-getcreatefunnel-a-getcreatefunnel-startdate-datetime-enddate-datetime-common-use-cases"></a>
+## Common Use Cases
+* Retrieving the percentage of successful create initated by an Extension's create blade for a week.
+* Retrieving the number of the failed creates.
+* Retrieving the drop off rate of customers attempting a create (how often creates are abandoned).
 
-```js
-let today = floor(now(),1d); 
-let fri= today - dayofweek(today) - 2d; 
-let sat = fri - 6d; 
-let startDate = sat-35d; 
-let endDate = fri; 
-GetCreateFunnelByDay(startDate, endDate) 
-| where Unsupported == 0 and CustomDeployment == 0 
-| extend startOfWeek = iff(dayofweek(Date) == 6d,Date , Date - dayofweek(Date) - 1d) 
-| summarize sum(CreateFlowLaunched), sum(DeploymentStartedWithExclusions), sum(DeploymentSucceeded) by startOfWeek, ExtensionName 
-| extend ["Deployment Success %"] = iff(sum_DeploymentStartedWithExclusions == 0, todouble(0), bin(todouble(sum_DeploymentSucceeded)/sum_DeploymentStartedWithExclusions*100 + 0.05, 0.1)) 
-| project startOfWeek, ["Extension"] = ExtensionName, ["Deployment Success %"]
-```
+<a name="a-name-getcreatefunnel-a-getcreatefunnel-startdate-datetime-enddate-datetime-underlying-function-resources"></a>
+## Underlying Function Resources
+* [GetCreateFlows()](#GetCreateFlows)
 
-<a name="create-flow-origins"></a>
-## Create Flow Origins
+<a name="a-name-getcreatefunnel-a-getcreatefunnel-startdate-datetime-enddate-datetime-parameters"></a>
+## Parameters
+* startDate: The date to mark the inclusive start of the time range.
+* endDate: The date to mark the exclusive end of the time range.
 
-<a name="create-flow-origins-overview"></a>
-### Overview
+<a name="a-name-getcreatefunnel-a-getcreatefunnel-startdate-datetime-enddate-datetime-output-columns"></a>
+## Output Columns
+* Extension
+  * The Extension which initiated the creates.
+* Blade
+  * The create blade which inititated the creates.
+* CreateBladeOpened
+  * The number of times the create blade was opened.
+  * Calculated by taking the count of the number of Create Flows for each blade from [GetCreateFlows()](#GetCreateFlows) which had:
+    * `CreateBladeOpened == true`.
+* Started
+  * The number of creates that were started.
+  * Calculated by taking the count of the number of Create Flows for each blade from [GetCreateFlows()](#GetCreateFlows) which had:
+    * `PortalCreateStarted == true`
+    * or `ArmDeploymentStarted == true`
+  * *Note - We check both of these for redundancy proof becuase we know that as long as one of these properties are true then we know a create was started.*
+* Excluded
+  * The number of creates from [GetCreateFlows()](#GetCreateFlows) that were marked as Excluded.
+  * *See [GetCreateFlows()](#GetCreateFlows) documentation for Excluded details.*
+* Completed
+  * The number of creates that were completed.
+  * Completed = Started - Excluded
+* StartRate
+  * The rate of create blades that are opened which leads to a create being started.
+  * StartRate = Started / CreateBladeOpened
+* Succeeded
+  * The number of creates that succeeded.
+* SuccessRate
+  * The rate of completed creates which succeeded.
+  * SuccessRate = Succeeded / Completed
+* Failed
+  * The number of creates that failed.
+* FailureRate
+  * The rate of completed creates which failed.
+  * FailureRate = Failed / Completed
+* Canceled
+  * The number of creates which were canceled.
+* CommerceError
+  * The number of creates which were aborted due to a commerce error.
+* Unknown
+  * The number of creates which do not have a known result.
+* OldCreateApi
+  * Represents if the create blade deployments were initiated using a deprecated version of the ARM provisioning API provided by the Portal SDK
+* CustomDeployment
+  * Represents if the create blade deployments were initiated without using the official ARM provisioning API provided by the portal SDK
 
-This report gives you an overview of where your create blade is being linked to and launched from.
+<a name="a-name-getcreatefunnelbyday-a-getcreatefunnelbyday-startdate-datetime-enddate-datetime"></a>
+# <a name="GetCreateFunnelByDay"></a>GetCreateFunnelByDay(startDate: datetime, endDate: datetime)
 
-<a name="create-flow-origins-description-of-data-fields"></a>
-### Description of data fields
+<a name="a-name-getcreatefunnelbyday-a-getcreatefunnelbyday-startdate-datetime-enddate-datetime-summary"></a>
+## Summary
+This functions calculates the create funnel KPI's for each extension's create blade for each day over a given time range.
 
-- **Create Flow Launched** - The number of times your create blade has been opened by users.
-- **New (%)** - The percentage representing how often your create blade is opened from +New.
-- **Browse (%)** - The percentage representing how often your create blade is opened from Browse.
-- **Marketplace (%)** - The percentage representing how often your create blade is opened from the Marketplace.
-- **DeepLink (%)** - The percentage representing how often your create blade is opened from a internal or external link.
+<a name="a-name-getcreatefunnelbyday-a-getcreatefunnelbyday-startdate-datetime-enddate-datetime-common-use-cases"></a>
+## Common Use Cases
+* Identifying the change in the number of successful create initiated by an Extension's create blade over the course of multiple weeks.
+* Identifying which days have higher number of failed deployments.
 
-<a name="create-flow-origins-how-these-numbers-are-generated"></a>
-### How these numbers are generated
+<a name="a-name-getcreatefunnelbyday-a-getcreatefunnelbyday-startdate-datetime-enddate-datetime-underlying-function-resources"></a>
+## Underlying Function Resources
+* [GetCreateFlows()](#GetCreateFunnelByDay)
 
-<a name="create-flow-origins-how-these-numbers-are-generated-create-flow-origins-kusto-query"></a>
-#### Create Flow Origins - Kusto Query
- 
-```js
-let timeSpan = 30d;
-let selectedData = 
-GetClientTelemetryByTimeSpan(timeSpan, false)
-| union (GetExtTelemetryByTimeSpan(timeSpan, false));
+<a name="a-name-getcreatefunnelbyday-a-getcreatefunnelbyday-startdate-datetime-enddate-datetime-parameters"></a>
+## Parameters
+* startDate: The date to mark the inclusive start of the time range.
+* endDate: The date to mark the exclusive end of the time range.
 
-selectedData
-| where Action == "CreateFlowLaunched"
-| extend 
-    CreateBladeName = _GetCreateBladeNameFromData(Data, ActionModifier),
-    ExtensionId = _GetCreateExtensionNameFromData(Data, ActionModifier),
-    OriginFromMenuItemId = extractjson("$.menuItemId", Data, typeof(string)),
-    DataContext = extractjson("$.context", Data, typeof(string))
-| extend OriginFromDataContext = extract('([^,"]*Blade[^,"]*)', 1, DataContext)
-| project CreateBladeName, ExtensionId, Origin = iff(OriginFromMenuItemId == "recentItems" or OriginFromMenuItemId == "deepLinking", OriginFromMenuItemId, OriginFromDataContext), DataContext 
-| extend Origin = iff(Origin == "", DataContext, Origin)
-| summarize CreateFlowLaunched = count() by ExtensionId, CreateBladeName, Origin
-| summarize 
-    CreateFlowLaunched = sum(CreateFlowLaunched), 
-    New = sum(iff(Origin contains "recentItems" or Origin contains "GalleryCreateMenuResultsListBlade", CreateFlowLaunched, 0)),
-    Browse = sum(iff(Origin contains "BrowseResourceBlade", CreateFlowLaunched, 0)),
-    Marketplace = sum(iff(Origin contains "GalleryItemDetailsBlade" or Origin contains "GalleryResultsListBlade" or Origin contains "GalleryHeroBanner", CreateFlowLaunched, 0)),
-    DeepLink = sum(iff(Origin contains "deepLinking", CreateFlowLaunched, 0))
-  by ExtensionId, CreateBladeName 
-| join kind = inner (ExtensionLookup | extend ExtensionId = Extension) on ExtensionId
-| project
-    ["Extension Name"] = ExtensionName, 
-    ["Create Blade Name"] = CreateBladeName, 
-    ["Create Flow Launched"] = CreateFlowLaunched,
-    ["+New"] = New,
-    ["+New (%)"] = todouble(New) / CreateFlowLaunched,
-    ["Browse"] = Browse,
-    ["Browse (%)"] = todouble(Browse) / CreateFlowLaunched,
-    ["Marketplace"] = Marketplace,
-    ["Marketplace (%)"] = todouble(Marketplace) / CreateFlowLaunched,
-    ["DeepLink"] = DeepLink,
-    ["DeepLink (%)"] = todouble(DeepLink) / CreateFlowLaunched
-```
+<a name="a-name-getcreatefunnelbyday-a-getcreatefunnelbyday-startdate-datetime-enddate-datetime-output-columns"></a>
+## Output Columns
+* Date
+  * The date at midnight of the day which the create flow was started.
+* Extension
+  * The Extension which initiated the creates.
+* Blade
+  * The create blade which inititated the creates.
+* GalleryPackageId
+  * The gallery package id that was created.
+* CreateBladeOpened
+  * The number of times the create blade was opened.
+  * Calculated by taking the count of the number of Create Flows  for each blade from [GetCreateFlows()](#GetCreateFlows) which had:
+    * `CreateBladeOpened == true`.
+* Started
+  * The number of creates that were started.
+  * Calculated by taking the count of the number of Create Flows  for each blade from [GetCreateFlows()](#GetCreateFlows) which had:
+    * `PortalCreateStarted == true`
+    * or `ArmDeploymentStarted == true`
+  * *Note - We check both of these for redundancy proof becuase we know that as long as one of these properties are true then we know a create was started.*
+* Excluded
+  * The number of creates from [GetCreateFlows()](#GetCreateFlows) that were marked as Excluded.
+  * *See [GetCreateFlows()](#GetCreateFlows) documentation for Excluded details.*
+* Completed
+  * The number of creates that were completed.
+  * Completed = Started - Excluded
+* StartRate
+  * The rate of create blades that are opened which leads to a create being started.
+  * StartRate = Started / CreateBladeOpened
+* Succeeded
+  * The number of creates that succeeded.
+* SuccessRate
+  * The rate of completed creates which succeeded.
+  * SuccessRate = Succeeded / Completed
+* Failed
+  * The number of creates that failed.
+* FailureRate
+  * The rate of completed creates which failed.
+  * FailureRate = Failed / Completed
+* Canceled
+  * The number of creates which were canceled.
+* CommerceError
+  * The number of creates which were aborted due to a commerce error.
+* Unknown
+  * The number of creates which do not have a known result.
+* OldCreateApi
+  * Represents if the create blade deployments were initiated using a deprecated version of the ARM provisioning API provided by the Portal SDK
+* CustomDeployment
+  * Represents if the create blade deployments were initiated without using the official ARM provisioning API provided by the portal SDK
 
-<a name="create-flow-errors"></a>
-## Create Flow Errors
+<a name="a-name-getcreatefunnelbygallerypackageid-a-getcreatefunnelbygallerypackageid-startdate-datetime-enddate-datetime"></a>
+# <a name="GetCreateFunnelByGalleryPackageId"></a>GetCreateFunnelByGalleryPackageId(startDate: datetime, endDate: datetime)
 
-<a name="create-flow-errors-overview"></a>
-### Overview
+<a name="a-name-getcreatefunnelbygallerypackageid-a-getcreatefunnelbygallerypackageid-startdate-datetime-enddate-datetime-summary"></a>
+## Summary
+This functions calculates the create funnel KPI's by gallery package id, extension, and create blade over a given time range.
 
-This report gives you an overview of create blades create errors, billing issues, and cancellations.
+<a name="a-name-getcreatefunnelbygallerypackageid-a-getcreatefunnelbygallerypackageid-startdate-datetime-enddate-datetime-common-use-cases"></a>
+## Common Use Cases
+* Identifying the number of successfully creates for a resource.
+* Identifying which resources have higher number of failed deployments.
 
-<a name="create-flow-errors-description-of-data-field"></a>
-### Description of data field
+<a name="a-name-getcreatefunnelbygallerypackageid-a-getcreatefunnelbygallerypackageid-startdate-datetime-enddate-datetime-underlying-function-resources"></a>
+## Underlying Function Resources
+* [GetCreateFlows()](#GetCreateFlows)
 
-- **Deployment Cancelled Count** - The number of cancalled deployments
-- **Billing Error Count** - The number of deployments that resulted in the biling error "no credit card on file".
-- **Total Errors Count** - The total number of deployments that resulted in an failure/error
-- **Deployment Failed %** - The percentage of deployments that resulted in a failure/error
-- **Error Submitting Deployment Request %** - The percentage of failed deployments that was because of the error "Error Submitting Deployment Request"
-- **Error Provisiong Resource Group %** - The percentage of failed deployments that was because of the error "Error Provisiong Resource Group".
-- **Error Registering Resource Providers %** - The percentage of failed deployments that was because of the error "Error Registering Resource Providers".
-- **Unknown Failure %** - The percentage of failed deployments that was because of the error "Unknown Failure".
-- **Deployment Request Failed %** - The percentage of failed deployments that was because of the error "Deployment Request Failed".
-- **Error Getting Deployment Status %** - The percentage of failed deployments that was because of the error "Error Getting Deployment Status".
-- **Deployment Status Unknown %** - The percentage of failed deployments that was because of the error "Deployment Status Unknown".
-- **Invalid Args %** - The percentage of failed deployments that was because of the error "Invalid Args".
-- **Old Create API**
-    - If true, this means that your create blade is using the old deprecated Parameter Collector (Parameter Collector V1 or V2) and therefore your create telemetry is not dependable and is potentially innacurrate. 
-    - It is recommended to get this field to 'false', by updating your create blade to use the new Parameter Collector (Parameter Collector V3).
-        - [Parameter Collector V3 - Getting Started](#portalfx-parameter-collection-getting-started)
-- **Custom Deployment**
-    - If true, this means that your create does not go through the official Arm Provisioner and therefore you only receive limited telemetry reporting.
-    - If your experience's create deployments go through Arm but you are not using the Arm Provisioning then please refer to the Create Engine documentation
-        - [Create Engine](#portalfx-create-engine-sample)
+<a name="a-name-getcreatefunnelbygallerypackageid-a-getcreatefunnelbygallerypackageid-startdate-datetime-enddate-datetime-parameters"></a>
+## Parameters
+* startDate: The date to mark the inclusive start of the time range.
+* endDate: The date to mark the exclusive end of the time range.
 
-<a name="create-flow-errors-how-these-numbers-are-generated"></a>
-### How these numbers are generated
+<a name="a-name-getcreatefunnelbygallerypackageid-a-getcreatefunnelbygallerypackageid-startdate-datetime-enddate-datetime-output-columns"></a>
+## Output Columns
+* Extension
+  * The Extension which initiated the creates.
+* Blade
+  * The create blade which inititated the creates.
+* GalleryPackageId
+  * The gallery package id that was created.
+* CreateBladeOpened
+  * The number of times the create blade was opened.
+  * Calculated by taking the count of the number of Create Flows for each blade from [GetCreateFlows()](#GetCreateFlows) which had:
+    * `CreateBladeOpened == true`.
+* Started
+  * The number of creates that were started.
+  * Calculated by taking the count of the number of Create Flows for each blade  from [GetCreateFlows()](#GetCreateFlows) which had:
+    * `PortalCreateStarted == true`
+    * or `ArmDeploymentStarted == true`
+  * *Note - We check both of these for redundancy proof becuase we know that as long as one of these properties are true then we know a create was started.*
+* Excluded
+  * The number of creates from [GetCreateFlows()](#GetCreateFlows) that were marked as Excluded.
+  * *See [GetCreateFlows()](#GetCreateFlows) documentation for Excluded details.*
+* Completed
+  * The number of creates that were completed.
+  * Completed = Started - Excluded
+* StartRate
+  * The rate of create blades that are opened which leads to a create being started.
+  * StartRate = Started / CreateBladeOpened
+* Succeeded
+  * The number of creates that succeeded.
+* SuccessRate
+  * The rate of completed creates which succeeded.
+  * SuccessRate = Succeeded / Completed
+* Failed
+  * The number of creates that failed.
+* FailureRate
+  * The rate of completed creates which failed.
+  * FailureRate = Failed / Completed
+* Canceled
+  * The number of creates which were canceled.
+* CommerceError
+  * The number of creates which were aborted due to a commerce error.
+* Unknown
+  * The number of creates which do not have a known result.
+* OldCreateApi
+  * Represents if the create blade deployments were initiated using a deprecated version of the ARM provisioning API provided by the Portal SDK
+* CustomDeployment
+  * Represents if the create blade deployments were initiated without using the official ARM provisioning API provided by the portal SDK
 
-<a name="create-flow-errors-how-these-numbers-are-generated-create-flow-errors-kusto-query"></a>
-#### Create Flow Errors - Kusto Query
+<a name="a-name-getcombinedcreatefunnel-a-getcombinedcreatefunnel-startdate-datetime-enddate-datetime"></a>
+# <a name="GetCombinedCreateFunnel"></a>GetCombinedCreateFunnel(startDate: datetime, endDate: datetime)
 
-```js
-let timeSpan = 30d;
-let startDate = GetStartDateForLastNDays(timeSpan);
-let endDate = GetEndDateForTimeSpanQueries();
+<a name="a-name-getcombinedcreatefunnel-a-getcombinedcreatefunnel-startdate-datetime-enddate-datetime-summary"></a>
+## Summary
+This functions calculates the overall create funnel KPIs for the Portal.
 
-let errors = 
-(GetClientTelemetryByDateRange(startDate, endDate, false)
-| union (GetExtTelemetryByDateRange(startDate, endDate, false))
-| where Action == "ProvisioningEnded" and ActionModifier == "Failed" and isnotempty(Name))
-| union (_GetArmCreateEvents(startDate, endDate) | where ExecutionStatus in ("Failed", "Cancelled", "BillingError") and isnotempty(Name))
-| extend
-    Date = bin(PreciseTimeStamp, 1d)
-    | join kind = leftouter (
-        _GetCreateBladesMapping(startDate, endDate)
-        | project Date, Name, 
-            ExtensionIdCurrent = ExtensionId, 
-            CreateBladeNameCurrent = CreateBladeName, 
-            UnsupportedCurrent = Unsupported, 
-            CustomDeploymentCurrent = CustomDeployment
-      ) on Date, Name 
-    // Join again on previous day's mappings to cover case when mapping is not found in current day
-    | join kind = leftouter (
-        _GetCreateBladesMapping(startDate - 1d, endDate - 1d)
-        | project Date, Name, 
-            ExtensionIdPrev = ExtensionId, 
-            CreateBladeNamePrev = CreateBladeName, 
-            UnsupportedPrev = Unsupported, 
-            CustomDeploymentPrev = CustomDeployment
-        | extend Date = Date + 1d
-      ) on Date, Name 
-    // Use current day's mapping if available, otherwise, use previous day
-    | extend 
-        ExtensionId = iff(isnotempty(ExtensionIdCurrent), ExtensionIdCurrent, ExtensionIdPrev),
-        CreateBladeName = iff(isnotempty(ExtensionIdCurrent), CreateBladeNameCurrent, CreateBladeNamePrev),
-        Unsupported = iff(isnotempty(ExtensionIdCurrent), UnsupportedCurrent, UnsupportedPrev),
-        CustomDeployment = iff(isnotempty(ExtensionIdCurrent), CustomDeploymentCurrent, CustomDeploymentPrev)
-| where isnotempty(ExtensionId) and isnotempty(CreateBladeName)
-| extend ExecutionStatus = iff(Action == "ProvisioningEnded", extractjson("$.provisioningStatus", Data, typeof(string)), ExecutionStatus);
+<a name="a-name-getcombinedcreatefunnel-a-getcombinedcreatefunnel-startdate-datetime-enddate-datetime-common-use-cases"></a>
+## Common Use Cases
+* Identifying the overall success rates of creates in the Portal.
+* Identifying the total number of failed creates in the Portal.
+* Identifying the total number of create aborted due to commerce errors in the Portal.
+* Identifying the overall rate of create flows that lead to a create being started.
 
-errors
-| summarize
-    CustomDeploymentErrorsCount = count(Action == "ProvisioningEnded" and ActionModifier == "Failed"),
-    // We exclude ProvisioningEnded events with ExecutionStatus in ("DeploymentFailed", "DeploymentCanceled") from ARMDeploymentErrorsCount as in this case, we get the number of deployments that failed or were cancelled from ARM.
-    ARMDeploymentErrorsCount = count((Action startswith "CreateDeployment") or (Action == "ProvisioningEnded" and ExecutionStatus !in ("DeploymentFailed", "DeploymentCanceled")))
-  by ExtensionId, CreateBladeName, Unsupported, CustomDeployment
-| join kind = inner (
-    errors
-    | summarize
-        ARMFailed = count(Action startswith "CreateDeployment" and ExecutionStatus == "Failed"),
-        ARMCancelled = count(Action startswith "CreateDeployment" and ExecutionStatus == "Cancelled"),
-        ARMBillingError = count(Action startswith "CreateDeployment" and ExecutionStatus == "BillingError"),
-        Failed = count(Action == "ProvisioningEnded" and ExecutionStatus == "DeploymentFailed"),
-        Cancelled = count(Action == "ProvisioningEnded" and ExecutionStatus == "DeploymentCanceled"),
-        ErrorSubmitting = count(Action == "ProvisioningEnded" and ExecutionStatus == "ErrorSubmittingDeploymentRequest"),
-        ErrorProvisioning = count(Action == "ProvisioningEnded" and ExecutionStatus == "ErrorProvisioningResourceGroup"),
-        ErrorRegistering = count(Action == "ProvisioningEnded" and ExecutionStatus == "ErrorRegisteringResourceProviders"),
-        ErrorGettingStatus = count(Action == "ProvisioningEnded" and ExecutionStatus == "ErrorGettingDeploymentStatus"),
-        InvalidArgs = count(Action == "ProvisioningEnded" and ExecutionStatus == "InvalidArgs"),
-        UnknownFailure = count(Action == "ProvisioningEnded" and ExecutionStatus == "UnknownFailure"),
-        RequestFailed = count(Action == "ProvisioningEnded" and ExecutionStatus == "DeploymentRequestFailed"),
-        StatusUnknown = count(Action == "ProvisioningEnded" and ExecutionStatus == "DeploymentStatusUnknown")
-      by ExtensionId, CreateBladeName, Unsupported, CustomDeployment)
-  on ExtensionId, CreateBladeName, Unsupported, CustomDeployment
-| extend Failed = iff(CustomDeployment, Failed, ARMFailed)
-| extend Cancelled = iff(CustomDeployment, Cancelled, ARMCancelled)
-| extend BillingError = iff(CustomDeployment, 0, ARMBillingError)
-| extend TotalCount = iff(CustomDeployment, CustomDeploymentErrorsCount, ARMDeploymentErrorsCount) - Cancelled - BillingError
-| extend TotalCountDbl = todouble(TotalCount)
-| join kind = leftouter (ExtensionLookup | extend ExtensionId = Extension) on ExtensionId
-| project
-    ["Extension Name"] = ExtensionName,
-    ["Create Blade Name"] = CreateBladeName,
-    ["Deployment Cancelled Count"] = Cancelled,
-    ["Billing Error Count"] = BillingError,
-    ["Total Errors Count"] = TotalCount,
-    ["Deployment Failed %"] = iff(TotalCountDbl == 0.0, 0.0, Failed / TotalCountDbl),
-    ["Error Submitting Deployment Request %"] = iff(TotalCountDbl == 0.0, 0.0, ErrorSubmitting / TotalCountDbl),
-    ["Error Provisioning Resource Group %"] = iff(TotalCountDbl == 0.0, 0.0, ErrorProvisioning / TotalCountDbl),
-    ["Error Registering Resource Providers %"] = iff(TotalCountDbl == 0.0, 0.0, ErrorRegistering / TotalCountDbl),
-    ["Error Getting Deployment Status %"] = iff(TotalCountDbl == 0.0, 0.0, ErrorGettingStatus / TotalCountDbl),
-    ["Invalid Args %"] = iff(TotalCountDbl == 0.0, 0.0, InvalidArgs / TotalCountDbl),
-    ["Unknown Failure %"] = iff(TotalCountDbl == 0.0, 0.0, UnknownFailure / TotalCountDbl),
-    ["Deployment Request Failed %"] = iff(TotalCountDbl == 0.0, 0.0, RequestFailed / TotalCountDbl),
-    ["Deployment Status Unknown %"] = iff(TotalCountDbl == 0.0, 0.0, StatusUnknown / TotalCountDbl),
-    ["Old Create API"] = Unsupported,
-    ["Custom Deployment"] = CustomDeployment
-```
+<a name="a-name-getcombinedcreatefunnel-a-getcombinedcreatefunnel-startdate-datetime-enddate-datetime-underlying-function-resources"></a>
+## Underlying Function Resources
+* [GetCreateFlows()](#GetCreateFlows)
 
-<a name="error-distribution"></a>
-## Error Distribution
+<a name="a-name-getcombinedcreatefunnel-a-getcombinedcreatefunnel-startdate-datetime-enddate-datetime-parameters"></a>
+## Parameters
+* startDate: The date to mark the inclusive start of the time range.
+* endDate: The date to mark the exclusive end of the time range.
 
-<a name="error-distribution-overview"></a>
-### Overview
-
-This report gives an overview of the errors that have occured over the last week and including how they have changed since the week before, aka WoW (Week or Week).
-
-<a name="error-distribution-description-of-reports"></a>
-### Description of reports
-
-- Error Distribution - The high level error that occured for all deployments in the last week.
-- Error Distribution By Extension - The number of create deployment error that occured by each extension over the last week.
-- Inner Error Distribution - Looking at the 'inner most error' inside of the error messages that is recorded for a create deployment failure. Error messages often become nested as they they reach different points of provisioning and have different stages record the failure reason. The 'inner most error' in theory should be the original reason why a create deployment failed.
-
-<a name="error-distribution-how-these-numbers-are-generated"></a>
-### How these numbers are generated
-
-<a name="error-distribution-how-these-numbers-are-generated-create-error-distribution-kusto-query"></a>
-#### Create Error Distribution - Kusto Query
-
-```js
-let today = floor(now(),1d);
-let sat = today - dayofweek(today) - 8d;
-let fri =  sat + 6d;
-ClientTelemetry
-| where PreciseTimeStamp >= sat and PreciseTimeStamp < fri + 1d
-| where Action == "ProvisioningEnded" and ActionModifier == "Failed"
-| extend provisioningStatus = extractjson("$.provisioningStatus", Data, typeof(string)),
-  isCustomProvisioning = extractjson("$.isCustomProvisioning", Data, typeof(string)),
-  oldCreateApi = extractjson("$.oldCreateApi", Data, typeof(string)),
-  launchingContext = extract('"launchingContext"\\s?:\\s?{([^}]+)', 1, Data)
-| where isnotempty(launchingContext) and isempty(extract("^(\"telemetryId\":\"[^\"]*\")$", 1, launchingContext)) and oldCreateApi != "true" and isCustomProvisioning != "true" and provisioningStatus != "DeploymentCanceled"
-| where Data !contains "We could not find a credit card on file for your azure subscription." 
-| summarize ["Error Count"] = count() by ["Error"] = provisioningStatus
-| order by ["Error Count"] desc
-```
-
-<a name="error-distribution-how-these-numbers-are-generated-create-error-distribution-by-extension-kusto-query"></a>
-#### Create Error Distribution By Extension - Kusto Query
-
-```js
-let today = floor(now(),1d);
-let sat = today - dayofweek(today) - 8d;
-let fri =  sat + 6d;
-ClientTelemetry
-| where PreciseTimeStamp >= sat and PreciseTimeStamp < fri + 1d
-| where Action == "ProvisioningEnded" and ActionModifier == "Failed"
-| extend provisioningStatus = extractjson("$.provisioningStatus", Data, typeof(string)),
-  isCustomProvisioning = extractjson("$.isCustomProvisioning", Data, typeof(string)),
-  oldCreateApi = extractjson("$.oldCreateApi", Data, typeof(string)),
-  launchingContext = extract('"launchingContext"\\s?:\\s?{([^}]+)', 1, Data)
-| where isnotempty(launchingContext) and isempty(extract("^(\"telemetryId\":\"[^\"]*\")$", 1, launchingContext)) and oldCreateApi != "true" and isCustomProvisioning != "true" and provisioningStatus != "DeploymentCanceled"
-| where Data !contains "We could not find a credit card on file for your azure subscription." 
-| summarize ["Error Count"] = count() by Extension
-| order by ["Error Count"] desc
-```
-
-<a name="error-distribution-how-these-numbers-are-generated-create-error-distribution-by-error-code-kusto-query"></a>
-#### Create Error Distribution By Error Code - Kusto Query
-
-```js
-let today = floor(now(),1d);
-let sat = today - dayofweek(today) - 8d;
-let fri =  sat + 6d;
-ClientTelemetry
-| where PreciseTimeStamp >= sat and PreciseTimeStamp < fri + 1d
-| where Action == "ProvisioningEnded" and ActionModifier == "Failed"
-| extend provisioningStatus = extractjson("$.provisioningStatus", Data, typeof(string)),
-  isCustomProvisioning = extractjson("$.isCustomProvisioning", Data, typeof(string)),
-  oldCreateApi = extractjson("$.oldCreateApi", Data, typeof(string)),
-  eCode = extractjson("$.details.code", Data, typeof(string)),
-  launchingContext = extract('"launchingContext"\\s?:\\s?{([^}]+)', 1, Data)
-| where isnotempty(launchingContext) and isempty(extract("^(\"telemetryId\":\"[^\"]*\")$", 1, launchingContext)) and oldCreateApi != "true"
-| where provisioningStatus != "DeploymentFailed" and provisioningStatus != "DeploymentCanceled" and isCustomProvisioning != "true"
-| where Data !contains "We could not find a credit card on file for your azure subscription." 
-| summarize ["Error Count"] = count() by ["Error Code"] = eCode
-| order by ["Error Count"] desc 
-```
-
-<a name="error-distribution-how-these-numbers-are-generated-create-inner-most-error-distribution-kusto-query"></a>
-#### Create Inner Most Error Distribution - Kusto Query
-
-```js
-let today = floor(now(),1d);
-let sat = today - dayofweek(today) - 8d;
-let fri =  sat + 6d;
-ClientTelemetry
-| where PreciseTimeStamp >= sat and PreciseTimeStamp < fri+1d
-| where Action == "ProvisioningEnded" and ActionModifier == "Failed"
-| join kind = inner (ExtensionLookup | project Extension, ExtensionName) on Extension
-| where Data !contains "We could not find a credit card on file for your azure subscription."
-| extend datajson = parsejson(Data)
-| extend provisioningStatus = tostring(datajson.provisioningStatus), isCustomProvisioning = tostring(datajson.isCustomProvisioning), oldCreateApi = tostring(datajson.oldCreateApi), launchingContext = extract('"launchingContext"\\s?:\\s?{([^}]+)', 1, Data)
-| where isnotempty(launchingContext) and isempty(extract("^(\"telemetryId\":\"[^\"]*\")$", 1, launchingContext)) and oldCreateApi != "true" and isCustomProvisioning != "true" and provisioningStatus != "DeploymentCanceled"
-| extend code1 = tostring(datajson.details.code), statusCode = tostring(datajson.details.deploymentStatusCode), details = datajson.details.properties.error.details[0]
-| extend message= tostring(details.message), code2 = tostring(details.code)
-| extend messagejson = parsejson(message)
-| extend code3 = tostring(messagejson.code), code4 = tostring(messagejson.error.code), code5= tostring(messagejson.error.details[0].code)
-| extend errorCode1 = iff(code5 == "", code4, code5)
-| extend errorCode2 = iff(errorCode1 == "", code3, errorCode1)
-| extend errorCode3 = iff(errorCode2 == "", code2, errorCode2)
-| extend errorCode4 = iff(errorCode3 == "", code1, errorCode3)
-| extend errorCode5 = iff(errorCode4 == "", statusCode, errorCode4)
-| summarize ["ErrorCount"] = count() by ["Extension"] = ExtensionName, errorCode5
-| order by ErrorCount desc
-```
-
-<a name="next-steps"></a>
-# Next Steps:
-- [Troubleshooting Create Regressions and ICM alerts](#portalfx-create-troubleshooting)
-- [For General Telemetry](#portalfx-telemetry)
-- [For Kusto Documentation](https://aka.ms/kusto)
+<a name="a-name-getcombinedcreatefunnel-a-getcombinedcreatefunnel-startdate-datetime-enddate-datetime-output-columns"></a>
+## Output Columns
+* CreateBladeOpened
+  * The total number of times create blade were opened.
+  * Calculated by taking the total count of the number of Create Flows from [GetCreateFlows()](#GetCreateFlows) which had:
+    * `CreateBladeOpened == true`.
+* Started
+  * The total number of creates that were started.
+  * Calculated by taking the total count of the number of Create Flows from [GetCreateFlows()](#GetCreateFlows) which had:
+    * `PortalCreateStarted == true`
+    * or `ArmDeploymentStarted == true`
+  * *Note - We check both of these for redundancy proof becuase we know that as long as one of these properties are true then we know a create was started.*
+* Excluded
+  * The total number of creates from [GetCreateFlows()](#GetCreateFlows) that were marked as Excluded.
+  * *See [GetCreateFlows()](#GetCreateFlows) documentation for Excluded details.*
+* Completed
+  * The total number of creates that were completed.
+  * Completed = Started - Excluded
+* StartRate
+  * The rate of create blades that are opened which leads to a create being started.
+  * StartRate = Started / CreateBladeOpened
+* Succeeded
+  * The total number of creates that succeeded.
+* SuccessRate
+  * The overall rate of completed creates which succeeded.
+  * SuccessRate = Succeeded / Completed
+* Failed
+  * The total number of creates that failed.
+* FailureRate
+  * The overrall rate of completed creates which failed.
+  * FailureRate = Failed / Completed
+* Canceled
+  * The total number of creates which were canceled.
+* CommerceError
+  * The total number of creates which were aborted due to a commerce error.
+* Unknown
+  * The total number of creates which do not have a known result.
 
 
 <a name="create-troubleshooting"></a>
 # Create Troubleshooting
  <h1 name="portalfx-create-troubleshooting"></h1>
- <properties title="" pageTitle="Troubleshooting create failures and regressions" description="" authors="asgar" />
-
-<a name="create-troubleshooting-overview"></a>
-## Overview
+ ## Overview
 
 Creates are when a user tries to provision a resource using the portal.  The goal of the Create Flow Regressions alert is to  generate awareness when our create reliability seems to be degrading.  This can happen for a number of reasons, this alert does not attempt to distinguish the reasons why.
 
@@ -2104,13 +2179,10 @@ web.config
 ## Run portalcop to identify and resolve common performance issues
 
  <h1 name="portalfx-performance-portalcop"></h1>
- <properties title="" pageTitle="Performance PortalCop" description="" authors="gurua" />
-
-<a name="performance-portalcop"></a>
-## PortalCop
+ ## PortalCop
 The Portal Framework team has built a tool called PortalCop that can help reduce code size and remove redundant RESX entries.
 
-<a name="performance-portalcop-installing-portalcop"></a>
+<a name="performance-run-portalcop-to-identify-and-resolve-common-performance-issues-installing-portalcop"></a>
 ### Installing PortalCop
 
 Run the following command in the NuGet Package Manager Console.
@@ -2125,10 +2197,10 @@ Or run the following in a Windows command prompt.
 nuget install PortalFx.PortalCop -Source https://msazure.pkgs.visualstudio.com/DefaultCollection/_packaging/Official/nuget/v3/index.json -Version 1.0.0.339
 ```
 
-<a name="performance-portalcop-running-portalcop"></a>
+<a name="performance-run-portalcop-to-identify-and-resolve-common-performance-issues-running-portalcop"></a>
 ### Running PortalCop
 
-<a name="performance-portalcop-running-portalcop-namespace-mode"></a>
+<a name="performance-run-portalcop-to-identify-and-resolve-common-performance-issues-running-portalcop-namespace-mode"></a>
 #### Namespace Mode
 
 NOTE: If you do not use AMD, please do not run this mode in your codebase.
@@ -2152,7 +2224,7 @@ Review the changes after running the tool. Especially, be wary of string content
    portalcop Namespace
 ```
 
-<a name="performance-portalcop-running-portalcop-resx"></a>
+<a name="performance-run-portalcop-to-identify-and-resolve-common-performance-issues-running-portalcop-resx"></a>
 #### Resx
 
 To reduce code size and save on localization costs, you can use the PortalCop RESX mode to find unused/redundant resx strings. 

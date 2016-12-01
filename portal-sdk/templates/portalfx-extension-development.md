@@ -39,3 +39,4 @@
 # Other
 {"gitdown": "include-file", "file": "../templates/portalfx-binding-reference.md"}
 {"gitdown": "include-file", "file": "../templates/portalfx-blade-viewmodel.md"}
+{"gitdown": "include-file", "file": "../templates/portalfx-load-configuration.md"}

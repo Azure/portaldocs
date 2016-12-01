@@ -1,8 +1,8 @@
 * [Overview](#overview)
-* [Before Deploying Extension](#before-deploying-extension)
-* [Deploying Extension UI](#deploying-extension-ui)
-* [Deploying Extension Controllers](#deploying-extension-controllers)
-* [Legacy/ DIY Deployments](#legacy-diy-deployments)
+* [Before deploying extension](#before-deploying-extension)
+* [Deploying extension UI](#deploying-extension-ui)
+* [Deploying extension controllers](#deploying-extension-controllers)
+* [Legacy/DIY deployments](#legacy-diy-deployments)
 * [Resiliency and failover](#resiliency-and-failover)
 * [Extension Hosting Service](#extension-hosting-service)
 * [How it works](#how-it-works)
@@ -35,7 +35,8 @@
 <a name="overview"></a>
 ## Overview
 
-The Azure Portal uses a decentralized model of deployment that consists of several components that work together to provide the end-to-end experience, each deployed to separate endpoints:
+The Azure Portal uses a decentralized model of deployment that consists of several components that work together to
+provide the end-to-end experience, each deployed to separate endpoints:
 
 - **Portal** \- web application that hosts the shell
 - **Extensions** \- each extension is a web application that is loaded by the portal
@@ -47,35 +48,49 @@ The Azure Portal uses a decentralized model of deployment that consists of sever
 <a name="overview-portal"></a>
 ### Portal
 
-The portal is deployed to all [public Azure regions](http://azure.microsoft.com/regions) and uses geographical load-balancing via Azure Traffic Manager (using the "Performance" profile).
-(For more information about Azure Traffic Manager, see their [introduction](https://azure.microsoft.com/en-us/documentation/articles/traffic-manager-overview/).)
+The portal is deployed to all [public Azure regions](http://azure.microsoft.com/regions) and uses geographical
+load-balancing via Azure Traffic Manager (using the "Performance" profile).
+(For more information about Azure Traffic Manager, see their
+[introduction](https://azure.microsoft.com/en-us/documentation/articles/traffic-manager-overview/).)
 
-Deploying in this fashion means that users can take advantage of a server closer to them, reducing latency and improving the overall experience of using the portal.
+Deploying in this fashion means that users can take advantage of a server closer to them, reducing latency and improving
+the overall experience of using the portal.
 
-The portal also takes advantage of the [Azure CDN](https://azure.microsoft.com/en-us/documentation/articles/cdn-overview/) for static resources (images, scripts, etc.). This shifts the location of the most-downloaded files even closer to the user.
+The portal also takes advantage of the [Azure CDN](https://azure.microsoft.com/en-us/documentation/articles/cdn-overview/)
+for static resources (images, scripts, etc.). This shifts the location of the most-downloaded files even closer to the user.
 
 <a name="overview-portal-deployment-schedule"></a>
-### Portal Deployment schedule
+### Portal deployment schedule
 
-The portal is deployed continuously. On any given day, multiple bug fixes, new features, and API changes may be deployed to production.  When a new version of the portal is deployed to production, the corresponding version of the SDK is automatically released to the [download center](/downloads). The download center contains the change log for the given release, including bug fixes, new features, and a log of breaking changes.
+The portal is deployed continuously. On any given day, multiple bug fixes, new features, and API changes may be deployed
+to production. When a new version of the portal is deployed to production, the corresponding version of the SDK is
+automatically released to the [download center](/downloads). The download center contains the change log for the given
+release, including bug fixes, new features, and a log of breaking changes.
 
 <a name="before-deploying-extension"></a>
-## Before Deploying Extension
+## Before deploying extension
 
-1.	For extensions Onboarding Ibiza: Enable/disable extensions
-1.	Extension "stamps"
+1. For extensions onboarding Ibiza: Enable/disable extensions
+1. Extension "stamps"
 1. Understand extension runtime compatibility
-	
+
 <a name="before-deploying-extension-1-for-extensions-onboarding-ibiza-enable-disable-extensions"></a>
 ### >
-<li>For extensions Onboarding Ibiza: Enable/Disable extensions</li>
+<li>For extensions onboarding Ibiza: Enable/disable extensions</li>
 <
 
-New extensions are disabled by default. This will hide the extension from users (it won't show up in the portal at all) until it's ready for general use.
+New extensions are disabled by default. This will hide the extension from users (it won't show up in the portal at all)
+until it's ready for general use.
 
-To temporarily enable a disabled extension (for your session only), add an extension override in the portal URL: `https://portal.azure.com?Microsoft_Azure_DevTestLab=true` (where `Microsoft_Azure_DevTestLab` is the name of the extension as registered with the portal). Conversely, you can temporarily disable an extension by setting it to `false`.
+To temporarily enable a disabled extension (for your session only), add an extension override in the portal URL:
+`https://portal.azure.com?Microsoft_Azure_DevTestLab=true` (where `Microsoft_Azure_DevTestLab` is the name of the
+extension as registered with the portal). Conversely, you can temporarily disable an extension by setting it to `false`.
 
-You can use temporary enablement in conjunction with a Gallery Item Hidekey (if you have one) to also temporarily show your item in the "Create New" experience while your extension is enabled. Just combine the parameters. Following the previous example, if your hidekey is `DevTestLabHidden`, then you can combine it with the above to produce a single URL to enable both the extension and the Gallery item: `https://portal.azure.com?Microsoft_Azure_DevTestLab=true&microsoft_azure_marketplace_ItemHideKey=DevTestLabHidden`.
+You can use temporary enablement in conjunction with a Gallery Item Hidekey (if you have one) to also temporarily show
+your item in the "Create New" experience while your extension is enabled. Just combine the parameters. Following the
+previous example, if your hidekey is `DevTestLabHidden`, then you can combine it with the above to produce a single URL
+to enable both the extension and the Gallery item:
+`https://portal.azure.com?Microsoft_Azure_DevTestLab=true&microsoft_azure_marketplace_ItemHideKey=DevTestLabHidden`.
 
 To permanently enable an extension (e.g. if it's ready for general use), please contact the portal team.
 
@@ -84,7 +99,9 @@ To permanently enable an extension (e.g. if it's ready for general use), please 
 <li>Extension &quot;stamps&quot;</li>
 <
 
-Every extension can deploy one or more "stamps" based on their testing requirements. In Azure parlance, a "stamp" is an instance of a service in a region. The "main" stamp is used for production and is the only one the portal will be configured for. Additional stamps can be accessed using a URI format specified in extension config.
+Every extension can deploy one or more "stamps" based on their testing requirements. In Azure parlance, a "stamp" is an
+instance of a service in a region. The "main" stamp is used for production and is the only one the portal will be
+configured for. Additional stamps can be accessed using a URI format specified in extension config.
 
 For example, this might be an extension configuration:
 
@@ -96,44 +113,61 @@ For example, this might be an extension configuration:
 }
 ```
 
-When users go to the portal, it will load the `Microsoft_Azure_DevTestLab` extension from the URL `https://main.devtest.ext.azure.com` (the portal always uses HTTPS).
+When users go to the portal, it will load the `Microsoft_Azure_DevTestLab` extension from the URL
+`https://main.devtest.ext.azure.com` (the portal always uses HTTPS).
 
-To use a secondary, test stamp, specify the `feature.canmodifystamps` flag in addition to a parameter matching the name of your extension as registered in the portal. For instance, `https://portal.azure.com?feature.canmodifystamps=true&Microsoft_Azure_DevTestLab=perf` would replace the `{0}` in the `uriFormat` string with `perf` and attempt to load the extension from there (making the extension URL `https://perf.devtest.ext.azure.com`). Note that you must specify the flag `feature.canmodifystamps=true` in order to override the stamp.
+To use a secondary, test stamp, specify the `feature.canmodifystamps` flag in addition to a parameter matching the name
+of your extension as registered in the portal. For instance,
+`https://portal.azure.com?feature.canmodifystamps=true&Microsoft_Azure_DevTestLab=perf` would replace the `{0}` in the
+`uriFormat` string with `perf` and attempt to load the extension from there (making the extension URL
+`https://perf.devtest.ext.azure.com`). Note that you must specify the flag `feature.canmodifystamps=true` in order to
+override the stamp.
 
 <a name="before-deploying-extension-3-understand-extension-runtime-compatibility"></a>
 ### >
 <li>Understand extension runtime compatibility</li>
 <
 
-Extensions do not need to be recompiled and redeployed with every release of the SDK. 
+Extensions do not need to be recompiled and redeployed with every release of the SDK.
 
 **For SDK build 5.0.302.258 and later**
-Extensions are guaranteed 120 days of *runtime* backward compatibility after deployment. This means that an extension which is compiled against the build version 5.0.302.258 and later of the SDK will be valid for 120 days - at which point the extension must be upgraded to continue functioning in production. 
+Extensions are guaranteed 120 days of *runtime* backward compatibility after deployment. This means that an extension
+which is compiled against the build version 5.0.302.258 and later of the SDK will be valid for 120 days - at which point
+the extension must be upgraded to continue functioning in production.
 
 **For SDK build older than 5.0.302.258**
-Extensions are guaranteed 90 days of *runtime* backward compatibility after deployment. This means that an extension which is compiled against the build version older than 5.0.302.258 of the SDK will be valid for 90 days - at which point the extension must be upgraded to continue functioning in production. 
+Extensions are guaranteed 90 days of *runtime* backward compatibility after deployment. This means that an extension
+which is compiled against the build version older than 5.0.302.258 of the SDK will be valid for 90 days - at which point
+the extension must be upgraded to continue functioning in production.
 
-To upgrade an extension, the extension author must download the latest version of the SDK, fix any breaking compile-time changes, and redeploy the extension.
+To upgrade an extension, the extension author must download the latest version of the SDK, fix any breaking compile-time
+changes, and redeploy the extension.
 
 <a name="deploying-extension-ui"></a>
-## Deploying Extension UI
+## Deploying extension UI
 
 [Deploying through Extension Hosting Service](#portalfx-extension-hosting-service)
 
 <a name="deploying-extension-controllers"></a>
-## Deploying Extension Controllers
+## Deploying extension controllers
 
-Each extension is responsible for deploying their controllers and setting up load-balancing across whatever regions make sense.
+Each extension is responsible for deploying their controllers and setting up load-balancing across whatever regions
+make sense.
 
-We recommend that extensions deploy controllers broadly across all regions in an active-active configuration and use a technology, such as [Azure Traffic Manager](https://azure.microsoft.com/en-us/documentation/articles/traffic-manager-overview/) with a "Performance" profile, to direct the user to the server closest to them. This will give users the best experience, especially if the extension communicates with an RP that is also deployed broadly across regions. (Since ARM is deployed in every region, this means that that traffic for a user will stay entirely within one region, reducing latency.)
+We recommend that extensions deploy controllers broadly across all regions in an active-active configuration and use a
+technology, such as [Azure Traffic Manager](https://azure.microsoft.com/en-us/documentation/articles/traffic-manager-overview/)
+with a "Performance" profile, to direct the user to the server closest to them. This will give users the best
+experience, especially if the extension communicates with an RP that is also deployed broadly across regions. (Since ARM
+is deployed in every region, this means that that traffic for a user will stay entirely within one region, reducing
+latency.)
 
 <a name="legacy-diy-deployments"></a>
-## Legacy/ DIY Deployments
+## Legacy/DIY deployments
 
 If you choose to deploy extension UI through legacy / DIY deployments, make sure you understand that
 1.	You will be responsible for deploying to all regions
-1.	You will be responsible for deploying service to every new data center 
-1.	You will be responsible for MDS setup, upgrade, Security pack upgrade and other infrastructure tasks 
+1.	You will be responsible for deploying service to every new data center
+1.	You will be responsible for MDS setup, upgrade, Security pack upgrade and other infrastructure tasks
 1.	If you are planning to use CDN to serve extension UI then understand that when CDN goes down (and they do) then the fallback will be not pleasing to your users.
 1.	You will be responsible for setting up Persistent storage so that users do not see reliability drop during extension deployment
 1.	You will be responsible for setting up infrastructure to rollback in case of live-site issues
@@ -155,7 +189,7 @@ We see much higher latencies and reliability issues when servers are not geo-loc
 
 In order to deploy to all regions:
 1.	Use [Extension Hosting Service](#portalfx-extension-hosting-service) to deploy UI
-1.	Deploy Controllers to all regions 
+1.	Deploy Controllers to all regions
 
 In general, it is best to set up servers in every region.
 That said, there is some flexibility.
