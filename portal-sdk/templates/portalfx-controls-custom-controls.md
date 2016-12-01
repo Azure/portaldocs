@@ -1,11 +1,11 @@
-# Custom controls
+## Custom controls
 
-## IMPORTANT NOTE:
+### IMPORTANT NOTE:
 - This feature is not yet enabled in production environment i.e. you cannot go to production as of now with custom control on your blade. This will enabled soon however, so you can start implmentation work now.
 - As this is a preview feature both 'feature.customcontrols=true' and 'clientOptimizations=bundle' need to be specified in the portal's query string to enable custom controls.
 - Custom controls is not enabled on sovereign\govt clouds. Custom controls feature will not work on these clouds.
 
-## Sections:
+### Sections:
 - [Custom control overview](#custom-control-overview)
 - [Building a custom control](#custom-control-building)
    - [Build your control](#custom-control-build-it)
@@ -18,7 +18,7 @@
 - [Fixed issues not yet in production branch](#custom-control-not-in-prod)
 
 <a name="custom-control-overview"></a>
-## Custom control overview
+### Custom control overview
 
 Today if you want to build an ibiza extenison you are provided with Rich framework built in controls. Sometimes you may have a scenario for richer user experience where you need a custom cotrol.
 In this case today, we give you 2 options: 
@@ -35,7 +35,7 @@ Basically custom controls feature:
 
 
 <a name="custom-control-building"></a>
-## Building a custom control
+### Building a custom control
 
 Building a custom control is can be divided into 3 easy steps:
 1. Build your control
@@ -46,14 +46,14 @@ Building a custom control is can be divided into 3 easy steps:
     Once you have packaged your control, you will consume that control into your extension for having rich customer experience. How to consume your custom control is mentioend [here]()
 
 <a name="custom-control-build-it"></a>
-### Building your control
+#### Building your control
 Develop your control however you like. Once you have a control working on a standalone HTML page or something then the next step is to itegrate it into the portal.
 
 <a name="custom-control-package-control"></a>
-### Package the control in the ibiza framework
+#### Package the control in the ibiza framework
 Once you have a working control there are just a few steps needed to package it in the framework:
 
-#### Implement Custom Controls contract in your controls
+##### Implement Custom Controls contract in your controls
 Create a <Your Control name>.ts file, which should import and implement `Fx/Composition/CustomControl` contracts which are shown below. Your module along with custom control contract will have your control template and control specific functionality. 
 
 ```ts
@@ -81,7 +81,7 @@ Create a <Your Control name>.ts file, which should import and implement `Fx/Comp
     }
 ```
 
-#### Define options contract for Custom Controls 
+##### Define options contract for Custom Controls 
 Once you have defined Custom Control contracts, you will need to create the options for your controls. This is basically the set of options your control will need from Shell when rendered in your extenions. 
 You will create the <Your Control Name>Contracts.d.ts file which will have the options required for your controls. Below shows the example where we pass name as an option:
 ```ts    
@@ -100,7 +100,7 @@ You will create the <Your Control Name>Contracts.d.ts file which will have the o
     }
 ```
 
-#### Define control PDL
+##### Define control PDL
 Once you have defined the options and contract for your controls, next you define is PDL with below fields:
  - `Name` the name of your control
  - `ModuleId` pointer to your control implementation
@@ -126,11 +126,11 @@ Once you have defined the options and contract for your controls, next you defin
 ```
   
 <a name="custom-control-consuming"></a>
-## Consuming a custom control
+### Consuming a custom control
 
 Once you have built your custom control, you can consume the control in yur experience in 3 steps:
 
-#### Define your template blade
+##### Define your template blade
 You need to identify the blade that carries custom controls by setting custom control property to true as shown below:
 
 ```xml
@@ -144,7 +144,7 @@ You need to identify the blade that carries custom controls by setting custom co
 </Definition>
 ```
 
-#### Refer your custom control in template
+##### Refer your custom control in template
 
 You can refer your custom control just like normal pcControl reference.
 
@@ -153,7 +153,7 @@ You can refer your custom control just like normal pcControl reference.
 <div data-bind='pcControl: fileExplorerVM'></div>
 ```
 
-#### In blade ViewModel use control reference to create control view model
+##### In blade ViewModel use control reference to create control view model
 
 ```ts
     this.breadCrumb = ControlReferences.BreadCrumb.createViewModel(container, {
@@ -165,7 +165,7 @@ You can refer your custom control just like normal pcControl reference.
 ```
 
 <a name="custom-control-validation"></a>
-## Making a custom control that participate in validation
+### Making a custom control that participate in validation
 Your scenario may require you to develop a control that you wish to use in forms section of the blade along with other Ibiza form controls. Ibiza has the internal validation patterns for rest of the controls and if you wish that your control should behave 
 similarly you will need to do 2 small changes in your control implmentation:
 
@@ -186,16 +186,15 @@ declare module "<YourExtensionName>/NumericSpinner" {
 ```
 
 <a name="custom-control-advanced"></a>
-## Advanced topics
+### Advanced topics
 
 <a name="custom-control-non-amd-scripts"></a>
-### Requiring non-AMD scripts from your custom control widget
+#### Requiring non-AMD scripts from your custom control widget
 If you're using 3rd party libraries to develop your control you may find the library was not developed to be loaded by RequireJS. You can still use require's config settings to load the file 
 as a dependency of your widget.
 
 <a name="custom-control-known-issues"></a>
-## Known issues
-
+### Known issues
 Currently certain controls do not work with the custom controls infrastructure. You will not be able to use custom controls if your blade contains any of the following. You can use 
 the bugs to track the progress of any fixes:
 
@@ -209,7 +208,7 @@ If you have other comments or find additional issues you can log a bug [here](ht
 or contact shresh\adamab.
 
 <a name="custom-control-not-in-prod"></a>
-## Fixed issues not yet in production branch
+### Custom control issues not yet in fixed in production
 The following fixes are available in MPAC but not the production branch. The best thing to do would be test in MPAC right now but available workarounds are listed below the issue.
 
 - [7474062: [CustomControls] CreateActionBar hits null ref exception in a custom controls blade](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7474062)
@@ -223,3 +222,7 @@ The following fixes are available in MPAC but not the production branch. The bes
 - [6921706: [Custom Controls] Custom controls should receive the calling extension name](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=6921706)
 - [7301109: [Custom Control][Drop Down] Clicking outside the drop down doesn't collapse the drop down](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7301109)
 - [7201412: [Custom Controls] Docked\Validation balloon support for custom controls](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7201412)
+
+Other issues not yet fixed in MPAC/DF:
+
+- [7915036: [Custom Control] Show a better error experience when custom controls are used in an unlocked blade](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7915036)
