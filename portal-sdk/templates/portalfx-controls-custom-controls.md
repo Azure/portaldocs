@@ -15,7 +15,7 @@
 - [Advanced topics](#custom-control-advanced)
   - [Requiring non-AMD scripts from your custom control widget](#custom-control-non-amd-scripts)
 - [Known issues](#custom-control-known-issues)
-- [Fixed issues not yet in production branch](#custom-control-not-in-prod)
+- [Fixed issues not yet fixed](#custom-control-not-yet-fixed)
 
 <a name="custom-control-overview"></a>
 ### Custom control overview
@@ -198,31 +198,15 @@ as a dependency of your widget.
 Currently certain controls do not work with the custom controls infrastructure. You will not be able to use custom controls if your blade contains any of the following. You can use 
 the bugs to track the progress of any fixes:
 
-- (OAuth button)[http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7301218]
-- (File upload control)[http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7300948]
-- (File download control)[http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7301179]
-- (Progress bar)[http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7301223]
+- [OAuth button](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7301218)
+- [File upload control](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7300948)
+- [File download control](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7301179)
+- [Progress bar](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7301223)
+- [Show a better error experience when custom controls are used in an unlocked blade](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7915036)
+- Issues around ProxiedObservablesV2
+  - Use feature flag 'feature.pov2=false' to turn off ProxiedObservablesV2 feature if you hit PO errors
 
 
 If you have other comments or find additional issues you can log a bug [here](http://vstfrd:8080/Azure/RD/AAPT%20-%20Ibiza%20-%20Partner%20Requests/_workItems/create/RDTask?%5BSystem.Title%5D=%5BCustom+Controls%5D+%3CYour+Ask%3E&%5BSystem.Description%5D=%3Cdiv%3E%3Cdiv%3ETeam+Name%3C%2Fdiv%3E%3Cdiv%3EExtension+Contact%3C%2Fdiv%3E%3Cdiv%3E%3Cspan+style%3D%22font-weight%3Abold%3B%22%3E%26lt%3BPUT+YOUR+PRIMARY+CONTACT+HERE%26gt%3B%3C%2Fspan%3E%3C%2Fdiv%3E%3Cdiv%3E%3Cb%3E%3Cbr%3E%3C%2Fb%3E%3C%2Fdiv%3E%3Cdiv%3EIbiza+Contact%3Cdiv%3E%3Cspan+style%3D%22font-weight%3Abold%3B%22%3E%3C%2Fspan%3E%3C%2Fdiv%3E%3C%2Fdiv%3E%3C%2Fdiv%3E%3Cdiv%3E%26lt%3BDescribe+Scenario%26gt%3B%3C%2Fdiv%3E&%5BSystem.Tags%5D=ClickStop2&%5BMicrosoft.VSTS.Common.ActivatedBy%5D=Shrey+Shirwaikar+%3CREDMOND%5Cshresh%3E&%5BMicrosoft.VSTS.Common.Priority%5D=&%5BMicrosoft.VSTS.Common.Triage%5D=Not+Triaged&%5BMicrosoft.VSTS.Scheduling.CompletedWork%5D=&%5BMicrosoft.VSTS.Scheduling.BaselineWork%5D=3&%5BMicrosoft.RD.KeywordSearch%5D=cs2&%5BMicrosoft.Azure.IssueType%5D=Dev+Work&%5BMicrosoft.Azure.WorkStatus%5D=In+Review&%5BMicrosoft.VSTS.Common.BacklogPriority%5D=130&%5BMicrosoft.VSTS.Common.StackRank%5D=2&%5BMicrosoft.Azure.ApprovedDate%5D=Thu+Jul+28+2016+22%3A00%3A50+GMT-0700+(Pacific+Daylight+Time)) 
 or contact shresh\adamab.
 
-<a name="custom-control-not-in-prod"></a>
-### Custom control issues not yet in fixed in production
-The following fixes are available in MPAC but not the production branch. The best thing to do would be test in MPAC right now but available workarounds are listed below the issue.
-
-- [7474062: [CustomControls] CreateActionBar hits null ref exception in a custom controls blade](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7474062)
-  - Use GenericActionBar or FormActionBar instead of CreateActionBar
-- [7602850: [Custom Controls] Have custom control domain mapping done for SDK instal in iisexpress scenario](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7602850)
-  - Config can be updated to empty string as work around
-- [6903952: [Custom Controls] Have extension reqirejs config module mapping when clientOptimization is false.](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=6903952)
-  - You can use bundle option for now
-- Issues around ProxiedObservablesV2
-  - Use feature flag 'feature.pov2=false' to turn off ProxiedObservablesV2 feature
-- [6921706: [Custom Controls] Custom controls should receive the calling extension name](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=6921706)
-- [7301109: [Custom Control][Drop Down] Clicking outside the drop down doesn't collapse the drop down](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7301109)
-- [7201412: [Custom Controls] Docked\Validation balloon support for custom controls](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7201412)
-
-Other issues not yet fixed in MPAC/DF:
-
-- [7915036: [Custom Control] Show a better error experience when custom controls are used in an unlocked blade](http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=7915036)
