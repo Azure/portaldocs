@@ -1,5 +1,3 @@
-<properties title="" pageTitle="Resource moves" description="" authors="flanakin" />
-
 ## Resource moves
 
 Resources can be moved between resource groups or subscriptions in the Properties blade and Essentials (resource summary part). Every resource that can be moved, directly or indirectly, by the ARM `/moveResources` API must have both Properties and Essentials entry points for consistency.
@@ -31,4 +29,21 @@ var resourceSummaryOptions = <MsPortalFx.ViewModels.Parts.ResourceSummary.Option
     },
     staticProperties: properties
 }
+```
+
+Along with essentials and properties blade, resource blade must also have move command.
+If you are not using Move resource PDL command on your resource blade, please use MoveResourceButton on the command/toolbar bar on your resource blade. 
+As we are eventually deprecating PDL support, moving forward, this is the strongly recommended way of adding the move command.
+
+Here's code to add move resource button to the toolbar:
+```ts
+    import MoveResorceButton = require("Fx/Composition/MoveResourceToolbarButton");
+
+    const moveResourceButton = new MoveResorceButton.MoveToolbarButton(container, 
+    { 
+        resourceId: "subscriptions/{subId}/resourcegroups/{resourceGroupId}/providers/{providerId}/{resourcetype}/{resourceName}", 
+        cloudName: "{cloudName}"
+    });
+    const toolBar = new Toolbars.Toolbar(container);
+    toolBar.setItems([moveResourceButton]);
 ```
