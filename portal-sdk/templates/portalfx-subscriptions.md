@@ -2,6 +2,24 @@
 
 ## Subscriptions
 
+### Getting the list of subscriptions
+Most extensions should only need the list of user selected subscriptions. To get the list of selected subscriptions, call the `getSelectedSubscriptions()` function:
+
+```ts
+MsPortalFx.Azure.getSelectedSubscriptions().then((subs: Subscription[]) => {
+    ...
+});
+```
+
+To get all subscriptions, call the `getAllSubscriptions()` function:
+
+```ts
+MsPortalFx.Azure.getAllSubscriptions().then((subs: Subscription[]) => {
+    ...
+});
+```
+
+### Getting subscription details
 Extensions need subscription details to enable the following scenarios:
 
 * Determining if a resource is in a disabled subscription
@@ -9,7 +27,6 @@ Extensions need subscription details to enable the following scenarios:
 * Making a decision based on the quota id
 * Showing resources for all filtered subscriptions
 
-### Getting subscription details
 Most extensions should only need the details of a single subscription for these first 3 scenarios. To get subscription details, call the `getSubscriptionInfo()` function:
 
 ```ts
@@ -28,9 +45,10 @@ Extensions that have subscription resources should use [Browse v2](/documentatio
 ### Subscription filtering on blades and parts
 If you show content across subscriptions, use the following guidelines:
 
+1. On template blades, use a `ResourceFilter` control (see below)
 1. Locked blades should add the `ResourceFilterPart` to the top of their blade (see below)
-2. Unlocked blades should add a subtitle that represents the selected subscriptions and a `Filter` command that includes the subscription filter in a context pane (same as locked blades)
-3. Parts should add a subtitle that represents the selected subscriptions and expose a `Filter` command similar to unlocked blades
+1. Unlocked blades should add a subtitle that represents the selected subscriptions and a `Filter` command that includes the subscription filter in a context pane (same as locked blades)
+1. Parts should add a subtitle that represents the selected subscriptions and expose a `Filter` command similar to unlocked blades
 
 The selected subscription label should be formatted using these rules:
 
@@ -39,6 +57,18 @@ The selected subscription label should be formatted using these rules:
 * All subscriptions: "All subscriptions"
 
 > [WACOM.NOTE] We will provide an API to do the label calculation for you. Stay tuned...
+
+If you have a template blade that shows resources across subscriptions, you can add the `ResourceFilter` control to your blade using a `pcControl` binding and use the observables on the viewmodel on your blade:
+```ts
+  this.resourceFilter = new MsPortalFx.Azure.ResourceFilter.ViewModel(this._container, {
+        actionHandler: this.gridViewModel,
+        showTextFilter: ko_observable(true),
+        showSubscriptionFilter: ko_observable(true),
+        showSubscriptionSummary: ko_observable(false),
+        showTenantLevelSubscriptionSummary: ko_observable(false),
+        textFilterPlaceholder: ko_observable<string>("Search here")
+  });
+```
 
 If you have a locked blade that shows resources across subscriptions, you can add the `ResourceFilterPart` from Hubs and bind its outputs to your part's inputs:
 
