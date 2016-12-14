@@ -1,13 +1,12 @@
-﻿<properties title="" pageTitle="Building create experiences" description="" authors="nickharris" />
+﻿<properties title="" pageTitle="Building create experiences" description="" authors="nickharris, paparsad, alshaker" />
 
 ## Building create experiences
 
-The Azure portal offers 3 ways to build a Create form:
+The Azure portal offers 3 ways to build a create form:
 
 1. *[Deploy to Azure](/documentation/articles/portalfx-create-deploytoazure)*
 
-    There are simple forms auto-generated from an ARM template with very basic controls and validation. Deploy to Azure is the quickest way to build a Create form and even integrate with the Marketplace,
-    but is very limited in available validation and controls.
+    There are simple forms auto-generated from an ARM template with very basic controls and validation. Deploy to Azure is the quickest way to build a Create form and even integrate with the Marketplace, but is very limited in available validation and controls.
 
     Use [Deploy to Azure](/documentation/articles/portalfx-create-deploytoazure) for [community templates](https://azure.microsoft.com/documentation/templates) and simple forms.
 
@@ -17,66 +16,152 @@ The Azure portal offers 3 ways to build a Create form:
 
     Use [Solution templates](https://github.com/Azure/azure-marketplace/wiki) for IaaS-focused ARM templates.
 
-3. *Custom form*
+3. *Custom create forms*
 
-    These are fully customized form built using TypeScript in an Azure portal extension. Most teams build custom Create forms for full flexibility in the UI and validation. This requires developing an extension.
+    These are fully customized forms built using TypeScript in an Azure portal extension. Most teams build custom create forms for full flexibility in the UI and validation. This requires developing an extension.
 
-### Create a template blade
+## Building custom create forms
 
-#### Create Marketplace package (aka Gallery package)
+### Create Marketplace package (aka Gallery package)
+The Marketplace provides a categorized collection of packages which can be created in the portal. Publishing your package to the Marketplace is simple:
 
-The Marketplace provides a categorized collection of packages which can be created in the portal. Publishing your
-package to the Marketplace is simple:
+1. Create a package and publish it to the DF Marketplace yourself, if applicable. Learn more about [publishing packages to the Marketplace](/documentation/sections/gallery).
+1. Side-load your extension to test it locally.
+1. Set a "hide key" before testing in production.
+1. Send the package to the Marketplace team to publish it for production.
+1. Notify the Marketplace team when you're ready to go live.
 
-1. Create a package
-1. Side-load your extension to test it locally
-1. Publish it to the DF Marketplace yourself, if applicable
-1. Set a "hide key" before testing in production
-1. Send the package to the Marketplace team to publish it for production
-1. Notify the Marketplace team when you're ready to go live
-
-Note that the +New menu is curated and can change at any time, based on C+E leadership business goals. Ensure
-documentation, demos, and tests use [Create from Browse](/documentation/articles/portalfx-browse#create) or
-[deep-links](/documentation/articles/portalfx-links) as the entry point.
+Note that the **+New** menu is curated and can change at any time based on C+E leadership business goals. Ensure documentation, demos, and tests use [Create from Browse](/documentation/articles/portalfx-browse#create) or [deep-links](/documentation/articles/portalfx-links) as the entry point.
 
 ![The +New menu][plus-new]
 
-Learn more about [publishing packages to the Marketplace](/documentation/sections/gallery).
-
 ![The Marketplace][marketplace]
 
+### Design for a single blade
+All create experiences should be designed for a single blade. Start by building a template blade. Always prefer dropdowns over pickers (form fields that allow selecting items from a list in a child blade) and avoid using [selectors](#controls-selectors-and-pickers) (form fields that open child blades).
 
-#### Handling provider callbacks
+Email [ibizafxpm](mailto:ibizafxpm@microsoft.com?subject=Full-screen Create) if you have any questions about the current state of full-screen create experiences.
 
+### Add a provider component
+The [parameter collection framework](/documentation/articles/portalfx-parameter-collection-overview) is platform that enables you to build UX to collect data from the user. If you're not familiar with collectors and providers, now is a good time to read more about it.
 
-#### Handling provisioner callbacks
+In most cases, your blade will be launched from the Marketplace or a toolbar command (like Create from Browse). They will act as the collectors. Consequently, your blade will be expected to act as a provider. Here's what a provider looks like:
 
-The parameter collection framework is the piece that ties all the above components together. At the core, this framework
-consists of two types of entities: Providers and Collectors. As their names suggest, providers implement an interface
-that allows them to provide data to collectors in a well understood format. Similarly, collectors implement an interface
-that allows them to collect this data from the providers.
+```ts
+// Instantiate a parameter provider view model.
+this.parameterProvider = new MsPortalFx.ViewModels.ParameterProvider<DataModel, DataModel>(container, {
+    // This is where we receive the initial data defined in the UI definition file uploaded
+    // with the gallery package. We'll use the data to seed the edit scope. This is the time
+    // do do any necessary data transformations or account for incomplete inputs.
+    mapIncomingDataForEditScope: (incoming) => {
+        var dataModel: DataModel = {
+            someProperty: ko.observable(incoming.someProperty || "")
+        };
+        return dataModel;
+    },
+    // This is where we transform the edit scope data to outputs. We're just returning the
+    // data as it is, so no work needed here.
+    mapOutgoingDataForCollector: (outgoing) => {
+        return outgoing;
+    }
+});
+```
 
-Learn more about [parameter collectors](/documentation/articles/portalfx-parameter-collection-overview).
+### Add a provisioner component
+A provisioner is another component in the [parameter collection framework](/documentation/articles/portalfx-parameter-collection-overview). If you're creating your resource by deploying a single template to ARM, you need to use an ARM provisioner. Otherwise, you need to use a regular provisioner to implement your custom deployment process.
 
+1. ARM provisioning:
+(Refer to the full EngineV3 sample to see the full create blade)
 
-#### Build form
+```ts
+// Instantiate a ARM provisioner view model.
+this.armProvisioner = new AzureResourceManager.Provisioner<DataModel>(container, initialState, {
+    // This is where we supply the ARM provisioner with the template deployment options
+    // required by the deployment operation.
+    supplyTemplateDeploymentOptions: (data, mode) => {
+        // Fill out the template deployment options.
+        var templateDeploymentOptions: AzureResourceManager.TemplateDeploymentOptions = {
+            subscriptionId: subscriptionId,
+            resourceGroupName: resourceGroupName,
+            resourceGroupLocation: resourceGroupLocation,
+            parameters: {
+                someProperty: data.someProperty()
+            },
+            deploymentName: galleryCreateOptions.deploymentName,
+            resourceProviders: [resourceProvider],
+            resourceId: resourceIdFormattedString,
+            // For the deployment template, you can either pass a link to the template (the URI of the
+            // template uploaded to the gallery service), or the actual JSON of the template (inline).
+            // Since gallery package for this sample is on your local box (under Local Development),
+            // we can't send ARM a link to template. We'll use inline JSON instead. This method returns
+            // the exact same template as the one in the package. Once your gallery package is uploaded
+            // to the gallery service, you can reference it as shown on the second line.
+            templateJson: this._getTemplateJson(),
+            // Or -> templateLinkUri: galleryCreateOptions.deploymentTemplateFileUris["TemplateName"],
+        };
+        return Q(templateDeploymentOptions);
+    },
 
-Use built-in form fields, like TextField and DropDown, to build your form the way you want. Use the built-in EditScope
-integration to manage changes and warn customers if they leave the form. Learn more about
-[building forms](/documentation/articles/portalfx-forms).
+    // Optional -> supplyStartboardInfo: (data: DataModel) => ParameterCollection.StartboardInfo;
+    // You can implement this callback if you want to supply different provisioning startboard
+    // info. If not implemented, the provisioner will use the info defined in the UI definition
+    // file in the gallery package. This is what we're doing here (preferable).
 
-#### Design for a single blade
-All Create experiences should be designed for a single blade. Always prefer dropdowns over pickers (form fields that
-allow selecting items from a list in a child blade) and avoid using [selectors](#controls-selectors-and-pickers)
-(form fields that open child blades).
+    // Supplying an action bar and a parameter provider allows for automatic provisioning.
+    actionBar: this.actionBar,
+    parameterProvider: this.parameterProvider,
 
-Email [ibizafxpm](mailto:ibizafxpm@microsoft.com?subject=Full-screen Create) if you have any questions about the current
-state of full-screen Create experiences.
+    // Add create features such as opting in for ARM preflight validation. You can OR multiple
+    // features together.
+    createFeatures: CreateFeatures.EnableArmValidation
+});
+```
 
-#### Standard ARM fields
-All ARM subscription resources require a subscription, resource group, location and pricing dropdown. The portal offers built-in controls
-for each of these. Refer to the EngineV3 Create sample
-(`SamplesExtension\Extension\Client\Create\EngineV3\ViewModels\CreateEngineBladeViewModel.ts`) for a working example.
+2. Custom provisioning:
+(Refer to the full RobotV3 sample to see the full create blade)
+```ts
+// Instantiate a provisioner view model.
+this.provisioner = new ParameterCollection.Provisioner<DataModel>(container, {
+    // This is where we supply the provisioner with the provisioning operation.
+    supplyProvisioningPromise: (data) => {
+        return this._dataContext.createMyResource(data).then(() => {
+            // Raise a notification, if needed.
+            // MsPortalFx.UI.NotificationManager.create(...).raise(...);
+
+            // Resolve the final promise with the container model for the startboard part.
+            // This is an object that contains the inputs to that part.
+            return {
+                // In this case, the startboard has one input called "id" (which is also
+                // the "startboardPartKeyId" on the startboardInfo object), and takes the
+                // name of the robot as the value.
+                id: data.someProperty()
+            };
+        });
+    },
+
+    // Implement this callback if you want to supply different provisioning startboard info.
+    supplyStartboardInfo: (data) => {
+        return robotStartboardInfo;
+    },
+
+    // Supplying an action bar and a parameter provider allows for automatic provisioning.
+    actionBar: this.actionBar,
+    parameterProvider: this.parameterProvider
+});
+```
+
+### Build your form
+Use built-in form fields, like TextField and DropDown, to build your form the way you want. Use the built-in EditScope integration to manage changes and warn customers if they leave the form.
+
+```ts
+// The parameter provider takes care of instantiating and initializing an edit scope for you,
+// so all we need to do is point our form's edit scope to the parameter provider's edit scope.
+this.editScope = this.parameterProvider.editScope;
+```
+Learn more about [building forms](/documentation/articles/portalfx-forms).
+
+### Standard ARM fields
+All ARM subscription resources require a subscription, resource group, location and pricing dropdown. The portal offers built-in controls for each of these. Refer to the EngineV3 Create sample (`SamplesExtension\Extension\Client\Create\EngineV3\ViewModels\CreateEngineBladeViewModel.ts`) for a working example.
 
 ##### Subscriptions dropdown
 ```ts
@@ -193,6 +278,34 @@ this.specDropDown = new Specs.DropDown(container, {
 });
 
 ```
+#### Additional/custom validation to the ARM fields
+Sometimes you need to add extra validation on any of the previous ARM fields. For instance, you might want to check with you RP/backend to make sure that the selected location is available in certain cirqumstances. To do that, just add a custom validator like you would do with any regular form field. Exmaple:
+
+```ts
+// The locations drop down.
+var locationCustomValidation = new MsPortalFx.ViewModels.CustomValidation(
+    validationMessage,
+    (value) => {
+        return this._dataContext.validateLocation(value).then((isValid) => {
+            // Resolve with undefined if 'value' is a valid selection and with an error message otherwise.
+            return MsPortalFx.ViewModels.getValidationResult(!isValid && validationMessage || undefined);
+        }, (error) => {
+            // Make sure your custom validation never throws. Catch the error, log the unexpected failure
+            // so you can investigate later, and fail open.
+            logError(...);
+            return MsPortalFx.ViewModels.getValidationResult();
+        });
+    });
+var locationsDropDownOptions: LocationsDropDown.Options = {
+    ...,
+    validations: ko.observableArray<MsPortalFx.ViewModels.Validation>([
+        new MsPortalFx.ViewModels.RequiredValidation(ClientResources.selectLocation),
+        locationCustomValidation // Add your custom validation here.
+    ])
+    ...
+};
+this.locationsDropDown = new LocationsDropDown(container, locationsDropDownOptions);
+```
 
 #### Wizards
 The Azure portal has a **legacy pattern** for wizard blades, however customer feedback and usability has proven the design
@@ -244,9 +357,7 @@ on a separate solution for wizards.
 Email [ibizafxpm](mailto:ibizafxpm@microsoft.com?subject=Create wizards + automation options)
 if you have any questions about wizard support.
 
-
 ### Testing
-
 Due to the importance of Create and how critical validation is, all Create forms should have automated testing to help
 avoid regressions and ensure the highest possible quality for your customers. Refer to [testing guidance](/documentation/articles/portalfx-test)
 for more information on building tests for your form.
