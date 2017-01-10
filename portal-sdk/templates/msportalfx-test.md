@@ -68,7 +68,7 @@ MsPortalFx-Test is an end-to-end test framework that runs tests against the Micr
 		cd e2etests    	
 		npm install msportalfx-test --no-optional
 
-1. The msportalfx-test module comes with useful TypeScript definitions. To make them available to your tests, create a directory named *typings* in your e2etests directory and a *msportalfx-test* directory within typings. Then copy the **msportalfx-test.d.ts** file from *\node_modules\msportalfx-test\typescript* to e2etests\typings\msportalfx-test.
+1. The msportalfx-test module comes with useful TypeScript definitions and its dependencies. To make them available to your tests, create a directory named *typings* in your e2etests directory and a *msportalfx-test* directory within typings. Then copy the **msportalfx-test.d.ts** file from *\node_modules\msportalfx-test\typescript* to e2etests\typings\msportalfx-test.  Then copy all other definition files in the *\node_modules\msportalfx-test\typescript* folder to their own correspondingly named folder under the *typings* folder.
 
 1. The msportalfx-test TypeScript definitions relies on a couple other third party definitions.To grab them first install the [tsd Node module](https://www.npmjs.com/package/tsd) globally:
 
