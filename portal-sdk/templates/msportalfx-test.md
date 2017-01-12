@@ -51,11 +51,11 @@ MsPortalFx-Test is an end-to-end test framework that runs tests against the Micr
 <a name="msportalfx-test-getting-started-installation"></a>
 ### Installation
 
-1. Install [Node.js](https://nodejs.org) if you have not done so. This will also install npm, which is the package manager for Node.js.  We recommend either using the LTS version or 5.1 for Visual Studio debugging.
+1. Install [Node.js](https://nodejs.org) if you have not done so. This will also install npm, which is the package manager for Node.js.  We have only verified support for LTS Node versions 4.5 and 5.1 which can be found in the "previous downloads" section.  Newer versions of Node are known to have compilation errors.  
 1. Install [Node Tools for Visual Studio](https://www.visualstudio.com/en-us/features/node-js-vs.aspx)
 1. Install [TypeScript](http://www.typescriptlang.org/) 1.8.10 or greater.
 1. Verify that your:
-    - node version is v4.5.0 or greater using `node -v`
+    - node version is v4.5 or v5.1 using `node -v`
     - npm version is 3.10.6 or greater using `npm -v`.  To update npm version use `npm install npm -g`
     - tsc version is 1.8.10 or greater using tsc -v.
 
@@ -106,6 +106,7 @@ Now, create a **portaltests.ts** file in your e2etests directory and paste the f
 
 import assert = require('assert');
 import testFx = require('MsPortalFx-Test');
+import nconf = require('nconf');
 import until = testFx.until;
 
 describe('Cloud Service Tests', function () {
