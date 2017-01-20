@@ -69,6 +69,7 @@
 * [Debugging](#debugging)
     * [Debugging extension load failures](#debugging-debugging-extension-load-failures)
     * [Testing in production](#debugging-testing-in-production)
+    * [Handling obsolete bundles](#debugging-handling-obsolete-bundles)
     * [Marking automated tests as test/synthetic traffic](#debugging-marking-automated-tests-as-test-synthetic-traffic)
 * [Other](#other)
     * [PDL Binding Quick Reference](#other-pdl-binding-quick-reference)
@@ -12366,7 +12367,8 @@ To avoid this being a phishing risk, we enforce that your extension must be host
   //use this if you want the extension to be registered only for the current portal load. 
   MsPortalImpl.Extension.registerTestExtension({ name: "YourExtensionName", uri: "https://someserver:59344" }, true);
 ```
-  
+
+
 * Navigate to [https://portal.azure.com?feature.canmodifyextensions=true&clientOptimizations=false](https://portal.azure.com?feature.canmodifyextensions=true&clientOptimizations=false)
 
   * For other useful switches, please refer to the [debugging guide](#portalfx-debugging)
@@ -12374,6 +12376,29 @@ To avoid this being a phishing risk, we enforce that your extension must be host
 The registered extension will be saved to user settings, and available in future sessions. When using the portal in this mode, you will see a banner letting you know the state of the configured extensions has been changed:
 
 ![Local extensions](../media/portalfx-testinprod/localExtensions.png)
+
+<a name="debugging-handling-obsolete-bundles"></a>
+## Handling obsolete bundles
+
+If you're using deprecated features that have been moved to obsolete script
+bundles, then you need to specify the obsoleteBundlesBitmask flag as well. 
+
+```ts
+  MsPortalImpl.Extension.registerTestExtension({
+      name: "YourExtensionName",
+      uri: "https://someserver:59344",
+      obsoleteBundlesBitmask: 1 // or the relevant value as appropriate.
+  });
+```
+
+Current list of obsoleted bundles:
+Definition file | flag | Bundle description
+--------------- | ---- | ------------------
+ Obsolete0.d.ts | 1    | Parameter collector V1/V2
+ Obsolete1.d.ts | 2    | CsmTopology control
+
+ So, for example if you're using Parameter collector V1/V2, specify 1. If you're
+ using both parameter collector V1/V2 and CsmTopology control, specify 3 (1 + 2). 
 
 <a name="debugging-marking-automated-tests-as-test-synthetic-traffic"></a>
 ## Marking automated tests as test/synthetic traffic

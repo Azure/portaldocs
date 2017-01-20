@@ -48,13 +48,14 @@ Comparison of test-frameworks:
 - Test Execution Speed: typescript is 20% faster
 - Distributed independently from SDK: Both
 - Open Source contribution Model: Actively working on moving Typescript based test-fx to open source contribution model. We are investigating dev work to move C# based test-fx to open source contribution Model.
+
  <h1 name="portalfx-test"></h1>
  #  Portal Test Framework
 
 Please use the following links for info on how to use the Portal Test Framework:
 
  <h1 name="portalfx-testing-move-cstestfx"></h1>
- ## NOTICE: Changes to C# Test Framework nuget
+ ## NOTICE: Changes to C# Test Framework NuGet
 
 <a name="choosing-the-right-test-framework-what"></a>
 ### What
@@ -62,18 +63,35 @@ The Ibiza Portal’s C# Test Framework is being moved to a separate repository. 
 
 <a name="choosing-the-right-test-framework-when"></a>
 ### When
-The new repository is already available for you to enlist into now.   An email will be sent when the Microsoft.Portal.TestFramework nuget contains the changes.
+The new repository is already available for you to enlist into now.   An email will be sent when the Microsoft.Portal.TestFramework NuGet contains the changes.
 
 <a name="choosing-the-right-test-framework-getting-the-new-test-framework"></a>
 ### Getting the new test framework:
-If you are currently using the [Microsoft.Portal.TestFramework NuGet](https://msazure.visualstudio.com/DefaultCollection/One/_apps/hub/ms.feed.feed-hub?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.testframework&packageVersion=5.0.302.542&_a=view) (recommended), then there should be minimal changes required.  Most likely you will just need to update your NuGet version and it should pull down the new dependencies.  If you did any custom copying of dlls then please note that some unnecessary DLLs have been removed.  The Microsoft.Portal.TestFramework nuget will continue to be tied with Portal releases and will stamped with the same version as the portal framework it was built with.
+If you are currently using the [Microsoft.Portal.TestFramework NuGet](https://msazure.visualstudio.com/DefaultCollection/One/_apps/hub/ms.feed.feed-hub?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.testframework&packageVersion=5.0.302.542&_a=view) (recommended), then there should be minimal changes required.  
 
-If you wish to pick up the absolute latest Test Framework bits, a nuget package called [Microsoft.Portal.TestFramework.CSharp](https://msazure.visualstudio.com/DefaultCollection/One/_apps/hub/ms.feed.feed-hub?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.testframework.csharp&packageVersion=1.0.8.8&_a=view) (not the same as Microsoft.Portal.TestFramework) is available via the [MsAzure Official feed](https://msazure.pkgs.visualstudio.com/_packaging/Official/nuget/v3/index.json) and [wanuget official](http://wanuget/Official/nuget).
-This package only contains the necessary DLLs for building the test framework, not running it.  You will need include some additional Portal framework DLLs (put them in the same directory as the running tests) in order to properly run tests (these DLLs are automatically included in the Microsoft.Portal.TestFramework nuget).  The specific DLLs are listed in the Microsoft.Portal.TestFramework.CSharp’s readme.txt file.  
+If you are using Visual Studio/NuGet then the dependencies should automatically be pulled down by just referencing Microsoft.Portal.TestFramework NuGet package.  You may need to update your reference paths as some of the DLLs (eg Microsoft.Portal.TestFramework.Core.dll) have moved to a dependent package (which should be included automatically).
+
+If you are using the a custom build environment that requires that explicit listing of the dependent packages (eg internal Microsoft CoreXt), please see the list of known package dependencies:
+* AzureUX.UserManagement.Client
+* Microsoft.Portal.TestFramework.CSharp
+* Microsoft.AspNet.WebApi.Client
+* Newtonsoft.Json
+* Selenium.WebDriver
+* Selenium.Support
+* WebDriver.ChromeDriver.win32 (if using Chrome, recommended)
+* WebDriver.IEDriverServer.win32 (if using IE11, note only limited support is available for this)
+
+If you see issues, please verify that the correct versions for the matching TestFramework NuGet package are being used.
+
+While we try to keep the package dependency list up to date, the best way to figure out the dependencies (and their versions) is to use NuGet to install the package and see what dependencies it includes.  If you want to manually figure out the dependency list, you can look at the Microsoft.Portal.TestFramework's nuspec file and follow its dependencies nuspec files which can be found in their corresponding nupkg.
+
+If you wish to pick up the absolute latest Test Framework bits, the NuGet package called [Microsoft.Portal.TestFramework.CSharp](https://msazure.visualstudio.com/DefaultCollection/One/_apps/hub/ms.feed.feed-hub?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.testframework.csharp&packageVersion=1.0.8.8&_a=view) (not the same as Microsoft.Portal.TestFramework) is available via the [MsAzure Official feed](https://msazure.pkgs.visualstudio.com/_packaging/Official/NuGet/v3/index.json) and [waNuGet official](http://waNuGet/Official/NuGet).
+This package only contains the necessary DLLs for building the test framework, not running it.  There are additional runtime dependencies on Portal framework DLLs (put them in the same directory as the running tests) in order to properly run tests (these DLLs are automatically included in the Microsoft.Portal.TestFramework NuGet).  The specific DLLs are listed in the Microsoft.Portal.TestFramework.CSharp’s readme.txt file.  
 
 <a name="choosing-the-right-test-framework-viewing-the-source-code-and-contributing-back"></a>
 ### Viewing the source code and contributing back
 If you wish to view the source code and possibly contribute fixes back to the Test Framework then please see [the contribution article](#portalfx-testing-contributing).
+
 
  <h1 name="portalfx-testing-ui-test-cases"></h1>
  ## Overview
@@ -89,7 +107,7 @@ To create a test project that can use the Portal Test Framwork:
 3. If your test cases involve the Azure Marketplace, also install the Microsoft.Portal.TestFramework.MarketplaceUtilities package from [here](https://msazure.visualstudio.com/DefaultCollection/One/_apps/hub/ms.feed.feed-hub?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.testframework.marketplaceutilities), which contains Selenium classes for elements in the Azure Marketplace.
 4. Add an app.config file to your test project and define the basic Test Framework settings under appSettings. For example:
 
-    ```xml
+```xml
 
 <appSettings>
   <!-- Browser type. "Chrome", "IE" -->
@@ -113,10 +131,11 @@ To create a test project that can use the Portal Test Framwork:
 
 5. Add a new Unit Test class and start writing your test case
 
+<a name="choosing-the-right-test-framework-navigating-to-the-portal"></a>
 ### Navigating to the Portal
 To navigate to the Portal, you first must supply the Portal's uri.  We recommend setting the value in the app.config file as shown above.  Once you have the Portal uri, you can use the **WebDriverFactory.Create** method to create an instance of the WebDriver object and then use the **PortalAuthentication** class to login, navigate to the Portal in the browser.
 
-    ```csharp
+```csharp
 
 // Get the specified Portal Uri from the configuration file
 var portalUri = new Uri(ConfigurationManager.AppSettings["PortalUri"]);
@@ -148,7 +167,7 @@ Please note that multi factor authentication (MFA) is not supported, you must us
 ### Side Loading An Extension via Test Framework
 The Portal provides options for side loading your extension for testing.  If you wish to side load your extension (either a localhost or deployed one) you can set the appropriate query strings and execute the registerTestExtension function for deployed extensions.  For a localhost extension you can just set a query string.  See (Testing in Production)[#Testing in production] for details.
 
-    ```csharp
+```csharp
 
 // Sign into the portal
 portalAuth.SignInAndSkipPostValidation(userName: "", /** The account login to use.  Note Multi Factor Authentication (MFA) is not supported, you must use an account that does not require MFA **/
@@ -174,7 +193,7 @@ portal = Portal.FindPortal(webDriver, false);
 
 Finally, you should dispose the WebDriver to cleanup:
 
-    ```csharp
+```csharp
 
 // Clean up the webdriver after
 webDriver.Dispose();
@@ -194,7 +213,7 @@ While the test framework does not provide any support for managing login credent
 
 <a name="choosing-the-right-test-framework-full-sample-code"></a>
 ### Full Sample Code
-    ﻿//------------------------------------------------------------
+﻿//------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
@@ -259,6 +278,7 @@ namespace DocSampleTest
         }
     }
 }
+
 
  <h1 name="portalfx-testing-parts-and-blades"></h1>
  <properties title="" pageTitle="Testing Parts and Blades" description="" authors="" />
@@ -390,6 +410,7 @@ namespace SamplesExtensionTests
 }
 
 ```
+
  <h1 name="portalfx-testing-filling-forms"></h1>
  <properties title="" pageTitle="Testing: Filling Out Forms" description="" authors="" />
 
@@ -568,6 +589,7 @@ namespace SamplesExtensionTests
     }
 }
 ```
+
  <h1 name="portalfx-testing-using-commands"></h1>
  <properties title="" pageTitle="Testing Commands" description="" authors="" />
 
@@ -807,6 +829,7 @@ namespace SamplesExtensionTests
 }
 
 ```
+
  <h1 name="portalfx-testing-taking-screenshots"></h1>
  <properties title="" pageTitle="Taking Screenshots while Testings" description="" authors="" />
 
@@ -906,6 +929,7 @@ namespace SamplesExtensionTests
     }
 }
 ```
+
  <h1 name="portalfx-loading-a-subset-of-extensions"></h1>
  <properties title="" pageTitle="Loading a subset extensions" description="" authors="madjos,nickharris" />
 
@@ -923,6 +947,7 @@ Usage:
 - This will enable hubs (which almost everyone needs).
 - This will enable the particular extension you want to test. 
 - You can add multiple like the HubsExtension=true and MyOtherExtension=true if you want to test other extensions.
+
 
  <h1 name="portalfx-testing-best-practices"></h1>
  <properties title="" pageTitle="Testing Best Practices" description="" authors="" />
@@ -1036,6 +1061,7 @@ grid.FindElements(By.CssSelector("[aria-selected=true]"))
 
 If you think the element you found would be a useful abstraction, feel free to contribute it back to the test framework!
 
+
  <h1 name="portalfx-testing-contributing"></h1>
  ## Contributing
 
@@ -1065,6 +1091,7 @@ To contribute back to the Test Framework, please submit a [pull request](https:/
 <a name="choosing-the-right-test-framework-testing-best-practices-troubleshooting"></a>
 ### Troubleshooting
 If you run into issues, please search the [internal Microsoft stack overflow](http://stackoverflow.microsoft.com) first.  If you are unable to find an answer, ask a new question and tag it with "ibiza-test".
+
 
  <h1 name="msportalfx-test"></h1>
  <a name="msportalfx-test"></a>
@@ -1126,11 +1153,11 @@ MsPortalFx-Test is an end-to-end test framework that runs tests against the Micr
 <a name="msportalfx-test-getting-started-installation"></a>
 ### Installation
 
-1. Install [Node.js](https://nodejs.org) if you have not done so. This will also install npm, which is the package manager for Node.js.  We recommend either using the LTS version or 5.1 for Visual Studio debugging.
+1. Install [Node.js](https://nodejs.org) if you have not done so. This will also install npm, which is the package manager for Node.js.  We have only verified support for LTS Node versions 4.5 and 5.1 which can be found in the "previous downloads" section.  Newer versions of Node are known to have compilation errors.  
 1. Install [Node Tools for Visual Studio](https://www.visualstudio.com/en-us/features/node-js-vs.aspx)
 1. Install [TypeScript](http://www.typescriptlang.org/) 1.8.10 or greater.
 1. Verify that your:
-    - node version is v4.5.0 or greater using `node -v`
+    - node version is v4.5 or v5.1 using `node -v`
     - npm version is 3.10.6 or greater using `npm -v`.  To update npm version use `npm install npm -g`
     - tsc version is 1.8.10 or greater using tsc -v.
 
@@ -1143,7 +1170,7 @@ MsPortalFx-Test is an end-to-end test framework that runs tests against the Micr
 		cd e2etests    	
 		npm install msportalfx-test --no-optional
 
-1. The msportalfx-test module comes with useful TypeScript definitions. To make them available to your tests, create a directory named *typings* in your e2etests directory and a *msportalfx-test* directory within typings. Then copy the **msportalfx-test.d.ts** file from *\node_modules\msportalfx-test\typescript* to e2etests\typings\msportalfx-test.
+1. The msportalfx-test module comes with useful TypeScript definitions and its dependencies. To make them available to your tests, create a directory named *typings* in your e2etests directory and a *msportalfx-test* directory within typings. Then copy the **msportalfx-test.d.ts** file from *\node_modules\msportalfx-test\typescript* to e2etests\typings\msportalfx-test.  Then copy all other definition files in the *\node_modules\msportalfx-test\typescript* folder to their own correspondingly named folder under the *typings* folder.
 
 1. The msportalfx-test TypeScript definitions relies on a couple other third party definitions.To grab them first install the [tsd Node module](https://www.npmjs.com/package/tsd) globally:
 
@@ -1182,6 +1209,7 @@ Now, create a **portaltests.ts** file in your e2etests directory and paste the f
 
 import assert = require('assert');
 import testFx = require('MsPortalFx-Test');
+import nconf = require('nconf');
 import until = testFx.until;
 
 describe('Cloud Service Tests', function () {
