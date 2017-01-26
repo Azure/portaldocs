@@ -37,12 +37,11 @@ As we are eventually deprecating PDL support, moving forward, this is the strong
 
 Here's code to add move resource button to the toolbar:
 ```ts
-    import MoveResorceButton = require("Fx/Composition/MoveResourceToolbarButton");
+    import MoveResorceButton = require("Fx/Controls/Toolbar/MoveResourceToolbarButton");
 
-    const moveResourceButton = new MoveResorceButton.MoveToolbarButton(container, 
+    const moveResourceButton = new MoveResorceButton.ViewModel(container, 
     { 
-        resourceId: "subscriptions/{subId}/resourcegroups/{resourceGroupId}/providers/{providerId}/{resourcetype}/{resourceName}", 
-        cloudName: "{cloudName}"
+        resourceId: "subscriptions/{subId}/resourcegroups/{resourceGroupId}/providers/{providerId}/{resourcetype}/{resourceName}"
     });
     const toolBar = new Toolbars.Toolbar(container);
     toolBar.setItems([moveResourceButton]);
