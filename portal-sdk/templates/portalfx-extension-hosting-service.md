@@ -241,7 +241,7 @@ To test an extension loaded from the Hosting Service before it is live in Produc
 
 ##### Side-loading the extension
 Any version of the extension deployed to the hosting service can then be loaded by using the following URL:
-https://portal.azure.com?feature.canmodifyextensions=true&my_extension_name=FriendlyName2
+https://portal.azure.com?feature.canmodifystamps=true&my_extension_name=FriendlyName2
 
 where FriendlyName2 can be replaced by any friendly name of the extension that is not yet active
 
