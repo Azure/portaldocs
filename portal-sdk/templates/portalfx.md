@@ -16,7 +16,7 @@ Sounds interesting. Want to become a partner?   [Onboard Ibiza](/portal-sdk/gene
 1. [Deploy](/portal-sdk/generated/index-portalfx-extension-deployment.md)
 1. [Localization / Globalization](/portal-sdk/generated/index-portalfx-extension-localization-globalization.md)
 1. [Accessibility](/portal-sdk/generated/index-portalfx-extension-accessibility.md)
-1. [Sharing PDE](/portal-sdk/generated/index-portalfx-extension-deployment.md)
+1. [Sharing PDE](/portal-sdk/generated/index-portalfx-extension-sharing-pde.md)
 
 Feeling Lost? Reach out to Community: [Stackoverflow](/portal-sdk/generated/index-portalfx-extension-QnA.md)
 
