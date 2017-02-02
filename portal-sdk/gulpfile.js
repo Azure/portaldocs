@@ -209,8 +209,8 @@ function writeDocsToFile(aggregate, outputDir){
     var downloadsDoc = fs.createWriteStream(path.resolve(outputDir, "downloads.md"));
     const latestSdkVersion = Object.keys(aggregate)[0];
 
-    releaseNotesFile.write(util.format("# Release Notes from %s", fourMonthsAgo.toLocaleDateString("en-US")));
-    breakingChangesFile.write(util.format("# Breaking Changes from %s \n* Additional Q&A about breaking changes can be found [here](./breaking-changes.md) \n* To ask a question about breaking changes [use this](https://aka.ms/ask/ibiza-breaking-change)  \n", fourMonthsAgo.toLocaleDateString("en-US")));
+    releaseNotesFile.write(util.format("# Release Notes since %s", fourMonthsAgo.toLocaleDateString("en-US")));
+    breakingChangesFile.write(util.format("# Breaking Changes since %s \n* Additional Q&A about breaking changes can be found [here](./breaking-changes.md) \n* To ask a question about breaking changes [use this](https://aka.ms/ask/ibiza-breaking-change)  \n", fourMonthsAgo.toLocaleDateString("en-US")));
     downloadsDoc.write(util.format("# Download Portal SDK \n Download Latest Release: <a href=\"%s\">%s</a>\n<table><tr><th>Download</th><th>Detail</th><th>Breaking Changes</th></tr>", aggregate[latestSdkVersion].downloadUrl, latestSdkVersion));
 
     Object.keys(aggregate).forEach(function (version) {
