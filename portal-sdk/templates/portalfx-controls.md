@@ -31,7 +31,8 @@ To learn more about any of our controls, click on any of the links below.
 - [Time Picker](http://aka.ms/portalfx/samples#blade/SamplesExtension/TimePickerInstructions/selectedItem/TimePickerInstructions/selectedValue/TimePickerInstructions)
 
 ## Drop downs
-- [Drop Down](http://aka.ms/portalfx/samples#blade/SamplesExtension/DropDownInstructions/selectedItem/DropDownInstructions/selectedValue/DropDownInstructions)
+- Drop Down
+	{"gitdown": "include-file", "file": "../templates/portalfx-controls-dropdown.md"}
 
 ## Editors
 
