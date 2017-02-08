@@ -21,7 +21,7 @@ issues caused by anti-patterns and inconsistencies that block usability, perform
     - Timelines (preview, GA)
     - Summary of the service and target scenarios
 
-2. **Business model review** (Stakeholders: [Brian Hillger’s team, Stacey Ellingson](mailto:ibiza-bmr@microsoft.com?subject=Azure%20Business%20model%20review)
+2. **Business model review** (Stakeholders: [Brian Hillger’s team, Stacey Ellingson](mailto:ibiza-bmr@microsoft.com?subject=Azure%20Business%20model%20review))
 
 3. **Management APIs in ARM/Graph**
 
