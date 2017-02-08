@@ -19,7 +19,7 @@ Resource blades must contain some common elements:
 
 
 
-- [Essentials](portalfx-ux-essentials): A snapshot of common settings that appears toward the top of the blade. Includes common settings properties (like the resource group the resource belongs to, resource status, location, etc) and settings that are specific to the resource (like the URL and web hosting plan).
+- [Essentials](portalfx-control-essentials): A snapshot of common settings that appears toward the top of the blade. Includes common settings properties (like the resource group the resource belongs to, resource status, location, etc) and settings that are specific to the resource (like the URL and web hosting plan).
 
 
 - [Commands](portalfx-ux-commands): A combination of an action and a resulting behavior (like Delete, Start, Pause, etc). They live across the top of the resource blade, directly beneath the title. 
