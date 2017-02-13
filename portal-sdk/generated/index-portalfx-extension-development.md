@@ -12396,6 +12396,7 @@ Definition file | flag | Bundle description
 --------------- | ---- | ------------------
  Obsolete0.d.ts | 1    | Parameter collector V1/V2
  Obsolete1.d.ts | 2    | CsmTopology control
+ Obsolete2.d.ts | 2    | PairedTimeline control
 
  So, for example if you're using Parameter collector V1/V2, specify 1. If you're
  using both parameter collector V1/V2 and CsmTopology control, specify 3 (1 + 2). 

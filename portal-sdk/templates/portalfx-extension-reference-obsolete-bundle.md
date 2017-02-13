@@ -6,6 +6,8 @@ Current list of obsoleted bundles:
 Bundle | Definition file | obsoleteBundlesBitmask flag
 --- | --- | ---
 Parameter collector V1/V2 | Obsolete0.d.ts | 1
+CsmTopology control | Obsolete1.d.ts | 2
+PairedTimeline control | Obsolete2.d.ts | 4
 
 If you are one of the extensions that is still using an obsoleted bundle there's nothing you need to do to keep your extension 
 running in production but there are a couple simple steps you'll need to follow when you compile or test your extension against 
