@@ -60,7 +60,7 @@ The TemplateBlade constructor receives 3 parameters:
 
 The code snippet below shows a simple constructor for a TemplateBlade:
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#ctor"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#ctor"}
 
 ### OnInputSet
 
@@ -70,11 +70,11 @@ If you don't need this functionality (e.g. you have no inputs to your blade) you
 
 When all your blade inputs are available onInputSet is invoked and all those inputs are passed.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#onInputSet"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#onInputSet"}
 
 The code snippet below shows a more complex scenario where data is fetched based on the inputs to the blade (a promise for data load is returned)
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Data/ClientSideSortFilter/ViewModels/ViewModels.ts", "section": "templateBlade#onInputSetDataLoad"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Data/ClientSideSortFilter/ViewModels/ViewModels.ts", "section": "templateBlade#onInputSetDataLoad"}
 
 #### Defining the signature of your blade (inputs and outputs)
 
@@ -92,11 +92,11 @@ The CommandBar is the container for the commands (clickable toolbar above the co
 
 To use a command bar you need to add a **CommandBar** element to your blade PDL definition.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/Template/template.pdl", "section": "templateBlade#commandBarDef"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/Template/template.pdl", "section": "templateBlade#commandBarDef"}
 
 The code below demonstrates a basic initialization example for a toolbar (adding a button and reacting to its click event)
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#commandBar"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#commandBar"}
 
 #### Advanced topics
 

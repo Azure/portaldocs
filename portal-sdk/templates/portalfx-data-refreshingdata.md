@@ -6,7 +6,7 @@
 
 In many scenarios, users expect to see their rendered data update implicitly as server data changes. This is fairly straightforward to accomplish by configuring your QueryCache/EntityCache to include 'polling'.
 
-{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/Hubs/RobotData.ts","section":"dataRefresh#poll"}
+{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/V1/Hubs/RobotData.ts","section":"dataRefresh#poll"}
 
 Additionally, the extension can customize the polling interval by using the '`pollingInterval`' option. By default, the polling interval is 60 seconds. It can be customized down to a minimum of 10 seconds. The minimum is enforced to avoid server load that might result from some accidental, overly aggressive change to '`pollingInterval`' by an extension developer. (There have been cases where even this 10 second minumum has caused customer impact due to increased server load.)
 
@@ -85,7 +85,7 @@ As server data changes, there are scenario where the extension should *take expl
 
 * **User makes server changes** - User initiates some action and, as a consequence, the extension issues an AJAX call that *changes server data*. As a best-practice, this AJAX call is typically issued from an extension DataContext.
 
-{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/Hubs/RobotData.ts","section":"dataRefresh#refreshFromDataContext"}
+{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/V1/Hubs/RobotData.ts","section":"dataRefresh#refreshFromDataContext"}
 
 In this scenario, since the AJAX call will be issued from a DataContext, refreshing data in QueryCaches/EntityCaches will be done using QueryCache/EntityCache methods directly. See ["Refreshing/updating a QueryCache/EntityCache"](#refresh-datacache) below.
   
@@ -124,7 +124,7 @@ To understand the design behind this collection of methods and how to select the
   
 As mentioned above, this method will issue an AJAX call (either using the '`supplyData`' or '`sourceUri`' option supplied to the QueryCache/EntityCache) for each entry currently held in the QueryCache/EntityCache.  Upon completion, each AJAX result is [merged](#refresh-datamerging) onto its corresponding cache entry.  
 
-{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/Hubs/RobotData.ts","section":"dataRefresh#refreshFromDataContext"}
+{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/V1/Hubs/RobotData.ts","section":"dataRefresh#refreshFromDataContext"}
 
 If the (optional) '`predicate`' parameter is supplied to the '`refreshAll`' call, then only those entries for which the predicate returns 'true' will be refreshed.  This '`predicate`' feature is useful when the extension undestands the nature of the server data changes and can - based on this knowledge - chose to *not* refresh QueryCache/EntityCache entries whose server data hasn't changed.
 
@@ -133,7 +133,7 @@ If the (optional) '`predicate`' parameter is supplied to the '`refreshAll`' call
   
 The '`refresh`' method is useful when the server data changes are known to be specific to a single cache entry (a single query in the case of QueryCache, a single entity 'id' in the case of EntityCache).
 
-{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/ResourceTypes/SparkPlug/SparkPlugData.ts","section":"dataRefresh#dataCacheRefresh"}
+{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/V1/ResourceTypes/SparkPlug/SparkPlugData.ts","section":"dataRefresh#dataCacheRefresh"}
   
 Using '`refresh`', only *a single AJAX call* will be issued to the server.
 
@@ -143,11 +143,11 @@ In some scenarios, AJAX calls to the server to refresh cached data can be *avoid
 
 **Example - Adding an item to a QueryCache entry**
 
-{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/Hubs/RobotData.ts","section":"dataRefresh#applyChanges1"}
+{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/V1/Hubs/RobotData.ts","section":"dataRefresh#applyChanges1"}
 
 **Example - Removing an item to a QueryCache entry**
 
-{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/Hubs/RobotData.ts","section":"dataRefresh#applyChanges2"}
+{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/V1/Hubs/RobotData.ts","section":"dataRefresh#applyChanges2"}
 
 Similar to '`refreshAll`', the '`applyChanges`' method accepts a function that is called for each cache entry currently in the QueryCache/EntityCache, allowing the extension to update only those cache entries known to be effected by the server changes made by the user.
   
@@ -157,7 +157,7 @@ A subtlety of QueryCache/EntityCache is that it can hold onto cache entries for 
 
 Now, when the server data for a given cache entry *has been entirely deleted*, then the extension will want to forcibly remove corresponding entries from their QueryCache (less common) and EntityCache (more common). The '`forceRemove`' method does just this.  
 
-{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/Hubs/ComputerData.ts","section":"dataRefresh#forceRemove"}
+{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/V1/Hubs/ComputerData.ts","section":"dataRefresh#forceRemove"}
   
 Once called, the corresponding cache entry will be removed. If the user were to - somehow - open a Blade or drag/drop a Part that tried to load the deleted data, the QueryCache/EntityCache would try to create an entirely new cache entry, and - presumably - it would fail to load the corresponding server data. In such a case, by design, the user would see a 'data not found' user experience in that Blade/Part.  
 

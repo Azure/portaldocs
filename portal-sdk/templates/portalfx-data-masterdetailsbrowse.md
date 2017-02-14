@@ -24,7 +24,7 @@ Inside the folder create a typescript file with the area name that ends in `Area
 This file holds a DataContext class. This DataContext is the class that will be passed to all the view models associated with the area.
 The DataContext for the MasterDetail Area contains the following:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailArea.ts", "section": "data#dataContextMembers"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailArea.ts", "section": "data#dataContextMembers"}
 
 The QueryCache and the EntityCache are the two memebers relevant for the browse scenario we're going over. The DataContext also
 contains an EditScopeCache which is used in the master detail edit scenario.
@@ -40,7 +40,7 @@ in the master/detail browse scenario.
 
 The first is the QueryCache. We use a QueryCache to cache a list of items as opposed to an EntityCache which caches a single item.
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailArea.ts", "section": "data#websitesQueryCache"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailArea.ts", "section": "data#websitesQueryCache"}
 
 When we create the QueryCache to hold the websites we specify two things:
 
@@ -55,7 +55,7 @@ and call fetch() on them.
 
 The other cache used in this sample is the EntityCache:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailArea.ts", "section": "data#websitesEntityCache"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailArea.ts", "section": "data#websitesEntityCache"}
 
 When creating the EntityCache for this example we specify three things:
 
@@ -76,12 +76,12 @@ Now let's get in to how to visualize the data in the caches. The first step is t
 specifies the right Area so your view models receive your DataContext. In the `<Definition>` tag at the top of the PDL file 
 include an Area attribute whose value corresponds to the name of your Area:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailBrowse/MasterDetailBrowse.pdl", "section": "data#pdlArea"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailBrowse/MasterDetailBrowse.pdl", "section": "data#pdlArea"}
 
 The view model for the websites list is in `\Client\MasterDetail\MasterDetailBrowse\ViewModels\MasterViewModels.ts`. You'll notice 
 one of the first things the blade does is create a view on the QueryCache:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailBrowse/ViewModels/MasterViewModels.ts", "section": "data#createView"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailBrowse/ViewModels/MasterViewModels.ts", "section": "data#createView"}
 
 The view is how you call `fetch()` to populate the QueryCache and also how you view the items returned by the fetch call. Note that
 you may have multiple views over the same QueryCache. This happens when you have multiple blades on the screen at the same time
@@ -95,20 +95,20 @@ control works.
 
 We pass the view's observable `items` array to the grid constructor as the `items` parameter:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailBrowse/ViewModels/MasterViewModels.ts", "section": "data#gridConstructor"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailBrowse/ViewModels/MasterViewModels.ts", "section": "data#gridConstructor"}
 
 It's okay that we haven't issued a `fetch()` on the QueryCache yet. Whenever the first `fetch` (or any subsequent fetch) is issued
 the view's `items` array will be observably updated which will populate the grid with the results.
 
 As is standard practice we'll call the view's `fetch` method on the blade's `onInputsSet()` and return the promise:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailBrowse/ViewModels/MasterViewModels.ts", "section": "data#onInputsSet"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailBrowse/ViewModels/MasterViewModels.ts", "section": "data#onInputsSet"}
 
 That's enough to populate the QueryCache with items from the server and show them in the grid.
 
 Now let's look at the OptionsGroup. We initialize the control and then subscribe to it's value property:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailBrowse/ViewModels/MasterViewModels.ts", "section": "data#optionGroupValueSubscription"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailBrowse/ViewModels/MasterViewModels.ts", "section": "data#optionGroupValueSubscription"}
 
 In the subscription we do the following:
 
@@ -127,11 +127,11 @@ The detail view will use the EntityCache (which we hooked up to our QueryCache) 
 website. Once you understand what's going on in the master blade you should have a pretty good handle of what's going on here.
 The blade starts by creating an view on the EntityCache:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailBrowse/ViewModels/DetailViewModels.ts", "section": "data#entityCacheView"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailBrowse/ViewModels/DetailViewModels.ts", "section": "data#entityCacheView"}
 
 Then in the `onInputsSet` we call `fetch` passing the ID of the website we want the data for:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailBrowse/ViewModels/DetailViewModels.ts", "section": "data#onInputsSet"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailBrowse/ViewModels/DetailViewModels.ts", "section": "data#onInputsSet"}
 
 When the fetch is completed the data will be available in the view's `item` property. This blade uses the `text` data-binding in it's
 HTML template to show the name, id and running status of the website but obviously you could do whatever you want with the item.

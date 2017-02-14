@@ -17,12 +17,12 @@ as well such as a table layout with controls in multiple rows and columns, a lis
 Follow [this link](http://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/formsallup) and then click on 'Basic Create Form' for an example and this of what it looks like.
 This is the code to create the section:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/Forms/Samples/BasicCreate/ViewModels/Parts/FormsSampleBasicCreatePart.ts", "section": "forms#section"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/Forms/Samples/BasicCreate/ViewModels/Parts/FormsSampleBasicCreatePart.ts", "section": "forms#section"}
 
 And the template is just binding the section into the DOM:
 
 ```
-{"gitdown": "include-file", "file":"../Samples/SamplesExtension/Extension/Client/Forms/Samples/BasicCreate/Templates/FormSampleBasicCreate.html"}
+{"gitdown": "include-file", "file":"../Samples/SamplesExtension/Extension/Client/V1/Forms/Samples/BasicCreate/Templates/FormSampleBasicCreate.html"}
 ```
 
 Since it will autogenerate the layout for all of it's children.

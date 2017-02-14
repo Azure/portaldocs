@@ -38,18 +38,18 @@ Form fields require a binding to one or more EditScope observables. Extension de
 
 * **EditScopeAccessor** (preferred, compile-time verified) - The Form field view model constructor accepts an EditScopeAccessor, wrapping *a compile-time verified lambda* returning the EditScope observable to which the Form field should bind:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/Forms/Scenarios/FormFields/ViewModels/FormFieldsFormIntegratedViewModels.ts", "section": "formsEditScopeFaq#editScopeAccessor"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/Forms/Scenarios/FormFields/ViewModels/FormFieldsFormIntegratedViewModels.ts", "section": "formsEditScopeFaq#editScopeAccessor"}
 
 * **String-typed path** (discouraged, not compile-time verified) - The Form field view model constructor accepts a *string-typed path* locating the EditScope observable to which the Form field should bind:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/Forms/Scenarios/FormFields/ViewModels/FormFieldsFormIntegratedViewModels.ts", "section": "formsEditScopeFaq#editScopePath"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/Forms/Scenarios/FormFields/ViewModels/FormFieldsFormIntegratedViewModels.ts", "section": "formsEditScopeFaq#editScopePath"}
 
 The EditScopeAccessor variant here (the first variant) is preferred for a couple of reasons:  
 
 * The supplied lambda will be compile-time verified. This code will be more maintainable when - for instance - the property names on the Form model types are changed.
 * There are advanced variations of EditScopeAccessor that enable less-common scenarios like: binding *multiple* EditScope observables to a single Form field, translating Form model data for presentation to the user, etc.:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/Forms/Scenarios/FormFields/ViewModels/FormFieldsFormIntegratedViewModels.ts", "section": "formsEditScopeFaq#editScopeAccessorAdvanced"}  
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/Forms/Scenarios/FormFields/ViewModels/FormFieldsFormIntegratedViewModels.ts", "section": "formsEditScopeFaq#editScopeAccessorAdvanced"}  
   
   
 ### Q: When do I need to worry about [type metadata](/documentation/articles/portalfx-data-typemetadata) for my EditScope?  
@@ -64,7 +64,7 @@ Re: EditScope and Forms, extensions supply type metadata for the following scena
 
 In TypeScript:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/Forms/Scenarios/ChangeTracking/Models/EditableFormData.ts", "section": "formsEditScopeFaq#entityTypeMetadata"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/Forms/Scenarios/ChangeTracking/Models/EditableFormData.ts", "section": "formsEditScopeFaq#entityTypeMetadata"}
 
 In C#:
 
@@ -119,12 +119,12 @@ To conveniently see the *actual* state of an EditScope 'entity' array, use the '
 
 This '`getEntityArrayWithEdits`' is particularly useful in ParameterProvider's '`mapOutgoingDataForCollector`' callback when returning an edited array to some ParameterCollector:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/ParameterCollection/ParameterProviders/ViewModels/ProviderViewModels.ts", "section": "formsEditScopeFaq#getEntityArrayWithEdits"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/ParameterCollection/ParameterProviders/ViewModels/ProviderViewModels.ts", "section": "formsEditScopeFaq#getEntityArrayWithEdits"}
 
 <a name="apply-array-as-edits"></a>
 And there is a corresponding '`applyArrayAsEdits`' EditScope method that simplifies applying edits to an existing EditScope 'entity' array. This is often done in a ParameterCollector's '`receiveResult`' callback:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/ParameterCollection/FormWithCollectors/ViewModels/FormWithCollectorsBladeViewModel.ts", "section": "formsEditScopeFaq#applyArrayAsEdits"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/ParameterCollection/FormWithCollectors/ViewModels/FormWithCollectorsBladeViewModel.ts", "section": "formsEditScopeFaq#applyArrayAsEdits"}
 
 This pair of EditScope methods significantly simplifies working with EditScope 'entity' arrays.  
   
@@ -151,11 +151,11 @@ Here's a sample that does something similar, converting - in this case - an arra
 
 #### Modeling your data as an 'entity' array
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/ParameterCollection/ParameterProviders/ViewModels/ProviderViewModels.ts", "section": "formsEditScopeFaq#makeEntityForEditableGrid"}  
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/ParameterCollection/ParameterProviders/ViewModels/ProviderViewModels.ts", "section": "formsEditScopeFaq#makeEntityForEditableGrid"}  
 
 #### Converting your data to an 'entity' array for consumption by editable grid
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/ParameterCollection/ParameterProviders/ViewModels/ProviderViewModels.ts", "section": "formsEditScopeFaq#makeEntityForEditableGrid2"}  
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/ParameterCollection/ParameterProviders/ViewModels/ProviderViewModels.ts", "section": "formsEditScopeFaq#makeEntityForEditableGrid2"}  
   
   
 ### Q: What do I return from 'saveEditScopeChanges'? I don't understand the different values of the '`AcceptEditScopeChangesAction`' enum.

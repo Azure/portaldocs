@@ -10,11 +10,11 @@ In summary:
 
 Menu blades are defined in PDL as shown below:
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/MenuBlade/MenuBlade.pdl", "section": "menuBlade#pdlDef"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/MenuBlade/MenuBlade.pdl", "section": "menuBlade#pdlDef"}
 
 The code below shows how to define a menu blade view-model to open 4 different items:
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/MenuBlade/ViewModels/SampleMenuBlade.ts", "section": "menuBlade#ctor"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/MenuBlade/ViewModels/SampleMenuBlade.ts", "section": "menuBlade#ctor"}
 
 A few things to notice in the code above:
 

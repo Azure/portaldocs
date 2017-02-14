@@ -20,7 +20,7 @@ For each [Area](#data-overview-areas) in an extension, there is a **singleton Da
 
 When a Blade or Part view model is instantiated, its constructor is supplied with a reference to the DataContext singleton instance for the associated extension Area.  In the Blade or Part view model constructor, the view model accesses the data required by that Blade or Part.
 
-{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailEdit/ViewModels/MasterViewModels.ts","section":"data-overview#data-context-ctor-use"}
+{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailEdit/ViewModels/MasterViewModels.ts","section":"data-overview#data-context-ctor-use"}
 
 The benefits of centralizing data access in a singleton DataContext include:  
 
@@ -54,7 +54,7 @@ There is a single DataContext class per Area. That class is - by convention - to
 
 `\Client\MasterDetail\MasterDetailArea.ts`
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailArea.ts", "section": "data#dataContextMembers"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailArea.ts", "section": "data#dataContextMembers"}
 
 You may notice that the DataContext class does not dictate the use of any FX base class or interface. In practice, the members of a DataContext class are typically:  
 
@@ -78,15 +78,15 @@ From an API perspective these DataCache classes all share the same API and usage
     * How to implicitly refresh cached data, to keep it consistent with server state
     * Etc.
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/Data/MasterDetailBrowse/MasterDetailBrowseData.ts", "section": "data-overview#create-data-cache"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/Data/MasterDetailBrowse/MasterDetailBrowseData.ts", "section": "data-overview#create-data-cache"}
 
 * **Step 2** - In its constructor, each Blade and Part view model **creates a DataView** with which to load and refresh data for the Blade/Part.
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailBrowse/ViewModels/DetailViewModels.ts", "section": "data#entityCacheView"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailBrowse/ViewModels/DetailViewModels.ts", "section": "data#entityCacheView"}
 
 * **Step 3** - When the Blade/Part view model receives its parameters in '`onInputsSet`', the view model **calls '`dataView.fetch()`'** to load data.
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/MasterDetail/MasterDetailBrowse/ViewModels/MasterViewModels.ts", "section": "data#onInputsSet"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailBrowse/ViewModels/MasterViewModels.ts", "section": "data#onInputsSet"}
   
 A detailed walk-through of a scenario employing these concepts can be found [here](/documentation/articles/portalfx-data-masterdetailsbrowse).
 

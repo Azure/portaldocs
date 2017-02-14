@@ -51,9 +51,9 @@ You can use the Ibiza command bar in your AppBlade and leverage the framework su
 
 Using the CommandBar is the same than in any other existing scenarios. The code snippet below shows an example of setting a CommandBar in your AppBlade view-model.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/AppBlade/ViewModels/AppBladeViewModel.ts", "section": "appBlade#commandBar"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/AppBlade/ViewModels/AppBladeViewModel.ts", "section": "appBlade#commandBar"}
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/AppBlade/ViewModels/AppBladeViewModel.ts", "section": "appBlade#commandBarButton"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/AppBlade/ViewModels/AppBladeViewModel.ts", "section": "appBlade#commandBarButton"}
 
 
 #### Exchanging messages between your IFrame and the Ibiza Fx
@@ -72,7 +72,7 @@ You can listen to messages using the **on** method in the **AppBlade** view-mode
 
 The code snippet below demonstrates how to listen to a message from your IFrame in your Ibiza extension view-model.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/AppBlade/ViewModels/AppBladeViewModel.ts", "section": "appBlade#listenForMessageFromIFrame"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/AppBlade/ViewModels/AppBladeViewModel.ts", "section": "appBlade#listenForMessageFromIFrame"}
 
 #### Post a message
 
@@ -80,13 +80,13 @@ You can post messages to you IFrame using the **postMessage** method in the **Ap
 
 The code snippet below demonstrates how to send a message from your Ibiza extension view-model to your IFrame.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/AppBlade/ViewModels/AppBladeViewModel.ts", "section": "appBlade#postMessageToIFrame"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/AppBlade/ViewModels/AppBladeViewModel.ts", "section": "appBlade#postMessageToIFrame"}
 
 #### Post theming information
 
 When using a template blade, you are responsible for implementing theming in your IFrame. The code snippet below demonstrates how to pass the current selected theme by the user to your IFrame using **postMessage** (which is the same technique used in the section above).
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/AppBlade/ViewModels/AppBladeViewModel.ts", "section": "appBlade#postThemingInfo"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/AppBlade/ViewModels/AppBladeViewModel.ts", "section": "appBlade#postThemingInfo"}
 
 #### Sending and Receiving messages from your IFrame
 

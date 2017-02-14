@@ -47,7 +47,7 @@ Second, you must provide plugin options.
 
 The following sample shows a simple method of enabling the plugins:
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Controls/Grid/ViewModels/ScrollableGridWithFilteringAndSorting.ts", "section": "grid#enablingplugins"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Controls/Grid/ViewModels/ScrollableGridWithFilteringAndSorting.ts", "section": "grid#enablingplugins"}
 
 Plugin compatibility:
 
@@ -72,7 +72,7 @@ The itemKey specifies the name of the property on your data item.
 For each data item the grid will use the itemKey to read the value.
 There are many other column options that specify the formatting of the value or enable plugin specific behaviors.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Controls/Grid/ViewModels/BasicGridViewModel.ts", "section": "grid#columndefinitions"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Controls/Grid/ViewModels/BasicGridViewModel.ts", "section": "grid#columndefinitions"}
 
 ### Formatting
 Columns are formatted using three key properties.
@@ -99,7 +99,7 @@ The following formatters can be used for formatting dates:
 - LongTime: 11:20:19 AM
 - CustomDate: Any format posible using Intl date formatting
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Controls/Grid/ViewModels/FormattedGridViewModel.ts", "section": "grid#dateformatter"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Controls/Grid/ViewModels/FormattedGridViewModel.ts", "section": "grid#dateformatter"}
 
 You can create your on Intl option or use one of the predefined options from the ``Globalization.Intl`` namespace.
 
@@ -109,7 +109,7 @@ There is a single formatter for formatting numbers called the Number formatter.
 The number formatter uses the Int API and will format to the current locale the user has set in the portal.
 It is capable of formatting numbers in many ways including currency.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Controls/Grid/ViewModels/FormattedGridViewModel.ts", "section": "grid#numberformatter"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Controls/Grid/ViewModels/FormattedGridViewModel.ts", "section": "grid#numberformatter"}
 
 [Intl API Number][IntlAPINumber]
 
@@ -149,7 +149,7 @@ The $data object bound to the template will be in the following format where val
 }
 ```
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Controls/Grid/ViewModels/FormattedGridViewModel.ts", "section": "grid#customhtmlformatter"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Controls/Grid/ViewModels/FormattedGridViewModel.ts", "section": "grid#customhtmlformatter"}
 
 ### Selection and Activation
 With the grid you can enable the SelectableRow extension that enables row selections and blade activations.

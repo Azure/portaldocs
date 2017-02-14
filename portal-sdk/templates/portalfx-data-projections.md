@@ -21,11 +21,11 @@ interface Robot {
 
 What we want to do is put each robot in a grid with three columns. The two columns (name and status) will be the same data as that of the model but the third column will be a combination of properties from the model object in the QueryCache. We'll combine the model and manufacturer observables into a single property. The interface for the data to show in the grid is then:
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/Data/Projection/ViewModels/MapAndMapIntoViewModels.ts", "section": "data#robotDetailsModel"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/Data/Projection/ViewModels/MapAndMapIntoViewModels.ts", "section": "data#robotDetailsModel"}
 
 A naive implementation of this might go something like this (ignore the lines about `projectionId` and `_logMapFunctionRunning()` for now. They're used for logging in the sample we'll get to in a sec):
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/Data/Projection/ViewModels/MapAndMapIntoViewModels.ts", "section": "data#buggyMapProjection"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/Data/Projection/ViewModels/MapAndMapIntoViewModels.ts", "section": "data#buggyMapProjection"}
 
 Without knowing too much about map() this looks like a fairly reasonable implementation. We know `robot.name()` has the name of the robot and `robot.model()` and `robot.manufacturer()` will give us the model and manufacturer values. The `RobotDetails` interface we're using to model the data in the grid requires observables for it's `name` and `modelAndMfg` properties so we'll throw the strings we get from the QueryCache model into a pair of observables and call it done.
 
@@ -91,17 +91,17 @@ This prevents the map() from taking a dependency on robot.model() and robot.manu
 
 A correct implemenation of the map above then looks like (again ignore uuid and the logging functions):
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/Data/Projection/ViewModels/MapAndMapIntoViewModels.ts", "section": "data#properMapProjection"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/Data/Projection/ViewModels/MapAndMapIntoViewModels.ts", "section": "data#properMapProjection"}
 
 You can click on the 'Proper map' button in the sample and perform the same actions to see the difference. Now updating a property on the opened grid item no longer results in a rerunning of your map function. Instead changes to `status` are pushed directly to the DOM and changes to `model` cause the pureComputed to recalculate but importantly __do not change the object in grid.items()__.
 
 Now that you understand how `map()` works we can introduce `mapInto()`. Here's the code the same projection implemented with mapInto():
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/Data/Projection/ViewModels/MapAndMapIntoViewModels.ts", "section": "data#properMapIntoProjection"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/Data/Projection/ViewModels/MapAndMapIntoViewModels.ts", "section": "data#properMapIntoProjection"}
 
 You can see how it reacts by clicking on the 'Proper mapInto' button and then add/remove/update the items. The code and behavior are the exact same. So how are map() and mapInto() different? We can see with a buggy implementation of a projection using mapInto():
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/Data/Projection/ViewModels/MapAndMapIntoViewModels.ts", "section": "data#buggyMapIntoProjection"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/Data/Projection/ViewModels/MapAndMapIntoViewModels.ts", "section": "data#buggyMapIntoProjection"}
 
 This is the same as our buggy implementation of map() we wrote earlier. Hit the 'Buggy mapInto' button and then play around with updating status() and model() of the top row while that row is activated. You'll notice, unlike map(), that the child blade doesn't close however you'll also notice that when the source data in the QueryCache changes __the observable changes are not present in the projected object__. The reason for this is mapInto() ignores any observables that use in the mapping function you supply. It is therefore guaranteed that a projected item will stay the same item as long as the source item is around but if you write your map incorrectly it isn't guaranteed the projected data is update to date.
 
@@ -124,7 +124,7 @@ The samples extension includes an example of using a __projected array__ to bind
 
 `\Client\Data\Projection\ViewModels\ProjectionBladeViewModel.ts`
 
-{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/Data/Projection/ViewModels/ProjectionBladeViewModel.ts", "section": "data#mapExample"}
+{"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/Data/Projection/ViewModels/ProjectionBladeViewModel.ts", "section": "data#mapExample"}
 
 ### Chaining uses of `map` and `filter`
 

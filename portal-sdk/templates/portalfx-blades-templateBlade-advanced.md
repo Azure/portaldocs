@@ -17,7 +17,7 @@ Sometimes you may want to prevent interaction with your blade while initializing
 
 The code snippet below shows an extreme example where a filter is applied on a timer and it changes from opaque to transparent).
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#shield"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#shield"}
 
 ### Showing a notification in your blade
 
@@ -27,7 +27,7 @@ This area is clickable and can either open a new blade or an external url.
 
 This capability is exposed through the **statusBar** member in the Blade base class (using `this.statusBar(myStatus)` in your blade view-model).
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/ContentState/ViewModels/ContentStateViewModels.ts", "section": "templateBlade#contentState"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/ContentState/ViewModels/ContentStateViewModels.ts", "section": "templateBlade#contentState"}
 
 <a name="pinning-your-blade"></a>
 ### Pinning your blade
@@ -44,19 +44,19 @@ You can store settings associated with a blade. Those settings need to be declar
 
 The code below shows how to define the settings in PDL using the `TemplateBlade.Settings` element.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/Template/Template.pdl", "section": "templateBlade#settingsPDL"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/Template/Template.pdl", "section": "templateBlade#settingsPDL"}
 
 Once the settings are declared, you need to define them in your view-model too.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#settingsVMDef"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#settingsVMDef"}
 
 The settings are retrieved through the blade container.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#settingsVMUse"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#settingsVMUse"}
 
 The settings are also passed to onInputsSet.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#settingsVMois"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/Template/ViewModels/TemplateBladeViewModels.ts", "section": "templateBlade#settingsVMois"}
 
 ### Showing Unauthorized UI in your blade
 
@@ -64,7 +64,7 @@ You can set your blade to Unauthorized UI using the **unauthorized** member of t
 
 The code below does this statically, but it can also be done dynamically (e.g. based on a condition after data is loaded).
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/Unauthorized/ViewModels/UnauthorizedBladeViewModel.ts", "section": "templateBlade#Unauthorized"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/Unauthorized/ViewModels/UnauthorizedBladeViewModel.ts", "section": "templateBlade#Unauthorized"}
 
 ### Showing Notice UI dynamically in your blade
 
@@ -72,4 +72,4 @@ You can set your blade to Notice UI using **enableNotice** member of the blade c
 
 This can be done statically (e.g. in the constructor) or dynamically. In the example below, the blade is set to Notice UI if the **id** input parameter has a given value.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/Blades/DynamicNotice/ViewModels/DynamicNoticeViewModels.ts", "section": "templateBlade#dynamicNotice"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Blades/DynamicNotice/ViewModels/DynamicNoticeViewModels.ts", "section": "templateBlade#dynamicNotice"}
