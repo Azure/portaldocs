@@ -135,23 +135,18 @@ Please read this documentaiton, if you are looking for information on following 
    
    Here is a table that explains mapping of portal environment to extension configuration in portal repository:
    
-   | --------------- | ------------------------------------------------- |----------------------------|
-   | Environment     | URL                                               |    Configuration File      |
-   |                 |                                                   |     (in portal repo)       |
-   | --------------- | ------------------------------------------------- |----------------------------|
-   | **DOGFOOD**     | `df.{extension}.onecloud-ext.azure-test.net`      |    [Extensions.test.json](https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx?path=%2FRDPackages%2FOneCloud%2FExtensions.test.json&version=GBdev&_a=contents)   |
-   | --------------- | ------------------------------------------------- |----------------------------|
-   | **RC**          | `rc.{extension}.onecloud-ext.azure-test.net`      |                            |
-   | **MPAC**        | `ms.{extension}.onecloud-ext.azure-test.net`      |                            |
-   | **Preview**     | `preview.{extension}.onecloud-ext.azure-test.net` |    [Extensions.prod.json](https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx?path=%2FRDPackages%2FOneCloud%2FExtensions.prod.json&version=GBdev&_a=contents)   |
-   | **PROD**        | `main.{extension}.ext.azure.com`                  |                            |
-   | --------------- | ------------------------------------------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-   | **BLACKFOREST** | `main.{extension}.ext.microsoftazure.de`          |       [Extensions.bf.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2FRDPackages%2FOneCloud%2FExtensions.bf.json&version=GBdev&_a=contents)                          |
-   | --------------- | ------------------------------------------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-   | **FAIRFAX**     | `main.{extension}.ext.azure.us`                   |       [Extensions.ff.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2FRDPackages%2FOneCloud%2FExtensions.ff.json&version=GBdev&_a=contents)                          |
-   | --------------- | ------------------------------------------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-   | **MOONCAKE**    | `main.{extension}.ext.azure.cn`                   |       [Extensions.mc.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2FRDPackages%2FOneCloud%2FExtensions.mc.json&version=GBdev&_a=contents)                          |
-   | --------------- | ------------------------------------------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Environment     | URL                                               | Configuration File                                                                                                                                                               |
+|-----------------|---------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                 |                                                   | (in portal repo)                                                                                                                                                                 |
+| **DOGFOOD**     | `df.{extension}.onecloud-ext.azure-test.net`      | [Extensions.test.json](https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx?path=%2FRDPackages%2FOneCloud%2FExtensions.test.json&version=GBdev&_a=contents) |
+| **RC**          | `rc.{extension}.onecloud-ext.azure-test.net`      |                                                                                                                                                                                  |
+| **MPAC**        | `ms.{extension}.onecloud-ext.azure-test.net`      |                                                                                                                                                                                  |
+| **Preview**     | `preview.{extension}.onecloud-ext.azure-test.net` | [Extensions.prod.json](https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx?path=%2FRDPackages%2FOneCloud%2FExtensions.prod.json&version=GBdev&_a=contents) |
+| **PROD**        | `main.{extension}.ext.azure.com`                  |                                                                                                                                                                                  |
+| **BLACKFOREST** | `main.{extension}.ext.microsoftazure.de`          | [Extensions.bf.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2FRDPackages%2FOneCloud%2FExtensions.bf.json&version=GBdev&_a=contents)                    |
+| **FAIRFAX**     | `main.{extension}.ext.azure.us`                   | [Extensions.ff.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2FRDPackages%2FOneCloud%2FExtensions.ff.json&version=GBdev&_a=contents)                    |
+| **MOONCAKE**    | `main.{extension}.ext.azure.cn`                   | [Extensions.mc.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2FRDPackages%2FOneCloud%2FExtensions.mc.json&version=GBdev&_a=contents)                    |
+
 
    
    The above table implies that to manage extension configuraiton in Dogfood, BlackForest, FairFax and MoonCake the extension developer will need to send the pull request tfor modifying Extensions.test.json, Extensions.bf.json, Extensions.ff.json and Extensions.mc.json.
