@@ -281,8 +281,9 @@ Dogfood -> RC -> MPAC -> PROD -> National Clouds (BF, FF and MC).
 
 In order to expedite the deployment of changes, you will need to send the pull request for each branch in portal repository i.e. Dogfood, MPAC and Production.
 
-** All the pull requests should be sent for Dev branch. Once the Pull request is marked as complete then you can send the pull request for Dogfood branch.
-Once the Dogfood Pull request is marked complete then you can send the pull request for MPAC branch. Once the Dogfood Pull request is marked complete then you can send the pull request for PROD branch. **
+** All the pull requests should be sent for Dev branch. Once the Pull request is marked as complete then you can cherry-pick the same commit from dev branch and send the pull request for Dogfood branch.
+Once the Dogfood Pull request is marked complete then you can cherry-pick the same commit from dogfood branch and send the pull request for for MPAC branch. 
+Once the MPAC Pull request is marked complete then you can cherry-pick the same commit from MPAC branch and send the pull request for for production branch. **
 
 If the pull request is not sent in the above specified order or the commit message is chanegd then it will lead to unit Test failure. In case of test failure your changes will be reverted without any notice.
 
