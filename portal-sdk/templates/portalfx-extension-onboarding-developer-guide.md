@@ -80,15 +80,14 @@ Please read this documentaiton, if you are looking for information on following 
     NOTE: Extension using legacy DIY URLs must use a standard CNAME pattern. 
     Create CNAMEs using [Microsoft's DNS](http://msinterface/form.aspx?ID=4260) (use any Azure property as the identity).
     
-   | --------------- | -------------------------------------------  |
-   | Environment     | URL                                          | 
-   | --------------- | -------------------------------------------  |
-   | **DOGFOOD**     | `df.{extension}.onecloud-ext.azure-test.net` |
-   | **PROD**        | `main.{extension}.ext.azure.com`             |
-   | **BLACKFOREST** | `main.{extension}.ext.microsoftazure.de`     |
-   | **FAIRFAX**     | `main.{extension}.ext.azure.us`              |
-   | **MOONCAKE**    | `main.{extension}.ext.azure.cn`              |
-   | --------------- | -------------------------------------------  |
+| Environment     | URL                                        |
+|-----------------|--------------------------------------------|
+| **DOGFOOD**     | df.{extension}.onecloud-ext.azure-test.net |
+| **PROD**        | main.{extension}.ext.azure.com             |
+| **BLACKFOREST** | main.{extension}.ext.microsoftazure.de     |
+| **FAIRFAX**     | main.{extension}.ext.azure.us              |
+| **MOONCAKE**    | main.{extension}.ext.azure.cn              |
+   
    
    ** PROD ** CNAME will be used for RC, MPAC, Preview and PROD  environment. 
    
