@@ -105,20 +105,20 @@ Please read this documentaiton, if you are looking for information on following 
    
    4. Cacheability: 
    
-   If you are using hosting service, then you don't need to worry about this attribute. You can simply set the value to :
+   If you are using hosting service, then you ** don't need to worry ** about this attribute. The default value of `cacheability` is `manifest`. 
    
    ```
-   cacheability: "none",
+   cacheability: "manifest",
    ```
    
-   If you using the legacy DIY deployment, then you will need to do some work before you can set the cacheability to none or your extension will slow down the performance of Azure Portal.
+   If you using the legacy DIY deployment, then you will need to do some work before you can set the cacheability to manifest or your extension will slow down the performance of Azure Portal.
    Please read about [Client-Side caching](https://aka.ms/cacheability) to improve the performance of your extension  before setting the value to none.
-   NOTE: Setting cacheability to **none** is a pre-requisite for Public Preview / GA. 
+   NOTE: Setting cacheability to **manifest** is a pre-requisite for Public Preview / GA. 
     
    For private preview, you can mark the cacheability to 
    
    ```
-   cacheability: "manifest",
+   cacheability: "none",
    ```
    
    5. disabled: 
