@@ -151,172 +151,172 @@ Please read this documentaiton, if you are looking for information on following 
    The above table implies that to manage extension configuraiton in Dogfood, BlackForest, FairFax and MoonCake the extension developer will need to send the pull request tfor modifying Extensions.test.json, Extensions.bf.json, Extensions.ff.json and Extensions.mc.json.
    However, the extension configuration for RC, MPAC, Preview and PROD is managed by the same file Extensions.prod.json. ** Therefore, extension can not host different stamps for these environments.**
    
-    ## Understanding scenarios for config change
-    
-       1. Onboarding / Registering a new extension in the portal (or Onboarding / Registering existing extension to a new environment in the portal)
-       
-       All new extensions should always be added to the portal configuration in disabled mode. Here is a sample pull request for registering a Scheduler extension in FairFax:
-       https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/459608f61d5c36864affafe6eb9d230655f67a29?refName=refs%2Fheads%2Fdev
-       
-       2. Enabling an extension in the portal 
-       
-        Your extension can only be enabled in production once all exit criteria have been met.
-        Once you have recieved sign-off from all the stakeholder mentioned in exit criteria, please attach the email with workitem that you will use for sending pull request.
-        
-        Enabling an extension requires two changes:
-        
-        1. To enable the extension just remove the disables boolean attribute from the config. 
-        2. Update the enabled extension count in test
-            
-        Here is a sample pull request for enabling HDInsight extension in Mooncake:
-        https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/062ccb2ed5c5a8a086877e2d61dd6009242f17fc?refName=refs%2Fheads%2Fdev
-        
+## Understanding scenarios for config change
 
-       3. Moving from DIY deployment to Extension hosting service
-       
-        If your extension is migrating from DIY deploment to hosting service, we recommend using the following path to minimize the probability of regression.
-        
-
-        1. Change the uri format to use hosting service (PROD) :
-
-            Here is a sample pull request for modifying the uriFormat:
-            https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/history?_a=history&itemPath=%2F&itemVersion=GBdev&user=Wissam%20Zeidan&alias=wissamz%40microsoft.com        
-            
-        2. Flight changes in MPAC: 
-            Here is a sample pull request for flighting extension in MPAC:
-            https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/be95cabcf7098c45927e3bb7aff9b5e0f65de341?refName=refs%2Fheads%2Fdev
-            
-        3. Enable 100% traffic in MPAC and PROD: 
-            Here is a sample pull requestthat shows enabling 100% traffic without flighting for MicrosoftAzureClassicStorageExtension and 100% traffic with flighting for Microsoft_Azure_Storage:
-            https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/b81b415411f54ad83f93d43d37bcad097949a4e3?refName=refs%2Fheads%2Fdev&discussionId=-1&_a=summary&fullScreen=false
-            
-       
-       4. Enable flighting in MPAC 
-        
-        Portal provides the ability to flight the MPAC customers to multiple stamps. Portal will districute the traffic equally between all the registeres stamps.
-        
-        
-        In case of hosting service:
-        
-        To flight traffic to multiple stamps, register other stamps in flightUri. For example in this case MPAC flight (friendly name) is used to flight traffic to another stamp
-        
-        ```
-        {
-            name: "Microsoft_Azure_Demo",
-            uri: "//demo.hosting.portal.azure.net/demo",
-            uriFormat: "//demo.hosting.portal.azure.net/demo/{0}",
-            feedbackEmail: "azureux-demo@microsoft.com",
-            flightUris: [
-                "//demo.hosting.portal.azure.net/demo/MPACFlight",
-            ],
-        }
-        ```
-        
-        In case of legacy deploment:
-        ```
-        {
-            name: "Microsoft_Azure_Demo",
-            uri: "//main.demo.ext.azure.com",
-            uriFormat: "//{0}.demo.ext.azure.com",
-            feedbackEmail: "azureux-demo@microsoft.com",
-            flightUris: [
-                "//flight.demo.ext.azure.com",
-            ],
-        }
-        ```
-        Here is a sample pull request: https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/be95cabcf7098c45927e3bb7aff9b5e0f65de341?refName=refs%2Fheads%2Fdev
-       
-       5. Performance Improevements : Manifest Caching
-            Work In Progress
-       
-       6. Performance Improevements : You have removed PCV1 and PCV2 Code from you extension
-            Work In Progress
-       
-       7. Updating the feedback email
-            Work In Progress
-    
-    ## How to send the pull request
+   1. Onboarding / Registering a new extension in the portal (or Onboarding / Registering existing extension to a new environment in the portal)
    
-    Before creating a pull request, create workitem so that you can assosciate the workitem with the commit.
-    Create a workitem for assosciating your changes to the commit:  https://aka.ms/portalfx/config/update
-    By assosciating the workitem with commit, you will get a notification when the configuration changes are deployed to each environment.
+   All new extensions should always be added to the portal configuration in disabled mode. Here is a sample pull request for registering a Scheduler extension in FairFax:
+   https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/459608f61d5c36864affafe6eb9d230655f67a29?refName=refs%2Fheads%2Fdev
+   
+   2. Enabling an extension in the portal 
+   
+    Your extension can only be enabled in production once all exit criteria have been met.
+    Once you have recieved sign-off from all the stakeholder mentioned in exit criteria, please attach the email with workitem that you will use for sending pull request.
     
-    Portal repository has 4 main branches i.e. dev, dogfood, mpac and production. ** All the pull requests should be sent for Dev branch.** 
+    Enabling an extension requires two changes:
     
-    - git clome https://msazure.visualstudio.com/DefaultCollection/One/_git/AzureUX-PortalFx
-    - cd AzureUX-PortalFx\
-    - init.cmd
-    - git checkout dev
-    - cd RDPackages\OneCloud
-    - Modify extension configuration
-    - if enabling an extension then you need to update the enabled extension test count in %ROOT%\src\StbPortal\Website.Server.Tests\DeploymentSettingsTests.cs
-    - git add <Modified_Files>
-    - git commit -m "#123456 Add/ Enable the extension"
-    - git fetch
-    - git checkout -b myalias/myhotfix origin/production
-    - git cherry-pick hotfixcommithashfrommpac
-    - git push origin myalias/myhotfix
-    - cd %ROOT%\src\
-    - testconfig   // This command will test if all the test cases passed. If any of the test cases faile, please verify your config again
+    1. To enable the extension just remove the disables boolean attribute from the config. 
+    2. Update the enabled extension count in test
+        
+    Here is a sample pull request for enabling HDInsight extension in Mooncake:
+    https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/062ccb2ed5c5a8a086877e2d61dd6009242f17fc?refName=refs%2Fheads%2Fdev
     
-    ## SLA for deploying the configuration changes
 
-    As per the safe dedployment mandate, all the configuration changes are treated as code change. This implies that all configuration changhes will go through the same deployment process as code change. 
-    
-    All changes checked-in to dev branch will be deployed in following order:
-    
-    Dogfood -> RC -> MPAC -> PROD -> National Clouds (BF, FF and MC).
-    
-    
-   | --------------- | ------- |
-   | Environment     | SLA     |
-   | --------------- | ------- |
-   | **DOGFOOD**     | 5 days  |
-   | **RC**          | 10 days |
-   | **MPAC**        | 15 days |
-   | **PROD**        | 20 days |
-   | **BLACKFOREST** | 1 month |
-   | **FAIRFAX**     | 1 month |
-   | **MOONCAKE**    | 1 month |
+   3. Moving from DIY deployment to Extension hosting service
    
-    ## Expediting the deployment of configuration changes
+    If your extension is migrating from DIY deploment to hosting service, we recommend using the following path to minimize the probability of regression.
     
-    In order to expedite the deployment of changes, you will need to send the pull request for each branch in portal repository i.e. Dogfood, MPAC and Production.
-    
-    ** All the pull requests should be sent for Dev branch. Once the Pull request is marked as complete then you can send the pull request for Dogfood branch.
-    Once the Dogfood Pull request is marked complete then you can send the pull request for MPAC branch. Once the Dogfood Pull request is marked complete then you can send the pull request for PROD branch. **
-    
-    If the pull request is not sent in the above specified order or the commit message is chanegd then it will lead to unit Test failure. In case of test failure your changes will be reverted without any notice.
-    
-    SLA for changes that are in PROD branch is:
 
-   | --------------- | ------- |
-   | Environment     | SLA     |
-   | --------------- | ------- |
-   | **PROD**        | 7 days  |
-   | **BLACKFOREST** | 10 days |
-   | **FAIRFAX**     | 10 days |
-   | **MOONCAKE**    | 10 days |
-   | --------------- | ------- |
-    
-   The above specified SLA is to deploy configuration changes to all regions in Production Environment. 
-    
-   As per the safe deployment mandate, deployment to production environment will be done in stage. Each stage is a logical grouping of regions. There are 5 stages in production environment.
-   And, there is 24 hour wait period between promoting the build from one batch to another. This implies that minimum time to deploy a change in all regions in Production branch is 5 days.
-    
-   ## Recieving Notification when changes are deployed
-    
-   Since you have assosciated your commit with a workitem, you will recieve the notification when the config change that you have submitted is deployed to each region.
-    
-   In case other people, in your team want to suscribe to these changes, please ask them to make a comment on the workitem. Once they have made a change they will start recieving the notifications.
-   
-   
-   ## Frequently asked questions
-   
-   Use a wildcard SSL cert for each environment to simplify maintenance (e.g. `*.{extension}.onecloud-ext.azure-test.net` or `*.{extension}.ext.azure.com`). If your team is building separate, independent extensions, you can also use
-   `{extension}.{team}.ext.azure.com` and create a wildcard SSL cert for `*.{team}.ext.azure.com` to simplify overall management. Internal teams can create SSL certs for DF using [http://ssladmin](http://ssladmin). Production certs
-   must follow your organizations PROD cert process -- **do not use SSL Admin for production certs**.
+    1. Change the uri format to use hosting service (PROD) :
 
-   **NOTE** : Registering an extension in Portal requires deployment so it can take almost 10 days. Please plan accordingly.
+        Here is a sample pull request for modifying the uriFormat:
+        https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/history?_a=history&itemPath=%2F&itemVersion=GBdev&user=Wissam%20Zeidan&alias=wissamz%40microsoft.com        
+        
+    2. Flight changes in MPAC: 
+        Here is a sample pull request for flighting extension in MPAC:
+        https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/be95cabcf7098c45927e3bb7aff9b5e0f65de341?refName=refs%2Fheads%2Fdev
+        
+    3. Enable 100% traffic in MPAC and PROD: 
+        Here is a sample pull requestthat shows enabling 100% traffic without flighting for MicrosoftAzureClassicStorageExtension and 100% traffic with flighting for Microsoft_Azure_Storage:
+        https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/b81b415411f54ad83f93d43d37bcad097949a4e3?refName=refs%2Fheads%2Fdev&discussionId=-1&_a=summary&fullScreen=false
+        
+   
+    4. Enable flighting in MPAC 
+    
+    Portal provides the ability to flight the MPAC customers to multiple stamps. Portal will districute the traffic equally between all the registeres stamps.
+    
+    
+    In case of hosting service:
+    
+    To flight traffic to multiple stamps, register other stamps in flightUri. For example in this case MPAC flight (friendly name) is used to flight traffic to another stamp
+    
+    ```
+    {
+        name: "Microsoft_Azure_Demo",
+        uri: "//demo.hosting.portal.azure.net/demo",
+        uriFormat: "//demo.hosting.portal.azure.net/demo/{0}",
+        feedbackEmail: "azureux-demo@microsoft.com",
+        flightUris: [
+            "//demo.hosting.portal.azure.net/demo/MPACFlight",
+        ],
+    }
+    ```
+    
+    In case of legacy deploment:
+    ```
+    {
+        name: "Microsoft_Azure_Demo",
+        uri: "//main.demo.ext.azure.com",
+        uriFormat: "//{0}.demo.ext.azure.com",
+        feedbackEmail: "azureux-demo@microsoft.com",
+        flightUris: [
+            "//flight.demo.ext.azure.com",
+        ],
+    }
+    ```
+    Here is a sample pull request: https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/be95cabcf7098c45927e3bb7aff9b5e0f65de341?refName=refs%2Fheads%2Fdev
+   
+   5. Performance Improevements : Manifest Caching
+        Work In Progress
+   
+   6. Performance Improevements : You have removed PCV1 and PCV2 Code from you extension
+        Work In Progress
+   
+   7. Updating the feedback email
+        Work In Progress
+
+## How to send the pull request
+
+Before creating a pull request, create workitem so that you can assosciate the workitem with the commit.
+Create a workitem for assosciating your changes to the commit:  https://aka.ms/portalfx/config/update
+By assosciating the workitem with commit, you will get a notification when the configuration changes are deployed to each environment.
+
+Portal repository has 4 main branches i.e. dev, dogfood, mpac and production. ** All the pull requests should be sent for Dev branch.** 
+
+- git clome https://msazure.visualstudio.com/DefaultCollection/One/_git/AzureUX-PortalFx
+- cd AzureUX-PortalFx\
+- init.cmd
+- git checkout dev
+- cd RDPackages\OneCloud
+- Modify extension configuration
+- if enabling an extension then you need to update the enabled extension test count in %ROOT%\src\StbPortal\Website.Server.Tests\DeploymentSettingsTests.cs
+- git add <Modified_Files>
+- git commit -m "#123456 Add/ Enable the extension"
+- git fetch
+- git checkout -b myalias/myhotfix origin/production
+- git cherry-pick hotfixcommithashfrommpac
+- git push origin myalias/myhotfix
+- cd %ROOT%\src\
+- testconfig   // This command will test if all the test cases passed. If any of the test cases fails, please verify your config again
+
+## SLA for deploying the configuration changes
+
+As per the safe dedployment mandate, all the configuration changes are treated as code change. This implies that all configuration changhes will go through the same deployment process as code change. 
+
+All changes checked-in to dev branch will be deployed in following order:
+
+Dogfood -> RC -> MPAC -> PROD -> National Clouds (BF, FF and MC).
+
+
+| --------------- | ------- |
+| Environment     | SLA     |
+| --------------- | ------- |
+| **DOGFOOD**     | 5 days  |
+| **RC**          | 10 days |
+| **MPAC**        | 15 days |
+| **PROD**        | 20 days |
+| **BLACKFOREST** | 1 month |
+| **FAIRFAX**     | 1 month |
+| **MOONCAKE**    | 1 month |
+
+## Expediting the deployment of configuration changes
+
+In order to expedite the deployment of changes, you will need to send the pull request for each branch in portal repository i.e. Dogfood, MPAC and Production.
+
+** All the pull requests should be sent for Dev branch. Once the Pull request is marked as complete then you can send the pull request for Dogfood branch.
+Once the Dogfood Pull request is marked complete then you can send the pull request for MPAC branch. Once the Dogfood Pull request is marked complete then you can send the pull request for PROD branch. **
+
+If the pull request is not sent in the above specified order or the commit message is chanegd then it will lead to unit Test failure. In case of test failure your changes will be reverted without any notice.
+
+SLA for changes that are in PROD branch is:
+
+| --------------- | ------- |
+| Environment     | SLA     |
+| --------------- | ------- |
+| **PROD**        | 7 days  |
+| **BLACKFOREST** | 10 days |
+| **FAIRFAX**     | 10 days |
+| **MOONCAKE**    | 10 days |
+| --------------- | ------- |
+
+The above specified SLA is to deploy configuration changes to all regions in Production Environment. 
+
+As per the safe deployment mandate, deployment to production environment will be done in stage. Each stage is a logical grouping of regions. There are 5 stages in production environment.
+And, there is 24 hour wait period between promoting the build from one batch to another. This implies that minimum time to deploy a change in all regions in Production branch is 5 days.
+
+## Recieving Notification when changes are deployed
+
+Since you have assosciated your commit with a workitem, you will recieve the notification when the config change that you have submitted is deployed to each region.
+
+In case other people, in your team want to suscribe to these changes, please ask them to make a comment on the workitem. Once they have made a change they will start recieving the notifications.
+
+
+## Frequently asked questions
+
+Use a wildcard SSL cert for each environment to simplify maintenance (e.g. `*.{extension}.onecloud-ext.azure-test.net` or `*.{extension}.ext.azure.com`). If your team is building separate, independent extensions, you can also use
+`{extension}.{team}.ext.azure.com` and create a wildcard SSL cert for `*.{team}.ext.azure.com` to simplify overall management. Internal teams can create SSL certs for DF using [http://ssladmin](http://ssladmin). Production certs
+must follow your organizations PROD cert process -- **do not use SSL Admin for production certs**.
+
+**NOTE** : Registering an extension in Portal requires deployment so it can take almost 10 days. Please plan accordingly.
 
    
