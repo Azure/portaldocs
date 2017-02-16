@@ -267,10 +267,8 @@ All changes checked-in to dev branch will be deployed in following order:
 
 Dogfood -> RC -> MPAC -> PROD -> National Clouds (BF, FF and MC).
 
-
-| --------------- | ------- |
 | Environment     | SLA     |
-| --------------- | ------- |
+|-----------------|---------|
 | **DOGFOOD**     | 5 days  |
 | **RC**          | 10 days |
 | **MPAC**        | 15 days |
@@ -290,14 +288,12 @@ If the pull request is not sent in the above specified order or the commit messa
 
 SLA for changes that are in PROD branch is:
 
-| --------------- | ------- |
 | Environment     | SLA     |
-| --------------- | ------- |
+|-----------------|---------|
 | **PROD**        | 7 days  |
 | **BLACKFOREST** | 10 days |
 | **FAIRFAX**     | 10 days |
 | **MOONCAKE**    | 10 days |
-| --------------- | ------- |
 
 The above specified SLA is to deploy configuration changes to all regions in Production Environment. 
 
