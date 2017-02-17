@@ -3,8 +3,8 @@ Please read this documentaiton, if you are looking for information on following 
    1. Onboarding / Registering a new extension in the portal
    2. Moving from legacy DIY deployment to Extension hosting service
    3. Enable flighting in MPAC 
-   4. Performance Improevements : Manifest Caching
-   5. Performance Improevements : You have removed PCV1 and PCV2 Code from you extension
+   4. Performance Improvements : Manifest Caching
+   5. Performance Improvements : You have removed PCV1 and PCV2 Code from you extension
    6. Updating the feedback email
 
 
@@ -15,9 +15,9 @@ Please read this documentaiton, if you are looking for information on following 
     
     ** First Party extensions. **
 
-   Once your service name is finalized, we recommend you to register your extension registered in all environments. 
+   Once your service name is finalized, we recommend you to have your extension registered in all environments. 
    
-   It is important you read next section of the guide carefully as we rely on you manage your extension registeration / configuration management in portal repository. 
+   It is important you read next section of the guide carefully as we rely on you manage your extension registration / configuration management in portal repository. 
    
    Before we deep dive into how you can modify each attribute of configuration for above mentioned scenarios, lets understand the configuration:
    
@@ -226,10 +226,10 @@ Please read this documentaiton, if you are looking for information on following 
     ```
     Here is a sample pull request: https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/be95cabcf7098c45927e3bb7aff9b5e0f65de341?refName=refs%2Fheads%2Fdev
    
-   5. Performance Improevements : Manifest Caching
+   5. Performance Improvements : Manifest Caching
         Work In Progress
    
-   6. Performance Improevements : You have removed PCV1 and PCV2 Code from you extension
+   6. Performance Improvements : You have removed PCV1 and PCV2 Code from you extension
         Work In Progress
    
    7. Updating the feedback email
@@ -243,7 +243,7 @@ By assosciating the workitem with commit, you will get a notification when the c
 
 Portal repository has 4 main branches i.e. dev, dogfood, mpac and production. ** All the pull requests should be sent for Dev branch.** 
 
-- git clome https://msazure.visualstudio.com/DefaultCollection/One/_git/AzureUX-PortalFx
+- git clone https://msazure.visualstudio.com/DefaultCollection/One/_git/AzureUX-PortalFx
 - cd AzureUX-PortalFx\
 - init.cmd
 - git checkout dev
