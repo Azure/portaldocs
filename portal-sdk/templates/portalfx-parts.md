@@ -1,3 +1,4 @@
+
 ## Parts (a.k.a. tiles) 
 
 Parts (a.k.a. tiles) are a framework feature that let you integrate your UI on dashboards.  Parts used to be more prevalent on blades, but this is an older pattern.  If you are building a part for use on a blade then please reconsider.  

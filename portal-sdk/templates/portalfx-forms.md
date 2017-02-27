@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Working with Forms" description="" authors="sewatson" />
 
 # Developing Forms
 

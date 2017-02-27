@@ -1,5 +1,3 @@
-<properties title="" pageTitle="Creating an Extension" description="" authors="nickharris" />
-
 ## Getting started with the Portal SDK
 
 ### Prerequisites
