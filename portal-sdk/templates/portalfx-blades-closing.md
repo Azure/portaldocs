@@ -1,6 +1,3 @@
-<properties title="" pageTitle="Closing blades" description="" authors="adamabdelhamed" />
-
-[Portal FX](/documentation/sections/portalfx) > [UI](/documentation/sections/portalfx#ui) > [Blades](/documentation/articles/portalfx-blades) > Closing Blades
 
 # Closing blades programatically
 
@@ -10,25 +7,25 @@ Check out the [blade opening sample](http://aka.ms/portalfx/samples#blade/Sample
  
 The following metnods are now available on your template blade container.
 
-```javascript
+```typescript
 
-    import { Container as BladeContainer } from "Fx/Composition/Blade";
-    …
-    // closes the current blade now, optionally passing data back to the parent
-    closeCurrentBlade(data?: any): Promise<boolean>; 
-    // closes the current child blade now, if one is present
-    closeChildBlade(): Promise<boolean>; 
-    // closes the current child context blade now, if one is present
-    closeContextBlade(): Promise<boolean>; 
+import { Container as BladeContainer } from "Fx/Composition/Blade";
+   
+// closes the current blade now, optionally passing data back to the parent
+closeCurrentBlade(data?: any): Promise<boolean>; 
+// closes the current child blade now, if one is present
+closeChildBlade(): Promise<boolean>; 
+// closes the current child context blade now, if one is present
+closeContextBlade(): Promise<boolean>; 
 ```
 
 The following methods are now available on your part container contract.
 
-```javascript
-    // closes the current child blade now, if one is present
-    closeChildBlade(): Promise<boolean>; 
-    // closes the current child context blade now, if one is present
-    closeContextBlade(): Promise<boolean>; 
+```typescript
+// closes the current child blade now, if one is present
+closeChildBlade(): Promise<boolean>; 
+// closes the current child context blade now, if one is present
+closeContextBlade(): Promise<boolean>; 
 ```
 
 Each of these methods returns a promise that generally returns true.  If there is a blade on the screen that has unsaved edits to a form, the framework will prompt the user, giving them the option to keep the unsaved blade open.  If the user chooses to continue working on their unsaved edits then the blade closing promise will return false.
@@ -37,12 +34,12 @@ Each of these methods returns a promise that generally returns true.  If there 
 
 When opening a child blade, you can register the optional onClosed callback to be notified when the blade you've opened closes.  The child blade can send you untyped data that you can use in your callback.  Here is an example:
  
-```javascript
+```typescript
 import { BladeClosedReason } from "Fx/Composition";
 ...
 container.openBlade(new SomeBladeReference({ … }, (reason: BladeClosedReason, data?: any) => {
         // Code that runs when the blade closes - Data will only be there if the child blade returned it
         // reason lets you differentiate between things like the user closing the blade via the close button vs. a parent blade programatically closing it
-    });
+});
 ```
 

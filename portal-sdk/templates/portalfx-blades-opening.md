@@ -1,6 +1,3 @@
-<properties title="" pageTitle="Opening blades" description="" authors="adamabdelhamed" />
-
-[Portal FX](/documentation/sections/portalfx) > [UI](/documentation/sections/portalfx#ui) > [Blades](/documentation/articles/portalfx-blades) > Opening Blades
 
 #Blade opening and closing
 
