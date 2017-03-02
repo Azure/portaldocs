@@ -1,3 +1,4 @@
+
 ## TypeScript decorator support for extension metadata (formerly known as No-PDL or No PDL)
 
 The Azure portal SDK requires developers to provide metadata for UI elements like blades and parts. The portal uses this metadata to build an inventory for your extension that is used internally.
