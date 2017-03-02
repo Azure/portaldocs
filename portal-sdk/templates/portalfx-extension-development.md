@@ -8,6 +8,7 @@
 
 # Basic Concepts  
 {"gitdown": "include-file", "file": "../templates/portalfx-ui-concepts.md"}
+{"gitdown": "include-file", "file": "../templates/portalfx-no-pdl-programming.md"}
 {"gitdown": "include-file", "file": "../templates/portalfx-parts.md"}
 {"gitdown": "include-file", "file": "../templates/portalfx-blades.md"}
 {"gitdown": "include-file", "file": "../templates/portalfx-forms.md"}
