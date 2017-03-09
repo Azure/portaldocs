@@ -253,7 +253,7 @@ Portal repository has 4 main branches i.e. dev, dogfood, mpac and production. **
 - git add <Modified_Files>
 - git commit -m "#123456 Add/ Enable the extension"
 - git fetch
-- git checkout -b myalias/myhotfix origin/production
+- git checkout -b myalias/myhotfix origin/dev
 - git cherry-pick hotfixcommithashfrommpac
 - git push origin myalias/myhotfix
 - cd %ROOT%\src\
