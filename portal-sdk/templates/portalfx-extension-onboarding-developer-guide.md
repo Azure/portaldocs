@@ -257,6 +257,7 @@ Portal repository has 4 main branches i.e. dev, dogfood, mpac and production. **
 - git cherry-pick hotfixcommithashfrommpac
 - git push origin myalias/myhotfix
 - cd %ROOT%\src\
+- buildall
 - testconfig   // This command will test if all the test cases passed. If any of the test cases fails, please verify your config again
 
 ## SLA for deploying the configuration changes
