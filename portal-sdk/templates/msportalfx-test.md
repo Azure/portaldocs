@@ -207,8 +207,23 @@ If you run into a compilation error with node.d.ts, verify that the tsc version 
     
     tsc --version
 
-If the version is incorrect, then you may need to adjust your path variables or directly call the latest version of tsc (eg c:.  
+If the version is incorrect, then you may need to adjust your path variables or directly call the latest version of tsc.
 
+If your test fails with the Chrome automation extension crashing, please try adding the no-sandbox flag to your config.json:
+	```json
+
+		{
+		"capabilities": {
+			"browserName": "chrome",
+            "chromeOptions": { 
+                "args": [ 
+                    "no-sandbox"
+            ]}
+		},
+		"portalUrl": "https://portal.azure.com"
+		}
+	```	
+    
 <a name="msportalfx-test-getting-started-updating"></a>
 ### Updating
 
