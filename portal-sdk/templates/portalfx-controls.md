@@ -110,6 +110,3 @@ To learn more about any of our controls, click on any of the links below.
 - [Video](http://aka.ms/portalfx/samples#blade/SamplesExtension/VideoInstructions/selectedItem/VideoInstructions/selectedValue/VideoInstructions)
 - [Terminal Emulator](http://aka.ms/portalfx/samples#blade/SamplesExtension/TerminalEmulatorInstructionsBlade/selectedItem/TerminalEmulatorInstructionsBlade/selectedValue/TerminalEmulatorInstructionsBlade)
 
-## Build your own controls
-
-  	{"gitdown": "include-file", "file": "../templates/portalfx-controls-custom-controls.md"}
