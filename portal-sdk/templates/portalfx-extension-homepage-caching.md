@@ -1,12 +1,7 @@
-<properties
-    title=""
-    pageTitle="Performance - Extension HomePage Caching"
-    description=""
-    authors="madjos" />
 
 ### Server side caching of extension home pages
 
-With the latest version of the SDK (5.0.302.85 or later) extension home pages can be cached (to different levels).
+With the (5.0.302.85 or later) version of the SDK  extension home pages can be cached (to different levels).
 This should help get slightly better load time especially from browsers that have high latency.
 Below are two example URLs from the portal running in production:
 
