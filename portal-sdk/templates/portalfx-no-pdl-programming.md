@@ -48,7 +48,96 @@ Below is an example of a menu blade build using decorators.  It uses the `@MenuB
 1.  It makes the public `viewModel` property required.  The property is of type `MenuBlade.ViewModel2` and provides you with APIs to setup the menu.
 2.  It makes the public 'context' property required.  The property is of type `MenuBlade.Context`.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V2/Forms/FormsBlade.ts", "section": "docs#HelloWorldMenuBlade"}
+```ts
+/// <reference path="../../../TypeReferences.d.ts" />
+
+import BladesArea = require("../BladesArea");
+import ClientResources = require("ClientResources");
+import BladeReferences = require("../../../_generated/BladeReferences");
+import MenuBlade = require("Fx/Composition/MenuBlade");
+
+export = Main;
+
+module Main {
+    "use strict";
+
+    @MenuBlade.Decorator()
+    export class TemplateBladesBlade {
+        public title = ClientResources.templateBladesBladeTitle;
+        public subtitle = ClientResources.samples;
+
+        public context: MenuBlade.Context<void, BladesArea.DataContext>;
+
+        public viewModel: MenuBlade.ViewModel2;
+
+        public onInitialize() {
+            const { container } = this.context;
+
+            this.viewModel = MenuBlade.ViewModel2.create(container, {
+                groups: [
+                    {
+                        id: "default",
+                        displayText: "",
+                        items: [
+                            {
+                                id: "simpleTemplateBlade",
+                                displayText: ClientResources.simpleTemplateBlade,
+                                icon: null,
+                                supplyBladeReference: () => {
+                                    return new BladeReferences.SimpleTemplateBladeReference();
+                                }
+                            },
+                            {
+                                id: "templateBladeWithShield",
+                                displayText: ClientResources.templateBladeWithShield,
+                                icon: null,
+                                supplyBladeReference: () => {
+                                    return new BladeReferences.TemplateBladeWithShieldReference();
+                                }
+                            },
+                            {
+                                id: "templateBladeWithCommandBar",
+                                displayText: ClientResources.templateBladeWithCommandBar,
+                                icon: null,
+                                supplyBladeReference: () => {
+                                    return new BladeReferences.TemplateBladeWithCommandBarReference();
+                                }
+                            },
+                            {
+                                id: "templateBladeReceivingDataFromChildBlade",
+                                displayText: ClientResources.templateBladeReceivingDataFromChildBlade,
+                                icon: null,
+                                supplyBladeReference: () => {
+                                    return new BladeReferences.TemplateBladeReceivingDataFromChildBladeReference();
+                                }
+                            },
+                            {
+                                id: "templateBladeWithSettings",
+                                displayText: ClientResources.templateBladeWithSettings,
+                                icon: null,
+                                supplyBladeReference: () => {
+                                    return new BladeReferences.TemplateBladeWithSettingsReference();
+                                }
+                            },
+                            {
+                                id: "templateBladeInMenuBlade",
+                                displayText: ClientResources.templateBladeInMenuBlade,
+                                icon: null,
+                                supplyBladeReference: () => {
+                                    return new BladeReferences.TemplateBladeInMenuBladeReference();
+                                }
+                            },
+                        ]
+                    }
+                ],
+                defaultId: "simpleTemplateBlade"
+            });
+
+            return Q();  // This sample loads no data.
+        }
+    }
+}
+```
 
 ### The context property
 
