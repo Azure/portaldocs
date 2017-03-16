@@ -48,7 +48,7 @@ Below is an example of a menu blade build using decorators.  It uses the `@MenuB
 1.  It makes the public `viewModel` property required.  The property is of type `MenuBlade.ViewModel2` and provides you with APIs to setup the menu.
 2.  It makes the public 'context' property required.  The property is of type `MenuBlade.Context`.
 
-{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V2/Blades/Template/TemplateBladesBlade.ts", "section": "docs#HelloWorldMenuBlade"}
+{"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V2/Forms/FormsBlade.ts", "section": "docs#HelloWorldMenuBlade"}
 
 ### The context property
 
