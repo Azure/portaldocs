@@ -77,8 +77,9 @@ Please read this documentaiton, if you are looking for information on following 
     uriFormat: "//{0}.demo.ext.azure.com",
    ```
    
-    NOTE: Extension using legacy DIY URLs must use a standard CNAME pattern. 
-    Create CNAMEs using [Microsoft's DNS](http://msinterface/form.aspx?ID=4260) (use any Azure property as the identity).
+   NOTE: Extension using legacy DIY URLs must use a standard CNAME pattern. 
+   Create DOGFOOD/PROD CNAMEs using [Microsoft's DNS](http://msinterface/form.aspx?ID=4260) (use any Azure property as the identity).
+   Create National Cloud CNAMEs using each cloud's process (search for "DNS" on their wiki pages for more info - http://aka.ms/fairfax http://aka.ms/blackforest http://aka.ms/mooncake)
     
 | Environment     | URL                                        |
 |-----------------|--------------------------------------------|
