@@ -77,9 +77,7 @@ Please read this documentaiton, if you are looking for information on following 
     uriFormat: "//{0}.demo.ext.azure.com",
    ```
    
-   NOTE: Extension using legacy DIY URLs must use a standard CNAME pattern. 
-   Create DOGFOOD/PROD CNAMEs using [Microsoft's DNS](http://msinterface/form.aspx?ID=4260) (use any Azure property as the identity).
-   Create National Cloud CNAMEs using each cloud's process (search for "DNS" on their wiki pages for more info - http://aka.ms/fairfax http://aka.ms/blackforest http://aka.ms/mooncake)
+   NOTE: Extension using legacy DIY URLs must use a standard CNAME pattern:
     
 | Environment     | URL                                        |
 |-----------------|--------------------------------------------|
@@ -90,7 +88,11 @@ Please read this documentaiton, if you are looking for information on following 
 | **MOONCAKE**    | main.{extension}.ext.azure.cn              |
    
    
-   ** PROD ** CNAME will be used for RC, MPAC, Preview and PROD  environment. 
+   **PROD** CNAME will be used for RC, MPAC, Preview and PROD environment.
+   
+   Create **DOGFOOD/PROD** CNAMEs using [Microsoft's DNS](http://msinterface/form.aspx?ID=4260) (use any Azure property as the identity).
+   
+   Create **National Cloud** CNAMEs using each cloud's process (search for "DNS" on their wiki pages for more info - http://aka.ms/fairfax http://aka.ms/blackforest http://aka.ms/mooncake)
    
    
    Since hosting service provides mechanism for extensions to deploy using safe deployment practice, portal will load the version of your extension based on the region from where the customer is accessing the portal. For more details please refer to hosting service documentation.
