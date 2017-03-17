@@ -8,12 +8,12 @@ Please read this documentaiton, if you are looking for information on following 
    6. Updating the feedback email
 
 
-    ** External Partners/ Third Party extension **
-    Please read the next section to understand the capabilties that Portal can provide for your extension through configuration.
+   **External Partners/ Third Party extension**
+   Please read the next section to understand the capabilties that Portal can provide for your extension through configuration.
     
-    You do not have access to repo, so please email us for any configuraiton changes: <a href="mailto:ibizafxpm@microsoft.com?subject=[Onboarding Request] Add &lt;Name&gt; extension to the portal&body=Extension name:  Company_[BrandOrSuite_]ProductOrComponent (e.g. Contoso_SomeSku_SomeProduct or Contoso_SomeProduct)%0A%0AURLs  (must adhere to pattern)%0APROD-- main.&lt;extension&gt;.ext.contoso.com%0A%0AContact info%0ABusiness Contacts:_________%0ADev leads: _________%0APROD on-call email: _________%0A">submit their request via email</a>.
+   You do not have access to repo, so please email us for any configuraiton changes: <a href="mailto:ibizafxpm@microsoft.com?subject=[Onboarding Request] Add &lt;Name&gt; extension to the portal&body=Extension name:  Company_[BrandOrSuite_]ProductOrComponent (e.g. Contoso_SomeSku_SomeProduct or Contoso_SomeProduct)%0A%0AURLs  (must adhere to pattern)%0APROD-- main.&lt;extension&gt;.ext.contoso.com%0A%0AContact info%0ABusiness Contacts:_________%0ADev leads: _________%0APROD on-call email: _________%0A">submit their request via email</a>.
     
-    ** First Party extensions. **
+   **First Party extensions**
 
    Once your service name is finalized, we recommend you to have your extension registered in all environments. 
    
