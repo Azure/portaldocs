@@ -44,19 +44,19 @@ Please read this documentaiton, if you are looking for information on following 
    
    Typically extension.pdl file looks like:
    
-   ```xml
-    <?xml version="1.0" encoding="utf-8" ?>
-    <Definition xmlns="http://schemas.microsoft.com/aux/2013/pdl">
-      <Extension Name="Microsoft_Azure_Demo" Version="1.0" EntryPointModulePath="Program"/>
-    </Definition>
-   ```
-    Extension names must use standard extension name format: `Company_BrandOrSuite_ProductOrComponent` (e.g. `Contoso_Azure_{extension}` or `Microsoft_Azure_{extension}`). 
-    
-    If your extension is in preview mode then you also need to add the preview tag:
-    
-    ```
-    <Extension Name="Microsoft_Azure_Demo" Version="1.0" Preview="true" EntryPointModulePath="Program"/>
-    ```
+```xml
+ <?xml version="1.0" encoding="utf-8" ?>
+ <Definition xmlns="http://schemas.microsoft.com/aux/2013/pdl">
+   <Extension Name="Microsoft_Azure_Demo" Version="1.0" EntryPointModulePath="Program"/>
+ </Definition>
+```
+ Extension names must use standard extension name format: `Company_BrandOrSuite_ProductOrComponent` (e.g. `Contoso_Azure_{extension}` or `Microsoft_Azure_{extension}`). 
+
+ If your extension is in preview mode then you also need to add the preview tag:
+
+ ```
+ <Extension Name="Microsoft_Azure_Demo" Version="1.0" Preview="true" EntryPointModulePath="Program"/>
+ ```
 
    2. uri / uriFormat: 
 
