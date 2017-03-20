@@ -96,7 +96,19 @@ NOTE: Extension using legacy DIY URLs must use a standard CNAME pattern:
 
 Create **DOGFOOD/PROD** CNAMEs using [Microsoft's DNS](http://msinterface/form.aspx?ID=4260) (use any Azure property as the identity).
 
-Create **National Cloud** CNAMEs using each cloud's process (search for "DNS" on their wiki pages for more info - http://aka.ms/fairfax http://aka.ms/blackforest http://aka.ms/mooncake)
+Create **National Cloud** CNAMEs using each cloud's process (search for "DNS" on their wiki pages for more info) 
+- Fairfax
+    - http://aka.ms/fairfax 
+    - Open TFS item requesting adding a CNAME using the following template: [TFS request template](http://aka.ms/jnbgoi)
+    - Example TFS request item of another hosting service extension: [Example](http://vstfrd:8080/Azure/Fairfax/_workitems#_a=edit&id=8798254&fullScreen=false)
+- Blackforest
+    - http://aka.ms/blackforest 
+    - Open TFS item requesting adding a CNAME using the following template: [TFS request template](http://aka.ms/Cf2ciz)
+    - Example TFS request item of another hosting service extension: [Example](http://vstfrd:8080/Azure/BlackForest/_workItems#id=8798256&fullScreen=false&_a=edit)
+- Mooncake
+    - http://aka.ms/mooncake
+    - Follow the information on this page: [Creating CName/DNS Entry in Mooncake](http://sharepoint/sites/CIS/waps/WAPO/Creating%20CName%20DNS%20Entry%20in%20Mooncake.aspx)
+    - Example TFS request item of another hosting service extension: [Example](http://vstfrd:8080/Azure/Mooncake/_workitems#_a=edit&id=8798258&fullScreen=false)
 
 
 Since hosting service provides mechanism for extensions to deploy using safe deployment practice, portal will load the version of your extension based on the region from where the customer is accessing the portal. For more details please refer to hosting service documentation.
