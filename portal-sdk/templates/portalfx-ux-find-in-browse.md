@@ -1,4 +1,3 @@
-<properties title="Show your info in Browse" pageTitle="Show your info in Browse" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

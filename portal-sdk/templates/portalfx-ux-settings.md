@@ -1,4 +1,3 @@
-<properties title="Settings" pageTitle="Settings" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

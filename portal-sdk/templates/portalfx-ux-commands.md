@@ -1,4 +1,3 @@
-<properties title="Commands" pageTitle="Commands" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

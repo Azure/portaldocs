@@ -1,3 +1,5 @@
+{"gitdown": "contents"}
+
 ## Exit criteria & quality metrics
 
 In order to meet customer expectations and continue to increase customer satisfaction, the following quality metrics
@@ -89,7 +91,7 @@ See also:
 ARM-based services must allow customers to move resources between subscriptions and resource groups.
 
 See also:
-- [Documentation](/documentation/articles/portalfx-resourcemove)
+- [Documentation](portalfx-resourcemove.md)
 - [Dashboard](http://aka.ms/portalfx/resourcemove/dashboard)
 - [#ibiza-resources on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-resources)
 - [Ask a question](https://stackoverflow.microsoft.com/questions/ask?tags=ibiza-resources)

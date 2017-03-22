@@ -1,4 +1,3 @@
-<properties title="Create forms" pageTitle="Create forms" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

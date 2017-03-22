@@ -1,6 +1,3 @@
-<properties title="" pageTitle="Deploy to Azure" description="" authors="flanakin" />
-
-[Portal FX](/documentation/sections/portalfx) > [Hubs](/documentation/sections/portalfx#hubs) > [Create](/documentation/articles/portalfx-create) > Deploy to Azure
 
 # Deploy to Azure
 

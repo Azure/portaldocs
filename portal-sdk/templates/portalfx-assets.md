@@ -1,4 +1,4 @@
-<properties title="" pageTitle="Working with assets" description="" authors="flanakin" />
+{"gitdown": "contents"}
 
 ## Assets
 
@@ -8,12 +8,12 @@ subscriptions (e.g. users). As an example, subscriptions, resource groups, and d
 
 Assets are used for the following experiences:
 
-* [Notifications](/documentation/articles/portalfx-notifications) should be linked to an asset
-* The [Browse menu](/documentation/articles/portalfx-browse) lists browseable asset types
+* [Notifications](portalfx-notifications.md) should be linked to an asset
+* The [Browse menu](portalfx-browse.md) lists browseable asset types
 * Browse > Recent only shows assets based on the asset type specified on a blade
 * The All Resources view only shows resources that have asset types that implement Browse v2
 * The resource group list only shows resources that have asset types with a defined `ResourceType`
-* Defining [permissions](/documentation/articles/portalfx-permissions) in PDL requires asset types
+* Defining [permissions](portalfx-permissions.md) in PDL requires asset types
 * References to deleted assets can be cleaned up with `notifyAssetDeleted()`
 * Overriding behavior for [resource kinds](#resource-kinds)
 
@@ -97,7 +97,7 @@ If a blade, part, or command represents or acts on multiple assets, use the prim
 
 ### Showing up in the Browse ("More services") menu
 To show up in the Browse menu, your asset type must specify the `<Browse Type="" />` node. The `Type` informs the Browse menu 
-how to interact with your asset type. Learn more about [Browse integration](/documentation/articles/portalfx-browse).
+how to interact with your asset type. Learn more about [Browse integration](portalfx-browse.md).
 
 Services that use [resource kinds](#resource-kinds) can also be added to the Browse menu, but that must be configured by the Fx team. To do this, [create a partner request](http://aka.ms/portalfx/request) with the asset type name and kind value.
 
@@ -109,10 +109,10 @@ above for more information.
 ### Showing up in All Resources and resource group resources
 The All Resources and resource group blades show all resources except alert rules, autoscale settings, and dashboards. Resources that aren't backed by an asset type use a very basic resource menu blade that exposes properties, RBAC, tags, locks, and activity log.
 
-To implement the most basic asset type, add the asset type definition (including display names, icon, blade, and part), add `<Browse Type="ResourceType" />` for [no-code Browse](/documentation/articles/portalfx-browse), and then include a `<ResourceType ResourceTypeName="" ApiVersion="" />` declaration.
+To implement the most basic asset type, add the asset type definition (including display names, icon, blade, and part), add `<Browse Type="ResourceType" />` for [no-code Browse](portalfx-browse.md), and then include a `<ResourceType ResourceTypeName="" ApiVersion="" />` declaration.
 
 ### Handling permissions for RBAC
-To ensure your blades, parts, and commands react to the user not having access, you can add an `AssetType`, `AssetIdProperty`, and required `Permissions` to your blades, parts, and commands. Learn more about [Permissions](/documentation/articles/portalfx-permissions).
+To ensure your blades, parts, and commands react to the user not having access, you can add an `AssetType`, `AssetIdProperty`, and required `Permissions` to your blades, parts, and commands. Learn more about [Permissions](portalfx-permissions.md).
 
 <a name="resource-kinds"></a>
 ### Special-casing ARM resource kinds
@@ -188,7 +188,7 @@ MsPortalFx.Hubs.Notifications.ClientNotification.publish({
 });
 ```
 
-Learn more about [notifications](/documentation/articles/portalfx-notifications).
+Learn more about [notifications](portalfx-notifications.md).
 
 ### ARM RP and resource type metadata
 Every ARM resource provider (RP) should have a default RP icon as well as a resource type icon specified in the RP manifest to support the following scenarios:

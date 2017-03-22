@@ -1,4 +1,3 @@
-<properties title="Packages" pageTitle="Packages" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

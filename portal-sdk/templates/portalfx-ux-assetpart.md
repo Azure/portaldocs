@@ -1,4 +1,3 @@
-<properties title="AssetPart" pageTitle="AssetPart" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

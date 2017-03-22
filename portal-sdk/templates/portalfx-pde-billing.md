@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Using the Billing PDE" description="" authors="nickha" />
 
 <tags
     ms.service="portalfx"

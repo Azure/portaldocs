@@ -1,6 +1,6 @@
-<properties title="" pageTitle="Introduction to Parameter Collection" description="" authors="nickharris" />
+{"gitdown": "contents"}
 
-{"gitdown": "include-file", "file": "./includes/portalfx-parameter-collection-related.md"}
+{"gitdown": "include-file", "file": "portalfx-parameter-collection-related.md"}
 
 # Introduction to Parameter Collection
 

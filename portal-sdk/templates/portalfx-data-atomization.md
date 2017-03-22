@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Data atomization" description="" authors="bradolenick,nickharris" />
 
 ## Data atomization
 

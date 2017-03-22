@@ -1,4 +1,3 @@
-<properties title="Expose your resources in the Marketplace" pageTitle="Expose your resources in the Marketplace" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

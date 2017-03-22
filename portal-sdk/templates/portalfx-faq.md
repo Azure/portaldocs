@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Frequently Asked Questions" description="" authors="nickharris" />
 
 ## Frequently Asked Questions
 
@@ -10,7 +9,7 @@ A: To contribute an extension to the portal, you don't need to clone our reposit
 You can write an extension using the [Ibiza SDK](http://aka.ms/portalfx/docs), deploy it to your own machine, and load it into the portal at runtime.
 When you're ready to register your extension in the preview or production environments, reach out to Ibiza team on: [https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza](https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza).
 
-See also: [How the portal works](/documentation/articles/portalfx-howitworks)
+See also: [How the portal works](portalfx-howitworks.md)
 
 #### Q: I'm stuck. Where can I find help?
 
@@ -18,7 +17,7 @@ A: There are a few ways to get help:
 
 * Read the [documentation](https://auxdocs.azurewebsites.net/)
 * Read or experiment with the samples that come with the SDK. You can find them under `\My Documents\PortalSDK\FrameworkPortal\Extensions\SamplesExtension`
-* Read the [debugging guide](/documentation/articles/portalfx-debugging)
+* Read the [debugging guide](portalfx-debugging.md)
 * Reach out to Ibiza team on: [https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza](https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza).
 
 #### Q: Which browsers are supported?

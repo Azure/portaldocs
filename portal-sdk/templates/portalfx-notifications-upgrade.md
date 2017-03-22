@@ -1,6 +1,3 @@
-<properties title="" pageTitle="Upgrading to the latest Notifications API" description="" authors="flanakin,gurua" />
-
-[Portal FX](/documentation/sections/portalfx) > [Hubs](/documentation/sections/portalfx#hubs) > [Notifications](/documentation/articles/portalfx-notifications) > Upgrading
 
 # Upgrading to the latest Notifications API
 
@@ -188,6 +185,6 @@ After upgrading to the new `ClientNotification` API, you can delete all your `No
 That's it. You're done. Time to build and revel in your done-ness :)
 
 
-Next Steps: [Notifications](/documentation/sections/portalfx-notifications)
+Next Steps: [Notifications](portalfx-notifications.md)
 
 [notification]: ../media/portalfx-notifications/notifications.png

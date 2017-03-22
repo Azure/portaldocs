@@ -1,3 +1,5 @@
+{"gitdown": "contents"}
+
 ## Kusto Telemetry
 
 ### Supported Databases
@@ -20,7 +22,7 @@ Other useful Kusto tables are the ones where errors and warnings are getting log
 |Database          | Table Name        | Details                                                                                                                                                                                                                                 |
 |------------------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |AzurePortal       | ClientEvents      | This table contains errors and warnings thrown from Framework and Hubs IFrame.                                                                                                                                                          |
-|AzurePortal       | ExtEvents         | This table contains errors and warnings thrown from an extension's IFrame. Your extension will log to this table only if you have previously [onboarded to ExtTelemetry/ExtEvents tables](/documentation/articles/portalfx-telemetry).  |
+|AzurePortal       | ExtEvents         | This table contains errors and warnings thrown from an extension's IFrame. Your extension will log to this table only if you have previously [onboarded to ExtTelemetry/ExtEvents tables](portalfx-telemetry.md).  |
 
 ### Supported Functions
 
@@ -54,7 +56,7 @@ We plan to merge ClientTelemetryForKustoExport into ClientTelemetry stream very 
 #### Action 
 This represents an event in the portal.
 
-{"gitdown": "include-file", "file": "./includes/portalfx-telemetry-actions.md"}
+{"gitdown": "include-file", "file": "portalfx-telemetry-actions.md"}
 
 #### ActionModifier
 This is used in tandem with the Action field. This represents a status of a particular Action. So for BladeReady for eg., you will see ActionModifier values of start, complete & cancel

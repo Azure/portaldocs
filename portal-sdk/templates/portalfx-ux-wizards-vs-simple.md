@@ -1,4 +1,3 @@
-<properties title="Wizards vs. simple form" pageTitle="Wizards vs. simple form" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

@@ -1,4 +1,3 @@
-<properties title="" pageTitle="National / community clouds" description="" authors="dbrankin" />
 
 <tags
   ms.service="portalfx"
@@ -37,7 +36,7 @@ there. Typical items to watch for are:
 1. Extensions must allow access from all community cloud URLs (*.portal.azure.com in Public Azure) they are enabled in
 
 These issues are discussed in more detail below. Many of these are best resolved through the 
-[Domain based configuration](/documentation/articles/portalfx-domain-based-configuration) pattern.
+[Domain based configuration](portalfx-domain-based-configuration.md) pattern.
 
 ### Hard-coded links
 Hardcoding URLs into source code is generally considered an anti-pattern as these can't be easily maintained. The recommended practice is to store

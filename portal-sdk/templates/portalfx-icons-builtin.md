@@ -1,6 +1,3 @@
-<properties linkid="" urlDisplayName="" pageTitle="Using built-in icons" metaKeywords="" description="" metaCanonical="" services="" documentationCenter="" title="Icons - built in icons" authors="" solutions="" manager="" editor="" />
-
-[Portal FX](/documentation/sections/portalfx) > [UI](/documentation/sections/portalfx#ui) > [Icons](/documentation/articles/portalfx-icons) > Using built-in icons
 
 # Using built-in icons
 
@@ -4110,7 +4107,7 @@ The portal comes with a set of icons which are available for use with blades, pa
 </div>
 <div style="clear:both"></div>
 
-Next steps: [Creating icons](/documentation/articles/portalfx-icons-creation)
+Next steps: [Creating icons](portalfx-icons-creation.md)
 
 <script type="text/javascript">
   $(".icons li").each(function() {

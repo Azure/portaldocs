@@ -1,4 +1,3 @@
-<properties title="Grids" pageTitle="Grids" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

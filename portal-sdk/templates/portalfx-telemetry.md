@@ -1,3 +1,5 @@
+{"gitdown": "contents"}
+
 # Portal Telemetry Overview
 
 Ibiza portal tracks several pieces of information as users navigate through the portal. Extensions do not need to consume any APIs to have this information collected.
@@ -18,11 +20,11 @@ There are two tables used for telemetry:
 * ExtTelemetry - contains extension telemetry. As an extension author, you may log additional telemetry to this table. 
     * *Note*: Your extension will log to this table only if you have onboarded to the telemetry services provided by Framework.
 
-You can read more [here](/documentation/articles/portalfx-telemetry-kusto-databases) about Kusto and about the data provided in our Kusto cluster.
+You can read more [here](portalfx-telemetry-kusto-databases.md) about Kusto and about the data provided in our Kusto cluster.
 
 ### Tracked Actions
 
-{"gitdown": "include-file", "file": "./includes/portalfx-telemetry-actions.md"}
+{"gitdown": "include-file", "file": "portalfx-telemetry-actions.md"}
 
 ## Logging
 
@@ -43,7 +45,7 @@ To start using the built-in controller provided by Framework for collecting tele
   }
 ```
 
-You can read [here](/documentation/articles/portalfx-telemetry-logging) more details about using the telemetry controller provided by Framework.
+You can read [here](portalfx-telemetry-logging.md) more details about using the telemetry controller provided by Framework.
 
 ### Logging telemetry to ExtTelemetry table
 
@@ -88,9 +90,9 @@ Errors and warnings are logged to ExtEvents table, which is available in Kusto o
 
 **NOTE:** Verbose logging is currently disabled in mpac/production, in order to prevent overly aggressive logging. We recommend you to use verbose logging only for debugging.
 
-We have built [Extension Errors Dashboard](/documentation/articles/portalfx-telemetry-extension-errors) for giving you the ability to analyze easier the errors and warnings thrown by your extension.
+We have built [Extension Errors Dashboard](portalfx-telemetry-extension-errors.md) for giving you the ability to analyze easier the errors and warnings thrown by your extension.
 
-**NOTE:**  In the charts from [Extension Errors Dashboard](/documentation/articles/portalfx-telemetry-extension-errors), we aggregate the error messages by omitting the text which is within double quotes (") or single quotes ('). We consider those parts to be the dynamic part of the message (e.g. an id, a timestamp etc.). For example, a message like [Could not find part "PartName1"] will be treated as [Could not find part ""]. Please use this format for all the logged error messages, if you want them to be aggregated by our queries.
+**NOTE:**  In the charts from [Extension Errors Dashboard](portalfx-telemetry-extension-errors.md), we aggregate the error messages by omitting the text which is within double quotes (") or single quotes ('). We consider those parts to be the dynamic part of the message (e.g. an id, a timestamp etc.). For example, a message like [Could not find part "PartName1"] will be treated as [Could not find part ""]. Please use this format for all the logged error messages, if you want them to be aggregated by our queries.
 
 ## Available Power BI Dashboards
 
@@ -99,10 +101,10 @@ Following are some of the dashboards that we support. If you do not have access 
 |Name                            | PowerBi Link                                                                                                                                     | Metrics Description                                                                    |
 |--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
 |Portal User Adoption Dashboard  | [http://aka.ms/portalfx/dashboard/PortalUserAdoption](http://aka.ms/portalfx/dashboard/PortalUserAdoption)                                       |                                                                                        |
-|Portal Performance Dashboard    | [http://aka.ms/portalfx/dashboard/PortalPerformance](http://aka.ms/portalfx/dashboard/PortalPerformance)                                         | [Perf Docs](/documentation/articles/portalfx-performance)                              |
-|Portal Reliability Dashboard    | [http://aka.ms/portalfx/dashboard/PortalReliability](http://aka.ms/portalfx/dashboard/PortalReliability)                                         | [Reliability Docs](/documentation/articles/portalfx-reliability)                       |
-|Portal Create Dashboard         | [http://aka.ms/portalfx/dashboard/PortalCreate](http://aka.ms/portalfx/dashboard/PortalCreate)                                                   | [Create Docs](/documentation/articles/portalfx-telemetry-create)                       |
-|Extension Errors Dashboard      | [http://aka.ms/portalfx/dashboard/ExtensionErrors](http://aka.ms/portalfx/dashboard/ExtensionErrors)                                             | [Extension Errors Docs](/documentation/articles/portalfx-telemetry-extension-errors)   |
+|Portal Performance Dashboard    | [http://aka.ms/portalfx/dashboard/PortalPerformance](http://aka.ms/portalfx/dashboard/PortalPerformance)                                         | [Perf Docs](portalfx-performance.md)                              |
+|Portal Reliability Dashboard    | [http://aka.ms/portalfx/dashboard/PortalReliability](http://aka.ms/portalfx/dashboard/PortalReliability)                                         | [Reliability Docs](portalfx-reliability.md)                       |
+|Portal Create Dashboard         | [http://aka.ms/portalfx/dashboard/PortalCreate](http://aka.ms/portalfx/dashboard/PortalCreate)                                                   | [Create Docs](portalfx-telemetry-create.md)                       |
+|Extension Errors Dashboard      | [http://aka.ms/portalfx/dashboard/ExtensionErrors](http://aka.ms/portalfx/dashboard/ExtensionErrors)                                             | [Extension Errors Docs](portalfx-telemetry-extension-errors.md)   |
 
 
 ## Collecting Feedback From Your Users

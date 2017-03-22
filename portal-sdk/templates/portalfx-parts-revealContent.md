@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Improving Part responsiveness" description="revealContent" authors="bradolenick" />
 
 ### Improving Part responsiveness
 

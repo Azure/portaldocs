@@ -1,9 +1,8 @@
-<properties title="" pageTitle="Forms - EditScope FAQ" description="" authors="brado" />
 
 ## EditScope FAQ  
 
 For an end-to-end overview of EditScope and how it's used in the Azure Portal FX, please refer to the video and accompanying PowerPoint presentation here:  
-[Forms: Working with Edit Scopes](/documentation/articles/portalfx-forms-working-with-edit-scopes)
+[Forms: Working with Edit Scopes](portalfx-forms-working-with-edit-scopes.md)
 
 When applying EditScope to common Form scenarios, here is a quick reference with answers to frequently-asked questions.
 
@@ -52,7 +51,7 @@ The EditScopeAccessor variant here (the first variant) is preferred for a couple
 {"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/Forms/Scenarios/FormFields/ViewModels/FormFieldsFormIntegratedViewModels.ts", "section": "formsEditScopeFaq#editScopeAccessorAdvanced"}  
   
   
-### Q: When do I need to worry about [type metadata](/documentation/articles/portalfx-data-typemetadata) for my EditScope?  
+### Q: When do I need to worry about [type metadata](portalfx-data-typemetadata.md) for my EditScope?  
 
 For many of the most common, simple Form scenarios, there is *no need* to describe the EditScope/Form model in terms of type metadata. Generally speaking, supplying type metadata is the way to turn on *advanced* FX behavior, in much the same way that - in .NET - developers apply custom attributes to their .NET types to tailor .NET FX behavior for the types.  
 
@@ -186,7 +185,7 @@ EditScope data follows a particular data model. In short, the EditScope is a hie
 * the EditScope includes an array of 'entity' objects
 * some EditScope object includes a property that is 'entity'-typed  
 
-An object is treated by EditScope as an 'entity' when type metadata associated with the object is marked as an 'entity' type (see [here](#entity-type) and the EditScope video/PPT [here](/documentation/articles/portalfx-forms-working-with-edit-scopes) for more details).
+An object is treated by EditScope as an 'entity' when type metadata associated with the object is marked as an 'entity' type (see [here](#entity-type) and the EditScope video/PPT [here](portalfx-forms-working-with-edit-scopes.md) for more details).
 
 Every 'entity' object is tracked by the EditScope as being created/updated/deleted. Extension developers define 'entities' at a granularity that suit their scenario, making it easy to determine what in their larger EditScope/Form data model has been user-edited.  
 

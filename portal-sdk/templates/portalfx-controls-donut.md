@@ -17,4 +17,4 @@ A sample view model can be found here:
 
 Other visualization controls:
 
-* [Chart](/documentation/articles/portalfx-controls-chart)
+* [Chart](portalfx-controls-chart.md)

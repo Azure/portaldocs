@@ -1,4 +1,3 @@
-<properties title="" pageTitle="MDS Tables" description="" authors="thaodoan" />
 
 <tags
     ms.service="portalfx"
@@ -39,4 +38,4 @@
 
 ### AuxwebUiClientTelemetry
 
-{"gitdown": "include-file", "file": "./includes/portalfx-telemetry-actions.md"}
+{"gitdown": "include-file", "file": "portalfx-telemetry-actions.md"}

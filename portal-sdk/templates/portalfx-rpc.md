@@ -1,4 +1,3 @@
-<properties title="" pageTitle="RPC" description="" authors="justbe" />
 
 ### Remote Procedure Calls (RPC)
 
@@ -65,4 +64,4 @@ This will asynchronously return a result from the source.
 > [WACOM.NOTE] Extensions in the portal will often need to be loaded into memory to perform an RPC call. It is often more predictable when both extensions are projecting UI.
 
 
-{"gitdown": "include-file", "file": "./includes/portalfx-extensibility.md"}
+{"gitdown": "include-file", "file": "portalfx-extensibility-pde.md"}

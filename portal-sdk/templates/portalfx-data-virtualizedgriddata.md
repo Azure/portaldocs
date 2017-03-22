@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Virtualized grid data" description="" authors="bradolenick" />
 
 ## Querying for virtualized data
 

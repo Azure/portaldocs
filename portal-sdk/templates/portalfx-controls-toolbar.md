@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Controls: Toolbar" description="" authors="adamabdelhamed" />
 
 ## Toolbar control
 ![Toolbar][toolbar]

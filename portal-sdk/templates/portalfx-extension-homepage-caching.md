@@ -59,7 +59,7 @@ To enable this, here are the steps you need to take:
 
 1.  Move to a version of the SDK newer than 5.0.302.121.
 
-1.  Implement [persistent caching of your scripts](/documentation/articles/portalfx-extension-persistent-caching-of-scripts).
+1.  Implement [persistent caching of your scripts](portalfx-extension-persistent-caching-of-scripts.md).
     You should do this any way to improve extension reliability.
     If you do not do this, you will see higher impact on reliability as a result of home page caching.
 

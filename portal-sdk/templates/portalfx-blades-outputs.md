@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Blade Outputs" description="" authors="justbe" />
 
 ### Blade Outputs
 
@@ -25,5 +24,5 @@ In this example, the parent blade defines a `BladeAction` which passes an `id` p
 
 In the snippet above, `OutputBindingsChildBlade` will be opened with a `currentNumber` parameter.  The child blade will be responsible for setting the value on the output binding.  After that value is set, `onInputsSet` of the part will be invoked, this time with a value named `currentNumber`.
 
-[part-settings]: ../media/portalfx-parts/part-settings.png
+
 

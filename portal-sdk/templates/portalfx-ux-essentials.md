@@ -1,4 +1,3 @@
-<properties title="Essentials" pageTitle="Essentials" description="" authors="mattshel" />
 
 ### Essentials 
 

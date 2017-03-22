@@ -1,4 +1,3 @@
-<properties title="" pageTitle="DictionaryConfiguration based configuration" description="" authors="dbrankin" />
 
 <tags ms.service="portalfx"
       ms.workload="portalfx"
@@ -14,7 +13,7 @@ on an arbitrary (case-insensitive) string key. For example, it is used in the Sh
 configuration sets.
 
 The boilerplate for this is pretty straightforward, and devs may wish to just jump straight to the 
-[example](/documentation/articles/portalfx-domain-based-configuration-example) code. 
+[example](portalfx-domain-based-configuration-example.md) code. 
 
 The developer needs to create two configuration classes: 
 

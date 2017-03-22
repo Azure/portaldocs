@@ -1,3 +1,5 @@
+{"gitdown": "contents"}
+
 #  Portal Test Framework
 
 Please use the following links for info on how to use the Portal Test Framework:

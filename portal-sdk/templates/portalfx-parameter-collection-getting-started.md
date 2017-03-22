@@ -1,6 +1,5 @@
-<properties title="" pageTitle="Getting Started with Parameter Collection" description="Parameter Collection v3" authors="nickharris" />
 
-{"gitdown": "include-file", "file": "./includes/portalfx-parameter-collection-related.md"}
+{"gitdown": "include-file", "file": "portalfx-parameter-collection-related.md"}
 
 ## Getting Started with Parameter Collection V3
 Implementing a parameter collection flow requires two distinct components to be implemented:
@@ -256,4 +255,4 @@ The complete list of supported options that can be supplied to the ParameterProv
 
 The full source of this ParameterProvider implementation can be found within the SamplesExtension under SamplesExtension\Extension\Client\ParameterCollection\ParameterProviders.
 
-Related Documentation: [ARM Provisioning API] (/documentation/articles/portalfx-provisioning-arm)
+Related Documentation: [ARM Provisioning API] (portalfx-provisioning-arm.md)

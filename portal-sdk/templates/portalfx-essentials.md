@@ -1,4 +1,4 @@
-<properties title="" pageTitle="The essentials panel" description="" authors="adamabdelhamed" />
+{"gitdown": "contents"}
 
 ## Essentials panel
 
@@ -180,7 +180,7 @@ Dynamic properties are displayed at the bottom of the right-hand column of the E
 
 ### (Advanced) Customizing the layout of properties
 
-In certain advanced scenarios, the extension may need to customize the layout of properties beyond just defining the right-hand column properties.  This is not recommended for most scenarios, as per-extension customization can easily violate the guidelines described [here](/documentation/articles/portalfx-ux-essentials), either today or if the guidelines are revised in the future.  For those scenarios where it is necessary to customize beyond the defaults, this can be done using the `MsPortalFx.ViewModels.Parts.ResourceSummary.Options2.layout` option.  Here, the extension can control which properties are shown as well as property ordering/placement in the left- and right-hand columns.  Consult the relevant doc comments in MsPortalFx.d.ts for details.
+In certain advanced scenarios, the extension may need to customize the layout of properties beyond just defining the right-hand column properties.  This is not recommended for most scenarios, as per-extension customization can easily violate the guidelines described [here](portalfx-ux-essentials.md), either today or if the guidelines are revised in the future.  For those scenarios where it is necessary to customize beyond the defaults, this can be done using the `MsPortalFx.ViewModels.Parts.ResourceSummary.Options2.layout` option.  Here, the extension can control which properties are shown as well as property ordering/placement in the left- and right-hand columns.  Consult the relevant doc comments in MsPortalFx.d.ts for details.
 
 {"gitdown": "include-file", "file": "../templates/portalfx-ux-essentials.md"}
 	

@@ -1,4 +1,3 @@
-<properties title="Part Versioning" pageTitle="Part Versioning" description="Part Versioning" authors="adamabdelhamed" />
 
 ### Versioning
 

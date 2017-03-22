@@ -1,3 +1,5 @@
 {"gitdown": "contents", "maxLevel": 2}
 
-{"gitdown": "include-file", "file": "./portalfx-extension-localization-globalization.md"}
+# Localization / Globalization
+{"gitdown": "include-headings", "file": "../templates/portalfx-localization.md"}
+{"gitdown": "include-headings", "file": "../templates/portalfx-globalization.md"}

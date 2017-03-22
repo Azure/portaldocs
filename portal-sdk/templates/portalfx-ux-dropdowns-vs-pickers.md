@@ -1,4 +1,3 @@
-<properties title="Dropdowns vs pickers" pageTitle="Dropdowns vs pickers" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

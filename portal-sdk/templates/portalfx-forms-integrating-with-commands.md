@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Integrating Forms with Commands" description="" authors="sewatson" />
 
 ## Integrating Forms with Commands
 

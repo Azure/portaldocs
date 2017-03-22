@@ -1,8 +1,5 @@
-<properties title="" pageTitle="MPAC Flighting" description="" authors="adamab" />
 
-[Portal FX](/documentation/sections/portalfx) > Flighting
-
-# AB Testing in Ibiza
+# AB Testing in Ibiza (Flighting)
 
 It is sometimes useful to expose new functionality to a limited set of users.  That strategy can help test the stability of the feature while limiting exposure.  It can help identify the most effective of two or more competing implementations in terms of usability and / or performance.
  

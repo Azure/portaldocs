@@ -1,4 +1,3 @@
-<properties title="Move a resource group" pageTitle="Move a resource group" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

@@ -1,8 +1,7 @@
-<properties title="" pageTitle="Versioning an extension" description="" authors="adamab" />
 
 ### Support stamping the extension version at compile time
 
-{"gitdown": "include-file", "file": "./includes/portalfx-versioning-extensions.md"}
+{"gitdown": "include-file", "file": "portalfx-versioning-extensions.md"}
 
 ### PDL Versioning
 Two build settings have been added to allow the extension version to be stamped at build time.   They are ExtensionVersion and ExtensionDescription.

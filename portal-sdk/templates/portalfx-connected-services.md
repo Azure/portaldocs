@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Hubs" description="" authors="flanakin" />
 
 # Hubs Overview
 Hubs are horizontal, cross-cutting services positioned in the vertical bar on

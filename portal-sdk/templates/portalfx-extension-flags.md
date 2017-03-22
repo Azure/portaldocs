@@ -1,6 +1,3 @@
-<properties title="" pageTitle="Extension flags" description="" authors="flanakin" />
-
-[Portal Fx](/documentation/sections/portalfx) > [Deployments](/documentation/sections/portalfx#deploy) > Extension flags
 
 # Extension flags
 

@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Testing: Filling Out Forms" description="" authors="" />
 
 ## Testing: Filling Out Forms
 

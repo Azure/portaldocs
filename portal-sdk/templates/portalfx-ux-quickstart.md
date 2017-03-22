@@ -1,4 +1,3 @@
-<properties title="Quickstart" pageTitle="Quickstart" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

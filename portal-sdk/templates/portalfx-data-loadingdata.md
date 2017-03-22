@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Querying for data" description="" authors="bradolenick" />
 
 ## Loading Data 
 

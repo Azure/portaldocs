@@ -1,4 +1,4 @@
-<properties title="" pageTitle="Azure Resource Manager APIs" description="Deployment, ARM, Azure Resource Manager, Provisioning" authors="nickharris, alshaker" />
+{"gitdown": "contents"}
 
 ## ARM APIs
 

@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Forms - field validation" description="" authors="sewatson" />
 
 ## Field Validation
 

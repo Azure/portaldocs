@@ -1,8 +1,7 @@
-﻿<properties title="" pageTitle="Create Engine Sample" description="" authors="alshaker" />
-
+﻿
 # Create Engine Sample
 The create engine sample demonstrates building a Marketplace create experience built using the parameter collection framework (PCv3) that creates an ARM resource through template deployment. 
-If your create experience doesn't rely on ARM deployments, please refer to the [Robot sample](/documentation/articles/portalfx-create-robot-sample).
+If your create experience doesn't rely on ARM deployments, please refer to the [Robot sample](portalfx-create-robot-sample.md).
 
 The sample code is heavily documented and covers the following:
 * Building a PCv3 parameter provider template blade (with the new action bar syntax).

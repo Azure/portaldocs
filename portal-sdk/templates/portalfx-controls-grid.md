@@ -1,5 +1,4 @@
-﻿<properties title="" pageTitle="Introduction to Grid" description="" authors="sewatson" />
-
+﻿
 ## Grid
 
 The grid control in SDK provides a rich set of features to build experiences that visualize tabular, structured data.
@@ -10,7 +9,7 @@ From simple experiences that visualize basic lists to advanced scenarios such as
 
 ### Getting Started
 The Grid API is in the MsPortalFx.ViewModels.Controls.Lists.Grid namespace.
-To create a grid you will need to provide data, column definitions, plugins, and options. Some of the basic implementations are provided [here](#basic-samples).
+To create a grid you will need to provide data, column definitions, plugins, and options. Some of the basic implementations are provided [here](#grid-further-resources).
 
 [Grid Samples][GridSamples]
 
@@ -20,17 +19,17 @@ Grid plugins are called "extensions" in the API.
 The "extension" terminology can be confusing to portal "extension" authors.
 So, in this document the grid extensions will be referred to as plugins.
 
-- [SelectableRow](#selection-and-activation) - Plugin to have selectable rows.
+- [SelectableRow](#grid-selection-and-activation) - Plugin to have selectable rows.
 - [ResizableColumn]()                        - Plugin to have resizable columns.
-- [SortableColumn](#sorting)                 - Plugin to have sortable columns.
-- [Filterable](#filtering)                   - Plugin to have filterable rows.
-- [ContextMenuShortcut](#context-menus)      - Plugin to have a shortcut to the item context menu displayed in the row.
-- [Pageable](#paging)                        - Plugin to handle and display large items in sequential pages.
-- [Scrollable](#scrolling)                   - Plugin to display items with virtual scrolling.
-- [Groupable](#grouping)                     - Plugin to group rows by column value.
-- [Hierarchical](#hierarchical)              - Plugin to display hierarchical items.
-- [EditableRow](#editing)                    - Plugin to have editable rows.
-- [ReorderRow](#reordering)                  - Plugin to have reorder rows.
+- [SortableColumn](#grid-sorting)                 - Plugin to have sortable columns.
+- [Filterable](#grid-filtering)                   - Plugin to have filterable rows.
+- [ContextMenuShortcut](#grid-context-menus)      - Plugin to have a shortcut to the item context menu displayed in the row.
+- [Pageable](#grid-paging)                        - Plugin to handle and display large items in sequential pages.
+- [Scrollable](#grid-scrolling)                   - Plugin to display items with virtual scrolling.
+- [Groupable](#grid-grouping)                     - Plugin to group rows by column value.
+- [Hierarchical](#grid-hierarchical)              - Plugin to display hierarchical items.
+- [EditableRow](#grid-editing)                    - Plugin to have editable rows.
+- [ReorderRow](#grid-reordering)                  - Plugin to have reorder rows.
 - [RightClickableRow]()                      - Plugin to have right-clickable row.
 - [Hoverable]()                              - Plugin to enable hover index communication with other parts.
 
@@ -62,7 +61,7 @@ Navigators can support two data retrieval patterns.
 - The first is sequential data access using continuation tokens.Sequential navigation can be enabled by the Pageable plugin.
 - The second is using random data access aka skip-take. Random access navigation can be enabled by the Pageable or Scrollable plugins.
 
-[Data Documentation](/portalfx-data.md)
+[Data Documentation](portalfx-data.md)
 
 ### Defining Columns
 Columns are defined by setting the columns property on the grid view model.

@@ -4,7 +4,7 @@
 Ibiza, as Azure's portal, is the framework and design language (UI) that unifies and provides access to all Microsoft cloud offerings. 
 The portal is a web application that provides a single webpage. In the portal, parts of the page are loaded by referencing service extensions that are dynamically accessed based on a customer’s action on the portal.
 The portal is basically a web application that hosts the shell.  The service extensions are built by partners such as Virtual Machine, SQL and DocumentDB using Ibiza SDK which provides the content needed by the portal dynamically. 
-Sounds interesting. Want to become a partner?   [Onboard Ibiza](/portal-sdk/generated/index-portalfx-extension-onboarding.md)
+Sounds interesting. Want to become a partner?  [Onboard Ibiza](/portal-sdk/generated/index-portalfx-extension-onboarding.md)
 
 # Extension Developer Resources 
 

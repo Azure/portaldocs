@@ -1,6 +1,3 @@
-<properties title="" pageTitle="Upgrading to the latest Browse API" description="" authors="flanakin" />
-
-[Portal FX](/documentation/sections/portalfx) > [Hubs](/documentation/sections/portalfx#hubs) > [Notifications](/documentation/articles/portalfx-browse) > Upgrading
 
 # Upgrading to the latest Browse API
 
@@ -246,4 +243,4 @@ The most efficient way to obtain and update data is to use a single query view t
     ```
 
 
-Next Steps: [Browse](/documentation/sections/portalfx-browse)
+Next Steps: [Browse](portalfx-browse.md)

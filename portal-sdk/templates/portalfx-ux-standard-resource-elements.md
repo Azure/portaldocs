@@ -1,4 +1,3 @@
-<properties title="Standard resource elements" pageTitle="Standard resource elements" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

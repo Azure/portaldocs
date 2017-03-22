@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Testing Best Practices" description="" authors="" />
 
 ## Testing Best Practices
 

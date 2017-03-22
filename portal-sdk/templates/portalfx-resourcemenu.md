@@ -1,3 +1,5 @@
+{"gitdown": "contents"}
+
 ## Resource menu
 
 The resource menu provides a browse/manage experience for an Azure resource. It
@@ -96,7 +98,7 @@ As an example, for Resource Groups, currently, the resource type tag is similar 
 
 First, if you don't have one already, create a new viewmodel for your
 AssetViewModel below is a skeleton for the AssetViewModel. For more information
-on assets [see the following](/documentation/articles/portalfx-assets)
+on assets [see the following](portalfx-assets.md)
 
 ```ts
 /**

@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Parameter Collection FAQ" description="Parameter Collection v3" authors="alshaker" />
 
 # FAQ
 ## When should I use a parameter provider?

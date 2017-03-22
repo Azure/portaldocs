@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Controls: Console" description="" authors="nickharris" />
 
 ## Console
 The console control provides a REPL like experience which can be used to replicate a Bash/PowerShell/Batch like experience.

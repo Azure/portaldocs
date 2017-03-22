@@ -1,4 +1,3 @@
-<properties title="Tile gallery" pageTitle="Tiles" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

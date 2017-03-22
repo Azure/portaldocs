@@ -32,11 +32,11 @@ This report gives you ability to look at your extensions live create flow teleme
 - **Old Create API**
     - If true, this means that your create blade is using the old deprecated Parameter Collector (Parameter Collector V1 or V2) and therefore your create telemetry is not dependable and is potentially innacurrate. 
     - It is recommended to get this field to 'false', by updating your create blade to use the new Parameter Collector (Parameter Collector V3).
-        - [Parameter Collector V3 - Getting Started](/documentation/articles/portalfx-parameter-collection-getting-started)
+        - [Parameter Collector V3 - Getting Started](portalfx-parameter-collection-getting-started.md)
 - **Custom Deployment**
     - If true, this means that your create does not go through the official Arm Provisioner and therefore you only receive limited telemetry reporting.
     - If your experience's create deployments go through Arm but you are not using the Arm Provisioning then please refer to the Create Engine documentation
-        - [Create Engine](/documentation/articles/portalfx-create-engine-sample)
+        - [Create Engine](portalfx-create-engine-sample.md)
 
 ### How these numbers are generated
 
@@ -165,11 +165,11 @@ This report gives you an overview of create blades create errors, billing issues
 - **Old Create API**
     - If true, this means that your create blade is using the old deprecated Parameter Collector (Parameter Collector V1 or V2) and therefore your create telemetry is not dependable and is potentially innacurrate. 
     - It is recommended to get this field to 'false', by updating your create blade to use the new Parameter Collector (Parameter Collector V3).
-        - [Parameter Collector V3 - Getting Started](/documentation/articles/portalfx-parameter-collection-getting-started)
+        - [Parameter Collector V3 - Getting Started](portalfx-parameter-collection-getting-started.md)
 - **Custom Deployment**
     - If true, this means that your create does not go through the official Arm Provisioner and therefore you only receive limited telemetry reporting.
     - If your experience's create deployments go through Arm but you are not using the Arm Provisioning then please refer to the Create Engine documentation
-        - [Create Engine](/documentation/articles/portalfx-create-engine-sample)
+        - [Create Engine](portalfx-create-engine-sample.md)
 
 ### How these numbers are generated
 
@@ -364,6 +364,6 @@ ClientTelemetry
 ```
 
 # Next Steps:
-- [Troubleshooting Create Regressions and ICM alerts](/documentation/articles/portalfx-create-troubleshooting)
-- [For General Telemetry](/documentation/articles/portalfx-telemetry)
+- [Troubleshooting Create Regressions and ICM alerts](portalfx-create-troubleshooting.md)
+- [For General Telemetry](portalfx-telemetry.md)
 - [For Kusto Documentation](https://aka.ms/kusto)

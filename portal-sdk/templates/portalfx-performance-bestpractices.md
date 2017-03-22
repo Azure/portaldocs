@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Performance" description="" authors="nickharris" />
 
 <!-- THIS FILE IS REFERENCED IN THE portalfx-performance SECTION PLEASE START ALL HEADINGS WITH H3S -->
 
@@ -54,7 +53,7 @@ export class BladeViewModel extends MsPortalFx.ViewModels.Blade {
 ```
 
 This leads to faster load time, and less memory consumption in the browser. You can learn more about the TypeScript module loading
-system in the [official language specification](http://www.typescriptlang.org/Content/TypeScript%20Language%20Specification.docx).
+system in the [official language specification](http://www.typescriptlang.org/docs/handbook/modules.html).
 
 #### Use QueryCache and EntityCache
 
@@ -71,7 +70,7 @@ A single ref-counted cache can hold data across your entire extension.  This has
 These classes provide advanced caching and ref-counting.
 Internally, these make use of Data.Loader and Data.DataSet (which will be made FX-internal in the future).
 
-To learn more, visit [Querying for data](/documentation/articles/portalfx-data-query).
+To learn more, visit [Querying for data](portalfx-data-query.md).
 
 #### Avoid unnecessary data reloading
 
@@ -109,7 +108,7 @@ or Part view model will return a resolved Promise, and the user will not see lon
 
 For your scenario to make use of `extendEntryLifetimes`, it is **very important** that you take steps to keep your client-side
 QueryCache/EntityCache data caches **consistent with server data**.
-See [Reflecting server data changes on the client](/documentation/articles/portalfx-data-query#reflecting-server-data-changes-on-the-client) for details.
+See [Reflecting server data changes on the client](portalfx-data-query.md) for details.
 
 
 #### Use paging for large data sets
@@ -123,7 +122,7 @@ you can check out the samples:
 
 #### Use "map" and "filter" to reduce size of rendered data
 
-Often, it is useful to use the [Knockout projections](https://github.com/stevesanderson/knockout-projections) to shape and filter model data loaded using QueryView and EntityView (see [Shaping and filtering data](/documentation/articles/portalfx-data-projections)).
+Often, it is useful to use the [Knockout projections](https://github.com/stevesanderson/knockout-projections) to shape and filter model data loaded using QueryView and EntityView (see [Shaping and filtering data](portalfx-data-projections.md)).
 
 Significant performance improvements can achieved by reducing the number and size of the model objects bound to controls like grids, lists, charts:
 

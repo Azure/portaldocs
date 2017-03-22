@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Blade Parameters" description="" authors="adamabdelhamed" />
 
 ### Blade Parameters
 

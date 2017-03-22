@@ -275,4 +275,4 @@ For preview packages the convention in the portal is to use a version such as: `
 For placeholder package you should use a version such as `0.1.0-placeholder`.
 
 
-[gallery-ui-examples]: /documentation/articles/gallery-ui-examples
+[gallery-ui-examples](gallery-ui-examples.md)

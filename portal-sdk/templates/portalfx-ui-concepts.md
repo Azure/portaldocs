@@ -1,4 +1,4 @@
-<properties title="" pageTitle="UX Concepts" description="" authors="" />
+{"gitdown": "contents"}
 
 ## UI Concepts
 Before you start building an extension for the portal, take a few minutes to review our terminology and concepts.
@@ -29,7 +29,7 @@ Show a menu at the left of a blade. This blade gets combined by the Shell with t
 Locked blades are usually task-focused (looking at a list of data, performing an action, etc.) and can't be user customized. 
 You should only use a Blade or Locked Blade when creating Resource blade. 
 
-[Learn more](/documentation/articles/portalfx-blades)
+[Learn more](portalfx-blades.md)
 
 ### Commands
 
@@ -37,7 +37,7 @@ Users click a command to take a specific action in a specific resource. Commands
 
 ![Command][command]
 
-[Learn more](/documentation/articles/portalfx-commands)
+[Learn more](portalfx-commands.md)
 
 ### Parts
 
@@ -47,7 +47,7 @@ Design each tile to work in at least 3 different sizes so they can be easily cus
 
 ![Part][part]
 
-[Learn more](/documentation/articles/portalfx-parts)
+[Learn more](portalfx-parts.md)
 
 ### Top bar
 
@@ -69,7 +69,7 @@ The marketplace houses all Microsoft and partner offerings, ranging from simple 
 Before your package is allowed into the marketplace, you'll need to onboard with the Marketplace team. You'll also be expected to supply a set of marketplace icons for each one of your packages.  
 
 
-[Learn more](/documentation/articles/portalfx-ux-gallery)
+[Learn more](portalfx-ux-gallery.md)
 
 
 

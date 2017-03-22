@@ -1,3 +1,4 @@
+{"gitdown": "contents"}
 
 ## Parts (a.k.a. tiles) 
 
@@ -42,12 +43,12 @@ To use a button part you first declare the part in the global __`<Definition>`__
 The matching view model lets you plug data into the part.  For this simple part, the data is just the label and icon, but for more data oriented parts this can be data gathered from a backend, like a resource provider.
 {"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Parts/Intrinsic/ViewModels/ButtonPartViewModel.ts", "section": "parts#BasicPartExampleViewModel"}
 
-More info: [More about built in parts](/documentation/articles/portalfx-parts-intrinsic)
-Related: [Integrate your part with the tile gallery](##How to integrate your part into the part gallery (a.k.a. tile gallery))
+More info: [More about built in parts](portalfx-parts-intrinsic.md)
+Related: [Integrate your part with the tile gallery](parts-a-k-a-tiles-how-to-integrate-your-part-into-the-part-gallery)
 
 ### How to create a custom part where you define the look and feel as well as the data loading
 
-Unlike the built in parts discussed in the previous section, custom parts let you define the html template that will be bound to your view model. Your templates can (and in many cases should) refer to the [controls](#Controls) that are provided by the framework.
+Unlike the built in parts discussed in the previous section, custom parts let you define the html template that will be bound to your view model. Your templates can (and in many cases should) refer to the [controls](portalfx-controls.md) that are provided by the framework.
 
 __You can see this code working in a [live sample here](http://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/custompart).__
 
@@ -60,7 +61,7 @@ The pdl points to this html template.
 That template will be bound (using [knockout](http://knockoutjs.com/)) to the view model below, which is also referred to in the pdl.
 {"gitdown": "include-section", "file": "../Samples/SamplesExtension/Extension/Client/V1/Parts/Custom/ViewModels/ExampleCustomPartViewModel.ts", "section": "parts#CustomPartViewModelDoc"}
 
-Related: [Integrate your part with the tile gallery](#how-to-integrate-your-part-into-the-part-gallery)
+Related: [Integrate your part with the tile gallery](#parts-a-k-a-tiles-how-to-integrate-your-part-into-the-part-gallery)
 
 ### How to integrate your part into the part gallery
 
@@ -133,12 +134,12 @@ At this point the part will become grayed out, non-interactive, and will have th
 
 ### Advanced Parts Topics
 
-- [Part versioning](/documentation/articles/portalfx-parts-versioning)
-- [Retiring a part](/documentation/articles/portalfx-parts-how-to-retire)
-- [How to remove a part from an unlocked blade](/documentation/articles/portalfx-parts-how-to-remove-from-blade)
-- [Using the reveal content pattern for better performance](/documentation/articles/portalfx-parts-revealContent)
-- [Handling part errors](/documentation/articles/portalfx-parts-errors)
-- [Handling assets that no longer exist](#handling-assets-that-no-longer-exist)
+- [Part versioning](portalfx-parts-versioning.md)
+- [Retiring a part](portalfx-parts-how-to-retire.md)
+- [How to remove a part from an unlocked blade](portalfx-parts-how-to-remove-from-blade.md)
+- [Using the reveal content pattern for better performance](portalfx-parts-revealContent.md)
+- [Handling part errors](portalfx-parts-errors.md)
+- [Handling assets that no longer exist](#parts-a-k-a-tiles-handling-assets-that-no-longer-exist)
 
  {"gitdown": "include-file", "file": "../templates/portalfx-parts-versioning.md"}
  {"gitdown": "include-file", "file": "../templates/portalfx-parts-how-to-retire.md"}

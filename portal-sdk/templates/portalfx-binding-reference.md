@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Binding Quick Reference" description="" authors="nickharris,tomacox" />
 
 ## PDL Binding Quick Reference
 
@@ -28,7 +27,7 @@
 &lt;/Blade.Parameters&gt;
 </pre>
   <td>Blade.Parameters</td>
-  <td>Blade.Parameters is used to define a collection of Parameter elements that define the parameters the blade is required to receive from the caller. %Type% may be any of the following values {Key, NewEditScope, Output, Supplemental} <a href="/documentation/articles/portalfx-blades-parameters"> - more detail</a></td>
+  <td>Blade.Parameters is used to define a collection of Parameter elements that define the parameters the blade is required to receive from the caller. %Type% may be any of the following values {Key, NewEditScope, Output, Supplemental} <a href="portalfx-blades-parameters.md"> - more detail</a></td>
 </tr>
 <tr>
   <td>
@@ -39,7 +38,7 @@
 &lt;/Blade.Properties&gt;
   </pre>
   <td>Blade.Properties</td>
-  <td>Blade parameters defined within Blade.Parameters can be passed to the blade view model via a Blade.Property collection of Property elements bound to a Source BladeParameter.  In this example the blade ViewModel onInputsSet method inputs parameter will have a property inputs.idX that contains the value of the supplied BladeParameter with name id <a href="/documentation/articles/portalfx-blades-properties">- more detail</a></td>
+  <td>Blade parameters defined within Blade.Parameters can be passed to the blade view model via a Blade.Property collection of Property elements bound to a Source BladeParameter.  In this example the blade ViewModel onInputsSet method inputs parameter will have a property inputs.idX that contains the value of the supplied BladeParameter with name id <a href="portalfx-blades-properties.md">- more detail</a></td>
 </tr>
 
 <tr>

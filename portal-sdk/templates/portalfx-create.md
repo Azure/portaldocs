@@ -1,14 +1,14 @@
-﻿<properties title="" pageTitle="Building create experiences" description="" authors="nickharris, paparsad, alshaker" />
+﻿{"gitdown": "contents"}
 
 ## Building create experiences
 
 The Azure portal offers 3 ways to build a create form:
 
-1. *[Deploy to Azure](/documentation/articles/portalfx-create-deploytoazure)*
+1. *[Deploy to Azure](portalfx-create-deploytoazure.md)*
 
     There are simple forms auto-generated from an ARM template with very basic controls and validation. Deploy to Azure is the quickest way to build a Create form and even integrate with the Marketplace, but is very limited in available validation and controls.
 
-    Use [Deploy to Azure](/documentation/articles/portalfx-create-deploytoazure) for [community templates](https://azure.microsoft.com/documentation/templates) and simple forms.
+    Use [Deploy to Azure](portalfx-create-deploytoazure.md) for [community templates](https://azure.microsoft.com/documentation/templates) and simple forms.
 
 2. *[Solution templates](https://github.com/Azure/azure-marketplace/wiki)*
 
@@ -24,26 +24,26 @@ The Azure portal offers 3 ways to build a create form:
 
 ### Create Marketplace package (aka Gallery package)
 The Marketplace provides a categorized collection of packages which can be created in the portal. Publishing your package to the Marketplace is simple:
-
-1. Create a package and publish it to the DF Marketplace yourself, if applicable. Learn more about [publishing packages to the Marketplace](/documentation/sections/gallery).
+
+1. Create a package and publish it to the DF Marketplace yourself, if applicable. Learn more about [publishing packages to the Marketplace](../../gallery-sdk/generated/index-gallery.md).
 1. Side-load your extension to test it locally.
 1. Set a "hide key" before testing in production.
 1. Send the package to the Marketplace team to publish it for production.
 1. Notify the Marketplace team when you're ready to go live.
 
-Note that the **+New** menu is curated and can change at any time based on C+E leadership business goals. Ensure documentation, demos, and tests use [Create from Browse](/documentation/articles/portalfx-browse#create) or [deep-links](/documentation/articles/portalfx-links) as the entry point.
+Note that the **+New** menu is curated and can change at any time based on C+E leadership business goals. Ensure documentation, demos, and tests use [Create from Browse](portalfx-browse.md) or [deep-links](portalfx-links.md) as the entry point.
 
 ![The +New menu][plus-new]
 
 ![The Marketplace][marketplace]
 
 ### Design for a single blade
-All create experiences should be designed for a single blade. Start by building a template blade. Always prefer dropdowns over pickers (form fields that allow selecting items from a list in a child blade) and avoid using [selectors](#controls-selectors-and-pickers) (form fields that open child blades).
+All create experiences should be designed for a single blade. Start by building a template blade. Always prefer dropdowns over pickers (form fields that allow selecting items from a list in a child blade) and avoid using selectors (form fields that open child blades).
 
 Email [ibizafxpm](mailto:ibizafxpm@microsoft.com?subject=Full-screen Create) if you have any questions about the current state of full-screen create experiences.
 
 ### Add a provider component
-The [parameter collection framework](/documentation/articles/portalfx-parameter-collection-overview) is platform that enables you to build UX to collect data from the user. If you're not familiar with collectors and providers, now is a good time to read more about it.
+The [parameter collection framework](portalfx-parameter-collection-overview.md) is platform that enables you to build UX to collect data from the user. If you're not familiar with collectors and providers, now is a good time to read more about it.
 
 In most cases, your blade will be launched from the Marketplace or a toolbar command (like Create from Browse). They will act as the collectors. Consequently, your blade will be expected to act as a provider. Here's what a provider looks like:
 
@@ -68,7 +68,7 @@ this.parameterProvider = new MsPortalFx.ViewModels.ParameterProvider<DataModel, 
 ```
 
 ### Add a provisioner component
-A provisioner is another component in the [parameter collection framework](/documentation/articles/portalfx-parameter-collection-overview). If you're creating your resource by deploying a single template to ARM, you need to use an ARM provisioner. Otherwise, you need to use a regular provisioner to implement your custom deployment process.
+A provisioner is another component in the [parameter collection framework](portalfx-parameter-collection-overview.md). If you're creating your resource by deploying a single template to ARM, you need to use an ARM provisioner. Otherwise, you need to use a regular provisioner to implement your custom deployment process.
 
 1. ARM provisioning:
 (Refer to the full EngineV3 sample to see the full create blade)
@@ -158,7 +158,7 @@ Use built-in form fields, like TextField and DropDown, to build your form the wa
 // so all we need to do is point our form's edit scope to the parameter provider's edit scope.
 this.editScope = this.parameterProvider.editScope;
 ```
-Learn more about [building forms](/documentation/articles/portalfx-forms).
+Learn more about [building forms](portalfx-forms.md).
 
 ### Standard ARM fields
 All ARM subscription resources require a subscription, resource group, location and pricing dropdown. The portal offers built-in controls for each of these. Refer to the EngineV3 Create sample (`SamplesExtension\Extension\Client\Create\EngineV3\ViewModels\CreateEngineBladeViewModel.ts`) for a working example.
@@ -310,7 +310,7 @@ this.locationsDropDown = new LocationsDropDown(container, locationsDropDownOptio
 #### Wizards
 The Azure portal has a **legacy pattern** for wizard blades, however customer feedback and usability has proven the design
 isn't ideal and shouldn't be used. Additionally, the wizard wasn't designed for
-[Parameter Collector v3](/documentation/articles/portalfx-parameter-collection-getting-started), which leads to a more
+[Parameter Collector v3](portalfx-parameter-collection-getting-started.md), which leads to a more
 complicated design and extended development time. The Portal Fx team is testing a new design for wizards to address
 these issues and will notify teams once usability has been confirmed and APIs updated. Wizards are discouraged and will
 not be supported.
@@ -322,7 +322,7 @@ the current state of wizards and full-screen Create support.
 Create is our first chance to engage with and win customers and every hiccup puts us at risk of losing customers; specifically
 new customers. As a business, we need to lead that engagement on a positive note by creating resources quickly and easily.
 When a customer clicks the Create button, it should succeed. This includes all types of errors – from
-using the wrong location to exceeding quotas  to unhandled exceptions in the backend. [Adding validation to your form fields](/documentation/articles/portalfx-forms-field-validation)
+using the wrong location to exceeding quotas  to unhandled exceptions in the backend. [Adding validation to your form fields](portalfx-forms-field-validation.md)
 will help avoid failures and surface errors before deployment.
 
 In an effort to resolve Create success regressions as early as possible, sev 2 [ICM](http://icm.ad.msft.net) (internal only)
@@ -359,13 +359,13 @@ if you have any questions about wizard support.
 
 ### Testing
 Due to the importance of Create and how critical validation is, all Create forms should have automated testing to help
-avoid regressions and ensure the highest possible quality for your customers. Refer to [testing guidance](/documentation/articles/portalfx-test)
+avoid regressions and ensure the highest possible quality for your customers. Refer to [testing guidance](portalfx-test.md)
 for more information on building tests for your form.
 
 ### Feedback
 
 When customers leave the Create blade before submitting the form, the portal asks for feedback. The feedback is stored
-in the standard [telemetry](/documentation/articles/portalfx-telemetry) tables. Query for
+in the standard [telemetry](portalfx-telemetry.md) tables. Query for
 `source == "FeedbackPane" and action == "CreateFeedback"` to get Create abandonment feedback.
 
 
@@ -375,7 +375,7 @@ Refer to [Create telemetry](/portal-sdk/generated/index-portalfx-extension-monit
 
 ### Troubleshooting
 
-Refer to the [troublshooting guide](/documentation/articles/portalfx-create-troubleshooting) for additional debugging information.
+Refer to the [troublshooting guide](portalfx-create-troubleshooting.md) for additional debugging information.
 
 
 ### Additional topics

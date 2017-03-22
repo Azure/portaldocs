@@ -1,3 +1,5 @@
 {"gitdown": "contents", "maxLevel": 2}
 
-{"gitdown": "include-file", "file": "./portalfx-extension-onboarding.md"}
+# Onboarding
+{"gitdown": "include-headings", "file": "../templates/portalfx-onboarding.md"}
+{"gitdown": "include-headings", "file": "../templates/portalfx-onboarding-exitcriteria.md"}

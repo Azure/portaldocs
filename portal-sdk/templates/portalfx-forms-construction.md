@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Forms - Loading, editing and saving data" description="" authors="andrewbi" />
 
 ## Loading, editing and saving data
 

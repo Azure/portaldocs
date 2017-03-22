@@ -1,4 +1,4 @@
-<properties title="" pageTitle="Controls" description="" authors="ashergarland" />
+{"gitdown": "contents"}
 
 # Controls
 
@@ -74,8 +74,8 @@ To learn more about any of our controls, click on any of the links below.
 - [String List](http://aka.ms/portalfx/samples#blade/SamplesExtension/StringListInstructions/selectedItem/StringListInstructions/selectedValue/StringListInstructions)
 - [Query Builder](http://aka.ms/portalfx/samples#blade/SamplesExtension/QueryBuilderInstructions/selectedItem/QueryBuilderInstructions/selectedValue/QueryBuilderInstructions)
 - Grid
-	{"gitdown": "include-file", "file": "../templates/portalfx-controls-grid.md"}
-	
+    [Grid](portalfx-controls-grid.md)
+
 ## Helpers and Indicators
 
 - [Docked Balloon](http://aka.ms/portalfx/samples#blade/SamplesExtension/DockedBalloonInstructions/selectedItem/DockedBalloonInstructions/selectedValue/DockedBalloonInstructions)

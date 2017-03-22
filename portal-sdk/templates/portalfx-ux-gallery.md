@@ -1,4 +1,3 @@
-<properties title="The Marketplace" pageTitle="The Marketplace" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

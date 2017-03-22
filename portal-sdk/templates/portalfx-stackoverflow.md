@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Telemetry in the Portal" description="" authors="" />
 
 ## Stackoverflow 
 

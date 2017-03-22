@@ -1,10 +1,9 @@
-<properties title="" pageTitle="Pinning blades" description="" authors="nickharris" />
 
 ### Pinning blades
 
 By default, all blades and parts are 'pinnable'.  Pinning a blade creates a part on the currently active dashboard.
 
-Every blade in the portal has a default representation. The default part for a blade uses a [button part](/documentation/articles/portalfx-parts-intrinsic-button).  The title, subtitle, and icon provided in the blade view model provide the data needed to create the default view.
+Every blade in the portal has a default representation. The default part for a blade uses a [button part](portalfx-parts-intrinsic-button.md).  The title, subtitle, and icon provided in the blade view model provide the data needed to create the default view.
 
 #### Creating a custom pinned part
 
@@ -35,7 +34,7 @@ To use a custom pinned part, it's as easy as
 </Blade>
 ```
 
-In the simple example above, the part in the catalog does not require inputs.  In the event that the part does require an input, the inputs must match the properties passed into the blade view model.  To learn more, check out [building pinnable parts](/documentation/articles/portalfx-parts-pinning).
+In the simple example above, the part in the catalog does not require inputs.  In the event that the part does require an input, the inputs must match the properties passed into the blade view model.  To learn more, check out [building pinnable parts](portalfx-parts-pinning.md).
 
 #### Preventing pinning
 

@@ -1,3 +1,5 @@
+{"gitdown": "contents"}
+
 ## Getting started with the Portal SDK
 
 ### Prerequisites
@@ -81,7 +83,7 @@ The code for the browse implementation is located in __Client/Browse__.  You can
 
 ![Browse Code](../media/portalfx-overview/browse-code.png)
 
-For more information on the browse experience see the [Browse documentation](#browse).
+For more information on the browse experience see the [Browse documentation](#getting-started-with-the-portal-sdk-browse).
 
 ### Resource Menu
 
@@ -97,9 +99,9 @@ For more information on the resource menu see the [Resource menu documentation](
 
 ### Next Steps
 
-Read more about [testing in production](/documentation/articles/portalfx-testinprod).
+Read more about [testing in production](portalfx-testinprod.md).
 
-Next Steps: To debug issues loading an extension in the portal, go through the [Debugging extension failures](/documentation/articles/portalfx-debugging-extension-load-failures) guide.
+Next Steps: To debug issues loading an extension in the portal, go through the [Debugging extension failures](portalfx-debugging-extension-load-failures.md) guide.
 
 ### Questions?
 

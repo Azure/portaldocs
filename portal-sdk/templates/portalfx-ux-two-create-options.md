@@ -1,4 +1,3 @@
-<properties title="Create vs. "+" in the Marketplace" pageTitle="Create vs. "+" in the Marketplace" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

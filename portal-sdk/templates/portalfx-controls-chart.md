@@ -3,7 +3,7 @@ Insert chart controls in your experience to allow your users to visualize and an
 
 [Chart](../media/portalfx-ui-concepts/chart.png)
 
-In most cases, you will probably want to use the chart [intrinsic part](/documentation/articles/portalfx-). The intrinsic part is maintained by the framework and will provide you with consistent layout with the rest of the portal.
+In most cases, you will probably want to use the chart [intrinsic part](portalfx-.md). The intrinsic part is maintained by the framework and will provide you with consistent layout with the rest of the portal.
 
 If you are using a custom part template, charts can be added with the following html:
 

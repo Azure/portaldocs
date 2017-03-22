@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Loading a subset extensions" description="" authors="madjos,nickharris" />
 
 ## Loading a Subset of Extensions
 There are some instances during test where you may want to only load your extension or a subset of extensions within the portal. You can do this using the feature.DisableExtensions feature flag. 

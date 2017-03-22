@@ -1,5 +1,5 @@
-<properties title="" pageTitle="Localizing your extension" description="" authors="ashergarland" />
-	
+{"gitdown": "contents"}
+
 ## Understanding Localization
 
 ### Language-detection in the portal
@@ -148,7 +148,7 @@ There are many cases where you will refer to a string directly from PDL. The com
 
 #### Formatting strings according to locale
 
-The [Azure Portal Globalization API Formatters](/documentation/articles/portalfx-globalization) enables you to easily format numbers, currencies, and dates for different cultures in JavaScript.
+The [Azure Portal Globalization API Formatters](portalfx-globalization.md) enables you to easily format numbers, currencies, and dates for different cultures in JavaScript.
 
 This is exposed publically through the module "MsPortalFx/Globalization"
 
@@ -209,7 +209,7 @@ It may be helpful at development time to use pseudo-localization to ensure that 
 
 #### Marketplace
 
-Packages submitted to the Azure Marketplace must be localized as well.  For more information, read [localization in the gallery](/documentation/articles/gallery-items#localization).
+Packages submitted to the Azure Marketplace must be localized as well.  For more information, read [localization in the gallery](gallery-items.md).
 
 ### Important references
 

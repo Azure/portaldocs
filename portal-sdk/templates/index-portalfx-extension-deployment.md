@@ -1,3 +1,7 @@
 {"gitdown": "contents", "maxLevel": 2}
 
-{"gitdown": "include-file", "file": "./portalfx-extension-deployment.md"}
+# Deployment
+{"gitdown": "include-headings", "file": "../templates/portalfx-deployment.md"}
+{"gitdown": "include-headings", "file": "../templates/portalfx-extension-hosting-service.md"}
+{"gitdown": "include-headings", "file": "../templates/portalfx-deployment-sovereign.md"}
+

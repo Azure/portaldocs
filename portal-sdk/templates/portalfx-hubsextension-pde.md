@@ -1,3 +1,5 @@
+{"gitdown": "contents"}
+
 ## Installation
 
 From nuget package manager console

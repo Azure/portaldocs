@@ -1,4 +1,3 @@
-<properties title="Select columns" pageTitle="Select columns" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Working with icons" description="" authors="nickharris" />
 
 # Icons
 
@@ -6,9 +5,9 @@ When you're ready to start adding icons in parts, commands, or blades, the porta
 
 In many cases, you will not need to provide your own icons, as the SDK framework includes a large library of icons that can be used off the shelf.
 
-## [Using built-in icons](/documentation/articles/portalfx-icons-builtin)
-## [Creating icons](/documentation/articles/portalfx-icons-creation)
-## [FAQs](/documentation/articles/portalfx-icons-faq)
+## [Using built-in icons](portalfx-icons-builtin.md)
+## [Creating icons](portalfx-icons-creation.md)
+## [FAQs](portalfx-icons-faq.md)
 
 ### Special MsPortalFx.Base.Images Calls
 
@@ -124,4 +123,4 @@ export class DeleteCommandViewModel implements MsPortalFx.ViewModels.CommandCont
 }
 ```
 
-Next steps: [Using built-in icons](/documentation/articles/portalfx-icons-builtin)
+Next steps: [Using built-in icons](portalfx-icons-builtin.md)

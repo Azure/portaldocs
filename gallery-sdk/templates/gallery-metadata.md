@@ -103,10 +103,3 @@ In addition to the above metadata, gallery authors can also provide custom key/v
 For any field that allows HTML the following elements and attributes are allowed.
 
 "h1", "h2", "h3", "h4", "h5", "p", "ol", "ul", "li", "a[target|href]", "br", "strong", "em", "b", "i"
-
-
-
-
-
-
-[1]: #html-sanitization

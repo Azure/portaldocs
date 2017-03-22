@@ -1,4 +1,3 @@
-<properties title="Resource tools" pageTitle="Resource tools" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

@@ -1,6 +1,3 @@
-<properties title="" pageTitle="Deep links" description="" authors="sewatson" />
-
-[Portal Fx](/documentation/sections/portalfx) > [Deployments](/documentation/sections/portalfx#deploy) > Deep links
 
 # Deep links
 

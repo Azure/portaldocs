@@ -1,3 +1,4 @@
+
 ## NOTICE: Changes to C# Test Framework NuGet
 
 ### What
@@ -29,4 +30,4 @@ If you wish to pick up the absolute latest Test Framework bits, the NuGet packag
 This package only contains the necessary DLLs for building the test framework, not running it.  There are additional runtime dependencies on Portal framework DLLs (put them in the same directory as the running tests) in order to properly run tests (these DLLs are automatically included in the Microsoft.Portal.TestFramework NuGet).  The specific DLLs are listed in the Microsoft.Portal.TestFramework.CSharp’s readme.txt file.  
 
 ### Viewing the source code and contributing back
-If you wish to view the source code and possibly contribute fixes back to the Test Framework then please see [the contribution article](#portalfx-testing-contributing).
+If you wish to view the source code and possibly contribute fixes back to the Test Framework then please see [the contribution article](portalfx-testing-contributing.md).

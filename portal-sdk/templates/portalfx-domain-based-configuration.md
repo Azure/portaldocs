@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Domain based configuration" description="" authors="dbrankin" />
 
 <tags
   ms.service="portalfx"
@@ -26,7 +25,7 @@ FwLink and aka.ms services.
 Extensions do not need to support additional host names themselves in order to take advantage of domain based configuration.
 
 For a discussion about when to use domain based configuration settings over vanilla configuration settings, please see 
-[Domain based configuration: Expected design pattern](/documentation/articles/portalfx-domain-based-configuration-pattern)
+[Domain based configuration: Expected design pattern](portalfx-domain-based-configuration-pattern.md)
 
 The Shell provides two APIs to support domain based configuration:
 

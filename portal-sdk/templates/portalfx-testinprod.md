@@ -1,4 +1,4 @@
-<properties title="" pageTitle="Testing in production" description="" authors="flanakin" />
+{"gitdown": "contents"}
 
 ## Testing in production
 
@@ -24,7 +24,7 @@ To avoid this being a phishing risk, we enforce that your extension must be host
   
 * Navigate to [https://portal.azure.com?feature.canmodifyextensions=true&clientOptimizations=false](https://portal.azure.com?feature.canmodifyextensions=true&clientOptimizations=false)
 
-  * For other useful switches, please refer to the [debugging guide](/documentation/articles/portalfx-debugging)
+  * For other useful switches, please refer to the [debugging guide](portalfx-debugging.md)
 
 The registered extension will be saved to user settings, and available in future sessions. When using the portal in this mode, you will see a banner letting you know the state of the configured extensions has been changed:
 
@@ -58,4 +58,4 @@ In this case the browser is trying to load the extension but the SSL certificate
 
 #### I get an error 'Security of a sandboxed iframe is potentially compromised by allowing script and same origin access'. How do I fix this?
 
-You need to allow the Azure Portal to frame your extension URL. For more information, [click here](/documentation/articles/portalfx-creating-extensions#_allowing-which-portal-can-load-the-extension)
+You need to allow the Azure Portal to frame your extension URL. For more information, [click here](portalfx-creating-extensions.md)

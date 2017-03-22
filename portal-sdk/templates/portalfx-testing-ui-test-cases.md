@@ -1,4 +1,5 @@
-## Overview
+
+## C# Test Framework Overview
 
 You write UI based test cases using Visual Studio and the Portal Test Framework which is part of the Portal SDK.
 
@@ -41,4 +42,8 @@ While the test framework does not provide any support for managing login credent
     1.  Write your own service for providing credentials.
 
 ### Full Sample Code
+```cs
+
 {"gitdown": "include-file", "file": "../samples/SampleCSTestsFiles/NavigateToPortalTest.cs"}
+
+```

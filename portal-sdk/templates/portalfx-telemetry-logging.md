@@ -1,6 +1,6 @@
 # Logging
 
-{"gitdown": "include-file", "file": "./includes/portalfx-logging-from-typescript-and-dotnet.md"}
+{"gitdown": "include-file", "file": "portalfx-logging-from-typescript-and-dotnet.md"}
 
 ##### Manually accepting log requests
 
@@ -69,6 +69,6 @@ array of traces. A typical payload takes the following structure:
 If using a non-.NET backend, you will need to create an endpoint which
 receives JSON in the body, and can accept these requests.
 
-{"gitdown": "include-file", "file": "./includes/portalfx-internal-writing-to-mds.md"}
+{"gitdown": "include-file", "file": "portalfx-internal-writing-to-mds.md"}
 
-{"gitdown": "include-file", "file": "./includes/portalfx-internal-alerting.md"}
+{"gitdown": "include-file", "file": "portalfx-internal-alerting.md"}

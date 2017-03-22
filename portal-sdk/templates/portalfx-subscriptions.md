@@ -1,4 +1,4 @@
-<properties title="" pageTitle="Working with subscriptions" description="" authors="flanakin" />
+{"gitdown": "contents"}
 
 ## Subscriptions
 
@@ -39,7 +39,7 @@ MsPortalFx.Azure.getSubscriptionInfo(subId).then((sub: Subscription) => {
 ```
 
 ### Browse
-Extensions that have subscription resources should use [Browse v2](/documentation/articles/portalfx-browse#resources), which handles the complexity of aggregating resources across subscriptions on behalf of the extension. All supplemental data should be obtained using the specified resource ids to ensure the extension isn't querying or polling for more data than is actually necessary.
+Extensions that have subscription resources should use [Browse v2](portalfx-browse.md), which handles the complexity of aggregating resources across subscriptions on behalf of the extension. All supplemental data should be obtained using the specified resource ids to ensure the extension isn't querying or polling for more data than is actually necessary.
 
 
 ### Subscription filtering on blades and parts

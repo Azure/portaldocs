@@ -1,4 +1,3 @@
-<properties title="" pageTitle="How the Azure Portal works" description="" authors="nickharris" />
 
 # Getting Started 
 
@@ -10,17 +9,17 @@ The [Azure portal](http://portal.azure.com) provides a consistent user interface
 
 ## How extensions work
 
-Extensions are simply web applications written using the [Azure Portal SDK](../generated/downloads.md).  The web application will provide content loaded by the portal in an isolated context.
+Extensions are simply web applications written using the [Azure Portal SDK](downloads.md).  The web application will provide content loaded by the portal in an isolated context.
 
 - Typically an extension is an [ASP.NET Web API](http://www.asp.net/web-api) project, which is modified to include content specific to the portal.
 - The client APIs use [TypeScript](http://www.typescriptlang.org/) to provide a productive experience for building JavaScript.
 - TypeScript is built using the [Asynchronous Module Loader (AMD)](http://requirejs.org/docs/whyamd.html) module system via [require.js](http://requirejs.org/).
-- The core programming model follows the [Model View ViewModel](http://en.wikipedia.org/wiki/Model_View_ViewModel) pattern. Most [UI elements](/documentation/articles/portalfx-ui-concepts) in the portal are backed by dynamic view models, which provide a 'live tile' style of UX.
+- The core programming model follows the [Model View ViewModel](http://en.wikipedia.org/wiki/Model_View_ViewModel) pattern. Most [UI elements](portalfx-ui-concepts.md) in the portal are backed by dynamic view models, which provide a 'live tile' style of UX.
 - View models make heavy use of [Knockout](http://knockoutjs.com/) for binding data to the client.
 - Building custom UI is enabled using standard web technologies like [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) and [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS).
 - Extensions are deployed to an endpoint owned by the service administrator.  Extension authors are responsible for hosting their own extensions.
 
-**NOTE:** Learn more about [deployment](/documentation/articles/portalfx-deployment).
+**NOTE:** Learn more about [deployment](portalfx-deployment.md).
 
 When a user visits the Azure portal, extensions will be loaded based on the users subscription. Extensions can be loaded asynchronously, and even deactivated when it's not currently in use.
 

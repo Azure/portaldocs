@@ -1,4 +1,3 @@
-<properties title="Move a subscription" pageTitle="Move a subscription" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

@@ -1,4 +1,3 @@
-<properties title="How to permanently retire a part" pageTitle="How to permanently retire a part" description="How to permanently retire a part" authors="adamabdelhamed" />
 
 ### Permanently Retire a part 
 

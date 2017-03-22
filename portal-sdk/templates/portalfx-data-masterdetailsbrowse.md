@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Data - Master details browse scenario" description="" authors="andrewbi" />
 
 ## Master details browse scenario
 

@@ -1,6 +1,5 @@
-<properties title="" pageTitle="Parameter Collection v2" description="" authors="nickharris" />
 
-{"gitdown": "include-file", "file": "./includes/portalfx-parameter-collection-related.md"}
+{"gitdown": "include-file", "file": "portalfx-parameter-collection-related.md"}
 
 # Parameter Collection: Inputs and Outputs
 For collectors and providers to communicate, there has to be a contract between them. The provider gets to define that contract. Following the interrogation analogy, the provider defines what questions you can ask, what it needs before it can answer the question, and what the response will look like. It's the duty of the collector to learn the provider's contract.

@@ -1,4 +1,4 @@
-<properties title="" pageTitle="Defining permissions" description="" authors="flanakin" />
+{"gitdown": "contents"}
 
 ## Defining permissions and checking access
 

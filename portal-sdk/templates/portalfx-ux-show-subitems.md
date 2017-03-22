@@ -1,4 +1,3 @@
-<properties title="Show a list of sub-items" pageTitle="Show a list of sub-items" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

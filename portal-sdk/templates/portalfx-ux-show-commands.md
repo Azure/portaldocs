@@ -1,4 +1,3 @@
-<properties title="Showing resource commands on the Browse blade" pageTitle="Showing resource commands on the Browse blade" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Performance Checklist" description="Performance Checklist" authors="nickharris" />
 
 <tags
     ms.service="portalfx"
@@ -11,11 +10,11 @@
 
 ## Performance Checklist - work in progress 
 
-- [Configure CDN](/documentation/articles/portalfx-cdn)
-- [Improve part responsiveness with revealContent](/documentation/articles/portalfx-parts-revealContent)
-- [Extension HomePage Caching](/documentation/articles/portalfx-extension-homepage-caching)
-- [Persistent Caching of scripts across extension updates](/documentation/articles/portalfx-extension-persistent-caching-of-scripts)
-- [Run portalcop to identify and resolve common performance issues](/documentation/articles/portalfx-performance-portalcop)
-- [Optimize number CORS preflight requests to ARM using invokeApi](/documentation/articles/portalfx-data-query#optimize-number-cors-preflight-requests-to-arm-using-invokeapi)
-- [Data best practices](/documentation/articles/portalfx-performance)
-- [Viewmodel best practices](/documentation/articles/portalfx-view-model-best-practices)
+- [Configure CDN](portalfx-cdn.md)
+- [Improve part responsiveness with revealContent](portalfx-parts-revealContent.md)
+- [Extension HomePage Caching](portalfx-extension-homepage-caching.md)
+- [Persistent Caching of scripts across extension updates](portalfx-extension-persistent-caching-of-scripts.md)
+- [Run portalcop to identify and resolve common performance issues](portalfx-performance-portalcop.md)
+- [Optimize number CORS preflight requests to ARM using invokeApi](portalfx-data-query.md)
+- [Data best practices](portalfx-performance.md)
+- [Viewmodel best practices](portalfx-view-model-best-practices.md)

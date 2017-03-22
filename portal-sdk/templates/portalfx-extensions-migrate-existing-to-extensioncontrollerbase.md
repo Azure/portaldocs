@@ -1,7 +1,3 @@
-<properties title="" pageTitle="Migrating an existing extension to ExtensionControllerBase" description="" authors="nickharris" />
-
-{"gitdown": "include", "file": "./includes/portalfx-overview-header.md"}
-
 
 ## Global.asax.cs changes
 

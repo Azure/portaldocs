@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Domain based configuration - example & sample code" description="" authors="dbrankin" />
 
 <tags ms.service="portalfx"
       ms.workload="portalfx"

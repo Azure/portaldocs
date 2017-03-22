@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Using type metadata" description="" authors="nickharris" />
 
 ## Type metadata
 When performing merge operations, the DataSet library will need to know a little bit about the schema of your model objects. For example, in the case of a Website, we want to know the property which defines the primary key of that object. This information which describes the object, and all of its properties is referred to in the portal as *type metadata*. Type metadata can be manually coded using existing libraries. However, for developers using C#, we provide two features that make this easier:

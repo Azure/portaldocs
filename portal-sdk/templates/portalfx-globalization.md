@@ -1,4 +1,4 @@
-<properties title="" pageTitle="Globalization API" description="" authors="ashergarland" />
+{"gitdown": "contents"}
 
 ## Globalization API
 

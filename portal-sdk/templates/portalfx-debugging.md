@@ -1,3 +1,5 @@
+{"gitdown": "contents"}
+
 ## Debugging
 
 Occasionally you may run into a little bit of trouble while developing your
@@ -128,8 +130,8 @@ There are also a variety of other tracing mechanisms available:
 In addition to tracing, there are a variety of diagnostic switches that may be helpful when debugging:
 
 - **?clientOptimizations=false** => Turns off bundling and minification of JavaScript to make debugging easier. Note this will apply to both the portal and extensions source. During development if you want to speed up portal load during your dev test cycles you can to turn off bundling and minification for your extension only.  To do this do not specify clientOptimizations but rather set the *IsDevelopmentMode appSetting in your web.config to true (Note: do not set IsDevelopmentMode to true on deployed extensions in production, use clientOptimizations instead).
-- **?feature.canmodifyextensions** => Used by [testing in production](/documentation/articles/portalfx-testinprod)
-- **?feature.canmodifystamps** => Used by [custom deployment environments](/documentation/articles/portalfx-deployment)
+- **?feature.canmodifyextensions** => Used by [testing in production](portalfx-testinprod.md)
+- **?feature.canmodifystamps** => Used by [custom deployment environments](portalfx-deployment.md)
 - **?feature.consoletelemetry=true** => Logs most telemetry events to the browser console
 - **?feature.customportal=false** => Turns off automatic redirection for users in the microsoft.com tenant
 - **?feature.verbosediagnostics=all** => Includes default diagnostics and all filtered diagnostics in the `Ctrl+Alt+A` popup
@@ -156,8 +158,8 @@ page, or something similar to this:
 
 If you see the graphic above, your extension is available for the shell to
 load. If your extension is not loaded, or if your extension site is not
-running, visit the [Creating Extensions](/documentation/articles/portalfx-creating-extensions)
-and the [Debugging extension failures](/documentation/articles/portalfx-debugging-extension-load-failures) guides.
+running, visit the [Creating Extensions](portalfx-creating-extensions.md)
+and the [Debugging extension failures](portalfx-debugging-extension-load-failures.md) guides.
 
 ### Debugging JavaScript
 
@@ -219,7 +221,7 @@ var viewModel = ko.dataFor($0)
 
 [See the ko.dataFor video in the debugging section for more details](/portal-sdk/generated/index-videos.md#debugging)
 
-*It's not actually your ViewModel, but rather a copy of your ViewModel in the shell side of the iframe kept in sync with your ViewModel in your iframe via something called the Proxy Observable (PO).  See the [aux docs architecture here](/documentation/articles/portalfx-howitworks).   For now, it's probably best to recognize that it's not the same ViewModel, but can be treated mostly as such.  Most bugs I've encountered don't involve issues in the PO layer.  We'll cover that how to look at errors across iframes in a later post.
+*It's not actually your ViewModel, but rather a copy of your ViewModel in the shell side of the iframe kept in sync with your ViewModel in your iframe via something called the Proxy Observable (PO).  See the [aux docs architecture here](portalfx-howitworks.md).   For now, it's probably best to recognize that it's not the same ViewModel, but can be treated mostly as such.  Most bugs I've encountered don't involve issues in the PO layer.  We'll cover that how to look at errors across iframes in a later post.
 
 #### KnockoutObservable.subscribe and debugger
 
@@ -247,7 +249,7 @@ What this basically does is says "whenever this property changes, break". Once y
 
 ### Crossing the iframe boundary
 
-In previous sections we ignored that there are multiple iframes and just assumed everything was in a single iframe. In reality, both iframes can, and do change, values in response to one another.  Below, we'll be taking a look at how to figure out where changes are coming from when they come from a different iframe. Note: Unlike the previous two parts, this is very portal specific. Before going any further, it's important to have at least a [high level understanding of how our portal is set up](# How the portal works).
+In previous sections we ignored that there are multiple iframes and just assumed everything was in a single iframe. In reality, both iframes can, and do change, values in response to one another.  Below, we'll be taking a look at how to figure out where changes are coming from when they come from a different iframe. Note: Unlike the previous two parts, this is very portal specific. Before going any further, it's important to have at least a [high level understanding of how our portal is set up](portalfx-howitworks.md#getting-started-how-the-portal-works).
 
 Firstly, you'll need to load the portal with diagnostics turned on (?trace=diagnostics).  Without this flag, we don't capture callstacks across iframes for perf reasons.  If doing this in a non-dev environment, it helps to turn off client optimizations as well (clientOptimizations=false), otherwise you'll be debugging minified code.
 
@@ -294,18 +296,18 @@ steps:
 <a name="production"></a>
 ### Debugging in production
 
-To debug and test your local extension against the production portal (or any deployed environment), refer to [testing in production](/documentation/articles/portalfx-testinprod).
+To debug and test your local extension against the production portal (or any deployed environment), refer to [testing in production](portalfx-testinprod.md).
 
 <a name="gettinghelp"></a>
 ### Getting Help
 
 If you're stuck, ask for help!
 
-- Read the [documentation](https://github.com/Azure/portalfx-docs-pr). (yes, this documentation)
+- Read the [documentation](https://github.com/Azure/portaldocs). (yes, this documentation)
 - Check out the samples. They're installed with the SDK! You can find them under `\My Documents\PortalSDK\FrameworkPortal\Extensions\SamplesExtension`
 - Reach out to Ibiza team on: [https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza](https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza).
 
-Next steps: [Deploying your extension](/documentation/articles/portalfx-deployment)
+Next steps: [Deploying your extension](portalfx-deployment.md)
 
 
 ### FAQ

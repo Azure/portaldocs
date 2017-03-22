@@ -16,7 +16,7 @@ What follows is the next level of detail behind these concepts and how to apply 
 <a name="data-overview-data-context"></a>
 ### Shared data access using **DataContext**
 
-For each [Area](#data-overview-areas) in an extension, there is a **singleton DataContext** instance that supports access to shared data (that is, data [loading](/documentation/articles/portalfx-data-loadingdata), [caching](/documentation/articles/portalfx-data-configuringdatacache), [refreshing and updating](/documentation/articles/portalfx-data-refreshingdata)) for the Blades and Parts implemented in that Area. Wherever muliple Blades and Parts make use of common server data, the DataContext is an ideal place to locate data loading/updating logic for an extension Area.  
+For each [Area](#data-overview-areas) in an extension, there is a **singleton DataContext** instance that supports access to shared data (that is, data [loading](portalfx-data-loadingdata.md), [caching](portalfx-data-configuringdatacache.md), [refreshing and updating](portalfx-data-refreshingdata.md)) for the Blades and Parts implemented in that Area. Wherever muliple Blades and Parts make use of common server data, the DataContext is an ideal place to locate data loading/updating logic for an extension Area.  
 
 When a Blade or Part view model is instantiated, its constructor is supplied with a reference to the DataContext singleton instance for the associated extension Area.  In the Blade or Part view model constructor, the view model accesses the data required by that Blade or Part.
 
@@ -26,7 +26,7 @@ The benefits of centralizing data access in a singleton DataContext include:
 
   * **Caching/Sharing** - The DataContext singleton instance will live as long as the extension is loaded in the browser, so when a Blade is opened (and, consequently, a new Blade view model is instantiated), data required by the new Blade will often *already be loaded and cached in the DataContext*, as required by some previously opened Blade or rendered Part. Not only will this cached data be available *immediately* - optimizing rendering performance, perceived responsiveness - but also *no new AJAX calls* are unnecessary to load the data for the newly-opened Blade - reducing server load and COGs.
   * **Consistency** - It is very common for multiple Blades and Parts to render the same data (just in different detail, with different presentation). Moreover, there are situations where such Blades/Parts can be seen on the screen at the same time - or separated in time only by a single user navigation. In such cases, the user will expect to see all their Blades and Parts depicting the *exact same state of the user's data*. An effective way to achieve this consistency is to load only *a single copy of the data*, which is what DataContext is designed to do.
-  * **Fresh data** - Users expect to see data in Blades and Parts that always reflects the state of their data in the cloud (and not stale or out-of-date data). Another benefit of loading and caching data in a single location is that the cached data can be regularly updated to accurately reflect the state of server data. See more details on refreshing data [here](/documentation/articles/portalfx-data-refreshingdata).
+  * **Fresh data** - Users expect to see data in Blades and Parts that always reflects the state of their data in the cloud (and not stale or out-of-date data). Another benefit of loading and caching data in a single location is that the cached data can be regularly updated to accurately reflect the state of server data. See more details on refreshing data [here](portalfx-data-refreshingdata.md).
 
 <a name="data-overview-areas"></a>
 ### Organizing your extension source code into **Areas**
@@ -59,7 +59,7 @@ There is a single DataContext class per Area. That class is - by convention - to
 You may notice that the DataContext class does not dictate the use of any FX base class or interface. In practice, the members of a DataContext class are typically:  
 
 * **DataCache classes** - The Azure Portal FX DataCache classes (`QueryCache`, `EntityCache` and the less-common `EditScopeCache`) are a simple and full-featured way of loading/caching data used by Blade and Part view models.
-* **CRUD methods** (create, replace, update, delete) - Commands available on Blades and Parts often modify server data. These commands should be implemented in terms of methods on the DataContext class, where each method can issue AJAX calls and [reflect server changes](/documentation/articles/portalfx-data-refreshingdata) in associated DataCaches.
+* **CRUD methods** (create, replace, update, delete) - Commands available on Blades and Parts often modify server data. These commands should be implemented in terms of methods on the DataContext class, where each method can issue AJAX calls and [reflect server changes](portalfx-data-refreshingdata.md) in associated DataCaches.
 
 <a name="data-overview-data-cache"></a>
 ### Using **DataCache** to load and cache data
@@ -68,11 +68,11 @@ The DataCache classes are a convenient way to load and cache data required by Bl
 
 * **QueryCache** - Loads data of type `Array<T>` according to an extension-specified `TQuery` type. `QueryCache` is useful for loading data for *list-like views* like Grid, List, Tree, Chart, etc..
 * **EntityCache** - Loads data of type `T` according to some extension-specified `TId` type. `EntityCache` is useful for loading data into property views and *single-record views*.
-* (Less commonly used) **EditScopeCache** - Loads and manages instances of EditScope, which is a change-tracked, editable model [for use in Forms](/documentation/articles/portalfx-forms-working-with-edit-scopes).  
+* (Less commonly used) **EditScopeCache** - Loads and manages instances of EditScope, which is a change-tracked, editable model [for use in Forms](portalfx-forms-working-with-edit-scopes.md).  
 
 From an API perspective these DataCache classes all share the same API and usage patterns:  
 
-* **Step 1** - In a DataContext, the extension **creates and [configures](/documentation/articles/portalfx-data-configuringdatacache) DataCache instances**. Briefly, configuration includes:  
+* **Step 1** - In a DataContext, the extension **creates and [configures](portalfx-data-configuringdatacache.md) DataCache instances**. Briefly, configuration includes:  
 
     * How to load data when it is missing from the cache
     * How to implicitly refresh cached data, to keep it consistent with server state
@@ -88,7 +88,7 @@ From an API perspective these DataCache classes all share the same API and usage
 
 {"gitdown": "include-section", "file":"../Samples/SamplesExtension/Extension/Client/V1/MasterDetail/MasterDetailBrowse/ViewModels/MasterViewModels.ts", "section": "data#onInputsSet"}
   
-A detailed walk-through of a scenario employing these concepts can be found [here](/documentation/articles/portalfx-data-masterdetailsbrowse).
+A detailed walk-through of a scenario employing these concepts can be found [here](portalfx-data-masterdetailsbrowse.md).
 
 <a name="data-overview-data-view"></a>
 ### **DataView** is for memory management
@@ -101,8 +101,8 @@ When a view model calls '`fetch(...)`' on its DataView, this '`fetch(...)`' call
 
 ### Summary
 
-For more information on using the data APIs in the portal framework, read the documentation on [working with data](/documentation/articles/portalfx-data).
+For more information on using the data APIs in the portal framework, read the documentation on [working with data](portalfx-data.md).
 
-Next Steps: Learn about [DataCaches](/documentation/articles/portalfx-data-configuringdatacache).
+Next Steps: Learn about [DataCaches](portalfx-data-configuringdatacache.md).
 
 [extension-areas]: ../media/portalfx-data-context/area.png

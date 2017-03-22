@@ -1,6 +1,5 @@
-<properties title="" pageTitle="Create Sample" description="" authors="" />
 
-# Create Sample
+## Create Sample
 The sample below shows how to fill out a form to create a resource.
 
 ### Open your create blade

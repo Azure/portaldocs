@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Typescript and this" description="" authors="julienv3" />
 
 # 'this' context
 

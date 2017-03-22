@@ -52,6 +52,3 @@ Yes, this is going to be tracked in the weekly status email.
 You can file a bug directly on Sean Watson using the link below, it will be triaged asap.
 [Resource menu bug](http://aka.ms/portalfx/resourcemenubug)
 Or if you don't have access to that template, email [ibiza Menu Blade](mailto:ibiza-menu-blade@microsoft.com) 
-
-
-[resourcemenu-resourcegroup-example]: ../media/portalfx-resourcemenu/resourcemenu-resourcegroup.gif

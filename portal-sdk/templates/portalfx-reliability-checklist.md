@@ -1,5 +1,3 @@
-<properties title="" pageTitle="Reliability Checklist" description="" authors="" />
-
 
 # Reliability Checklist
 

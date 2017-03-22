@@ -1,4 +1,4 @@
-<properties title="" pageTitle="Using the Select Member Blade" description="" authors="admeyerms" />
+{"gitdown": "contents"}
 
 <tags
     ms.service="portalfx"

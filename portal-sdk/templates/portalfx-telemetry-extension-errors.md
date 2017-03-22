@@ -6,7 +6,7 @@ To view the Extension Errors PowerBi dashboard follow this link: [Extension Erro
 
 ### Prerequisites
 
-**NOTE:** Note that your extension's errors/warnings will be tracked in this dashboard only if you have previously [onboarded to ExtTelemetry/ExtEvents tables](/documentation/articles/portalfx-telemetry).
+**NOTE:** Note that your extension's errors/warnings will be tracked in this dashboard only if you have previously [onboarded to ExtTelemetry/ExtEvents tables](portalfx-telemetry.md).
 
 #### Getting access to the Extension Errors Dashboard
 

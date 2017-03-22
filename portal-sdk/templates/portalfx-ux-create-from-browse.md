@@ -1,4 +1,3 @@
-<properties title="Create a resource from the Browse view" pageTitle="Create a resource from the Browse view" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

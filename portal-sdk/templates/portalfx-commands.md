@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Commands" description="" authors="adamabdelhamed" />
 
 ### Introduction to Commands
 Commands provide a way by which users can complete an action. Samples of common commands include:

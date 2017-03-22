@@ -1,4 +1,3 @@
-<properties title="" pageTitle="CDN" description="" authors="alvarorahul,madjos,nickharris" />
 
 ### Using the CDN
 Extension authors may choose to use a CDN to serve static images, scripts, and stylesheets. The Azure Portal SDK does not require the use of a CDN, or the use of a particular CDN. However, extensions served from Azure can take advantage of the built-in CDN capabilities in the SDK.
@@ -131,7 +130,7 @@ When you release to ensure that users are served the latest static content, as o
 
 ### Configuring versioning of your Extensioon 
 
-{"gitdown": "include-file", "file": "./includes/portalfx-versioning-extensions.md"}
+{"gitdown": "include-file", "file": "portalfx-versioning-extensions.md"}
 
 ### FAQ
 

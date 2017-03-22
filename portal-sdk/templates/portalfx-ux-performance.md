@@ -1,4 +1,3 @@
-<properties title="Performance best practices" pageTitle="Performance best practices" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

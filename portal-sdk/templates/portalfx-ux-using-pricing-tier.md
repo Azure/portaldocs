@@ -1,4 +1,3 @@
-<properties title="Using the pricing tier" pageTitle="Using the pricing tier" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

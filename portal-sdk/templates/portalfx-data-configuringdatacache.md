@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Configuring the data cache" description="" authors="bradolenick" />
 
 ## Querying for data
 

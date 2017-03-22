@@ -1,3 +1,5 @@
+{"gitdown": "contents"}
+
 ## Overview
 
 Portal performance from a customers perspective is seen as all experiences throughout the product. 
@@ -82,12 +84,12 @@ You can, if preferred, run queries locally but ensure you are using the Fx provi
 ## Performance Checklist
 
 - [Configure CDN][portalfx-cdn]
-- [Extension HomePage Caching](/portalfx-extension-homepage-caching)
-- [Persistent Caching of scripts across extension updates](/portalfx-extension-persistent-caching-of-scripts)
-- [Run portalcop to identify and resolve common performance issues](/portalfx-performance-portalcop)
+- [Extension HomePage Caching](portalfx-extension-homepage-caching)
+- [Persistent Caching of scripts across extension updates](portalfx-extension-persistent-caching-of-scripts)
+- [Run portalcop to identify and resolve common performance issues](portalfx-performance-portalcop)
 - [Optimize number CORS preflight requests to ARM using invokeApi](index-portalfx-extension-development.md#optimize-number-cors-preflight-requests-to-arm-using-invokeapi)
-- [Improve part responsiveness with revealContent](/index-portalfx-extension-development.md#portalfx-parts-revealContent)
-- [Best practices](#performancebestpractices)
+- [Improve part responsiveness with revealContent](index-portalfx-extension-development.md#portalfx-parts-revealContent)
+- [Best practices](#performance-best-practices)
 
 ## Performance Frequently Asked Questions (FAQ)
 
@@ -150,6 +152,6 @@ blade which is not meeting the bar.
 
 Coming soon please reach out to sewatson if you are interested.
 
-[TelemetryOnboarding]: </portalfx-telemetry-getting-started>
+[TelemetryOnboarding]: <portalfx-telemetry-getting-started>
 [Ext-Perf/Rel-Report]: <http://aka.ms/portalfx/dashboard/extensionperf>
-[portalfx-cdn]: </portalfx-cdn>
+[portalfx-cdn]: <portalfx-cdn>

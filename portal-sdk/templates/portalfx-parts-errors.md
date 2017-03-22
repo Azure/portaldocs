@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Handling part errors" description="" authors="adamabdelhamed" />
 
 ### Handling part errors
 

@@ -1,6 +1,3 @@
-<properties title="" pageTitle="Creating Icons" description="" authors="nickharris" />
-
-[Portal FX](/documentation/sections/portalfx) > [UI](/documentation/sections/portalfx#ui) > [Icons](/documentation/articles/portalfx-icons) > Creating icons
 
 # Icons: Creating icons
 There are only couple rules when creating SVG icons:
@@ -47,5 +44,5 @@ There are only couple rules when creating SVG icons:
   * #00188f
   * #e81123
 
-Next steps: [Working with Icons](/documentation/articles/portalfx-icons)
+Next steps: [Working with Icons](portalfx-icons.md)
 

@@ -194,7 +194,7 @@ export class InputBindingsDifferentBladesParentPartViewModel {
 
 #### Blade Parameters (Not recommended for new scenarios)
 
-Blades must explicitly declare which parameters they are required to receive.  Think of this as a function signature. There are [multiple types of parameters](/documentation/articles/portalfx-blades-parameters), each of which can serve a special purpose. In the examples above, a `<BladeInput>` defined a `Parameter` property - that parameter must match the name of a parameter available on the launched blade.  To learn more about blade parameters, check out the [full documentation](/documentation/articles/portalfx-blades-parameters).
+Blades must explicitly declare which parameters they are required to receive.  Think of this as a function signature. There are [multiple types of parameters](portalfx-blades-parameters.md), each of which can serve a special purpose. In the examples above, a `<BladeInput>` defined a `Parameter` property - that parameter must match the name of a parameter available on the launched blade.  To learn more about blade parameters, check out the [full documentation](portalfx-blades-parameters.md).
 
 `\SamplesExtension\Extension\Client\Bindings\InputBindingsDifferentBlades\InputBindingsDifferentBlades.pdl`
 
@@ -213,7 +213,7 @@ Blades must explicitly declare which parameters they are required to receive.  T
 </Blade>
 ```
 
-The parameters passed to a blade can then be bound to parts, commands, or even the blade view model.  To learn more, visit [blade propertiess](/documentation/articles/portalfx-blades-properties).
+The parameters passed to a blade can then be bound to parts, commands, or even the blade view model.  To learn more, visit [blade propertiess](portalfx-blades-properties.md).
 
 #### Receiving data with BladeOutput (Not recommended for new scenarios)
 
@@ -246,7 +246,7 @@ In the code above, the `onInputsSet` method of the `OutputBindingsParentPartView
 
 > [WACOM.NOTE] When the value of a blade output changes, the `onInputsSet` method of the part view model will be invoked.  The `inputs` object will contain the value of the output binding, which may not have been available when the first time `onInputsSet` is invoked.  This is one of the cases where `onInputsSet` is called multiple times for a given view model.
 
-Learn more about [blade outputs](/documentation/articles/portalfx-blades-outputs).
+Learn more about [blade outputs](portalfx-blades-outputs.md).
 
 #### Grids, CollectionParts, and ListViews 
 
@@ -312,9 +312,9 @@ There are two separate `<BladeAction>` elements defined for this part.  The `Col
 
 #### Launching blades from another extension (Not recommended for new scenarios)
 
-When using `<BladeAction>`, you're generally going to be launching blades from your own extension.  In some cases, you may [import a part from another extension](/documentation/articles/portalfx-parts-sharing).  Using this technique, the source of the shared part will control launching of the blade.  However - in some cases you may want to launch a blade from another extension using a part from the current extension.  This is where `BladeReference` is useful.
+When using `<BladeAction>`, you're generally going to be launching blades from your own extension.  In some cases, you may [import a part from another extension](portalfx-parts-sharing.md).  Using this technique, the source of the shared part will control launching of the blade.  However - in some cases you may want to launch a blade from another extension using a part from the current extension.  This is where `BladeReference` is useful.
 
-{"gitdown": "include-file", "file": "./includes/portalfx-extensibility-pde.md"}
+{"gitdown": "include-file", "file": "portalfx-extensibility-pde.md"}
 
 ##### Consuming the blade (Not recommended for new scenarios)
 
@@ -378,7 +378,7 @@ This method can also be used to launch a blade from another extension, using the
 
 #### Hotspots (Not recommended for new scenarios)
 
-When building [custom parts](/documentation/articles/portalfx-parts-custom), you may want to launch a blade from a div, button, or `<a>` tag. To launch a blade, start with a `pcHotSpot` binding in your HTML template:
+When building [custom parts](portalfx-parts-custom.md), you may want to launch a blade from a div, button, or `<a>` tag. To launch a blade, start with a `pcHotSpot` binding in your HTML template:
 
 `\SamplesExtension\Extension\Client\ParameterCollection\CollectorAsHotSpot\Templates\CompositePart.html`
 

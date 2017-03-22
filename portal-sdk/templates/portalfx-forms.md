@@ -1,3 +1,4 @@
+{"gitdown": "contents"}
 
 # Developing Forms
 
@@ -13,11 +14,11 @@ The SDK includes extensive support for displaying and managing user input. Forms
 
 To get started using forms, pick from one of the following topics:
 
-* [Layouting out UI](/documentation/articles/portalfx-forms-sections)
-* [Building a form](/documentation/articles/portalfx-forms-construction)
-* [Validation](/documentation/articles/portalfx-forms-field-validation)
-* [Edit Scopes](/documentation/articles/portalfx-forms-working-with-edit-scopes)
-* [Command integration](/documentation/articles/portalfx-forms-integrating-with-commands)
+* [Layouting out UI](portalfx-forms-sections.md)
+* [Building a form](portalfx-forms-construction.md)
+* [Validation](portalfx-forms-field-validation.md)
+* [Edit Scopes](portalfx-forms-working-with-edit-scopes.md)
+* [Command integration](portalfx-forms-integrating-with-commands.md)
 
 [forms-example]: ../media/portalfx-forms/forms.png
 

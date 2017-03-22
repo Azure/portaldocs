@@ -1,4 +1,3 @@
-<properties title="Adding more columns in Browse view" pageTitle="Adding more columns in Browse view" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

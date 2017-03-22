@@ -1,10 +1,9 @@
-<properties title="" pageTitle="Forms - working with edit scopes" description="" authors="nickharris" />
 
 ## Working with Edit Scopes
 
 [Watch the Working with Edit Scopes Video](/portal-sdk/generated/index-videos.md#working-with-editscope) 
 
-(For quick answers to frequently-asked questions on EditScope, see the [EditScope FAQ](/documentation/articles/portalfx-forms-edit-scope-faq).)
+(For quick answers to frequently-asked questions on EditScope, see the [EditScope FAQ](portalfx-forms-edit-scope-faq.md).)
 
 Edit scopes provide a standard way of managing edits over a collection of input fields, blades, and extensions. They provide many common functions that would otherwise be difficult to orchestrate:
 

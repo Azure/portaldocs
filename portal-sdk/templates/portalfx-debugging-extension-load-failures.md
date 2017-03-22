@@ -1,4 +1,4 @@
-<properties title="" pageTitle="Debugging Your Extension" description="" authors="nickharris" />
+{"gitdown": "contents"}
 
 ## Debugging extension load failures
 

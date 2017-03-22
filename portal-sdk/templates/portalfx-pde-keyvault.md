@@ -1,4 +1,4 @@
-<properties title="" pageTitle="Using the KeyVault Picker Blades" description="" authors="karlaug" />
+{"gitdown": "contents"}
 
 <tags
     ms.service="portalfx"

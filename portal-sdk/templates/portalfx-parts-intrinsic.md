@@ -1,14 +1,10 @@
 
-<properties title="" pageTitle="Part content state" description="" authors="sewatson" />
-
-[Portal FX](/documentation/sections/portalfx) > [UI](/documentation/sections/portalfx#ui) > [Parts](/documentation/articles/portalfx-parts-index) > Intrinsic Parts
-
 # Intrinsic Parts
 
 Intrinsic parts are composed of existing controls in the portal, and provide patterns for solving common patterns in the portal.
 
 We have a list of all the currently available intrinsics located under the [samples extension](https://aka.ms/portalfx/samples/#blade/SamplesExtension/IntrinsicPartsIndexBlade).
-If you install the latest [SDK version](/en-us/downloads) you will find the sample code here:
+If you install the latest [SDK version](downloads.md) you will find the sample code here:
 	_%userprofile%\Documents\PortalSDK\FrameworkPortal\Extensions\SamplesExtension\Extension\Client\Parts\Intrinsic\ViewModels_
 
 ## Asset
@@ -130,7 +126,7 @@ Learn how to use the Simple Chart part.
 Learn how to use the Single value gauge part.
 </a>
 
-Next steps: [Developing custom parts](/documentation/articles/portalfx-parts-custom)
+Next steps: [Developing custom parts](portalfx-parts-custom.md)
 
 [asset]: ../media/portalfx-controls/asset.png
 [button]: ../media/portalfx-controls/button.png

@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Blades" description="" authors="adamabdelhamed" />
 
 ### Introduction to Blades
 
@@ -21,14 +20,14 @@ Defining a blade in PDL is simple. Blades can be created in any PDL file, and th
 
 Blades use view models to drive dynamic content include titles, icons, and status.  To learn more about blades, start with the following topics:
 
-* [Controlling blade UI](/documentation/articles/portalfx-blades-ui)
-* [Opening blades](/documentation/articles/portalfx-blades-opening)
-* [Blade parameters](/documentation/articles/portalfx-blades-parameters)
-* [Blade properties](/documentation/articles/portalfx-blades-properties)
-* [Blade outputs](/documentation/articles/portalfx-blades-outputs)
-* [Pinning blades](/documentation/articles/portalfx-blades-pinning)
-* [Blade Kinds](/documentation/articles/portalfx-blades-bladeKinds)
-* [Closing blades](/documentation/articles/portalfx-blades-closing)
+* [Controlling blade UI](portalfx-blades-ui.md)
+* [Opening blades](portalfx-blades-opening.md)
+* [Blade parameters](portalfx-blades-parameters.md)
+* [Blade properties](portalfx-blades-properties.md)
+* [Blade outputs](portalfx-blades-outputs.md)
+* [Pinning blades](portalfx-blades-pinning.md)
+* [Blade Kinds](portalfx-blades-bladeKinds.md)
+* [Closing blades](portalfx-blades-closing.md)
 
 * Controlling blade UI
  {"gitdown": "include-file", "file": "../templates/portalfx-blades-ui.md"}

@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Portal SDK NuGet packages" description="NuGet" authors="nickharris" />
 
 # NuGet packages for Extension Dependencies
 
@@ -64,8 +63,8 @@ The following NuGet packages are available:
 
 ## PDE Extensions
 
-See all available PDE's shipped as NuGet packages [here](/documentation/sections/portalfx#pde)
+See all available PDE's shipped as NuGet packages [here](portalfx.md#pde)
 
 ## Sharing your extension PDE
 
-To learn how to share your PDE using NuGet see the guidance [here](/documentation/articles/portalfx-pde-publish)
+To learn how to share your PDE using NuGet see the guidance [here](portalfx-pde-publish.md)

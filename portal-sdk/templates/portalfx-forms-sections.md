@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Forms sections" description="" authors="andrewbi" />
 
 ## Laying out your UI on the blade
 

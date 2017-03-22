@@ -179,7 +179,7 @@ Ready to write your first Azure portal extension? Here are a few resources to g
 
    `AzureGallery.exe upload -p ..\path\to\package.azpkg -h [optional hide key]`
 
-   In order to use the gallery loader you will need to set some values in the AzureGallery.exe.config file for details see [AzureGallery.exe docs](/documentation/articles/gallery-items#gallery-package-management). For dev/test scenarios see [Test In Prod](/documentation/articles/gallery-development)
+   In order to use the gallery loader you will need to set some values in the AzureGallery.exe.config file for details see [AzureGallery.exe docs](gallery-items.md). For dev/test scenarios see [Test In Prod](gallery-development.md)
 
 1. **Recommended patterns**
 
@@ -227,8 +227,8 @@ Ready to write your first Azure portal extension? Here are a few resources to g
       - Show all resource properties in the column chooser
 
       See also:
-      - [Browse documentation](/documentation/articles/portalfx-browse)
-      - [Asset documentation](/documentation/articles/portalfx-assets)
+      - [Browse documentation](portalfx-browse.md)
+      - [Asset documentation](portalfx-assets.md)
       - [#ibiza-browse on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-browse)
       - [Ask a question](https://stackoverflow.microsoft.com/questions/ask?tags=ibiza-browse)
 
@@ -276,7 +276,7 @@ Ready to write your first Azure portal extension? Here are a few resources to g
    configuration change is pushed to PROD. External teams can
    <a href="mailto:ibizafxpm@microsoft.com?subject=[Onboarding Request] Add &lt;Name&gt; extension to the portal&body=Extension name:  Company_[BrandOrSuite_]ProductOrComponent (e.g. Contoso_SomeSku_SomeProduct or Contoso_SomeProduct)%0A%0AURLs  (must adhere to pattern)%0APROD-- main.&lt;extension&gt;.ext.contoso.com%0A%0AContact info%0ABusiness Contacts:_________%0ADev leads: _________%0APROD on-call email: _________%0A">submit their request via email</a>.
 
-1. **[Exit criteria + quality metrics](/documentation/articles/portalfx-onboarding-exitcriteria)**
+1. **[Exit criteria + quality metrics](portalfx-onboarding-exitcriteria.md)**
 
    Every extension must meet required exit criteria / quality metrics before it will be enabled.
 

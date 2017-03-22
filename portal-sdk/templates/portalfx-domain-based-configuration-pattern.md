@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Domain based configuration - Design pattern" description="" authors="dbrankin" />
 
 <tags ms.service="portalfx"
       ms.workload="portalfx"
@@ -17,13 +16,13 @@ AAD client application IDs, etc.
 If on the other hand the same deployment has to support multiple domains (i.e. community clouds, such as Fujitsu A5),
 domain based configuration should be used, with the selection being based on the Trusted Authority for the caller.
 
-For those that wish to jump ahead, this [example](/documentation/articles/portalfx-domain-based-configuration-example) 
+For those that wish to jump ahead, this [example](portalfx-domain-based-configuration-example.md) 
 shows all the code required to wire up domain based configuration server side. Additional code is required to push values 
 down to the browser, and the recommended pattern for this is covered below.
 
 ## Built in support
-See also [Shell RPC call](/documentation/articles/portalfx-domain-based-configuration) and
-[PortalContext.TrustedAuthorityHost](/documentation/articles/portalfx-domain-based-configuration)
+See also [Shell RPC call](portalfx-domain-based-configuration.md) and
+[PortalContext.TrustedAuthorityHost](portalfx-domain-based-configuration.md)
 
 ## Expected design pattern
 Partners (extension authors) are of free to do what they want with respect to domain based configuration, but the following is the
@@ -38,18 +37,18 @@ domain based configuration should be used, with the selection being based on the
 
 ## Domain based configuration
 Once the partner has identified their configuration, they create a supporting `DictionaryConfiguration` class as per the
-[DictionaryConfiguration documentation](/documentation/articles/portalfx-dictionaryconfiguration). The dictionary key will
+[DictionaryConfiguration documentation](portalfx-dictionaryconfiguration.md). The dictionary key will
 be the `TrustedAuthorityHost` (i.e. the host name the Shell was loaded under), which is available at run time via `PortalContext`.
 
 By convention, we append `DomainBasedConfiguration` to the end of the class name (`ErrorApplicationDomainBasedConfiguration`,
 `HubsDomainBasedConfiguration`, (portal) `WebsiteDomainBasedConfiguration`, etc). However, this is purely a convention and is
 not enforced (or required).
 
-This [example](/documentation/articles/portalfx-domain-based-configuration-example) shows all the code required to wire up
+This [example](portalfx-domain-based-configuration-example.md) shows all the code required to wire up
 domain based configuration.
 
 ## Exporting domain based configuration values to the client
-See [How to expose config settings for consumption in the client](/documentation/articles/portalfx-load-configuration) for an
+See [How to expose config settings for consumption in the client](portalfx-load-configuration.md) for an
 overview of exposing config settings to the client.
 
 In many cases, the domain based configuration is needed in client side TypeScript. While the extension developer is free to do this any

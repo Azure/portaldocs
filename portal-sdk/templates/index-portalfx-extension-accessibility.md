@@ -1,3 +1,5 @@
 {"gitdown": "contents", "maxLevel": 2}
 
-{"gitdown": "include-file", "file": "./portalfx-extension-accessibility.md"}
+# Accessibility
+{"gitdown": "include-headings", "file": "../templates/portalfx-accessibility.md"}
+

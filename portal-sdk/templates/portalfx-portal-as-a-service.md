@@ -68,7 +68,7 @@ Extensions development does not have any specific requirements and any extension
 
 The telemetry principles and delivery pipeline stay the same as for the Ibiza Portal.
 
-For more information about Telemetry / Performance / Reliability, refer to the [telemetry documentation](/documentation/articles/portalfx-extension-monitor).
+For more information about Telemetry / Performance / Reliability, refer to the [telemetry documentation](portalfx-extension-monitor.md).
 
 Filtering telemetry based on the custom portal can be done using the _'feature.browsecuration'_ flag value in the _Query_ column.
 

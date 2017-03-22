@@ -1,4 +1,3 @@
-<properties title="How to handle assets that no longer exist" pageTitle="How to handle assets that no longer exist" description="How to handle assets that no longer exist" authors="adamabdelhamed" />
 
 ### Handling assets that no longer exist
 

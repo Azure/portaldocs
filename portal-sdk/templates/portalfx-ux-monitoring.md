@@ -1,4 +1,3 @@
-<properties title="Using standard monitoring parts" pageTitle="Using standard monitoring parts" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

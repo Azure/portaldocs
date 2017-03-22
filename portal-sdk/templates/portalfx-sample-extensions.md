@@ -1,4 +1,3 @@
-<properties title="" pageTitle="PortalFx Getting Started" description="" authors="justbe" />
 
 ## Samples extension
 

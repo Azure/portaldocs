@@ -1,4 +1,4 @@
-<properties pageTitle="Deployments" description="Deployments" services="portalfx" documentationCenter="portalfx" authors="flanakin,spaoliello" />
+{"gitdown": "contents"}
 
 ## Overview
 
@@ -29,7 +29,7 @@ for static resources (images, scripts, etc.). This shifts the location of the mo
 
 The portal is deployed continuously. On any given day, multiple bug fixes, new features, and API changes may be deployed
 to production. When a new version of the portal is deployed to production, the corresponding version of the SDK is
-automatically released to the [download center](/downloads). The download center contains the change log for the given
+automatically released to the [download center](downloads.md). The download center contains the change log for the given
 release, including bug fixes, new features, and a log of breaking changes.
 
 ## Before deploying extension
@@ -100,7 +100,7 @@ changes, and redeploy the extension.
 
 ## Deploying extension UI
 
-[Deploying through Extension Hosting Service](/documentation/articles/portalfx-extension-hosting-service)
+[Deploying through Extension Hosting Service](portalfx-extension-hosting-service.md)
 
 ## Deploying extension controllers
 
@@ -130,16 +130,16 @@ In general, it is best to set up servers in every region. That said, there is so
 
 We recommend that extensions deploy  broadly across all regions in an active-active configuration and use a technology, such as [Azure Traffic Manager](https://azure.microsoft.com/en-us/documentation/articles/traffic-manager-overview/) with a "Performance" profile, to direct the user to the server closest to them. This will give users the best experience, especially if the extension communicates with an RP that is also deployed broadly across regions. (Since ARM is deployed in every region, this means that that traffic for a user will stay entirely within one region, reducing latency.)
 
-We also recommend that extensions use a CDN, such as Azure CDN, to move the most commonly-downloaded resources as close to the end user as possible. For more information about using Azure CDN with extensions, see [Configuring CDN and understanding Extension Versioning](/documentation/articles/portalfx-cdn).
+We also recommend that extensions use a CDN, such as Azure CDN, to move the most commonly-downloaded resources as close to the end user as possible. For more information about using Azure CDN with extensions, see [Configuring CDN and understanding Extension Versioning](portalfx-cdn.md).
 
 ## Resiliency and failover
 
 Having a presence in all geographies is important for good performance.
 We see much higher latencies and reliability issues when servers are not geo-located with their users.
-(For more tips, see the [performance page](/documentation/articles/portalfx-performance).)
+(For more tips, see the [performance page](portalfx-performance.md).)
 
 In order to deploy to all regions:
-1.	Use [Extension Hosting Service](/documentation/articles/portalfx-extension-hosting-service) to deploy UI
+1.	Use [Extension Hosting Service](portalfx-extension-hosting-service.md) to deploy UI
 1.	Deploy Controllers to all regions
 
 In general, it is best to set up servers in every region.

@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Distributing a PDE using NuGet" description="" authors="nickha" />
 
 <tags
     ms.service="portalfx"
@@ -77,9 +76,9 @@ To share your PDE with other teams please follow these guidelines:
  
 - Now that the NuGet is created as part of your build you need to create a document for consuming the content exposed by the PDE
 
-    - [Check your access to the doc repo portalfx-docs-pr](https://github.com/Azure/portalfx-docs-pr)
+    - [Check your access to the doc repo portalfx-docs-pr](https://github.com/Azure/portaldocs)
 	
         - if you don’t have access follow the instructions [here](http://aka.ms/azuregithub) to enable 2FA on your github account and link your microsoft account
-		- Then through [here](http://aka.ms/azuregithub) request access to portalfx-docs-pr
+		- Then through [here](http://aka.ms/azuregithub) request access to portalfxdocs
 
 - The resulting NuGet is to be published from your official builds to [http://wanuget/Official/](http://wanuget/Official/). See OneBranch guidance to [publish your package](https://microsoft.sharepoint.com/teams/WAG/EngSys/Implement/OneBranch/Publish%20your%20package.aspx)

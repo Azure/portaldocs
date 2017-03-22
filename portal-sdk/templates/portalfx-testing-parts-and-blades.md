@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Testing Parts and Blades" description="" authors="" />
 
 ## Testing Parts and Blades
 

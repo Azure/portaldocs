@@ -11,7 +11,7 @@ be destroyed long before the blade is closed by being removed from the source ar
 (especially virtualized data) memory leaks can quickly add up and lead to poor performance. Before we get into a discussion of child 
 lifetime managers it should be noted that `pureComputed()` does *not* take a lifetime manager because pureComputed already uses memory 
 as efficiently as possible by design and generally any computed you create in a `map()` should be a pureComputed (as opposed to a 
-`ko.reactor`). More info on pureComputeds is available [here](#data-pureComputed).
+`ko.reactor`). More info on pureComputeds is available [here](portalfx-blade-viewmodel.md#data-pureComputed).
 
 For this example let's say you have some data in a data cache and for each item you want to display a row in a grid and separately 
 display a button in a Section located below the grid. We'll use the `mapInto()` function to map the items in the data cache into 
@@ -29,7 +29,7 @@ let gridItems = this._view.items.mapInto(container, (itemLifetime, item) => {
 ```
 
 A few things to note here. First is that everywhere we read the value an observable in the mapping function we wrapped it in a 
-ko.pureComputed. This is important and we have documentation [here](#data-shaping) that goes into the reasons why.
+ko.pureComputed. This is important and we have documentation [here](portalfx-data-projections.md#data-shaping) that goes into the reasons why.
 
 The second thing is that rather than passing 'container' into the button constructor we passed `itemLifetime` which our mapping 
 function receives as a parameter. This is a "child" lifetime manager that was automatically created for you by the mapInto function.

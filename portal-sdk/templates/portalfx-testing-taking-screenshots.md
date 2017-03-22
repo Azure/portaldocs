@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Taking Screenshots while Testings" description="" authors="" />
 
 ## Taking Screenshots while Testings
 

@@ -1,9 +1,6 @@
 * [Stackoverflow](#stackoverflow)
 
 
- <h1 name="portalfx-extension-QnA"></h1>
-  <h1 name="portalfx-stackoverflow"></h1>
- <properties title="" pageTitle="Telemetry in the Portal" description="" authors="" />
 
 <a name="stackoverflow"></a>
 ## Stackoverflow

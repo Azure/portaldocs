@@ -1,5 +1,3 @@
-<properties title="" pageTitle="Resource menu apis" description="" authors="sewatson" />
-
 
 ### Resource menu APIs
 

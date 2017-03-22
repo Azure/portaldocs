@@ -5,14 +5,14 @@ Demonstrates how to configure your solution to side load a gallery package in pr
 
 [![Side Loading Gallery Packages in Prod](../media/videos/sideloadgallery.png)](https://auxdocs.blob.core.windows.net/videos/GalleryPackaging_H264_4500kbps_AAC_und_ch2_128kbps.mp4)
 
-[Learn More](./documentation/articles/gallery-development)
+[Learn More](../../gallery-sdk/generated/index-gallery.md#gallery-package-development-and-debugging)
 
 ## Working with EditScope
 Watch this tutorial to understand, implement debug forms using EditScope
 
 [![Working with EditScope](../media/videos/editscope.png)](https://auxdocs.blob.core.windows.net/videos/EditScope_H264_4500kbps_AAC_und_ch2_128kbps.mp4)
 
-[Learn More](./articles/portalfx-forms-working-with-edit-scopes)
+[Learn More](portalfx-forms-working-with-edit-scopes.md)
 [PowerPoint](https://auxdocs.blob.core.windows.net/videos/editscope20150312.pptx)
 
 ## Debugging
@@ -25,5 +25,5 @@ Watch this tutorial to understand, implement debug forms using EditScope
 
 [![Performance brownbag](../media/videos/performancebrownbag.png)](https://auxdocs.blob.core.windows.net/videos/IbizaExtensionPerfandReliabilityBrownBag20150826_H264_4500kbps_AAC_und_ch2_128kbps.mp4)
 
-[Learn More](./articles/portalfx-performance)
+[Learn More](portalfx-performance.md)
 [PowerPoint](https://auxdocs.blob.core.windows.net/videos/PerfBrownbag_8_26_2015.pptx)

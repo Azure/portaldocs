@@ -1,4 +1,4 @@
-<properties title="" pageTitle="how to expose config settings for consumption in the client" description="" authors="lixinxu" />
+{"gitdown": "contents"}
 
 <tags
     ms.service="portalfx"
@@ -85,4 +85,4 @@ Suppose you created a portal extension called "MyExtension" the following steps 
 If you have any questions, reach out to Ibiza team on: [https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza](https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza).
 
 An extended version of the above is used to transfer domain based configuration (such as correctly formatted FwLinks) to the client.
-For details and examples, please see [Domain based configuration](/documentation/articles/portalfx-domain-based-configuration).
+For details and examples, please see [Domain based configuration](portalfx-domain-based-configuration.md).

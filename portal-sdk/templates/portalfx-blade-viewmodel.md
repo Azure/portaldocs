@@ -1,3 +1,5 @@
+{"gitdown": "contents"}
+
 # Understanding the blade view model
 
 The portal uses a view model abstraction to allow extensions to author UI in the portal. This allows extensions to deal with data
@@ -241,7 +243,7 @@ would have been incremented to 3 as well because the pureComputed becomes live a
 
 Any observables read in the function passed to `ko.reactor()` will become a dependency for that reactor and the reactor will recompute 
 whenever *any* of those observable values change. The same goes for `ko.pureComputed()` and the observable array's `map()` and `mapInto()`
-functions (for map and mapInto this information is covered in more detail [here](#data-shaping)). This can very easily lead to a situation 
+functions (for map and mapInto this information is covered in more detail [here](portalfx-data-projections.md#shaping-and-filtering-data)). This can very easily lead to a situation 
 where a computed is recalculating at times you never intended. Whenever you write a pureComputed or a reactor it's always a good idea 
 to put a breakpoint in the computed function and see when and why. We have seen computed functions that should run once actually run 
 30+ time and waste CPU time recalcuating things that didn't need to be recalculated. If another computed takes a dependency on that computed

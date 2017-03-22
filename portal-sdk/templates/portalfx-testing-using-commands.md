@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Testing Commands" description="" authors="" />
 
 ## Testing Commands
 

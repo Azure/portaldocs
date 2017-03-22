@@ -1,4 +1,3 @@
-<properties title="Configuring your resource" pageTitle="Configuring your resource" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

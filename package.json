@@ -12,7 +12,8 @@
     "gulp": "^3.9.1",
     "ncp": "^2.0.0",
     "q": "^1.4.1",
-    "url-extractor": "^2.0.2"
+    "url-extractor": "^2.0.2",
+    "node-dir": "^0.1.16"
   },
   "scripts": {
     "docs": "gulp docs",

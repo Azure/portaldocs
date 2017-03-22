@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Resource tags" description="" authors="flanakin,justbe" />
 
 ## Resource Tags
 

@@ -10,6 +10,7 @@ var gulp = require('gulp');
 var path = require('path');
 var util = require('util');
 var ncp = require('ncp');
+var dir = require('node-dir');
 
 //directories have to work within both AzureUx-PortalFx and portalfx-docs-pr repos.
 const sdkDir = __dirname;
@@ -22,7 +23,7 @@ const fourMonthsAgo = new Date(new Date().setMonth(new Date().getMonth() - 4));
  * generates docs for ux design team
  */
 gulp.task('ux', function () {
-    if (!fs.existsSync(generatedDir)){
+    if (!fs.existsSync(generatedDir)) {
         fs.mkdirSync(generatedDir);
     }
     return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-ux.md"), generatedDir, {}, true);
@@ -40,33 +41,54 @@ gulp.task('portal', function () {
         fs.mkdirSync(generatedDir);
     }
 
-    var indexDocNames = ["index-portalfx.md",
-        "index-portalfx-extension-development.md",
-        "index-portalfx-extension-sharing-pde.md",
-        "index-portalfx-extension-accessibility.md",
-        "index-portalfx-extension-deployment.md",
-        "index-portalfx-extension-onboarding.md",
-        "index-portalfx-extension-monitor.md",
-        "index-portalfx-extension-test.md",
-        "index-portalfx-extension-QnA.md",
-        "index-portalfx-extension-style-guide.md",
-        "index-videos.md"];
+    console.log("templates Dir " + templatesDir);
 
-    //generate new master readme.md that appears in the root of the github repo that contains all sections
-    return gulpCommon.processFile(path.resolve(templatesDir, "README.md"), process.cwd(), {}, true).then(function () {  //generate root level docs for each section
-        var indexDocGenerationPromises = indexDocNames.map(function (indexFileName) {
-            return gulpCommon.processFile(path.resolve(templatesDir, indexFileName), generatedDir, {}, true);
-        });
-
-        return Q.all(indexDocGenerationPromises);
-    }).then(function () {
-        var checkLinkPromises = [Q()];
-        if (process.argv.indexOf("--verify") > 0) {
-            checkLinkPromises  = indexDocNames.map(function (indexFileName) {
-                return gulpCommon.checkLinks(path.resolve(generatedDir, indexFileName));
+    return Q.ninvoke(dir, "paths", templatesDir, true).then(function(paths) {
+        try {
+            var filePromises = [Q()];
+            
+            var dirs = paths.filter(function (file) {
+                return file.endsWith(".md");
             });
+
+            filePromises = dirs.map(function (f) {
+                var relativePath = f.replace(templatesDir, "");
+                var newGeneratedDir = path.join(generatedDir, path.dirname(relativePath));
+
+                if (!fs.existsSync(newGeneratedDir)) {
+                    fs.mkdirSync(newGeneratedDir);
+                }
+
+                // return gulpCommon.processFile(f, newGeneratedDir, { headingNesting: { enabled: false } }, true);
+                return gulpCommon.processFile(f, newGeneratedDir, {}, true);
+            });
+
+            return Q.all(filePromises);
         }
-        return Q.all(checkLinkPromises);
+        catch (err) {
+           console.log("An error occured: " + err);
+
+           throw err;
+        }
+    }).then(function () {
+        try {
+            var checkLinkPromises = [Q()];
+                if (process.argv.indexOf("--verify") > 0) {
+                    Q.ninvoke(dir, "paths", generatedDir, true).then(function(generatedFiles){
+                        checkLinkPromises  = generatedFiles.map(function (fileName) {
+                        console.log("generated file is " + fileName);
+                        return gulpCommon.checkLinks(path.resolve(generatedDir, fileName));
+                    });
+                });
+            }
+
+           return Q.all(checkLinkPromises);
+        }
+        catch (err) {
+           console.log("An error occured: " + err);
+
+           throw err;
+        }
     });
 });
 
@@ -97,7 +119,7 @@ function queryPortalFxLogs(query, continuationToken, mergedResults) {
             .then(function (result) {
                 var body = result[0];
                 mergedResults = mergedResults.concat(body.entries);
-                                
+
                 if (body.continuationToken) {
                     //recurse continuation token 
                     return queryPortalFxLogs(query, body.continuationToken, mergedResults);
@@ -203,7 +225,7 @@ function generateDynamicDocs(portalFxLogs, outputDir) {
 /**
  * Takes the aggregate content for all versions and writes it to release-notes.md, breaking-changes.md and downloads.md
  */
-function writeDocsToFile(aggregate, outputDir){
+function writeDocsToFile(aggregate, outputDir) {
     var releaseNotesFile = fs.createWriteStream(path.resolve(outputDir, "release-notes.md"));
     var breakingChangesFile = fs.createWriteStream(path.resolve(outputDir, "breaking-changes.md"));
     var downloadsDoc = fs.createWriteStream(path.resolve(outputDir, "downloads.md"));
@@ -217,6 +239,7 @@ function writeDocsToFile(aggregate, outputDir){
         var result = aggregate[version]
         var versionFragment = version.replace(/\./g, '');
 
+        console.log("Version: " + version);
         releaseNotesFile.write(util.format("\n\n## %s\n%d Breaking Changes, %d Features added and %d Bugs Fixed\n<table>%s</table>",
             version,
             result.breakingCount,
@@ -270,8 +293,8 @@ function updateAggregate(versionAggregate, isBreakingChange, changeType) {
 /**
  * Check if the blob exists.
  */
-function getBlobDownloadUrl(blobSvc, container, blobName, sdkVersion){
-    var result = { version : sdkVersion };
+function getBlobDownloadUrl(blobSvc, container, blobName, sdkVersion) {
+    var result = { version: sdkVersion };
     return Q.ninvoke(blobSvc, "doesBlobExist", container, blobName).then(function (existResult) {
         result.downloadUrl = (existResult && existResult[0].exists) ? util.format("https://auxdocs.azurewebsites.net/en-us/Downloads/Download/%s", sdkVersion.replace(/\./g, '_')) : "";
         return result;
@@ -283,7 +306,7 @@ function getBlobDownloadUrl(blobSvc, container, blobName, sdkVersion){
  */
 function getPrettyChangeType(isBreaking, changeType) {
     if (isBreaking) {
-        return "<strong>Break</strong>"; 
+        return "<strong>Break</strong>";
     } else if (changeType === "RDTask") {
         return "Feature";
     } else if (changeType === "RDBug") {

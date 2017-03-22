@@ -1,4 +1,4 @@
-<properties title="" pageTitle="Accessibility" description="" authors="ardreice" />
+{"gitdown": "contents"}
 
 # Accessibility
 

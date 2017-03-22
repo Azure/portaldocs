@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Creating resource blades" description="" authors="mattshel" />
 
 <tags
     ms.service="portalfx"

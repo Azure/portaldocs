@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Getting started with Azure Monitoring" description="" authors="nagan" />
 
 <tags
     ms.service="portalfx"

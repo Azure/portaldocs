@@ -1,4 +1,3 @@
-<properties title="" pageTitle="Blades" description="" authors="adamabdelhamed" />
 
 ### TemplateBlade Advanced Options
 

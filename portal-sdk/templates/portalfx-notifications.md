@@ -1,4 +1,4 @@
-<properties title="" pageTitle="Working with notifications" description="" authors="flanakin,gurua" />
+{"gitdown": "contents"}
 
 ## Notifications
 
@@ -78,7 +78,7 @@ Associate notifications with assets and ensure there is a clear next-action. Whe
 
 ### Defining your notifications
 
-**NOTE:** **Using legacy notifications?** The below API was introduced in SDK 5.0. If you're using one of the older, PDL-based Notifications APIs, use the [Notifications v3 upgrade guide](/documentation/articles/portalfx-notifications-upgrade) to convert your code.
+**NOTE:** **Using legacy notifications?** The below API was introduced in SDK 5.0. If you're using one of the older, PDL-based Notifications APIs, use the [Notifications v3 upgrade guide](portalfx-notifications-upgrade.md) to convert your code.
 
 #### One-time notification
 
