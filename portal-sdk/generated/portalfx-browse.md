@@ -11,7 +11,7 @@ The Favorites in the left nav and the Browse menu are the primary ways to launch
 
 There are 3 ways you can be surfaced in Browse:
 
-1. ["No-code" Browse](#aresources) for ARM resources
+1. ["No-code" Browse](#resources) for ARM resources
 2. [Browse service](#assets) for assets that don't use ARM (aka Browse v1)
 3. [Custom blade](#blade) if you have a single instance and not a list of resources
 

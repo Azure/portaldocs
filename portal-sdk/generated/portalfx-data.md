@@ -858,7 +858,7 @@ In many cases, you may want to shape your data to fit the view you are binding t
 
 The recommended approach to these cases is to use the `map` and `filter` methods found in the <a href="https://github.com/stevesanderson/knockout-projections" target="_blank">Knockout projections</a> library, included in the SDK.
 
-See [Shaping and filtering your data](portalfx-data-projections.md) for more details.
+See [Shaping and filtering your data](./aaaportalfx-data-projections.md) for more details.
 
 <!--
     Base.Net.Ajax

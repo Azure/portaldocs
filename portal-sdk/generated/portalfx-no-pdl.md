@@ -83,7 +83,7 @@ This is the decorator code.  There are several options that can be specified as 
 
 ```
 
-Additionally, the No-PDL programming model introduces (and requires) a context property to be present in your blade class. The context property is populated by the framework on your behalf and contains APIs you can call to interact with the shell.  You can learn more about the context property [here](typescript-decorator-support-for-extension-metadata-formerly-known-as-no-pdl-or-no-pdl-the-context-property).
+Additionally, the No-PDL programming model introduces (and requires) a context property to be present in your blade class. The context property is populated by the framework on your behalf and contains APIs you can call to interact with the shell.  You can learn more about the context property [here](#typescript-decorator-support-for-extension-metadata-formerly-known-as-no-pdl-or-no-pdl-the-context-property).
 
 ```typescript
 

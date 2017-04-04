@@ -70,7 +70,7 @@ A single ref-counted cache can hold data across your entire extension.  This has
 These classes provide advanced caching and ref-counting.
 Internally, these make use of Data.Loader and Data.DataSet (which will be made FX-internal in the future).
 
-To learn more, visit [Querying for data](portalfx-data-query.md).
+To learn more, visit [Querying for data](portalfx-data-configuringdatacache.md).
 
 #### Avoid unnecessary data reloading
 
@@ -108,7 +108,7 @@ or Part view model will return a resolved Promise, and the user will not see lon
 
 For your scenario to make use of `extendEntryLifetimes`, it is **very important** that you take steps to keep your client-side
 QueryCache/EntityCache data caches **consistent with server data**.
-See [Reflecting server data changes on the client](portalfx-data-query.md) for details.
+See [Reflecting server data changes on the client](portalfx-data-configuringdatacache.md) for details.
 
 
 #### Use paging for large data sets

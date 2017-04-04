@@ -16,9 +16,9 @@ Users can move tiles around, change their size, or pin frequently-used tiles to 
 
 We provide built-in tiles, and those tiles include all of the standard UX functionality, like correct sizing and the ability to pin (so you get this stuff for free when you use our models). If you create your own tiles, you're responsible for making sure they include all of the right tile behavior.
 
-Remember that tiles can be removed at any time from a blade. If there's an essential function that's only exposed in a tile, users might delete the tile and regret it later. Deleted tiles can be added again, but that's not always quick or intuitive. Consider putting this sort of stuff in [Settings](portalfx-ux-settings) instead. 
+Remember that tiles can be removed at any time from a blade. If there's an essential function that's only exposed in a tile, users might delete the tile and regret it later. Deleted tiles can be added again, but that's not always quick or intuitive. Consider putting this sort of stuff in [Settings](portalfx-ux-settings.md) instead. 
 
-Also remember that you don't always have to make every tile visible right away. Users can always go to the [tile gallery](portalfx-ux-tile-gallery) and add them later. Consider putting tiles that may only appeal to a subset of your users in the gallery instead of on the blade. 
+Also remember that you don't always have to make every tile visible right away. Users can always go to the [tile gallery](portalfx-ux-tile-gallery.md) and add them later. Consider putting tiles that may only appeal to a subset of your users in the gallery instead of on the blade. 
 
 ### Types of tiles ###
 

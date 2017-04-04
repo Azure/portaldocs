@@ -91,14 +91,10 @@ var self = module.exports = {
             tree = self.maxLevel(tree, config.maxLevel);
 
             var output = MarkdownContents.treeToMarkdown(tree);
-        }
-        catch (err) {
-            console.log ("An error occured: " + err);
-        }
-        try {
+
             output = self.appendFilepathsToLinks(output, relativeFilePath);
         } catch (err) {
-            console.log ("An error occured: " + err);
+            console.log ("An error occured while trying to include headings: " + err);
         }
 
         return output;
@@ -226,6 +222,7 @@ var self = module.exports = {
     checkLinks: function(inputFile) {
         var links = [];
         var docs = [];
+        var brokenLinks = [];
         return Q.ninvoke(fs, 'readFile', inputFile,'utf8').then(function (result){
             console.log("checking links in " + inputFile);
             var urls = urlExt.extractUrls(result, urlExt.SOURCE_TYPE_MARKDOWN);
@@ -239,6 +236,7 @@ var self = module.exports = {
                             "idwebelements",
                             "igroup",
                             "kusto.azurewebsites.net",
+                            "mailto:",
                             "management.azure.com",
                             "microsoft.sharepoint.com",
                             "msazure.pkgs.visualstudio.com",
@@ -253,17 +251,19 @@ var self = module.exports = {
             
             var count = 0;
             urls.forEach(function(url) {
+                // Trim the http:// or https://
+                var trimmedUrl = url.replace("/(?i:^HTTPS://|HTTP://)/","");
+                        
+                if (urlsToSkip.some(function(s) { return trimmedUrl.toUpperCase().indexOf(s.toUpperCase()) >= 0;})) {
+                    console.log(chalk.yellow("Skipping check for url: " + url));
+                    return;
+                }
+                
                 switch (url[0]) {
                     case "#": 
                         if (!result.includes("name=\"" + url.substr(1) + "\"")) {
-                           console.log(chalk.red("\tHyperlink " + url  + " does not refer to a valid link in the document."));
-                           count++;
-                        }
-                        break;
-                    case ".":
-                        var file = path.resolve(path.dirname(inputFile), url);
-                        if (!fs.existsSync(file)) {
-                           console.log(chalk.red("\tLink : " + url + " does not resolve to valid path. Resolved path " + file + "does not exist. "));
+                           //console.log(chalk.red("\tHyperlink " + url  + " does not refer to a valid link in the document.  Input file: " + inputFile));
+                           brokenLinks.push({ "url":url, "inputFile":inputFile });
                            count++;
                         }
                         break;
@@ -271,43 +271,57 @@ var self = module.exports = {
                         var sanitizedPath = url.substr(0, url.indexOf("#") > 0 ? url.indexOf("#") : url.length).replace(/\//gm, "\\");
                         var file = __dirname + sanitizedPath + (!path.extname(sanitizedPath) ? '.md' : '');
                         if (!fs.existsSync(file)) {
-                           console.log(chalk.red("\tLink : " + url + " does not resolve to valid path. Resolved path " + file + "does not exist. "));
+                           //console.log(chalk.red("\tLink : " + url + " does not resolve to valid path. Resolved path " + file + "does not exist. Input file: " + inputFile));
+                           brokenLinks.push({ "url":url, "inputFile":inputFile });
                            count++;
                         }
                         break;
                     case "h":
-                        // Trim the http:// or https://
-                        var trimmedUrl = url.replace("/(?i:^HTTPS://|HTTP://)/","");
-                        
                         if (urlsToSkip.some(function(s) { return trimmedUrl.toUpperCase().indexOf(s.toUpperCase()) >= 0;})) {
-                            console.log(chalk.yellow("Skipping check for url: " + url));
+                            console.log(chalk.yellow("Skipping check for url: " + url + " in " + inputFile));
                         }
                         else {
                             links.push(url);
                         }
                         break;
+                    case ".":
+                    default:
+                        var sanitizedPath = url.substr(0, url.indexOf("#") > 0 ? url.indexOf("#") : url.length).replace(/\//gm, "\\");
+                        var file = path.resolve(path.dirname(inputFile), sanitizedPath);
+                        if (!fs.existsSync(file)) {
+                           //console.log(chalk.red("\tLink : " + url + " does not resolve to valid path. Resolved path " + file + "does not exist. Input file: " + inputFile));
+                           brokenLinks.push({ "url":url, "inputFile":inputFile });
+                           count++;
+                        }
+                        break;
                 }
             });
-            console.log("\t" + count + " broken links found");
         }).then(function() {
             try {
                 var dl = deadlink();
                 var promises = dl.resolve(links);
-                console.log("\tchecking " + links.length + " urls");
                 
                 return Q.all(promises).then(function(resolutions) {
                     
                     resolutions.forEach(function (resolution) {
                         if (resolution.error) {
-                            console.log(chalk.red("broken link/fragment: " + resolution.url));
+                            brokenLinks.push({ "url":resolution.url, "inputFile":"unknown" });
                         }
                     });
                     
                 })
             }
             catch (err) {
-                console.log(chalk.yellow("Error in checking links: " + err));
+                console.log(chalk.red("Error in checking links: " + err));
                 return Q.all(promises);
+            }
+        }).then(function() {
+            if (brokenLinks.length > 0)
+            {
+                //console.log(chalk.red(brokenLinks.length + " broken links/fragments found.  Please fix them!"));
+                brokenLinks.forEach(function(l) {
+                    console.log(chalk.bgRed("Broken link/fragment found in " + l.inputFile + " for url: " + l.url));
+                });
             }
         });
     }

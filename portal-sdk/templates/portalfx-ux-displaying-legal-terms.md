@@ -186,7 +186,7 @@ If you have questions or comments about the legal terms selector or legal terms 
 [integration section]: #displaying-legal-terms-in-a-create-form-referencing-the-legal-terms-blade
 [parameters section]: #displaying-legal-terms-in-a-create-form-parameters-and-settings
 [purchases section]: #displaying-legal-terms-in-a-create-form-parameters-and-settings-listing-the-purchased-products
-[create forms article]: portalfx-ux-create-forms
+[create forms article]: portalfx-ux-create-forms.md
 [publishing portal]: https://publish.windowsazure.com/ 
 [1store]: mailto:1store@microsoft.com
 [selector example image]: ../media/portalfx-ux-displaying-legal-terms/legal_selector_sample.png
