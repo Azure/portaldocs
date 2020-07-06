@@ -1,0 +1,1 @@
+The page you requested has moved to [top-extensions-custom-domains.md#consumption-example](top-extensions-custom-domains.md#consumption-example).

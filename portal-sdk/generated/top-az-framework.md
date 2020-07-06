@@ -1,0 +1,1 @@
+This document has been rewritten.  Find its replacement [here](./portalfx-az-blade-self-host.md).

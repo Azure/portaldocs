@@ -1,0 +1,1 @@
+This document has moved to [Extension Hosting Service](top-extensions-hosting-service.md).
