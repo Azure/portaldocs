@@ -82,7 +82,7 @@ You can import framework controls, Fluent UI controls or your own AMD modules fr
 Two main reasons make React Views more performant than generic iframe solutions;
 
 * The Portal controls the iframe's homepage and the core OSS libraries, which allows the injection of generic iframes that can be used for any React View and ensures reusability of libraries that only have to be downloaded and parsed once but can be used in all React experiences.
-  
+
 * Writing your React component(s) as AMD modules, your experience will use the optimized Portal bundling algorithm, module loader and hosting solution.
 
 <a name="react-views-how-it-works-performance-how-performance-is-measured"></a>
@@ -98,7 +98,7 @@ In addition to that measurement showing up as a native marker in a performance p
 This section contains instructions on how to set up React Views in an existing extension.
 
 **If you're creating a brand new extension**, please follow the instructions to create a new extension from a [template extension](https://github.com/Azure/portaldocs/blob/master/portal-sdk/generated/top-extensions-getting-started.md).
-Once you've done so, you'll have the file structure that we're trying to build in this section and can skip to the [Beyond getting started](#beyond-getting-started) section. 
+Once you've done so, you'll have the file structure that we're trying to build in this section and can skip to the [Beyond getting started](#beyond-getting-started) section.
 
 <a name="react-views-getting-started-step-1-tsconfig-json"></a>
 ### Step 1: tsconfig.json
@@ -662,7 +662,8 @@ define(['exports'], function (exports) {
 ##### Samples
 | Library | React View | Code changes |
 |---------|------------|--------------|
-| Luxon.js | [Link](https://df.onecloud.azure-test.net/#blade/SamplesExtension/ReactViewsBlade/reactLuxon) | [Link](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/2855250) |
+| Luxon.js | [Sample](https://df.onecloud.azure-test.net/#blade/SamplesExtension/ReactViewsBlade/reactLuxon) | [PR](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/2855250) |
+| D3.js | [Sample](https://df.onecloud.azure-test.net/#blade/SamplesExtension/ReactViewsBlade/reactD3) | [PR](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/2789974)
 
 <a name="react-views-beyond-getting-started-styling"></a>
 ### Styling
