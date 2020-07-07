@@ -1,0 +1,217 @@
+- name: Azure portal extension development documentation
+  href: index
+- name: Onboarding a new extension
+  items:
+    - name: Overview / Get started
+      href: /azure/portal-sdk/portal-sdk/generated/top-onboarding
+    - name: Steps that do not involve the Ibiza team
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-onboarding-with-related-teams
+    - name: Managing cloud/environment specific configuration
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-configuration
+    - name: Production-ready metrics
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-production-ready-metrics
+    - name: Partner feature request process
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-partner-request
+- name: Azure portal architecture
+  items:
+    - name: Architecture overview
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-architecture
+    - name: Authentication flow
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-authentication-flow
+    - name: Authentication procedures
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-authentication-procedures
+- name: Design guide
+  href: /azure/portal-sdk/portal-sdk/generated/top-design
+- name: Development guide
+  items:
+    - name: Getting started
+      items:
+        - name: Downloads
+          href: /azure/portal-sdk/portal-sdk/generated/downloads
+        - name: Release notes
+          href: /azure/portal-sdk/portal-sdk/generated/release-notes
+        - name: Breaking changes
+          href: /azure/portal-sdk/portal-sdk/generated/breaking-changes
+        - name: Install the SDK
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-install-software
+        - name: Get started
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-getting-started
+        - name: Updating the SDK
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-packages#updating-your-extension-to-a-newer-version-of-the-sdk
+        - name: Running your extension locally (a.k.a. sideloading)
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-sideloading
+    - name: Samples
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-samples
+    - name: Blades
+      items:
+        - name: Overview
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-blades
+        - name: TemplateBlade
+          href: /azure/portal-sdk/portal-sdk/generated/top-blades-templateblade
+        - name: MenuBlade
+          href: /azure/portal-sdk/portal-sdk/generated/top-blades-menublade
+        - name: ResourceMenuBlade
+          href: /azure/portal-sdk/portal-sdk/generated/top-blades-resourcemenublade
+        - name: FrameBlade
+          href: /azure/portal-sdk/portal-sdk/generated/top-blades-frameblade
+        - name: Opening and closing blades programmatically
+          href: /azure/portal-sdk/portal-sdk/generated/top-blades-opening-and-closing
+        - name: Advanced TemplateBlade topics
+          href: /azure/portal-sdk/portal-sdk/generated/top-blades-advanced
+        - name: Blade with tiles
+          href: /azure/portal-sdk/portal-sdk/generated/top-blades-legacy
+    - name: Parts
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-parts
+    - name: Building UI with HTML templates and Fx controls
+      items:
+        - name: Controls overview
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-controls
+        - name: Controls playground
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-controls#the-controls-playground
+    - name: Forms
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-forms
+    - name: Common scenarios and integration points
+      items:
+        - name: Blades that create or provision resources and services
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-create
+        - name: Add your resource or service into the 'All services' (browse) menu
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-browse
+    - name: Other UI concepts
+      items:
+        - name: Context panes
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-context-panes
+        - name: Dialogs
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-dialogs
+        - name: Notifications
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-notifications
+    - name: Loading and managing data
+      items:
+        - name: Making authenticated and batched calls to Azure Resource Manager (ARM) and other endpoints
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-data-ajax
+        - name: Legacy data management features
+          href: /azure/portal-sdk/portal-sdk/generated/top-legacy-data
+    - name: Advanced development topics
+      items:
+        - name: Memory management (LifetimeManager)
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-lifetime
+        - name: Sharing blades and parts across extensions
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-sharing-blades-and-parts
+        - name: Custom domains (e.g. aad.portal.azure.com)
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-custom-domains
+- name: Debugging
+  items:
+    - name: Using debug mode
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-debugging#debug-mode
+    - name: Debugging extension load failures
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-debugging#debug-extension-load-failures
+    - name: Debugging console errors
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-debugging#debug-console-errors
+    - name: Debugging javascript
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-debugging#debug-javascript
+    - name: Debugging knockout
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-debugging#debug-knockout
+    - name: Debugging the data stack
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-debugging#debug-the-data-stack
+- name: Performance
+  href: /azure/portal-sdk/portal-sdk/generated/top-extensions-performance
+- name: Testing
+  items:
+    - name: Unit testing support
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-unit-test
+    - name: C# test framework (Open source)
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-csharp-test-framework
+    - name: Node.js test framework (Open source)
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-node-js-test-framework
+- name: Telemetry and alerting
+  items:
+    - name: Portal telemetry overview
+      href: /azure/portal-sdk/portal-sdk/generated/top-telemetry
+    - name: Set up and verify telemetry logging from your extension
+      href: /azure/portal-sdk/portal-sdk/generated/top-telemetry#logging-telemetry
+    - name: Getting access to raw portal telemetry data
+      href: /azure/portal-sdk/portal-sdk/generated/top-telemetry#viewing-telemetry
+    - name: Consuming telemetry via pre-built Power BI dashboards
+      href: /azure/portal-sdk/portal-sdk/generated/top-telemetry#power-bi-reports
+    - name: Performance and reliability monitoring
+      href: /azure/portal-sdk/portal-sdk/generated/top-telemetry-alerting
+- name: Experimentation and flighting
+  items:
+    - name: Flighting a new version of your extension in MPAC
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-flighting
+    - name: Feature flags to enable or disable individual features within an environment
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-flags
+- name: Localization and globalization
+  items:
+    - name: Localization overview and supported languages
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-localization-globalization
+    - name: Setting up localization for your extension
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-localization-globalization#localizing-build
+    - name: Setting up localization for your gallery package
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-localization-globalization#marketplace
+    - name: Testing localization with side-loading
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-localization-globalization#testing-localization
+    - name: Formatting numbers, currencies and dates
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-localization-globalization#formatting-numbers-currencies-and-dates
+- name: Accessibility
+  items:
+    - name: Accessibility guidelines
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-accessibility
+    - name: Accessibility testing and SLAs
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-accessibility#accessibility-planning
+- name: Deploying your extension
+  items:
+    - name: Extension registration, environments, clouds and Ibiza team SLAs
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-publishing
+    - name: Moving an extension from private preview to public preview to GA
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-developmentPhases
+    - name: Deployment using the Extension Hosting Service
+      items:
+        - name: Extension Hosting Service overview
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-hosting-service
+        - name: Onboarding your extension to the Extension Hosting Service
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-hosting-service#step-by-step-onboarding
+        - name: Registring your extension with the Extension Hosting Service
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-hosting-service#step-9-registering-your-extension-with-the-hosting-service
+        - name: Deploying a new version of an extension
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-hosting-service#deploying-a-new-version-of-an-extension
+        - name: Deploying your extension using Express V2 and the Extension Hosting Service
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-hosting-service-ev2
+        - name: SLA for registering an extension with the Extension Hosting Service
+          href: /azure/portal-sdk/portal-sdk/generated/top-extensions-svc-lvl-agreements
+    - name: Custom extension deployment infrastructure
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-custom-deployment
+- name: Legacy features
+  items:
+    - name: PDL-based programming
+      href: /azure/portal-sdk/portal-sdk/generated/top-legacy-blades-template-pdl
+    - name: Legacy parts
+      href: /azure/portal-sdk/portal-sdk/generated/top-legacy-parts
+    - name: Legacy data management feature
+      href: /azure/portal-sdk/portal-sdk/generated/top-legacy-data
+    - name: Controls in the MsPortalFx namespace
+      href: /azure/portal-sdk/portal-sdk/generated/top-extensions-samples-controls-deprecated
+    - name: EditScope
+      href: /azure/portal-sdk/portal-sdk/generated/top-legacy-editscopes
+- name: Marketplace/Gallery developer resources
+  items:
+    - name: Gallery overview
+      href: /azure/portal-sdk/gallery-sdk/generated/index-gallery#gallery-overview
+    - name: Gallery item specifications
+      href: /azure/portal-sdk/gallery-sdk/generated/index-gallery#gallery-item-specificiations
+    - name: Gallery item metadata
+      href: /azure/portal-sdk/gallery-sdk/generated/index-gallery#gallery-item-metadata
+    - name: Gallery item field to UI element mappings
+      href: /azure/portal-sdk/gallery-sdk/generated/index-gallery#gallery-item-field-to-ui-element-mappings
+    - name: Gallery package development and debugging
+      href: /azure/portal-sdk/gallery-sdk/generated/index-gallery#gallery-package-development-and-debugging
+    - name: Legacy OneBox development approach
+      href: /azure/portal-sdk/gallery-sdk/generated/index-gallery#legacy-onebox-development-approach
+    - name: Using the "Add to Resource" blade
+      href: /azure/portal-sdk/gallery-sdk/generated/index-gallery#using-the-add-to-resource-blade
+    - name: Your icon tile for the Azure store
+      href: /azure/portal-sdk/gallery-sdk/generated/index-gallery#your-icon-tile-for-the-azure-store
+    - name: Developer tooling and productivity
+      href: /azure/portal-sdk/gallery-sdk/generated/index-gallery#developer-tooling-and-productivity
+    - name: Gallery frequently asked questions
+      href: /azure/portal-sdk/gallery-sdk/generated/index-gallery#gallery-frequently-asked-questions
+     
