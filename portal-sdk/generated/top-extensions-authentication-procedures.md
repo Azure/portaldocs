@@ -31,7 +31,7 @@ Calling external services involves AAD Onboarding.  The onboarding process can t
 
 Your extension should use cross-origin resource sharing (CORS) for all non-aggregated, non-orchestrated calls. If you need to call multiple sources for a single piece of UI, you should use a server API to orchestrate and aggregate those calls.
 
-Use the built-in `ajax()` function to communicate from the extension client to call any extension server API. This function will attach a token targeted at ARM that is specific to your extension for the HTTP header. 
+Use the built-in `ajax()` function to communicate from the extension client to call any extension server API. This function will attach a token targeted at ARM that is specific to your extension for the HTTP header.
 
 **NOTE**: Do not use `jQuery.ajax()` because it will not properly authorize your requests. If you have a scenario that is not supported by `ajax()`, you can use the `getAuthorizationToken()` function to obtain a token and manually attach it to your request.
 
@@ -49,20 +49,21 @@ Use the `WebApiClient` class to call ARM from your extension server. This class 
     }
 ```
 
-<a name="calling-backed-services-apis-or-graph-apis"></a>
-## Calling backed services/APIs or Graph APIs
+<a name="calling-backend-services-apis-or-graph-apis"></a>
+## Calling backend services/APIs or Graph APIs
 
-Only Ibiza has the authority to mint tokens. To call external resources, extension developers need to request the creation of the AAD and register the extension resources with Ibiza for the appropriate environment, as specified in [top-onboarding.md#register-the-extension-with-the-portal-product-configuration](top-onboarding.md#register-the-extension-with-the-portal-product-configuration). 
+Only Ibiza has the authority to mint tokens. To call external resources, extension developers need to request the creation of the AAD and register the extension resources with Ibiza for the appropriate environment, as specified in [top-onboarding.md#register-the-extension-with-the-portal-product-configuration](top-onboarding.md#register-the-extension-with-the-portal-product-configuration).
 
 The following example enables `Contoso_Extension`, a sample extension that queries Graph APIs from the client.
 
 1. The extension owner creates an RDTask that is located at [http://aka.ms/portalfx/newextension](http://aka.ms/portalfx/newextension).  This is part of the process that onboards the AAD application with the Portal, as specified in [portalfx-extensions-onboarding-aad.md](portalfx-extensions-onboarding-aad.md).
 
-1. The AAD Onboarding Website is located at [https://aadonboardingsite.cloudapp.net/RegisterApp](https://aadonboardingsite.cloudapp.net/RegisterApp). After the Ibiza team creates the app, you can reach out to <a href="mailto:aadonboarding@microsoft.com?subject=Expediting%20the%20Onboarding%20of%20a%20new%20Extension">aadonboarding@microsoft .com</a> to expedite the process.
+1. The AAD Onboarding Website is located at [https://aadonboardingsite.cloudapp.net/RegisterApp](https://aadonboardingsite.cloudapp.net/RegisterApp). After the Ibiza team creates the app, you can reach out to <a href="mailto:aadonboarding@microsoft.com?subject=Expediting%20the%20Onboarding%20of%20a%20new%20Extension">aadonboarding@microsoft.com</a> to expedite the process.
 
 1. Submit the RDTask to register the AAD application into the Portal's extension configuration. This step can be done simultaneously with the previous step.
 
     * The client-side `resourceAccess` configuration for the extension in Portal would look something like the following code.
+    * *New:* See [Migrating resource access configuration](#migrating-resource-access-configuration) for instructions on migrating your extension's authorization configuration to your hosting service configuration.
 
         ```json
         {
@@ -84,18 +85,18 @@ The following example enables `Contoso_Extension`, a sample extension that queri
 
         ```json
         {
-                "name": "Contoso_Extension",
-                "name": "Contoso_Extension",
-                "uri": "//stamp2.extension.contoso.com/Home",
-                "uriFormat": "//{0}.extension.contoso.com/Home",
-                "resourceAccess": [{
-                    "name": "",
-                    "resource": "https://management.core.windows.net/"
-                }, {
-                    "name": "self",
-                    "resource": "1a123abc-1234-1a2b-ab01-01ab01a1a1ab"
-                }]
-            }
+            "name": "Contoso_Extension",
+            "name": "Contoso_Extension",
+            "uri": "//stamp2.extension.contoso.com/Home",
+            "uriFormat": "//{0}.extension.contoso.com/Home",
+            "resourceAccess": [{
+                "name": "",
+                "resource": "https://management.core.windows.net/"
+            }, {
+                "name": "self",
+                "resource": "1a123abc-1234-1a2b-ab01-01ab01a1a1ab"
+            }]
+        }
         ```
 
      * The following code adds a parameter to `ajax` calls so that the extension can exchange tokens. In this instance, the token goes to the resourceName `self` for later exchange.
@@ -153,7 +154,7 @@ The following example enables `Contoso_Extension`, a sample extension that queri
             }
         ```
 
-1. After the configuration changes are deployed in the requested environment, like Dogfood, PPE, or PROD, the extension can request tokens for the graph resource using any of its data APIs, as in the following code.
+2. After the configuration changes are deployed in the requested environment, like Dogfood, PPE, or PROD, the extension can request tokens for the graph resource using any of its data APIs, as in the following code.
 
     ```ts
     MsPortalFx.Base.Security.getAuthorizationToken({ resourceName: "graph" });
@@ -184,7 +185,7 @@ The following example enables `Contoso_Extension`, a sample extension that queri
 <a name="access-claims"></a>
 ## Access claims
 
-Tokens received from AAD contain a set of claims that are formatted as key-value pairs.  They contain information about the user, and they are only available to extensions that comply with the Azure privacy policy that is located at [https://www.microsoft.com/en-us/TrustCenter/Privacy/default.aspx](https://www.microsoft.com/en-us/TrustCenter/Privacy/default.aspx). 
+Tokens received from AAD contain a set of claims that are formatted as key-value pairs.  They contain information about the user, and they are only available to extensions that comply with the Azure privacy policy that is located at [https://www.microsoft.com/en-us/TrustCenter/Privacy/default.aspx](https://www.microsoft.com/en-us/TrustCenter/Privacy/default.aspx).
 
 <!-- TODO: Validate whether the following lists are still part of the signin process. -->
 
@@ -220,7 +221,7 @@ interface UserInfo {
 While not recommended, the token used to communicate with your server also contains claims that can be read from the
 server by using the **ASP.NET** claims API specified in [http://msdn.microsoft.com/en-us/library/ee517271.aspx](http://msdn.microsoft.com/en-us/library/ee517271.aspx). To simplify development, the `HttpContext.User` property specified in [http://aka.ms/portalfx/httpContextUser](http://aka.ms/portalfx/httpContextUser) has been augmented with the most commonly used claims.
 
-The extension uses the API to read additional claims from the token. Due to size constraints, additional information required by an extension cannot be added to the token. Instead, the extension obtains it from the AAD Graph API that is specified in [http://aka.ms/portalfx/AADGraphAPI](http://aka.ms/portalfx/AADGraphAPI). 
+The extension uses the API to read additional claims from the token. Due to size constraints, additional information required by an extension cannot be added to the token. Instead, the extension obtains it from the AAD Graph API that is specified in [http://aka.ms/portalfx/AADGraphAPI](http://aka.ms/portalfx/AADGraphAPI).
 
 The following code sample retrieves common claims.
 
@@ -318,3 +319,109 @@ The Portal does not automatically log users out after a period of inactivity; it
 This typically happens after a few hours of usage, maybe eight to 24 hours based on the type of account. It may also happen if the token was not refreshed or renewed for a period of time, which is typically one hour.
 
 **NOTE**: If the browser is in a situation where it cannot connect to the network for more than an hour, typically, the user is logged out.
+
+
+<a name="migrating-resource-access-configuration"></a>
+## Migrating resource access configuration
+
+To provide extension authors greater control over the deployment cadence of resource access changes, the SDK now supports defining resource access in the extension's hosting service configuration.
+
+**This feature is not yet enabled for sovereign clouds**
+
+1. Prerequisites
+   1. Upgrade your extension’s SDK to version **5.0.303.4271** or newer.
+   1. If your extension requires access to a resource other than ARM, you must define an `OAuthClientId` at the root of your extension configuration in the relevant `Extensions.*.json` files in the Portal repo.
+
+1. Add the desired resources to your extension's hosting service configuration.
+   *  In your extension's hosting service configuration(s), add a new `authorization` property with the desired resource access.
+       * Note that the ARM resource (name: "") is not included. All extensions will now get ARM access using the Portal's credentials without needing to define it in configuration.
+
+    ```ts
+    "authorization": {
+        "resourceAccess": [
+            {
+                "name": "graph",
+                "resource": "https://graph.ppe.windows.net/"
+            }
+        ]
+    }
+    ```
+
+1. Deploy your extension with the new configuration changes.
+1. Verify your new configuration by requesting a token for each of the resources with access defined...
+    * ...from a blade in your extension.
+    * ...manually from the developer command prompt:
+        * From your browser's developer tools, navigate to the "Console" tab, and select your extension's frame using the dropdown in the header.
+
+        * The following code will trigger a network request to `/api/DelegationToken` for your resource:
+
+        ```js
+        MsPortalFx.Base.Security.getAuthorizationToken({
+            resourceName: "graph",
+        });
+        ```
+
+        1. Open the "Network" tab of your browser's developer tools
+
+        1. Locate the call to `/api/DelegationToken` and inspect the response - a successful token request will have status `200` and will include a "Bearer" token in the response body.
+
+
+1. Remove the `resourceAccess` section from your extension configuration in the Portal repo.
+
+    Once you have verified that your extension can still retrieve tokens for each of the resources in your extension's `authorization` configuration, you should remove the `resourceAccess` section of your extension's configuration in the relevant `Extensions.*.json` files in the Portal repo.
+
+
+
+**Before migration**
+
+*Extensions.dogfood.json*
+
+```json
+{
+    "name": "Microsoft_Azure_MyExtension",
+    "feedbackEmail": "myteamtriage@microsoft.com",
+    "flags": "SupportsPrewarming",
+    "resourceAccess": [
+        {
+            "name": "",
+            "resource": "https://management.core.windows.net/",
+        }
+        {
+            "name": "graph",
+            "resource": "https://graph.ppe.windows.net/",
+        }
+    ],
+    "hostingServiceName": "testextension"
+},
+```
+
+**After migration**
+
+*Extensions.dogfood.json*
+
+```json
+{
+    "name": "Microsoft_Azure_MyExtension",
+    "feedbackEmail": "myteamtriage@microsoft.com",
+    "flags": "SupportsPrewarming",
+    "hostingServiceName": "testextension",
+    "oAuthClientId": "727c064e-126e-445a-92b5-224e5af412fb"
+},
+```
+
+*df-onecloud.azure-test.net.json*
+
+```json
+{
+  "argbrowseoptions": {...},
+  "authorization": {
+    "resourceAccess": [
+      {
+        "name": "graph",
+        "resource": "https://graph.ppe.windows.net/"
+      }
+    ]
+  },
+  "enablePortalLogging": true,
+  "features": {...}
+```
