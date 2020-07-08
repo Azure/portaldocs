@@ -33,7 +33,7 @@ Based on viewport width:
 
 Based on viewport height:
 
-- **Content in blade and context pane:** undocked by default. Above 500px of viewport height, content is allowed to be pinned within the content.
+- **Content in blade and context pane:** content is undocked by default. Above 500px of viewport height, content is allowed to be pinned within the content using relative sizing.
 - **Breadcrumb and blade header:** this UI is unpinned below 500px of viewport height, allowing to scroll the full blade content.
 - **Grids** have a maximum height constraint equal to the viewport height when rendered in a viewport that is less than 500px in height. This improves usability of the grid by allowing both scrollbars of the grid to show within the viewport in these low resolution. Note this only applies to the EditableGrid when using a virtual vertical scrollbar.
 
@@ -133,6 +133,39 @@ Embrace the _design for smallest resolution first_ philosophy around in all the 
 - API calls to `container.size` will be structured has additive
 
 Doing so keeps the code maintainable and more readable.
+
+<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-fixing-content-for-responsiveness-add-min-height-to-guard-against-undocked-render-below-500px-of-viewport-height"></a>
+#### Add min-height to guard against undocked render below 500px of viewport height
+
+The portal allows for pinned UI when the viewport height of the browser is greater than 500px. Pinned UI (also known as docked content) takes up fixed amount of spaces in the UI, usually based on relative height units along with flexbox rendering. This could cause some content to have very little remaining space to render.
+
+If using pinned UI, verify that it can still render properly at a viewport height of 500px. Blade content at that resolution has 350px left of content height. Pinning UI at top and bottom of such blades could significantly reduce the main content usability.
+
+```html
+<!-- Typical usage of msportalfx-docking that should be reviewed at small viewport height. -->
+<div class="msportalfx-docking">
+    <div class="msportalfx-docking-header">Always takes space at the top<div>
+    <div class="msportalfx-docking-body">This content is at risk of being crushed by the header and footer!<div>
+    <div class="msportalfx-docking-footer">Always takes space at the bottom<div>
+</div>
+```
+
+In similar fashion, if your content depends on an uninterrupted chain of `height: 100%` being set, you should also add a `min-height` property to ensure that the UI is displayed at any resolution. Below 500px of viewport height, the portal doesn't propagate the relative UI height to the content in journeys, as it should instead overflow the rendered viewport for better usability.
+
+```html
+<!--
+    Typical usage of relative height chaining that should be reviewed at small viewport height.
+    The top level element doesn't set a min-height, and relies on the implicit relative height inheritance to define its height. The portal doesn't set an inherited height below 500px of viewport height.
+    The inner elements have min-height defined to guard against a scenario where the height inheritance is interrupted.
+-->
+
+<div style="height: 100%">
+    <div class="renderOnRight" style="height: 100%; min-height: 350px">Without a min-height, this element could render in an unexpected fashion below 500px viewport height!<div>
+    <div class="renderOnLeft" style="height: 100%; min-height: 350px">Without a min-height, this element could render in an unexpected fashion below 500px viewport height!<div>
+</div>
+
+<!-- Note that for simplification, the styles are inlined. Don't emulate this pattern in your code as it is bad practice for maintainability! -->
+```
 
 <a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-fixing-content-for-responsiveness-sizing-is-everything"></a>
 #### Sizing is everything
@@ -361,22 +394,6 @@ The `flex` property is a shorthand for three properties: `flex-grow`, `flex-shri
        it is simpler to reset to 0 in this simple (and most other) scenario. */
     min-width: 0;
 }
-```
-
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-fixing-content-for-responsiveness-watch-for-pinned-ui-on-small-viewport-height"></a>
-#### Watch for pinned UI on small viewport height
-
-The portal allows for pinned UI when the viewport height of the browser is greater than 500px. Pinned UI (also known as docked content) takes up fixed amount of spaces in the UI. This could cause some content to have very little remaining space to render.
-
-If using pinned UI, verify that it can still render properly at a viewport height of 500px. Blade content at that resolution has 350px left of content height. Pinning UI at top and bottom of such blades could significantly reduce the main content usability.
-
-```html
-<!-- Typical usage of msportalfx-docking that should be reviewed at small viewport height. -->
-<div class="msportalfx-docking">
-    <div class="msportalfx-docking-header">Always takes space at the top<div>
-    <div class="msportalfx-docking-body">This content is at risk of being crushed by the header and footer!<div>
-    <div class="msportalfx-docking-footer">Always takes space at the bottom<div>
-</div>
 ```
 
 <a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-fixing-content-for-responsiveness-consider-a-media-query-to-control-layout-based-on-min-width-of-container"></a>

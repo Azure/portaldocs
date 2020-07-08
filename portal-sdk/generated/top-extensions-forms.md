@@ -1,12 +1,11 @@
 <a name="portal-forms"></a>
 # Portal Forms
 
-
 <a name="portal-forms-overview"></a>
 ## Overview
 
 Form controls are a subset of controls that allow users to input information.  These controls provide a consistent API surface for managing validation, dirty states, and user input.  They also provide a consistent layout structure.
-  
+
 Everything that applies to controls also applies to form controls, as specified in [top-extensions-controls.md](top-extensions.controls.md).
 
 <a name="portal-forms-overview-form-control-view-model-contract"></a>
@@ -24,7 +23,7 @@ The following properties and methods are present on all form controls.
 
 **validations**: Validations are run whenever the control value changes, when the validations array changes, or whenever the extension calls `triggerValidation` programmatically.  If the validations fail, the control will be marked as invalid, and the validation message will be shown below the control.  In addition, if this collection contains a "Required" validation, a red asterisk will be displayed next to the label of the control that signifies to users that a value is required to proceed. This property is configurable.
 
-  **NOTE**: The extension can programmatically trigger validation on all visible form fields by using  `context.Form.TriggerValidation`, where context is the blade context object.
+>**NOTE**: The extension can programmatically trigger validation on all visible form fields by using  `context.Form.TriggerValidation`, where context is the blade context object.
 
 **validationResults**: This property is a reflection of the current state of all validations on the control. This property is read-only and is not configurable.
 
@@ -34,16 +33,18 @@ The following properties and methods are present on all form controls.
 
 **triggerValidation**: This method runs all validations on the control.  It will return a `promise` with the overall valid state of the control after validation has completed. This property is read-only and is not configurable.
 
+>**NOTE**: triggerValidation should be called with the boolean `true` if it is called in the callback of a user triggered operation (and only when user triggered). This will ensure the focus is moved to the first invalid form control if any are found invalid.
+
 <a name="portal-forms-form-control-input-options"></a>
 ## Form control input options
 
 All configurable properties on the control, like `value`, `validations`, or `dirty`, are options that can be sent as either observables or non-observables.  Observable values are best used when one observable is already present and you do not want to set up the two-way binding. For example, you could send the same observable as the `disabled` property to multiple forms, and then disable all of the forms at once by setting that observable only once. For more information about observables, see [portalfx-blades-viewmodel.md#observable-and-non-observable-values](portalfx-blades-viewmodel.md#observable-and-non-observable-values).
 
-**NOTE**:  For the most part, sending in non-observables is recommended because it makes extension code more readable and less verbose.
+>**NOTE**:  For the most part, sending in non-observables is recommended because it makes extension code more readable and less verbose.
 
 **suppressDirtyBehavior**: This is used when the form control is not being used for saving data. When this flag is set to true, the control will not mark itself as `dirty` when the value is changed.  This will prevent dirty styling, and prevent this control from triggering the alert when blades are closed.  For example, if you have a slider that controls the zoom level of a view, information like the slider position is lost when the blade is closed, but that setting is not relevant.
 
-**NOTE**: This property is not configurable after creation of the control.
+>**NOTE**: This property is not configurable after creation of the control.
 
 <a name="portal-forms-form-control-input-options-form-layout"></a>
 ### Form Layout
@@ -54,24 +55,24 @@ The section has two properties that allow for layout control. They are as follow
 
 **leftLabelPosition**: When this property is set to `true`, the labels of child form controls are placed to the left of the control, instead of above the control.  The controls themselves are aligned vertically, a few pixels to the right of the longest label.
 
-**LeftLabelWidth**: When this property is set to `true`, the labels of the child form controls are placed to the left of the control, instead of above the control.  The control labels have a fixed width that is set to the number of pixels that was sent to the control. 
+**LeftLabelWidth**: When this property is set to `true`, the labels of the child form controls are placed to the left of the control, instead of above the control.  The control labels have a fixed width that is set to the number of pixels that was sent to the control.
 
 <a name="portal-forms-form-control-input-options-legacy-integration"></a>
 ### Legacy Integration
 
 If you are working with blades that use legacy concepts like `editScope`, you can still use the new form controls by sending the `editScope` observable to the blade options as the `value` property. This results in the `editScope` being updated when the control is updated, and vice versa.
 
-**NOTE**:  EditScopes are becoming obsolete.  It is recommended that extensions and forms be developed without edit scopes, as specified in [portalfx-editscopeless-procedure.md](portalfx-editscopeless-procedure.md).
+>**NOTE**:  EditScopes are becoming obsolete.  It is recommended that extensions and forms be developed without edit scopes, as specified in [portalfx-editscopeless-procedure.md](portalfx-editscopeless-procedure.md).
 
 <a name="portal-forms-form-control-input-options-form-topics"></a>
 ### Form Topics
 
 There are a number of subtopics in the forms topic.  Sample source code is included in subtopics that discuss the various Azure SDK API items.
 
-| API Topic                        | Document                                                                                     | 
-| -------------------------------- | -------------------------------------------------------------------------------------------- | 
-| Integrating Forms with Commands  | [top-forms-integrating-with-commands.md](top-forms-integrating-with-commands.md)   | 
-| Form Field Validation            | [top-forms-field-validation.md](top-forms-field-validation.md)                     | 
+| API Topic                        | Document                                                                                     |
+| -------------------------------- | -------------------------------------------------------------------------------------------- |
+| Integrating Forms with Commands  | [top-forms-integrating-with-commands.md](top-forms-integrating-with-commands.md)   |
+| Form Field Validation            | [top-forms-field-validation.md](top-forms-field-validation.md)                     |
 
 For more information about how forms and parameters interact with an extension, see [portalfx-parameter-collection-overview.md](portalfx-parameter-collection-overview.md).
 

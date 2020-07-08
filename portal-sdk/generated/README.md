@@ -56,7 +56,7 @@ Learn how the framework is structured and how it is designed to run in multiple 
 <a name="azure-portal-extension-development-documentation-design-guide"></a>
 ## Design guide
 
-Design patterns provide solutions for common Azure scenarios.  By leveraging these patterns, Azure teams will accelerate extension development and provide users with a familiar experience so that users can easily adopt new Azure services.  The design guide covers [design toolkits, style guidance](/portal-sdk/generated/top-design.md#design-toolkits-and-resources), [common page layouts](/portal-sdk/generated/top-design.md#page) and [the resource management pattern](/portal-sdk/generated/top-design.md#resource-management).
+Design patterns provide solutions for common Azure scenarios. By leveraging these patterns, Azure teams will accelerate extension development and provide users with a familiar experience so that users can easily adopt new Azure services. The design guide covers [design toolkits, style guidance](/portal-sdk/generated/top-design.md#design-toolkits-and-resources), [common page layouts](/portal-sdk/generated/top-design.md#page) and [the resource management pattern](/portal-sdk/generated/top-design.md#resource-management).
 
 * [Design guide](/portal-sdk/generated/top-design.md)
 
@@ -157,12 +157,23 @@ Navigating between topics or other resources is a core element of interactivity 
 
 [Ask a question about navigation on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-blades-parts)
 
+<a name="azure-portal-extension-development-documentation-development-guide-focus-management"></a>
+### Focus management
+
+While the portal does autofocus management with default rules that should match most scenarios, sometimes it is better for extension to guide the focus to an appropriate location.
+
+* [How focus is managed and how to set focus programmatically](/portal-sdk/generated/top-blades-focus-management.md)
+
+[Ask a question about focus management on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-blades-parts)
+
 <a name="azure-portal-extension-development-documentation-development-guide-building-ui-with-html-templates-and-fx-controls"></a>
 ### Building UI with HTML templates and Fx controls
 
 Any template based UI in the portal (e.g. template blades or template parts can make use of a rich controls library maintained by the Ibiza team.
 
 * [Controls overview](/portal-sdk/generated/top-extensions-controls.md)
+
+* [Controls list and design guidance](/portal-sdk/generated/design-patterns-controls.md)
 
 * [Controls playground](/portal-sdk/generated/top-extensions-controls.md#the-controls-playground)
 
@@ -270,6 +281,7 @@ The Ibiza team provides limited testing support. Due to resource constraints the
 * [Node.js test framework (Open source)](/portal-sdk/generated/top-extensions-node-js-test-framework.md)
 
 When asking for assistance with a debugging UI (not unit test) test framework specific issues on stackoverflow, please include the following (if applicable):
+
 * Screenshot of the test as it fails taken via the portal.takeScreenshot()/webdriver.takeScreenshot() API (usually via a try/catch block)
 * Call stack
 * Exception message
@@ -299,7 +311,7 @@ The Ibiza team collects standard telemetry for generic actions like blade openin
 <a name="azure-portal-extension-development-documentation-experimentation-and-flighting"></a>
 ## Experimentation and flighting
 
-It is common for teams to want to experiment with new capabilities. We offer  framework features that make this possible.
+It is common for teams to want to experiment with new capabilities. We offer framework features that make this possible.
 
 * [Flighting a new version of your extension in MPAC](/portal-sdk/generated/top-extensions-flighting.md)
 
