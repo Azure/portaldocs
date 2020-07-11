@@ -326,8 +326,6 @@ This typically happens after a few hours of usage, maybe eight to 24 hours based
 
 To provide extension authors greater control over the deployment cadence of resource access changes, the SDK now supports defining resource access in the extension's hosting service configuration.
 
-**This feature is not yet enabled for sovereign clouds**
-
 1. Prerequisites
    1. Upgrade your extension’s SDK to version **5.0.303.4271** or newer.
    1. If your extension requires access to a resource other than ARM, you must define an `OAuthClientId` at the root of your extension configuration in the relevant `Extensions.*.json` files in the Portal repo.
