@@ -662,8 +662,8 @@ define(['exports'], function (exports) {
 ##### Samples
 | Library | React View | Code changes |
 |---------|------------|--------------|
-| Luxon.js | [Sample](https://df.onecloud.azure-test.net/#blade/SamplesExtension/ReactViewsBlade/reactLuxon) | [PR](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/2855250) |
-| D3.js | [Sample](https://df.onecloud.azure-test.net/#blade/SamplesExtension/ReactViewsBlade/reactD3) | [PR](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/2789974)
+| Luxon.js | [Sample](https://df.onecloud.azure-test.net/#blade/SamplesExtension/ReactViewsBlade/luxon) | [PR](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/2855250) |
+| D3.js | [Sample](https://df.onecloud.azure-test.net/#blade/SamplesExtension/ReactViewsBlade/d3) | [PR](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/2789974)
 
 <a name="react-views-beyond-getting-started-styling"></a>
 ### Styling
@@ -704,13 +704,11 @@ three: {
  ```typescript
 
 public render() {
-    return <>
-        <Fabric>
-            <Text className={classNames.one}>{ClientResources.reactStyled}</Text>
-            <Text className={classNames.two}>{ClientResources.hello}</Text>
-            <Text className={classNames.three}>{this.state.name}</Text>
-        </Fabric>
-    </>;
+    return <Fabric>
+        <Text className={classNames.one}>{ClientResources.reactStyled}</Text>
+        <Text className={classNames.two}>{ClientResources.hello}</Text>
+        <Text className={classNames.three}>{this.state.name}</Text>
+    </Fabric>;
 }
 
 ```
