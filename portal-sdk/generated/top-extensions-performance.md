@@ -555,7 +555,7 @@ Below are the steps to switch to the V2 targets. A video of the migration steps 
 <a name="v2-targets-get-extension-building-using-v2-targets"></a>
 ## Get extension building using V2 targets
 
-- Remove all `<TypeScriptCompile>` elements from the csproj. Do not remove the `<SvgTypeScriptCompile>` tags. If you use Visual Studio and want to see TypeScript files in the Solution Explorer, you should instead change the element names to None or Content.
+- Remove all `<TypeScriptCompile>` elements from the csproj. Do not remove the `<SvgTs>` tags. If you use Visual Studio and want to see TypeScript files in the Solution Explorer, you should instead change the element names to None or Content.
 - Remove all TypeScript and PDL MSBuild properties from the csproj. These include:
 
 ```xml
