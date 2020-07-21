@@ -1,8 +1,9 @@
 * [Performance Overview](#performance-overview)
     * [Extension-loading performance](#performance-overview-extension-loading-performance)
     * [Blade performance](#performance-overview-blade-performance)
+        * [BladeFullReady](#performance-overview-blade-performance-bladefullready)
+        * [BladeFullRender](#performance-overview-blade-performance-bladefullrender)
     * [Part performance](#performance-overview-part-performance)
-    * [WxP score](#performance-overview-wxp-score)
     * [How to assess your performance](#performance-overview-how-to-assess-your-performance)
         * [Extension-loading](#performance-overview-how-to-assess-your-performance-extension-loading)
         * [Blade](#performance-overview-how-to-assess-your-performance-blade)
@@ -67,15 +68,38 @@ If the user were to browse away from your experience and browse back before your
 <a name="performance-overview-blade-performance"></a>
 ## Blade performance
 
-Blade performance is spread across a couple of main areas:
+Blade performance is spread across a couple of main areas. The best way to see how your scenario maps to these buckets is to take a [browser performance profile](#performance-profiling).
 
-1. Blade's constructor
-1. Blade's 'onInitialize' or 'onInputsSet'
-1. (PDL-based `<Blade>` only) Any Parts nested within the Blade become ready
+<a name="performance-overview-blade-performance-bladefullready"></a>
+### BladeFullReady
+
+BladeFullReady can be broken down into 4 stages:
+
+1. If the extension isn't loaded, load the extension
+1. Download and parse the required dependencies for the blade
+1. Execute and wait for the blade's `onInitialize()` promise to resolve
+1. Process promise resolution from the main thread and complete the initial rendering of the Blade.
+
+All of these perf costs are represented under the one `BladeFullReady` action and the full end to end duration is tracked under the `duration` column.
+
+For an additional breakdown of the time spent you can inspect a native performance profile or the `data` column of the `BladeFullReady` telemetry event to find the following properties:
+
+| Stage | Native marker identifier | Data property name | Description |
+| ----- | ------------------------ | -------- | ----------- |
+| 0 | ExtLoadBladeBundles | bundleLoadingTime | The async time spent requiring the BladeDefinition (which today is co-bundled with the Blade class’ module). This covers the time downloading and processing your Blade’s bundles. |
+| 1 | ExtInstantiateBladeClass | Not Tracked | The async time spent diContainer.getAsync’ing the Blade class. This and the following ‘ExtBladeOnInitializeSync’ show up as insignificantly small, which itself can help refocus on larger time-slices. |
+| 2 | ExtBladeOnInitializeSync | Not Tracked | The sync time spent in the Blade’s ‘onInitialize’ method. |
+| 3 | ExtBladeOnInitializeAsync | onInitializeAsyncTime | The async time from the point ‘onInitialized’ is called to the point where the Promise returned from ‘onInitialize’ is resolved. All these are measured in the extension web worker. |
+| * | ExtBladePrepareFirstAjax | prepareFirstAjaxTime | The time spent from the point ‘onInitialized’ is called to the point where the first ajax call is sent from the extension web worker.  This is fuzzy because the FX ajax client isn’t explicitly bound to a Blade, but inaccuracies should be outlier cases and should be easy to exclude based on knowledge of the Blade. |
 
 If your blade is a FrameBlade or AppBlade there is an additional initialization message from your iframe to your viewmodel which is also tracked, see the samples extension [framepage.js](https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FAcceptanceTests%2FExtensions%2FSamplesExtension%2FExtension%2FContent%2FScripts%2Fframepage.js&version=GBproduction&_a=contents) for an example of what messages are required.
 
-All of these perf costs are represented under the one 'BladeFullReady' action.
+<a name="performance-overview-blade-performance-bladefullrender"></a>
+### BladeFullRender
+
+BladeFullRender is the time it takes your experience to become FullReady + finish updating the UI. This means you are no longer populating the UI or changing observables bound to the UI.
+
+`BladeFullRender` duration is logged as an additional property, `bladeRenderTime`, in the `BladeFullReady` telemetry action's data column.
 
 <a name="performance-overview-part-performance"></a>
 ## Part performance
@@ -87,34 +111,7 @@ Similar to Blade performance, Part performance is spread across a couple of area
 
 If your part is a FramePart there is an additional initialization message from your iframe to your viewmodel which is also tracked, see the samples extension [framepage.js](https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FAcceptanceTests%2FExtensions%2FSamplesExtension%2FExtension%2FContent%2FScripts%2Fframepage.js&version=GBproduction&_a=contents) for an example of what messages are required.
 
-All of these perf costs are represented under the one 'PartReady' action.
-
-<a name="performance-overview-wxp-score"></a>
-## WxP score
-
-The WxP score is a per extension Weight eXPerience score (WxP). It is calculated by the Azure Portal team as follows:
-
-```txt
-
-WxP = (BladeViewsMeetingTheBar * 95thPercentileBar) / ((BladeViewsMeetingTheBar * 95thPercentileBar) + ∑(BladeViewsNotMeetingTheBar * ActualLoadTimePerBlade))
-
-```
-
-| Blade   | 95th Percentile Times | Usage Count | Meets 95th Percentile Bar? |
-| ------- | --------------------- | ----------- | -------------------------- |
-| Blade A | 1.2                   | 1000        | Yes                        |
-| Blade B | 5                     | 500         | No                         |
-| Blade C | 6                     | 400         | No                         |
-
-```txt
-
-WxP = (BladeViewsMeetingTheBar * 95thPercentileBar) / ((BladeViewsMeetingTheBar * 95thPercentileBar) + ∑(BladeViewsNotMeetingTheBar * ActualLoadTimePerBlade)) %
-    = (4 * 1000) / ((4 * 1000) + ((5 * 500) + (6 * 400))) %
-    = 44.94%
-
-```
-
-> Note: The model penalizes extensions for blades which have a higher number of views and don’t meet the bar.
+All of these perf costs are represented under the one `PartReady` action.
 
 <a name="performance-overview-how-to-assess-your-performance"></a>
 ## How to assess your performance
