@@ -32,6 +32,7 @@ You can also click on the links in the table to open the correct Stackoverflow f
 | [ibiza-controls-grid](https://stackoverflow.microsoft.com/questions/tagged/ibiza-controls-grid)       | A tag specially for questions related to Ibiza's Grid controls.   | Paymon Parsadmehr    | |
 | [ibiza-create](https://stackoverflow.microsoft.com/questions/tagged/ibiza-create) | A tag for questions related to Ibiza's resource create experiences and provisioning APIs. | Balbir Singh        | |
 | [ibiza-data](https://stackoverflow.microsoft.com/questions/tagged/ibiza-data) | A tag for questions related to the Batch API that Ibiza supports. | Balbir Singh | |
+| [ibiza-declarative](https://stackoverflow.microsoft.com/questions/tagged/ibiza-declarative) | A tag for questions related to declarative extension development. Learn [more](top-declarative.md). | Shrisha Kumar | |
 | [ibiza-development](https://stackoverflow.microsoft.com/questions/tagged/ibiza-development)   | A tag for questions related local development of extensions like IDE integration, side-loading etc. | Shrisha Kumar | |
 | [ibiza-missing-docs](https://stackoverflow.microsoft.com/questions/tagged/ibiza-docs)         | Topics that are not included in [https://aka.ms/portalfx/docs](https://aka.ms/portalfx/docs), are incomplete, or are difficult to understand  | Shrisha Kumar | |
 | [ibiza-forms](https://stackoverflow.microsoft.com/questions/tagged/ibiza-forms)                       | An Ibiza monitored tag for questions related to Azure Portal forms                            | Paymon Parsadmehr    | |

@@ -81,7 +81,18 @@ With the one time configuration steps complete you can now install the CLI as yo
 ### restore, build, serve, sideload and watch
 
 1. Run command prompt as Admin
-1. run following commands
+1. Get started with a declarative extension. A declarative extension is easier to build and cheaper to maintain. Learn more [here](top-declarative.md). Extension authors can always shift from a declarative extension to a hybrid extension (declarative and native typescript blades) at any point of time.
+1. To get started with a declarative extension, run following commands
+
+```
+cd c:\ && mkdir dev && cd dev
+ap new -d -n Microsoft_Azure_FirstExtension -o ./FirstExtension
+cd ./FirstExtension/src/default/extension
+ap start
+
+```
+
+Alternatively, if you have evaluated using a declarative extension and established that it does not work for your scenario, you can start with a native Ibiza extension using the following commands - 
 
 ```
 cd c:\ && mkdir dev && cd dev
@@ -336,7 +347,7 @@ Argument | alias | Description
 --- | --- | ---
 --name | -n | Required. The name used in portal registration of the extension e.g Microsoft_Azure_SomeExtension.
 --output | -o | Required. The output directory to place the new project.
---declarative | -d | Optional. Scaffolds declarative extension. This feature is in preview mode.
+--declarative | -d | Optional. Scaffolds declarative extension.
 --help | | Optional. Show help for new command.
 
 <a name="cli-overview-command-reference-ap-new-example-usage-2"></a>

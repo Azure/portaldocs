@@ -61,6 +61,8 @@ Design patterns provide solutions for common Azure scenarios. By leveraging thes
 
 ### Getting started
 
+If you are building a new extension, consider building a declarative extension.  A declarative extension is easier to build and cheaper to maintain. Learn more [here](/portal-sdk/generated/top-declarative.md).
+
 Azure portal extension development is supported on Windows Server 2012 R2, and Windows 10.
 
 * [Downloads](/portal-sdk/generated/downloads.md)

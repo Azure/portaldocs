@@ -1,6 +1,8 @@
 <a name="getting-started-with-the-portal-sdk"></a>
 ## Getting Started with the Portal SDK
 
+Get started with a declarative extension. A declarative extension is easier to build and cheaper to maintain. Learn more [here](top-declarative.md). Extension authors can always shift from a declarative extension to a hybrid extension (declarative and native typescript blades) at any point of time.
+
 The Azure Portal SDK includes everything you need to build extensions for the portal. Included are variety of tools and samples that help developers build extensions on top of the framework.  There are three common experiences for Azure resources; Create, Browse, and  Resource Management. This guide will walk you through creating your first extension, running that extension and then running the unit tests for that extension.
 
 - [Installing the Azure Portal SDK](#install-the-azure-portal-sdk)
@@ -32,8 +34,15 @@ The Azure Portal SDK includes everything you need to build extensions for the po
     - select npm in the left nav of the dialog that opens
     - follow the instructions in the dialog. If done correctly the PAT (secret) should be added to a .npmrc in your c:\users\youralias\.npmrc this file with the PAT should not be checked in and should be treated as a secret. The .npmrc file in  Extension\\.npmrc will not have a PAT but will have the registry.  Authentication should now succeed.
 
-2. `ap new -n Microsoft_Azure_YourExtension -o ./targetdirectory`
-3. To launch your extension:
+2. For a declarative extension, run the following command -
+
+    `ap new -d -n Microsoft_Azure_YourExtension -o ./targetdirectory`
+
+3. Alternatively, if you have evaluated using a declarative extension and established that it does not work for your scenario, you can start with a native Ibiza extension using the following command - 
+
+`ap new -n Microsoft_Azure_YourExtension -o ./targetdirectory`
+
+4. To launch your extension:
 
 - Run the command prompt **as administrator** > cd ./src/Default/Extension > run command `ap start`
 - Or, Visual Studio Code **as administrator**: `Ctl+Shift+P > Tasks: Run Task > npm: start`
