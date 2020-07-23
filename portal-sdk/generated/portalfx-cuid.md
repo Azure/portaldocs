@@ -48,10 +48,6 @@ CreateUiDefinition only supports ARM resources. Additionally, if your create has
 
 SDKs above version 5.0.302.62501 support CreateUiDefinition based creates.
 
-<!--
- However, there are manual steps involved in this version of the SDK to make localization work. This localization issue was fixed in SDK version 5.0.303.xx onwards. We recommend that you use SDK version 5.0.303.xx or above to move to CreateUiDefinition based creates. However, you can use any SDK versions >= 5.0.302.62501 to move to CreateUiDefinition based create with a small manual process to get localization to work.
--->
-
 Therefore, step 1 of moving to CreateUiDefinition based creates will be update your extension to a newer SDK.
 
 <a name="moving-to-compliant-full-screen-create-using-createuidefinition-steps-to-move-to-full-screen-create-step-2-author-your-createuidefinition-json"></a>
@@ -171,23 +167,22 @@ The folder structure in your extension should look as follows once you have adde
 
 ![alt-text](../media/portalfx-cuid/CUIDWithLocalization.png "CreateUiDefinitionWithLocalization.json")
 
-5. Add the following to your extension csproj –
+5. You need to generate the resjson in all 18 languages the portal supports. For eg, for Spanish, you need to generate a resjson with Spanish strings called Strings.es.json. This can be done using capabilities of the localization pipeline. You need not check in the localized files as they will be generated during each official build. The exact instructions depend on the build system you are using. Please refer to [this doc](https://aka.ms/locv3) to learn how to do this for your extension based on the build system you are on. For eg, if you are using CoreXt, add the following to your extension csproj –
+
 ```
 <ItemGroup>
 <FilesToLocalize Include="Client\UiDef\**\Strings.resjson">
-<OutputPath>Client\UiDef\%(RecursiveDir)</OutputPath>
+<OutputPath>$(MSBuildThisFileDirectory)\Client\UiDef\%(RecursiveDir)</OutputPath>
 <CopyOption>LangIDOnName</CopyOption>
 </FilesToLocalize>
 </ItemGroup>
 ```
 
-6. Check-in the above changes and trigger a build. Once the loc pipeline runs, you will find 18 localized files at `../obj/locbld/Client/UiDef/<AssetName>`. You will now have to check-in these localized files in the same folder that has DeploymentTemplate.json and CreateUiDefinition.json.
-
-<!--
-If you are on SDK version 5.0.303.xx or newer, there is nothing else that needs to be done for localization to work.
--->
 
 ![alt-text](../media/portalfx-cuid/FolderStructure2.png "Folder structure once localization files are added correctly")
+
+6. Check-in the above changes and trigger a build. Once the loc pipeline runs, localization should be enabled for your new create.
+
 
 
 <a name="moving-to-compliant-full-screen-create-using-createuidefinition-steps-to-move-to-full-screen-create-step-5-gallery-package-changes"></a>

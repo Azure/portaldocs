@@ -190,9 +190,9 @@ public onPinFromUiClick() {
 ```
 
 <a name="parts-overview-offering-a-part-in-the-tile-gallery"></a>
-### Offering a part in the Tile gallery
+### Offering a part in the tile gallery
 
-The Tile Gallery is presented when users create new dashboards or when they put their dashboard in edit mode. The Gallery lets users browse and search through all parts built by all extensions, as long as the parts have the right metadata. If you want your part to be included in the tile gallery then you just need to provide a little bit of metadata inside of your part's decorator.
+The tile gallery is presented when users create new dashboards or when they put their dashboard in edit mode. The gallery lets users browse and search through all parts built by all extensions, as long as the parts have the right metadata. If you want your part to be included in the tile gallery then you just need to provide a little bit of metadata inside of your part's decorator. Dashboard team curates the list of parts in tile gallery, contact ibizadashboards@microsoft.com to get your part reviewed and added to the gallery.
 
 The following example includes the `galleryMetadata` property that lets the developer specify a localized title and category, in addition to a thumbnail image.
 
