@@ -17,7 +17,7 @@ Azure portal onboarding process is updated and teams looking to onboard new exte
 
 * No need to raise pull requests or cherry-picking changes across different branches for onboarding or updating configuration
 
-* Partners can onboard to the Azure portal using Easy Start experience that will udpate the corresponding service tree database.
+* Partners can onboard to the Azure portal using Easy Start experience that will update the corresponding service tree database.
 
 * Portal team will pull the configuration from service tree and deploy the configuration to all clouds​ and across all portal and hosting service branches
 
@@ -30,25 +30,33 @@ Azure portal onboarding process is updated and teams looking to onboard new exte
 <a name="azure-portal-onboarding-using-easy-start-step-by-step-process-overview"></a>
 ## Step by Step Process overview
 
-Onboarding a service, or developing a Portal extension, has three phases: onboarding, development, and deployment. The process is specified in the following image.
+Onboarding a service or developing a Portal extension has three phases: onboarding, development, and deployment. The process is specified in the following image.
 
 ![alt-text](../media/portalfx-extensions-onboarding/azure-onboarding.png "Azure Onboarding Process")
 
-<a name="azure-portal-onboarding-using-easy-start-kickoff-meeting"></a>
+<a name="phase-1-onboarding"></a>
+# Phase 1 - Onboarding
+
+<a name="phase-1-onboarding-kickoff-meeting"></a>
 ## Kickoff Meeting
 
-<a name="azure-portal-onboarding-using-easy-start-kickoff-meeting-who-needs-these-meetings"></a>
-### who needs these meetings?
+<a name="phase-1-onboarding-kickoff-meeting-already-own-an-extension-in-portal"></a>
+### Already own an extension in Portal
+
+* If your **extension is already onboarded** to either Dogfood or Public clouds and **need to onboard to other environments/clouds** in Portal, you can **skip this meeting** and go directly to the [Onboarding requirements](#onboarding-requirements) section.
+
+<a name="phase-1-onboarding-kickoff-meeting-who-needs-these-meetings"></a>
+### who needs these meetings
 
 * If you have scenarios that do NOT use ARM RP(Resource Provider)or do NOT belong to Azure or need a customized experiences in Portal, you are recommended to setup a meeting a with the Azure portal onboarding team.
 
-* If you are planning to host an Internal only service, you must schedule a meeting with the onboarding team to get the required approvals and then start onboarding.
+* If you are planning to host an Internal only service or a 3rd party service or a non-Microsoft owned service, you must schedule a meeting with the onboarding team to get the required approvals and then start onboarding.
 
 * If you have scenarios that do NOT require a full fledged extension and plan to surface your existing web interface through Azure portal, you can send a meeting invite to Azure portal onboarding team.
 
 There are lots of docs here. We recommend you send mail to [ibiza-onboarding@microsoft.com](<mailto:ibiza-onboarding@microsoft.com?subject=Kickoff Meeting Request&body=My team would like to meet with you to learn about the Azure onboarding process.>) and request a kickoff meeting. Someone from our team will spend 30 minutes walking through the process at a high level. We can point you in the right direction regarding the latest patterns and practices. We can also answer any questions you have. Finally, we can talk about how the relationship between our teams is managed.
 
-<a name="azure-portal-onboarding-using-easy-start-onboard-with-related-teams"></a>
+<a name="phase-1-onboarding-onboard-with-related-teams"></a>
 ## Onboard with related teams
 
 Onboarding to Azure all up is a big task that spans many teams. The doc you are reading will help you onboard to the portal, but there are many other teams you will need to work with to get your entire service up and running. These include, but are not limited to the following teams.
@@ -97,7 +105,7 @@ While the portal team cannot help directly with all of these factors, see [porta
 
 For less common scenarios, you might need to do a custom deployment. For example, if the extension needs to reach server services using certificate based authentication, then there should be controller code on the server that our hosting service does not support. You should be very sure that  a custom hosting solution is the correct solution previous to developing one.
 
-<a name="azure-portal-onboarding-using-easy-start-join-dls-and-request-permissions"></a>
+<a name="phase-1-onboarding-join-dls-and-request-permissions"></a>
 ## Join DLs and request permissions
 
 Request the following permissions to stay current on product roadmaps, get news on latest features, and receive invites for ibiza related events.
@@ -116,10 +124,13 @@ Request the following permissions to stay current on product roadmaps, get news 
 
 * Developers who want to contribute to the test framework should join groups from the site located at [http://aka.ms/azuregithub](http://aka.ms/azuregithub).
 
-Ask an onboarding question on [Stackoverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-onboarding).
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers"></a>
+## Get the SDK, docs, and samples to your developers
 
-<a name="azure-portal-onboarding-using-easy-start-onboarding-requirements"></a>
-## Onboarding Requirements
+ The [development guide](top-extensions-getting-started.md) located in the main documentation index has all the right pointers.
+
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-onboarding-requirements"></a>
+### Onboarding Requirements
 
 * All **services must be registered in Service Tree** and contain a **valid service tree id with an IcM team registered for each cloud** that the portal extension is onboarding to.
 
@@ -159,8 +170,8 @@ Ask an onboarding question on [Stackoverflow](https://stackoverflow.microsoft.co
 
 * **Service tree entries must not be removed** or cleared without informing the Azure portal team **if you own an active extension** in Azure portal.
 
-<a name="azure-portal-onboarding-using-easy-start-required-and-optional-fields"></a>
-## Required and Optional fields
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-required-and-optional-fields"></a>
+### Required and Optional fields
 
 Please review the following required and optional fields for Portal extension.
 
@@ -176,8 +187,8 @@ Please review the following required and optional fields for Portal extension.
 | Flags | Pre-defined flags as listed | False | SupportsPrewarming, Disabled, ThirdPartyExtension |
 | Flights | Name of the flight | False | MpacFlight |
 
-<a name="azure-portal-onboarding-using-easy-start-unsupported-scenarios-and-fields"></a>
-## Unsupported scenarios and fields
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-unsupported-scenarios-and-fields"></a>
+### Unsupported scenarios and fields
 
 * **Adding/Updating resourceAccess is not supported** with the new onboarding model.
 
@@ -187,17 +198,20 @@ Please review the following required and optional fields for Portal extension.
 
 * Partners who **require resourceAccess to call other backend services like graph, keyvault** or other custom services, must **use client side configuration** to add resourceAccess.
 
-* If you have scenarios that **need help updating resourceAccess or migrating to new model**, please schedule some time with the Azure portal [Onboarding Team](mailTo:ibiza-onboarding@microsoft.com).
+* If you have scenarios that **need help updating resourceAccess or migrating to new model**, please post your onboarding questions on Stackoverflow using the tag [ibiza-onboarding](https://stackoverflow.microsoft.com/questions/tagged/ibiza-onboarding) and email [Onboarding Team](mailTo:ibiza-onboarding@microsoft.com).
 
-Please post your onboarding questions on Stackoverflow using the tag [ibiza-onboarding](https://stackoverflow.microsoft.com/questions/tagged/ibiza-onboarding) or email [Onboarding Team](mailTo:ibiza-onboarding@microsoft.com)
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-step-by-step-guide-to-portal-onboarding"></a>
+### Step By Step guide to Portal onboarding
 
+* Visit Easy Start onboarding using your service tree id **https://eng.ms/tools/easystart/&lt;servicetreeid&gt;**
 
-<a name="azure-portal-onboarding-using-easy-start-step-by-step-guide-to-portal-onboarding"></a>
-## Step By Step guide to Portal onboarding
+**Example: https://eng.ms/tools/a0a46d95-77ef-4cb4-a6d8-6aa5a288c1db for Azure portal**
 
-* Visit the **[Onboarding Dashboard](https://aka.ms/portalfx/onboarding/dashboard)**.
+* Alternatively you can **visit [Onboarding Dashboard](https://aka.ms/portalfx/onboarding/dashboard)**.
 
-* If you **do not have access** to this dashboard, **please join**   **[ibizapartners-pm](http://igroup/join/ibizapartners-pm)** or **[ibizapartners-dev](http://igroup/join/ibizapartners-dev)** as appropriate.
+* If you **do not have access** to this dashboard, please **request access from Power Bi** after clicking the link
+
+* You can also **join [ibizapartners-pm](http://igroup/join/ibizapartners-pm)** or **[ibizapartners-dev](http://igroup/join/ibizapartners-dev)** as appropriate.
 
 * **Search your service** from the list either by **service tree name** or **service tree id** or **service tree admin**.
 
@@ -213,11 +227,11 @@ Please post your onboarding questions on Stackoverflow using the tag [ibiza-onbo
 
 ![Service Tree List](./../media/top-onboarding/easystart-onboarding.png)
 
-<a name="azure-portal-onboarding-using-easy-start-onboading-wizard"></a>
-## Onboading Wizard
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-onboading-wizard"></a>
+### <strong>Onboading Wizard</strong>
 
-<a name="azure-portal-onboarding-using-easy-start-onboading-wizard-extension-name"></a>
-### <strong>Extension Name</strong>
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-onboading-wizard-extension-name"></a>
+#### <strong>Extension Name</strong>
 
 * Enter a unique Extension Name as per **naming convention "Microsoft_Azure_ExtensionName"**.
 * Please **check with Marketing team or your leadership team** before deciding a name and onboard to Azure portal.​
@@ -231,22 +245,22 @@ Please post your onboarding questions on Stackoverflow using the tag [ibiza-onbo
 **Screenshot - 2**
 ![Service Tree List](./../media/top-onboarding/easystart-new-extension-details.png)
 
-<a name="azure-portal-onboarding-using-easy-start-onboading-wizard-hosting-service-name"></a>
-### <strong>Hosting Service Name</strong>
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-onboading-wizard-hosting-service-name"></a>
+#### <strong>Hosting Service Name</strong>
 
 * **Must be unique** across all extensions.
 
 * Used in the extension's csproj file as **HostingServiceRoutePrefix**. [More Info](top-extensions-hosting-service.md#build-configuration).
 
-<a name="azure-portal-onboarding-using-easy-start-onboading-wizard-feedback-email-address"></a>
-### <strong>Feedback Email Address</strong>
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-onboading-wizard-feedback-email-address"></a>
+#### <strong>Feedback Email Address</strong>
 
 * Please enter a valid **email enabled security group** with the list of PMs and Developers responsible for handling any issues with this extension.
 
 * User adding/udpating the extension configuration must be part of the feedback email group.
 
-<a name="azure-portal-onboarding-using-easy-start-onboading-wizard-icm-team-id"></a>
-### <strong>IcM Team Id</strong>
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-onboading-wizard-icm-team-id-numeric-values-only"></a>
+#### <strong>IcM Team Id (numeric values only)</strong>
 
 * Please enter a valid **IcM Team Id(numeric values only)** of the registered IcM service and team for this extension.
 
@@ -264,8 +278,8 @@ Please post your onboarding questions on Stackoverflow using the tag [ibiza-onbo
 
 ![Service Tree List](./../media/top-onboarding/easystart-icm-info.png)
 
-<a name="azure-portal-onboarding-using-easy-start-onboading-wizard-storage-container-url"></a>
-### <strong>Storage Container URL</strong>
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-onboading-wizard-storage-container-url"></a>
+#### <strong>Storage Container URL</strong>
 
 * Please enter a valid **storage container URL**.
 
@@ -281,8 +295,8 @@ eg: Dogfood, Prod, Mooncake, Fairfax and BlackForest
 * Upload the [config.json](top-extensions-hosting-service.md#step-6-upload-safe-deployment-config) and the [generated zip file](top-extensions-hosting-service.md#step-1-generate-hosting-service-versioned-zip-file) from your build.
 ![storage container](./../media/portalfx-extensions-onboarding/hosting-service-storage-container.png)
 
-<a name="azure-portal-onboarding-using-easy-start-onboading-wizard-redirect-to"></a>
-### <strong>Redirect To</strong>
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-onboading-wizard-redirect-to"></a>
+#### <strong>Redirect To</strong>
 
 * This is **applicable only if you already have an extension registered in your service that you would like to redirect to**.
 
@@ -290,19 +304,19 @@ eg: Dogfood, Prod, Mooncake, Fairfax and BlackForest
 
 * Extensions are **NOT required to create a storage account to redirect extension** or specify one if you intend to redirect to an existing extension. Extensions **must specify the hosting service name that is used by the previous extension**.
 
-<a name="azure-portal-onboarding-using-easy-start-onboading-wizard-st-party-aad-app-id"></a>
-### <strong>1st party AAD App Id</strong>
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-onboading-wizard-st-party-aad-app-id"></a>
+#### <strong>1st party AAD App Id</strong>
 
 * All **extensions must [register a 1st party AAD app](top-onboarding-new.md#aad-onboarding) if you are calling graph or other backend services**.
 
 * Extensions **do NOT need 1st party AAD app if you only call ARM**
 
-* Do NOT use multiple 1st party AAD apps in one extension.
+* Do **NOT** use multiple 1st party AAD apps in one extension.
 
-* Extensions may use one AAD apps across multiple extensions.
+* Extensions may use one AAD app across multiple extensions.
 
-<a name="azure-portal-onboarding-using-easy-start-onboading-wizard-flags"></a>
-### <strong>Flags</strong>
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-onboading-wizard-flags"></a>
+#### <strong>Flags</strong>
 
 * All new extension onboarding must use **"SupportsPrewarming"**.
 
@@ -312,15 +326,15 @@ eg: Dogfood, Prod, Mooncake, Fairfax and BlackForest
 
 * Any **services calling services outside of Microsoft and NOT using ThirdPartyExtension flag will be removed** from Azure portal.
 
-<a name="azure-portal-onboarding-using-easy-start-onboading-wizard-flights"></a>
-### <strong>Flights</strong>
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-onboading-wizard-flights"></a>
+#### <strong>Flights</strong>
 
 * Flights are named versions that can be loaded in **[MPAC](https://ms.portal.azure.com)**. [See more](top-extensions-flighting.md#mpac-flighting)
 
 * You can add a flighted version to the config.json in your extension package and specify that name in this field.
 
-<a name="azure-portal-onboarding-using-easy-start-frequently-asked-questions"></a>
-## Frequently Asked Questions
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-frequently-asked-questions"></a>
+### Frequently Asked Questions
 
 * ***I am unable to update my existing extension as the next button is disabled. What am I doing wrong?***
 
@@ -342,16 +356,34 @@ eg: Dogfood, Prod, Mooncake, Fairfax and BlackForest
 
     * Please **reach out to Azure Global team** to check for the timelines and requirements on onboarding to National/Sovereign clouds.
 
-* Where can I find IcM Team Id?
+* **Where can I find IcM Team Id?**
 
     * You check the **[IcM Tenant Details](https://icm.ad.msft.net/imp/ManageTenants.aspx)** for your service.
 
     * You can also **lookup for Team Id** in the **All Active IcM Services** tab in the **[IcM Services PowerBi Dashboard](https://aka.ms/portalfx/partners/icm)**
 
-<a name="azure-portal-onboarding-using-easy-start-how-to-verify-onboarding-status"></a>
-## How to verify onboarding status
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-how-to-verify-onboarding-status"></a>
+### How to verify onboarding status
 
-* Visit **https://aka.ms/portalfx/onboarding/status**
+![Service Tree List](./../media/top-onboarding/easystart-status.png)
+
+* **Easy Start** shows the **onboarding status** for each extension that is onboarded.
+
+    * **In-Progress** - Indicates the extension is **onboarded only to Dogfood configuration**.
+
+    * **Onboarded** - Indicates the extension is **onboarded to Production**.
+
+    * **Deprecated** - Indicates the extension is **deprecated from all clouds**.
+
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-how-to-verify-onboarding-status-note-deprecated-extension-configuration-will-not-be-written-to-azure-portal-configuration-however-this-information-continues-to-exist-in-service-tree-database-for-governance-reasons-and-partners-can-choose-to-revert-if-needed"></a>
+#### Note : Deprecated extension configuration will not be written to Azure portal configuration. However this information continues to exist in Service tree database for governance reasons and partners can choose to revert if needed
+
+* **Portal onboarding service checks every hour** for any updates to the services tree database and reads the extension metadata from service tree database and **updates the portal extension configuration files** (Extension.*.json) in Azure portal framework repository **for all branches**
+![Service Tree List](./../media/top-onboarding/onboarding-service.png)
+
+* You can verify the commits written to the Portal Framework repositories in the [Dev](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud&version=GBDogfood&_a=history), [Dogfood](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud&version=GBdogfood&_a=history) and [Production](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud&version=GBproduction&_a=history) branches and Hosting Service changes in [Dev](https://msazure.visualstudio.com/One/_git/AzureUX-PortalHostingSvc?path=%2Fsrc%2FRDPackages%2FExtensionHost&version=GBdev&_a=history), [Dogfood](https://msazure.visualstudio.com/One/_git/AzureUX-PortalHostingSvc?path=%2Fsrc%2FRDPackages%2FExtensionHost&version=GBdogfood&_a=history) and [Production](https://msazure.visualstudio.com/One/_git/AzureUX-PortalHostingSvc?path=%2Fsrc%2FRDPackages%2FExtensionHost&version=GBproduction&_a=history) branches.
+
+* You can also **visit [Onboarding Status](https://aka.ms/portalfx/onboarding/status)** to view the onboarding status in Portal configuration files.
 
 * **Search or select** your extension and check the details.
 
@@ -360,8 +392,8 @@ eg: Dogfood, Prod, Mooncake, Fairfax and BlackForest
 * Report will be **refreshed every few hours**.
 ![Service Tree List](./../media/top-onboarding/easystart-onboarding-status.png)
 
-<a name="azure-portal-onboarding-using-easy-start-how-to-verify-deployment-status"></a>
-## How to verify deployment status
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-how-to-verify-deployment-status"></a>
+### How to verify deployment status
 
 * Visit **https://aka.ms/portalfx/deploymentstatus**
 
@@ -370,8 +402,8 @@ eg: Dogfood, Prod, Mooncake, Fairfax and BlackForest
 * Report will be **refreshed every few hours**.
 ![Service Tree List](./../media/top-onboarding/easystart-deployment-status.png)
 
-<a name="azure-portal-onboarding-using-easy-start-ownership-transfer-requirements"></a>
-## Ownership-transfer Requirements
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-ownership-transfer-requirements"></a>
+### Ownership-transfer Requirements
 
 * Transferring ownership of a service or extension in Azure portal requires creating a task to Azure portal and working with Azure portal onboarding team to complete the task.
 
@@ -379,15 +411,15 @@ eg: Dogfood, Prod, Mooncake, Fairfax and BlackForest
 
 * Partners must update the IcM service and team if ownership is transferred along with the feedback email address of the new owners
 
-<a name="azure-portal-onboarding-using-easy-start-off-boarding-deprecation-of-service"></a>
-## Off-boarding / Deprecation of service
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-off-boarding-deprecation-of-service"></a>
+### Off-boarding / Deprecation of service
 
 * Deprecation or retiring experience of any service that is in GA requires 90 days notice to customers and services in Public Preview require 30days notice to customers.
 
 * Service owners can set the Flags to "Disabled" to turn of the extension rendering in Azure portal. Any bookmarks or deep-links will continue to work until the extension is fully deprecated.
 
-<a name="azure-portal-onboarding-using-easy-start-aad-onboarding"></a>
-## AAD Onboarding
+<a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-aad-onboarding"></a>
+### AAD Onboarding
 
 NOTE: ARM tokens obtained during portal login are meant only for calling ARM. For all other purposes, please create a 1st party App.
 
@@ -408,28 +440,100 @@ NOTE: ARM tokens obtained during portal login are meant only for calling ARM. Fo
 TODO - Add an example after the feature is ready (ETA is March or April )
 -->
 
+<a name="phase-2-development"></a>
+# Phase 2 - Development
 
-<a name="azure-portal-onboarding-using-easy-start-useful-links"></a>
-## Useful links
+<a name="phase-2-development-develop-your-extension"></a>
+## Develop your extension
+
+ The [development guide](top-extensions-getting-started.md) located in the main documentation index has all the right pointers.
+
+<a name="phase-2-development-learn-about-the-hosting-service-plan-your-deployment-strategy"></a>
+## Learn about the hosting service / plan your deployment strategy
+
+The Ibiza team provides and operates a common extension hosting service that makes it easy to get your extension into a globally distributed system without having to manage your own infrastructure. For more information see [top-extensions-hosting-service.md](top-extensions-hosting-service.md).
+
+For less common scenarios, you might need to do a custom deployment.
+
+For example, if you need to talk to backend services using certificate-based authentication then you'll need controller code on the server. This is not supported with our hosting service. You should be very sure you require a custom hosting solution before going down this path.
+
+**NOTE**: The deployment can be configured in such a way that the client portion of the extension uses the hosting service while the custom controller code can be deployed separately.
+For more information, see [top-extensions-custom-deployment.md](top-extensions-custom-deployment.md).
+
+<a name="phase-2-development-register-the-extension-with-the-portal-product-configuration"></a>
+## Register the extension with the portal product configuration
+
+Once the name of the extension is finalized, it is time to register the extension in all environments. This requires a portal deployment and can take time. Our Service Level Agreements are located at [top-extensions-svc-lvl-agreements.md](top-extensions-svc-lvl-agreements.md).  Please plan accordingly.
+
+* For internal partners, the request to register an extension is a pull request, as specified in [top-extensions-publishing.md](top-extensions-publishing.md).
+
+* External teams can submit their requests by reaching out to the <a href="mailto:ibizafxpm@microsoft.com?subject=Onboarding Request: Add <extensionName> to the Portal&body=Extension Name:  <br><br>Company:  <br><br>Brand or Suite:  <br><br>Product or Component:  <br><br> URLs: <br><br>Production: main.<extensionName>.ext.<company>.com<br><br>  Contact info: <br><br>Business Contacts <br><br> Dev leads: <br><br> PROD on-call email for live site incidents: <br><br>">ibizafxpm team</a> with an onboarding request.
+
+* **NOTE**: Extension names must use standard extension name format, as in the example located [here](/portal-sdk/generated/top-extensions-configuration.md#configuration-file-locations-and-structure).
+
+* **NOTE**:  Extension URLs adhere to the naming requirements located in [portalfx-extensions-cnames.md](portalfx-extensions-cnames.md).
+
+* Show your asset types.
+
+<a name="phase-3-deployment"></a>
+# Phase 3 - Deployment
+
+<a name="phase-3-deployment-release-kind"></a>
+## Release kind
+
+There are three typical release kinds: private preview, public preview, and Global Availability (GA). For the purposes of deployment public preview and GA are the same. The only difference is that the UI may show preview labels and disclaimers where appropriate. For more information about the three kinds of releases, see  [top-extensions-developmentPhases.md](top-extensions-developmentPhases.md).
+
+<a name="phase-3-deployment-private-preview"></a>
+## Private preview
+
+For a private preview, the goal is to hide your experience to the general public, but show it to a limited audience. This procedure assumes that the discoverable entry point in the product is the All Services menu, also known as the Browse menu.
+
+Hiding or showing items in the all services menu is controlled by the extension configuration that gets deployed with your extension. The following  example shows how to set it up.
+To do so, you should make a change to hide all your asset types in the environments you wish to stay hidden in. See [hiding assets](portalfx-assets.md#How-to-hide-your-asset-in-different-environments) for help with the change.
+
+When in the hidden state, users will not be able to browse to or search for the entry point of the extension. However, you can distribute a special link like the following one that enables the entry point by using a feature flag.
+https://portal.azure.com?extensionName_hideassettypes=none
+
+A few notes about this path:
+
+* Any user that receives this URL will be able to see your entry point.
+
+* Any users who receives a deep link to blades within your extension will be able to see that experience even without the feature flag
+
+* If the extension is integrated into the Marketplace, then that team has its own way of hiding Marketplace items. Contact <a href="mailto:1store@microsoft.com?subject=Integrating a New Extension into the Marketplace">1store@microsoft.com </a> for more details.
+
+<a name="phase-3-deployment-public-preview-or-ga"></a>
+## Public preview or GA
+
+You are required to check the quality of your extension. We have standardized ways of measuring reliability and performance at key areas. If you have a private preview then we have already collected this data for you.
+
+There is no blocking exit criteria, which means you do not have to prove that the extension's performance and reliability are in the required range. However, once you ship, the Portal team will monitor the quality of the extension. Extensions that do not meet the required quality bar will be flagged in executive reviews and will be asked to improve their quality as soon as possible.
+
+When you are ready for all users to see your experience, you will enable your entry point as shown in the following example and then deploy your extension.
+
+<a name="phase-3-deployment-public-preview-or-ga-useful-links"></a>
+### Useful links
 
 | Link | Description |
 | ----------- | ------- |
-| [Getting Started](https://aka.ms/portalfx/onboarding/gettingstarted) | How To: Getting started with Azure portal SDK |
 | [Architecture](https://aka.ms/portalfx/onboarding/architecture)     | Azure portal architecture  |
+| [Getting Started](https://aka.ms/portalfx/onboarding/gettingstarted) | How To: Getting started with Azure portal SDK |
+| [Gallery Packages](https://github.com/Azure/portaldocs/blob/master/gallery-sdk/generated/index-gallery.md#gallery-overview) | How To: Getting started with Gallery Packages |
 | [Onboarding PPT](https://aka.ms/portalfx/onboarding/ppt)     | Azure portal Onboarding Powerpoint Slides  |
-| [Samples Playground](https://aka.ms/portalfx/onboarding/ppt)     | Azure portal Samples Playground  |
+| [Samples Playground](https://aka.ms/portalfx/playground)     | Azure portal Samples Playground  |
 | [Authentication in Azure portal](https://aka.ms/portalfx/auth)     | How To: Azure portal authentication  |
 | [Azure portal Release Pipeline](https://dev.azure.com/msazure/One/_dashboards/dashboard/adf2732d-f4a9-476d-a7a7-7ab7aab4a2ad)     | Check Framework Service release pipeline  |
 | [Hosting Service Release Pipeline](https://dev.azure.com/msazure/One/_dashboards/dashboard/25be4cd4-4fbd-45c9-b257-79baf530abbe)     | Check Hosting Service release pipeline   |
 | [Check Framework Commits](https://commits.azurewebsites.net/#repos/AzureUX-PortalFx/commits)     | Check commit status for Framework   |
 | [Check Hosting Service Commits](https://commits.azurewebsites.net/#repos/AzureUX-PortalHostingSvc/commits)     | Check commit status for Hosting Service   |
+| [Commit History](https://commits.azurewebsites.net/#repos/AzureUX-PortalHostingSvc/commits)     | Check commit status for Hosting Service   |
 | [Simonp-Sites Commits](http://simonp-sites/commits/search)     | Alternative tool for framework commit status   |
 | [Simonp-Sites Pipeline](http://simonp-sites/pipeline)     | Alternative tool for pipeline   |
 | [Simonp-Sites Environments](http://simonp-sites/environments)     | Alternative tool for environments   |
 
 You can ask developer community questions on Stackoverflow with the tag [ibiza-onboarding](https://stackoverflow.microsoft.com/questions/tagged/ibiza-onboarding) or use the following for specific areas of Ibiza.
 
-<a name="azure-portal-onboarding-using-easy-start-stackoverflow-forums"></a>
+<a name="phase-3-deployment-stackoverflow-forums"></a>
 ## Stackoverflow Forums
 
 The Ibiza team strives to answer the questions that are tagged with Ibiza tags on the Microsoft [Stackoverflow](https://stackoverflow.microsoft.com) Web site within 24 hours. If you do not receive a response within 24 hours, please email the owner associated with the tag.

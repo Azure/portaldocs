@@ -51,6 +51,44 @@ Perform the following steps to open a blade from  a different extension.
     });
     ```
 
+The portal SDK also generates strongly typed blade references for menu blades.  These blade references can be used to open menu blades, select a specific menu item and and even supply parameters to the menu blade content.
+
+Opening a menu blade
+
+```typescript
+
+// open the "control" menu item in the resource menu for a specific resource
+const resourceId = "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/web1";
+this._container.openBlade(BladeReferences.forExtension("HubsExtension").forMenuBlade("ResourceMenuBlade", "control").createReference({ parameters: { id: resourceId } }));
+
+```
+
+
+Opening a menu blade and passing customized parameters to the content blade
+
+```typescript
+
+const resourceId = "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/web1";
+
+// create a reference with the custom notification we want to pass to the control blade
+const controlBladeReference = BladeReferences.forBlade("VirtualServerControlBlade").createReference({ parameters: { id: resourceId, showNotification: "true" } });
+
+// create a reference for the resource menu blade with our custom control blade reference
+const menuBladeReference = BladeReferences.forExtension("HubsExtension").forMenuBlade("ResourceMenuBlade", "control", controlBladeReference).createReference({ parameters: { id: resourceId } });
+
+// when the resource menu blade is opened -
+// 1. the 'control' menu item will be selected
+// 2. the 'VirtualServerControlBlade' will be opened as the menu blade content
+this._container.openBlade(menuBladeReference);
+
+```
+
+Opening the portals resource menu blade
+
+```typescript
+const menuBladeRef = BladeReferences.forExtension("HubsExtension").forMenuBlade("ResourceMenuBlade", "overview").createReference({ id: "_ARM_ID_HERE" });
+```
+
 <a name="navigating-to-other-content-container-apis-open-blade-methods"></a>
 ### Open blade methods
 
