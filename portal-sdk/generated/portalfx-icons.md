@@ -1,8 +1,7 @@
-
 <a name="icons"></a>
 # Icons
 
-When you're ready to add icons in parts, commands, or blades, the portal places some special requirements on the types of icons you can use.  All icons are required to be SVG file. This allows for icons that will scale on high resolution devices, and for a certain level of automatic theming.
+When you're ready to add icons in parts, commands, or blades, the portal places some special requirements on the types of icons you can use. All icons are required to be SVG file. This allows for icons that will scale on high resolution devices, and for a certain level of automatic theming.
 
 In many cases, you will not need to provide your own icons, as the SDK framework includes a large library of icons that can be used off the shelf.
 
@@ -33,27 +32,20 @@ export class DeleteCommandViewModel implements MsPortalFx.ViewModels.CommandCont
 <a name="icons-setting-up-your-project-file-to-use-custom-svgs"></a>
 ## Setting up your project file to use Custom SVGs
 
-1. Add this to your .csproj :
+1. Add this to your .csproj:
 
 ```xml
-<SvgTypeScriptCompile Include="Client\_generated\Svg.ts">
-  <Namespace>SamplesExtension</Namespace>
-  <IsAmd>true</IsAmd>
-</SvgTypeScriptCompile>
+<SvgTs Include="Content\Images\*.svg">
+  <OutputFile>Client\_generated\Svg\%(Filename).ts</OutputFile>
+</SvgTs>
 ```
 
-2. Add your SVGs to your project and assign their build action to 'Svg' like so:
-
-```xml
-<Svg Include="Content\SamplesExtension\Images\sample.svg" />
-```
-
-3. Import the **Svg** module (or whatever you named it above) in any file you need to use custom images:
+2. Import your image in any file you need to use custom images:
 
 ```ts
-import Svg = require ("./../_generated/Svg");
+import * as SampleSvg from "./../_generated/sample.svg";
 ...
-this.icon(Svg.Content.SamplesExtension.Images.robot);
+this.icon(MsPortalFx.Base.Images.CustomImageWithOptions(SampleSvg, customImageOptions));
 ```
 
 You now you will be able to reference your SVG images
@@ -65,11 +57,11 @@ Be sure not to check the generated Svg.ts file in source control, as it updates 
 
 The framework offers a few special functions to render images for certain specific scenarios.
 
-Function | Usage
---- | ---
-**`MsPortalFx.Base.Images.Blank()`** | Doesn't renders any SVG element. This overrides the default icon.
-**`MsPortalFx.Base.Images.Custom()`** | Triggers loading a custom SVG from your project. This is built into your SVG bundle definition. You shouldn't normally need to call this function. Instead, use the custom reference directly into the API.
-**`MsPortalFx.Base.Images.ImageUri()`** | Used to add non SVG images. *Not recommended*
+| Function                                | Usage                                                                                                                                                                                                       |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`MsPortalFx.Base.Images.Blank()`**    | Doesn't renders any SVG element. This overrides the default icon.                                                                                                                                           |
+| **`MsPortalFx.Base.Images.Custom()`**   | Triggers loading a custom SVG from your project. This is built into your SVG bundle definition. You shouldn't normally need to call this function. Instead, use the custom reference directly into the API. |
+| **`MsPortalFx.Base.Images.ImageUri()`** | Used to add non SVG images. _Not recommended_                                                                                                                                                               |
 
 <a name="icons-tips-tricks"></a>
 ## Tips &amp; Tricks
@@ -82,7 +74,7 @@ Do not name your SVGs with <a href="http://msdn.microsoft.com/en-us/library/ie/0
 <a name="icons-tips-tricks-using-custom-svgs-in-pdl"></a>
 ### Using custom SVGs in PDL
 
-  This is the common pattern when using icons in PDL, see the Icon attribute below:
+This is the common pattern when using icons in PDL, see the Icon attribute below:
 
 ```xml
 <AssetType Name="Engine"
@@ -124,7 +116,11 @@ export class DeleteCommandViewModel implements MsPortalFx.ViewModels.CommandCont
         //this.icon(MsPortalFx.Base.Images.Start());
 
         //PNG Version
-        this.icon(MsPortalFx.Base.Images.ImageUri(MsPortalFx.Base.Resources.getContentUri("Content/RemoteExtension/Images/Website_Commandbar_Play.png")));
+        this.icon(
+            MsPortalFx.Base.Images.ImageUri(
+                MsPortalFx.Base.Resources.getContentUri("Content/RemoteExtension/Images/Website_Commandbar_Play.png")
+            )
+        );
     }
 }
 ```
@@ -135,7 +131,7 @@ export class DeleteCommandViewModel implements MsPortalFx.ViewModels.CommandCont
 You can change the color of most icons provided by the framework (All the ones at the root namespace ie
 `MsPortalFx.Base.Images.Add()` but not `MsPortalFx.Base.Images.Polychromatic.PowerUp()`)
 
-To do so all you need to do is add {palette: MsPortalFx.Base.ImagePalette.*} inside the function
+To do so all you need to do is add `{palette: MsPortalFx.Base.ImagePalette.*}` inside the function
 
 ```ts
 import * as CustomSvgImages from "./SvgDefinitions.js";
@@ -156,12 +152,12 @@ For any [built-in monochromatic icon](https://df.onecloud.azure-test.net/#blade/
 
 Example of the rendering in major theme modes:
 
-Light mode | Dark mode
---- | ---
-In light theme, monochromatic icon is presented with color black | In dark theme, monochromatic icon is presented with color white
-![Flat icons with light theme][icon-light-theme] | ![Flat icons with dark theme][icon-dark-theme]
+| Light mode                                                       | Dark mode                                                       |
+| ---------------------------------------------------------------- | --------------------------------------------------------------- |
+| In light theme, monochromatic icon is presented with color black | In dark theme, monochromatic icon is presented with color white |
+| ![Flat icons with light theme][icon-light-theme]                 | ![Flat icons with dark theme][icon-dark-theme]                  |
 
-If you would like to have color of your icon ***NOT*** be impacted by theme changes, you can embed the fill color in the SVG itself.
+If you would like to have color of your icon **_NOT_** be impacted by theme changes, you can embed the fill color in the SVG itself.
 
 Next steps: [Using built-in icons](portalfx-icons-builtin.md)
 

@@ -422,6 +422,31 @@ export class OpenBladeApiSamplesViewModel
         }));
     }
 
+    public onResourceMenuButtonClick() {
+        //bladeReference#resourceMenuBlade
+        // open the "control" menu item in the resource menu for a specific resource
+        const resourceId = "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/web1";
+        this._container.openBlade(BladeReferences.forExtension("HubsExtension").forMenuBlade("ResourceMenuBlade", "control").createReference({ parameters: { id: resourceId } }));
+        //bladeReference#resourceMenuBlade
+    }
+
+    public onResourceMenuButtonWithNotificationClick() {
+        //bladeReference#resourceMenuBladeWithOverride
+        const resourceId = "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/web1";
+
+        // create a reference with the custom notification we want to pass to the control blade
+        const controlBladeReference = BladeReferences.forBlade("VirtualServerControlBlade").createReference({ parameters: { id: resourceId, showNotification: "true" } });
+
+        // create a reference for the resource menu blade with our custom control blade reference
+        const menuBladeReference = BladeReferences.forExtension("HubsExtension").forMenuBlade("ResourceMenuBlade", "control", controlBladeReference).createReference({ parameters: { id: resourceId } });
+
+        // when the resource menu blade is opened -
+        // 1. the 'control' menu item will be selected
+        // 2. the 'VirtualServerControlBlade' will be opened as the menu blade content
+        this._container.openBlade(menuBladeReference);
+        //bladeReference#resourceMenuBladeWithOverride
+    }
+
     private _initializeHotSpotSample(container: BladeContainer) {
         // tslint:disable-next-line:deprecation HotSpot
         this.hotspot = new HotspotViewModel(container, {

@@ -42,7 +42,6 @@
     * [Extension-loading performance](top-extensions-performance.md#extension-loading-performance)
     * [Blade performance](top-extensions-performance.md#blade-performance)
     * [Part performance](top-extensions-performance.md#part-performance)
-    * [WxP score](top-extensions-performance.md#wxp-score)
     * [How to assess your performance](top-extensions-performance.md#how-to-assess-your-performance)
 * [Performance Frequently Asked Questions (FAQ)](top-extensions-performance.md#performance-frequently-asked-questions-faq)
     * [My Extension 'load' is above the bar, what should I do](top-extensions-performance.md#my-extension-load-is-above-the-bar-what-should-i-do)

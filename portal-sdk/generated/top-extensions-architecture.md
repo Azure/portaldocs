@@ -21,7 +21,7 @@ With this system, a team develops a UI extension to plug into and extend the UI 
 
 [Common Portal UX Marketplace and Browse](#common-portal-ux-marketplace-and-browse)
 
-* * * 
+* * *
 
 <a name="azure-portal-a-composed-web-application-the-portal-shell"></a>
 ### The Portal Shell
@@ -50,7 +50,7 @@ In 2013, when the Azure Portal was designed, the only browser facility suitable 
 <a name="azure-portal-a-composed-web-application-projecting-blade-and-part-ui"></a>
 ### Projecting Blade and Part UI
 
-UI extensions develop their Blades and Parts following the [MVVM](portalfx-extensions-glossary-architecture.md) pattern.  
+UI extensions develop their Blades and Parts following the [MVVM](portalfx-extensions-glossary-architecture.md) pattern.
 * The "view" is defined as a Blade/Part-specific HTML template.  The HTML template typically arranges uses of FX controls in the Blade/Part content area.
 *  The HTML template and FX controls are bound to a UI-extension-developed [ViewModel](portalfx-extensions-glossary-architecture.md) TypeScript class, which is where the UI extension business logic is isolated from the JavaScript of the larger Portal application and from other UI extensions.
 * The `ViewModel` frequently includes "model" data loaded via AJAX from the cloud, though most often it is loaded from the Azure Resource Manager or from the team's/service's [Resource Provider](portalfx-extensions-glossary-architecture.md).
@@ -103,35 +103,36 @@ Frequently, user interactions with the Portal chrome and within Blade/Part UI wi
 public onClick() {
     const { container, parameters } = this.context;
 
-    container.openBlade(new WebsiteDetailsBladeReference({
-        resourceId: parameters.resourceId
+    container.openBlade(BladeReferences.forBlade("WebsiteDetailsBlade").createReference({
+        parameters: { resourceId: parameters.resourceId },
     }));
 }
 ```
 
-There are two important concepts regarding navigation that are demonstrated here.  First, in-Portal navigation is accomplished by using an FX TypeScript API available to UI-extension-authored Blades and Parts instead of by using URL.  Second, the API requires the following uses of a code-generated BladeReference.
+There are two important concepts regarding navigation that are demonstrated here. First, in-Portal navigation is accomplished by using an FX TypeScript API available to UI-extension-authored Blades and Parts instead of by using URL. Second, the API requires the following uses of a code-generated Blade reference types.
 
-* To identify the target Blade in question 
+* To identify the target Blade in question
 
 * To provide a compiler-verified API for the Blade's parameters
 
-For every Blade and Part developed in a UI extension, Ibiza tooling will code-generate a corresponding `BladeReference` or `PartReference` that can be utilized with FX APIs to open a Blade and to pin a Part respectively, as in the following example.
+For every Blade and Part developed in a UI extension, Ibiza tooling will code-generate a corresponding `BladeReferenceTypes.d.ts` or `PartReferenceTypes.d.ts` files that can be utilized with FX APIs to open a Blade and to pin a Part respectively, as in the following example.
 
 ```
 import * as PartPinner from "Fx/Pinner";
+import { PartReferences } from "Fx/Composition";
 
 public onPinButtonClick() {
     const { parameters } = this.context;
-    
+
     PartPinner.pin([
-        new WebsitePartReference({
-            resourceId: parameters.resourceId
+        PartReferences.forPart("WebsitePart").createReference({
+            parameters: { resourceId: parameters.resourceId },
         })
     ]);
 }
 ```
 
-These APIs and associated code-generation are critical to integrating UI and UX across Azure services.  The same `BladeReference` and `PartReference` classes useful to extension "A" for navigating among its Blades/Parts can be employed by extension "B" to link to Blades from "A".  All that is necessary is for extension "A" to redistribute a code package containing the following.
+These APIs and associated code-generation are critical to integrating UI and UX across Azure services. Similar Blade and Part reference types useful to extension "A" for navigating among its Blades/Parts can be employed by extension "B" to link to Blades from "A". All that is necessary is for extension "A" to redistribute a code package containing the following.
 
 * A [PDE](portalfx-extensions-glossary-architecture.md) file emitted as part of extension "A"'s build
 
@@ -152,14 +153,14 @@ public onClick() {
     const bladeParameters: WebsiteDetailsBladeParameters = {
           resourceId: parameters.resourceId
     };
-    
-    container.openBlade(new WebsiteDetailsBladeReference(bladeParameters));
+
+    container.openBlade(BladeReferences.forBlade("WebsiteDetailsBlade").createReference({ parameters: bladeParameters }));
 }
 
 ```
 
 These form the APIs for the Blades and Parts exported by extension "A" to those teams who wish to link to extension "A" UI.  Like any other API that is produced by one team for the consumption of others, these APIs should be updated only in a backwards-compatible manner.  The TypeScript implementation of a Blade in extension "A" continues to support all versions of the `parameters` type ever published/exported to consuming teams.  Typically, extensions follow these best practices.
-	
+
 * Never change the name of a Blade or a Part
 
 * Limit their `parameters` updates to the addition of parameters that are marked in TypeScript as optional

@@ -10,69 +10,16 @@ This document details the usage and extensibility points of the ap CLI.  The fol
 
 <a name="cli-overview-setup-and-installation-one-time-configuration-steps"></a>
 ### One time configuration steps
-The following steps detail the one time configuration that must be applied to authenticate against the internal AzurePortal registry for both NuGet and npm.  If you prefer follow along see the step by step: [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
 
  - Install the LTS of nodejs [download](https://nodejs.org/en/download)
- - Install the .NET 4.7.2 *Developer Pack* - [located here](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net472-developer-pack-offline-installer)
- - NuGet Credential provider
-    1. Connect to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=connect&feed=AzurePortal
-    1. Select NuGet.exe under the NuGet header
-    1. Click the 'Get the tools' button in the top right corner
-    1. Follow steps 1 and 2 to download the latest NuGet version and the credential provider.
 
- - NPM Auth Personal Access Token (PAT)
+1. download [setup.js](https://aka.ms/portalfx/cli/setup) and place 'setup.js' inside the project or directory you are working on.
+1. run `node setup.js` and perform any actions it asks you to.
 
-    Just as NuGet needed the credentidal provider npm requires a PAT for auth.  Which can be configured as follows.
+If you prefer follow along see the step by step:
+ - [Manual one time Auth, Setup and Installation steps](./top-ap-cli.md#manual-one-time-auth,-setup-and-installation)
+ - [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
 
-    1. Connect to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=connect&feed=AzurePortal
-    1. Select npm under the npm header
-    1. Click the 'Get the tools' button in the top right corner
-    1. Optional. Follow steps 1 to install node.js and npm if not already done so.
-    1. Follow step 2 to install vsts-npm-auth node.
-    1. Add a .npmrc file to your project or empty directory with the following content
-        ```
-        registry=https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/
-        always-auth=true
-        ```
-    1. From the command prompt in the same directory:
-        - set the default npm registry
-           ```
-           npm config set registry https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/
-           ```
-        - generate a readonly PAT using vsts-npm-auth
-           ```
-           vsts-npm-auth -R -config .npmrc
-           ```
-           Generally the PAT will be written to %USERPROFILE%\.npmrc we strongly recommend not checking your PAT into source control; anyone with access to your PAT can interact with Azure DevOps Services as you.
-
-
- - Path
-    Ensure the following are on your path i.e resolve when typed in and run from the command prompt.
-    1. `NuGet` and the above installed credential provider is on your path.
-    1. Ensure `npm` is on your path.
-    1. Ensure `msbuild` is on your path.
-
-    If not present you can add the items to your path as follows:
-    1. WindowsKey + R
-    1. `rundll32.exe sysdm.cpl,EditEnvironmentVariables`
-    1. In the dialog click `Edit` on the `Path` variable and add (note paths may vary depending on your environment and msbuiuld version)
-        - for npm `C:\Users\youralias\AppData\Roaming\npm`
-        - for nuget and cred provider `C:\Users\youralias\.nuget`
-        - for msbuild `C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin`
-
-If you have run into problems checkout the [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
-
-<a name="cli-overview-setup-and-installation-installing-the-azure-portal-extension-developer-cli"></a>
-### Installing the Azure portal extension developer CLI
-
-With the one time configuration steps complete you can now install the CLI as you would with any other node module.
-
-1. Run the following command in the directory that contains your .npmrc.
-    ```
-    npm install -g @microsoft/azureportalcli
-    ```
-
-[Video: Installing the node module](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=1324)
 
 <a name="cli-overview-basic-workflows"></a>
 ## Basic workflows
@@ -142,6 +89,7 @@ See `ap update` demo in the [Video: Updating the CLI, extension SDK version and 
 Command | Alias | Description
 --- | --- | ---
 build | | Runs msbuild.exe on the *.sln or *proj with/p:RunBundlerInDevMode=true. If no *.sln or *proj is found and tsconfig.json exists then runs tsc.cmd. If arguments are supplied they are passed through to underlying executable.
+diag | | Emits all information and current deployed state of extension for all clouds.
 lint | | Runs eslint against an extension including azure portal custom lint rules.
 new | | Creates a new extension.
 release | | Runs msbuild.exe on the *.sln or *proj with /p:RunBundlerInDevMode=false;Configuration=Release. If no *.sln or *proj is found and tsconfig.json exists then runs tsc.cmd. If arguments are supplied they are passed through to underlying executable.
@@ -221,6 +169,67 @@ Example apCliConfig.json configuration:
     "tscAlias": "./alias/not/on/path/tsc.cmd",
 }
 ```
+<a name="cli-overview-command-reference-ap-diag"></a>
+### ap diag
+
+```
+ap diag <arguments>
+```
+
+This command emits diagnostics for an extension from clouds.
+It is to help developers understand what version of their extension is deployed in each of these different clouds. Diagnostics also include shell version, extension version, SDK version, SDK age, stage definition, and last error in all common deplyment slots in all public clouds.
+
+
+<a name="cli-overview-command-reference-ap-diag-arguments-1"></a>
+#### Arguments
+Argument | alias | Description
+--- | --- | ---
+--name | --n | Optional. The extensions hosting service name to emit the diagnostics for.
+--production | --prod | Optional. Emits the diagnostics from production cloud.
+--blackforest | --bf | Optional. Emits the diagnostics from blackforest cloud.
+--fairfax | --ff | Optional. Emits the diagnostics from fairfax cloud.
+--mooncake | --mc | Optional. Emits the diagnostics from mooncake cloud.
+--dogfood | --df | Optional. Emits the diagnostics from dogfood cloud.
+--mpac | --mpac | Optional. Emits the diagnostics from mpac cloud.
+
+<a name="cli-overview-command-reference-ap-diag-example-usage-1"></a>
+#### Example Usage
+
+Emits the diagnostics for the extension within the current working directory from all 6 clouds (production, blackforest, fairfax, mooncake, dogfood, mpac). When you run `ap diag`, you get the `extensionHostingServiceName​` as a default extension name from `./devServerConfig.json`
+
+```
+ap diag
+```
+
+Emits the diagnostics for "storage" extension from specific clouds. You can also choose the clouds you want to be diagnosed. If cloud name not given, it emits the diagnostics from all 6 clouds.
+
+```
+ap diag --name storage
+ap diag --name storage --prod
+ap diag --name storage --prod --ff
+ap diag --name storage --ff --bf --df
+```
+
+Emits the diagnostics for existing default extension from specific clouds. You can also choose the clouds you want to be diagnosed.
+
+```
+ap diag --prod
+ap diag --mc --df --mpac
+```
+
+<a name="cli-overview-command-reference-ap-diag-supplying-defaults-using-apcliconfig-json-1"></a>
+#### Supplying defaults using apCliConfig.json
+When the `ap diag` command runs, it will search for `apCliConfig.json` from the current working directory up to the root of the drive. The `diag` command can be customized by supplying any of the following optional top level properties. This may be useful if you have other custom friendly names you wish to emit diagnostic information on by default.
+
+Property | Description
+--- | ---
+diagAdditionaFriendlyNames | Optional. Collection of additional friendly names to emit diagnostics on.
+
+```
+{
+    "diagAdditionaFriendlyNames": ["staging", "someotherfriendlyname"]
+}
+```
 
 <a name="cli-overview-command-reference-ap-lint"></a>
 ### ap lint
@@ -235,7 +244,7 @@ If an .eslintrc* and/or .eslintignore files is present in the current working di
 
 If authoring custom rules for your own team use apCliConfig.json to supply a collection of paths and ap CLI will supply them to the eslint --rulesdir argument.
 
-<a name="cli-overview-command-reference-ap-lint-arguments-1"></a>
+<a name="cli-overview-command-reference-ap-lint-arguments-2"></a>
 #### Arguments
 Argument | Description
 --- | ---
@@ -244,7 +253,7 @@ Argument | Description
 --resolve-plugins-relative-to | Optional. A folder where plugins should be resolved from.
 --help | Show help for the command.
 
-<a name="cli-overview-command-reference-ap-lint-example-usage-1"></a>
+<a name="cli-overview-command-reference-ap-lint-example-usage-2"></a>
 #### Example Usage
 
 Most common usage, integration directly with VS Code for realtime feedback on lint violations as you develop, see subsequent section for configuring the eslint plugin for VS Code.
@@ -341,7 +350,7 @@ ap new <arguments>
 
 Creates/Scaffolds a new Portal Extension and corresponding test project with the supplied name to the target ouput folder. For a video walkthrough of scaffolding a new extension see [this video](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=1495).
 
-<a name="cli-overview-command-reference-ap-new-arguments-2"></a>
+<a name="cli-overview-command-reference-ap-new-arguments-3"></a>
 #### Arguments
 Argument | alias | Description
 --- | --- | ---
@@ -350,7 +359,7 @@ Argument | alias | Description
 --declarative | -d | Optional. Scaffolds declarative extension.
 --help | | Optional. Show help for new command.
 
-<a name="cli-overview-command-reference-ap-new-example-usage-2"></a>
+<a name="cli-overview-command-reference-ap-new-example-usage-3"></a>
 #### Example Usage
 
 Two examples scaffolding a new extension to the ./dev/newextension folder. The first using shorthand, the second longhand.
@@ -378,14 +387,14 @@ ap release <arguments>
 Runs msbuild.exe on the *.sln or *proj with /p:RunBundlerInDevMode=false;Configuration=Release. If no
 *.sln or *proj is found and tsconfig.json exists then runs tsc.cmd.  The result is the versioned zip, e.g 1.0.0.0.zip, output which can be deployed to hosting service. For build output in the format for required local hosting service see the build command. Arguments are optional, if supplied they are passed through to underlying executable for the resolved build type.  The build alias for msbuild and tsc can be overriden using apCliConfig.json. For a video walkthrough of the release command [this video](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=2132)
 
-<a name="cli-overview-command-reference-ap-release-arguments-3"></a>
+<a name="cli-overview-command-reference-ap-release-arguments-4"></a>
 #### Arguments
 Argument | Description
 --- | ---
 * | All arguments supplied are passed through to the resolved build executable, generally msbuild or tsc.
 --help | Show help for build command
 
-<a name="cli-overview-command-reference-ap-release-example-usage-3"></a>
+<a name="cli-overview-command-reference-ap-release-example-usage-4"></a>
 #### Example Usage
 
 Most common usage is to perform build allowing `ap` to resolve the *.sln, *proj or tsconfig.json that requires build.
@@ -412,7 +421,7 @@ Emit help for the release command.
 ap release --help
 ```
 
-<a name="cli-overview-command-reference-ap-release-supplying-defaults-using-apcliconfig-json-1"></a>
+<a name="cli-overview-command-reference-ap-release-supplying-defaults-using-apcliconfig-json-2"></a>
 #### Supplying defaults using apCliConfig.json
 When the build command runs it will search for apCliConfig.json from the current working directory up to the root of the drive. The build command can be customized by supplying any of the following optional top level properties. This may be useful if you have a predefined wrapper alias used within your build environment.
 
@@ -444,7 +453,7 @@ Where recusive discovery of NuGet packages and node modules that need restoratio
 
 Requires `nuget` and `npm.cmd` available on the path. See first time setup steps at top of this document.
 
-<a name="cli-overview-command-reference-ap-restore-arguments-4"></a>
+<a name="cli-overview-command-reference-ap-restore-arguments-5"></a>
 #### Arguments
 Argument | Alias | Description
 --- | --- | ---
@@ -453,7 +462,7 @@ Argument | Alias | Description
 --restoreInParallel | | optional. Run npm install and NuGet restore in parallel.
 --help | | Emits help and usage for the command
 
-<a name="cli-overview-command-reference-ap-restore-example-usage-4"></a>
+<a name="cli-overview-command-reference-ap-restore-example-usage-5"></a>
 #### Example Usage
 
 Most common usage, node modules and NuGet packages needing install/restore will be discovered. if specific set supplied in apCliConfig.json then they will be used in place of recursive search.
@@ -490,7 +499,7 @@ Emits help and usage examples for the restore command
 ap restore --help
 ```
 
-<a name="cli-overview-command-reference-ap-restore-supplying-defaults-using-apcliconfig-json-2"></a>
+<a name="cli-overview-command-reference-ap-restore-supplying-defaults-using-apcliconfig-json-3"></a>
 #### Supplying defaults using apCliConfig.json
 When the restore command runs it will search up from the current working directory up until it finds apCliConfig.json or the root of the drive. The restore command can be customized by supplying any of the following optional top level properties. If you have a large project and discovery is slow this is useful to supply an explicit list of node modules and NuGet packages to be used by default by `ap restore`.
 
@@ -518,14 +527,14 @@ ap run <arguments>
 
 The `ap run` command provides straight passthrough to `npm run`. Typically used to run scripts defined in package.json.
 
-<a name="cli-overview-command-reference-ap-run-arguments-5"></a>
+<a name="cli-overview-command-reference-ap-run-arguments-6"></a>
 #### Arguments
 Argument | Description
 --- | ---
 * | Required. All arguments are passed through directly to npm run. See usage examples
 --help | Emits help and usage for the command
 
-<a name="cli-overview-command-reference-ap-run-example-usage-5"></a>
+<a name="cli-overview-command-reference-ap-run-example-usage-6"></a>
 #### Example Usage
 
 Running tests in watch mode
@@ -552,20 +561,24 @@ ap serve <arguments>
 
 A command to run the local hosting service. Optional arguments are passthrough to the local hosting service.
 
-<a name="cli-overview-command-reference-ap-serve-arguments-6"></a>
+<a name="cli-overview-command-reference-ap-serve-arguments-7"></a>
 #### Arguments
 Argument | Description
 --- | ---
 * | Optional. All arguments are passed through directly to local hosting service. See usage examples
 --help | Emits help and usage for the command
 
-<a name="cli-overview-command-reference-ap-serve-example-usage-6"></a>
+<a name="cli-overview-command-reference-ap-serve-example-usage-7"></a>
 #### Example usage
 
 Most common usage, discovers first devServerConfig.json below current directory and runs local hosting service to side load your extension in portal.azure.com.
 ```
 ap serve
 ```
+Precedence:
+- -s "URL"
+- "sideLoadTarget" specified in devserverConfig.json
+- -s if neither is specified and -s is passed, the default <https://portal.azure.com>  is loaded
 
 Use specific ./devServerConfig.json and side load extension.
 ```
@@ -638,7 +651,7 @@ The local hosting service devServerConfig.json supports the following properties
 | extensionServableContentPath​ | The output that is generated by the bundler ​|
 | bundlerPath​ | The path to the bundler executable​ ​|
 | extensionContentSource​ | The output of the typescript compiler​​ ​|
-| sideLoadUrl | URL for sideload supports custom parameters. This is optional ​|
+| sideLoadTarget | URL for sideload supports custom parameters. This is optional ​|
 | localConfigPath | Optional. The folder path relative to devServerConfig.json that contains local config files for development. ​|
 | galleryPackagePath | Optional. The path to the local gallery package. If omitted, will default to <devServerConfig.json path>/App_Data/Gallery |
 
@@ -652,7 +665,7 @@ An example of a dev server config:
     "extensionServableContentPath": "./obj/Debug",
     "bundlerPath": "../../packages/Microsoft.Portal.Tools.5.0.303.3921/build/bundle.exe",
     "extensionContentSource": "./Output",
-    "sideLoadUrl": "https://portal.azure.com?feature.foo=true#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview"
+    "sideLoadTarget": "https://portal.azure.com?feature.foo=true#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview"
     "localConfigPath" : "./LocalContent/Config",
     "galleryPackagePath": "./App_Data/Gallery"
 }
@@ -670,13 +683,13 @@ process to enable compile on save. This effectively enables compile on save base
 
 Customization using apCliConfig.json as defined in the restore, build and watch commands will also apply to this command.
 
-<a name="cli-overview-command-reference-ap-start-arguments-7"></a>
+<a name="cli-overview-command-reference-ap-start-arguments-8"></a>
 #### Arguments
 Argument | Description
 --- | ---
 --help | Emits help and usage for the command
 
-<a name="cli-overview-command-reference-ap-start-example-usage-7"></a>
+<a name="cli-overview-command-reference-ap-start-example-usage-8"></a>
 #### Example Usage
 
 Performs restore, build, serve and watch commands enabling compile on save and fast inner dev/test loop.
@@ -699,14 +712,14 @@ ap update
 
 Updates Azure Portal SDK NuGets and node modules to same version as the CLI. By default the following files are recursively searched for and updated: packages.config,package.json,corext.config,*.proj,*.csproj,*.njsproj and devServerConfig.json.  To provide your own set of files either supply a collection of file paths or supply a glob pattern via apCliConfig.json.  This video details how to update both the ap CLI and your extension using this command - [Video: Updating the CLI, extension SDK version and revoked SDKs](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=2214).
 
-<a name="cli-overview-command-reference-ap-update-arguments-8"></a>
+<a name="cli-overview-command-reference-ap-update-arguments-9"></a>
 #### Arguments
 Argument | Alias | Description
 --- | --- | ---
 --config | -c | Optional. Path to apCliConfig.json.
 --help | Emits help and usage for the command
 
-<a name="cli-overview-command-reference-ap-update-example-usage-8"></a>
+<a name="cli-overview-command-reference-ap-update-example-usage-9"></a>
 #### Example Usage
 
 Most common, recursively finds target files to update NuGet and node module references from portal sdk.
@@ -727,7 +740,7 @@ Emits help and usage examples for the update command.
 ap update --help
 ```
 
-<a name="cli-overview-command-reference-ap-update-supplying-defaults-using-apcliconfig-json-3"></a>
+<a name="cli-overview-command-reference-ap-update-supplying-defaults-using-apcliconfig-json-4"></a>
 #### Supplying defaults using apCliConfig.json
 When the update command runs you can optionally specify a collection of file paths or custom glob pattern for files to be updated using apCliConfig.json
 using either of the following optional top level properties. If you have a large project and discovery is slow this is useful to supply an explicit list of files will speed up this command.
@@ -918,5 +931,72 @@ The ap CLI is built by the Azure portal team for the extension developer communi
       * Select .NET Framework 4.7.2 SDK and targeting pack from the *Individual components* tab:
 
       ![alt-text](../media/top-extensions-install-software/vs2019_components.png "Selecting VS 2019 components")
+
+<a name="cli-overview-manual-one-time-auth-setup-and-installation"></a>
+## Manual one time Auth, Setup and Installation
+The following steps detail the one time configuration that must be applied to authenticate against the internal AzurePortal registry for both NuGet and npm.
+If you prefer follow along see the step by step: [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
+
+- Install the LTS of nodejs [download](https://nodejs.org/en/download)
+- Install the .NET 4.7.2 *Developer Pack* - [located here](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net472-developer-pack-offline-installer)
+- NuGet Credential provider
+    1. Connect to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=connect&feed=AzurePortal
+    1. Select NuGet.exe under the NuGet header
+    1. Click the 'Get the tools' button in the top right corner
+    1. Follow steps 1 and 2 to download the latest NuGet version and the credential provider.
+
+- NPM Auth Personal Access Token (PAT)
+
+    Just as NuGet needed the credentidal provider npm requires a PAT for auth.  Which can be configured as follows.
+
+    1. Connect to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=connect&feed=AzurePortal
+    1. Select npm under the npm header
+    1. Click the 'Get the tools' button in the top right corner
+    1. Optional. Follow steps 1 to install node.js and npm if not already done so.
+    1. Follow step 2 to install vsts-npm-auth node.
+    1. Add a .npmrc file to your project or empty directory with the following content
+        ```
+        registry=https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/
+        always-auth=true
+        ```
+    1. From the command prompt in the same directory:
+        - set the default npm registry
+        ```
+        npm config set registry https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/
+        ```
+        - generate a readonly PAT using vsts-npm-auth
+        ```
+        vsts-npm-auth -R -config .npmrc
+        ```
+        Generally the PAT will be written to %USERPROFILE%\.npmrc we strongly recommend not checking your PAT into source control; anyone with access to your PAT can interact with Azure DevOps Services as you.
+
+
+- Path
+    Ensure the following are on your path i.e resolve when typed in and run from the command prompt.
+    1. `NuGet` and the above installed credential provider is on your path.
+    1. Ensure `npm` is on your path.
+    1. Ensure `msbuild` is on your path.
+
+    If not present you can add the items to your path as follows:
+    1. WindowsKey + R
+    1. `rundll32.exe sysdm.cpl,EditEnvironmentVariables`
+    1. In the dialog click `Edit` on the `Path` variable and add (note paths may vary depending on your environment and msbuiuld version)
+        - for npm `C:\Users\youralias\AppData\Roaming\npm`
+        - for nuget and cred provider `C:\Users\youralias\.nuget`
+        - for msbuild `C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin`
+
+If you have run into problems checkout the [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
+
+<a name="cli-overview-manual-one-time-auth-setup-and-installation-installing-the-azure-portal-extension-developer-cli"></a>
+### Installing the Azure portal extension developer CLI
+
+With the one time configuration steps complete you can now install the CLI as you would with any other node module.
+
+1. Run the following command in the directory that contains your .npmrc.
+    ```
+    npm install -g @microsoft/azureportalcli
+    ```
+
+[Video: Installing the node module](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=1324)
 
 To validate that your dev machine is ready for Azure Portal Extension development start with the template extension in the [Getting Started Guide](top-extensions-getting-started.md)
