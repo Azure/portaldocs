@@ -733,6 +733,10 @@ To enable hot reloading make sure that:
 
 Please, be aware of [Hot reloading limitations](#hot-reloading-limitations).
 
+### Navigating to an external domain
+
+When using React Views, extension developers are responsible for being compliant with the process for linking to external domains. Please see [How to link to external domains](./top-extensions-linking.md) for more information.
+
 ## Known limitations
 
 ### Storage
