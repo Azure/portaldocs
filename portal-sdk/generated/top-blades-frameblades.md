@@ -3,7 +3,7 @@
 
 FrameBlades provide an alternative programming model for developing UI in Ibiza. This alternative gives the extension author full control over the DOM via an IFrame. Fx controls cannot be used within FrameBlades.
 
-Because Frame blades do not use Ibiza Fx controls, extension developers are fully responsible for accessibility, theming, and consistency.
+Because Frame blades do not use Ibiza Fx controls, extension developers are fully responsible for accessibility, theming, consistency and external domain navigation.
 
 While this programming model results in maximum flexibility, it  also adds a significant burden of accessibility, theming, and consistency on the developer.   We recommend using Frame blades under the following conditions.
 
@@ -305,3 +305,8 @@ MsPortalFx.Services.getSettings().then(settings => {
 ```
 
 On the iframe side you can respond to the message just like you would respond to the auth token message. You can then adjust your css accordingly.
+
+<a name="navigating-to-an-external-domain"></a>
+## Navigating to an external domain
+
+When using FrameBlade, extension developers are responsible for being compliant with the process for linking to external domains. Please see [How to link to external domains](./top-extensions-linking.md) for more information.
