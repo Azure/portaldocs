@@ -13,11 +13,11 @@
 
 Dialogs allow the developer to display information to the user with very little navigation. Dialogs may be as simple as a short confirmation, or as complex as a form. They can be both targeted and non-targeted, such that they either display at the top of the blade or they display in context of another piece of UI. The following is an image of a non-targeted dialog.
 
-![alt-text](../media/portalfx-ui-concepts/dialog-non-targeted.png "Non-targeted dialog")
+![alt-text](../media/top-extensions-dialogs/dialog-non-targeted.png "Non-targeted dialog")
 
 The following is an image of a targeted dialog.
 
-![alt-text](../media/portalfx-ui-concepts/dialog-targeted.png "Targeted dialog")
+![alt-text](../media/top-extensions-dialogs/dialog-targeted.png "Targeted dialog")
 
 <a name="dialogs-when-to-use-dialogs"></a>
 ## When to use dialogs
