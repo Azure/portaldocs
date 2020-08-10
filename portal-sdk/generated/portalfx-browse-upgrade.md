@@ -1,6 +1,7 @@
-
 <a name="upgrading-to-the-latest-browse-api"></a>
 # Upgrading to the latest Browse API
+
+If your resources are tracked and available in the Azure Resource Graph, you should follow the information in this section: [Azure Resource Graph Browse](portalfx-browse-azureresourcegraph.md)
 
 Browse v2 introduces paging and a greatly-simplified API for ARM resources. Browse v2 doesn't support non-ARM assets, yet; but if you have an ARM resource, you can start with no-code Browse and build out based on your needs.
 

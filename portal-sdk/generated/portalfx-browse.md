@@ -45,8 +45,20 @@ To allow people to create new resources from Browse, you can associate your asse
 
 The Browse blade will launch the Marketplace item, if specified; otherwise, it will launch the Marketplace category blade for the specific menu item id (e.g. `gallery/virtualMachines/recommended` for Virtual machines > Recommended). To determine the right Marketplace category, contact the <a href="mailto:1store?subject=Marketplace menu item id">Marketplace team</a>. If neither is specified, the Add command won't be available.
 
-<a name="building-browse-experiences-no-code-browse-customizing-columns"></a>
-### Customizing columns
+<a name="building-browse-experiences-using-azure-resource-graph-for-browse"></a>
+## Using Azure Resource Graph for Browse
+
+[Azure Resource Graph Browse](portalfx-browse-azureresourcegraph.md)
+
+There are many reasons why it is beneficial to move to utilize the Azure Resource Graph for your resources as list in the section on the Azure Resource Graph linked above. Any tracked resources should be utilizing this indexing layer.
+
+The rest of this document is specifically for resources which are not available in Azure Resource Graph.
+
+<a name="building-browse-experiences-resources-not-available-in-azure-resource-graph"></a>
+## Resources not Available in Azure Resource Graph
+
+<a name="building-browse-experiences-resources-not-available-in-azure-resource-graph-customizing-columns-only-for-non-arg-resources"></a>
+### Customizing columns (only for non-ARG resources)
 
 By default, no-code Browse only shows the resource name, group, location, and subscription. To customize the columns, add a view-model to the `AssetType` and indicate that you have custom Browse config:
 
@@ -121,8 +133,8 @@ Notice that the genre column actually renders 2 properties: genre and subgenre. 
 
 At this point, you should be able to compile and see your columns show up in your Browse blade. Of course, you still need to populate your supplemental data. Let's do that now...
 
-<a name="building-browse-experiences-no-code-browse-providing-supplemental-data"></a>
-### Providing supplemental data
+<a name="building-browse-experiences-resources-not-available-in-azure-resource-graph-providing-supplemental-data-only-for-non-arg-resources"></a>
+### Providing supplemental data (only for non-ARG resources)
 
 In order to specify supplemental data to display on top of the standard resource columns, you'll need to opt in to specifying supplemental data in PDL:
 
@@ -212,8 +224,8 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
 
 Now, you should have supplemental data getting populated. Great! Let's add context menu commands...
 
-<a name="building-browse-experiences-no-code-browse-adding-context-menu-commands"></a>
-### Adding context menu commands
+<a name="building-browse-experiences-resources-not-available-in-azure-resource-graph-adding-context-menu-commands-only-for-non-arg-resources"></a>
+### Adding context menu commands (only for non-ARG resources)
 
 Context menu commands in Browse must take a single `id` input parameter that is the resource id of the specific resource. To specify commands, add the name of the command group defined in PDL to Browse config:
 
@@ -243,7 +255,7 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
 
 If you need to expose different commands based on some other metadata, you can also specify the the command group in `SupplementalData.contextMenu` in the same way.
 
-<a name="building-browse-experiences-no-code-browse-adding-an-informational-message-link"></a>
+<a name="building-browse-experiences-resources-not-available-in-azure-resource-graph-adding-an-informational-message-link"></a>
 ### Adding an informational message/link
 
 If you need to display an informational message and/or link above the list of resources, add an `infoBox` to your Browse config:
