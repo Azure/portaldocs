@@ -125,13 +125,11 @@ Both of these features allow you to write your model objects once in C#, and the
 
 To use type metadata generation, you need to keep your model objects (aka Data Transfer Objects / DTOs) in a separate .NET project from your extension. For an example, check out the `SamplesExtension.DataModels` project included in the SDK. The class library project used to generate models requires the following dependencies:
 
-- System.ComponentModel.DataAnnotations
 - System.ComponentModel.Composition
 - Microsoft.Portal.TypeMetadata.  Note: this assembly can be found in the Microsoft.Portal.TypeMetadata NuGet package.
 
 At the top of any C# file using the `TypeMetadataModel` annotation, the following namespaces must be imported:
 
-- `System.ComponentModel.DataAnnotations`
 - `Microsoft.Portal.TypeMetadata`
 
 <a name="type-metadata-c-to-typescript-code-generation-approach-step-2-configure-typemetadata-generation"></a>
