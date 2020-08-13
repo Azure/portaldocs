@@ -39,7 +39,7 @@ ap start
 
 ```
 
-Alternatively, if you have evaluated using a declarative extension and established that it does not work for your scenario, you can start with a native Ibiza extension using the following commands - 
+Alternatively, if you have evaluated using a declarative extension and established that it does not work for your scenario, you can start with a native Ibiza extension using the following commands -
 
 ```
 cd c:\ && mkdir dev && cd dev
@@ -177,14 +177,15 @@ ap diag <arguments>
 ```
 
 This command emits diagnostics for an extension from clouds.
-It is to help developers understand what version of their extension is deployed in each of these different clouds. Diagnostics also include shell version, extension version, SDK version, SDK age, stage definition, and last error in all common deplyment slots in all public clouds.
+Help developers understand what version of their extension is deployed in each of these different clouds and provide useful information about the extension.
+Diagnostics also include extension name, primary stamp version, shell version, extension portal side version, extension hosting service side version, SDK version, SDK age, stage definition, manifest errors, and last error in all common deplyment slots in all public clouds.
 
 
 <a name="cli-overview-command-reference-ap-diag-arguments-1"></a>
 #### Arguments
 Argument | alias | Description
 --- | --- | ---
---name | --n | Optional. The extensions hosting service name to emit the diagnostics for.
+--name | --n | Optional. The extension name in portal registration or extensions hosting service name to emit the diagnostics for.
 --production | --prod | Optional. Emits the diagnostics from production cloud.
 --blackforest | --bf | Optional. Emits the diagnostics from blackforest cloud.
 --fairfax | --ff | Optional. Emits the diagnostics from fairfax cloud.
@@ -195,10 +196,16 @@ Argument | alias | Description
 <a name="cli-overview-command-reference-ap-diag-example-usage-1"></a>
 #### Example Usage
 
-Emits the diagnostics for the extension within the current working directory from all 6 clouds (production, blackforest, fairfax, mooncake, dogfood, mpac). When you run `ap diag`, you get the `extensionHostingServiceName​` as a default extension name from `./devServerConfig.json`
+Emits the diagnostics for the extension within the current working directory from all 6 clouds (production, blackforest, fairfax, mooncake, dogfood, mpac). When you run `ap diag`, you get the `getExtensionNameInPortalRegistration` as a default extension name from `./devServerConfig.json`
 
 ```
 ap diag
+```
+
+Emits the diagnostics for "Microsoft_Azure_Storage" extension from specific clouds. You can also choose the clouds you want to be diagnosed. If cloud name not given, it emits the diagnostics from all 6 clouds.
+
+```
+ap diag --name Microsoft_Azure_Storage
 ```
 
 Emits the diagnostics for "storage" extension from specific clouds. You can also choose the clouds you want to be diagnosed. If cloud name not given, it emits the diagnostics from all 6 clouds.
