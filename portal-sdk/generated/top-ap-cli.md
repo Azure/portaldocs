@@ -17,7 +17,7 @@ This document details the usage and extensibility points of the ap CLI.  The fol
 1. run `node setup.js` and perform any actions it asks you to.
 
 If you prefer follow along see the step by step:
- - [Manual one time Auth, Setup and Installation steps](./top-ap-cli.md#manual-one-time-auth,-setup-and-installation)
+ - [Manual one time Auth Setup and Installation steps](./top-ap-cli.md#manual-one-time-auth-setup-and-installation)
  - [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
 
 
@@ -940,7 +940,7 @@ The ap CLI is built by the Azure portal team for the extension developer communi
       ![alt-text](../media/top-extensions-install-software/vs2019_components.png "Selecting VS 2019 components")
 
 <a name="cli-overview-manual-one-time-auth-setup-and-installation"></a>
-## Manual one time Auth, Setup and Installation
+## Manual one time Auth Setup and Installation
 The following steps detail the one time configuration that must be applied to authenticate against the internal AzurePortal registry for both NuGet and npm.
 If you prefer follow along see the step by step: [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
 

@@ -38,6 +38,7 @@
       - [View padding](#view-padding)
     - [Debugging](#debugging)
       - [Hot reloading](#hot-reloading)
+    - [Feature exposure control](#feature-exposure-control)
   - [Known limitations](#known-limitations)
     - [Storage](#storage)
     - [Service Workers](#service-workers)
@@ -732,6 +733,13 @@ To enable hot reloading make sure that:
 2. you have `&feature.reactreload=true` and `&clientOptimizations=false` flags added onto the URL that you're side loading against
 
 Please, be aware of [Hot reloading limitations](#hot-reloading-limitations).
+
+### Feature exposure control
+You can use Portal feature flags as mechanism to hide/expose some experience or behavior in ReactViews.
+While synchronous feature flag checks APIs are not yet available, please use the following approach as temporary work-around:
+```typescript
+Az.getFeatureFlags().then((features) => { /* Parse features for the given key */ })
+```
 
 ### Navigating to an external domain
 
