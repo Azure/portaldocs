@@ -149,12 +149,12 @@ To share your PDE with other teams please follow these guidelines:
         * [Secret Picker](#commands-key-secret-pickers-secret-picker)
     * [Contact](#commands-contact)
 * [Getting started with Azure CDN](#getting-started-with-azure-cdn)
-    * [1. Importing CDN Extension NuGet Package](#getting-started-with-azure-cdn-importing-cdn-extension-nuget-package)
-    * [2. Referencing CDN PDE](#getting-started-with-azure-cdn-referencing-cdn-pde)
-    * [3. Referencing CDN Integration Blade](#getting-started-with-azure-cdn-referencing-cdn-integration-blade)
+    * [1\. Importing CDN Extension NuGet Package](#getting-started-with-azure-cdn-importing-cdn-extension-nuget-package)
+    * [2\. Referencing CDN PDE](#getting-started-with-azure-cdn-referencing-cdn-pde)
+    * [3\. Referencing CDN Integration Blade](#getting-started-with-azure-cdn-referencing-cdn-integration-blade)
         * [Blade Inputs](#getting-started-with-azure-cdn-referencing-cdn-integration-blade-blade-inputs)
         * [Notes and Tips](#getting-started-with-azure-cdn-referencing-cdn-integration-blade-notes-and-tips)
-    * [4. Telemetry and Monitoring](#getting-started-with-azure-cdn-telemetry-and-monitoring)
+    * [4\. Telemetry and Monitoring](#getting-started-with-azure-cdn-telemetry-and-monitoring)
         * [Contact Us](#getting-started-with-azure-cdn-telemetry-and-monitoring-contact-us)
 
 
@@ -398,12 +398,12 @@ Install-Package Microsoft.Portal.Extensions.Billing -Source https://msazure.pkgs
         * [Secret Picker](#commands-key-secret-pickers-secret-picker)
     * [Contact](#commands-contact)
 * [Getting started with Azure CDN](#getting-started-with-azure-cdn)
-    * [1. Importing CDN Extension NuGet Package](#getting-started-with-azure-cdn-importing-cdn-extension-nuget-package)
-    * [2. Referencing CDN PDE](#getting-started-with-azure-cdn-referencing-cdn-pde)
-    * [3. Referencing CDN Integration Blade](#getting-started-with-azure-cdn-referencing-cdn-integration-blade)
+    * [1\. Importing CDN Extension NuGet Package](#getting-started-with-azure-cdn-importing-cdn-extension-nuget-package)
+    * [2\. Referencing CDN PDE](#getting-started-with-azure-cdn-referencing-cdn-pde)
+    * [3\. Referencing CDN Integration Blade](#getting-started-with-azure-cdn-referencing-cdn-integration-blade)
         * [Blade Inputs](#getting-started-with-azure-cdn-referencing-cdn-integration-blade-blade-inputs)
         * [Notes and Tips](#getting-started-with-azure-cdn-referencing-cdn-integration-blade-notes-and-tips)
-    * [4. Telemetry and Monitoring](#getting-started-with-azure-cdn-telemetry-and-monitoring)
+    * [4\. Telemetry and Monitoring](#getting-started-with-azure-cdn-telemetry-and-monitoring)
         * [Contact Us](#getting-started-with-azure-cdn-telemetry-and-monitoring-contact-us)
 
 
@@ -776,12 +776,12 @@ Install-Package Microsoft.Portal.Extensions.Monitoring -Source https://msazure.p
         * [Secret Picker](#commands-key-secret-pickers-secret-picker)
     * [Contact](#commands-contact)
 * [Getting started with Azure CDN](#getting-started-with-azure-cdn)
-    * [1. Importing CDN Extension NuGet Package](#getting-started-with-azure-cdn-importing-cdn-extension-nuget-package)
-    * [2. Referencing CDN PDE](#getting-started-with-azure-cdn-referencing-cdn-pde)
-    * [3. Referencing CDN Integration Blade](#getting-started-with-azure-cdn-referencing-cdn-integration-blade)
+    * [1\. Importing CDN Extension NuGet Package](#getting-started-with-azure-cdn-importing-cdn-extension-nuget-package)
+    * [2\. Referencing CDN PDE](#getting-started-with-azure-cdn-referencing-cdn-pde)
+    * [3\. Referencing CDN Integration Blade](#getting-started-with-azure-cdn-referencing-cdn-integration-blade)
         * [Blade Inputs](#getting-started-with-azure-cdn-referencing-cdn-integration-blade-blade-inputs)
         * [Notes and Tips](#getting-started-with-azure-cdn-referencing-cdn-integration-blade-notes-and-tips)
-    * [4. Telemetry and Monitoring](#getting-started-with-azure-cdn-telemetry-and-monitoring)
+    * [4\. Telemetry and Monitoring](#getting-started-with-azure-cdn-telemetry-and-monitoring)
         * [Contact Us](#getting-started-with-azure-cdn-telemetry-and-monitoring-contact-us)
 
 
@@ -990,9 +990,7 @@ CdnIntegrationBlade allows customers to create and manage CDN endpoints for thei
 Through the simple integration explained in this document, your customers can enable CDN on their Azure resources within your extension without having to leave and go to the CDN extension. The CDN integration blade can be embedded in your own extension if you follow the below steps.
 
 <a name="getting-started-with-azure-cdn-importing-cdn-extension-nuget-package"></a>
-## >
-<li>Importing CDN Extension NuGet Package</li>
-<
+## 1. Importing CDN Extension NuGet Package
 
 To be able to use the CDN integration blade, you will need to reference Microsoft.Portal.Extensions.Cdn nuget package.
 For CoreXT based environemtns, you can add a reference to the package in your **corext.config** or **packages.config** file as shown below. If you are not using CoreXT, please reference the package as appropriate in your environment.
@@ -1003,9 +1001,7 @@ For CoreXT based environemtns, you can add a reference to the package in your **
 *Note:* you will need to update the version with the latest from [here](https://msazure.visualstudio.com/DefaultCollection/One/_apps/hub/ms.feed.feed-hub?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.extensions.cdn)
 
 <a name="getting-started-with-azure-cdn-referencing-cdn-pde"></a>
-##  start="2">
-<li>Referencing CDN PDE</li>
-<
+## 2. Referencing CDN PDE
 
 In your extension *.csproj file, you will need to add a reference to the Microsoft_Azure_Cdn.pde similar to this:
 ```xml
@@ -1013,13 +1009,11 @@ In your extension *.csproj file, you will need to add a reference to the Microso
 ```
 
 <a name="getting-started-with-azure-cdn-referencing-cdn-integration-blade"></a>
-##  start="3">
-<li>Referencing CDN Integration Blade</li>
-<
+## 3. Referencing CDN Integration Blade
 
 For the CdnIntegrationBlade to show up in your extension, you may reference it in one of the following ways:
 
- - You can add it as an item in your resource menu similar to the code below (this approach is fully type-checked, even the strings for the extension name and blade name, which will be available when a corresponding .pde file is imported): 
+ - You can add it as an item in your resource menu similar to the code below (this approach is fully type-checked, even the strings for the extension name and blade name, which will be available when a corresponding .pde file is imported):
 ```ts
 {
     id: "cdnIntegration",
@@ -1055,7 +1049,7 @@ this._container.selectable.selectedValue(<MsPortalFx.ViewModels.DynamicBladeSele
             location: this._siteView.item().Location(),
             originHostname: this._siteView.item().DefaultHostName()
         }
-    });            
+    });
 ```
 
 <a name="getting-started-with-azure-cdn-referencing-cdn-integration-blade-blade-inputs"></a>
@@ -1077,22 +1071,20 @@ The hostname of your service which is used as an origin for the created CDN endp
 ### Notes and Tips
 1.  Please use *"cdnIntegration"* for the resource menu item *id* because we use this id to track blade loads and create telemetry on CDN Integration Blade.
 2.  The *displayText* "Azure CDN" needs to be localized and should come from your Resources.resx.
-3.  The CdnIntegrationBlade *only* works in public Azure and is NOT available in national clouds like MoonCake, BlackForst, etc. 
+3.  The CdnIntegrationBlade *only* works in public Azure and is NOT available in national clouds like MoonCake, BlackForst, etc.
 4.  You can set the *visible* property on this menu item to true or choose to conditionally show this blade based on a feature flag  in your extension.
 	```ts
 	visible: ko.observable(MsPortalFx.isFeatureEnabled("cdnintegration"))
 	```
 
 <a name="getting-started-with-azure-cdn-telemetry-and-monitoring"></a>
-##  start="4">
-<li>Telemetry and Monitoring</li>
-<
+## 4. Telemetry and Monitoring
 We are tracking the usage and actions on CDN integration blade through following metrics:
 
  - Number of CDN Endpoints created from partner extensions vs. CDN extension.
  - Number of customers clicking Azure CDN from partner extension.
  - Number of customers managing CDN from partner extension.
- - Percentage of customers initiating a CDN create operation after landing into the Azure CDN blade. 
+ - Percentage of customers initiating a CDN create operation after landing into the Azure CDN blade.
  - Percentage of success and failure of create operations from the Azure CDN blade.
 
 You shouldn't need to add any extra telemetry on your side.
@@ -1101,3 +1093,4 @@ You shouldn't need to add any extra telemetry on your side.
 ### Contact Us
 You can start development today! Create a code review and add "inzarif" and "cdneng" as reviewers.
 Don't hesitate to contact us for any questions, concerns, or bug reports.
+

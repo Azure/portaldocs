@@ -38,3 +38,23 @@ We encourage all of our partners that wish to attend to schedule a meeting with 
     - TO: ewinner;lwelicki;
     - Subject: YOUR_EXTENSION_NAME: Azure ux office hours
     - Location: Conf Room 41/15 (It is already reserved), create a skype meeting if that is preferred
+
+<a name="office-hours-experimentation-onboarding"></a>
+### Experimentation Onboarding
+
+- *When?*  Monday from 13:30 to 14:00 Pacific Time
+- *Where?* [Teams Link](https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZGUyODUxZjktMzdhYi00YzhhLTg3ZDEtNmQzNzhiYmExNjBj%40thread.v2/0?context=%7b%22Tid%22%3a%2272f988bf-86f1-41af-91ab-2d7cd011db47%22%2c%22Oid%22%3a%22c4869557-ad6d-4e8e-804e-1b92437a15f1%22%7d)
+- *Contacts:* Jen Townsand (jetownse), Jiannan Lu (jiannl)
+- *Goals*
+    - Provide guidance on how to set up your extension for A/B testing
+    - Help you design your experiment 
+    - Help you author metrics for your expeirments
+    - Consult on experiment results
+- *How do I book time?*: 
+    - The Ibiza Office Hours are drop-in office hours. 
+    - In order to book additional time outside these hours, please send a meeting request with the following:
+        - TO: ayghaff, jetownse, jiannl
+        - Subject: YOUR_EXTENSION_NAME: Azure Exp office hours
+        - Location: We will create a teams meeting 
+
+

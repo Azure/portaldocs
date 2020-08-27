@@ -1,18 +1,18 @@
 * [ARM APIs](#arm-apis)
     * [Deploying ARM Templates](#arm-apis-deploying-arm-templates)
-    * [1. Deploying the Templates](#arm-apis-deploying-the-templates)
-    * [2. Polling for Updates](#arm-apis-polling-for-updates)
-    * [3. Samples](#arm-apis-samples)
+    * [1\. Deploying the Templates](#arm-apis-deploying-the-templates)
+    * [2\. Polling for Updates](#arm-apis-polling-for-updates)
+    * [3\. Samples](#arm-apis-samples)
 
 
 <a name="arm-apis"></a>
 ## ARM APIs
 
-Historically, managing a resource (a user-managed entity such as a database server, database, or website) in Microsoft Azure required you to perform operations against one resource at a time. If you had a complex application made up of multiple resources, management of this application became a complex task. In the Microsoft Azure preview portal you can create resource groups to manage all your resources in an application together. Resource group is a new concept in Azure that serves as the lifecycle boundary for every resource contained within it. 
-Resource groups enable you to manage all your resources in an application together. Resource groups are enabled by the new management functionality, Azure Resource Manager (ARM). 
+Historically, managing a resource (a user-managed entity such as a database server, database, or website) in Microsoft Azure required you to perform operations against one resource at a time. If you had a complex application made up of multiple resources, management of this application became a complex task. In the Microsoft Azure preview portal you can create resource groups to manage all your resources in an application together. Resource group is a new concept in Azure that serves as the lifecycle boundary for every resource contained within it.
+Resource groups enable you to manage all your resources in an application together. Resource groups are enabled by the new management functionality, Azure Resource Manager (ARM).
 
 The Azure Resource Manager allows you to group multiple resources as a logical group which serves as the lifecycle boundary for every resource contained within it. Typically a group will contain resources related to a specific application. For example, most applications that are designed to run in Microsoft Azure use a combination of resources (such as a database server, database, or website) to perform as designed. An [Azure Resource Manager Template](https://aka.ms/portalfx/armtemplate) makes it possible for you to deploy and manage these resources together by using a JSON description of the resources and associated deployment parameters.  To simplify deployment of ARM templates you may use the Provisionning API for ARM.
- 
+
 
 <a name="arm-apis-deploying-arm-templates"></a>
 ### Deploying ARM Templates
@@ -23,9 +23,7 @@ If your request is accepted, ARM begins the deployment of the template. That mea
 We've added a couple of APIs to help you do that in your code. Generally you either only want to submit the request to ARM (only the first step), or you want to wait till the deployment is done. We take care of the notifications for you, but you can choose to suppress them if you need to.
 
 <a name="arm-apis-deploying-the-templates"></a>
-### >
-<li>Deploying the Templates</li>
-<
+### 1. Deploying the Templates
 Now you can deploy ARM templates directly using this API:
 
 ```ts
@@ -47,7 +45,7 @@ The API takes one argument, a template deployment options object, which has the 
 The API returns a promise that behaves based on the `deploymentMode` value:
 
  * __RequestDeploymentOnly__: (Default) A deployment request will be submitted to ARM. The promise will resolve/reject when ARM accepts/denies the request.
- * __DeployAndAwaitCompletion__: A deployment request will be submitted to ARM. The promise will report progress when ARM accepts the request. The promise will resolve/reject when ARM succeeds/fails to provision the deployed resource(s). Operations are not reported while the deployment is in progress (silent polling). Operations are reported on success. 
+ * __DeployAndAwaitCompletion__: A deployment request will be submitted to ARM. The promise will report progress when ARM accepts the request. The promise will resolve/reject when ARM succeeds/fails to provision the deployed resource(s). Operations are not reported while the deployment is in progress (silent polling). Operations are reported on success.
  * __DeployAndGetAllOperations__: Just like `DeployAndAwaitCompletion`, except that the promise will continuously report ARM operations as progress. Operations are also reported on success.
 
 The result returned when the promise resolves (and the progress) have the following structure:
@@ -60,9 +58,7 @@ The result returned when the promise resolves (and the progress) have the follow
 Polling is described in the next section. If you chose to do the polling yourself, set the `deploymentMode` to `RequestDeploymentOnly` and wait for ARM to accept the request and return a correlation id. You can use the correlation id to poll for deployment updates using the `MsPortalFx.Azure.ResourceManager.pollForDeployment` described in the next section, till ARM is done with provisioning the deployed resource(s). Check out sample #4 in the samples section. Please note that those calls aren't cached, so if the user abandons the session (by closing the browser or navigating away) before the request makes it to ARM, the call to this API will result in nothing. In the other two modes, if you have some UI that reflects the deployment progress, and if the request goes through and ARM responds back with the correlation id, it's still advisable to store it somewhere because the user can still abandon the session, and you'll need to continue reflecting progress on reload.
 
 <a name="arm-apis-polling-for-updates"></a>
-###  start="2">
-<li>Polling for Updates</li>
-<
+### 2. Polling for Updates
 There's another API to poll for deployment updates. You can use this if you have the correlation id of an existing deployment (returned when a deployment request is accepted by ARM).
 ```ts
 MsPortalFx.Azure.ResourceManager.pollForDeployment(options);
@@ -82,14 +78,10 @@ Polling is done every ten seconds for the first minute, then every minute for th
 The result returned when the promise resolves (and the progress) is exactly like the one returned in the `deployTemplate` API. `operations` are returned only if `getAllOperations` is set to true.
 
 <a name="arm-apis-samples"></a>
-###  start="3">
-<li>Samples</li>
-<
+### 3. Samples
 
 <a name="arm-apis-samples-requesting-a-template-deployment"></a>
-##### >
-<li>Requesting a template deployment</li>
-<
+#### 1. Requesting a template deployment
 ```ts
 // Prepare the template deployment options.
 var deploymentOptions: MsPortalFx.Azure.ResourceManager.TemplateDeploymentOptions = {
@@ -114,16 +106,14 @@ MsPortalFx.Azure.ResourceManager.deployTemplate(options)
     .then((result: MsPortalFx.Azure.ResourceManager.TemplateDeploymentResult) => {
         // ARM accepted the deployment request.
         // Store the correlation id if you want to poll for deployment updates afterwards.
-        // Do something with the result. 
+        // Do something with the result.
     }, (error: any) => {
         // Something went wrong!
     });
 ```
 
 <a name="arm-apis-samples-deploy-a-template-and-await-completion"></a>
-#####  start="2">
-<li>Deploy a template and await completion</li>
-<
+#### 2. Deploy a template and await completion
 ```ts
 // Prepare the template deployment options.
 var deploymentOptions: MsPortalFx.Azure.ResourceManager.TemplateDeploymentOptions = {
@@ -137,16 +127,14 @@ MsPortalFx.Azure.ResourceManager.deployTemplate(options)
         // Will be called only once, when ARM accepts the deployment request.
         // Store the correlation id if you have UI that reflects the progress and the user abandons the session.
     }).then((result: MsPortalFx.Azure.ResourceManager.TemplateDeploymentResult) => {
-        // Deployment is complete. 
+        // Deployment is complete.
     }, (error: any) => {
         // Something went wrong!
     });
 ```
 
 <a name="arm-apis-samples-deploy-a-template-and-await-completion-while-getting-all-operations"></a>
-#####  start="3">
-<li>Deploy a template and await completion (while getting all operations)</li>
-<
+#### 3. Deploy a template and await completion (while getting all operations)
 ```ts
 // Prepare the template deployment options.
 var deploymentOptions: MsPortalFx.Azure.ResourceManager.TemplateDeploymentOptions = {
@@ -157,7 +145,7 @@ var deploymentOptions: MsPortalFx.Azure.ResourceManager.TemplateDeploymentOption
 // Deploy the template.
 MsPortalFx.Azure.ResourceManager.deployTemplate(options)
     .progress((progress: MsPortalFx.Azure.ResourceManager.TemplateDeploymentResult) => {
-        // First time will be called when ARM accepts the deployment request. 
+        // First time will be called when ARM accepts the deployment request.
         // Store the correlation id if you have UI that reflects the progress for the case when the user abandons the session.
         // Subsequent calls will continuously reports progress (and operations) while the deployment is in progress.
     }).then((result: MsPortalFx.Azure.ResourceManager.TemplateDeploymentResult) => {
@@ -168,9 +156,7 @@ MsPortalFx.Azure.ResourceManager.deployTemplate(options)
 ```
 
 <a name="arm-apis-samples-requesting-a-template-deployment-and-seperately-polling-for-updates-and-operations"></a>
-#####  start="4">
-<li>Requesting a template deployment and seperately polling for updates (and operations)</li>
-<
+#### 4. Requesting a template deployment and seperately polling for updates (and operations)
 ```ts
 // Prepare the template deployment options.
 var deploymentOptions: MsPortalFx.Azure.ResourceManager.TemplateDeploymentOptions = {
