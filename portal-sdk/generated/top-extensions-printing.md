@@ -65,9 +65,11 @@ The problem is lessened for elements that are able to relayout on the page, for 
 <a name="how-to-get-well-formed-printout-from-your-content-faq"></a>
 ## FAQ
 
-Q. How much space is available width wise on paper?
+**Q. How much space is available width wise on paper?**
 
-A. It is highly dependent on the paged media format and its settings. As an example, let's assume this paged media format and settings:
+**A. It is highly dependent on the paged media format and its settings.**
+
+As an example, let's assume this paged media format and settings:
 
 - US Letter paper format
 - Portrait orientation
@@ -76,3 +78,39 @@ A. It is highly dependent on the paged media format and its settings. As an exam
 - Browser printout engine generates output at 72DPI
 
  This example translates to about 720px of screen pixels on the output.
+
+**Q. What telemetry is offered about print?**
+
+**A. The framework offers the following telemetry for tracking the print functionality usage.**
+
+Use any of these queries in Kusto Explorer.
+
+*Which view is print requested from?*
+
+```js
+ClientTelemetry
+| where action == "PrintRequest"
+| summarize count() by name
+```
+
+*Which method was used to invoke print?*
+
+```js
+ClientTelemetry
+| where action == "PrintRequest"
+| summarize count() by source
+```
+
+*Which display mode is shown when print was invoked?*
+
+```js
+ClientTelemetry
+| where action == "PrintRequest"
+| extend displayMode = tostring(parse_json(data)["displayMode"])
+| summarize count() by displayMode
+// Where 0 is None, 1 is Dashboard, 2 is Home, 3 is AllServices, 4 is Journey/Blades
+```
+
+*Did the user complete or cancelled the print operation?*
+
+We cannot know is if the user is completing or cancelling the print operation. We can only know the dialog was shown and eventually closed.

@@ -939,6 +939,14 @@ The ap CLI is built by the Azure portal team for the extension developer communi
 
       ![alt-text](../media/top-extensions-install-software/vs2019_components.png "Selecting VS 2019 components")
 
+- How can CloudTest access internal Azure DevOps feed?
+
+    1. Create a [service account with 2FA exemption](https://www.1eswiki.com/wiki/Service_Accounts).
+    1. This is the [ link to grant the service account access ](https://onebranch.visualstudio.com/OneBranch/_wiki/wikis/OneBranch.wiki/3092/System-Account-Access-to-msazure-ADO-instance-and-SharePoint-Site) to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=connect&feed=AzurePortal .
+    1. Once granted access, after the service account has permission to the AzurePortal Feed, you can [ generate PAT token following this doc ](https://www.1eswiki.com/wiki/Service_Account_Lockdown#Generating_a_PAT_via_the_Command-line).
+    1. Store the PAT token in a keyvault that cloudtest can access.
+    1. If not already base 64 encoded, don't forget to encode the PAT token in base 64 before putting it in .npmrc. more details to[ generate .npmrc with a long lasting PAT here ](https://docs.microsoft.com/en-us/azure/devops/artifacts/npm/npmrc).
+
 <a name="cli-overview-manual-one-time-auth-setup-and-installation"></a>
 ## Manual one time Auth Setup and Installation
 The following steps detail the one time configuration that must be applied to authenticate against the internal AzurePortal registry for both NuGet and npm.

@@ -475,6 +475,23 @@ Once the name of the extension is finalized, it is time to register the extensio
 
 * Show your asset types.
 
+<a name="phase-2-development-onboarding-to-out-of-the-box-alerts-for-your-extension"></a>
+## Onboarding to out-of-the-box alerts for your extension
+
+In order to ensure that all teams meet quality standard to be included in the Azure Portal, we require teams onboard to our out-of-the box alerting infrastructure. This will not require any deployment on your part, but only submitting a PR with a JSON configuration specifying your thresholds, which you can learn more about in our [alerting onboarding documentation](./top-telemetry-alerting.md) 
+
+The following alerts are required:
+1. Extension SDK Age (automatically opted-in by default when onboarded to alerting)
+1. Performance
+1. Availability
+
+<a name="phase-2-development-onboarding-to-a-b-testing"></a>
+## Onboarding to A/B Testing
+
+Ibiza offers out-of-the-box A/B testing and feature flighting through the [ExP Experimentation Platform](https://expdocs.azurewebsites.net/azureexp.html).
+
+To learn how you can integrate your extension and learn more, visit the [Ibiza Experimentation website](https://aka.ms/Ibizaexperimentation)
+
 <a name="phase-3-deployment"></a>
 # Phase 3 - Deployment
 

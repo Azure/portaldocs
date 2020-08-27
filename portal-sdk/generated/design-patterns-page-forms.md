@@ -24,9 +24,7 @@ The Forms design pattern makes it easy for users to provide information while ma
 ## Variations
 
 <a name="variations-form-in-dialog"></a>
-### >
-<li>Form in dialog</li>
-<
+### 1. Form in dialog
 
 <a name="variations-form-in-dialog-example-images"></a>
 #### Example Images
@@ -100,9 +98,7 @@ Button labels and behavior:
 * "Cancel" – close the dialog without performing validation
 
 <a name="variations-form-in-context-pane"></a>
-###  start="2">
-<li>Form in context pane</li>
-<
+### 2. Form in context pane
 
 <a name="variations-form-in-context-pane-example-images-1"></a>
 #### Example Images
@@ -182,9 +178,7 @@ The design of a form in context pane with notification toast after submission is
 </div>
 
 <a name="variations-form-in-menu-page"></a>
-###  start="3">
-<li>Form in menu page</li>
-<
+### 3. Form in menu page
 
 <a name="variations-form-in-menu-page-example-images-2"></a>
 #### Example Images
@@ -254,9 +248,7 @@ The design of form in menu page with status bar after submission is shown below:
 </div>
 
 <a name="variations-form-in-full-screen-page"></a>
-###  start="4">
-<li>Form in full screen page</li>
-<
+### 4. Form in full screen page
 
 <a name="variations-form-in-full-screen-page-example-images-3"></a>
 #### Example Images
@@ -368,9 +360,7 @@ The design of form with notification toast after submission is shown below:
 </div>
 
 <a name="variations-form-with-tabs"></a>
-###  start="5">
-<li>Form with tabs</li>
-<
+### 5. Form with tabs
 
 Tabs can be used inside a form to indicate multiple steps or aspects. They can be used in any type of forms such as menu page form, full page form, etc. They cannot be used above the form to avoid hierarchical confusion. When tabs are present, a line separator is visible at all time to indicate the buttons are at the form level as opposed to inside an individual tab.
 
@@ -379,9 +369,7 @@ Tabs can be used inside a form to indicate multiple steps or aspects. They can b
 </div>
 
 <a name="variations-form-in-wizard"></a>
-###  start="6">
-<li>Form in wizard</li>
-<
+### 6. Form in wizard
 
 Wizard form is a full screen page with tabs across the top and is used as a form to create a new Azure resource. Please refer to resource create pattern for more information to create wizard: [Create a resource](https://review.docs.microsoft.com/en-us/azure/portal-sdk/portal-sdk/generated/design-patterns-resource-create)
 
