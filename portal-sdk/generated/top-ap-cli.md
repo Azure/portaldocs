@@ -941,6 +941,8 @@ The ap CLI is built by the Azure portal team for the extension developer communi
 
 - How can CloudTest access internal Azure DevOps feed?
 
+   **Important Note**: if you would like better integration with  devops internal package feeds, i.e so that you dont need to perform the steps below, then vote for this feature [vote here](https://aka.ms/portalfx/cloudtest/npmauth)
+
     1. Create a [service account with 2FA exemption](https://www.1eswiki.com/wiki/Service_Accounts).
     1. This is the [ link to grant the service account access ](https://onebranch.visualstudio.com/OneBranch/_wiki/wikis/OneBranch.wiki/3092/System-Account-Access-to-msazure-ADO-instance-and-SharePoint-Site) to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=connect&feed=AzurePortal .
     1. Once granted access, after the service account has permission to the AzurePortal Feed, you can [ generate PAT token following this doc ](https://www.1eswiki.com/wiki/Service_Account_Lockdown#Generating_a_PAT_via_the_Command-line).

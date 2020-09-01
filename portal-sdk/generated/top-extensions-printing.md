@@ -87,28 +87,33 @@ Use any of these queries in Kusto Explorer.
 
 *Which view is print requested from?*
 
-```js
+```kql
 ClientTelemetry
+| where PreciseTimeStamp >= ago(1d)
+| where userTypeHint == ""
 | where action == "PrintRequest"
 | summarize count() by name
 ```
 
 *Which method was used to invoke print?*
 
-```js
+```kql
 ClientTelemetry
+| where PreciseTimeStamp >= ago(1d)
+| where userTypeHint == ""
 | where action == "PrintRequest"
 | summarize count() by source
 ```
 
 *Which display mode is shown when print was invoked?*
 
-```js
+```kql
 ClientTelemetry
+| where PreciseTimeStamp >= ago(1d)
+| where userTypeHint == ""
 | where action == "PrintRequest"
 | extend displayMode = tostring(parse_json(data)["displayMode"])
 | summarize count() by displayMode
-// Where 0 is None, 1 is Dashboard, 2 is Home, 3 is AllServices, 4 is Journey/Blades
 ```
 
 *Did the user complete or cancelled the print operation?*

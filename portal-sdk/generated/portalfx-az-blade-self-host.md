@@ -98,7 +98,6 @@ container.openBlade(new BladeReference(
             log.debug("AzBlade closed.");
         },
     }));
-    }
 
 ```
 
