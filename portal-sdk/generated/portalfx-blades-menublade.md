@@ -69,6 +69,25 @@ constructor(container: MsPortalFx.ViewModels.ContainerContract) {
                         });
                     },
                 },
+                // Menu item that demonstrates opening of a parameter collector blade for a create scenario
+                {
+                    id: "createenginenomkt",
+                    displayText: ClientResources.createNoMarketplaceEngine,
+                    icon: null,
+                    supplyBladeReference: () => {
+                        return BladeReferences.forBlade("CreateNoMarketplaceArmEngineBlade").createReference({
+                            doesProvisioning: true,
+                            parameters:{
+                                createEngineOptions: ["600cc",
+                                    "800cc",
+                                    "1000cc",
+                                    "1200cc",
+                                    "1600cc"].join(","),
+                                initialData: "1600cc",
+                            },
+                        });
+                    },
+                },
                 // Menu item that demonstrates opting out of full width.
                 {
                     id: "fullwidthoptout",
