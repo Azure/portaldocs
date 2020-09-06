@@ -155,6 +155,7 @@ Allowing the user to verify all settings prior to submission ensures accuracy an
 
 ```typescript
 
+const { instanceId } = MsPortalFx.Base.Diagnostics.Telemetry.Context.getBladeContext();
 const onCreateButtonClick = () => {
     // Review & Create
     if (this.tabs.activeTabIndex() < this.tabs.tabs().length - 1) {
@@ -176,6 +177,7 @@ const onCreateButtonClick = () => {
                 data: {
                     correlationId: val.correlationId,
                     subscriptionId: val.subscriptionId,
+                    bladeInstanceId: instanceId,
                 },
             });
         })
