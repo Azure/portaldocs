@@ -443,7 +443,7 @@ To delete a azure gallery package run the following command.
 
 <a name="gallery-item-specificiations-gallery-package-management-configuring-the-azure-package-loader-tool"></a>
 #### Configuring the Azure Package Loader Tool
-In order to use the gallery loader you will need to set some values in the AzureGallery.exe.config file. You can download the following two test certificates here: [Certificate1](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Certificate/https://gallerypackagedeployment.vault.azure.net/certificates/GalleryPackageDeploymentCertificate/8d5bff464b774a8b8ca4e0c94bf3c948) and [Certificate2](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Certificate/https://gallerypackagedeployment.vault.azure.net/certificates/GalleryPrivilegedOperationsCertificate/7e31e866441342fda8467051422f4fd2) in PFX/PEM format. Install them without a password and update the configuration as shown below.
+In order to use the gallery loader you will need to set some values in the AzureGallery.exe.config file. You can download the following two test certificates here: [Certificate1](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Certificate/https://gallerypackagedeployment.vault.azure.net/certificates/GalleryPackageDeploymentCertificate/a24116111eaa4a78a6ea321cba42691f) and [Certificate2](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Certificate/https://gallerypackagedeployment.vault.azure.net/certificates/GalleryPrivilegedOperationsCertificate/6995728756084188b478e609a8c9dcb0) in PFX/PEM format. Install them without a password and update the configuration as shown below.
 
 If you are a Microsoft FTE and do not have permissions to access the certificates, please join the right groups following instructions [here](../../portal-sdk/generated/top-onboarding.md#join-dls-and-request-permissions). If you are an external partner, request permissions through the Microsoft team you are collaborating with to light up your extension.
 
@@ -451,12 +451,12 @@ In order to publish to production, you must contact the [1store team](mailto:1st
 
 ```xml
 <appSettings>
-  <add key="Microsoft.Azure.Gallery.ServiceEndpoint" value="https://df.gallery.azure-test.net"/>
-  <add key="Microsoft.Azure.Gallery.ServiceSettings.PrivilegedOperationsCertificateThumbprint" value="27D197C10E071431D1D9415E7F3C0327C5CBD560"/>
-  <add key="Microsoft.Azure.Gallery.ServiceSettings.HighPrivilegeOperationsCertificateThumbprint" value="7528606024903A055EBD86ECDE3539E23C84784A"/>
+  <add key="Microsoft.Azure.Gallery.ServiceEndpoint" value="https://df.admin.gallery.azure-test.net"/>
+  <add key="Microsoft.Azure.Gallery.ServiceSettings.PrivilegedOperationsCertificateThumbprint" value="<PUT HERE CERT1 THUMBPRINT>"/>
+  <add key="Microsoft.Azure.Gallery.ServiceSettings.HighPrivilegeOperationsCertificateThumbprint" value="<PUT HERE CERT2 THUMBPRINT>"/>
 
   <add key="Catalog.Host" value="df.marketplacerp.azure-test.net" />
-  <add key="Catalog.AdminCertThumbprint" value="7528606024903A055EBD86ECDE3539E23C84784A" />
+  <add key="Catalog.AdminCertThumbprint" value="<PUT HERE CERT2 THUMBPRINT>" />
 </appSettings>
 ```
 
