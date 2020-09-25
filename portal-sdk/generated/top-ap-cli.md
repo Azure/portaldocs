@@ -92,6 +92,7 @@ build | | Runs msbuild.exe on the *.sln or *proj with/p:RunBundlerInDevMode=true
 diag | | Emits all information and current deployed state of extension for all clouds.
 lint | | Runs eslint against an extension including azure portal custom lint rules.
 new | | Creates a new extension.
+samples | | Clones the samples extension.
 release | | Runs msbuild.exe on the *.sln or *proj with /p:RunBundlerInDevMode=false;Configuration=Release. If no *.sln or *proj is found and tsconfig.json exists then runs tsc.cmd. If arguments are supplied they are passed through to underlying executable.
 restore | | Installs node modules and restores NuGet packages for all package.json, *.sln and *.csproj recursively from the current working directory.
 run | | Straight passthrough to npm run i.e 'ap run mycommand' will execute 'npm run mycommand'
@@ -384,6 +385,40 @@ Emit help for the build command.
 ap new --help
 ```
 
+<a name="cli-overview-command-reference-ap-samples"></a>
+### ap samples
+
+```
+ap samples <arguments>
+```
+
+Clones the Azure portal Samples Extension.
+
+<a name="cli-overview-command-reference-ap-samples-arguments-4"></a>
+#### Arguments
+Argument | alias | Description
+--- | --- | ---
+--output | -o | Optional. The output directory to place the new project.
+--help | | Optional. Show help for new command.
+
+<a name="cli-overview-command-reference-ap-samples-example-usage-4"></a>
+#### Example Usage
+
+Two examples scaffolding a samples extension to the ./dev/samplesextension folder. The first using shorthand, the second longhand.
+
+```
+ap samples
+ap samples -o ./dev/someextension
+ap samples --output ./dev/storage
+
+```
+
+Emit help for the build command.
+
+```
+ap samples --help
+```
+
 <a name="cli-overview-command-reference-ap-release"></a>
 ### ap release
 
@@ -394,14 +429,14 @@ ap release <arguments>
 Runs msbuild.exe on the *.sln or *proj with /p:RunBundlerInDevMode=false;Configuration=Release. If no
 *.sln or *proj is found and tsconfig.json exists then runs tsc.cmd.  The result is the versioned zip, e.g 1.0.0.0.zip, output which can be deployed to hosting service. For build output in the format for required local hosting service see the build command. Arguments are optional, if supplied they are passed through to underlying executable for the resolved build type.  The build alias for msbuild and tsc can be overriden using apCliConfig.json. For a video walkthrough of the release command [this video](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=2132)
 
-<a name="cli-overview-command-reference-ap-release-arguments-4"></a>
+<a name="cli-overview-command-reference-ap-release-arguments-5"></a>
 #### Arguments
 Argument | Description
 --- | ---
 * | All arguments supplied are passed through to the resolved build executable, generally msbuild or tsc.
 --help | Show help for build command
 
-<a name="cli-overview-command-reference-ap-release-example-usage-4"></a>
+<a name="cli-overview-command-reference-ap-release-example-usage-5"></a>
 #### Example Usage
 
 Most common usage is to perform build allowing `ap` to resolve the *.sln, *proj or tsconfig.json that requires build.
@@ -460,7 +495,7 @@ Where recusive discovery of NuGet packages and node modules that need restoratio
 
 Requires `nuget` and `npm.cmd` available on the path. See first time setup steps at top of this document.
 
-<a name="cli-overview-command-reference-ap-restore-arguments-5"></a>
+<a name="cli-overview-command-reference-ap-restore-arguments-6"></a>
 #### Arguments
 Argument | Alias | Description
 --- | --- | ---
@@ -469,7 +504,7 @@ Argument | Alias | Description
 --restoreInParallel | | optional. Run npm install and NuGet restore in parallel.
 --help | | Emits help and usage for the command
 
-<a name="cli-overview-command-reference-ap-restore-example-usage-5"></a>
+<a name="cli-overview-command-reference-ap-restore-example-usage-6"></a>
 #### Example Usage
 
 Most common usage, node modules and NuGet packages needing install/restore will be discovered. if specific set supplied in apCliConfig.json then they will be used in place of recursive search.
@@ -534,14 +569,14 @@ ap run <arguments>
 
 The `ap run` command provides straight passthrough to `npm run`. Typically used to run scripts defined in package.json.
 
-<a name="cli-overview-command-reference-ap-run-arguments-6"></a>
+<a name="cli-overview-command-reference-ap-run-arguments-7"></a>
 #### Arguments
 Argument | Description
 --- | ---
 * | Required. All arguments are passed through directly to npm run. See usage examples
 --help | Emits help and usage for the command
 
-<a name="cli-overview-command-reference-ap-run-example-usage-6"></a>
+<a name="cli-overview-command-reference-ap-run-example-usage-7"></a>
 #### Example Usage
 
 Running tests in watch mode
@@ -568,14 +603,14 @@ ap serve <arguments>
 
 A command to run the local hosting service. Optional arguments are passthrough to the local hosting service.
 
-<a name="cli-overview-command-reference-ap-serve-arguments-7"></a>
+<a name="cli-overview-command-reference-ap-serve-arguments-8"></a>
 #### Arguments
 Argument | Description
 --- | ---
 * | Optional. All arguments are passed through directly to local hosting service. See usage examples
 --help | Emits help and usage for the command
 
-<a name="cli-overview-command-reference-ap-serve-example-usage-7"></a>
+<a name="cli-overview-command-reference-ap-serve-example-usage-8"></a>
 #### Example usage
 
 Most common usage, discovers first devServerConfig.json below current directory and runs local hosting service to side load your extension in portal.azure.com.
@@ -690,13 +725,13 @@ process to enable compile on save. This effectively enables compile on save base
 
 Customization using apCliConfig.json as defined in the restore, build and watch commands will also apply to this command.
 
-<a name="cli-overview-command-reference-ap-start-arguments-8"></a>
+<a name="cli-overview-command-reference-ap-start-arguments-9"></a>
 #### Arguments
 Argument | Description
 --- | ---
 --help | Emits help and usage for the command
 
-<a name="cli-overview-command-reference-ap-start-example-usage-8"></a>
+<a name="cli-overview-command-reference-ap-start-example-usage-9"></a>
 #### Example Usage
 
 Performs restore, build, serve and watch commands enabling compile on save and fast inner dev/test loop.
@@ -719,14 +754,14 @@ ap update
 
 Updates Azure Portal SDK NuGets and node modules to same version as the CLI. By default the following files are recursively searched for and updated: packages.config,package.json,corext.config,*.proj,*.csproj,*.njsproj and devServerConfig.json.  To provide your own set of files either supply a collection of file paths or supply a glob pattern via apCliConfig.json.  This video details how to update both the ap CLI and your extension using this command - [Video: Updating the CLI, extension SDK version and revoked SDKs](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=2214).
 
-<a name="cli-overview-command-reference-ap-update-arguments-9"></a>
+<a name="cli-overview-command-reference-ap-update-arguments-10"></a>
 #### Arguments
 Argument | Alias | Description
 --- | --- | ---
 --config | -c | Optional. Path to apCliConfig.json.
 --help | Emits help and usage for the command
 
-<a name="cli-overview-command-reference-ap-update-example-usage-9"></a>
+<a name="cli-overview-command-reference-ap-update-example-usage-10"></a>
 #### Example Usage
 
 Most common, recursively finds target files to update NuGet and node module references from portal sdk.
@@ -940,6 +975,8 @@ The ap CLI is built by the Azure portal team for the extension developer communi
       ![alt-text](../media/top-extensions-install-software/vs2019_components.png "Selecting VS 2019 components")
 
 - How can CloudTest access internal Azure DevOps feed?
+
+   **Important Note**: if you would like better integration with  devops internal package feeds, i.e so that you dont need to perform the steps below, then vote for this feature [vote here](https://aka.ms/portalfx/cloudtest/npmauth)
 
     1. Create a [service account with 2FA exemption](https://www.1eswiki.com/wiki/Service_Accounts).
     1. This is the [ link to grant the service account access ](https://onebranch.visualstudio.com/OneBranch/_wiki/wikis/OneBranch.wiki/3092/System-Account-Access-to-msazure-ADO-instance-and-SharePoint-Site) to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=connect&feed=AzurePortal .

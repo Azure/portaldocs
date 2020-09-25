@@ -719,11 +719,7 @@ public render() {
 View has default padding pre-applied for consistency with other portal experiences. You can apply the `reactview-nodefaultpadding` class to not use the standard padding.
 
 ### Debugging
-Debugging React Views with [official React Developer Tools](https://github.com/facebook/react/tree/master/packages/react-devtools#react-devtools) is supported only when portal is loaded with `&clientOptimizations=false` or `&clientOptimizations=bundle` flags.
-Use the tools within your browsers:
- - [Chrome extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
- - [Edge add-on](https://microsoftedge.microsoft.com/addons/detail/gpphkfbcpidddadnkolkpfckpihlkkil)
- - [Firefox add-on](https://addons.mozilla.org/firefox/addon/react-devtools/)
+Debugging React Views with React Developer Tools is supported only when portal is loaded with `&clientOptimizations=false` or `&clientOptimizations=bundle` flags. Use the keyboard shortcut Ctrl+Alt+D in a **focused** ReactView iframe to toggle the React Developer Tools.
 
 You can also use [official Redux Developer Tools](https://github.com/reduxjs/redux-devtools) to power up your Redux development workflow with enhanced state debugging capabilities like time-travel action replay and more (the same `&clientOptimizations=false` or `&clientOptimizations=bundle` flags are needed)!
 
