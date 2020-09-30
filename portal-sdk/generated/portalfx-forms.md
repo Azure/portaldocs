@@ -578,7 +578,7 @@ In C#:
 
 ```csharp
 
-[TypeMetadataModel(typeof(Person), "SamplesExtension.DataModels")]
+[TypeMetadataModel(typeof(Person), "DataModels")]
 [EntityType]
 public class Person
 {

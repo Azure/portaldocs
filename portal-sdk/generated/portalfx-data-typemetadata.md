@@ -140,8 +140,8 @@ At the top of any C# file using the `TypeMetadataModel` annotation, the followin
 ```xml
 
 <PropertyGroup>
-  <PortalEmitTypeMetadataTypeScript>true</PortalEmitTypeMetadataTypeScript>
-  <PortalEmitTypeMetadataTypeScriptTargetFolder>Client\_generated</PortalEmitTypeMetadataTypeScriptTargetFolder>
+ <PortalEmitTypeMetadataTypeScript>true</PortalEmitTypeMetadataTypeScript>
+  <PortalEmitTypeMetadataTypeScriptTargetFolder>Client</PortalEmitTypeMetadataTypeScriptTargetFolder>
   <BladeReferencesCodegenMode>Definitions</BladeReferencesCodegenMode>
   <PartReferencesCodegenMode>Definitions</PartReferencesCodegenMode>
 </PropertyGroup>
@@ -184,7 +184,7 @@ namespace Microsoft.Portal.Extensions.SamplesExtension.DataModels
     /// <summary>
     /// Representation of a computer component used by the hubs/browse sample.
     /// </summary>
-    [TypeMetadataModel(typeof(ComputerComponent), "SamplesExtension.DataModels")]
+    [TypeMetadataModel(typeof(ComputerComponent), "DataModels")]
     [Indexable]
     public class ComputerComponent
     {
@@ -286,7 +286,7 @@ namespace Microsoft.Portal.Extensions.SamplesExtension.DataModels
     /// <summary>
     /// Representation of a computer used by the hubs/browse sample.
     /// </summary>
-    [TypeMetadataModel(typeof(Computer), "SamplesExtension.DataModels")]
+    [TypeMetadataModel(typeof(Computer), "DataModels")]
     [Indexable]
     public class Computer
     {

@@ -251,7 +251,7 @@ To send initial data to the provider and optionally receive a result back you ca
 
 import * as Di from "Fx/DependencyInjection";
 import * as ClientResources from "ClientResources";
-import { ServerConfig } from "_generated/SamplesExtension/DataModels/ServerConfig";
+import { ServerConfig } from "DataModels/ServerConfig";
 
 /**
  * Parameter collector command view model class. The 'serverConfigCollector' property is referenced

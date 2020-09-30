@@ -83,7 +83,7 @@ The C# sample is located at `<dirParent>\SamplesExtension.DataModels/Person.cs`.
 
  ```csharp
 
-[TypeMetadataModel(typeof(Person), "SamplesExtension.DataModels")]
+[TypeMetadataModel(typeof(Person), "DataModels")]
 [EntityType]
 public class Person
 {
