@@ -53,7 +53,8 @@ Perform the following steps to open a blade from  a different extension.
 
 The portal SDK also generates strongly typed blade references for menu blades.  These blade references can be used to open menu blades, select a specific menu item and and even supply parameters to the menu blade content.
 
-Opening a menu blade
+<a name="navigating-to-other-content-container-apis-opening-a-menu-blade"></a>
+### Opening a menu blade
 
 ```typescript
 
@@ -64,7 +65,8 @@ this._container.openBlade(BladeReferences.forExtension("HubsExtension").forMenuB
 ```
 
 
-Opening a menu blade and passing customized parameters to the content blade
+<a name="navigating-to-other-content-container-apis-opening-a-menu-blade-and-passing-customized-parameters-to-the-content-blade"></a>
+### Opening a menu blade and passing customized parameters to the content blade
 
 ```typescript
 
@@ -83,7 +85,8 @@ this._container.openBlade(menuBladeReference);
 
 ```
 
-Opening the portals resource menu blade
+<a name="navigating-to-other-content-container-apis-opening-the-portals-resource-menu-blade"></a>
+### Opening the portals resource menu blade
 
 ```typescript
 const menuBladeRef = BladeReferences.forExtension("HubsExtension").forMenuBlade("ResourceMenuBlade", "overview").createReference({ id: "_ARM_ID_HERE" });
