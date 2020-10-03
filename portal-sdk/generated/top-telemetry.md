@@ -406,15 +406,6 @@ You can read [here](portalfx-telemetry-logging.md) more details about using the 
 <a name="overview-logging-telemetry-logging-telemetry-to-exttelemetry-table"></a>
 ### Logging telemetry to ExtTelemetry table
 
-You can use the Portal telemetry APIs to log telemetry. However, before you do so you will need to initialize the telemetry service.
-
-```ts
-  // Initialize the telemetry functionality and make it available for use.
-  MsPortalFx.Base.Diagnostics.Telemetry.initialize("ExtensionName", false /* traceBrowserInformation */ );
-```
-
-> Note that you don't need to trace browser information to your particular extension as this data is collected globally. However, if you would like the browser information in your own telemetry store set traceBrowserInformation to true.
-
 To log telemetry, you can call the `trace` method as shown below:
 
 ```ts
@@ -431,7 +422,7 @@ Telemetry logs go to ExtTelemetry table, which is available in Kusto in both Azu
 The recommended format for `name` column is 'Extension/Microsoft_Azure_NewExtension/Blade/NewBladeName', if the event is related to a blade.
 Do not stringify the `data` and `context` columns passed to the logs as the trace function does so automatically. Passing stringified versions of these parameters will result in hard to parse double-encoded strings in the back-end logs.
 
-> Every 60 seconds, when an extension's telemetry logs reach above 200 events per user per browser tab, we stop logging ExtTelemetry events utill the next 60 seconds window is started. In addition a telemetry throttled IcM alert is triggered to notify the extension partner.
+> Every 60 seconds, when an extension's telemetry logs reach above 500 events per user per browser tab, we stop logging ExtTelemetry events utill the next 60 seconds window is started. In addition a telemetry throttled IcM alert is triggered to notify the extension partner.
 
 <a name="overview-logging-telemetry-logging-errors-warnings-to-extevents-table"></a>
 ### Logging errors/warnings to ExtEvents table
