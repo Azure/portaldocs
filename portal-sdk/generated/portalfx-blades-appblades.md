@@ -177,9 +177,10 @@ function receiveMessage(event) {
     }
 
     var postMessageContainer = document.getElementById("post-message-container");
-    var divElement = document.createElement("div");
-    divElement.className = "post-message";
-
+    var divElement = document.getElementById(kind);
+    if (!divElement) {
+        return;
+    }
     var message;
 
     switch (kind) {
@@ -197,9 +198,7 @@ function receiveMessage(event) {
             break;
     }
 
-    var textNode = document.createTextNode(message);
-
-    divElement.appendChild(textNode);
+    divElement.innerText = message;
     postMessageContainer.appendChild(divElement);
 }
 

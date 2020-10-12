@@ -16,10 +16,10 @@ Absolute links are sanitized automatically in most kinds of blades and parts. Ne
 
 The absolute-link sanitization process consists of the following:
 
-1. If the link refers to `https://docs.microsoft.com` or `https://aka.ms`, the sanitizer will keep the link as is in public versions of the Portal, or automatically transform those links to point to the Government Clouds' approved deployment of those same services, when the Portal is running in any of these environments.
+1. If the link refers to `https://docs.microsoft.com`, the sanitizer will keep the link as is in public versions of the Portal, or automatically transform those links to point to the Government Clouds' approved deployment of those same services, when the Portal is running in any of these environments.
 2. Detect if the link is to one of the trusted domains configured in the global allow-list, or the extension-specific allow-list (if available). Notice that these allow lists depend on the environment (aka the domain) where the Portal is running.
     - If it's part of an allow list, then the link is rendered as is.
-    - If it's not part of an allow list, the link will point to a confirmation page, prompting the user to explictly acknowledge redirecting to an external site. This requirement is especially important for JEDI compliance.
+    - If it's not part of an allow list, the link will point to a confirmation page, prompting the user to explictly acknowledge redirecting to an external site. This requirement is especially important for compliance.
    For example, a template with the following:
 
     ```html
