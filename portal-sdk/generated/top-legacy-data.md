@@ -1874,8 +1874,6 @@ At the top of any C# file using the `TypeMetadataModel` annotation, the followin
 ```xml
 
 <PropertyGroup>
- <PortalEmitTypeMetadataTypeScript>true</PortalEmitTypeMetadataTypeScript>
-  <PortalEmitTypeMetadataTypeScriptTargetFolder>Client</PortalEmitTypeMetadataTypeScriptTargetFolder>
   <BladeReferencesCodegenMode>Definitions</BladeReferencesCodegenMode>
   <PartReferencesCodegenMode>Definitions</PartReferencesCodegenMode>
 </PropertyGroup>
