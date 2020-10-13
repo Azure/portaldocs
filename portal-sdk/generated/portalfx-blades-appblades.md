@@ -199,7 +199,6 @@ function receiveMessage(event) {
     }
 
     divElement.innerText = message;
-    postMessageContainer.appendChild(divElement);
 }
 
 ```
