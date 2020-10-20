@@ -755,12 +755,12 @@ module MsPortalFxForAsset {
                 /**
                  * The max number of selected resources supported by the command operation.
                  */
-                readonly maxSelectedItems?: number;
+                readonly maxSelectedItems: number;
 
                 /**
                  * The message shown when user tries to select more than supported items by the command operation.
                  */
-                readonly disabledMessage?: string;
+                readonly disabledMessage: string;
             }
 
             /**
