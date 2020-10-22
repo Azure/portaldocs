@@ -1,7 +1,7 @@
 <a name="unit-testing-a-reactview"></a>
 # Unit Testing a ReactView
 
-New react extNew extensions come set up with unit testing support, with the following libraries configured
+New react extensions come set up with unit testing support, with the following libraries configured
 
 - [Jest](https://jestjs.io/docs/en/getting-started)
 - [Enzyme](https://enzymejs.github.io/enzyme/)
