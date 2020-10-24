@@ -53,7 +53,6 @@ htmlTemplate: "" +
     "</div>",
 forExport: true,
 })
-@TemplateBlade.InjectableModel.Decorator(BladesArea.DataContext)
 export class ExportedBlade {
 
 ```
@@ -97,7 +96,7 @@ You'll find that you have to fix up any type references to your Parameters type,
 
 ```typescript
 
-public context: TemplateBlade.Context<SamplesExtension.ExportedBlade.Parameters, BladesArea.DataContext>;
+public context: TemplateBlade.Context<SamplesExtension.ExportedBlade.Parameters>;
 
 ```
 
