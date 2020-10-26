@@ -247,16 +247,13 @@ color pallette to help style the card:
 
 ```tsx
 import { Stack, StackItem } from "@fluentui/react/lib/Stack";
-import { getTheme, mergeStyleSets } from '@fluentui/react/lib/Styling';
-
-const theme = getTheme(); // Capture the current theme's pallette
+import { mergeStyleSets } from '@fluentui/react/lib/Styling';
+import { useTheme } from "@fluentui/react-theme-provider/lib/useTheme";
 
 const classNames = mergeStyleSets({
     listRootDiv: {
         width: "200px", // By restricting the width, we can create a card like layout
         float: "left",
-        /* using the theme's semantic colors, we can help the card standout from the background */
-        background: theme.semanticColors.bodyStandoutBackground,
         margin: "5px", // Put some padding around our cards
         padding: "5px",
     },
@@ -278,11 +275,14 @@ const classNames = mergeStyleSets({
 
 const onRenderCell = (resource: ResourceMetadata) => {
     /*
-    Here we create a layout that has a left side, big icon and a right side with the three properties listed.
-    To do this, we create a Horizontal stack of 200 px, with the first item being the Icon, and the second
-    being a vertical stack of our three property values.
+     Here we create a layout that has a left side, big icon and a right side with the three properties listed.
+     To do this, we create a Horizontal stack of 200 px, with the first item being the Icon, and the second
+     being a vertical stack of our three property values.
     */
-    return <div className={classNames.listRootDiv}>
+
+    // the useTheme hook allows us to grab the current correct color, and have it update as the portal theme changes
+    const backgroundColor = useTheme().semanticColors.bodyStandoutBackground;
+    return <div className={classNames.listRootDiv} styles={{ backgroundColor }}>
         <Stack horizontal>
             <StackItem >
                 <FrameworkIcon image={resource.icon} className={classNames.icon} />
@@ -416,7 +416,8 @@ import * as React from "react";
 import { versionId } from "@microsoft/azureportal-reactview/major-version/1";
 import { List } from "@fluentui/react/lib/List";
 import { Stack, StackItem } from "@fluentui/react/lib/Stack";
-import { getTheme, mergeStyleSets } from '@fluentui/react/lib/Styling';
+import { mergeStyleSets } from "@fluentui/react/lib/Styling";
+import { useTheme } from "@fluentui/react-theme-provider/lib/useTheme";
 import { batch } from "@microsoft/azureportal-reactview/Ajax";
 import { setTitle } from "@microsoft/azureportal-reactview/Az";
 import { ResourceMetadata, ArmResource } from "@microsoft/azureportal-reactview/ResourceManagement";
@@ -424,8 +425,6 @@ import { getAllAssetTypes } from "@microsoft/azureportal-reactview/AssetTypes";
 import { FrameworkIcon } from "@microsoft/azureportal-reactview/FrameworkIcon";
 import { SearchBox } from "@fluentui/react/lib/SearchBox";
 import { SubscriptionFilter } from "@microsoft/azureportal-reactview/SubscriptionFilter";
-
-const theme = getTheme();
 
 function getAllResources() {
     return batch<{ value: ArmResource[] }>({
@@ -447,7 +446,6 @@ const classNames = mergeStyleSets({
     listRootDiv: {
         width: "200px",
         float: "left",
-        background: theme.semanticColors.bodyStandoutBackground,
         margin: "5px",
         padding: "5px",
     },
@@ -467,7 +465,8 @@ const classNames = mergeStyleSets({
 });
 
 const onRenderCell = (resource: ResourceMetadata) => {
-    return <div className={classNames.listRootDiv}>
+    const backgroundColor = useTheme().semanticColors.bodyStandoutBackground;
+    return <div className={classNames.listRootDiv} style={{ backgroundColor }} >
         <Stack horizontal>
             <StackItem >
                 <FrameworkIcon image={resource.icon} className={classNames.icon} />
@@ -491,49 +490,48 @@ const onRenderCell = (resource: ResourceMetadata) => {
 
 @ReactView.ReduxFree.Decorator({
     versionId,
-    viewReady: (state: GettingStartedState) => !!state.resources
+    viewReady: (state: GettingStartedState) => !!state.resources,
 })
 export class GettingStarted extends React.Component<{}, GettingStartedState> {
     constructor(props: {}) {
         super(props);
         Promise.all([getAllResources(), getAllAssetTypes()])
-        .then(results => {
-            const [armResources, assetTypes] = results;
-            const resources = armResources.map(resource => {
-                return ResourceMetadata.parse(resource, assetTypes);
+            .then(results => {
+                const [armResources, assetTypes] = results;
+                const resources = armResources.map(resource => {
+                    return ResourceMetadata.parse(resource, assetTypes);
+                });
+                this.setState({ resources });
             });
-            this.setState({ resources });
-        });
         this.state = {};
         setTitle("Getting Started");
     }
-
-    public render() {
+    render() {
         if (this.state.resources === undefined) {
-            return <></>;
+            return <></>; // If we don't have anything to render, we return a React Fragment
         }
         return <>
             <SubscriptionFilter
                 onSubscriptionChange={(subs) => {
                     this.setState({
-                        subscriptionIds: subs.map(i => i.subscriptionId)
+                        subscriptionIds: subs.map(i => i.subscriptionId),
                     });
                 }}
             />
             <SearchBox
                 onChange={(_, value) => {
-                    this.setState({searchQuery: value.toLowerCase()});
+                    this.setState({ searchQuery: value.toLowerCase() });
                 }}
             />
             <List
                 items={this.state.resources
-                .filter(resource => {
-                    return resource.armId.resourceName.toLowerCase().includes(this.state.searchQuery || "")
-                })
-                .filter((resource => {
-                    return (this.state.subscriptionIds || []).includes(resource.armId.subscription);
-                }))
-            }
+                    .filter(resource => {
+                        return resource.armId.resourceName.toLowerCase().includes(this.state.searchQuery || "");
+                    })
+                    .filter((resource => {
+                        return (this.state.subscriptionIds || []).includes(resource.armId.subscription);
+                    }))
+                }
                 onRenderCell={onRenderCell}
                 getItemCountForPage={() => this.state.resources?.length}
             />
