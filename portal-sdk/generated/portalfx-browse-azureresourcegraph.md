@@ -233,16 +233,160 @@ A column tag has 5 properties.
       WidthInPixels="90" />
 ```
 
-- Name: The identifier which is used to uniquely refer to your column
-- DisplayName: A display string, __this has to be a reference to a resource__
-- Description: A description string, __this has to be a reference to a resource__
-- Format: See below table for possible format
-- WidthInPixels: String, which represents the default width of the column in pixels (e.g. "120")
+| Property | Description |
+| -- | -- |
+| Name | The identifier which is used to uniquely refer to your column |
+| DisplayName | A display string, __this has to be a reference to a resource__ |
+| LowerDisplayName | A lowercase display string, __this has to be a reference to a resource__ |
+| Description | A description string, __this has to be a reference to a resource__ |
+| Format | See below table for [`possible formats`](###Column%20Formats) |
+| Width | String, which represents the default width of the column (e.g. "120fr" - fractional units or "100px" - pixels) |
+| SortColumn | Optional name of a separate column returned by the query for sorting. If the column returned as `Name` is formatted, the `SortColumn` can be used to return a sortable format of the value (possibly original value) for sorting in the grid |
+| SourceUnits | Optional source units for a `Number` format column used to render the best appropriate units for the value (ie, bytes, KB, MB, etc.). See below table for [`possible units`](###Source%20Units) |
+| MaximumFractionDigits | Optional precision for a `Number` format column if the column might show fraction digits - often useful when using SourceUnits |
+| Blade | Optional blade reference for a `BladeLink` format column to specify the blade to launch when the link is clicked. Required for `BladeLink` format columns |
+| BladeParameterColumn | Optional parameter column for a `BladeLink` format column to specify the parameters for the blade. Required for `BladeLink` format columns.  See note below * |
+| OpenBladeAsContextPane | Optional boolean to open a `BladeLink` format column blade in the context pane. Default is to open as a blade, use `true` to open in context pane |
+| IconColumn | Optional name of separate column returned by the query for the icon for a `Status` format column. [`See notes about icons below`](###Column%20Icons). Required for `Status` format columns |
+| PreventSummary | Optional flag when summary (visualization) of the column should be prevented |
+| ColumnQueryForSummary | Optional column query for the summarization for this column used for the summary query drilldown |
+| SummaryQuery | Optional summarization query for this column if normal count() summarization is not appropriate. When the `ColumnQueryForSummary` property is set, that is prepended to the summary query |
+| SummaryColumn | Optional column name to be used for the summary for this column. This is only valid with there is a summary query. The value column should have this name and the count column should have this name with the 'Column' suffix. For example, if the SummaryColumn is 'mySummary', the query value column should be 'mySummary' and the count column should be 'mySummaryCount' |
+| SummaryVisualizations | Optional summary visualizations for the column. If not set, standard bar and donut charts along with grid (list) are used. See below table for [`possible summary visualizations`](###Possible%20Summary%20Visualizations). Comma-delimited list of possible values |
 
+Note for `BladeParameterColumn`:
+- If this is set and the result is a string, the column name will be the parameter name with that value.
+- If this is set and the result is an object, that object will be the entire parameters for the blade.
+
+<a name="browse-with-azure-resource-graph-pdl-definition-column-formats"></a>
+### Column Formats
 | Format option | Description |
-| ------------- | ----------- |
+| -- | -- |
 | String | String rendering of your column |
 | Resource | If the returned column is a ARM resource id, this column format will render the cell as the resources name and a link to the respective blade |
+| Date | Date rendering of your column |
+| Number | Number rendering of your column, can use the `SourceUnits` to help formatting (ie, bytes, kilobytes, megabytes) and `MaximumFractionDigits` to format a maximum precision for numbers with a fraction portion |
+| Location | String representation of an ARM location code localized for the user's locale (column should return location ID) |
+| BladeLink | A blade link column which allows the user to launch a blade represented by `Blade` using parameters returned by the `BladeParameterColumn` |
+| Tenant | String representation of an ARM tenant ID from the display name for the tenant (column should return tenant ID) |
+| Status | String rendering of your column with an icon which is return by `IconColumn`.  Currently only StatusBadge icons are supported (see list below) |
+
+<a name="browse-with-azure-resource-graph-pdl-definition-source-units"></a>
+### Source Units
+The delineated sections below show possible appropriate units in groups (ie, 20,000 metric bytes will show as 20 KB and 1,363,148 SI bytes will show as 1.3 GB).
+
+| Unit | Description |
+| -- | -- |
+| None | No units - same as not including units |
+|-|-|
+| Percentage | Source is in percentage |
+|-|-|
+| Bytes | Source is in metric bytes (divisor of 1000) |
+| Kilobytes | Source is in metric kilobytes (divisor of 1000) |
+| Megabytes | Source is in metric megabytes (divisor of 1000) |
+| Gigabytes | Source is in metric gigabytes (divisor of 1000) |
+| Terabytes | Source is in metric terabytes (divisor of 1000) |
+| Petabytes | Source is in metric petabytes (divisor of 1000) |
+|-|-|
+| BytesPerDay | Source is in metric bytes per day (divisor of 1000) |
+| BytesPerHour | Source is in metric bytes per hour (divisor of 1000) |
+| BytesPerMinute | Source is in metric bytes per minute (divisor of 1000) |
+| BytesPerSecond | Source is in metric bytes per second (divisor of 1000) |
+| KilobytesPerSecond | Source is in metric kilobytes per second (divisor of 1000) |
+| MegabytesPerSecond | Source is in metric megabytes per second (divisor of 1000) |
+| GigabytesPerSecond | Source is in metric gigabytes per second (divisor of 1000) |
+| TerabytesPerSecond | Source is in metric terabytes per second (divisor of 1000) |
+| PetabytesPerSecond | Source is in metric petabytes per second (divisor of 1000) |
+|-|-|
+| Count | Source is a count |
+| Thousand | Source is a count in thousands |
+| Million | Source is a count in millions |
+| Billion | Source is a count in billions |
+| Trillion | Source is a count in trillions |
+|-|-|
+| MicroSeconds | Source is in microseconds |
+| MilliSeconds | Source is in milliseconds |
+| Seconds | Source is in seconds |
+| Minutes | Source is in minutes |
+| Hours | Source is in hours |
+| Days | Source is in days |
+|-|-|
+| CountPerDay | Source is a count per day |
+| CountPerHour | Source is a count per hour |
+| CountPerMinute | Source is a count per minute |
+| CountPerSecond | Source is a count per second |
+| ThousandPerSecond | Source is a count in thousands per second |
+| MillionPerSecond | Source is a count in millions per second |
+| BillionPerSecond | Source is a count in billions per second |
+| TrillionPerSecond | Source is a count in trillions per second |
+|-|-|
+| Bytes_SI | Source is in SI bytes (divisor of 1024) |
+| Kilobytes_SI | Source is in SI kilobytes (divisor of 1024) |
+| Megabytes_SI | Source is in SI megabytes (divisor of 1024) |
+| Gigabytes_SI | Source is in SI gigabytes (divisor of 1024) |
+| Terabytes_SI | Source is in SI terabytes (divisor of 1024) |
+| Petabytes_SI | Source is in SI petabytes (divisor of 1024) |
+|-|-|
+| BytesPerDay_SI | Source is in SI bytes per day (divisor of 1024) |
+| BytesPerHour_SI | Source is in SI bytes per hour (divisor of 1024) |
+| BytesPerMinute_SI | Source is in SI bytes per minute (divisor of 1024) |
+| BytesPerSecond_SI | Source is in SI bytes per second (divisor of 1024) |
+| KilobytesPerSecond_SI | Source is in SI kilobytes per second (divisor of 1024) |
+| MegabytesPerSecond_SI | Source is in SI megabytes per second (divisor of 1024) |
+| GigabytesPerSecond_SI | Source is in SI gigabytes per second (divisor of 1024) |
+| TerabytesPerSecond_SI | Source is in SI terabytes per second (divisor of 1024) |
+| PetabytesPerSecond_SI | Source is in SI petabytes per second (divisor of 1024) |
+
+<a name="browse-with-azure-resource-graph-pdl-definition-column-icons"></a>
+### Column Icons
+
+Some columns require icons to be returned by the `IconColumn` column of the query. Possible values
+are outlined below.
+
+When an icon is returned by the query, the query should use the `{{Icon icon-name-here}}` escape sequence with no wrapping quotes as shown here:
+
+```kql
+where type == 'microsoft.web/sites'
+| extend status = case(
+    state == 'stopped', '{{Resource status.stopped, Module=BrowseResources}}',
+    state == 'running', '{{Resource status.running, Module=BrowseResources}}',
+    '{{Resource status.other, Module=BrowseResources}}')
+| extend statusIcon = case(
+    state == 'stopped', {{Icon StatusBadge.Stopped}},
+    state == 'running', {{Icon StatusBadge.Success}},
+    {{Icon StatusBadge.None}})
+| project name,resourceGroup,kind,location,id,type,subscriptionId,tags,status,statusIcon
+```
+
+<a name="browse-with-azure-resource-graph-pdl-definition-column-icons-valid-icons-for-a-status-column"></a>
+#### Valid Icons for a <code>Status</code> Column
+| Icon | Description |
+| -- | -- |
+| StatusBadge.Canceled | The canceled icon |
+| StatusBadge.Critical | The critical icon |
+| StatusBadge.Disabled | The disabled icon |
+| StatusBadge.Error | The error icon |
+| StatusBadge.Failed | The failed error icon |
+| <span>StatusBadge</span>.Info | The info alert icon |
+| StatusBadge.None | No icon |
+| StatusBadge.Pending | The pending icon |
+| StatusBadge.Stopped | The stopped icon |
+| StatusBadge.Success | The success or running icon |
+| StatusBadge.Unknown | The icon for unknown state |
+| StatusBadge.Update | The icon to update |
+| StatusBadge.Upsell | The icon for upsell |
+| StatusBadge.Warning | The warning icon |
+
+<a name="browse-with-azure-resource-graph-pdl-definition-possible-summary-visualizations"></a>
+### Possible Summary Visualizations
+| Visualization | Description |
+| -- | -- |
+| Map | Shows a map with pins for the counts of values. Source column must be a `Location` format column |
+| BarChart | Shows a bar chart for the counts of values |
+| DonutChart | Shows a donut chart for the counts of values |
+| Grid | Shows a grid (list) for the counts of values |
+| Default | All possible visualizations excluding `Map` |
+| DefaultWithMap | All possible visualizations including `Map` |
 
 <a name="browse-with-azure-resource-graph-pdl-definition-default-columns"></a>
 ### Default columns

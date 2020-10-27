@@ -2,6 +2,8 @@
 <a name="c-portal-test-framework"></a>
 # C# Portal Test Framework
 
+> [Choosing the right test Framework](portalfx-choosing-test-framework.md)
+
 <a name="c-portal-test-framework-overview"></a>
 ## Overview
 
