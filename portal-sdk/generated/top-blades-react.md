@@ -90,7 +90,8 @@ those before such a breaking change takes place. For more info on Az APIs, take 
 <a name="reactviews-getting-started"></a>
 ## Getting Started
 
-If you are a new extension, then following the [getting started guide](tutorial-getting-started.md) will create an extension that already onboarded to ReactViews. Please skip this section and continue on to the short guide below.
+If you are a new extension, then following the [getting started guide](top-extensions-getting-started.md) will create an extension that's already onboarded to ReactViews. 
+Once you've created your new extension you can skip the getting started section.
 
 Otherwise, if you are on a traditional extension this guide will onboard you to the latest set of ReactView tooling.
 
@@ -154,7 +155,7 @@ one is using the CLI `reactview-build` which provides a working out of the box s
 Your extension is most likely compatible with the CLI if:
 
 - Your ClientResource strings all end in "Resources" (e.g OverviewResources, ClientResources, CreateResources)
-- Your folders nested and setup as described in [Step One](#step-one).
+- Your folders nested and setup as described in [Create a folder](#create-a-folder).
 - You don't require any custom Webpack loaders/plugins besides style-loader
 
 You can always migrate from CLI to Node interface easily, migrating back may not work as easily. If you can use the CLI, it is the recommended approach.
@@ -302,7 +303,7 @@ If that's what you see, then head to the [Guides](#guides) to start building and
 <a name="reactviews-guides"></a>
 ## Guides
 
-- Once you've ensured your extension has ReactView support, try one of these next steps:
+Before following the guides below, please ensure your package version is updated to the latest version.
 - Guide: [Creating a new ReactView experience](top-react-guides-new.md)
 - Guide: [Unit Testing a ReactView](top-blades-react-unit-testing.md)
 
@@ -765,8 +766,6 @@ Instead your service will need to respond with `allow *`
 <a name="reactviews-frequently-asked-questions-faq-why-not-build-my-own-react-experience-in-a-frame"></a>
 ### Why not build my own React experience in a frame
 
-Traditionally, partner teams had to choose between
-
 Traditionally, teams that wanted to build with more modern tools in the Portal used FrameBlades or Az Extensions. However, both consistency and performance are very big problems in those worlds. Consistency as a problem is fairly straightforward: Portal controls aren't available, Portal styling can update and change without warning, themes can dynamically change, self owned accessibility story, and so on. Performance is a more complex problem, while React and Webpack and other modern tools can make your React app somewhat fast, it cannot compete with the traditional Template blades in terms of speed. This is because those frameworks must load and execute in the hot path, once loaded they are faster than Knockout but they've started the race from significantly further back. ReactViews solved this problem by having React and a handful of other libraries preloaded in an iFrame off screen, when a ReactView needs to be loaded the only cost in the hot path is downloading and executing your React components and dependencies. Further, since controls are shared between extensions the caching rate is substantially higher than they would be in non-shared frames.
 
 <a name="reactviews-known-gaps"></a>
@@ -796,7 +795,7 @@ The main difference is unlike the Knockout offering there is no container like c
 
 ReactViews currently only support authoring blade-like experiences. There is no part development support currently.
 
-[React UserVoice]: https://aka.ms/portalfx/request/react]
+[React UserVoice]: https://aka.ms/portalfx/request/react
 [React Bug]: https://aka.ms/portalfx/reactbug
 [React Teams link]: https://aka.ms/portalfx/reactteam
 [React StackOverflow]: https://aka.ms/portalfx/ask/react

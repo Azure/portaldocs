@@ -106,7 +106,6 @@ If you have the source code to the samples you can find the source code at this 
 import * as ClientResources from "ClientResources";
 import { ClickableLink } from "Fx/Composition";
 import * as TemplateBlade from "Fx/Composition/TemplateBlade";
-import * as BladesArea from "../BladesArea";
 import * as Dropdown from "Fx/Controls/DropDown";
 
 @TemplateBlade.Decorator({
@@ -115,7 +114,6 @@ import * as Dropdown from "Fx/Controls/DropDown";
     <div class="ext-statusoptions" data-bind="pcControl: statusBarState"/>
 </div>`,
 })
-@TemplateBlade.InjectableModel.Decorator(BladesArea.DataContext)
 export class TemplateBladeWithStatusBar {
     public title = ClientResources.templateBladeWithStatusBar;
     public subtitle: string;
@@ -123,7 +121,7 @@ export class TemplateBladeWithStatusBar {
     // Dropdown that manages the status of the blade and therefore the status bar
     public statusBarState: Dropdown.Contract<TemplateBlade.ContentState>;
 
-    public context: TemplateBlade.Context<void, BladesArea.DataContext>;
+    public context: TemplateBlade.Context<void>;
 
     public async onInitialize() {
         const { container } = this.context;
