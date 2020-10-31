@@ -347,25 +347,28 @@ async function setNugetCredentialProvider(currentOS) {
     await runCredProviderScript(currentOS, tmpPath, fileName);
 }
 /**
- * Check whether the .Net Framework 4.7.2 or later is installed.
- * @returns true if version is 4.7.2 or later is installed, false otherwise.
+ * Check whether the .Net Framework 4.7.2 is installed.
+ * @returns true if version is 4.7.2 is installed.
  */
 async function checkDotNetFxVersion() {
-    const command = `powershell.exe (Get-ItemProperty "HKLM:SOFTWARE\\Microsoft\\'NET Framework Setup'\\NDP\\v4\\Full").Release`;
-    try {
-        const result = await exec(command);
-        if (!result.stderr && Number(result.stdout) >= 461808) {
-            console.log(`**Executing: "${command}",
-             .Net Framework found with version 4.7.2 or later${os_1.EOL}`);
-            return true;
-        }
-        throw new Error();
+    const mostRecentNetVersionCmd = `powershell.exe (Get-ItemProperty "HKLM:SOFTWARE\\Microsoft\\'NET Framework Setup'\\NDP\\v4\\Full").Release`;
+    const testNetFx472RegKeyCmd = `powershell.exe Test-Path "HKLM:\\SOFTWARE\\Classes\\Installer\\Dependencies\\Microsoft.NetFx.MTPack_4.7.2"`;
+    //most recent installed release
+    const netFxReleaseResult = await exec(mostRecentNetVersionCmd);
+    const release = Number(netFxReleaseResult.stdout);
+    //registry key, may not be present on every machine as is dependent on how it was installed
+    const net472RegKeyExists = Boolean((await exec(testNetFx472RegKeyCmd)).stdout);
+    const netFxReleaseIn472Range = (!netFxReleaseResult.stderr && release >= 461808 && release < 528040);
+    const found = net472RegKeyExists || netFxReleaseIn472Range;
+    if (found) {
+        console.log(`**Found .NET Framework found with version 4.7.2. release:${release}, regkey:${net472RegKeyExists}.${os_1.EOL}`);
     }
-    catch (error) {
-        console.log(`**Executing: "${command}"`);
-        console.log(`\tResult: (false) ".Net Framework" does not exist.${os_1.EOL}`);
+    else {
+        console.log(`**.NET Framework 4.7.2 NOT found"`);
+        console.log(`\tcommand "${mostRecentNetVersionCmd} returned ${release || netFxReleaseResult.stderr}.`);
+        console.log(`\tcommand "${testNetFx472RegKeyCmd} returned ${net472RegKeyExists}.${os_1.EOL}`);
     }
-    return false;
+    return found;
 }
 /**
  * Helper method for prining message in console.
