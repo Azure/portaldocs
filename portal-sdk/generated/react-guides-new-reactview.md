@@ -1,7 +1,7 @@
 <a name="creating-a-new-reactview-experience"></a>
-# Creating a New ReactView Experience
+# Creating a new ReactView experience
 
-* [Creating a New ReactView Experience](#creating-a-new-reactview-experience)
+* [Creating a new ReactView experience](#creating-a-new-reactview-experience)
     * [Getting Setup](#creating-a-new-reactview-experience-getting-setup)
     * [Add Boilerplate](#creating-a-new-reactview-experience-add-boilerplate)
     * [Load the Data](#creating-a-new-reactview-experience-load-the-data)
@@ -12,7 +12,6 @@
     * [Filtering the cards](#creating-a-new-reactview-experience-filtering-the-cards)
     * [Putting it all together](#creating-a-new-reactview-experience-putting-it-all-together)
     * [Next Steps](#creating-a-new-reactview-experience-next-steps)
-
 
 
 ReactViews are the recommended way to build all new experiences within the portal. This guide assumes you have already onboarded your extension
