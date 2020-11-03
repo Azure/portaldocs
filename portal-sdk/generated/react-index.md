@@ -27,6 +27,7 @@
     * [Additional Features](#reactviews-additional-features)
         * [React Dev Tools](#reactviews-additional-features-react-dev-tools)
         * [Localization](#reactviews-additional-features-localization)
+        * [Theming](#reactviews-additional-features-theming)
     * [Getting Support](#reactviews-getting-support)
         * [Stack overflow](#reactviews-getting-support-stack-overflow)
         * [Teams](#reactviews-getting-support-teams)
@@ -475,6 +476,22 @@ More improvements are still being worked on in this space, including resize. If 
 Within ReactViews there's two parts to localization. For strings, localization is handled the same way as for traditional Knockout blades. Simply import your resource files after the .d.ts files have been generated, and at runtime
 we will hand your code the correct version of the file depending on the locale the user has selected. For other localization, such as timezones and currency, we recommend installing a third party library to help localize. For time,
 our recommended library is `luxon` and is what we use within the portal. For numbers, we recommend using the built in browser internationalization APIs.
+
+<a name="reactviews-additional-features-theming"></a>
+### Theming
+
+All fluent and portal provided react components are themed with the fluent azure theme. Additionally, they will
+update when the user changes the current theme in the portal.
+For more detailed documentation of theme usage see fluent's [react-theme-provider](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider) docs
+
+However, if you wish to access the theme directly in a react component there is a small gotcha to be aware of:
+
+Top-level ReactView blades that use decorators can access the theme, but won't be updated when the user changes the fluent theme.
+
+To ensure that a component re-renders when the theme is changed, any component that directly accesses the theme should:
+* be a child component of the top-level ReactView blade
+* be a functional component that uses fluent's [useTheme](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider#usetheme) hook OR
+* use fluent's [ThemeContext.Consumer](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider#themecontextconsumer)
 
 <a name="reactviews-getting-support"></a>
 ## Getting Support
