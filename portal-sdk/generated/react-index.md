@@ -28,6 +28,7 @@
         * [React Dev Tools](#reactviews-additional-features-react-dev-tools)
         * [Localization](#reactviews-additional-features-localization)
         * [Theming](#reactviews-additional-features-theming)
+        * [LocalStorage and SessionStorage](#reactviews-additional-features-localstorage-and-sessionstorage)
     * [Getting Support](#reactviews-getting-support)
         * [Stack overflow](#reactviews-getting-support-stack-overflow)
         * [Teams](#reactviews-getting-support-teams)
@@ -492,6 +493,12 @@ To ensure that a component re-renders when the theme is changed, any component t
 * be a child component of the top-level ReactView blade
 * be a functional component that uses fluent's [useTheme](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider#usetheme) hook OR
 * use fluent's [ThemeContext.Consumer](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider#themecontextconsumer)
+
+<a name="reactviews-additional-features-localstorage-and-sessionstorage"></a>
+### LocalStorage and SessionStorage
+
+LocalStorage and SessionStorage are both supported in ReactViews.
+They can both be used in exactly the same way you would expect to use them by accessing `window.localStorage` or `window.sessionStorage`
 
 <a name="reactviews-getting-support"></a>
 ## Getting Support
