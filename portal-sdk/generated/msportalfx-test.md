@@ -686,7 +686,11 @@ import testFx from 'MsPortalFx-Test';
 
 You can enable additional diagnostic logs by setting the following environment variable.
 
-> set DEBUG=testFx:warning,testFx:information,testFx:diagnostics
+> set DEBUG=testFx:warning,testFx:information,testFx:diagnostics*
+
+or
+
+> set DEBUG=testFx*
 
 
 <a name="msportalfx-test-debugging-callstack"></a>
