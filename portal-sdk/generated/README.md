@@ -127,7 +127,7 @@ The primary UI building block is a called a blade. A blade is like a page. It ge
 
 * [Overview](/portal-sdk/generated/top-extensions-blades.md)
 
-* [React Views](/portal-sdk/generated/top-blades-react.md)
+* [React Views](/portal-sdk/generated/react-index.md)
 
 * [TemplateBlade](/portal-sdk/generated/top-blades-templateblade.md)
 
@@ -280,9 +280,9 @@ The Ibiza team provides limited testing support. Due to resource constraints the
 
 * [Unit testing support](/portal-sdk/generated/top-extensions-unit-test.md)
 
-* [C# test framework (Open source)](/portal-sdk/generated/top-extensions-csharp-test-framework.md)
-
 * [Node.js test framework (Open source)](/portal-sdk/generated/top-extensions-node-js-test-framework.md)
+
+* [C# test framework (Open source)](/portal-sdk/generated/top-extensions-csharp-test-framework.md)
 
 When asking for assistance with a debugging UI (not unit test) test framework specific issues on stackoverflow, please include the following (if applicable):
 

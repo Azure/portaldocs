@@ -758,6 +758,12 @@ export default interface PortalContext {
         browserResolution: BrowserResolution;
     };
     /**
+     * The browserstack url the tests should run on.
+     * This field needs to be set if the tests are meant to run on browserstack
+     * and should not be set if the tests are meant to run locally.
+     */
+    browserStackUrl?: string;
+    /**
      * The path to the ChromeDriver binary.
      */
     chromeDriverPath?: string;
