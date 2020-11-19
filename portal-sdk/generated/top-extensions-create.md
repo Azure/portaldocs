@@ -16,7 +16,7 @@ If you are authoring a new create experience or moving an existing create to our
 <a name="create-getting-started"></a>
 ### Getting Started
 
-The  most recent Portal SDK contains a sample create in `SamplesExtension/Client/V2/Create/Engine/CreateArmEngineBlade.tsx`. This sample uses NoPDL and includes 3 essential tabs and 2 optional tabs. All the styling and validation patterns are included and can be easily augmented to meet your needs. The remainder of this document is intended to help you understand the key design principles and create a consistent experience.
+The  most recent Portal SDK contains a sample create in `SamplesExtension/Client/V2/Create/Engine/CreateArmEngineBlade.ts`. This sample uses NoPDL and includes 3 essential tabs and 2 optional tabs. All the styling and validation patterns are included and can be easily augmented to meet your needs. The remainder of this document is intended to help you understand the key design principles and create a consistent experience.
 
 <a name="create-related-design-guidelines"></a>
 ### Related design guidelines

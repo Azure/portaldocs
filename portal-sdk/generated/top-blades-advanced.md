@@ -101,7 +101,7 @@ A status bar can be displayed at the top of a blade. The status bar supports tex
 
 There is a sample for the status bar at [https://df.onecloud.azure-test.net/?feature.samplesextension=true#blade/SamplesExtension/TemplateBladeWithStatusBar](https://df.onecloud.azure-test.net/?feature.samplesextension=true#blade/SamplesExtension/TemplateBladeWithStatusBar).
 
-If you have the source code to the samples you can find the source code at this path: `Client/V2/Blades/Template/TemplateBladeWithStatusBar.tsx`. It is also included in the following code.
+If you have the source code to the samples you can find the source code at this path: `Client/V2/Blades/Template/TemplateBladeWithStatusBar.ts`. It is also included in the following code.
 
 import * as ClientResources from "ClientResources";
 import { ClickableLink } from "Fx/Composition";
@@ -166,7 +166,7 @@ No-pdl blades can be made pinnable by making the following changes to your code.
 
 1. Return a `PartReference` instance to a Part you design.  The Part should open the Blade when clicked.
 
-These concepts are illustrated in the sample located at `<dir>/Client/V2/Blades/Pinning/PinnableBlade.tsx` and in the working copy located at [https://df.onecloud.azure-test.net/#blade/SamplesExtension/PinnableBlade/personId/111](https://df.onecloud.azure-test.net/#blade/SamplesExtension/PinnableBlade/personId/111).
+These concepts are illustrated in the sample located at `<dir>/Client/V2/Blades/Pinning/PinnableBlade.ts` and in the working copy located at [https://df.onecloud.azure-test.net/#blade/SamplesExtension/PinnableBlade/personId/111](https://df.onecloud.azure-test.net/#blade/SamplesExtension/PinnableBlade/personId/111).
 
 <a name="advanced-topics-exception-cases-that-affect-the-entire-blade"></a>
 ### Exception cases that affect the entire blade

@@ -157,8 +157,8 @@ The design of **simple edit form** in context pane is shown below:
 </div>
 Button labels and behavior:
 
-* "Save" – validate fields and either show invalid fields indication or save the changes and close the form
-* "Cancel" – close the form without performing validation
+* "Save" – validate fields and either show invalid fields indication or save the changes and close the dialog
+* "Cancel" – close the dialog without performing validation
 
  The design of **action form** in context pane is shown below :
 
@@ -168,8 +168,8 @@ Button labels and behavior:
 
 Button labels and behavior:
 
-* "\<same as action\>" – validate fields and either show invalid fields indication or perform the action and close the form
-* "Cancel" – close the form without performing validation
+* "\<same as action\>" – validate fields and either show invalid fields indication or perform the action and close the dialog
+* "Cancel" – close the dialog without performing validation
 
 The design of a form in context pane with notification toast after submission is shown below:
 
@@ -299,7 +299,7 @@ There are 3 types of forms to use for full screen page: complex edit form, simpl
 
 Complex edit form in full screen page is used for changing existing values and it is complex so that users need time to fill out and save multiple times along the way.
 
-* Command bar is not allowed inside the full screen page
+* Command bar is not allowed inside the context pane
 * Keep form open after users click "Apply" button or "Discard changes" button
 * Close form and prompt users to save or discard change after users click "Close" button
 * Use a status bar to inform the status of applied or discarded changes: successful (green), failed (red), or in progress (blue)
@@ -339,8 +339,8 @@ The design of simple edit form in full screen page is shown below:
 
 Button labels and behavior:
 
-* "Save" – validate fields and either show invalid fields indication or save the changes and close the form
-* "Cancel" – close the form without performing validation
+* "Save" – validate fields and either show invalid fields indication or save the changes and close the dialog
+* "Cancel" – close the dialog without performing validation
 
 The design of action form in full screen page is shown below:
 
@@ -350,8 +350,8 @@ The design of action form in full screen page is shown below:
 
 Button labels and behavior:
 
-* "\<same as action\>" – validate fields and either show invalid fields indication or perform the action and close the form
-* "Cancel" – close the form without performing validation
+* "\<same as action\>" – validate fields and either show invalid fields indication or perform the action and close the dialog
+* "Cancel" – close the dialog without performing validation
 
 The design of form with notification toast after submission is shown below:
 
@@ -444,9 +444,9 @@ The design for submitting and canceling a form should follow these recommendatio
 
 Summary of buttons and corresponding behaviors:
 
-* "Save" – validate fields and either show invalid fields indication or save the changes and close the form
-* "Cancel" – close the form without performing validation
-* "\<same as action\>" – validate fields and either show invalid fields indication or perform the action and close the form
+* "Save" – validate fields and either show invalid fields indication or save the changes and close the dialog
+* "Cancel" – close the dialog without performing validation
+* "\<same as action\>" – validate fields and either show invalid fields indication or perform the action and close the dialog
 * "Apply" – validate fields and either show invalid fields indication or save the changes and remain on the same form
 * "Discard changes" – discard the changes and remain on the same form
 * "Close" - prompt user to save or discard the changes and close the form

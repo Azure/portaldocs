@@ -4,7 +4,7 @@
 <a name="azure-portal-sdk-packages-updating-your-extension-to-a-newer-version-of-the-sdk"></a>
 ## Updating your extension to a newer version of the SDK
 
-Updating your extensions version of the Azure Portal SDK simply involves updating the versions of the NuGet packages and node modules that the extension references and updating any content files, such as *.d.ts and *.pde, that those packages deliver.
+Updating your extensions version of the Azure Portal SDK simply involves updating the versions of the NuGet packages and node modules that the extension references and updating any content files, such as *.d.ts and *.pde, that those packages deliver.  
 
 <a name="azure-portal-sdk-packages-updating-your-extension-to-a-newer-version-of-the-sdk-updating-your-nuget-packages"></a>
 ### Updating your NuGet Packages
@@ -52,7 +52,7 @@ In order to download the NuGet packages required for extension development conne
 Portal SDK NuGet packages are published to an internal Azure DevOps Artifact registry.
 
 
-NuGet packages are published to the [Official feed](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal) for internal consumers and then mirrored to the [AzurePortal feed](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal).
+NuGet packages are published to the [Official feed](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal) for internal consumers and then mirrored to the [AzurePortal feed](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal). 
 For internal teams depending on your internal build system the configuration of how to consume this feed will vary.  For the latest guidance on consuming the feed within your build system, consult your build system's documentation. For those using 1ES systems, see the NuGet in 1ES guide located at [https://www.1eswiki.com/wiki/NuGet_in_1ES](https://www.1eswiki.com/wiki/NuGet_in_1ES).
 
 Third party extensions should use the AzurePortal feed. To connect
@@ -67,7 +67,7 @@ Third party extensions should use the AzurePortal feed. To connect
 <a name="azure-portal-sdk-packages-package-references-one-time-setup-to-configure-npm-registry-for-development"></a>
 ### One time setup to Configure NPM registry for development
 
-Portal SDK Node Modules are only published to Microsoft internal NPM registries. Once onboarded you will need to add a reference to the [Azure Portal Artifact feed](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal).
+Portal SDK Node Modules are only published to Microsoft internal NPM registries. Once onboarded you will need to add a reference to the [Azure Portal Artifact feed](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal). 
 
 1. navigate to the [Azure Portal Artifact feed]
 1. Click `Connect to Feed`
@@ -99,9 +99,9 @@ After installation, NuGet packages that are used for development can be viewed i
 | Package | Purpose |
 | ------- | ------- |
 | [@microsoft/hostingservice (node module)](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=%40microsoft%2Fportalhostingservice&protocolType=Npm&version=1.182.2201) | Contains local version of hosting service for dev/debug runtime used during extension development. |
-| [Microsoft.Portal.Tools](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Portal.Tools&protocolType=NuGet&version=5.0.302.26601) | 	Contains PDC, Ev2 generator, precompiler, build target files (.target), Definition files, and TypeScript compiler. |
-| [Microsoft.Portal.Framework](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Portal.Framework&protocolType=NuGet&version=5.0.302.26601) | Contains framework assemblies required for extension development. |
-| [Microsoft.Portal.Security.AadCore](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Portal.Security.AadCore&protocolType=NuGet&version=5.0.302.26601)	| Contains AAD module used for auth. |
+| [Microsoft.Portal.Tools](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Portal.Tools&protocolType=NuGet&version=5.0.302.26601) | 	Contains PDC, Ev2 generator, precompiler, build target files (.target), Definition files, and TypeScript compiler. | 
+| [Microsoft.Portal.Framework](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Portal.Framework&protocolType=NuGet&version=5.0.302.26601) | Contains framework assemblies required for extension development. | 
+| [Microsoft.Portal.Security.AadCore](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Portal.Security.AadCore&protocolType=NuGet&version=5.0.302.26601)	| Contains AAD module used for auth. | 
 
 
 <a name="azure-portal-sdk-packages-package-references-publishing-in-the-marketplace"></a>
@@ -109,17 +109,17 @@ After installation, NuGet packages that are used for development can be viewed i
 
 | Package | Purpose |
 | ------- | ------- |
-| [Microsoft.Azure.Gallery.AzureGalleryUtility](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Azure.Gallery.AzureGalleryUtility&protocolType=NuGet&version=5.1.0.19) | Contains tools to package, upload and update gallery items in the Azure Portal marketplace.|
-| [Microsoft.Azure.Gallery.Common](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Azure.Gallery.Common&protocolType=NuGet&version=5.1.0.19) | Common packages used by Microsoft.Azure.Gallery.AzureGalleryUtility|
+| [Microsoft.Azure.Gallery.AzureGalleryUtility](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Azure.Gallery.AzureGalleryUtility&protocolType=NuGet&version=5.1.0.19) | Contains tools to package, upload and update gallery items in the Azure Portal marketplace.| 
+| [Microsoft.Azure.Gallery.Common](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Azure.Gallery.Common&protocolType=NuGet&version=5.1.0.19) | Common packages used by Microsoft.Azure.Gallery.AzureGalleryUtility| 
 
 <a name="azure-portal-sdk-packages-package-references-testing"></a>
 ### Testing
 
 | Package | Purpose | Document |
 | ------- | ------- | -------- |
-| [msportalfx-test](https://aka.ms/portalfx/msportalfx-test/package) (node module) | Provides APIs for authoring UI-based test cases with Selenium in TypeScript. |
-| [msportalfx-ut](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=msportalfx-ut&protocolType=Npm&version=5.302.26601) (node module)	| Provides APIs for authoring Unit Tests against extension code in TypeScript. Includes runtime, APIs, test runner support, trx and junit output for CI and code coverage reporting. See [top-extensions-unit-test.md](top-extensions-unit-test.md) for more details. |
-| [Microsoft.Portal.TestFramework](https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=Official%40Local&package=Microsoft.Portal.TestFramework&protocolType=NuGet&_a=package) | Provides APIs for writing UI-based test cases with Selenium authored in CSharp. For more information about using the test framework, see [top-extensions-csharp-test-framework.md](top-extensions-csharp-test-framework.md). |
+| [msportalfx-test](https://www.npmjs.com/package/msportalfx-test) (node module) | Provides APIs for authoring UI-based test cases with Selenium in TypeScript. | 
+| [msportalfx-ut](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=msportalfx-ut&protocolType=Npm&version=5.302.26601) (node module)	| Provides APIs for authoring Unit Tests against extension code in TypeScript. Includes runtime, APIs, test runner support, trx and junit output for CI and code coverage reporting. See [top-extensions-unit-test.md](top-extensions-unit-test.md) for more details. | 
+| [Microsoft.Portal.TestFramework](https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=Official%40Local&package=Microsoft.Portal.TestFramework&protocolType=NuGet&_a=package) | Provides APIs for writing UI-based test cases with Selenium authored in CSharp. For more information about using the test framework, see [top-extensions-csharp-test-framework.md](top-extensions-csharp-test-framework.md). | 
 | [Microsoft.Portal.TestFramework.UnitTest](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Portal.TestFramework.UnitTest&protocolType=NuGet&version=5.0.302.26601) | The [msportalfx-ut](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=msportalfx-ut&protocolType=Npm&version=5.302.26601)  node module shipped in a NuGet package for those that cannot consume the internal package source that is located at [here](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=msportalfx-ut&protocolType=Npm&version=5.302.26601), or are on CoreXT or similar IDE's that require offline/disconnected builds. For more information about unit testing, see [top-extensions-unit-test.md](top-extensions-unit-test.md). |
 
 <a name="azure-portal-sdk-packages-package-references-shared-packages"></a>
@@ -129,23 +129,23 @@ Portal Definition Exports, or PDE's, are extensions that are maintained by teams
 
 | Package | Purpose | Document |
 | ------- | ------- | -------- |
-| [Microsoft.Portal.Extensions.KeyVault](https://msazure.visualstudio.com/One/_packaging?feed=AzurePortal&_a=package&package=Microsoft.Portal.Extensions.KeyVault&protocolType=NuGet) | Blades and parts shared by the KeyVault extension. | [portalfx-pde-keyvault.md](portalfx-pde-keyvault.md) |
-| [Microsoft.Portal.Extensions.AAD](https://msazure.visualstudio.com/One/_packaging?feed=AzurePortal&_a=package&package=Microsoft.Portal.Extensions.AAD&protocolType=NuGet) | Blades and parts shared by the AAD extension. | [portalfx-pde-adrbac.md](portalfx-pde-adrbac.md) |
-| [Microsoft.Portal.Extensions.Billing](https://msazure.visualstudio.com/One/_packaging?feed=AzurePortal&_a=package&package=Microsoft.Portal.Extensions.Billing&protocolType=NuGet) | Blades and parts shared by the Billing extension. | [portalfx-pde-billing.md](portalfx-pde-billing.md) |
-| [Microsoft.Portal.Extensions.Hubs](https://msazure.visualstudio.com/One/_packaging?feed=AzurePortal&_a=package&package=Microsoft.Portal.Extensions.Hubs&protocolType=NuGet) | Blades and parts shared by the Hubs extension. | [portalfx-hubsextension-pde.md](portalfx-hubsextension-pde.md) |
-| [Microsoft.Portal.Extensions.Insights](https://msazure.visualstudio.com/One/_packaging?feed=AzurePortal&_a=package&package=Microsoft.Portal.Extensions.Insights&protocolType=NuGet) | Blades and parts shared by the Insights extension. | [portalfx-pde-azureinsights.md](portalfx-pde-azureinsights.md) |
-| [Microsoft.Portal.Extensions.Monitoring](https://msazure.visualstudio.com/One/_packaging?feed=AzurePortal&_a=package&package=Microsoft.Portal.Extensions.Monitoring&protocolType=NuGet) | Blades and parts shared by the Monitoring extension. | [portalfx-pde-monitoring.md](portalfx-pde-monitoring.md) |
+| [Microsoft.Portal.Extensions.KeyVault](https://msazure.visualstudio.com/One/_packaging?feed=AzurePortal&_a=package&package=Microsoft.Portal.Extensions.KeyVault&protocolType=NuGet) | Blades and parts shared by the KeyVault extension. | [portalfx-pde-keyvault.md](portalfx-pde-keyvault.md) | 
+| [Microsoft.Portal.Extensions.AAD](https://msazure.visualstudio.com/One/_packaging?feed=AzurePortal&_a=package&package=Microsoft.Portal.Extensions.AAD&protocolType=NuGet) | Blades and parts shared by the AAD extension. | [portalfx-pde-adrbac.md](portalfx-pde-adrbac.md) | 
+| [Microsoft.Portal.Extensions.Billing](https://msazure.visualstudio.com/One/_packaging?feed=AzurePortal&_a=package&package=Microsoft.Portal.Extensions.Billing&protocolType=NuGet) | Blades and parts shared by the Billing extension. | [portalfx-pde-billing.md](portalfx-pde-billing.md) | 
+| [Microsoft.Portal.Extensions.Hubs](https://msazure.visualstudio.com/One/_packaging?feed=AzurePortal&_a=package&package=Microsoft.Portal.Extensions.Hubs&protocolType=NuGet) | Blades and parts shared by the Hubs extension. | [portalfx-hubsextension-pde.md](portalfx-hubsextension-pde.md) | 
+| [Microsoft.Portal.Extensions.Insights](https://msazure.visualstudio.com/One/_packaging?feed=AzurePortal&_a=package&package=Microsoft.Portal.Extensions.Insights&protocolType=NuGet) | Blades and parts shared by the Insights extension. | [portalfx-pde-azureinsights.md](portalfx-pde-azureinsights.md) | 
+| [Microsoft.Portal.Extensions.Monitoring](https://msazure.visualstudio.com/One/_packaging?feed=AzurePortal&_a=package&package=Microsoft.Portal.Extensions.Monitoring&protocolType=NuGet) | Blades and parts shared by the Monitoring extension. | [portalfx-pde-monitoring.md](portalfx-pde-monitoring.md) | 
 
 <a name="azure-portal-sdk-packages-package-references-deprecated-packages"></a>
 ### Deprecated packages
 
-The following NuGet packages have been deprecated. Do not use these packages when building new extensions.
+The following NuGet packages have been deprecated. Do not use these packages when building new extensions. 
 
 | Package | Purpose |
 | ------- | ------- |
 | Microsoft.Portal.Azure.Website | Sideload your extension instead, as specified in [top-extensions-sideloading.md](top-extensions-sideloading.md). |
 | Microsoft.Portal.Azure.WebsiteNoAuth | Sideload your extension instead, as specified in [top-extensions-sideloading.md](top-extensions-sideloading.md). |
 | Microsoft.Portal.Framework.Scripts | Use Microsoft.Portal.TestFramework.UnitTest instead, as specified in [top-extensions-unit-test.md](top-extensions-unit-test.md). |
-| Microsoft.Portal.Tools.Etw | The recommended practice is to use the Extension Hosting Service as specified in [top-extensions-hosting-service.md](top-extensions-hosting-service.md) instead of custom deployment, as specified in [top-extensions-custom-deployment.md](top-extensions-custom-deployment.md). If you are self-hosting your extension, then this package provides the `EtwRelatedFilesUtility.exe` tool and sample configurations.  |
+| Microsoft.Portal.Tools.Etw | The recommended practice is to use the Extension Hosting Service as specified in [top-extensions-hosting-service.md](top-extensions-hosting-service.md) instead of custom deployment, as specified in [top-extensions-custom-deployment.md](top-extensions-custom-deployment.md). If you are self-hosting your extension, then this package provides the `EtwRelatedFilesUtility.exe` tool and sample configurations.  | 
 | Microsoft.Portal.TypeMetadata | Author typemetadata directly instead of using this package, as specified in [portalfx-data-typemetadata.md#non-generated-type-metadata](portalfx-data-typemetadata.md#non-generated-type-metadata). |
-| [Microsoft.Portal.Tools.ContentUnbundler](https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=Official%40Local&package=Microsoft.Portal.Tools.ContentUnbundler&protocolType=NuGet&_a=package) | This NuGet has been deprecated. The recommended practice is to generate HostingService artifacts as part of native build. [Extension Hosting Service](top-extensions-hosting-service.md). |
+| [Microsoft.Portal.Tools.ContentUnbundler](https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=Official%40Local&package=Microsoft.Portal.Tools.ContentUnbundler&protocolType=NuGet&_a=package) | This NuGet has been deprecated. The recommended practice is to generate HostingService artifacts as part of native build. [Extension Hosting Service](top-extensions-hosting-service.md). | 

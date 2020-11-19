@@ -6,11 +6,16 @@
         * [Why build a ReactView](#reactviews-what-is-a-reactview-why-build-a-reactview)
         * [Breaking Change](#reactviews-what-is-a-reactview-breaking-change)
     * [What is Az](#reactviews-what-is-az)
+    * [Getting Started](#reactviews-getting-started)
+        * [Create a folder](#reactviews-getting-started-create-a-folder)
+        * [Install the packages](#reactviews-getting-started-install-the-packages)
+        * [Create your build script](#reactviews-getting-started-create-your-build-script)
+            * [Onboarding to CLI Based Build](#reactviews-getting-started-create-your-build-script-onboarding-to-cli-based-build)
+            * [Onboarding to the Node API based build](#reactviews-getting-started-create-your-build-script-onboarding-to-the-node-api-based-build)
+        * [Integrate](#reactviews-getting-started-integrate)
+        * [Validate](#reactviews-getting-started-validate)
     * [Guides](#reactviews-guides)
-        * [Getting Started - Onboarding your existing extension](#reactviews-guides-getting-started-onboarding-your-existing-extension)
-        * [Creating a new ReactView experience](#reactviews-guides-creating-a-new-reactview-experience)
-        * [Unit Testing a ReactView](#reactviews-guides-unit-testing-a-reactview)
-        * [Migrating Knockout controls to React components](#reactviews-guides-migrating-knockout-controls-to-react-components)
+    * [Knockout to React controls](#reactviews-knockout-to-react-controls)
     * [Libraries Explained](#reactviews-libraries-explained)
         * [Redux and React-Redux](#reactviews-libraries-explained-redux-and-react-redux)
             * [What is Redux](#reactviews-libraries-explained-redux-and-react-redux-what-is-redux)
@@ -27,8 +32,6 @@
     * [Additional Features](#reactviews-additional-features)
         * [React Dev Tools](#reactviews-additional-features-react-dev-tools)
         * [Localization](#reactviews-additional-features-localization)
-        * [Theming](#reactviews-additional-features-theming)
-        * [LocalStorage and SessionStorage](#reactviews-additional-features-localstorage-and-sessionstorage)
     * [Getting Support](#reactviews-getting-support)
         * [Stack overflow](#reactviews-getting-support-stack-overflow)
         * [Teams](#reactviews-getting-support-teams)
@@ -64,13 +67,13 @@ install most packages, and testing with most popular open source frameworks (jes
 
 ReactViews are the current recommended approach for building new experiences. That being said, there are still gaps we're actively working on closing;
 For a list of gaps take a look at the [known gaps](#known-gaps) below. Unless there's a blocking gap, your team is highly encouraged to build all new
-experiences as ReactViews. They combine the performance, reliability, security, and consistency of traditional Knockout blades with the flexibility of
+experiences as ReactViews. They combine the performance, reliability, security, and consistency of traditional knockout blades with the flexibility of
 framed experiences.
 
 <a name="reactviews-what-is-a-reactview-breaking-change"></a>
 ### Breaking Change
 
-ReactViews do not have access to MsPortalFx or Fx modules. Additionally, jQuery, Knockout, and Q are not loaded or accessible from within your
+ReactViews do not have access to MsPortalFx or Fx modules. Additionally, jQuery, knockout, and Q are not loaded or accessible from within your
 ReactView. You may load your own versions of these libraries if you need them, but the framework does not provide them for you out of the box. Many
 teams have made significant investments in the traditional Template blade and MsPortalFx world, for those teams we provide a construct called a
 ReactModel that runs within your extension and has access to redux primitives as a way of facilitating communication between your ReactView and the
@@ -79,40 +82,236 @@ MsPortalFx context.
 <a name="reactviews-what-is-az"></a>
 ## What is Az
 
-Az (imported as `@microsoft/azureportal-reactview/Az`) is a set of APIs that is provided as a fill in for general Portal interactions, Template blade
+Az (imported as @microsoft/azureportal-reactview/Az) is a set of APIs that is provided as a fill in for general Portal interactions, Template blade
 authors can generally view Az as being the substitute for container APIs. Additionally, there are a handful of other APIs on Az around subscriptions,
 feature flags, and logging. In the long run we will split out the non-container functionality into separate modules. We're actively working on creating
-those before such a breaking change takes place. For more info on Az APIs, take a look at the [full documentation](react-az-api.md).
+those before such a breaking change takes place. For more info on Az APIs, take a look at the [full documentation](#portalfx-react-az.md).
+
+<a name="reactviews-getting-started"></a>
+## Getting Started
+
+If you are a new extension, then following the [getting started guide](top-extensions-getting-started.md) will create an extension that's already onboarded to ReactViews. 
+Once you've created your new extension you can skip the getting started section.
+
+Otherwise, if you are on a traditional extension this guide will onboard you to the latest set of ReactView tooling.
+
+ReactViews use an NPM based toolchain and a completely separate build pipeline from a traditional extension for generating assets,
+however, these assets will continue to be dropped into the same output folder in order to be packaged for hosting service consumption.
+To do this, we'll do the following:
+
+1. [Create a folder](#create-a-folder) nested under your Client or TypeScript folder. All your ReactView code will live in this folder.
+2. [Install the packages](#install-the-packages) azureportal-reactview and azureportal-reactview-tools from the AzurePortal registry.
+3. [Create your build script](#create-your-build-script) which may be out of the box configuration, or a custom case.
+4. [Integrate](#integrate) the ReactView build with the Knockout build.
+5. [Validate](#validate) that you can load the Test ReactView.
+
+<a name="reactviews-getting-started-create-a-folder"></a>
+### Create a folder
+
+Create a folder within your Client or TypeScript folder, which is side by side with your extension's existing code.
+Typically, this folder is called ReactViews or React with a nested folder called Views.
+If you know you need a model, create the nested structure otherwise just use a single folder called ReactViews.
+Within this folder run `npm init -y` which will create a `package.json` file.
+
+Finally, in your extension's root tsconfig.json file, add the new folder to the exclude entry. It will look something like:
+
+```javascript
+{
+    "exclude": [
+        "Client/React/Views/**/*"
+    ]
+}
+```
+
+<a name="reactviews-getting-started-install-the-packages"></a>
+### Install the packages
+
+Next to the `package.json` create a new file called `.npmrc`, this file will contain
+the information connecting you to the AzurePortal registry. The contents should be:
+
+```ini
+registry=https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/
+always-auth=true
+allow-same-version=true
+```
+
+The next step is to authenticate with the feed, and install the packages. You can do this with the following npm commands (run from within the same folder):
+
+```sh
+npm install -g vsts-npm-auth --registry https://registry.npmjs.com --always-auth false
+vsts-npm-auth -R -config .npmrc
+npm install --save @microsoft/azureportal-reactview
+npm install --save-dev @microsoft/azureportal-reactview-tools
+```
+
+<a name="reactviews-getting-started-create-your-build-script"></a>
+### Create your build script
+
+As stated earlier, ReactView assets are generated entirely independently, using both Webpack and TypeScript.
+In order to successfully integrate with the MsPortalFx build pipeline, we provide tools that come with default webpack and typescript configuration.
+This tool is included as part of the `@microsoft/azureportal-reactview-tools` package. There are two ways to consume the build,
+one is using the CLI `reactview-build` which provides a working out of the box solution for most teams. The second option, for advanced scenarios, is to use the Node API.
+
+Your extension is most likely compatible with the CLI if:
+
+- Your ClientResource strings all end in "Resources" (e.g OverviewResources, ClientResources, CreateResources)
+- Your folders nested and setup as described in [Create a folder](#create-a-folder).
+- You don't require any custom Webpack loaders/plugins besides style-loader
+
+You can always migrate from CLI to Node interface easily, migrating back may not work as easily. If you can use the CLI, it is the recommended approach.
+
+Regardless of which method you choose, the first step is to copy the `tsconfig.extension.json` file into your new ReactView folder, and rename it to `tsconfig.json`.
+
+Additionally, let's copy the `Test.ReactView.tsx` file from [here][Test ReactView], so we can test our build with it. Don't worry about the contents for now.
+
+[Test ReactView]: https://msazure.visualstudio.com/One/_git/AzureUX-TemplateExtension?path=%2Fsrc%2FDefault%2FExtension%2FClient%2FReactViews%2FTest.ReactView.tsx
+
+<a name="reactviews-getting-started-create-your-build-script-onboarding-to-cli-based-build"></a>
+#### Onboarding to CLI Based Build
+
+Identify the output folder of your existing MsPortalFx base code relative to the ReactView folder.
+It might be something like: `../../Output/`, append the current folder structure to that to maintain the shape.
+Within your `package.json` file, add the following script entries, substituting this new directory where appropriate:
+
+```javascript
+{
+    "scripts": {
+        "build": "reactview-build --outputDirectory ../../Output/ReactViews/",
+        "build:dev": "reactview-build --development --outputDirectory ../../Output/ReactViews/",
+        "watch": "reactview-build --watch --development --outputDirectory ../../Output/ReactViews/"
+    }
+}
+```
+
+After saving the file, running `npm run build` should output:
+
+```text
+Starting reactview-build...
+Finished reactview-build without errors!
+Wrote files to: [The output directory you configured]
+```
+
+If you encounter build errors, you should be able to find answers on your favorite search engine. The number one issue that teams encounter is
+around import statements. Webpack demands that your imports be in one of the following shapes (most to least preferred):
+
+```typescript
+import { x, y } from "someModule"; // This enables webpack to tree shake everything except x and y
+import someDefault from "someModule"; // This is a default import, also allows proper tree shaking
+import * as something from "someModule"; // This imports everything from a module and can break tree shaking
+```
+
+The following are examples of import staments that generally have to be rewritten:
+
+```typescript
+const { x, y } = require("someModule"); // This should be converted to the first option above
+import something = require("someModule"); // this should be converted to the third option above
+```
+
+These odd style of imports are most often used with open source libraries that were hand converted to AMD modules or client resource files.
+
+Otherwise, head to the directory was configured, and check if `Test.ReactView.js` was emitted. If not, try running `npm run build -- --traceOutput` to see where each file is being emitted with more verbosity.
+
+If the file, is there, everything is working as expected! [Skip to integration](#integrate).
+
+<a name="reactviews-getting-started-create-your-build-script-onboarding-to-the-node-api-based-build"></a>
+#### Onboarding to the Node API based build
+
+If the above steps did not work for you, or you have a custom scenario there is a custom Node API surface that can enable a wider variety of scenarios.
+
+To start, make a javascript file called `reactbuild.js` next to your package.json file. Within this file put the following contents:
+
+```javascript
+const path = require("path");
+const reactTools = require("@microsoft/azureportal-reactview-tools/webpack.config");
+const builder = new reactTools.ReactViewBuild(process.cwd(),path.resolve([relative path to your output directory]));
+// customizations here, in this example we've named our Resource files as ending in Strings
+reactViewConfig.addExternal(/Strings$/);
+// customizations end
+builder.runWebPack(); // pass true in to watch
+```
+
+Apply customizations as needed, we support the following. Most of them have thorough documentation on their site:
+
+- `setMode`: sets Webpack's mode
+- `setDevtool`: set's Webpack's devtool property
+- `addExternal`: add an extern to webpack
+- `addPackageAlias`: add an alias to webpack (useful for helping webpack work with path configurations in tsconfigs)
+
+Most notably, there is the `getConfig` method, that will return the underlying raw webpack configuration.
+If you call this method and make modifications, you are effectively 'voiding the warranty'.
+While this gives a nice path to arbitrary customizations, be aware that if something breaks the portal may not provide support.
+
+Once your customizations have been applied, save the file and add aliases to the `package.json` as needed, something like this.
+You will likely want to enhance your script to take parameters for watch, and development build support:
+
+```javascript
+{
+    "scripts": {
+        "build": "node ./buildreact.js"
+    }
+}
+```
+
+Finally, run `npm run build` and tweak config as needed until no errors are returned, and the `Test.ReactView.js` file is emitted in the output directory.
+For the most part, the errors are not portal specific and can be solved using your favorite search engine.
+
+<a name="reactviews-getting-started-integrate"></a>
+### Integrate
+
+Integrating the ReactView build into your MsPortalFx build requires three additions within your `Extension.csproj`.
+
+Add a reference to the new `tsconfig.json` file, this is needed to enable the precompiler parsing step for blade references etc.:
+
+```xml
+<Content Include="Client\ReactViews\tsconfig.json" />
+```
+
+Add a custom target to call `npm run build` within your folder. Many teams create a conditional step for calling `npm run build:dev` like so:
+
+```xml
+<Target Name="ReactViewBuild" BeforeTargets="GenerateContentPackage" AfterTargets="CompileTypescriptWithTSConfig">
+    <Exec
+        WorkingDirectory="$(MSBuildThisFileDirectory)/Client/ReactViews"
+        Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'"
+        Command="npm run build:dev" />
+    <Exec
+        WorkingDirectory="$(MSBuildThisFileDirectory)/Client/ReactViews"
+        Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'"
+        Command="npm run build" />
+</Target>
+```
+
+Note: Portal team does not provide an npm/node executable to use at build time, you may have to go through extra steps depending on your configuration to ensure they are available.
+
+Finally, disable the `ProcessCss` target:
+
+```xml
+<Target Name="ProcessCss" />
+```
+
+Run a clean build of your extension, and fix any build breaks as needed before heading to the next step.
+
+<a name="reactviews-getting-started-validate"></a>
+### Validate
+
+Once your build worked, you should be able to sideload your extension using whichever method your team prefers (e.g `ap serve`),
+and navigate to the added Test.ReactView by going to the deeplink: `#blade/[ExtensionName]/Test.ReactView` (e.g `#blade/Microsoft_Azure_Compute/Test.Reactview`).
+You should see a view load that has just a piece of text stating that you have successfully onboarded to ReactViews.
+
+If that's what you see, then head to the [Guides](#guides) to start building and migrating experiences!
 
 <a name="reactviews-guides"></a>
 ## Guides
 
 Before following the guides below, please ensure your package version is updated to the latest version.
+- Guide: [Creating a new ReactView experience](top-react-guides-new.md)
+- Guide: [Unit Testing a ReactView](top-blades-react-unit-testing.md)
 
-<a name="reactviews-guides-getting-started-onboarding-your-existing-extension"></a>
-### Getting Started - Onboarding your existing extension
-
-If you are a new extension, then following the [extension getting started guide](top-extensions-getting-started.md) will create an extension that's already onboarded to ReactViews. Once you've created your new extension you can start building ReactViews.
-
-Otherwise, if you are on a traditional extension this guide will onboard you to the latest set of ReactView tooling.
-
-- [Onboarding an existing extension to ReactViews](react-guides-onboarding-an-existing-extension.md)
-
-<a name="reactviews-guides-creating-a-new-reactview-experience"></a>
-### Creating a new ReactView experience
-
-- [Creating a new ReactView experience](react-guides-new-reactview.md)
-
-<a name="reactviews-guides-unit-testing-a-reactview"></a>
-### Unit Testing a ReactView
-
-- [Unit Testing a ReactView](react-guides-unit-testing.md)
-
-<a name="reactviews-guides-migrating-knockout-controls-to-react-components"></a>
-### Migrating Knockout controls to React components
+<a name="reactviews-knockout-to-react-controls"></a>
+## Knockout to React controls
 
 If you're migrating an existing Knockout based blade to a ReactView you'll find that the FluentUI components aren't mapped one to one with the Knockout controls offering.
-You can use the [mapping table here](react-guides-knockout-controls-mapping.md), to find the appropriate components.
+You can use the mapping table [here](react-knockout-controls-mapping.md), to find the appropriate components.
 
 <a name="reactviews-libraries-explained"></a>
 ## Libraries Explained
@@ -155,7 +354,6 @@ These constraints require effort on the part of a developer, but also open up a 
 #### How do we use Redux
 
 To explain how using redux and using react-redux works, we'll go through the following sample code
-
 ```tsx
 import * as Az from "Az";
 import * as React from "react";
@@ -236,20 +434,17 @@ export class ModelFree extends React.Component<{}, {}> {
 ```typescript
 import { createStore } from "redux";
 ```
-
 > We import the `createStore` function from the `"redux"` module to create the redux store that will be used in multiple components.
 
 ```typescript
 import { Text } from "OfficeFabric/Text";
 import { TextField } from "OfficeFabric/TextField";
 ```
-
 > Those two import statements are importing two Fluent UI controls, the Text control (simply displays text) and the TextField control (an editable textbox).
 
 ```typescript
 import { Decorator, ReactReduxConnect } from "ReactView/ReactView";
 ```
-
 > Here we import the root `Decorator` and the `ReactReduxConnect` decorators from the `"ReactView"` module
 >
 > The root decorator, unlike the `ReduxFree` decorator, uses redux and react-redux while the `ReactReduxConnect` decorator is used to replicate redux `connect` functionality when handling multiple components using the same store.
@@ -259,7 +454,6 @@ interface StoreState {
     text: string;
 }
 ```
-
 > The interface representing the data in our redux store; here all we want to share between components is the TextField's text content, so that's the only property we define here.
 
 ```tsx
@@ -270,7 +464,6 @@ class TextLabel extends React.Component<{ text?: string }, {}> {
     }
 }
 ```
-
 > Here we define a label component, which is simply going to be an Fluent UI `Text` control with our store's text property for content.
 >
 > The `ReactReduxConnect` decorator uses our Store interface as a generic argument, and the fist parameter, named `mapStateToProps`, is a function taking in the redux state and outputting and object with the subset of properties that this component cares about; here, that's the `"text"` property.
@@ -289,7 +482,6 @@ function setText(text: string): SetTextAction {
     };
 }
 ```
-
 > Here we have a combination of a redux action interface and a redux action creator; this is standard redux code and you can find more information about it offical [redux action documentation](https://redux.js.org/basics/actions/) but in short redux store mutations are done via actions which are composed of a type and new values(s) keyed under the same name(s) as the store properties.
 
 ```tsx
@@ -300,7 +492,6 @@ class TextBox extends React.Component<{ setText?: typeof setText }, {}> {
     }
 }
 ```
-
 > Here we have our second component, the `TextField` which will set the text value used in our other component.
 >
 > The decorator uses two arguments, the first one (`mapStateToProps`) being null since this component does not need to read anything from the redux store and the second one (`mapDispatchToProps`) being an object with all actions creators this component will use, which in this case is the `setText` action.
@@ -319,7 +510,6 @@ const store = createStore((state: StoreState = { text: "Default" }, action: SetT
     }
 });
 ```
-
 > This is where we instantiate our redux store; see official [redux createStore documentation](https://redux.js.org/api/createstore/). The function passed in is our reducer.
 >
 > The first argument of the reducer is the store's state, which is initialized with a default value in declaration.
@@ -349,7 +539,6 @@ export class ModelFree extends React.Component<{}, {}> {
     }
 }
 ```
-
 > Finally, we have our blade component. It is registered with the root decorator from the `ReactView` module, which takes 4 generic arguemnts; component properties (which this one does not have), the component's state (which this does not have either), a redux store interface and an interface containing all possible redux actions - again, in more complicated cases we would interset multiple action types, but here we can simply use `SetTextAction` directly.
 >
 > In addition to the `viewReady` property, we also need to pass in our redux store. The rest is pretty straightforward; we initialize the view's title in is constructor, and the render function returns a Fabric-rooted list of the components interacting with each other via the redux store.
@@ -470,35 +659,12 @@ React dev tools via browser extension does not currently work with ReactViews, d
 More improvements are still being worked on in this space, including resize. If you have suggestions, please submit them on [User Voice](#user-voice).
 
 > Note: React dev tools is currently not supported in IE.
-
 <a name="reactviews-additional-features-localization"></a>
 ### Localization
 
 Within ReactViews there's two parts to localization. For strings, localization is handled the same way as for traditional Knockout blades. Simply import your resource files after the .d.ts files have been generated, and at runtime
 we will hand your code the correct version of the file depending on the locale the user has selected. For other localization, such as timezones and currency, we recommend installing a third party library to help localize. For time,
 our recommended library is `luxon` and is what we use within the portal. For numbers, we recommend using the built in browser internationalization APIs.
-
-<a name="reactviews-additional-features-theming"></a>
-### Theming
-
-All fluent and portal provided react components are themed with the fluent azure theme. Additionally, they will
-update when the user changes the current theme in the portal.
-For more detailed documentation of theme usage see fluent's [react-theme-provider](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider) docs
-
-However, if you wish to access the theme directly in a react component there is a small gotcha to be aware of:
-
-Top-level ReactView blades that use decorators can access the theme, but won't be updated when the user changes the fluent theme.
-
-To ensure that a component re-renders when the theme is changed, any component that directly accesses the theme should:
-* be a child component of the top-level ReactView blade
-* be a functional component that uses fluent's [useTheme](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider#usetheme) hook OR
-* use fluent's [ThemeContext.Consumer](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider#themecontextconsumer)
-
-<a name="reactviews-additional-features-localstorage-and-sessionstorage"></a>
-### LocalStorage and SessionStorage
-
-LocalStorage and SessionStorage are both supported in ReactViews.
-They can both be used in exactly the same way you would expect to use them by accessing `window.localStorage` or `window.sessionStorage`
 
 <a name="reactviews-getting-support"></a>
 ## Getting Support

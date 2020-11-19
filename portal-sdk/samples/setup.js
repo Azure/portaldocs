@@ -34,8 +34,6 @@ const https = __importStar(require("https"));
 const fs = __importStar(require("fs"));
 const fsPromises = fs.promises;
 const path_1 = __importDefault(require("path"));
-const npmRoute = "//msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm";
-const registry = `https:${npmRoute}/registry/`;
 /**
  * Generates a command line which finds a program or file.
  * @param fileName file name to search
@@ -151,7 +149,7 @@ async function generateNpmPAT() {
     if (os.platform() === "linux" || os.platform() === "darwin") {
         await checkPATNonWindows();
     }
-    const setNpmRegistry = `npm config set registry ${registry}`;
+    const setNpmRegistry = "npm config set registry https://pkgs.dev.azure.com/msazure/_packaging/AzurePortal/npm/registry/";
     console.log("Setting the default npm registry...");
     await exec(setNpmRegistry);
     if (os.platform() === "win32") {
@@ -161,7 +159,7 @@ async function generateNpmPAT() {
             console.log(`Installing 'vsts-npm-auth'...`);
             await exec(`npm install -g vsts-npm-auth --registry https://registry.npmjs.org`);
         }
-        const generatePAT = "vsts-npm-auth -F -R -E 525600 -C .npmrc";
+        const generatePAT = "vsts-npm-auth -R -config .npmrc";
         console.log(`generating a readonly PAT using vsts-npm-auth...${os_1.EOL}If prompted to login, use your @microsoft.com account to authenticate against Azure Dev Ops.`);
         await exec(generatePAT);
     }
@@ -172,19 +170,19 @@ async function generateNpmPAT() {
  */
 async function checkPATNonWindows() {
     const contents = ["; begin auth token",
-        `${npmRoute}/registry/:username=msazure`,
-        `${npmRoute}/registry/:_password=[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN]`,
-        `${npmRoute}/registry/:email=npm requires email to be set but doesnt use the value`,
-        `${npmRoute}/:username=msazure`,
-        `${npmRoute}/:_password=[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN]`,
-        `${npmRoute}/:email=npm requires email to be set but doesnt use the value`,
+        "//pkgs.dev.azure.com/msazure/_packaging/AzurePortal/npm/registry/:username=msazure",
+        "//pkgs.dev.azure.com/msazure/_packaging/AzurePortal/npm/registry/:_password=[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN]",
+        "//pkgs.dev.azure.com/msazure/_packaging/AzurePortal/npm/registry/:email=npm requires email to be set but doesnt use the value",
+        "//pkgs.dev.azure.com/msazure/_packaging/AzurePortal/npm/:username=msazure",
+        "//pkgs.dev.azure.com/msazure/_packaging/AzurePortal/npm/:_password=[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN]",
+        "//pkgs.dev.azure.com/msazure/_packaging/AzurePortal/npm/:email=npm requires email to be set but doesnt use the value",
         "; end auth token"];
-    const regexs = [/\/\/msazure\.pkgs\.visualstudio\.com\/_packaging\/AzurePortal\/npm\/registry\/\:username=.*$/gm,
-        /\/\/msazure\.pkgs\.visualstudio\.com\/_packaging\/AzurePortal\/npm\/registry\/\:\_password=.*$/gm,
-        /\/\/msazure\.pkgs\.visualstudio\.com\/_packaging\/AzurePortal\/npm\/registry\/\:email=.*$/gm,
-        /\/\/msazure\.pkgs\.visualstudio\.com\/_packaging\/AzurePortal\/npm\/\:username=.*$/gm,
-        /\/\/msazure\.pkgs\.visualstudio\.com\/_packaging\/AzurePortal\/npm\/\:\_password=.*$/gm,
-        /\/\/msazure\.pkgs\.visualstudio\.com\/_packaging\/AzurePortal\/npm\/\:email=.*$/gm];
+    const regexs = [/\/\/pkgs\.dev\.azure\.com\/msazure\/_packaging\/AzurePortal\/npm\/registry\/\:username=.*$/gm,
+        /\/\/pkgs\.dev\.azure\.com\/msazure\/_packaging\/AzurePortal\/npm\/registry\/\:\_password=.*$/gm,
+        /\/\/pkgs\.dev\.azure\.com\/msazure\/_packaging\/AzurePortal\/npm\/registry\/\:email=.*$/gm,
+        /\/\/pkgs\.dev\.azure\.com\/msazure\/_packaging\/AzurePortal\/npm\/\:username=.*$/gm,
+        /\/\/pkgs\.dev\.azure\.com\/msazure\/_packaging\/AzurePortal\/npm\/\:\_password=.*$/gm,
+        /\/\/pkgs\.dev\.azure\.com\/msazure\/_packaging\/AzurePortal\/npm\/\:email=.*$/gm,];
     const passWordRegex = [/\_password\=\"?\[(BASE64_ENCODED_PERSONAL_ACCESS_TOKEN)\]\"?$/gm];
     const userNpmrcPath = path_1.default.join(process.env.HOME, ".npmrc");
     console.log();
@@ -235,8 +233,8 @@ async function checkNpmrcFile(path, contents, regexs, location) {
  * Then, sets npm registry and generates PAT.
  */
 async function setNPMAuthPAT() {
-    const contents = [`registry=${registry}`, "always-auth=true"];
-    const regexs = [/(registry=https:\/\/(msazure\.pkgs\.visualstudio\.com)\/_packaging\/AzurePortal\/npm\/registry(\/)?)$/gmi,
+    const contents = ["registry=https://pkgs.dev.azure.com/msazure/_packaging/AzurePortal/npm/registry/", "always-auth=true"];
+    const regexs = [/(registry=https:\/\/((msazure\.pkgs\.visualstudio\.com)|(pkgs\.dev\.azure\.com\/msazure))\/_packaging\/AzurePortal\/npm\/registry(\/)?)$/gmi,
         /^(always-auth=true)$/gmi];
     const path = ".npmrc";
     await checkNpmrcFile(path, contents, regexs, "current");
@@ -347,28 +345,25 @@ async function setNugetCredentialProvider(currentOS) {
     await runCredProviderScript(currentOS, tmpPath, fileName);
 }
 /**
- * Check whether the .Net Framework 4.7.2 is installed.
- * @returns true if version is 4.7.2 is installed.
+ * Check whether the .Net Framework 4.7.2 or later is installed.
+ * @returns true if version is 4.7.2 or later is installed, false otherwise.
  */
 async function checkDotNetFxVersion() {
-    const mostRecentNetVersionCmd = `powershell.exe (Get-ItemProperty "HKLM:SOFTWARE\\Microsoft\\'NET Framework Setup'\\NDP\\v4\\Full").Release`;
-    const testNetFx472RegKeyCmd = `powershell.exe Test-Path "HKLM:\\SOFTWARE\\Classes\\Installer\\Dependencies\\Microsoft.NetFx.MTPack_4.7.2"`;
-    //most recent installed release
-    const netFxReleaseResult = await exec(mostRecentNetVersionCmd);
-    const release = Number(netFxReleaseResult.stdout);
-    //registry key, may not be present on every machine as is dependent on how it was installed
-    const net472RegKeyExists = Boolean((await exec(testNetFx472RegKeyCmd)).stdout);
-    const netFxReleaseIn472Range = (!netFxReleaseResult.stderr && release >= 461808 && release < 528040);
-    const found = net472RegKeyExists || netFxReleaseIn472Range;
-    if (found) {
-        console.log(`**Found .NET Framework found with version 4.7.2. release:${release}, regkey:${net472RegKeyExists}.${os_1.EOL}`);
+    const command = `powershell.exe (Get-ItemProperty "HKLM:SOFTWARE\\Microsoft\\'NET Framework Setup'\\NDP\\v4\\Full").Release`;
+    try {
+        const result = await exec(command);
+        if (!result.stderr && Number(result.stdout) >= 461808) {
+            console.log(`**Executing: "${command}",
+             .Net Framework found with version 4.7.2 or later${os_1.EOL}`);
+            return true;
+        }
+        throw new Error();
     }
-    else {
-        console.log(`**.NET Framework 4.7.2 NOT found"`);
-        console.log(`\tcommand "${mostRecentNetVersionCmd} returned ${release || netFxReleaseResult.stderr}.`);
-        console.log(`\tcommand "${testNetFx472RegKeyCmd} returned ${net472RegKeyExists}.${os_1.EOL}`);
+    catch (error) {
+        console.log(`**Executing: "${command}"`);
+        console.log(`\tResult: (false) ".Net Framework" does not exist.${os_1.EOL}`);
     }
-    return found;
+    return false;
 }
 /**
  * Helper method for prining message in console.
@@ -464,7 +459,7 @@ async function oneTimeConfigurationSteps() {
         - for npm: 'export PATH=$PATH:C:\\Users\\{youralias}\\AppData\\Roaming\\npm'
     4. Open a new command prompt to pickup the updated path and run this 'setup.js' file again`;
     const windowsNugetCredProvInstruction = `Manual Instruction:
-    1. Connect to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal
+    1. Connect to the AzurePortal Feed https://dev.azure.com/msazure/One/_packaging?_a=feed&feed=AzurePortal
     2. Select NuGet.exe under the NuGet header
     3. Click the 'Get the tools' button in the top right corner
     4. Follow steps 1 and 2 to download the latest NuGet version and the credential provider.
@@ -472,29 +467,29 @@ async function oneTimeConfigurationSteps() {
     const nonWindowsCredProvNonInstruction = `Manual Instruction:
     1. Set TMP environment variable: type " export TMP = '/tmp' " this to command prompt.
         i. (Optional) If you do not want to go through the manual installation, try running the "setup.js" file again.
-    2. Connect to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal
+    2. Connect to the AzurePortal Feed https://dev.azure.com/msazure/One/_packaging?_a=feed&feed=AzurePortal
     3. Select NuGet.exe under the NuGet header
     4. Click the 'Get the tools' button in the top right corner
     5. Follow step2 to download the credential provider under 'Installation on Linux and Mac' section.
     6. rerun this "setup.js" file`;
     const windowsNPMAuthPATInstruction = `Manual Instruction: Just as NuGet needed the credential provider npm requires a PAT for auth. Which can be configured as follows.
-    1. Connect to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal
-    2. Click Connect to Feed, then select npm
+    1. Connect to the AzurePortal Feed https://dev.azure.com/msazure/One/_packaging?_a=feed&feed=AzurePortal
+    2. Select npm under the npm header
     3. Click the 'Get the tools' button in the top right corner
     4. Optional. install node.js and npm if not already done so.
     5. Follow step 2 to install vsts-npm-auth node.
     6. Add a .npmrc file to your project, in the same directory as your package.json
-        registry=${registry}
+        registry=https://pkgs.dev.azure.com/msazure/_packaging/AzurePortal/npm/registry/
         always-auth=true
     7. From the command prompt in the same directory:
         - set the default npm registry (copy and paste below line to command prompt)
-            npm config set registry ${registry}
+            npm config set registry https://pkgs.dev.azure.com/msazure/_packaging/AzurePortal/npm/registry/
         - generate a readonly PAT using vsts-npm-auth (copy and paste below line to command prompt)
-            vsts-npm-auth -F -R -E 525600 -C .npmrc
+            vsts-npm-auth -R -config .npmrc
     8. rerun this "setup.js" file`;
     const nonWindowsNPMAuthPATHInstruction = `Manual Instruction: Just as NuGet needed the credential provider npm requires a PAT for auth. Which can be configured as follows.
-    1. Connect to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal
-    2. Click Connect to Feed, then select npm
+    1. Connect to the AzurePortal Feed https://dev.azure.com/msazure/One/_packaging?_a=feed&feed=AzurePortal
+    2. Select npm under the npm header
     3. Click 'Other' in Project setup
     4. Follow Step 1 to Step 4.
     5. rerun this "setup.js" file`;
@@ -529,9 +524,7 @@ async function oneTimeConfigurationSteps() {
             catch (error) {
                 throwingDetailedErrors(currentOS, error, nonWindowsCredProvNonInstruction, windowsNugetCredProvInstruction);
             }
-            messageBox(`One time configuration steps completed.${os_1.EOL}Running install of ap cli using command 'npm install -g @microsoft/azureportalcli@latest' ...`);
-            //spawn install, no need to wait
-            cp.spawn(os.platform() === "win32" ? "npm.cmd" : "npm", ["install", "-g", "@microsoft/azureportalcli@latest"], { stdio: "inherit" });
+            messageBox(`One time configuration steps completed.${os_1.EOL}You may now install the cli with 'npm install -g @microsoft/azureportalcli@latest'`);
         }
         catch (error) {
             console.log(error);
