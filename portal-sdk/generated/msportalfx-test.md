@@ -1205,12 +1205,12 @@ import testFx from 'MsPortalFx-Test';
         await resourceBlade.openMenuItem(PortalFxResources.properties);
         const expectedPropertiesCount = 6;
         await testFx.portal.wait(async () => {
-            const properties = resourcePropertiesParentBlade.getAllDetailBladeItems(testFx.Parts.PartProperty);
-            const count = await properties.count();
+            const properties = await resourcePropertiesParentBlade.getAllDetailBladeItems(testFx.Parts.PartProperty);
+            const count = properties.length;
             return count === expectedPropertiesCount;
         }, null, testFx.Utils.String.format("Expected to have {0} properties in the Properties blade.", expectedPropertiesCount));
         const locator = new testFx.Parts.PartProperty().buildLocator({ name: PortalFxResources.nameLabel });
-        const property = resourcePropertiesParentBlade.detailBladeContent.element(locator).asType(testFx.Parts.PartProperty);
+        const property = (await resourcePropertiesParentBlade.detailBladeContent).element(locator).asType(testFx.Parts.PartProperty);
         const nameProperty = await testFx.portal.wait(async () => {
             const copyableLabel = property.value.element(testFx.Controls.CopyableLabel);
             const present = await copyableLabel.isPresent();
