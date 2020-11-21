@@ -22,6 +22,9 @@ htmlTemplate: "" +
     "  <div>This is a Template Blade.</div>" +
     "</div>",
 })
+@TemplateBlade.ForContextPane.Decorator({
+width: TemplateBlade.ForContextPane.Width.Small,
+})
 //docs#DecoratorReference
 export class SimpleTemplateBlade {
 public title = ClientResources.simpleTemplateBlade;
