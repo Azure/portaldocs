@@ -208,8 +208,7 @@ export class OpenBladeApiSamplesViewModel
     /**
      * Hotspot view model
      */
-    // tslint:disable-next-line:deprecation HotSpot
-    public hotspot: HotspotViewModel;
+    public hotspot: any;
 
     public grid: Grid.ViewModel<Person, Person>;
 
@@ -448,8 +447,7 @@ export class OpenBladeApiSamplesViewModel
     }
 
     private _initializeHotSpotSample(container: BladeContainer) {
-        // tslint:disable-next-line:deprecation HotSpot
-        this.hotspot = new HotspotViewModel(container, {
+        this.hotspot = new (HotspotViewModel as any)(container, {
             onClick: () => {
                 container.openBlade(BladeReferences.forBlade("OpenBladeApiChildBlade").createReference());
             },
