@@ -2,7 +2,7 @@
 <a name="msportalfx-test"></a>
 # msportalfx-test
 
-Generated on 2020-11-30
+Generated on 2020-12-01
 
 * [msportalfx-test](#msportalfx-test)
     * [Overview](#msportalfx-test-overview)
@@ -2110,4 +2110,4 @@ Send an email to ibizadiscuss@microsoft.com
 
 [View thet API Reference](http://aka.ms/msportalfx-test/api)
 
-Generated on 2020-11-30
+Generated on 2020-12-01

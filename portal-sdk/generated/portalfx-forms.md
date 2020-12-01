@@ -135,7 +135,7 @@ website:
 
 ```typescript
 
-const websiteName = new TextBox.ViewModel(
+const websiteName = new (TextBox.ViewModel as any)(
     this._ltm,
     this._form,
     this._form.createEditScopeAccessor(data => data.name),
@@ -508,7 +508,7 @@ Form fields require a binding to one or more EditScope observables. Extension de
 
 ```typescript
 
-this.textBoxSimpleAccessor = new MsPortalFx.ViewModels.Forms.TextBox.ViewModel(
+this.textBoxSimpleAccessor = new (MsPortalFx.ViewModels.Forms.TextBox.ViewModel as any)(
     container,
     this,
     this.createEditScopeAccessor<string>((data) => { return data.state; }),
@@ -520,7 +520,7 @@ this.textBoxSimpleAccessor = new MsPortalFx.ViewModels.Forms.TextBox.ViewModel(
 
 ```typescript
 
-this.textBoxViewModel = new MsPortalFx.ViewModels.Forms.TextBox.ViewModel(container, this, "name", textBoxOptions);
+this.textBoxViewModel = new (MsPortalFx.ViewModels.Forms.TextBox.ViewModel as any)(container, this, "name", textBoxOptions);
 
 ```
 
@@ -531,7 +531,7 @@ The EditScopeAccessor variant here (the first variant) is preferred for a couple
 
 ```typescript
 
-this.textBoxReadWriteAccessor = new MsPortalFx.ViewModels.Forms.TextBox.ViewModel(
+this.textBoxReadWriteAccessor = new (MsPortalFx.ViewModels.Forms.TextBox.ViewModel as any)(
     container,
     this,
     this.createEditScopeAccessor<string>(<MsPortalFx.ViewModels.Forms.EditScopeAccessors.Options<FormIntegratedFormData.FormIntegratedFormData, string>>{

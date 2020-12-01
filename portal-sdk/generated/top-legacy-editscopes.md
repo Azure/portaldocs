@@ -423,7 +423,7 @@ In the `EditScopeAccessor`, the form field `ViewModel` constructor accepts an `E
 
  ```typescript
 
-this.textBoxSimpleAccessor = new MsPortalFx.ViewModels.Forms.TextBox.ViewModel(
+this.textBoxSimpleAccessor = new (MsPortalFx.ViewModels.Forms.TextBox.ViewModel as any)(
     container,
     this,
     this.createEditScopeAccessor<string>((data) => { return data.state; }),
@@ -435,7 +435,7 @@ this.textBoxSimpleAccessor = new MsPortalFx.ViewModels.Forms.TextBox.ViewModel(
 
  ```typescript
 
-this.textBoxReadWriteAccessor = new MsPortalFx.ViewModels.Forms.TextBox.ViewModel(
+this.textBoxReadWriteAccessor = new (MsPortalFx.ViewModels.Forms.TextBox.ViewModel as any)(
     container,
     this,
     this.createEditScopeAccessor<string>(<MsPortalFx.ViewModels.Forms.EditScopeAccessors.Options<FormIntegratedFormData.FormIntegratedFormData, string>>{
@@ -456,7 +456,7 @@ The string-typed path methodology can be used instead of the `EditScopeAccessor`
 
  ```typescript
 
-this.textBoxViewModel = new MsPortalFx.ViewModels.Forms.TextBox.ViewModel(container, this, "name", textBoxOptions);
+this.textBoxViewModel = new (MsPortalFx.ViewModels.Forms.TextBox.ViewModel as any)(container, this, "name", textBoxOptions);
 
 ```
 
@@ -597,7 +597,7 @@ This form displays one textbox that allows the user to edit the name of the webs
 
  ```typescript
 
-const websiteName = new TextBox.ViewModel(
+const websiteName = new (TextBox.ViewModel as any)(
     this._ltm,
     this._form,
     this._form.createEditScopeAccessor(data => data.name),

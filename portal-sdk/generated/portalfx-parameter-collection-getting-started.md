@@ -134,7 +134,7 @@ implements ParameterProviderForm.Contract {
  */
 public parameterProvider: MsPortalFx.ViewModels.ParameterProvider<ServerConfig, ProviderModels.ServerFormData>;
 
-public serverIdentifierTextBox: MsPortalFx.ViewModels.Forms.TextBox.ViewModel;
+public serverIdentifierTextBox: any;
 
 public fixedStorageSlider: any;
 
@@ -168,7 +168,7 @@ constructor(container: MsPortalFx.ViewModels.PartContainerContract) {
 
     // Use the form to edit the edit scope set up by the provider
     this.editScope = this.parameterProvider.editScope;
-    this.serverIdentifierTextBox = new MsPortalFx.ViewModels.Forms.TextBox.ViewModel(container, this, "serverIdentifier");
+    this.serverIdentifierTextBox = new (MsPortalFx.ViewModels.Forms.TextBox.ViewModel as any)(container, this, "serverIdentifier");
     // tslint:disable-next-line:deprecation
     this.fixedStorageSlider = new (MsPortalFx.ViewModels.Forms.Slider.ViewModel as any)(container, this, "fixedStorageGigabytes", { min: ko.observable(50), max: ko.observable(1000), showStepMarkers: ko.observable(false) });
 }

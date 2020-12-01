@@ -40,12 +40,12 @@ For reference here are the properties we'll put on the blade view model to creat
 /**
  * Textbox control containing the user's name.
  */
-public nameTextBox: TextBox.ViewModel;
+public nameTextBox: any;
 
 /**
  * Observable containing either a numeric textbox or a textbox.
  */
-public smartPhone: KnockoutObservable<TextBox.ViewModel>;
+public smartPhone: KnockoutObservable<any>;
 
 /**
  * OK button for submitting updated user data back to server.
@@ -97,12 +97,12 @@ Here's what our blade view model constructor looks like:
 
 this._view = dataContext.personData.peopleEntities.createView(container);
 
-this.nameTextBox = new TextBox.ViewModel(container, {
+this.nameTextBox = new (TextBox.ViewModel as any)(container, {
     readOnly: true,
     label: ko.observable("Name"),
 });
 
-this.smartPhone = ko.observable<TextBox.ViewModel>();
+this.smartPhone = ko.observable();
 
 this.okButton = Button.create(container, {
     text: "OK",
@@ -183,7 +183,7 @@ return this._view.fetch(inputs.id).then(() => {
     // otherwise leave it empty
     const smartPhone = person.smartPhone();
     if (smartPhone) {
-        const textBox = new TextBox.ViewModel(this._container, {
+        const textBox = new (TextBox.ViewModel as any)(this._container, {
             readOnly: true,
             label: ko.observable("Smart phone"),
             defaultValue: ko.observable(smartPhone),
