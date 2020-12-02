@@ -1,15 +1,33 @@
+* [Declarative views](#declarative-views)
+    * [Introduction](#declarative-views-introduction)
+    * [Advantages of using declarative views](#declarative-views-advantages-of-using-declarative-views)
+    * [Supported declarative views](#declarative-views-supported-declarative-views)
+        * [All services integration](#declarative-views-supported-declarative-views-all-services-integration)
+        * [Browse](#declarative-views-supported-declarative-views-browse)
+        * [Resource menu](#declarative-views-supported-declarative-views-resource-menu)
+        * [Overview](#declarative-views-supported-declarative-views-overview)
+        * [Get started experiences](#declarative-views-supported-declarative-views-get-started-experiences)
+        * [Browse as a resource menu item](#declarative-views-supported-declarative-views-browse-as-a-resource-menu-item)
+        * [Resource creation](#declarative-views-supported-declarative-views-resource-creation)
+        * [Markdown](#declarative-views-supported-declarative-views-markdown)
+    * [Declarative views basics](#declarative-views-declarative-views-basics)
+        * [Localization in a declarative extension](#declarative-views-declarative-views-basics-localization-in-a-declarative-extension)
+        * [Getting started with a declarative extension](#declarative-views-declarative-views-basics-getting-started-with-a-declarative-extension)
+    * [Questions?](#declarative-views-questions)
+
+
 <a name="declarative-views"></a>
 # Declarative views
 
 <a name="declarative-views-introduction"></a>
 ## Introduction
 
-Declarative views are a no-code option for building UI for the Azure Portal easily and quickly. In a declarative view, the author only expresses the functionality needed in the blade via a JSON document and lets the framework handle the design of the blade and runtime.
+For common and popular views in the Azure portal like browse, get started, etc., it does not make sense for each team to build this view from scratch. Therefore, the framework team has built these popular views and lets you customize them easily by authoring a JSON file. The framework team recommends that extension team not re-build a view that is supported declaratively, as declarative views come with multiple advantages.
 
 <a name="declarative-views-advantages-of-using-declarative-views"></a>
 ## Advantages of using declarative views
 
-As a result of handling the design of the blade under the hood, declarative views abstract away many of the challenges of building UI using native Ibiza blades or react views such as -
+As a result of the framework handling the design and rendering, declarative views abstract away many of the challenges of building UI using native Ibiza blades/react views such as -
 
 1. **Consistency** - The Azure Portal has well defined design patterns for common Azure scenarios like creating, browsing and managing a resource. All teams are expected to adhere to these design patterns and update their UI when the design patterns are updated. Declarative UI abstracts authors from this requirement and ensures that all declarative views are compliant with the latest design patterns.
 
@@ -29,7 +47,9 @@ Declarative supports most popular patterns that are used repeatedly in the Azure
 <a name="declarative-views-supported-declarative-views-all-services-integration"></a>
 ### All services integration
 
-To have a presence in the Azure Portal [All Services menu](https://portal.azure.com/?feature.customportal=false#allservices) and other entry points such as the global search bar in the Portal, an asset has be to defined. This asset can be defined declaratively. An asset represents a service in Azure and most assets map to an ARM resource type. Learn more about defining assets in the Azure Portal [here](portalfx-declarative-assets.md).
+To have a presence in the Azure Portal [All Services menu](https://portal.azure.com/?feature.customportal=false#allservices) and other entry points such as the global search bar in the Portal, an asset has be to defined. This asset can be defined declaratively. An asset represents a service in Azure and most assets map to an ARM resource type. 
+
+[Learn more about defining assets in the Azure Portal](declarative-assets.md).
 
 Example of the storage account asset showing up in the Portal's global search -
 
@@ -42,7 +62,9 @@ Example of the storage account asset showing up in the Portal's All Services Men
 <a name="declarative-views-supported-declarative-views-browse"></a>
 ### Browse
 
-When Portal users click on the asset described above, they are taken to a browse view. The browse view is a list of all resources of the given resource type. In most cases, this information of all resources for a given resource type comes from [Azure Resource Graph](https://docs.microsoft.com/en-us/azure/governance/resource-graph/). Additionally, extension authors can add actions to the command bar to perform operations on a group of resources. Learn more about browse views in the Azure Portal [here](portalfx-declarative-assets.md#configuring-browse).
+When Portal users click on the asset described above, they are taken to a browse view. The browse view is a list of all resources of the given resource type. In most cases, this information of all resources for a given resource type comes from [Azure Resource Graph](https://docs.microsoft.com/azure/governance/resource-graph/). Additionally, extension authors can add actions to the command bar to perform operations on a group of resources. 
+
+[Learn more about browse views in the Azure Portal](declarative-assets.md#configuring-browse).
 
 Example of the storage account browse -
 
@@ -51,7 +73,9 @@ Example of the storage account browse -
 <a name="declarative-views-supported-declarative-views-resource-menu"></a>
 ### Resource menu
 
-When a customer clicks on a particular resource in browse, they are taken to a page specific to that particular resource. A resource menu serves as a table of content for the resource and is present on the left side of the page. The resource menu is a list  of different options available to manage the resource. Authors can add new menu sections and menu items based on the necessary functionality for their resources. Additionally, a few menu items are available to all resources for free such as Activity log, Tags etc. Learn more about configuring the resource menu [here](portalfx-declarative-assets.md#configuring-the-resource-menu).
+When a customer clicks on a particular resource in browse, they are taken to a page specific to that particular resource. A resource menu serves as a table of content for the resource and is present on the left side of the page. The resource menu is a list  of different options available to manage the resource. Authors can add new menu sections and menu items based on the necessary functionality for their resources. Additionally, a few menu items are available to all resources for free such as Activity log, Tags etc. 
+
+[Learn more about configuring the resource menu](declarative-assets.md#configuring-the-resource-menu).
 
 Example of the resource menu for storage accounts -
 

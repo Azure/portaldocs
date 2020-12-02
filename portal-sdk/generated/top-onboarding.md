@@ -4,6 +4,10 @@
 <a name="azure-portal-onboarding-using-easy-start-introduction"></a>
 ## Introduction
 
+This document is for Microsoft owned and operated services to integrate with the Azure Portal.
+
+If you are not a Microsoft team building a new Azure service and looking to integrate with the Azure Portal, this is not the correct document for you. Please go [here](top-isv-index.md) for docs to learn how a ISV can integrate with the Azure Portal.
+
 Azure portal onboarding process is updated and teams looking to onboard new extensions or updating/removing existing extensions do NOT need to raise pull requests going forward. Azure portal has migrated the extension configuration for all clouds to service tree. Partner teams can now manage the configuration through Easy Start onboarding site.
 
 <a name="azure-portal-onboarding-using-easy-start-overview"></a>
@@ -15,7 +19,7 @@ Azure portal onboarding process is updated and teams looking to onboard new exte
 
 * Partners won't be required to update any configuration files in Azure portal repositories.​
 
-* No need to raise pull requests or cherry-picking changes across different branches for onboarding or updating configuration
+* No need to raise pull requests or cherry-picking changes across different branches for onboarding or updating configuration. 
 
 * Partners can onboard to the Azure portal using Easy Start experience that will update the corresponding service tree database.
 
@@ -27,8 +31,8 @@ Azure portal onboarding process is updated and teams looking to onboard new exte
 
 * Any updates to service tree database directly using tools other than recommended could corrupt the configuration and will impact your service availability.
 
-<a name="azure-portal-onboarding-using-easy-start-step-by-step-process-overview"></a>
-## Step by Step Process overview
+<a name="step-by-step-process-overview"></a>
+# Step by Step Process overview
 
 Onboarding a service or developing a Portal extension has three phases: onboarding, development, and deployment. The process is specified in the following image.
 
@@ -46,11 +50,11 @@ Onboarding a service or developing a Portal extension has three phases: onboardi
 * If your **extension is already onboarded** to either Dogfood or Public clouds and **need to onboard to other environments/clouds** in Portal, you can **skip this meeting** and go directly to the [Onboarding requirements](#onboarding-requirements) section.
 
 <a name="phase-1-onboarding-kickoff-meeting-who-needs-these-meetings"></a>
-### who needs these meetings
+### Who needs these meetings
 
-* If you have scenarios that do NOT use ARM RP(Resource Provider)or do NOT belong to Azure or need a customized experiences in Portal, you are recommended to setup a meeting a with the Azure portal onboarding team.
+* If you have scenarios that do NOT use ARM RP(Resource Provider) or do NOT belong to Azure or need a customized experiences in Portal, you are recommended to setup a meeting a with the Azure portal onboarding team.
 
-* If you are planning to host an Internal only service or a 3rd party service or a non-Microsoft owned service, you must schedule a meeting with the onboarding team to get the required approvals and then start onboarding.
+* If you are planning to host an internal only service or a 3rd party service or a non-Microsoft owned service, you must schedule a meeting with the onboarding team to get the required approvals and then start onboarding.
 
 * If you have scenarios that do NOT require a full fledged extension and plan to surface your existing web interface through Azure portal, you can send a meeting invite to Azure portal onboarding team.
 
@@ -108,15 +112,15 @@ For less common scenarios, you might need to do a custom deployment. For example
 <a name="phase-1-onboarding-join-dls-and-request-permissions"></a>
 ## Join DLs and request permissions
 
-Request the following permissions to stay current on product roadmaps, get news on latest features, and receive invites for ibiza related events.
+ 
+
+Join the following groups to stay current on Ibiza product road map, get news on latest features, and receive invites for Ibiza related events.
 
 * PMs and Developer Leads should join the `ibizapartners PM`  group [here](https://idweb/IdentityManagement/aspx/common/GlobalSearchResult.aspx?searchtype=e0c132db-08d8-4258-8bce-561687a8a51e&content=ibizapartners-pm&popupFromClipboard=%2Fidentitymanagement%2Faspx%2FGroups%2FEditGroup.aspx%3Fid%3Dacc725b5-30aa-4336-9c81-1867762bb945).
 
 * Developers should join the `ibizapartners DEV` group [here](https://idweb/IdentityManagement/aspx/common/GlobalSearchResult.aspx?searchtype=e0c132db-08d8-4258-8bce-561687a8a51e&content=ibizapartners-pm&popupFromClipboard=%2Fidentitymanagement%2Faspx%2FGroups%2FEditGroup.aspx%3Fid%3D109b1485-33c5-4c00-8e85-69d9b6176b9f).
 
-* Developers should join the appropriate group listed on [http://aka.ms/standardaccess](http://aka.ms/standardaccess) to get access to portal telemetry. All groups on this page receive access.
-
-* Developers should join the  `Azure Portal Partner Contributors - 19668(19668)` group by using this link: [https://myaccess](https://myaccess).
+* Instructions to get access to Ibiza telemetry can be found [here](top-telemetry.md#viewing-telemetry)
 
 * PMs, Developers, and Developer Leads should subscribe to the partner request process by joining the ```Uservoice ``` group at this link:  [https://aka.ms/portalfx/uservoice](https://aka.ms/portalfx/uservoice). For more information about the partner request process, see [top-extensions-partner-request.md](/portal-sdk/generated/top-extensions-partner-request.md).
 
@@ -124,10 +128,12 @@ Request the following permissions to stay current on product roadmaps, get news 
 
 * Developers who want to contribute to the test framework should join groups from the site located at [http://aka.ms/azuregithub](http://aka.ms/azuregithub).
 
+
+
 <a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers"></a>
 ## Get the SDK, docs, and samples to your developers
 
- The [development guide](top-extensions-getting-started.md) located in the main documentation index has all the right pointers.
+ The [development guide](README.md#development-guide) located in the main documentation index has all the right pointers.
 
 <a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-onboarding-requirements"></a>
 ### Onboarding Requirements
@@ -322,9 +328,13 @@ eg: Dogfood, Prod, Mooncake, Fairfax and BlackForest
 
 * Do NOT use **"Disabled"** unless you have are a custom domain partner and require hiding your extension.
 
+<!-- docs#thirdpartyflag -->
+
 * **"ThirdPartyExtension"** must be used if the service is non-Microsoft. **Not using the ThirdPartyExtension for non-Microsoft services is considered as security and privacy violation** and could potentially leak user data.
 
 * Any **services calling services outside of Microsoft and NOT using ThirdPartyExtension flag will be removed** from Azure portal.
+
+<!-- docs#thirdpartyflag -->
 
 <a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-onboading-wizard-flights"></a>
 #### <strong>Flights</strong>
