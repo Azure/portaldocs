@@ -1554,6 +1554,8 @@ The following example demonstrates how to:
             EditorBlade,
             70000);
         const editor: Editor = editorBlade.editor;
+        editor.viewModelName = "editorVM";
+
         const content = await editor.read();
         // tslint:disable-next-line: deprecation
         assert.equal(content, expectedContent, "expectedContent is not matching");
