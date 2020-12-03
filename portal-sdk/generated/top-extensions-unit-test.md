@@ -29,7 +29,7 @@ This tutorial will provide you step by step instructions for creating a UnitTest
 |   +-- test/ResourceOverviewBlade.test.ts
 |   +-- test-main.js
 |   +-- karma.conf.js
-|   +-- msportalfx-ut.config.json
+|   +-- azureportal-ut.config.json
 |   +-- package.json
 |   +-- tsconfig.json
     +-- .npmrc
@@ -52,7 +52,7 @@ Note:
 <a name="unit-test-framework-creating-a-project-from-scratch-with-visual-studio-code-dev-build-time-configuration-add-npmrc"></a>
 #### Add ./.npmrc
 
-msportalfx-ut is available from the internal AzurePortal Registry.  To configure your project to use this registry add the following:
+@microsoft/azureportal-ut is available from the internal AzurePortal Registry.  To configure your project to use this registry add the following:
 
 Add a ./.npmrc file
 
@@ -77,7 +77,7 @@ always-auth=true
   "main": "index.js",
   "scripts": {
     "restore": "npm install --no-color --no-optional",
-    "build": "npm run restore && gulp generateAmdModuleFromResx --no-color --gulpfile=./node_modules/msportalfx-ut/gulpfile.js --silent --cwd ./ && tsc -p tsconfig.json",
+    "build": "npm run restore && gulp generateAmdModuleFromResx --no-color --gulpfile=./node_modules/@microsoft/azureportal-ut/gulpfile.js --silent --cwd ./ && tsc -p tsconfig.json",
     "test": "npm run build && karma start",
     "test-ci": "npm run build && karma start --single-run --no-colors"
   },
@@ -106,7 +106,7 @@ always-auth=true
     "karma-requirejs": "1.1.0",
     "karma-trx-reporter": "0.4.0",
     "mocha": "7.1.2",
-    "msportalfx-ut": "file:../../packages/Microsoft.Portal.TestFramework.UnitTest.$(CURRENT_BUILD_VERSION)/msportalfx-ut-$(NPM_CURRENT_BUILD_VERSION).tgz",
+    "@microsoft/azureportal-ut": "file:../../packages/Microsoft.Portal.TestFramework.UnitTest.$(CURRENT_BUILD_VERSION)/microsoft-azureportal-ut-$(NPM_CURRENT_BUILD_VERSION).tgz",
     "nconf": "0.10.0",
     "requirejs": "2.3.6",
     "sinon": "7.2.3",
@@ -119,7 +119,7 @@ always-auth=true
 
     In the package.json you can see we're using mocha and chai but you can choose your own test and assertion framework.
 
-1. Update ./package.json to refer directly to msportalfx-ut i.e rather then using the file:// syntax simply specify `"msportalfx-ut" : "5.302.VersionOfSdkYouAreUsing"` (notice difference in versioning, no 0 as minor version)
+1. Update ./package.json to refer directly to @microsoft/azureportal-ut i.e rather then using the file:// syntax simply specify `"@microsoft/azureportal-ut" : "5.302.VersionOfSdkYouAreUsing"` (notice difference in versioning, no 0 as minor version)
 
 1. run the following command.
 
@@ -132,30 +132,31 @@ always-auth=true
 Note:
 * If you receive auth errors against the internal NPM feed see the "Connect to feed" instructions [here](https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=AzurePortal&_a=feed)
 
-<a name="unit-test-framework-creating-a-project-from-scratch-with-visual-studio-code-dev-build-time-configuration-add-msportalfx-ut-config-json"></a>
-#### add ./msportalfx-ut.config.json
+<a name="unit-test-framework-creating-a-project-from-scratch-with-visual-studio-code-dev-build-time-configuration-add-azureportal-ut-config-json"></a>
+#### add ./azureportal-ut.config.json
 
-msportalfx-ut.config.json defines paths to those files needed by the msportalfx-ut node module to generate everything under `./_generated/*`.
+azureportal-ut.config.json defines paths to those files needed by the @microsoft/azureportal-ut node module to generate everything under `./_generated/*`.
 
-add ./msportalfx-ut.config.json with the following:
+add ./azureportal-ut.config.json with the following:
 
 ```json
 
 {
-    "UTNodeModuleRootPath": "./node_modules/msportalfx-ut",
+    "UTNodeModuleRootPath": "./node_modules/@microsoft/azureportal-ut",
     "GeneratedAssetRootPath": "./_generated",
     "ResourcesResxRootDirectory": "../Extension/Client"
 }
 
+
 ```
 Customize the paths to those of your extension. The definition of each key in the config is as follows:
 
-- `UTNodeModuleRootPath`: the root path to where the msportalfx-ut node module was installed.
+- `UTNodeModuleRootPath`: the root path to where the @microsoft/azureportal-ut node module was installed.
 - `GeneratedAssetRootPath`: the root path to save all assets that will be generated e.g your resx to js AMD module so you can use resource strings directly in your test.
 - `ResourcesResxRootDirectory`: extension client root directory that contains all *.resx files. These will be used to generate js AMD string resource modules into `GeneratedAssetRootPath` and the associated require config.
 
 Note:
-* if your official build environment uses different paths then your dev environment you can override them either by using command line arguments or environmental variables.  The msportalfx-ut gulpfile will search in the following order command line argument > environmental variable > ./msportalfx-ut.config.json file.  An example of overriding an item for an official build via a command line argument `gulp --UTNodeModuleResolutionPath ./some/other/location`
+* If your official build environment uses different paths then your dev environment you can override them either by using command line arguments or environmental variables.  The @microsoft/azureportal-ut gulpfile will search in the following order command line argument > environmental variable > ./azureportal-ut.config.json file.  An example of overriding an item for an official build via a command line argument `gulp --UTNodeModuleResolutionPath ./some/other/location`
 
 <a name="unit-test-framework-creating-a-project-from-scratch-with-visual-studio-code-dev-build-time-configuration-add-a-test"></a>
 #### Add a test
@@ -166,7 +167,7 @@ Add a CreateBlade test to ./test/CreateBlade.test.ts.  This demonstrates how to 
 
 import { CreateBlade } from "Resource/Create/CreateBlade";
 import * as sinon from "sinon";
-import { TemplateBladeHarness } from "msportalfx-ut/Harness";
+import { TemplateBladeHarness } from "@microsoft/azureportal-ut/Harness";
 
 describe("Create Blade Tests", () => {
   let server: sinon.SinonFakeServer;
@@ -222,7 +223,7 @@ import { assert } from "chai"; // type issues with node d.ts and require js d.ts
 import { Parameters, ResourceOverviewBlade } from "Resource/Blades/Overview/ResourceOverviewBlade";
 import * as ClientResources from "ClientResources";
 import * as sinon from "sinon";
-import { TemplateBladeHarness } from "msportalfx-ut/Harness";
+import { TemplateBladeHarness } from "@microsoft/azureportal-ut/Harness";
 
 describe("Resource Overview Blade Tests", () => {
   let server: sinon.SinonFakeServer;
@@ -240,28 +241,28 @@ describe("Resource Overview Blade Tests", () => {
     // arrange
     const resourceId = "/subscriptions/0c82cadf-f711-4825-bcaf-44189e8baa9f/resourceGroups/sdfsdfdfdf/providers/Providers.Test/statefulIbizaEngines/asadfasdff";
     server.respondWith((request) => {
-        if (request.url.startsWith(`${MsPortalFx.getEnvironmentValue("armEndpoint")}/batch`)
-            && JSON.parse(request.requestBody).requests[0].url.endsWith(`${resourceId}?api-version=${MsPortalFx.getEnvironmentValue("armApiVersion")}`)) {
-            request.respond(200, { "Content-Type": "application/json" }, JSON.stringify({
-                "responses": [
-                    {
-                        "httpStatusCode": 200,
-                        "content": {
-                            "id":`${resourceId}`,
-                            "name": "bar",
-                            "type": "Providers.Test/statefulIbizaEngines",
-                            "location": "East Asia",
-                            "properties": {},
-                        },
-                    },
-                ],
-            }));
-        } else {
-            request.respond(404, null, "not mocked");
-        }
+      if (request.url.startsWith(`${MsPortalFx.getEnvironmentValue("armEndpoint")}/batch`)
+        && JSON.parse(request.requestBody).requests[0].url.endsWith(`${resourceId}?api-version=${MsPortalFx.getEnvironmentValue("armApiVersion")}`)) {
+        request.respond(200, { "Content-Type": "application/json" }, JSON.stringify({
+          "responses": [
+            {
+              "httpStatusCode": 200,
+              "content": {
+                "id": `${resourceId}`,
+                "name": "bar",
+                "type": "Providers.Test/statefulIbizaEngines",
+                "location": "East Asia",
+                "properties": {},
+              },
+            },
+          ],
+        }));
+      } else {
+        request.respond(404, null, "not mocked");
+      }
     });
 
-    const bladeParameters : Parameters = { id: resourceId };
+    const bladeParameters: Parameters = { id: resourceId };
     // options for the blade under test. optional callbacks beforeOnInitializeCalled, afterOnInitializeCalled and afterRevealContentCalled
     // can be supplied to execute custom test code
 
@@ -320,8 +321,8 @@ describe("Resource Overview Blade Tests", () => {
         ],
         "target": "es5",
         "paths": {
-            "msportalfx-ut/*": [
-                "./node_modules/msportalfx-ut/lib/*"
+            "@microsoft/azureportal-ut/*": [
+                "./node_modules/@microsoft/azureportal-ut/lib/*"
             ],
             "*": [
                 "../Extension/Output/Content/Scripts/*",
@@ -458,15 +459,15 @@ module.exports = function (config) {
             // sinonjs used for mocking xhr.
             { pattern: "Extension.UnitTests/node_modules/sinon/**/*.js", included: false },
             // aggregate script of portal bundles required for test.
-            "Extension.UnitTests/node_modules/msportalfx-ut/lib/FxScripts.js",
+            "Extension.UnitTests/node_modules/@microsoft/azureportal-ut/lib/FxScripts.js",
             // karma requirejs adapter required to successfully load requirejs in karma.
             "Extension.UnitTests/node_modules/karma-requirejs/lib/adapter.js",
             // generated require configs for extension resx files.
             { pattern: "Extension.UnitTests/_generated/Ext/**/*RequireConfig.js", included: true },
-            // msportalfx-ut test harness and other test scripts you may load within a unit test.
-            { pattern: "Extension.UnitTests/node_modules/msportalfx-ut/lib/*.js", included: false },
+            // @microsoft/azureportal-ut test harness and other test scripts you may load within a unit test.
+            { pattern: "Extension.UnitTests/node_modules/@microsoft/azureportal-ut/lib/*.js", included: false },
             // portal framework scripts.
-            { pattern: "Extension.UnitTests/node_modules/msportalfx-ut/lib/fx/Content/Scripts/**/*.js", included: false },
+            { pattern: "Extension.UnitTests/node_modules/@microsoft/azureportal-ut/lib/fx/Content/Scripts/**/*.js", included: false },
             // reserved directory for generated content for framework.
             { pattern: "Extension.UnitTests/_generated/Fx/**/*.js", included: false },
             // generated content for extension.
@@ -628,7 +629,7 @@ point to the correct location.
 
 If you are a executing the default instructions on your Corext environment, this is the error you will see:
 
-`npm ERR! enoent ENOENT: no such file or directory, stat 'C:\...\ExtensionName\packages\Microsoft.Portal.TestFramework.UnitTest.5.0.302.979\msportalfx-ut-5.302.979.tgz'`
+`npm ERR! enoent ENOENT: no such file or directory, stat 'C:\...\ExtensionName\packages\Microsoft.Portal.TestFramework.UnitTest.5.0.302.979\microsoft-azureportal-ut-5.302.979.tgz'`
 
 This error indicates that it cannot find the expanded NuGet package for the Unit Test Framework.
 
@@ -662,11 +663,11 @@ This error indicates that it cannot find the expanded NuGet package for the Unit
 
     Found under `<ExtensionRepoName>\src\<ExtensionName>.UnitTests\package.json`
 
-    If you have the package `msportalfx-ut` in your dependencies, remove it.
+    If you have the package `@microsoft/azureportal-ut` in your dependencies, remove it.
 
     Update your scripts init command to be the following:
 
-    `"init": "npm install --no-optional && npm install %PkgMicrosoft_Portal_TestFramework_UnitTest%\\msportalfx-ut-5.302.1016.tgz --no-save",`
+    `"init": "npm install --no-optional && npm install %PkgMicrosoft_Portal_TestFramework_UnitTest%\\microsoft-azureportal-ut-5.302.1016.tgz --no-save",`
 
     **Note:** *The version listed above should match the version of the Portal SDK you are using for your extension and will match the `"Microsoft.Portal.Framework"` package in your `packages.config`.*
 
@@ -684,7 +685,7 @@ example usage:
 
 ```typescript
 
-import * as harness from "msportalfx-ut/Harness";
+import * as harness from "@microsoft/azureportal-ut/Harness";
 
 ...
 
@@ -726,10 +727,10 @@ add
 1. ./package.json update the `script` named `prereq`  to be the following
 
     ```
-    "prereq": "npm run init && gulp --gulpfile=./node_modules/msportalfx-ut/gulpfile.js --cwd ./"
+    "prereq": "npm run init && gulp --gulpfile=./node_modules/@microsoft/azureportal-ut/gulpfile.js --cwd ./"
     ```
 
-1. ./msportalfx-ut.config.js
+1. ./azureportal-ut.config.js
 
     ```
         "ExtensionTypingsFiles": "../Extension/**/*.d.ts",
@@ -746,8 +747,8 @@ add
 
     ...
             "paths": {
-                "msportalfx-ut/*": [
-                    "./node_modules/msportalfx-ut/lib/*"
+                "@microsoft/azureportal-ut/*": [
+                    "./node_modules/@microsoft/azureportal-ut/lib/*"
                 ],
                 "*": [
                     "./_generated/Ext/typings/Client/*",
@@ -812,5 +813,5 @@ Try the following:
 <a name="i-can-t-use-the-internal-npm-registry-https-msazure-pkgs-visualstudio-com-_packaging-azureportal-npm-registry-because-my-build-nodes-are-completely-disconnected-from-the-internet"></a>
 ## My build nodes are completely disconnected from the internet
 
-* you can commit your version of msportalfx-ut.zip into your repo and install it directly using relative file path syntax
-`"msportalfx-ut": "file:../externals/msportalfx-ut-5.302.someversion.tgz",`
+* you can commit your version of @microsoft/azureportal-ut.zip into your repo and install it directly using relative file path syntax
+`"@microsoft/azureportal-ut": "file:../externals/@microsoft/azureportal-ut-5.302.someversion.tgz",`

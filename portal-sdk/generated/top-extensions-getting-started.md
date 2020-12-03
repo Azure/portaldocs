@@ -6,7 +6,7 @@
         * [All services & browse integration](#getting-started-with-the-portal-sdk-exploring-the-extension-all-services-browse-integration)
         * [Resource Menu Blade](#getting-started-with-the-portal-sdk-exploring-the-extension-resource-menu-blade)
         * [Adding a Blade](#getting-started-with-the-portal-sdk-exploring-the-extension-adding-a-blade)
-    * [NextSteps](#getting-started-with-the-portal-sdk-nextsteps)
+    * [Next steps](#getting-started-with-the-portal-sdk-next-steps)
     * [Questions?](#getting-started-with-the-portal-sdk-questions)
     * [FAQ:](#getting-started-with-the-portal-sdk-faq)
         * [I receive a "this site is not secure" or "your connection is not private" error when running the extension](#getting-started-with-the-portal-sdk-faq-i-receive-a-this-site-is-not-secure-or-your-connection-is-not-private-error-when-running-the-extension)
@@ -104,15 +104,15 @@ Now that you have created a resource it is time to explore how users will find t
 <a name="getting-started-with-the-portal-sdk-exploring-the-extension-all-services-browse-integration"></a>
 ### All services &amp; browse integration
 
-The first place to integrate your new experience in the Azure portal is to have a presence in the [All Service](https://portal.azure.com/?feature.customportal=false#allservices) list and global search. This is how customers find your service. To have a presence in the Azure Portal All Services list and other entry points such as the global search bar in the Portal, an asset has be to defined. An asset represents a service in Azure and most assets map to an ARM resource type. 
+The first place to integrate your new experience in the Azure portal is to have a presence in the [All Service](https://portal.azure.com/?feature.customportal=false#allservices) list and global search. This is how customers find your service. To have a presence in the Azure Portal All Services list and other entry points such as the global search bar in the Portal, an asset has be to defined. An asset represents a service in Azure and most assets map to an ARM resource type.
 
-In this new extension you have created, there is an existing asset called "My resources". You can find this asset in the all services list and the global search in the Portal - 
+In this new extension you have created, there is an existing asset called "My resources". You can find this asset in the all services list and the global search in the Portal -
 
 ![alt-text](../media/top-extensions-getting-started/allServicesIntegration.png "All services integration")
 
 ![alt-text](../media/top-extensions-getting-started/globalSearchIntegration.png "Global search integration")
 
-The definition for this asset can be found at `../Client/Assets/ResourceAsset.dx.json`. You can modify the `assetType` JSON object to edit the asset. 
+The definition for this asset can be found at `../Client/Assets/ResourceAsset.dx.json`. You can modify the `assetType` JSON object to edit the asset.
 
 Once a customer clicks into an asset, it takes the customer to a view called Browse. This view lets customers browse through all resources for a given resource type and drill into a particular resource. The data for browse is powered by [Azure resource graph](https://azure.microsoft.com/features/resource-graph/). A custom Azure resource graph query can be specified in the `assetType.browse` JSON object.
 
@@ -138,7 +138,7 @@ The definition for this resource can be found at `../Client/Assets/ResourceAsset
 <a name="getting-started-with-the-portal-sdk-exploring-the-extension-adding-a-blade"></a>
 ### Adding a Blade
 
-Blades are the main unit of UX that can be built in the Portal. They are pages that can be loaded in the portal. A lot of popular views in the Portal can be built by just defining a simple JSON file. One such example is the Overview blade available at `../Client/Assets/Views/ResourceOverviewWithEssentials.Dx.jsonc`. 
+Blades are the main unit of UX that can be built in the Portal. They are pages that can be loaded in the portal. A lot of popular views in the Portal can be built by just defining a simple JSON file. One such example is the Overview blade available at `../Client/Assets/Views/ResourceOverviewWithEssentials.Dx.jsonc`.
 
 ![alt-text](../media/top-extensions-getting-started/resourcebladecontent.png "resource blade content")
 
@@ -146,8 +146,8 @@ To learn more about all the popular views that can be built by authoring just a 
 
 If the view you are trying to build is unique and is not one of the standard views that can be built by just authoring a JSON file, you can build your own view using React. You can learn more about React views [here](react-index.md).
 
-<a name="getting-started-with-the-portal-sdk-nextsteps"></a>
-## NextSteps
+<a name="getting-started-with-the-portal-sdk-next-steps"></a>
+## Next steps
 
 - You are now ready to start developing your Azure Portal extension. Use `ap build` to build your extension, `ap serve` to run the local server, and `ap watch` to watch for changes and enable compile on save. You can learn more about AP CLI commands [here](top-ap-cli.md).
 
