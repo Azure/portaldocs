@@ -1277,9 +1277,14 @@ module MsPortalFxForAsset {
              */
             export interface Selection {
                 /**
-                 * The max number of selected resources supported by the command operation.
+                 * The maximum number of selected resources supported by the command operation.
                  */
-                readonly maxSelectedItems: number;
+                readonly maxSelectedItems?: number;
+
+                /**
+                 * The minimum number of selected resources supported by the command operation.
+                 */
+                readonly minSelectedItems?: number;
 
                 /**
                  * The message shown when user tries to select more than supported items by the command operation.
@@ -1418,6 +1423,22 @@ import { SvgType } from "Fx/Images";
             },
         },
         {
+            kind: ForAsset.Commands.SelectionCommandKind.OpenBladeSelectionCommand,
+            id: "SelectionBasedOpenBladeCommand1",
+            label: ClientResources.AssetCommands.openBlade2,
+            icon: {
+                image: SvgType.Attachment,
+            },
+            bladeReference: {
+                blade: "SimpleTemplateBlade",
+            },
+            selection: {
+                maxSelectedItems: 3,
+                minSelectedItems: 3,
+                disabledMessage: ClientResources.AssetCommands.disabledMessage,
+            },
+        },
+        {
             kind: ForAsset.Commands.SelectionCommandKind.MenuSelectionCommand,
             id: "SelectionBasedMenuCommand",
             label: ClientResources.AssetCommands.menuCommand,
@@ -1425,7 +1446,8 @@ import { SvgType } from "Fx/Images";
                 image: SvgType.PolyResourceLinked,
             },
             selection: {
-                maxSelectedItems: 2,
+                maxSelectedItems: 3,
+                minSelectedItems: 2,
                 disabledMessage: ClientResources.AssetCommands.disabledMessage,
             },
             commands: [
