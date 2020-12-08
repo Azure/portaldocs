@@ -1350,12 +1350,12 @@ return Q.all(promises);
 
 ```typescript
 
-public updateEngine(engine: EngineModel): Q.Promise<void> {
-   let promise: Q.Promise<any>;
+public updateEngine(engine: EngineModel): Promise<void> {
+   let promise: Promise<any>;
    if (useFrameworkPortal) {
        // Using framework portal (NOTE: this is not allowed against ARM).
        // NOTE: do NOT use invoke API since it doesn't handle CORS.
-       promise = Q(FxBaseNet.ajaxExtended<any>({
+       promise = FxBaseNet.ajaxExtended<any>({
            headers: { accept: applicationJson },
            isBackgroundTask: false,
            setAuthorizationHeader: true,
@@ -1365,7 +1365,7 @@ public updateEngine(engine: EngineModel): Q.Promise<void> {
            data: ko.toJSON(convertToResource(engine)),
            contentType: applicationJson,
            useFxArmEndpoint: true,
-       }));
+       });
    } else {
        // Using local controller.
        promise = FxBaseNet.ajax({

@@ -127,6 +127,8 @@ The primary UI building block is a called a blade. A blade is like a page. It ge
 
 * [Overview](/portal-sdk/generated/top-extensions-blades.md)
 
+* [Declarative Views](/portal-sdk/generated/top-declarative.md)
+
 * [React Views](/portal-sdk/generated/react-index.md)
 
 * [TemplateBlade](/portal-sdk/generated/top-blades-templateblade.md)

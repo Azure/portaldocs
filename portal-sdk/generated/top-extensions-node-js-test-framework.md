@@ -1,14 +1,14 @@
 <a name="overview"></a>
 ## Overview
 
-**MsPortalFx-Test** is an end-to-end test framework that is written in **TypeScript** abd  runs tests against the Microsoft Azure Portal. It tests extension interactions with user behavior, moreso than extension interactions with the Portal.  Its open source contribution model focuses on partner needs instead of internal Portal needs. It is distributed independently from the SDK to allow developers to develop tests in the same language as the extension.
+**@microsoft/azureportal-test**, formerly known as msportalfx-test, is an end-to-end test framework that is written in **TypeScript** abd  runs tests against the Microsoft Azure Portal. It tests extension interactions with user behavior, moreso than extension interactions with the Portal.  Its open source contribution model focuses on partner needs instead of internal Portal needs. It is distributed independently from the SDK to allow developers to develop tests in the same language as the extension.
 
 The test framework interacts with the Portal as a user would, and helps developers make performant and robust extensions when they decrease breaking changes to partner team CI.
 
 <a name="overview-general-architecture"></a>
 ### General Architecture
 
-**MsPortalFx-Test** is arranged into three layers of abstraction. The names of the layers may not be consistent in all instances, but the general idea is the same.  There may also be some future refactoring to easily differentiate between the layers.
+**@microsoft/azureportal-test** is arranged into three layers of abstraction. The names of the layers may not be consistent in all instances, but the general idea is the same.  There may also be some future refactoring to easily differentiate between the layers.
 
 1. Controls layer
 
@@ -30,10 +30,10 @@ The test framework interacts with the Portal as a user would, and helps develope
 
 1. Install [Node.js](https://nodejs.org/en/download/). (last tested on 12.19 LTS)
 
-After installing Node.js can either `scaffold an msportalfx-test project` or `create a msportaltx-test project from scratch`
+After installing Node.js can either `scaffold an @microsoft/azureportal-test project` or `create a @microsoft/azureportal-test project from scratch`
 
-<a name="overview-getting-started-scaffold-an-msportalfx-test-project"></a>
-#### Scaffold an msportalfx-test project
+<a name="overview-getting-started-scaffold-an-microsoft-azureportal-test-project"></a>
+#### Scaffold an @microsoft/azureportal-test project
 
 1. Install the `ap cli` [https://aka.ms/portalfx/apclidoc](https://aka.ms/portalfx/apclidoc)
 
@@ -45,7 +45,7 @@ After installing Node.js can either `scaffold an msportalfx-test project` or `cr
 #### Create a msportaltx-test project from scratch
 
 
-1. **MsPortalFx-Test** is available for download on **npm** under the package name **msportalfx-test** [https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal).
+1. **@microsoft/azureportal-test** is available for download on **npm** under the package name **@microsoft/azureportal-test** [https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal).
 
 1. Install TypeScript 3.9.5 is located at [https://marketplace.visualstudio.com/items?itemName=TypeScriptTeam.typescript-395](https://marketplace.visualstudio.com/items?itemName=TypeScriptTeam.typescript-395).
 
@@ -55,132 +55,154 @@ After installing Node.js can either `scaffold an msportalfx-test project` or `cr
     md e2etests
     ```
 
-1. Switch to the new directory and install the msportalfx-test module by using npm:
+1. Switch to the new directory and install the @microsoft/azureportal-test module by using npm:
 
     ```
     cd e2etests
-    npm install msportalfx-test --no-optional
-    ```
-1. The **msportalfx-test** module comes with useful TypeScript definitions and its dependencies. To make them available to your tests, we recommend that you use the typings Typescript Definition Manager.
-
-1. First install the typings Typescript Definition Manager globally:
-
-    ```
-    npm install typings -g
+    npm install @microsoft/azureportal-test
     ```
 
-1. Next copy the provided **typings.json** and **package.json** files from the **node_modules/msportalfx-test/typescript** folder (there are other files there as well but you can ignore those) to your test root directory and use typings to install the provided definitions.
+1. Next copy the provided **tsconfig.json** and **package.json** files from the **node_modules/@microsoft/azureportal-test/typescript** folder (there are other files there as well but you can ignore those) to your test root directory.
+    1. The provided **package.json** file is used to help jumpstart the example below by installing dependencies and creating a basic environment for running tests.
+    1. Note the **typings.json** file and **typings** package dependency from previous versions is no longer needed and has been removed.  You may need to update the typescript imports when you remove them, see the below Write a test example for how to import @microsoft/azureportal-test.
 
-        *copy typings.json to your test root directory*
-        *navigate to your test root directory*
-        typings install
+1. In the **package.json** file, update the @microsoft/azureportal-test version to the latest version.  Also update the Chromedriver version to match the version of Chrome you have installed.
 
-1. In the **package.json** file, you update the chromedriver and msportalfx-test  versions to their latest versions found at
+    [@microsoft/azureportal-test package](https://aka.ms/portalfx/microsoft-azureportal-test/package)
 
     [https://www.npmjs.com/package/chromedriver](https://www.npmjs.com/package/chromedriver)
 
-    [msportalfx-test package](https://aka.ms/portalfx/msportalfx-test/package)
-
 1. The **package.json** describes your project and its dependencies for NPM to understand.  You can find more details about it at [https://docs.npmjs.com/files/package.json](https://docs.npmjs.com/files/package.json)
 
+1. The **tsconfig.json** provides configuration values for building via typescript compiler (tsc).
+s
 1. Once the dependencies have been updated, install them by running the following command:
 
     ```
-    npm install --no-optional
+    npm install
     ```
 1. Now you are ready to write a test.
 
 <a name="overview-write-a-test"></a>
 ### Write a test
 
-For this test example you'll need an existing cloud service for the test you'll write below, so if you don't have one please go to the Azure Portal and create a new [cloud service](https://ms.portal.azure.com/#create/Microsoft.CloudService). Write down the dns name of your cloud service to use it in your test.
+For this test example you'll need an Azure subscription and account for the test you'll write below.
 
 We'll use the [Mocha](https://mochajs.org/) testing framework to layout the following test, but you could use any framework that supports Node.js modules and promises. Mocha is included by default in the **package.json** file you copied earlier.
 
 Create a `portaltests.ts` file in your e2etests directory and paste the following.
 
 ```ts
-/// <reference path="./typings/index.d.ts" />
- 
-import assert = require('assert');
-import testFx = require('MsPortalFx-Test');
-import nconf = require('nconf');
-import until = testFx.until;
- 
-describe('Cloud Service Tests', function () {
-    this.timeout(0);
-    
-    it('Can Browse To A Cloud Service', () => {
- 
-        
-        // Load command line arguments, environment variables and config.json into nconf
-        nconf.argv()
-            .env()
-            .file(__dirname + "/config.json");
- 
-        //provide windows credential manager as a fallback to the above three
-        nconf[testFx.Utils.NConfWindowsCredentialManager.ProviderName] = testFx.Utils.NConfWindowsCredentialManager;
-        nconf.use(testFx.Utils.NConfWindowsCredentialManager.ProviderName);
-        
-        
-        testFx.portal.portalContext.signInEmail = 'johndoe@outlook.com';
-        testFx.portal.portalContext.signInPassword = nconf.get('msportalfx-test/johndoe@outlook.com/signInPassword');
-        
-        // Update this variable to use the dns name of your actual cloud service 
-        let dnsName = "mycloudservice";
-        
-        return testFx.portal.openBrowseBlade('microsoft.classicCompute', 'domainNames', "Cloud services (classic)").then((blade) => {
-            return blade.filterItems(dnsName);
-        }).then((blade) => {
-            return testFx.portal.wait<testFx.Controls.GridRow>(() => {
-                return blade.grid.rows.count().then((count) => {
-                    return count === 1 ? blade.grid.rows.first() : null;
-                });
-            }, null, "Expected only one row matching '" + dnsName + "'.");
-        }).then((row) => {
-            return row.click();
-        }).then(() => {            
-            let summaryBlade = testFx.portal.blade({ title: dnsName + " - Production" });
-            return testFx.portal.wait(until.isPresent(summaryBlade));
-        }).then(() => {
-            return testFx.portal.quit();
-        });
-    });
+import * as testFx from "@microsoft/azureportal-test";
+import * as nconf from "nconf";
+
+describe("Resource Group Tests", function () {
+    this.timeout(0);
+    this.retries(0);
+
+    // Runs before every test.  See additional documentation at https://mochajs.org
+    beforeEach(() => {
+        // Load command line arguments, environment variables and config.json into nconf
+        // nconf is an optional package that can be used to help make various settings available.  Read more about it at https://npmsj.org/nconf
+        // The below code loads settings from command line arguments, envrionment variables, and a config.json file into nconf in a hierarchical manner for easy retrieval
+        nconf.argv()
+            .env()
+            .file("config.json");
+
+        // The @microsoft/azureportal-test framework includes an nconf extension that reads values from the windows credential manager
+        (<any>nconf)[testFx.Utils.NConfWindowsCredentialManager.ProviderName] = testFx.Utils.NConfWindowsCredentialManager;
+        nconf.use(testFx.Utils.NConfWindowsCredentialManager.ProviderName);
+
+        // Provide the portal context values needed to load the portal
+        // Provide the URL to the portal that is being tested
+        const portalUrl = nconf.get("PORTAL_URL");
+        if (!!portalUrl) {
+            testFx.portal.portalContext.portalUrl = portalUrl;
+        }
+
+        // Provide credentials to the test framweork to be used for login
+        testFx.portal.portalContext.signInEmail = nconf.get("LOGIN_NAME");
+        testFx.portal.portalContext.signInPassword = nconf.get(`aux/OneCloud.TestInfra/TestLogins/${testFx.portal.portalContext.signInEmail}`); // NOTE YOU SHOULD NEVER STORE SECRETS/PASSWORDS IN PLAIN TEXT.  In this case we have our password stored in windows credential manager under the name "aux/OneCloud.TestInfra/TestLogins/<login_name>"
+    });
+
+    // Test scenario
+    it("Can open create resource group blade", async () => {
+        const createResourceGroupURI = "create/Microsoft.ResourceGroup";
+
+        const myblade = await testFx.portal.openBlade(
+            createResourceGroupURI,
+            testFx.PortalFxResources.hubsExtension.resourceGroups.createTitle
+        );
+
+        const createBladeDisplayed = await createBlade.isDisplayed();
+        assert(createBladeDisplayed, "Create blade was not visible after loading the portal!");
+    });
+
+    // Runs after every test.
+    afterEach(async function () {
+        console.log("Running cleanup");
+        try {
+            if (this.currentTest.state === "failed") {
+                await testFx.portal.takeScreenshot(this.currentTest.title);
+            }
+        } catch (e) { }
+        try {
+            await testFx.portal.quit();
+        }
+        catch (e) { }
+    });
 });
+
 ```
 
-Remember to replace "mycloudservice" with the dns name of your actual cloud service.
-Also replace the signInEmail and password values with your test account credentials
+Remember to replace the signInEmail and signInPassword values with your test account credentials.  You can also use nconf to retrieve them from environment variables or windows credential manager (when using the included extension).
 
-**NOTE**: MFA-enabled `@microsoft.com` accounts are not supported.
+**NOTE**: MFA-enabled `@microsoft.com` accounts are not supported.  The recommendation for testing is to use a non MFA-enabled @microsoft.com account on an isolated subscription that has no other services runnning.
 
-In this test we start by importing the MsPortalFx-Test module. Then the credentials are specified for the user that will sign in to the Portal. These should be the credentials of a user that already has an active Azure subscription.
+In this test we start by importing the @microsoft/azureportal-test module. Then the credentials are specified for the user that will sign in to the Portal. These should be the credentials of a user that already has an active Azure subscription.
 
-After that we can use the Portal object to drive a test scenario that opens the Cloud Services Browse blade, filters the list of cloud services, checks that the grid has only one row after the filter, selects the only row and waits for the correct blade to open. Finally, the call to `quit()` closes the browser.
+After that we can use the Portal object to drive a test scenario that opens the Create Resource Group Browse blade and waits for the correct blade to open. In the afterEach block we take a screenshot if the test fails and finally, call `quit()` to close the browser.
 
 <a name="overview-add-the-configuration"></a>
 ### Add the configuration
 
-Create a file named `config.json` next to `portaltests.ts`. Paste this in the file.
+The @microsoft/azureportal-test framework can be configured via a config.json file.
+Create a file named `config.json` next to `portaltests.ts`. Paste this in the file and save next to your test file.
 
 ```js
-	{
-	"capabilities": {
-		"browserName": "chrome"
-	},
-	"portalUrl": "https://portal.azure.com"
-	}
+{
+    "capabilities": {
+        "browserName": "chrome",
+        "chromeOptions": {
+            "args": [
+                "no-sandbox",
+                "window-size=1280,960",
+                "disable-extensions",
+                "disable-popup-blocking"
+            ]
+        }
+    },
+    "chromeDriverPath": "node_modules\\chromedriver\\lib\\chromedriver\\chromedriver.exe",
+    "portalUrl": "https://portal.azure.com",
+    "signInUrl": "https://login.microsoftonline.com",
+    "enableFiddler": "false",
+    "managementEndpoint": "https://management.core.windows.net/",
+    "allowUnauthorizedCert": "true",
+    "LOGIN_NAME": "<someone@someCompany.com>"
+}
 ```
 
-This configuration tells **MsPortalFx-Test** that **Google Chrome** should be used for the test session and `https://portal.azure.com` should be the Portal under test.
+Replace the LOGIN_NAME with the account being used to login.  If your machine automatically logs you in via corp signin then no password is needed.  Else store the password in windows credential manager and update the sign in password line in the test code to retrieve it.
+
+This configuration tells **@microsoft/azureportal-test** that **Google Chrome** should be used for the test session and `https://portal.azure.com` should be the Portal under test.  You may
 
 <a name="overview-compile-and-run"></a>
 ### Compile and run
 
-Compile your TypeScript test file:
+Compile your TypeScript test file (note these commands are stored in the package.json file "scripts" section, you can open it to see what these commands translate to):
 
 ```ts
-tsc portaltests.ts --module commonjs
+npm run build
 ```
 
 and then run **Mocha** against the generated JavaScript file.
@@ -194,35 +216,43 @@ npm test
 The following output will be sent to your console as the test progresses:
 
 ```ts
-    Portal Tests
-Opening the Browse blade for the microsoft.classicCompute/domainNames resource type...
-Starting the ChromeDriver process...
-Performing SignIn...
-Waiting for the Portal...
-Waiting for the splash screen to go away...
-Applying filter 'mycloudservice'...
-    √ Can Browse To A Cloud Service (37822ms)
-
-    1 passing (38s)
+Resource Group Tests
+  testFx:information Opening the blade for create/Microsoft.ResourceGroup... +1s
+  testFx:information Starting the ChromeDriver process... +2ms
+  testFx:information Navigating to https://df.onecloud.azure-test.net?testframework=msportalfx-test&trace=debugLog&enableAnimations=false#create/Microsoft.ResourceGroup +18ms
+  testFx:information Performing sign in... +6s
+  testFx:information Performing SignIn... +1ms
+  testFx:information Successfully signed in +11s
+  testFx:information Already signed in, proceeding with test... +2ms
+  testFx:information Waiting 120000 ms for the splash screen to go away... +1ms
+    √ Example test (96266ms)
+Running cleanup
+ResourcesTest.ts:54
+  1 passing (2m)
 ```
 
-If you run into a compilation error with `node.d.ts`, verify that the tsc version you are using is 1.8.x or newer.  You can check the version by running:
+If you run into a compilation error with `node.d.ts`, verify that you are using the recommended tsc version stated earlier in this document or newer.  You can check the version by running:
 
 `tsc --version`
 
-If the version is incorrect, then you may need to adjust your path variables or directly call the correct version of `tsc.exe`.
+If the version is incorrect, then you may need to install the correct version, adjust your path variables or directly call the correct version of `tsc.exe`.
 
 <a name="overview-more-documentation-and-examples"></a>
 ### More Documentation and Examples
 
-The full documentation is available on the npm site [https://aka.ms/portalfx/msportalfx-test](https://aka.ms/portalfx/msportalfx-test).
+The full documentation is available on the npm site [https://aka.ms/portalfx/microsoft-azureportal-test](https://aka.ms/portalfx/microsoft-azureportal-test).
 
-Additional examples are available in the source code located at [https://aka.ms/portalfx/msportalfx-test/src](https://aka.ms/portalfx/msportalfx-test/src).
+Additional examples are available in the source code located at [https://aka.ms/portalfx/microsoft-azureportal-test/src](https://aka.ms/portalfx/microsoft-azureportal-test/src).
 
 
 <a name="overview-contributing"></a>
 ### Contributing
 
-Contributions to improve the test framework are encouraged.  If you develop a feature/fix a bug/etc that you feel would be useful to other users of the test framework then please submit a pull request to the msportalfx-test repository located at [https://aka.ms/portalfx/msportalfx-test/src](https://aka.ms/portalfx/msportalfx-test/src).
+Contributions to improve the test framework are encouraged.  If you develop a feature/fix a bug/etc that you feel would be useful to other users of the test framework then please submit a pull request to the @microsoft/azureportal-test repository located at [https://aka.ms/portalfx/microsoft-azureportal-test/src](https://aka.ms/portalfx/microsoft-azureportal-test/src).
 
-For detailed instructions, please view the full documentation on the npm site located at  [https://aka.ms/portalfx/msportalfx-test](https://aka.ms/portalfx/msportalfx-test).
+For detailed instructions, please view the full documentation on the npm site located at  [https://aka.ms/portalfx/microsoft-azureportal-test](https://aka.ms/portalfx/microsoft-azureportal-test).
+
+<a name="questions"></a>
+## Questions?
+
+Ask questions on: [https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza-test](https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza-test)

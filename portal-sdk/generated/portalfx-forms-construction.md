@@ -92,7 +92,7 @@ website:
 
 ```typescript
 
-const websiteName = new TextBox.ViewModel(
+const websiteName = new (TextBox.ViewModel as any)(
     this._ltm,
     this._form,
     this._form.createEditScopeAccessor(data => data.name),

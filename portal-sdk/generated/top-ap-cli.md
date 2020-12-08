@@ -5,6 +5,8 @@ The Azure portal extension developer CLI, namely `ap`, is the foundational tool 
 
 This document details the usage and extensibility points of the ap CLI.  The following video covers the majority of the content within this document - [ap cli video https://aka.ms/portalfx/apcli](https://aka.ms/portalfx/apcli).
 
+
+<!-- docs#setup -->
 <a name="cli-overview-setup-and-installation"></a>
 ## Setup and Installation
 
@@ -17,9 +19,10 @@ This document details the usage and extensibility points of the ap CLI.  The fol
 1. run `node setup.js` and perform any actions it asks you to.
 
 If you prefer follow along see the step by step:
- - [Manual one time Auth Setup and Installation steps](./top-ap-cli.md#manual-one-time-auth-setup-and-installation)
+ - [Manual one time Auth Setup and Installation steps](#manual-one-time-auth-setup-and-installation)
  - [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
 
+<!-- docs#setup -->
 
 <a name="cli-overview-basic-workflows"></a>
 ## Basic workflows
@@ -984,6 +987,8 @@ The ap CLI is built by the Azure portal team for the extension developer communi
     1. Store the PAT token in a keyvault that cloudtest can access.
     1. If not already base 64 encoded, don't forget to encode the PAT token in base 64 before putting it in .npmrc. more details to[ generate .npmrc with a long lasting PAT here ](https://docs.microsoft.com/en-us/azure/devops/artifacts/npm/npmrc).
 
+<!-- docs#manualsetup -->
+
 <a name="cli-overview-manual-one-time-auth-setup-and-installation"></a>
 ## Manual one time Auth Setup and Installation
 The following steps detail the one time configuration that must be applied to authenticate against the internal AzurePortal registry for both NuGet and npm.
@@ -1050,5 +1055,7 @@ With the one time configuration steps complete you can now install the CLI as yo
     ```
 
 [Video: Installing the node module](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=1324)
+
+<!-- docs#manualsetup -->
 
 To validate that your dev machine is ready for Azure Portal Extension development start with the template extension in the [Getting Started Guide](top-extensions-getting-started.md)

@@ -363,8 +363,7 @@ The package will contain 1 or more ARM template stored in the DeploymentTemplate
 
 <a name="gallery-item-specificiations-gallery-package-management-getting-the-gallery-tools"></a>
 #### Getting the Gallery Tools
-You can find the latest version of the gallery tools (Microsoft.Azure.Gallery.AzureGalleryUtility) in the official NuGet feed: [https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=Official](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=Official). Please only use packages with major version 5. Do not use major version 10, i.e., use 5.*.*.* and do not use 10.*.*.*
-Download the latest version (5.2.1.606, but there might be newer version, you can check by the publish date/time)
+You can find the latest version of the gallery tools (Microsoft.Azure.Gallery.AzureGalleryUtility) in the Marketplace NuGet feed: [https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=MarketplaceOne](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=MarketplaceOne).
 
 <a name="gallery-item-specificiations-gallery-package-management-creating-an-azure-gallery-package"></a>
 #### Creating an Azure Gallery Package
@@ -373,7 +372,7 @@ After you have created the folder structure and added the required files to your
 To create packages run the following command.
 
 ```bat
-> AzureGallery.exe package -m [path to manifest.json] -o [output directory]
+> Microsoft.Azure.Gallery.AzureGalleryUtility.exe package -m [path to manifest.json] -o [output directory]
 ```
 
 <a name="gallery-item-specificiations-gallery-package-management-publishing-a-azure-gallery-package-or-deployment-fragment"></a>
@@ -383,13 +382,10 @@ In order to publish a gallery package (azpkg) you will run the AzureGallery tool
 To upload the package run the following command.
 
 ```bat
-> AzureGallery.exe upload -p ..\path\to\package.azpkg
+> Microsoft.Azure.Gallery.AzureGalleryUtility.exe upload -p ..\path\to\package.azpkg
 ```
 
 Provisioning your package to all the regions and Cache refresh might take up to 30 minutes to show up in Azure Marketplace. You can verify this using a public endpoints: 
-```
-https://df.gallery.azure-test.net/Microsoft.Gallery/Galleryitems/<galleryItemId>?api-version=2015-04-01
-```
 ```
 https://df.catalogrp.azure-test.net/view/offers/<galleryItemId>?api-version=2018-08-01-beta
 ```
@@ -411,8 +407,8 @@ Make sure to update the "**galleryItemId**" in the URI that you received when yo
         ```
     1. Reduce the package's version by 1 minor version. This is because you'll need to bump up the version once you remove the hide key and you don't want to have to have the minor version of your package in the sovereigns be +1 from your public package.
     1. Re-zip your package and rename it back to `.azpkg`.
-1. Send your gallery package `.azpkg` file to [OneStore team](mailto:1store@microsoft.com) to get it published. Let them know this is for Fairfax and that you already added a hidekey.
-1. Once the OneStore team completes publishing, test your package by launching the portal with the hidekey.
+1. Create an ICM on "PFX-MIX-Marketplace Ingestion Experience/Marketplace Publishing" with your gallery package `.azpkg` file to get it published. Let them know this is for Fairfax and that you already added a hidekey.
+1. Once the MIX Marketplace Ingestion Experience team completes publishing, test your package by launching the portal with the hidekey.
 
     ```
     https://portal.azure.us/?microsoft_azure_marketplace_ItemHideKey=HIDEKEY_NAME_HERE
@@ -428,7 +424,7 @@ To update the filters for the a package run the following command.
 
 
 ```bat
-> AzureGallery.exe update -i [Publisher].[Name].[Version] -h [comma-separated hide key list] -sf [comma-separated subscription guid list]
+> Microsoft.Azure.Gallery.AzureGalleryUtility.exe update -i [Publisher].[Name].[Version] -h [comma-separated hide key list] -sf [comma-separated subscription guid list]
 ```
 
 <a name="gallery-item-specificiations-gallery-package-management-deleting-a-azure-gallery-package-or-deployment-fragment"></a>
@@ -438,29 +434,16 @@ Deleting Azure Gallery Packages is only supported in the test environments. We w
 To delete a azure gallery package run the following command.
 
 ```bat
-> AzureGallery.exe delete -i [Publisher].[Name].[Version]
+> Microsoft.Azure.Gallery.AzureGalleryUtility.exe delete -i [Publisher].[Name].[Version]
 ```
 
 <a name="gallery-item-specificiations-gallery-package-management-configuring-the-azure-package-loader-tool"></a>
 #### Configuring the Azure Package Loader Tool
-In order to use the gallery loader you will need to set some values in the AzureGallery.exe.config file. You can download the following two test certificates here: [Certificate1](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Certificate/https://gallerypackagedeployment.vault.azure.net/certificates/GalleryPackageDeploymentCertificate/a24116111eaa4a78a6ea321cba42691f) and [Certificate2](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Certificate/https://gallerypackagedeployment.vault.azure.net/certificates/GalleryPrivilegedOperationsCertificate/6995728756084188b478e609a8c9dcb0) in PFX/PEM format. Install them without a password and update the configuration as shown below.
+In order to use the gallery loader you will need to download the following two test certificates here: [Certificate1](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Certificate/https://gallerypackagedeployment.vault.azure.net/certificates/GalleryPackageDeploymentCertificate/a24116111eaa4a78a6ea321cba42691f) and [Certificate2](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Certificate/https://gallerypackagedeployment.vault.azure.net/certificates/GalleryPrivilegedOperationsCertificate/6995728756084188b478e609a8c9dcb0) in PFX/PEM format. Install them without a password.
 
 If you are a Microsoft FTE and do not have permissions to access the certificates, please join the right groups following instructions [here](../../portal-sdk/generated/top-onboarding.md#join-dls-and-request-permissions). If you are an external partner, request permissions through the Microsoft team you are collaborating with to light up your extension.
 
-In order to publish to production, you must contact the [1store team](mailto:1store@microsoft.com).
-
-```xml
-<appSettings>
-  <add key="Microsoft.Azure.Gallery.ServiceEndpoint" value="https://df.admin.gallery.azure-test.net"/>
-  <add key="Microsoft.Azure.Gallery.ServiceSettings.PrivilegedOperationsCertificateThumbprint" value="<PUT HERE CERT1 THUMBPRINT>"/>
-  <add key="Microsoft.Azure.Gallery.ServiceSettings.HighPrivilegeOperationsCertificateThumbprint" value="<PUT HERE CERT2 THUMBPRINT>"/>
-
-  <add key="Catalog.Host" value="df.marketplacerp.azure-test.net" />
-  <add key="Catalog.AdminCertThumbprint" value="<PUT HERE CERT2 THUMBPRINT>" />
-</appSettings>
-```
-
-> NOTE: The utilization of certificate authorization is temporary. We will be switching to STS auth post public preview. For now everyone is sharing the same cert and has permission to publish/delete any package. Please don't break other people’s packages.
+In order to publish to production, create an ICM on "PFX-MIX-Marketplace Ingestion Experience/Marketplace Publishing" with your gallery package `.azpkg` file to get it published
 
 <a name="gallery-item-specificiations-versioning"></a>
 ### Versioning

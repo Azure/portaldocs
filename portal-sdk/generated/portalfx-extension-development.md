@@ -3,8 +3,12 @@
 # Getting Started
 
 * [Getting Started with the Portal SDK](top-extensions-getting-started.md#getting-started-with-the-portal-sdk)
-* [Questions?](top-extensions-getting-started.md#questions)
-* [FAQ:](top-extensions-getting-started.md#faq)
+    * [Installing the Azure Portal SDK](top-extensions-getting-started.md#installing-the-azure-portal-sdk)
+    * [Creating and running an Extension](top-extensions-getting-started.md#creating-and-running-an-extension)
+    * [Exploring the Extension](top-extensions-getting-started.md#exploring-the-extension)
+    * [Next steps](top-extensions-getting-started.md#next-steps)
+    * [Questions?](top-extensions-getting-started.md#questions)
+    * [FAQ:](top-extensions-getting-started.md#faq)
 
 * [Samples extension](portalfx-sample-extensions.md#samples-extension)
 

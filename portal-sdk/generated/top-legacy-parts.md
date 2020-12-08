@@ -444,7 +444,7 @@ AllCaps,
 @Di.Class("viewModel")
 export class GeneralGalleryPart implements Def.Contract {
 public configOnDropSelectable: FxViewModels.Selectable<FxViewModels.DynamicBladeSelection>;
-public configureHotSpot: FxViewModels.Controls.HotSpot.ViewModel; // tslint:disable-line:deprecation
+public configureHotSpot: any;
 
 public timeRange = ko.observable<string>();
 public otherParameter = ko.observable<string>();
@@ -465,7 +465,7 @@ constructor(container: PartContainerContract) {
     container.partTitle(ClientResources.generalGalleryPartTitle);
 
     // Create the HotSpot control that the user will click.
-    this.configureHotSpot = new FxViewModels.Controls.HotSpot.ViewModel(container); // tslint:disable-line:deprecation
+    this.configureHotSpot = new (FxViewModels.Controls.HotSpot.ViewModel as any)(container);
     this.configureHotSpot.clickableDuringCustomize = true;
     //parts#PartGalleryConfigOnDropDoc
     // Configure the HotSpot's Selectable so it will be implicitly activated when the user drops this Part on a Dashboard.

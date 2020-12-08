@@ -1,119 +1,119 @@
 
-<a name="msportalfx-test"></a>
-# msportalfx-test
+<a name="microsoft-azureportal-test"></a>
+# @microsoft/azureportal-test
 
-Generated on 2020-12-07
+Generated on 2020-12-08
 
-* [msportalfx-test](#msportalfx-test)
-    * [Overview](#msportalfx-test-overview)
-        * [Goals](#msportalfx-test-overview-goals)
-        * [General Architecture](#msportalfx-test-overview-general-architecture)
-    * [Getting Started](#msportalfx-test-getting-started)
-        * [Installation](#msportalfx-test-getting-started-installation)
-        * [Write a test](#msportalfx-test-getting-started-write-a-test)
-        * [Add the configuration](#msportalfx-test-getting-started-add-the-configuration)
-        * [Compile and run](#msportalfx-test-getting-started-compile-and-run)
-        * [Updating](#msportalfx-test-getting-started-updating)
-        * [More Examples](#msportalfx-test-getting-started-more-examples)
-        * [Running tests in Visual Studio](#msportalfx-test-getting-started-running-tests-in-visual-studio)
-    * [Side loading a local extension during the test session](#msportalfx-test-side-loading-a-local-extension-during-the-test-session)
-    * [Running](#msportalfx-test-running)
-        * [In Dev](#msportalfx-test-running-in-dev)
-            * [From VS](#msportalfx-test-running-in-dev-from-vs)
-            * [From cmdline](#msportalfx-test-running-in-dev-from-cmdline)
-        * [CI](#msportalfx-test-running-ci)
-            * [Cloudtest](#msportalfx-test-running-ci-cloudtest)
-                * [Environment Setup](#msportalfx-test-running-ci-cloudtest-environment-setup)
-                * [Running Tests](#msportalfx-test-running-ci-cloudtest-running-tests)
-            * [Windows Azure Engineering System (WAES)](#msportalfx-test-running-ci-windows-azure-engineering-system-waes)
-            * [Jenkins](#msportalfx-test-running-ci-jenkins)
-            * [How to setup test run parallelization](#msportalfx-test-running-ci-how-to-setup-test-run-parallelization)
-    * [Debugging](#msportalfx-test-debugging)
-        * [debug tests 101](#msportalfx-test-debugging-debug-tests-101)
-        * [debugging tests in VS Code](#msportalfx-test-debugging-debugging-tests-in-vs-code)
-        * [Checking the result of the currently running test in code](#msportalfx-test-debugging-checking-the-result-of-the-currently-running-test-in-code)
-        * [How to take a screenshot of the browser](#msportalfx-test-debugging-how-to-take-a-screenshot-of-the-browser)
-        * [How to capture browser console output](#msportalfx-test-debugging-how-to-capture-browser-console-output)
-        * [Logs](#msportalfx-test-debugging-logs)
-            * [Enabling diagnostic logs](#msportalfx-test-debugging-logs-enabling-diagnostic-logs)
-        * [Callstack](#msportalfx-test-debugging-callstack)
-        * [Test output artifacts](#msportalfx-test-debugging-test-output-artifacts)
-    * [Localization](#msportalfx-test-localization)
-    * [User Management](#msportalfx-test-user-management)
-    * [Configuration](#msportalfx-test-configuration)
-        * [Configuration options](#msportalfx-test-configuration-configuration-options)
-            * [Behavior](#msportalfx-test-configuration-configuration-options-behavior)
-            * [PortalContext](#msportalfx-test-configuration-configuration-options-portalcontext)
-            * [Running tests against the Dogfood environment](#msportalfx-test-configuration-configuration-options-running-tests-against-the-dogfood-environment)
-    * [Scenarios](#msportalfx-test-scenarios)
-        * [Create](#msportalfx-test-scenarios-create)
-            * [Opening the create blade from a deployed gallery package](#msportalfx-test-scenarios-create-opening-the-create-blade-from-a-deployed-gallery-package)
-            * [Opening the create blade from a local gallery package](#msportalfx-test-scenarios-create-opening-the-create-blade-from-a-local-gallery-package)
-            * [Validation State](#msportalfx-test-scenarios-create-validation-state)
-            * [Get the validation state of fields on your create form](#msportalfx-test-scenarios-create-get-the-validation-state-of-fields-on-your-create-form)
-            * [Wait on a fields validation state](#msportalfx-test-scenarios-create-wait-on-a-fields-validation-state)
-        * [Browse](#msportalfx-test-scenarios-browse)
-            * [How to test the context menu in browse shows your extensions commands?](#msportalfx-test-scenarios-browse-how-to-test-the-context-menu-in-browse-shows-your-extensions-commands)
-            * [How to test the grid in browse shows the expected default columns for your extension resource](#msportalfx-test-scenarios-browse-how-to-test-the-grid-in-browse-shows-the-expected-default-columns-for-your-extension-resource)
-        * [How to test the grid in browse shows additional extension resource columns that are selected](#msportalfx-test-scenarios-how-to-test-the-grid-in-browse-shows-additional-extension-resource-columns-that-are-selected)
-        * [Blades](#msportalfx-test-scenarios-blades)
-            * [Blade navigation](#msportalfx-test-scenarios-blades-blade-navigation)
-            * [Locating an open blade](#msportalfx-test-scenarios-blades-locating-an-open-blade)
-            * [Common portal blades](#msportalfx-test-scenarios-blades-common-portal-blades)
-                * [Opening the extensions Create blade](#msportalfx-test-scenarios-blades-common-portal-blades-opening-the-extensions-create-blade)
-                * [Opening the Browse blade for your resource](#msportalfx-test-scenarios-blades-common-portal-blades-opening-the-browse-blade-for-your-resource)
-                * [Opening a Resource Summary blade](#msportalfx-test-scenarios-blades-common-portal-blades-opening-a-resource-summary-blade)
-                * [Spec Picker Blade](#msportalfx-test-scenarios-blades-common-portal-blades-spec-picker-blade)
-                * [Properties Blade](#msportalfx-test-scenarios-blades-common-portal-blades-properties-blade)
-                * [QuickStart Blade](#msportalfx-test-scenarios-blades-common-portal-blades-quickstart-blade)
-                * [Users Blade](#msportalfx-test-scenarios-blades-common-portal-blades-users-blade)
-                * [Move Resource Blade](#msportalfx-test-scenarios-blades-common-portal-blades-move-resource-blade)
-            * [Blade Dialogs](#msportalfx-test-scenarios-blades-blade-dialogs)
-        * [Parts](#msportalfx-test-scenarios-parts)
-            * [How to get the reference to a part on a blade](#msportalfx-test-scenarios-parts-how-to-get-the-reference-to-a-part-on-a-blade)
-            * [CollectionPart](#msportalfx-test-scenarios-parts-collectionpart)
-            * [Grid](#msportalfx-test-scenarios-parts-grid)
-                * [Finding a row within a grid](#msportalfx-test-scenarios-parts-grid-finding-a-row-within-a-grid)
-            * [CreateComboBoxField - Obsolete](#msportalfx-test-scenarios-parts-createcomboboxfield-obsolete)
-            * [ResourceGroupDropDownField](#msportalfx-test-scenarios-parts-resourcegroupdropdownfield)
-            * [Editor](#msportalfx-test-scenarios-parts-editor)
-                * [Can read and write content](#msportalfx-test-scenarios-parts-editor-can-read-and-write-content)
-            * [essentials](#msportalfx-test-scenarios-parts-essentials)
-                * [Essentials tests](#msportalfx-test-scenarios-parts-essentials-essentials-tests)
-        * [Command](#msportalfx-test-scenarios-command)
-        * [Action Bar](#msportalfx-test-scenarios-action-bar)
-        * [Delete](#msportalfx-test-scenarios-delete)
-        * [Styling / layout regression detection](#msportalfx-test-scenarios-styling-layout-regression-detection)
-            * [...](#msportalfx-test-scenarios-styling-layout-regression-detection-)
-        * [Locators](#msportalfx-test-scenarios-locators)
-        * [Consuming Updates](#msportalfx-test-scenarios-consuming-updates)
-        * [Mocking](#msportalfx-test-scenarios-mocking)
-            * [How to show mock data into the Portal](#msportalfx-test-scenarios-mocking-how-to-show-mock-data-into-the-portal)
-                * [Mocking ARM](#msportalfx-test-scenarios-mocking-how-to-show-mock-data-into-the-portal-mocking-arm)
-        * [Code Coverage](#msportalfx-test-scenarios-code-coverage)
-            * [Interop, how to run .NET code from your tests](#msportalfx-test-scenarios-code-coverage-interop-how-to-run-net-code-from-your-tests)
-        * [Accessibility Testing](#msportalfx-test-scenarios-accessibility-testing)
-            * [Overview](#msportalfx-test-scenarios-accessibility-testing-overview-1)
-            * [Sample Test](#msportalfx-test-scenarios-accessibility-testing-sample-test)
-            * [Options](#msportalfx-test-scenarios-accessibility-testing-options)
-        * [Contributing](#msportalfx-test-scenarios-contributing)
-            * [To enlist](#msportalfx-test-scenarios-contributing-to-enlist)
-            * [To build the source](#msportalfx-test-scenarios-contributing-to-build-the-source)
-            * [To setup the tests](#msportalfx-test-scenarios-contributing-to-setup-the-tests)
-        * [To run the tests](#msportalfx-test-scenarios-to-run-the-tests)
-            * [Authoring documents](#msportalfx-test-scenarios-to-run-the-tests-authoring-documents)
-            * [Generating the docs](#msportalfx-test-scenarios-to-run-the-tests-generating-the-docs)
-            * [To submit your contribution](#msportalfx-test-scenarios-to-run-the-tests-to-submit-your-contribution)
-            * [Questions?](#msportalfx-test-scenarios-to-run-the-tests-questions)
-        * [API Reference](#msportalfx-test-scenarios-api-reference)
+* [@microsoft/azureportal-test](#microsoft-azureportal-test)
+    * [Overview](#microsoft-azureportal-test-overview)
+        * [Goals](#microsoft-azureportal-test-overview-goals)
+        * [General Architecture](#microsoft-azureportal-test-overview-general-architecture)
+    * [Getting Started](#microsoft-azureportal-test-getting-started)
+        * [Installation](#microsoft-azureportal-test-getting-started-installation)
+        * [Write a test](#microsoft-azureportal-test-getting-started-write-a-test)
+        * [Add the configuration](#microsoft-azureportal-test-getting-started-add-the-configuration)
+        * [Compile and run](#microsoft-azureportal-test-getting-started-compile-and-run)
+        * [Updating](#microsoft-azureportal-test-getting-started-updating)
+        * [More Examples](#microsoft-azureportal-test-getting-started-more-examples)
+        * [Running tests in Visual Studio](#microsoft-azureportal-test-getting-started-running-tests-in-visual-studio)
+    * [Side loading a local extension during the test session](#microsoft-azureportal-test-side-loading-a-local-extension-during-the-test-session)
+    * [Running](#microsoft-azureportal-test-running)
+        * [In Dev](#microsoft-azureportal-test-running-in-dev)
+            * [From VS](#microsoft-azureportal-test-running-in-dev-from-vs)
+            * [From cmdline](#microsoft-azureportal-test-running-in-dev-from-cmdline)
+        * [CI](#microsoft-azureportal-test-running-ci)
+            * [Cloudtest](#microsoft-azureportal-test-running-ci-cloudtest)
+                * [Environment Setup](#microsoft-azureportal-test-running-ci-cloudtest-environment-setup)
+                * [Running Tests](#microsoft-azureportal-test-running-ci-cloudtest-running-tests)
+            * [Windows Azure Engineering System (WAES)](#microsoft-azureportal-test-running-ci-windows-azure-engineering-system-waes)
+            * [Jenkins](#microsoft-azureportal-test-running-ci-jenkins)
+            * [How to setup test run parallelization](#microsoft-azureportal-test-running-ci-how-to-setup-test-run-parallelization)
+    * [Debugging](#microsoft-azureportal-test-debugging)
+        * [debug tests 101](#microsoft-azureportal-test-debugging-debug-tests-101)
+        * [debugging tests in VS Code](#microsoft-azureportal-test-debugging-debugging-tests-in-vs-code)
+        * [Checking the result of the currently running test in code](#microsoft-azureportal-test-debugging-checking-the-result-of-the-currently-running-test-in-code)
+        * [How to take a screenshot of the browser](#microsoft-azureportal-test-debugging-how-to-take-a-screenshot-of-the-browser)
+        * [How to capture browser console output](#microsoft-azureportal-test-debugging-how-to-capture-browser-console-output)
+        * [Logs](#microsoft-azureportal-test-debugging-logs)
+            * [Enabling diagnostic logs](#microsoft-azureportal-test-debugging-logs-enabling-diagnostic-logs)
+        * [Callstack](#microsoft-azureportal-test-debugging-callstack)
+        * [Test output artifacts](#microsoft-azureportal-test-debugging-test-output-artifacts)
+    * [Localization](#microsoft-azureportal-test-localization)
+    * [User Management](#microsoft-azureportal-test-user-management)
+    * [Configuration](#microsoft-azureportal-test-configuration)
+        * [Configuration options](#microsoft-azureportal-test-configuration-configuration-options)
+            * [Behavior](#microsoft-azureportal-test-configuration-configuration-options-behavior)
+            * [PortalContext](#microsoft-azureportal-test-configuration-configuration-options-portalcontext)
+            * [Running tests against the Dogfood environment](#microsoft-azureportal-test-configuration-configuration-options-running-tests-against-the-dogfood-environment)
+    * [Scenarios](#microsoft-azureportal-test-scenarios)
+        * [Create](#microsoft-azureportal-test-scenarios-create)
+            * [Opening the create blade from a deployed gallery package](#microsoft-azureportal-test-scenarios-create-opening-the-create-blade-from-a-deployed-gallery-package)
+            * [Opening the create blade from a local gallery package](#microsoft-azureportal-test-scenarios-create-opening-the-create-blade-from-a-local-gallery-package)
+            * [Validation State](#microsoft-azureportal-test-scenarios-create-validation-state)
+            * [Get the validation state of fields on your create form](#microsoft-azureportal-test-scenarios-create-get-the-validation-state-of-fields-on-your-create-form)
+            * [Wait on a fields validation state](#microsoft-azureportal-test-scenarios-create-wait-on-a-fields-validation-state)
+        * [Browse](#microsoft-azureportal-test-scenarios-browse)
+            * [How to test the context menu in browse shows your extensions commands?](#microsoft-azureportal-test-scenarios-browse-how-to-test-the-context-menu-in-browse-shows-your-extensions-commands)
+            * [How to test the grid in browse shows the expected default columns for your extension resource](#microsoft-azureportal-test-scenarios-browse-how-to-test-the-grid-in-browse-shows-the-expected-default-columns-for-your-extension-resource)
+        * [How to test the grid in browse shows additional extension resource columns that are selected](#microsoft-azureportal-test-scenarios-how-to-test-the-grid-in-browse-shows-additional-extension-resource-columns-that-are-selected)
+        * [Blades](#microsoft-azureportal-test-scenarios-blades)
+            * [Blade navigation](#microsoft-azureportal-test-scenarios-blades-blade-navigation)
+            * [Locating an open blade](#microsoft-azureportal-test-scenarios-blades-locating-an-open-blade)
+            * [Common portal blades](#microsoft-azureportal-test-scenarios-blades-common-portal-blades)
+                * [Opening the extensions Create blade](#microsoft-azureportal-test-scenarios-blades-common-portal-blades-opening-the-extensions-create-blade)
+                * [Opening the Browse blade for your resource](#microsoft-azureportal-test-scenarios-blades-common-portal-blades-opening-the-browse-blade-for-your-resource)
+                * [Opening a Resource Summary blade](#microsoft-azureportal-test-scenarios-blades-common-portal-blades-opening-a-resource-summary-blade)
+                * [Spec Picker Blade](#microsoft-azureportal-test-scenarios-blades-common-portal-blades-spec-picker-blade)
+                * [Properties Blade](#microsoft-azureportal-test-scenarios-blades-common-portal-blades-properties-blade)
+                * [QuickStart Blade](#microsoft-azureportal-test-scenarios-blades-common-portal-blades-quickstart-blade)
+                * [Users Blade](#microsoft-azureportal-test-scenarios-blades-common-portal-blades-users-blade)
+                * [Move Resource Blade](#microsoft-azureportal-test-scenarios-blades-common-portal-blades-move-resource-blade)
+            * [Blade Dialogs](#microsoft-azureportal-test-scenarios-blades-blade-dialogs)
+        * [Parts](#microsoft-azureportal-test-scenarios-parts)
+            * [How to get the reference to a part on a blade](#microsoft-azureportal-test-scenarios-parts-how-to-get-the-reference-to-a-part-on-a-blade)
+            * [CollectionPart](#microsoft-azureportal-test-scenarios-parts-collectionpart)
+            * [Grid](#microsoft-azureportal-test-scenarios-parts-grid)
+                * [Finding a row within a grid](#microsoft-azureportal-test-scenarios-parts-grid-finding-a-row-within-a-grid)
+            * [CreateComboBoxField - Obsolete](#microsoft-azureportal-test-scenarios-parts-createcomboboxfield-obsolete)
+            * [ResourceGroupDropDownField](#microsoft-azureportal-test-scenarios-parts-resourcegroupdropdownfield)
+            * [Editor](#microsoft-azureportal-test-scenarios-parts-editor)
+                * [Can read and write content](#microsoft-azureportal-test-scenarios-parts-editor-can-read-and-write-content)
+            * [essentials](#microsoft-azureportal-test-scenarios-parts-essentials)
+                * [Essentials tests](#microsoft-azureportal-test-scenarios-parts-essentials-essentials-tests)
+        * [Command](#microsoft-azureportal-test-scenarios-command)
+        * [Action Bar](#microsoft-azureportal-test-scenarios-action-bar)
+        * [Delete](#microsoft-azureportal-test-scenarios-delete)
+        * [Styling / layout regression detection](#microsoft-azureportal-test-scenarios-styling-layout-regression-detection)
+            * [...](#microsoft-azureportal-test-scenarios-styling-layout-regression-detection-)
+        * [Locators](#microsoft-azureportal-test-scenarios-locators)
+        * [Consuming Updates](#microsoft-azureportal-test-scenarios-consuming-updates)
+        * [Mocking](#microsoft-azureportal-test-scenarios-mocking)
+            * [How to show mock data into the Portal](#microsoft-azureportal-test-scenarios-mocking-how-to-show-mock-data-into-the-portal)
+                * [Mocking ARM](#microsoft-azureportal-test-scenarios-mocking-how-to-show-mock-data-into-the-portal-mocking-arm)
+        * [Code Coverage](#microsoft-azureportal-test-scenarios-code-coverage)
+            * [Interop, how to run .NET code from your tests](#microsoft-azureportal-test-scenarios-code-coverage-interop-how-to-run-net-code-from-your-tests)
+        * [Accessibility Testing](#microsoft-azureportal-test-scenarios-accessibility-testing)
+            * [Overview](#microsoft-azureportal-test-scenarios-accessibility-testing-overview-1)
+            * [Sample Test](#microsoft-azureportal-test-scenarios-accessibility-testing-sample-test)
+            * [Options](#microsoft-azureportal-test-scenarios-accessibility-testing-options)
+        * [Contributing](#microsoft-azureportal-test-scenarios-contributing)
+            * [To enlist](#microsoft-azureportal-test-scenarios-contributing-to-enlist)
+            * [To build the source](#microsoft-azureportal-test-scenarios-contributing-to-build-the-source)
+            * [To setup the tests](#microsoft-azureportal-test-scenarios-contributing-to-setup-the-tests)
+        * [To run the tests](#microsoft-azureportal-test-scenarios-to-run-the-tests)
+            * [Authoring documents](#microsoft-azureportal-test-scenarios-to-run-the-tests-authoring-documents)
+            * [Generating the docs](#microsoft-azureportal-test-scenarios-to-run-the-tests-generating-the-docs)
+            * [To submit your contribution](#microsoft-azureportal-test-scenarios-to-run-the-tests-to-submit-your-contribution)
+            * [Questions?](#microsoft-azureportal-test-scenarios-to-run-the-tests-questions)
+        * [API Reference](#microsoft-azureportal-test-scenarios-api-reference)
 
 
-<a name="msportalfx-test-overview"></a>
+<a name="microsoft-azureportal-test-overview"></a>
 ## Overview
 
-MsPortalFx-Test is an end-to-end test framework that runs tests against the Microsoft Azure Portal interacting with it as a user would. 
+`@microsoft/azureportal-test` is an end-to-end test framework that runs tests against the Microsoft Azure Portal interacting with it as a user would.
 
-<a name="msportalfx-test-overview-goals"></a>
+<a name="microsoft-azureportal-test-overview-goals"></a>
 #### Goals
 
 - Strive for zero breaking changes to partner team CI
@@ -125,35 +125,35 @@ MsPortalFx-Test is an end-to-end test framework that runs tests against the Micr
 - Robust
 - Great Docs
 
-<a name="msportalfx-test-overview-general-architecture"></a>
+<a name="microsoft-azureportal-test-overview-general-architecture"></a>
 #### General Architecture
 3 layers of abstraction (note the names may change but the general idea should be the same).  There may also be some future refactoring to easily differentiate between the layers.
-- Test layer 
+- Test layer
 
-    - Useful wrappers for testing common functionality.  Will retry if necessary.  Throws if the test/verification fails.  
+    - Useful wrappers for testing common functionality.  Will retry if necessary.  Throws if the test/verification fails.
     - Should be used in writing tests
     - Built upon the action and control layers
     - EG: parts.canPinAllBladeParts
-    
-- Action layer 
+
+- Action layer
 
     - Performs an action and verifies it was successful.  Will retry if necessary.
     - Should be used in writing tests
     - Built upon the controls layer
     - EG: portal.openBrowseBlade
-    
-- Controls layer 
+
+- Controls layer
 
     - The basic controls used in the portal (eg blades, checkboxes, textboxes, etc).  Little to no retry logic.  Should be used mainly for composing the actions and tests layers.
     - Should be used for writing test and action layers.  Should not be used directly by tests in most cases.
     - Built upon webdriver primitives
-    - EG: part, checkbox, etc  
+    - EG: part, checkbox, etc
 
 
-<a name="msportalfx-test-getting-started"></a>
+<a name="microsoft-azureportal-test-getting-started"></a>
 ## Getting Started
 
-<a name="msportalfx-test-getting-started-installation"></a>
+<a name="microsoft-azureportal-test-getting-started-installation"></a>
 ### Installation
 
 1. Install [Node.js](https://nodejs.org) if you have not done so. This will also install npm, which is the package manager for Node.js.  We have only verified support for LTS Node versions 4.5 and 5.1 which can be found in the "previous downloads" section.  Newer versions of Node are known to have compilation errors.  
@@ -168,29 +168,29 @@ MsPortalFx-Test is an end-to-end test framework that runs tests against the Micr
 
 		md e2etests
 
-1. Switch to the new directory and install the msportalfx-test module via npm:
+1. Switch to the new directory and install the @microsoft/azureportal-test module via npm:
 
 		cd e2etests
-		npm install msportalfx-test --no-optional
+		npm install @microsoft/azureportal-test --no-optional
 
-1. The msportalfx-test module comes with some TypeScript definitions and its dependencies. To make them available to your tests, we recommend that you use the [typings](https://www.npmjs.com/package/typings) Typescript Definition Manager.
+1. The @microsoft/azureportal-test module comes with some TypeScript definitions and its dependencies. To make them available to your tests, we recommend that you use the [typings](https://www.npmjs.com/package/typings) Typescript Definition Manager.
 
 1. First install the [typings](https://www.npmjs.com/package/typings) Typescript Definition Manager globally:
 
 		npm install typings -g
 
-	Next copy the provided **typings.json** file and the **msportalfx-test.d.ts** file from the **node_modules/msportalfx-test/typescript** folder to your test root directory and use *typings* to install the provided definitions:
+	Next copy the provided **typings.json** file and the **microsoft-azureportal-test.d.ts** file from the **node_modules/@microsoft/azureportal-test/typescript** folder to your test root directory and use *typings* to install the provided definitions:
 
 		*copy typings.json to your test root directory*
         *navigate to your test root directory*
 		typings install
 
-1. MsPortalFx-Test needs a WebDriver server in order to be able to drive the browser. Currently only [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver) is supported, so downloaded it and place it in your machine's PATH or just install it from the [chromedriver Node module](https://www.npmjs.com/package/chromedriver).  You may also need a C++ compiler (Visual Studio includes one):
+1. @microsoft/azureportal-test needs a WebDriver server in order to be able to drive the browser. Currently only [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver) is supported, so downloaded it and place it in your machine's PATH or just install it from the [chromedriver Node module](https://www.npmjs.com/package/chromedriver).  You may also need a C++ compiler (Visual Studio includes one):
 
 		npm install chromedriver
 
 
-<a name="msportalfx-test-getting-started-write-a-test"></a>
+<a name="microsoft-azureportal-test-getting-started-write-a-test"></a>
 ### Write a test
 You'll need an existing cloud service for the test you'll write below, so if you don't have one please go to the Azure Portal and [create a new cloud service](https://ms.portal.azure.com/#create/Microsoft.CloudService). Write down the dns name of your cloud service to use it in your test.
 
@@ -205,7 +205,7 @@ Now, create a **portaltests.ts** file in your e2etests directory and paste the f
 /// <reference path="./typings/index.d.ts" />
 
 import assert from 'assert';
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 import nconf from 'nconf';
 import until = testFx.until;
 
@@ -226,7 +226,7 @@ describe('Cloud Service Tests', function () {
         
 
 		testFx.portal.portalContext.signInEmail = 'johndoe@outlook.com';
-		testFx.portal.portalContext.signInPassword = nconf.get('msportalfx-test/johndoe@outlook.com/signInPassword');
+		testFx.portal.portalContext.signInPassword = nconf.get('microsoft-azureportal-test/johndoe@outlook.com/signInPassword');
 
 		// Update this variable to use the dns name of your actual cloud service
 		let dnsName = "mycloudservice";
@@ -253,16 +253,16 @@ describe('Cloud Service Tests', function () {
 1. write credentials to the windows credential manager
 
 ```
-    cmdkey /generic:msportalfx-test/johndoe@outlook.com/signInPassword /user:johndoe@outlook.com /pass:somePassword
+    cmdkey /generic:microsoft-azureportal-test/johndoe@outlook.com/signInPassword /user:johndoe@outlook.com /pass:somePassword
 ```
 
 Remember to replace "mycloudservice" with the dns name of your actual cloud service.
 
-In this test we start by importing the **MsPortalFx-Test** module. Then the credentials are specified for the user that will sign in to the Portal. These should be the credentials of a user that already has an active Azure subscription.
+In this test we start by importing the **@microsoft/azureportal-test** module. Then the credentials are specified for the user that will sign in to the Portal. These should be the credentials of a user that already has an active Azure subscription.
 
 After that we can use the Portal object to drive a test scenario that opens the Cloud Services Browse blade, filters the list of cloud services, checks that the grid has only one row after the filter, selects the only row and waits for the correct blade to open. Finally, the call to quit() closes the browser.
 
-<a name="msportalfx-test-getting-started-add-the-configuration"></a>
+<a name="microsoft-azureportal-test-getting-started-add-the-configuration"></a>
 ### Add the configuration
 
 Create a file named **config.json** next to portaltests.ts. Paste this in the file:
@@ -278,9 +278,9 @@ Create a file named **config.json** next to portaltests.ts. Paste this in the fi
 
 	```
 
-This configuration tells MsPortalFx-Test that Google Chrome should be used for the test session and [https://portal.azure.com](https://portal.azure.com) should be the Portal under test.
+This configuration tells @microsoft/azureportal-test that Google Chrome should be used for the test session and [https://portal.azure.com](https://portal.azure.com) should be the Portal under test.
 
-<a name="msportalfx-test-getting-started-compile-and-run"></a>
+<a name="microsoft-azureportal-test-getting-started-compile-and-run"></a>
 ### Compile and run
 Compile your TypeScript test file (note if you are using a newer version of TSC than 1.8 then you may need to pass in additional flags that aren't present in older versions of TSC):
 
@@ -312,23 +312,23 @@ If the version is incorrect, then you may need to adjust your path variables or 
 
 If you see errors regarding duplicate identifiers due to some definitions being imported twice, you can try setting [moduleResolution compiler option](https://www.typescriptlang.org/docs/handbook/compiler-options.htm) to classic in your tsconfig.json file.
 
-<a name="msportalfx-test-getting-started-updating"></a>
+<a name="microsoft-azureportal-test-getting-started-updating"></a>
 ### Updating
 
-1.  In order to keep up to date with the latest changes, we recommend that you update whenever a new version of MsportalFx-Test is released.  npm install will automatically pull the latest version of msportalfx-test.
+1.  In order to keep up to date with the latest changes, we recommend that you update whenever a new version of @microsoft/azureportal-test is released.  npm install will automatically pull the latest version of @microsoft/azureportal-test.
 
-        Make sure to copy typescript definition files in your *typings\* folder from the updated version in *\node_modules\msportalfx-test\typescript*.
+        Make sure to copy typescript definition files in your *typings\* folder from the updated version in *\node_modules\@microsoft\azureportal-test\typescript*.
 
-<a name="msportalfx-test-getting-started-more-examples"></a>
+<a name="microsoft-azureportal-test-getting-started-more-examples"></a>
 ### More Examples
 More examples can be found
 - within this document
-- in the [msportalfx-test /test folder] (https://github.com/Azure/msportalfx-test/tree/master/test)
+- in the `test` folder [here](https://aka.ms/portalfx/microsoft-azureportal-test/src)
 - and the [Contacts Extension Tests](http://vstfrd:8080/Azure/One/_git/AzureUX-PortalFx#path=%2Fsrc%2FSDK%2FAcceptanceTests%2FExtensions%2FContactsExtension%2FTests).
 
 If you don't have access, please follow the enlistment instructions below.
 
-<a name="msportalfx-test-getting-started-running-tests-in-visual-studio"></a>
+<a name="microsoft-azureportal-test-getting-started-running-tests-in-visual-studio"></a>
 ### Running tests in Visual Studio
 
 1. Install [Node Tools for Visual Studio](https://www.visualstudio.com/en-us/features/node-js-vs.aspx) (Note that we recommend using the Node.js “LTS” versions rather than the “Stable” versions since sometimes NTVS doesn’t work with newer Node.js versions.)
@@ -343,14 +343,14 @@ If you don't have access, please follow the enlistment instructions below.
 
 1. Once that is done you should be able to build and then see your test in the test explorer.  If you don’t see your tests, then make sure you don’t have any build errors.  You can also try restarting Visual Studio to see if that makes them show up.
 
-[FileSetTestFrameworkPropertyMocha]: /docs/media/msportalfx-test/FileSetTestFrameworkPropertyMocha.png
-[NewTypeScriptNodeJsExistingProject]: /docs/media/msportalfx-test/NewTypeScriptNodeJsExistingProject.png
+[FileSetTestFrameworkPropertyMocha]: /docs/media/microsoft-azureportal-test/FileSetTestFrameworkPropertyMocha.png
+[NewTypeScriptNodeJsExistingProject]: /docs/media/microsoft-azureportal-test/NewTypeScriptNodeJsExistingProject.png
 
 
-<a name="msportalfx-test-side-loading-a-local-extension-during-the-test-session"></a>
+<a name="microsoft-azureportal-test-side-loading-a-local-extension-during-the-test-session"></a>
 ## Side loading a local extension during the test session
 
-You can use MsPortalFx-Test to write end to end tests that side load your local extension in the Portal. You can do this by specifying additional options in the Portal object. If you have not done so, please take a look at the *Installation* section of [this page](https://auxdocs.azurewebsites.net/en-us/documentation/articles/portalfx-testing-getting-started) to learn how to get started with MsPortalFx-Test.
+You can use `@microsoft/azureportal-test` to write end to end tests that side load your local extension in the Portal. You can do this by specifying additional options in the Portal object. If you have not done so, please take a look at the *Installation* section of [this page](https://auxdocs.azurewebsites.net/en-us/documentation/articles/portalfx-testing-getting-started) to learn how to get started with @microsoft/azureportal-test.
 
 We'll write a test that verifies that the Browse experience for our extension has been correctly implemented. But before doing that we should have an extension to test and something to browse to, so let's work on those first.
 
@@ -369,13 +369,13 @@ We'll write a test that verifies that the Browse experience for our extension ha
 
 1. Create a new TypeScript file called **localextensiontests.ts**.
 
-1. In the created file, import the MsPortalFx-Test module and layout the Mocha test:
+1. In the created file, import the `@microsoft/azureportal-test` module and layout the Mocha test:
 
 	```ts
 	/// <reference path="./typings/index.d.ts" />
 
 	import assert from 'assert';
-	import testFx from 'MsPortalFx-Test';
+	import testFx from '@microsoft/azureportal-test';
 	import until = testFx.until;
 
 	describe('Local Extension Tests', function () {
@@ -445,7 +445,7 @@ We'll write a test that verifies that the Browse experience for our extension ha
 /// <reference path="./typings/index.d.ts" />
 
 import assert from 'assert';
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 import until = testFx.until;
 
 describe('Local Extension Tests', function () {
@@ -518,27 +518,27 @@ The following output will be sent to your console as the test progresses:
 	  1 passing (23s)
 
 
-<a name="msportalfx-test-running"></a>
+<a name="microsoft-azureportal-test-running"></a>
 ## Running
 
-<a name="msportalfx-test-running-in-dev"></a>
+<a name="microsoft-azureportal-test-running-in-dev"></a>
 ### In Dev
 
-<a name="msportalfx-test-running-in-dev-from-vs"></a>
+<a name="microsoft-azureportal-test-running-in-dev-from-vs"></a>
 #### From VS
 
-<a name="msportalfx-test-running-in-dev-from-cmdline"></a>
+<a name="microsoft-azureportal-test-running-in-dev-from-cmdline"></a>
 #### From cmdline
 
-<a name="msportalfx-test-running-ci"></a>
+<a name="microsoft-azureportal-test-running-ci"></a>
 ### CI
 
-<a name="msportalfx-test-running-ci-cloudtest"></a>
+<a name="microsoft-azureportal-test-running-ci-cloudtest"></a>
 #### Cloudtest
 
 Running mocha nodejs tests in cloudtest requires a bit of engineering work to set up the test VM. Unfortunetly, the nodejs test adaptor cannot be used with vs.console.exe since it requires a full installation of Visual Studio which is absent on the VMs. Luckily, we can run a script to set up our environment and then the Exe Execution type for our TestJob against the powershell/cmd executable.
 
-<a name="msportalfx-test-running-ci-cloudtest-environment-setup"></a>
+<a name="microsoft-azureportal-test-running-ci-cloudtest-environment-setup"></a>
 ##### Environment Setup
 Nodejs (and npm) is already installed on the cloudtest VMs. Chrome is not installed by default, so we can include the chrome executable in our build drop for quick installation.
 
@@ -552,7 +552,7 @@ call chrome_installer.exe /silent /install
 exit 0
 ```
 
-<a name="msportalfx-test-running-ci-cloudtest-running-tests"></a>
+<a name="microsoft-azureportal-test-running-ci-cloudtest-running-tests"></a>
 ##### Running Tests
 Use the Exe execution type in your TestJob to specify the powershell (or cmd) exe. Then, point to a script which will run your tests:
 
@@ -580,33 +580,34 @@ mocha WorkspaceTests.js --reporter mocha-trx-reporter --reporter-file ./TestResu
 xcopy TestResults\* ..\TestResults
 ```
 
-To pass non-secret parameters to your cloudtest session (and the msportalfx-tests) use the props switch when kicking off a cloudtest session. The properties will become machine level environment variables on your cloudtest VM. Once these are set as environment variables of the session, you can use nconf to pick them up in your UI test configuration.
+To pass non-secret parameters to your cloudtest session (and the @microsoft/azureportal-test) use the props switch when kicking off a cloudtest session. The properties will become machine level environment variables on your cloudtest VM. Once these are set as environment variables of the session, you can use nconf to pick them up in your UI test configuration.
 ```
 ct -t "amd64\CloudTest\TestMap.xml" -tenant Default -BuildId "GUID" -props worker:TEST_ENVIRONMENT=canary
 ```
 
-<a name="msportalfx-test-running-ci-windows-azure-engineering-system-waes"></a>
+
+<a name="microsoft-azureportal-test-running-ci-windows-azure-engineering-system-waes"></a>
 #### Windows Azure Engineering System (WAES)
 
 See [WAES](http://aka.ms/WAES)
 
-<a name="msportalfx-test-running-ci-jenkins"></a>
+<a name="microsoft-azureportal-test-running-ci-jenkins"></a>
 #### Jenkins
 
-<a name="msportalfx-test-running-ci-how-to-setup-test-run-parallelization"></a>
+<a name="microsoft-azureportal-test-running-ci-how-to-setup-test-run-parallelization"></a>
 #### How to setup test run parallelization
 
-<a name="msportalfx-test-debugging"></a>
+<a name="microsoft-azureportal-test-debugging"></a>
 ## Debugging
 
-<a name="msportalfx-test-debugging-debug-tests-101"></a>
+<a name="microsoft-azureportal-test-debugging-debug-tests-101"></a>
 ### debug tests 101
 
-<a name="msportalfx-test-debugging-debugging-tests-in-vs-code"></a>
+<a name="microsoft-azureportal-test-debugging-debugging-tests-in-vs-code"></a>
 ### debugging tests in VS Code
 If you run mocha with the --debug-brk flag, you can press F5 and the project will attach to a debugger.
 
-<a name="msportalfx-test-debugging-checking-the-result-of-the-currently-running-test-in-code"></a>
+<a name="microsoft-azureportal-test-debugging-checking-the-result-of-the-currently-running-test-in-code"></a>
 ### Checking the result of the currently running test in code
 
 Sometimes it is useful to get the result of the currently running test, for example: you want to take a screenshot only when the test fails.
@@ -623,14 +624,14 @@ Sometimes it is useful to get the result of the currently running test, for exam
 
 One thing to watch out for in typescript is how lambda functions, "() => {}", behave.  Lambda functions (also called "fat arrow" sometimes) in Typescript capture the "this" variable from the surrounding context.  This can cause problems when trying to access Mocha's current test state.  See [arrow functions](https://basarat.gitbooks.io/typescript/content/docs/arrow-functions.html) for details.
 
-<a name="msportalfx-test-debugging-how-to-take-a-screenshot-of-the-browser"></a>
+<a name="microsoft-azureportal-test-debugging-how-to-take-a-screenshot-of-the-browser"></a>
 ### How to take a screenshot of the browser
 
 This is an example of how to take a screenshot of what is currently displayed in the browser.
 
 ```ts
 //1. import test fx
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
     var screenshotPromise = testFx.portal.takeScreenshot(ScreenshotTitleHere);
 ```
@@ -638,7 +639,7 @@ import testFx from 'MsPortalFx-Test';
 Taking a screenshot when there is a test failure is a handy way to help diagnose issues.  If you are using the mocha test runner, then you can do the following to take a screenshot whenever a test fails:
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 
     afterEach(function () {
@@ -649,13 +650,13 @@ import testFx from 'MsPortalFx-Test';
 
 ```
 
-<a name="msportalfx-test-debugging-how-to-capture-browser-console-output"></a>
+<a name="microsoft-azureportal-test-debugging-how-to-capture-browser-console-output"></a>
 ### How to capture browser console output
 
 When trying to identify reasons for failure of a test its useful to capture the console logs of the browser that was used to execute your test. You can capture the logs at a given level e.g error, warning, etc or at all levels using the LogLevel parameter. The following example demonstrates how to call getBrowserLogs and how to work with the result. getBrowserLogs will return a Promise of string[] which when resolved will contain the array of logs that you can view during debug or write to the test console for later analysis.
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 
         await testFx.portal.goHome();
@@ -665,14 +666,14 @@ import testFx from 'MsPortalFx-Test';
 ```
 
 
-<a name="msportalfx-test-debugging-logs"></a>
+<a name="microsoft-azureportal-test-debugging-logs"></a>
 ### Logs
 
 By default the framework emits logs to the console. You can reroute logs to be sent to a custom Logger.
 
 ```ts
 //1. import test fx
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
     function logToStorageAccount(logMsg: string) {
         // log to storageaccount
@@ -681,7 +682,7 @@ import testFx from 'MsPortalFx-Test';
     testFx.Logger.bind(logToStorageAccount);
 ```
 
-<a name="msportalfx-test-debugging-logs-enabling-diagnostic-logs"></a>
+<a name="microsoft-azureportal-test-debugging-logs-enabling-diagnostic-logs"></a>
 #### Enabling diagnostic logs
 
 You can enable additional diagnostic logs by setting the following environment variable.
@@ -693,30 +694,30 @@ or
 > set DEBUG=testFx*
 
 
-<a name="msportalfx-test-debugging-callstack"></a>
+<a name="microsoft-azureportal-test-debugging-callstack"></a>
 ### Callstack
 
-<a name="msportalfx-test-debugging-test-output-artifacts"></a>
+<a name="microsoft-azureportal-test-debugging-test-output-artifacts"></a>
 ### Test output artifacts
 
-<a name="msportalfx-test-localization"></a>
+<a name="microsoft-azureportal-test-localization"></a>
 ## Localization
 
-<a name="msportalfx-test-user-management"></a>
+<a name="microsoft-azureportal-test-user-management"></a>
 ## User Management
 
-<a name="msportalfx-test-configuration"></a>
+<a name="microsoft-azureportal-test-configuration"></a>
 ## Configuration
 
-<a name="msportalfx-test-configuration-configuration-options"></a>
+<a name="microsoft-azureportal-test-configuration-configuration-options"></a>
 ### Configuration options
-This document will describe the behavior and list common configuration settings used by the MsPortalFx-Test framework.
+This document will describe the behavior and list common configuration settings used by the `@microsoft/azureportal-test` framework.
 
-<a name="msportalfx-test-configuration-configuration-options-behavior"></a>
+<a name="microsoft-azureportal-test-configuration-configuration-options-behavior"></a>
 #### Behavior
 The test framework will search for a config.json in the current working directory (usually the directory the test is invoked from).  If no config.json is found then it will check the parent folder for a config.json (and so on...).
 
-<a name="msportalfx-test-configuration-configuration-options-portalcontext"></a>
+<a name="microsoft-azureportal-test-configuration-configuration-options-portalcontext"></a>
 #### PortalContext
 This file contains a list of configuration values used by the test framework for context when running tests against the portal.
 These values are mutable to allow test writers to set the values in cases where they prefer not to store them in the config.json.
@@ -821,7 +822,7 @@ export default interface PortalContext {
 
 ```
 
-<a name="msportalfx-test-configuration-configuration-options-running-tests-against-the-dogfood-environment"></a>
+<a name="microsoft-azureportal-test-configuration-configuration-options-running-tests-against-the-dogfood-environment"></a>
 #### Running tests against the Dogfood environment
 In order to run tests against the Dogfood test environment, you will need to update the follow configuration settings in the config.json:
 
@@ -832,19 +833,20 @@ In order to run tests against the Dogfood test environment, you will need to upd
 }
 ```
 
-<a name="msportalfx-test-scenarios"></a>
+
+<a name="microsoft-azureportal-test-scenarios"></a>
 ## Scenarios
 
-<a name="msportalfx-test-scenarios-create"></a>
+<a name="microsoft-azureportal-test-scenarios-create"></a>
 ### Create
 
-<a name="msportalfx-test-scenarios-create-opening-the-create-blade-from-a-deployed-gallery-package"></a>
+<a name="microsoft-azureportal-test-scenarios-create-opening-the-create-blade-from-a-deployed-gallery-package"></a>
 #### Opening the create blade from a deployed gallery package
 
 To open/navigate to the create blade a gallery package previously deployed to the Azure Marketplace you can use `portal.openGalleryCreateBlade`.  The returned promise will resolve with the CreateBlade defined by that gallery package.
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 FromLocalPackage
         await testFx.portal.openGalleryCreateBladeFromLocalPackage(
@@ -864,13 +866,13 @@ FromLocalPackage
 ...
 ```
 
-<a name="msportalfx-test-scenarios-create-opening-the-create-blade-from-a-local-gallery-package"></a>
+<a name="microsoft-azureportal-test-scenarios-create-opening-the-create-blade-from-a-local-gallery-package"></a>
 #### Opening the create blade from a local gallery package
 
 To open/navigate to the create blade a local gallery package that has been side loaded into the portal along with your extension you can use `portal.openGalleryCreateBladeFromLocalPackage`.  The returned promise will resolve with the CreateBlade defined by that gallery package.
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 
         await testFx.portal.openGalleryCreateBladeFromLocalPackage(
@@ -890,10 +892,10 @@ import testFx from 'MsPortalFx-Test';
 ...
 ```
 
-<a name="msportalfx-test-scenarios-create-validation-state"></a>
+<a name="microsoft-azureportal-test-scenarios-create-validation-state"></a>
 #### Validation State
 
-<a name="msportalfx-test-scenarios-create-get-the-validation-state-of-fields-on-your-create-form"></a>
+<a name="microsoft-azureportal-test-scenarios-create-get-the-validation-state-of-fields-on-your-create-form"></a>
 #### Get the validation state of fields on your create form
 
 `FormElement` exposes two useful functions for working with the ValidationState of controls.
@@ -901,7 +903,7 @@ import testFx from 'MsPortalFx-Test';
 The function `getValidationState` returns a promise that resolves with the current state of the control and can be used as follows
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 
         //click the createButton on the create blade to fire validation
@@ -918,13 +920,13 @@ import testFx from 'MsPortalFx-Test';
 
 ```
 
-<a name="msportalfx-test-scenarios-create-wait-on-a-fields-validation-state"></a>
+<a name="microsoft-azureportal-test-scenarios-create-wait-on-a-fields-validation-state"></a>
 #### Wait on a fields validation state
 
 The function `waitOnValidationState(someState, optionalTimeout)` returns a promise that resolves when the current state of the control is equivalent to someState supplied.  This is particularly useful for scenarions where you may be performing serverside validation and the control remains in a pending state for the duration of the network IO.
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 
         //change the value to initiate validation
@@ -937,17 +939,17 @@ import testFx from 'MsPortalFx-Test';
 ```
 
 
-<a name="msportalfx-test-scenarios-browse"></a>
+<a name="microsoft-azureportal-test-scenarios-browse"></a>
 ### Browse
 
-<a name="msportalfx-test-scenarios-browse-how-to-test-the-context-menu-in-browse-shows-your-extensions-commands"></a>
+<a name="microsoft-azureportal-test-scenarios-browse-how-to-test-the-context-menu-in-browse-shows-your-extensions-commands"></a>
 #### How to test the context menu in browse shows your extensions commands?
 
 There is a simple abstraction available in MsPortalFx.Tests.Browse.  You can use it as follows:
 
 ```ts
 //1. import test fx
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 
 ...
 
@@ -971,14 +973,14 @@ it("Can Use Context Click On Browse Grid Rows", () => {
 ```
 
 
-<a name="msportalfx-test-scenarios-browse-how-to-test-the-grid-in-browse-shows-the-expected-default-columns-for-your-extension-resource"></a>
+<a name="microsoft-azureportal-test-scenarios-browse-how-to-test-the-grid-in-browse-shows-the-expected-default-columns-for-your-extension-resource"></a>
 #### How to test the grid in browse shows the expected default columns for your extension resource
 
 There is a simple abstraction available in MsPortalFx.Tests.Browse.  You can use it as follows:
 
 ```ts
 //1. import test fx
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 
 ...
 
@@ -1004,7 +1006,7 @@ it("Browse contains default columns with expected column header", () => {
 }
 ```
 
-<a name="msportalfx-test-scenarios-how-to-test-the-grid-in-browse-shows-additional-extension-resource-columns-that-are-selected"></a>
+<a name="microsoft-azureportal-test-scenarios-how-to-test-the-grid-in-browse-shows-additional-extension-resource-columns-that-are-selected"></a>
 ### How to test the grid in browse shows additional extension resource columns that are selected
 
 There is a simple abstraction available in MsPortalFx.Tests.Browse that asserts extension resource specific columns can be selected in browse and that after selection they show up in the browse grid.
@@ -1012,7 +1014,7 @@ the function is called `canSelectResourceColumns`. You can use it as follows:
 
 ```ts
 // 1. import test fx
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 
 ...
 
@@ -1051,18 +1053,18 @@ it("Can select additional columns for the resourcetype and columns have expected
 ```
 
 
-<a name="msportalfx-test-scenarios-blades"></a>
+<a name="microsoft-azureportal-test-scenarios-blades"></a>
 ### Blades
 
-<a name="msportalfx-test-scenarios-blades-blade-navigation"></a>
+<a name="microsoft-azureportal-test-scenarios-blades-blade-navigation"></a>
 #### Blade navigation
 
-To navigate to blades within msportalfx-test can use one of several approaches
+To navigate to blades within `@microsoft/azureportal-test` can use one of several approaches
 
 - via a deep link to the blade using the `portal.navigateToUriFragment` function e.g
 
     ```ts
-    import testFx from 'MsPortalFx-Test';
+    import testFx from '@microsoft/azureportal-test';
     ...
     
         const resourceName = resourcePrefix + guid.newGuid();
@@ -1097,7 +1099,7 @@ To navigate to blades within msportalfx-test can use one of several approaches
 - via `portal.search` function to search for, and open browse and resource blades
 
     ```ts
-    import testFx from 'MsPortalFx-Test';
+    import testFx from '@microsoft/azureportal-test';
     ...
     const subscriptionsBlade = testFx.portal.blade({ title: testSupport.subscription });
 
@@ -1118,7 +1120,7 @@ To navigate to blades within msportalfx-test can use one of several approaches
     });
     ```
 
-<a name="msportalfx-test-scenarios-blades-locating-an-open-blade"></a>
+<a name="microsoft-azureportal-test-scenarios-blades-locating-an-open-blade"></a>
 #### Locating an open blade
 
 There are several approaches that can be used for locating an already opened blade use `testfx.portal.blade`.
@@ -1129,34 +1131,34 @@ There are several approaches that can be used for locating an already opened bla
         const resourceBlade = testFx.portal.blade({ title: resourceGroupName });
     ```
 
-<a name="msportalfx-test-scenarios-blades-common-portal-blades"></a>
+<a name="microsoft-azureportal-test-scenarios-blades-common-portal-blades"></a>
 #### Common portal blades
 
-<a name="msportalfx-test-scenarios-blades-common-portal-blades-opening-the-extensions-create-blade"></a>
+<a name="microsoft-azureportal-test-scenarios-blades-common-portal-blades-opening-the-extensions-create-blade"></a>
 ##### Opening the extensions Create blade
 
 See [Opening an extensions gallery package create blade](#scenarios-create-opening-an-extensions-gallery-package-create-blade)
 
-<a name="msportalfx-test-scenarios-blades-common-portal-blades-opening-the-browse-blade-for-your-resource"></a>
+<a name="microsoft-azureportal-test-scenarios-blades-common-portal-blades-opening-the-browse-blade-for-your-resource"></a>
 ##### Opening the Browse blade for your resource
 
 To open/navigate to the Browse blade from resource type you can use `portal.openBrowseBlade`.  The returned promise will resolve with the browse blade.
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 
         const blade = await testFx.portal.openBrowseBlade(resourceProvider, resourceType, resourceBladeTitle, timeouts.defaultLongTimeout);
         
 ...
 ```
-<a name="msportalfx-test-scenarios-blades-common-portal-blades-opening-a-resource-summary-blade"></a>
+<a name="microsoft-azureportal-test-scenarios-blades-common-portal-blades-opening-a-resource-summary-blade"></a>
 ##### Opening a Resource Summary blade
 
 To open/navigate to the Resource Summary blade for a specific resource you can use `portal.openResourceBlade`.  The returned promise will resolve with the Resource summary blade for the given resource.
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 
         const result = await testSupport.armClient.createResourceGroup(resourceGroupName, locationId);
@@ -1165,14 +1167,14 @@ import testFx from 'MsPortalFx-Test';
 ...
 ```
 
-<a name="msportalfx-test-scenarios-blades-common-portal-blades-spec-picker-blade"></a>
+<a name="microsoft-azureportal-test-scenarios-blades-common-portal-blades-spec-picker-blade"></a>
 ##### Spec Picker Blade
 
 The `SpecPickerBlade` can be used to select/change the current spec of a resource.  The following example demonstrates how to navigate to the spec picker for a given resource then changes the selected spec.
 
 ```ts
 //1. imports
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 import SpecPickerBlade = testFx.Parts.SpecPickerBlade;
 
 
@@ -1191,13 +1193,13 @@ import SpecPickerBlade = testFx.Parts.SpecPickerBlade;
 
 There are also several API's available to make testing common functionality within browse such as context menu commands and column picking fucntionality for more details see [Browse Scenarios](#scenarios-browse).
 
-<a name="msportalfx-test-scenarios-blades-common-portal-blades-properties-blade"></a>
+<a name="microsoft-azureportal-test-scenarios-blades-common-portal-blades-properties-blade"></a>
 ##### Properties Blade
 
 Navigation to the `PropertiesBlade` is done via the resource summary blade. The following demonstrates how to navigate to the properties blade
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 //2. navigate to the properties blade from the resource blade and check the value of one of the properties
 
@@ -1205,12 +1207,12 @@ import testFx from 'MsPortalFx-Test';
         await resourceBlade.openMenuItem(PortalFxResources.properties);
         const expectedPropertiesCount = 6;
         await testFx.portal.wait(async () => {
-            const properties = resourcePropertiesParentBlade.getAllDetailBladeItems(testFx.Parts.PartProperty);
-            const count = await properties.count();
+            const properties = await resourcePropertiesParentBlade.getAllDetailBladeItems(testFx.Parts.PartProperty);
+            const count = properties.length;
             return count === expectedPropertiesCount;
         }, null, testFx.Utils.String.format("Expected to have {0} properties in the Properties blade.", expectedPropertiesCount));
         const locator = new testFx.Parts.PartProperty().buildLocator({ name: PortalFxResources.nameLabel });
-        const property = resourcePropertiesParentBlade.detailBladeContent.element(locator).asType(testFx.Parts.PartProperty);
+        const property = (await resourcePropertiesParentBlade.detailBladeContent).element(locator).asType(testFx.Parts.PartProperty);
         const nameProperty = await testFx.portal.wait(async () => {
             const copyableLabel = property.value.element(testFx.Controls.CopyableLabel);
             const present = await copyableLabel.isPresent();
@@ -1223,13 +1225,13 @@ import testFx from 'MsPortalFx-Test';
 ...
 ```
 
-<a name="msportalfx-test-scenarios-blades-common-portal-blades-quickstart-blade"></a>
+<a name="microsoft-azureportal-test-scenarios-blades-common-portal-blades-quickstart-blade"></a>
 ##### QuickStart Blade
 
 Using a deep link you can navigate directly into a `QuickStartBlade` for a resource with `Portal.navigateToUriFragment`.
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 
         const resourceName = resourcePrefix + guid.newGuid();
@@ -1256,7 +1258,7 @@ import testFx from 'MsPortalFx-Test';
 While deeplinking is fast it does not validate that the user can actually navigate to a QuickStartBlade via a `ResourceSummaryPart` on a resource summary blade.  The following demonstrates how to verify the user can do so.
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 //1. model your resource summary blade which contains a resource summary part
 
@@ -1282,13 +1284,13 @@ export default class SummaryBlade extends Blade {
 ...
 ```
 
-<a name="msportalfx-test-scenarios-blades-common-portal-blades-users-blade"></a>
+<a name="microsoft-azureportal-test-scenarios-blades-common-portal-blades-users-blade"></a>
 ##### Users Blade
 
 Using a deep link you can navigate directly into the user access blade for a resource with `Portal.navigateToUriFragment`.
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 
         const resourceName = resourcePrefix + guid.newGuid();
@@ -1316,7 +1318,7 @@ import testFx from 'MsPortalFx-Test';
 While deeplinking is fast it does not validate that the user can actually navigate to a UsersBlade via a `ResourceSummaryPart` on a resource summary blade.  The following demonstrates how to verify the user can do so.
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 //1. model your resource summary blade which contains a resource summary part
 
@@ -1342,13 +1344,13 @@ export default class SummaryBlade extends Blade {
 ...
 ```
 
-<a name="msportalfx-test-scenarios-blades-common-portal-blades-move-resource-blade"></a>
+<a name="microsoft-azureportal-test-scenarios-blades-common-portal-blades-move-resource-blade"></a>
 ##### Move Resource Blade
 
 The `MoveResourcesBlade` represents the portals blade used to move resources from a resource group to a new resource group `portal.startMoveResource` provides a simple abstraction that will iniate the move of an existing resource to a new resource group.  The following example demonstrates how to initiate the move and then wait on successful notification of completion.
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 
         await testFx.portal.startMoveResource(
@@ -1362,7 +1364,7 @@ import testFx from 'MsPortalFx-Test';
         return await testFx.portal.element(NotificationsPane).waitForNewNotification(portalFxResources.movingResourcesComplete, null, 5 * 60 * 1000);
 ```
 
-<a name="msportalfx-test-scenarios-blades-blade-dialogs"></a>
+<a name="microsoft-azureportal-test-scenarios-blades-blade-dialogs"></a>
 #### Blade Dialogs
 
 On some blades you may use commands that cause a blade dialog that generally required the user to perform some acknowledgement action.
@@ -1374,7 +1376,7 @@ The following example demonstrates how to:
 - clicking on a button in a dialog
 
 ```ts
-import testFx from 'MsPortalFx-Test';
+import testFx from '@microsoft/azureportal-test';
 ...
 
         testFx.portal.blade({ title: "Samples", bladeType: SamplesBlade });
@@ -1392,10 +1394,10 @@ import testFx from 'MsPortalFx-Test';
 ```
 
 
-<a name="msportalfx-test-scenarios-parts"></a>
+<a name="microsoft-azureportal-test-scenarios-parts"></a>
 ### Parts
 
-<a name="msportalfx-test-scenarios-parts-how-to-get-the-reference-to-a-part-on-a-blade"></a>
+<a name="microsoft-azureportal-test-scenarios-parts-how-to-get-the-reference-to-a-part-on-a-blade"></a>
 #### How to get the reference to a part on a blade
 
 1. If it is a specific part, like the essentials for example:
@@ -1411,7 +1413,7 @@ import testFx from 'MsPortalFx-Test';
 	let thePart = blade.element(By.Classname("myPartClass")).AsType(testFx.Parts.Part);
 ```
 
-<a name="msportalfx-test-scenarios-parts-collectionpart"></a>
+<a name="microsoft-azureportal-test-scenarios-parts-collectionpart"></a>
 #### CollectionPart
 
 The following example demonstrates how to:
@@ -1442,10 +1444,10 @@ The following example demonstrates how to:
 
 Note if you have multiple collection parts you may want to use `blade.part(...)` to search by text.
 
-<a name="msportalfx-test-scenarios-parts-grid"></a>
+<a name="microsoft-azureportal-test-scenarios-parts-grid"></a>
 #### Grid
 
-<a name="msportalfx-test-scenarios-parts-grid-finding-a-row-within-a-grid"></a>
+<a name="microsoft-azureportal-test-scenarios-parts-grid-finding-a-row-within-a-grid"></a>
 ##### Finding a row within a grid
 
 The following demonstrates how to use `Grid.findRow` to:
@@ -1461,7 +1463,7 @@ The following demonstrates how to use `Grid.findRow` to:
             
 ```
 
-<a name="msportalfx-test-scenarios-parts-createcomboboxfield-obsolete"></a>
+<a name="microsoft-azureportal-test-scenarios-parts-createcomboboxfield-obsolete"></a>
 #### CreateComboBoxField - Obsolete
 
 use this for modeling the resouce group `CreateComboBoxField` on create blades.
@@ -1496,7 +1498,7 @@ return testFx.portal.goHome(40000).then(() => {
 });
 ```
 
-<a name="msportalfx-test-scenarios-parts-resourcegroupdropdownfield"></a>
+<a name="microsoft-azureportal-test-scenarios-parts-resourcegroupdropdownfield"></a>
 #### ResourceGroupDropDownField
 
 use this for modeling the resouce group `ResourceGroupDropDownField` on create blades.
@@ -1534,10 +1536,10 @@ use this for modeling the resouce group `ResourceGroupDropDownField` on create b
         
 ```
 
-<a name="msportalfx-test-scenarios-parts-editor"></a>
+<a name="microsoft-azureportal-test-scenarios-parts-editor"></a>
 #### Editor
 
-<a name="msportalfx-test-scenarios-parts-editor-can-read-and-write-content"></a>
+<a name="microsoft-azureportal-test-scenarios-parts-editor-can-read-and-write-content"></a>
 ##### Can read and write content
 
 The following example demonstrates how to:
@@ -1576,10 +1578,10 @@ The following example demonstrates how to:
         
 ```
 
-<a name="msportalfx-test-scenarios-parts-essentials"></a>
+<a name="microsoft-azureportal-test-scenarios-parts-essentials"></a>
 #### essentials
 
-<a name="msportalfx-test-scenarios-parts-essentials-essentials-tests"></a>
+<a name="microsoft-azureportal-test-scenarios-parts-essentials-essentials-tests"></a>
 ##### Essentials tests
 
 The following example demonstrates how to:
@@ -1709,39 +1711,39 @@ The following example demonstrates how to:
         
 ```
 
-<a name="msportalfx-test-scenarios-command"></a>
+<a name="microsoft-azureportal-test-scenarios-command"></a>
 ### Command
 
-<a name="msportalfx-test-scenarios-action-bar"></a>
+<a name="microsoft-azureportal-test-scenarios-action-bar"></a>
 ### Action Bar
 
-<a name="msportalfx-test-scenarios-delete"></a>
+<a name="microsoft-azureportal-test-scenarios-delete"></a>
 ### Delete
 
-<a name="msportalfx-test-scenarios-styling-layout-regression-detection"></a>
+<a name="microsoft-azureportal-test-scenarios-styling-layout-regression-detection"></a>
 ### Styling / layout regression detection
 
 The CSS styling regression feature has been deprecated, please remove all usage of the `portal.detectStylingRegression` function.
 
 
-<a name="msportalfx-test-scenarios-styling-layout-regression-detection-"></a>
+<a name="microsoft-azureportal-test-scenarios-styling-layout-regression-detection-"></a>
 #### ...
 
-<a name="msportalfx-test-scenarios-locators"></a>
+<a name="microsoft-azureportal-test-scenarios-locators"></a>
 ### Locators
 
-<a name="msportalfx-test-scenarios-consuming-updates"></a>
+<a name="microsoft-azureportal-test-scenarios-consuming-updates"></a>
 ### Consuming Updates
 
-<a name="msportalfx-test-scenarios-mocking"></a>
+<a name="microsoft-azureportal-test-scenarios-mocking"></a>
 ### Mocking
 
-<a name="msportalfx-test-scenarios-mocking-how-to-show-mock-data-into-the-portal"></a>
+<a name="microsoft-azureportal-test-scenarios-mocking-how-to-show-mock-data-into-the-portal"></a>
 #### How to show mock data into the Portal
 
 The [MsPortalFx-Mock](https://www.npmjs.com/package/msportalfx-mock) package provides a framework for showing mock data in the portal. It come with builtin support for mocking ARM data.
 
-<a name="msportalfx-test-scenarios-mocking-how-to-show-mock-data-into-the-portal-mocking-arm"></a>
+<a name="microsoft-azureportal-test-scenarios-mocking-how-to-show-mock-data-into-the-portal-mocking-arm"></a>
 ##### Mocking ARM
 
 Mock data including providers, subscriptions, resource groups and resources can be defined in JSON object and used to initialize the ArmManager.
@@ -1867,16 +1869,16 @@ The proxy can be disposed at the end of your tests.
 ```
 
 
-<a name="msportalfx-test-scenarios-code-coverage"></a>
+<a name="microsoft-azureportal-test-scenarios-code-coverage"></a>
 ### Code Coverage
-<a name="msportalfx-test-scenarios-code-coverage-interop-how-to-run-net-code-from-your-tests"></a>
+<a name="microsoft-azureportal-test-scenarios-code-coverage-interop-how-to-run-net-code-from-your-tests"></a>
 #### Interop, how to run .NET code from your tests
 edge.js
 
-<a name="msportalfx-test-scenarios-accessibility-testing"></a>
+<a name="microsoft-azureportal-test-scenarios-accessibility-testing"></a>
 ### Accessibility Testing
 
-<a name="msportalfx-test-scenarios-accessibility-testing-overview-1"></a>
+<a name="microsoft-azureportal-test-scenarios-accessibility-testing-overview-1"></a>
 #### Overview
 
 Automated accessibility testing is enabled via './src/Accessibility.ts' which wraps two NPM libraries, 'axe-core' and 'axe-webdriverjs'.
@@ -1888,7 +1890,7 @@ Automated accessibility testing is enabled via './src/Accessibility.ts' which wr
 5. The 'ensureAccessibilityIsAxeCoreClean' function is primarily intended to be used at the blade level, as script is executed to collect the extension and blade name for reporting purposes.
 6. In the case of blades which have controls which are dynamically rendered (create blades with tabs for example), the 'ensureAccessibilityIsAxeCoreClean' function can be called multiple times, and results can be differentiated by specifying a 'stepName' parameter, additional details below.
 
-<a name="msportalfx-test-scenarios-accessibility-testing-sample-test"></a>
+<a name="microsoft-azureportal-test-scenarios-accessibility-testing-sample-test"></a>
 #### Sample Test
 
 Here is the minimal amount of code necessary to test if a blade is accessible or not, from './test/AccessibilityTests.ts':
@@ -1920,7 +1922,7 @@ describe("Can test accessibility of blades", function () {
 
 This code is opening the browse resource groups blade, and testing if it is accessible. The 'errorIdsToIgnore' parameter is used to ignore a set of errors by their error ID.
 
-<a name="msportalfx-test-scenarios-accessibility-testing-options"></a>
+<a name="microsoft-azureportal-test-scenarios-accessibility-testing-options"></a>
 #### Options
 
 Here is a copy of the options interface for the 'ensureAccessibilityIsAxeCoreClean' function, within './src/Accessibility.ts':
@@ -1978,24 +1980,24 @@ export interface Options {
 
 ```
 
-<a name="msportalfx-test-scenarios-contributing"></a>
+<a name="microsoft-azureportal-test-scenarios-contributing"></a>
 ### Contributing
 
-<a name="msportalfx-test-scenarios-contributing-to-enlist"></a>
+<a name="microsoft-azureportal-test-scenarios-contributing-to-enlist"></a>
 #### To enlist
 
-git clone https://github.com/azure/msportalfx-test.git
+git clone https://msazure.visualstudio.com/DefaultCollection/One/_git/AzureUX-PortalFx
 
-<a name="msportalfx-test-scenarios-contributing-to-build-the-source"></a>
+<a name="microsoft-azureportal-test-scenarios-contributing-to-build-the-source"></a>
 #### To build the source
 
 Use Visual Studio or Visual Studio Code to build
 
 How to build and push your changes
 
-1. Go to the root directory
+1. Go to the src/msportalfx-test directory
     1. npm run clean  (This will wipe out any extra files you have in the directory)
-1. Build the msportalfx-test package (see README.MD for details)
+1. Build the @microsoft/azureportal-test package (see README.MD for details)
     - npm install --no-optional
     - Note the above command pulls dependencies and builds, if you just want to build use: `npm run build`
 1.   Test your changes, see README.md for details on setup
@@ -2005,7 +2007,7 @@ How to build and push your changes
 1. Push your changes
 
 
-<a name="msportalfx-test-scenarios-contributing-to-setup-the-tests"></a>
+<a name="microsoft-azureportal-test-scenarios-contributing-to-setup-the-tests"></a>
 #### To setup the tests
 
 1. To run the tests you need:
@@ -2017,22 +2019,22 @@ How to build and push your changes
 
 Once you have the first two use the following to create the AAD application and service principal.
 
-```powershell 
-    msportalfx-test\scripts\Create-AdAppAndServicePrincipal.ps1 
-        -TenantId "someguid" 
-        -SubscriptionId "someguid" 
-        -ADAppName "some ap name" 
-        -ADAppHomePage "https://somehomepage" 
-        -ADAppIdentifierUris "https://someidentiferuris" 
-        -ADAppPassword $someAdAppPassword 
-        -SPRoleDefinitionName "Reader" 
+```powershell
+    @microsoft\azureportal-test\scripts\Create-AdAppAndServicePrincipal.ps1
+        -TenantId "someguid"
+        -SubscriptionId "someguid"
+        -ADAppName "some ap name"
+        -ADAppHomePage "https://somehomepage"
+        -ADAppIdentifierUris "https://someidentiferuris"
+        -ADAppPassword $someAdAppPassword
+        -SPRoleDefinitionName "Reader"
 ```
 
-**Note**: Don't forget to store the password you use below in key vault, secret store or other. You will not be able to retrieve it using the commandlets. 
+**Note**: Don't forget to store the password you use below in key vault, secret store or other. You will not be able to retrieve it using the commandlets.
 
-You will use the details of the created service principal in the next steps.  
+You will use the details of the created service principal in the next steps.
 
-For more detail on [AAD Applications and Service Principals] see (https://azure.microsoft.com/en-us/documentation/articles/resource-group-authenticate-service-principal/#authenticate-with-password---powershell).  
+For more detail on [AAD Applications and Service Principals] see (https://azure.microsoft.com/en-us/documentation/articles/resource-group-authenticate-service-principal/#authenticate-with-password---powershell).
 
 1. Open **test\config.json** and enter appropriate values for:
     ```
@@ -2042,7 +2044,7 @@ For more detail on [AAD Applications and Service Principals] see (https://azure.
             "subscriptionName": "SUBSCRIPTION_NAME_HERE",
     ```
 
-1. The account that corresponds to the specified credentials should have at least contributor access to the subscription specified in the **config.json** file. The account must be a Live Id account. It cannot be an account that requires two factor authentication (like most @microsoft.com accounts). 
+1. The account that corresponds to the specified credentials should have at least contributor access to the subscription specified in the **config.json** file. The account must be a Live Id account. It cannot be an account that requires two factor authentication (like most @microsoft.com accounts).
 
 1. Install the Portal SDK from [Aux Docs](https://auxdocs.azurewebsites.net/en-us/downloads), then open Visual Studio and create a new Portal Extension from File --> New Project --> Azure Portal --> Azure Portal Extension. Name this project **LocalExtension** so that the extension itself is named LocalExtension, which is what many of the tests expect. Then hit CTRL+F5 to host the extension in IIS Express.
 
@@ -2050,7 +2052,7 @@ For more detail on [AAD Applications and Service Principals] see (https://azure.
 
 1. Many of the tests currently rely on the CloudService extension. We are working to remove this dependency.
 
-<a name="msportalfx-test-scenarios-to-run-the-tests"></a>
+<a name="microsoft-azureportal-test-scenarios-to-run-the-tests"></a>
 ### To run the tests
 
 Open a command prompt in this directory and run:
@@ -2060,7 +2062,7 @@ Open a command prompt in this directory and run:
 	npm test
 ```
 
-<a name="msportalfx-test-scenarios-to-run-the-tests-authoring-documents"></a>
+<a name="microsoft-azureportal-test-scenarios-to-run-the-tests-authoring-documents"></a>
 #### Authoring documents
 - When adding a document create a new *.md file in /docs e.g /docs/foo.md
 - Author the document using [markdown syntax](https://daringfireball.net/projects/markdown/syntax)
@@ -2078,7 +2080,7 @@ Open a command prompt in this directory and run:
 
     this will find all content in ../test/BrowseResourceBladeTests.ts that is wrapped in comments //tutorial-browse-context-menu#step2 and will inject them directly into the document. see /docs/tutorial-browse-context-menu.md for a working example
 
-<a name="msportalfx-test-scenarios-to-run-the-tests-generating-the-docs"></a>
+<a name="microsoft-azureportal-test-scenarios-to-run-the-tests-generating-the-docs"></a>
 #### Generating the docs
 You can generate the documentation in one of two ways
 
@@ -2088,7 +2090,7 @@ You can generate the documentation in one of two ways
     npm pack
     ```
 
--  Or, While you are writing docs you may want to check that your composition or jsdoc for API ref is generating as expected to do this you can execute run the following 
+-  Or, While you are writing docs you may want to check that your composition or jsdoc for API ref is generating as expected to do this you can execute run the following
 
     ```
     npm run docs
@@ -2096,20 +2098,21 @@ You can generate the documentation in one of two ways
 
 the output of the composed TEMPLATE.md will be written to ./README.md and the generated API reference from your jsdocs will be written to /docs/apiref.md
 
-<a name="msportalfx-test-scenarios-to-run-the-tests-to-submit-your-contribution"></a>
+<a name="microsoft-azureportal-test-scenarios-to-run-the-tests-to-submit-your-contribution"></a>
 #### To submit your contribution
-Submit a pull request to the repo [http://aka.ms/msportalfx-test](http://aka.ms/msportalfx-test)
+Submit a pull request to the repo [http://aka.ms/portalfx/microsoft-azureportal-test/src](http://aka.ms/portalfx/microsoft-azureportal-test/src)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-<a name="msportalfx-test-scenarios-to-run-the-tests-questions"></a>
+
+<a name="microsoft-azureportal-test-scenarios-to-run-the-tests-questions"></a>
 #### Questions?
 
 Send an email to ibizadiscuss@microsoft.com
 
-<a name="msportalfx-test-scenarios-api-reference"></a>
+<a name="microsoft-azureportal-test-scenarios-api-reference"></a>
 ### API Reference
 
 [View thet API Reference](http://aka.ms/msportalfx-test/api)
 
-Generated on 2020-12-07
+Generated on 2020-12-08
