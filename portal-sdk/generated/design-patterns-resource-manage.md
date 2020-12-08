@@ -113,7 +113,7 @@ Each menu item opens a page that allows the user to drill deeper for more inform
 
 <a name="behavior-overview-page"></a>
 ### Overview page
-The overview page is the home page for a resource. It displays key information and actions for the resource.  The overview page should contain a toolbar, essentials panel, and content area.  See more details on overview page layout in the [overview page design pattern](portalfx-design-page-overview.md)
+The overview page is the home page for a resource. It displays key information and actions for the resource.  The overview page should contain a toolbar, essentials panel, and content area.  See more details on overview page layout in the [overview page design pattern](design-patterns-page-overview.md)
 
 <div style="max-width:800px">
 <img alttext="Resource overview page" src="../media/design-patterns-resource-manage/overview.png"  />
