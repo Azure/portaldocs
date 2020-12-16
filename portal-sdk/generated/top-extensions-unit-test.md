@@ -25,8 +25,7 @@ This tutorial will provide you step by step instructions for creating a UnitTest
 
 +-- Extension
 +-- Extension.UnitTests
-|   +-- test/CreateBlade.test.ts
-|   +-- test/ResourceOverviewBlade.test.ts
+|   +-- test/ResourceKeysBlade.test.ts
 |   +-- test-main.js
 |   +-- karma.conf.js
 |   +-- azureportal-ut.config.json
@@ -160,72 +159,17 @@ Note:
 
 <a name="unit-test-framework-creating-a-project-from-scratch-with-visual-studio-code-dev-build-time-configuration-add-a-test"></a>
 #### Add a test
-
-Add a CreateBlade test to ./test/CreateBlade.test.ts.  This demonstrates how to provide the provisioning context to your CreateBlade that portal would normally provide via your gallery package. You can modify this example for your own extension.
-
-```typescript
-
-import { CreateBlade } from "Resource/Create/CreateBlade";
-import * as sinon from "sinon";
-import { TemplateBladeHarness } from "@microsoft/azureportal-ut/Harness";
-
-describe("Create Blade Tests", () => {
-  let server: sinon.SinonFakeServer;
-
-  beforeEach(function () {
-    server = sinon.fakeServer.create();
-    server.respondImmediately = true;
-  });
-
-  afterEach(function () {
-    server.restore();
-  });
-
-  it("Verify initial state of CreateBlade", () => {
-    return TemplateBladeHarness.initializeBlade(CreateBlade, {
-      parameters: null,
-      blade: new CreateBlade(),
-      provisioningContext: {
-        initialValues: { locationNames: [], subscriptionIds: [] },
-        telemetryId: "",
-        provisioningConfig: {
-          dashboardPartReference: {
-            dashboardPartKeyId: "id",
-            options: {
-              extensionName: "ExtensionTemplate",
-            },
-            partName: "ResourcePart",
-            parameters: null,
-          },
-        },
-        marketplaceItem: null,
-      },
-      beforeOnInitializeCalled: (blade) => {
-        console.log("Add any before on init tests here");
-      },
-      afterOnInitializeCalled: (blade) => {
-        console.log("Add any after on init tests here");
-      },
-    }).then((blade) => {
-      console.log("Add any init complete tests here");
-    });
-  });
-});
-
-
-```
-
-Add a TemplateBlade test to ./test/ResourceOverviewBlade.test.ts.  You can modify this example for your own extension.
+Add a TemplateBlade test to ./test/ResourceKeysBlade.test.ts.  You can modify this example for your own extension.
 
 ```typescript
 
 import { assert } from "chai"; // type issues with node d.ts and require js d.ts so using chai
-import { Parameters, ResourceOverviewBlade } from "Resource/Blades/Overview/ResourceOverviewBlade";
+import { ResourceKeysBladeParameters, ResourceKeysBlade } from "Views/ResourceKeysBlade";
 import * as ClientResources from "ClientResources";
 import * as sinon from "sinon";
 import { TemplateBladeHarness } from "@microsoft/azureportal-ut/Harness";
 
-describe("Resource Overview Blade Tests", () => {
+describe("Resource Keys Blade Tests", () => {
   let server: sinon.SinonFakeServer;
 
   beforeEach(function () {
@@ -237,7 +181,7 @@ describe("Resource Overview Blade Tests", () => {
     server.restore();
   });
 
-  it("title populated with content from ARM", () => {
+  it("resource keys blade has correct title and subtitle", () => {
     // arrange
     const resourceId = "/subscriptions/0c82cadf-f711-4825-bcaf-44189e8baa9f/resourceGroups/sdfsdfdfdf/providers/Providers.Test/statefulIbizaEngines/asadfasdff";
     server.respondWith((request) => {
@@ -262,14 +206,14 @@ describe("Resource Overview Blade Tests", () => {
       }
     });
 
-    const bladeParameters: Parameters = { id: resourceId };
+    const bladeParameters : ResourceKeysBladeParameters = { id: resourceId };
     // options for the blade under test. optional callbacks beforeOnInitializeCalled, afterOnInitializeCalled and afterRevealContentCalled
     // can be supplied to execute custom test code
 
     // get blade instance with context initialized and onInitialized called
-    return TemplateBladeHarness.initializeBlade(ResourceOverviewBlade, {
+    return TemplateBladeHarness.initializeBlade(ResourceKeysBlade, {
       parameters: bladeParameters,
-      blade: new ResourceOverviewBlade(),
+      blade: new ResourceKeysBlade(),
       afterOnInitializeCalled: (blade) => {
         console.log("after on init called");
       },
@@ -279,10 +223,10 @@ describe("Resource Overview Blade Tests", () => {
       afterRevealContentCalled: (blade) => {
         console.log("after reveal called");
       },
-    }).then((resourceBlade) => {
+    }).then((resourceKeysBlade) => {
 
-      assert.equal(resourceBlade.title(), "bar");
-      assert.equal(resourceBlade.subtitle, ClientResources.resourceOverviewBladeSubtitle);
+      assert.equal(resourceKeysBlade.title, ClientResources.resourceKeyBladeTitle);
+      assert.equal(resourceKeysBlade.subtitle, ClientResources.resourceKeyBladeSubtitle);
     });
   });
 });
@@ -402,8 +346,7 @@ rjs = require.config({
     baseUrl: window.__karma__ ? "/base/Extension.UnitTests" : "",
     paths: {
         "_generated": "../Extension/Output/Content/Scripts/_generated",
-        "Resource": "../Extension/Output/Content/Scripts/Resource",
-        "Shared": "../Extension/Output/Content/Scripts/Shared",
+        "Views": "../Extension/Output/Content/Scripts/Views",
         "sinon": "node_modules/sinon/pkg/sinon",
         "chai": "node_modules/chai/chai",
     },
@@ -605,6 +548,136 @@ Clicking through from the summary view to the ResourceOverviewBlade you can see 
 <a name="faq"></a>
 # FAQ
 
+<a name="faq-examples-adding-tests-for-template-blades"></a>
+## Examples Adding tests for template blades
+
+ 
+
+Add a CreateBlade test to ./test/CreateBlade.test.ts.  This demonstrates how to provide the provisioning context to your CreateBlade that portal would normally provide via your gallery package. You can modify this example for your own extension.
+
+ 
+
+```typescript
+import { CreateBlade } from "Resource/Create/CreateBlade";
+import * as sinon from "sinon";
+import { TemplateBladeHarness } from "@microsoft/azureportal-ut/Harness";
+
+describe("Create Blade Tests", () => {
+  let server: sinon.SinonFakeServer;
+
+  beforeEach(function () {
+    server = sinon.fakeServer.create();
+    server.respondImmediately = true;
+  });
+
+  afterEach(function () {
+    server.restore();
+  });
+
+  it("Verify initial state of CreateBlade", () => {
+    return TemplateBladeHarness.initializeBlade(CreateBlade, {
+      parameters: null,
+      blade: new CreateBlade(),
+      provisioningContext: {
+        initialValues: { locationNames: [], subscriptionIds: [] },
+        telemetryId: "",
+        provisioningConfig: {
+          dashboardPartReference: {
+            dashboardPartKeyId: "id",
+            options: {
+              extensionName: "ExtensionTemplate",
+            },
+            partName: "ResourcePart",
+            parameters: null,
+          },
+        },
+        marketplaceItem: null,
+      },
+      beforeOnInitializeCalled: (blade) => {
+        console.log("Add any before on init tests here");
+      },
+      afterOnInitializeCalled: (blade) => {
+        console.log("Add any after on init tests here");
+      },
+    }).then((blade) => {
+      console.log("Add any init complete tests here");
+    });
+  });
+});
+
+```
+
+Add a TemplateBlade test to ./test/ResourceOverviewBlade.test.ts.  You can modify this example for your own extension.
+
+```typescript
+import { assert } from "chai"; // type issues with node d.ts and require js d.ts so using chai
+import { Parameters, ResourceOverviewBlade } from "Resource/Blades/Overview/ResourceOverviewBlade";
+import * as ClientResources from "ClientResources";
+import * as sinon from "sinon";
+import { TemplateBladeHarness } from "@microsoft/azureportal-ut/Harness";
+
+describe("Resource Overview Blade Tests", () => {
+  let server: sinon.SinonFakeServer;
+
+  beforeEach(function () {
+    server = sinon.fakeServer.create();
+    server.respondImmediately = true;
+  });
+
+  afterEach(function () {
+    server.restore();
+  });
+
+  it("title populated with content from ARM", () => {
+    // arrange
+    const resourceId = "/subscriptions/0c82cadf-f711-4825-bcaf-44189e8baa9f/resourceGroups/sdfsdfdfdf/providers/Providers.Test/statefulIbizaEngines/asadfasdff";
+    server.respondWith((request) => {
+      if (request.url.startsWith(`${MsPortalFx.getEnvironmentValue("armEndpoint")}/batch`)
+        && JSON.parse(request.requestBody).requests[0].url.endsWith(`${resourceId}?api-version=${MsPortalFx.getEnvironmentValue("armApiVersion")}`)) {
+        request.respond(200, { "Content-Type": "application/json" }, JSON.stringify({
+          "responses": [
+            {
+              "httpStatusCode": 200,
+              "content": {
+                "id": `${resourceId}`,
+                "name": "bar",
+                "type": "Providers.Test/statefulIbizaEngines",
+                "location": "East Asia",
+                "properties": {},
+              },
+            },
+          ],
+        }));
+      } else {
+        request.respond(404, null, "not mocked");
+      }
+    });
+
+    const bladeParameters: Parameters = { id: resourceId };
+    // options for the blade under test. optional callbacks beforeOnInitializeCalled, afterOnInitializeCalled and afterRevealContentCalled
+    // can be supplied to execute custom test code
+
+    // get blade instance with context initialized and onInitialized called
+    return TemplateBladeHarness.initializeBlade(ResourceOverviewBlade, {
+      parameters: bladeParameters,
+      blade: new ResourceOverviewBlade(),
+      afterOnInitializeCalled: (blade) => {
+        console.log("after on init called");
+      },
+      beforeOnInitializeCalled: (blade) => {
+        console.log("before on init called");
+      },
+      afterRevealContentCalled: (blade) => {
+        console.log("after reveal called");
+      },
+    }).then((resourceBlade) => {
+
+      assert.equal(resourceBlade.title(), "bar");
+      assert.equal(resourceBlade.subtitle, ClientResources.resourceOverviewBladeSubtitle);
+    });
+  });
+});
+```
 <a name="faq-when-i-do-file-file-new-project-visual-c-azure-portal-i-get-the-following-error"></a>
 ## When I do File <code>File &gt; New &gt; Project &gt; Visual C# &gt; Azure Portal</code> I get the following error
 

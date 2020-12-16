@@ -202,8 +202,8 @@ locationDropDown.value(locationDropDown.fetchedValues().first((value)=> value.na
 ```ts
 import * as SubscriptionDropDown from "Fx/Controls/SubscriptionDropDown";
 ```
-```typescript
 
+```ts
 const subscriptionDropDown = SubscriptionDropDown.create(this.context.container, {
     initialSubscriptionId: this.context.provisioning.initialValues.subscriptionIds,
     validations: [
@@ -212,16 +212,16 @@ const subscriptionDropDown = SubscriptionDropDown.create(this.context.container,
 });
 
 const subscriptionId = ko.pureComputed(() => subscriptionDropDown.value() && subscriptionDropDown.value().subscriptionId);
-
 ```
+
 
 <a name="building-custom-create-forms-edit-scopeless-based-accessible-dropdowns-resource-groups-dropdown"></a>
 #### Resource groups dropdown
 ```ts
 import * as ResourceGroupDropDown from "Fx/Controls/ResourceGroupDropDown";
 ```
-```typescript
 
+```ts
 const resourceGroupDropDown = ResourceGroupDropDown.create(this.context.container, {
     subscriptionId: subscriptionId,
     infoBalloonContent: ClientResources.resourceGroupDropDownInfoBalloon,
@@ -230,15 +230,15 @@ const resourceGroupDropDown = ResourceGroupDropDown.create(this.context.containe
         new Validations.Required(),
     ],
 });
-
 ```
+
 <a name="building-custom-create-forms-edit-scopeless-based-accessible-dropdowns-locations-dropdown"></a>
 #### Locations dropdown
 ```ts
 import * as LocationDropDown from "Fx/Controls/LocationDropDown";
 ```
-```typescript
 
+```ts
 const locationDropDown = LocationDropDown.create(this.context.container, {
     initialLocationName: ko.observableArray<string>(),
     subscriptionId: subscriptionId,
@@ -247,7 +247,6 @@ const locationDropDown = LocationDropDown.create(this.context.container, {
     ],
     resourceTypes: ["Providers.Test/statefulIbizaEngines"],
 });
-
 ```
 
 <a name="building-custom-create-forms-arm-dropdown-options"></a>

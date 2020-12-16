@@ -41,7 +41,7 @@ The Azure Portal SDK includes everything you need to build extensions for the po
 
 2. To create a new extension, run the following command -
 
-    `ap new -d -n Microsoft_Azure_YourExtension -o ./targetdirectory`
+    `ap new -n Microsoft_Azure_YourExtension -o ./targetdirectory`
 
 3. To launch your extension:
 
