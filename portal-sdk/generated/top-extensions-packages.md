@@ -52,8 +52,10 @@ In order to download the NuGet packages required for extension development conne
 Portal SDK NuGet packages are published to an internal Azure DevOps Artifact registry.
 
 
-NuGet packages are published to the [Official feed](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal) for internal consumers and then mirrored to the [AzurePortal feed](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal).
+NuGet packages are published to the [Official feed](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=Official) for internal consumers and then mirrored to the [AzurePortal feed](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal).
 For internal teams depending on your internal build system the configuration of how to consume this feed will vary.  For the latest guidance on consuming the feed within your build system, consult your build system's documentation. For those using 1ES systems, see the NuGet in 1ES guide located at [https://www.1eswiki.com/wiki/NuGet_in_1ES](https://www.1eswiki.com/wiki/NuGet_in_1ES).
+
+Note that the Official feed only contains NuGet packages, while the AzurePortal feed contains both NuGet packages and node modules.
 
 Third party extensions should use the AzurePortal feed. To connect
 
