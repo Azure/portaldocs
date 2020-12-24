@@ -25,7 +25,7 @@ When a Blade or Part view model is instantiated, its constructor is supplied wit
 
 ```typescript
 
-constructor(container: MsPortalFx.ViewModels.ContainerContract, dataContext: MasterDetailArea.DataContext) {
+constructor(container: MsPortalFx.ViewModels.ContainerContract, dataContext: MasterDetailArea.DataContext, _mock: AjaxMock) {
     super();
 
     this.title(ClientResources.masterDetailEditMasterBladeTitle);
@@ -124,7 +124,7 @@ From an API perspective these DataCache classes all share the same API and usage
 
 this.websiteEntities = new MsPortalFx.Data.EntityCache<WebsiteModel, number>({
     entityTypeName: WebsiteModelMetadata.name,
-    sourceUri: MsPortalFx.Data.uriFormatter(Util.appendSessionId(DataShared.websiteByIdUri), true),
+    sourceUri: MsPortalFx.Data.uriFormatter(DataShared.websiteByIdUri, true),
     findCachedEntity: {
         queryCache: this.websitesQuery,
         entityMatchesId: (website, id) => {

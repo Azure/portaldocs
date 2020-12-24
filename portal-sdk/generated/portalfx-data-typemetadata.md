@@ -152,13 +152,6 @@ At the top of any C# file using the `TypeMetadataModel` annotation, the followin
 
 ```cs
 
-﻿//-----------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
-//-----------------------------------------------------------------------------
-
-using Microsoft.Portal.TypeMetadata;
-
-[assembly: IgnoreRuntimeTypeMetadataGeneration()]
 
 ```
 *Note*: This attribute ensures that no typesMetadata blob is generated at runtime and embedded in the home/index response thus bloating ExtensionLoad.
@@ -172,99 +165,6 @@ For an example of a model class which generates the TypeScript shown in the [Aut
 
 ```cs
 
-﻿//-----------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
-//-----------------------------------------------------------------------------
-using Microsoft.Portal.TypeMetadata;
-
-namespace Microsoft.Portal.Extensions.SamplesExtension.DataModels
-{
-    /// <summary>
-    /// Representation of a computer component used by the hubs/browse sample.
-    /// </summary>
-    [TypeMetadataModel(typeof(ComputerComponent), "DataModels")]
-    [Indexable]
-    public class ComputerComponent
-    {
-        /// <summary>
-        /// Gets or sets the name of the computer component.
-        /// </summary>
-        [Id]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the display text of the computer component.
-        /// </summary>
-        public string Display { get; set; }
-
-        /// <summary>
-        /// Gets or sets the type of the computer component.
-        /// </summary>
-        public ComponentType ComponentType { get; set; }
-
-        /// <summary>
-        /// Gets or sets the model of the computer component.
-        /// </summary>
-        public string Model { get; set; }
-
-        /// <summary>
-        /// Gets or sets the manufacturer of the computer component.
-        /// </summary>
-        public string Manufacturer { get; set; }
-
-        /// <summary>
-        /// Gets or sets the status of the computer component.
-        /// </summary>
-        public ComponentStatus Status { get; set; }
-    }
-
-    /// <summary>
-    /// The component type for the computer component.
-    /// </summary>
-    public enum ComponentType
-    {
-        /// <summary>
-        /// Processor component.
-        /// </summary>
-        Processor,
-
-        /// <summary>
-        /// Memory component.
-        /// </summary>
-        Memory,
-
-        /// <summary>
-        /// Video card component.
-        /// </summary>
-        VideoCard,
-
-        /// <summary>
-        /// Drive component.
-        /// </summary>
-        Drive
-    }
-
-    /// <summary>
-    /// The component status for the computer component.
-    /// </summary>
-    public enum ComponentStatus
-    {
-        /// <summary>
-        /// Component is normal (success state).
-        /// </summary>
-        Normal,
-
-        /// <summary>
-        /// Component is defective (error state).
-        /// </summary>
-        Defective,
-
-        /// <summary>
-        /// Component is in overheating state (warning).
-        /// </summary>
-        Overheating
-    }
-}
 
 
 ```
@@ -273,48 +173,6 @@ namespace Microsoft.Portal.Extensions.SamplesExtension.DataModels
 
 ```cs
 
-﻿//-----------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
-//-----------------------------------------------------------------------------
-using System.Collections.Generic;
-using Microsoft.Portal.TypeMetadata;
-
-namespace Microsoft.Portal.Extensions.SamplesExtension.DataModels
-{
-    /// <summary>
-    /// Representation of a computer used by the hubs/browse sample.
-    /// </summary>
-    [TypeMetadataModel(typeof(Computer), "DataModels")]
-    [Indexable]
-    public class Computer
-    {
-        /// <summary>
-        /// Gets or sets the name of the computer.
-        /// </summary>
-        [Id]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the display text of the computer.
-        /// </summary>
-        public string Display { get; set; }
-
-        /// <summary>
-        /// Gets or sets the model of the computer.
-        /// </summary>
-        public string Model { get; set; }
-
-        /// <summary>
-        /// Gets or sets the manufacturer of the computer.
-        /// </summary>
-        public string Manufacturer { get; set; }
-
-        /// <summary>
-        /// Gets or sets the collection of computer component of the computer.
-        /// </summary>
-        public IEnumerable<ComputerComponent> Components { get; set; }
-    }
-}
 
 
 ```

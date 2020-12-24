@@ -86,7 +86,7 @@ this.websitesQuery = new QueryCache<WebsiteModel, WebsiteQueryParams>({
 
         // this particular controller expects a sessionId as well but this is not the common case.
         // Unless your controller also requires a sessionId this can be omitted
-        return Util.appendSessionId(uri);
+        return uri;
     },
 });
 
@@ -114,7 +114,7 @@ this.websiteEntities = new EntityCache<WebsiteModel, number>({
     // call into the URI used to query the backend. In this case websites are identified by a number
     // which uriFormatter() will fill into the id spot of this URI. Again this particular endpoint
     // requires the sessionId parameter as well but yours probably doesn't.
-    sourceUri: FxData.uriFormatter(Util.appendSessionId(MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/{id}")), true),
+    sourceUri: FxData.uriFormatter(MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/{id}"), true),
 
     // this property is how the EntityCache looks up a website from the QueryCache. This way we share the same
     // data object across multiple views and make sure updates are reflected across all blades at the same time
