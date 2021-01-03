@@ -308,10 +308,7 @@ A plugin can be installed and configured directly within VS Code to allow you to
 1. Enable eslint in VS Code for typescript - open json settings using `CTL + Shift + P` select `(Preferences): Open Settings (JSON)` and add:
     ```json
         "eslint.validate": [
-            {
-                "language": "typescript",
-                "autoFix": false
-            },
+           "typescript",
         ],
     ```
 1. Install dev dependencies required by the eslint plugin for vscode `npm install typescript@3.5.3 @microsoft/eslint-plugin-azureportal --no-optional --save-dev` (note version of typescript may have been updated since authoring.)
