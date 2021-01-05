@@ -2,7 +2,7 @@
 <a name="microsoft-azureportal-test"></a>
 # @microsoft/azureportal-test
 
-Generated on 2020-12-31
+Generated on 2021-01-04
 
 * [@microsoft/azureportal-test](#microsoft-azureportal-test)
     * [Overview](#microsoft-azureportal-test-overview)
@@ -2115,4 +2115,4 @@ Send an email to ibizadiscuss@microsoft.com
 
 [View thet API Reference](http://aka.ms/msportalfx-test/api)
 
-Generated on 2020-12-31
+Generated on 2021-01-04
