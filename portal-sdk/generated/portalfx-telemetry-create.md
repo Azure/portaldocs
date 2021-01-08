@@ -2,6 +2,7 @@
     * [Create Flow Telemetry Dashboards](#create-telemetry-create-flow-telemetry-dashboards)
     * [Create Flow table](#create-telemetry-create-flow-table)
     * [Create Flow Functions](#create-telemetry-create-flow-functions)
+        * [AzurePortal Database VS. AzPtlCosmos Database functions](#create-telemetry-create-flow-functions-azureportal-database-vs-azptlcosmos-database-functions)
         * [GetCreateFlows](#create-telemetry-create-flow-functions-getcreateflows)
         * [GetCreateFunnel](#create-telemetry-create-flow-functions-getcreatefunnel)
         * [GetCreateFunnelByDay](#create-telemetry-create-flow-functions-getcreatefunnelbyday)
@@ -16,7 +17,7 @@
 
 * PowerBi Dashboard: [https://msit.powerbi.com/groups/me/dashboards/73368590-6a29-4a85-b534-69791580be4a](https://msit.powerbi.com/groups/me/dashboards/73368590-6a29-4a85-b534-69791580be4a)
 * [Documentation](portalfx-telemetry-createFlowDashboard.md)
-  
+
 <a name="create-telemetry-create-flow-table"></a>
 ## Create Flow table
 
@@ -36,7 +37,7 @@ A CreateFlow row is a flattened telemetry timeline comprised of the following cr
 
 **Rules about the which events make up a create flow**
 
-- Every CreateFlow row will have the PS,PE,CDS,CDE events 
+- Every CreateFlow row will have the PS,PE,CDS,CDE events
 - A createflow used to be only started with a CFL event, but now can be started with a ProvisioningBladeOpened PBO event as well.
 - A createflow can have either the CFL or the PBO event, or only 1, but must have at least 1.
 
@@ -55,12 +56,64 @@ A CreateFlow row is a flattened telemetry timeline comprised of the following cr
 <a name="create-telemetry-create-flow-functions"></a>
 ## Create Flow Functions
 
+<a name="create-telemetry-create-flow-functions-azureportal-database-vs-azptlcosmos-database-functions"></a>
+### AzurePortal Database VS. AzPtlCosmos Database functions
+
+There are two Kusto databases that are supported with Create Flow related functions for you to use. Although in some cases the functions may have the same names, they have some differenes that are worth noting.
+
+<a name="create-telemetry-create-flow-functions-azureportal-database-vs-azptlcosmos-database-functions-azureportal-create-functions"></a>
+#### AzurePortal Create functions
+
+Found under: `Functions\CreateFlows`
+
+* The intended purpose of the AzurePoral.GetCreateFlows function is for Live-site alert debugging and test verification.
+* Creates completed in the Portal will be available here typically within 10-15 minutes.
+* Creates here will include **test traffic** and will be with the column `isTestTraffic=true`.
+* Queries will be much slower as all raw telemetry must be queried over in-real-time.
+* For most use-cases, please try to query only hours of data at a time with this query for best results. If the create you are searching for has occured in the last 24 hours, or is test traffic, then this is the best function for you to use.
+
+Common cases for traffic being marked as test:
+* If any feature flags are used
+* Test account is used
+* Stamp of extension is manually overriden
+
+Note:
+* The AzPtlCosmos.GetCreateFlows function provides additional optional filtering parameters that can be passed in to drastically improve query time - these options are not available in the AzurePortal.GetCreateFlows function as these queries all occur in-real-time.
+
+<a name="create-telemetry-create-flow-functions-azureportal-database-vs-azptlcosmos-database-functions-azptlcosmos-create-functions"></a>
+#### AzPtlCosmos Create functions
+
+Found under: `Functions\CreateFlows`
+
+* The intended purpose of the AzPtlCosmos.getCreateFlows function is for KPI tracking, dashboards, and general use.
+* All telemetry in this database goes through a pipeline to improve and filter the results, which causes a significant delay up to 24 hours for CreateFlows (no SLA).
+  * The result is drastically improved results and query speed.
+* If the creates you want to capture span more than 24 hours, but have occured more than 24 hours ago, and are not test traffic, then this is the correct function to use.
+
 <a name="create-telemetry-create-flow-functions-getcreateflows"></a>
 ### GetCreateFlows
 
 <a name="create-telemetry-create-flow-functions-getcreateflows-summary"></a>
 #### Summary
-`GetCreateFlows(startDate: datetime, endDate: datetime)`
+<a name="create-telemetry-create-flow-functions-getcreateflows-summary"></a>
+<a name="create-telemetry-create-flow-functions-getcreateflows-summary-1"></a>
+#### Summary
+
+```
+GetCreateFlows(
+    startDate:datetime,                 // required
+    endDate:datetime,                   // required
+    match_Extention:string="",          // optional
+    match_Blade:string="",              // optional
+    match_SessionId:string="",          // optional
+    match_SubscriptionId:string="",     // optional
+    match_TelemetryId:string="",        // optional
+    match_CorrelationId:string="",      // optional
+    match_GalleryPackageId:string="",   // optional
+    match_BuildNumber:string="",        // optional
+    exclude_NonMarketplace:bool=true    // optional
+)
+```
 
 This function returns the list of Portal Azure service deployment lifecycles, also known as 'create flows', for a given time range.
 * Each create flow represents the lifecycle of a create with the beginning being marked by the moment the create blade is opened and ending the moment that the create has been concluded and logged by the Portal.
@@ -88,8 +141,17 @@ This function returns the list of Portal Azure service deployment lifecycles, al
 
 <a name="create-telemetry-create-flow-functions-getcreateflows-parameters"></a>
 #### Parameters
-* startDate: The date to mark the inclusive start of the time range.
-* endDate: The date to mark the exclusive end of the time range.
+* startDate: ***required*** The date to mark the inclusive start of the time range.
+* endDate: ***required*** The date to mark the exclusive end of the time range.
+* match_Extention: *optional* Filter by extension name.
+* match_Blade: *optional* Filter by blade name.
+* match_SessionId: *optional* Filter by session id.
+* match_SubscriptionId: *optional* Filter by subscription id.
+* match_TelemetryId: *optional* Filter by telemetry id.
+* match_CorrelationId: *optional* Filter by correlation id.
+* match_GalleryPackageId: *optional* Filter by gallery package id.
+* match_BuildNumber: *optional* Filter by build number.
+* exclude_NonMarketplace: *optional* Filter out creates that were not initiated from the marketplace. True by default.
 
 <a name="create-telemetry-create-flow-functions-getcreateflows-output-columns"></a>
 #### Output Columns
@@ -121,7 +183,7 @@ This function returns the list of Portal Azure service deployment lifecycles, al
     * Unknown
       * The status of the create is unable to be determined.
       * If ARMExecutionStatus is blank and PortalExecutionStatus is blank
-    * Abandoned 
+    * Abandoned
       * The create blade was closed before a create was initialized.
 * Excluded
   * Boolean which represents if this Create Flow is to be excluded from create funnel KPI calculations.
@@ -216,7 +278,7 @@ This function returns the list of Portal Azure service deployment lifecycles, al
 <a name="create-telemetry-create-flow-functions-getcreatefunnel"></a>
 ### GetCreateFunnel
 
-<a name="create-telemetry-create-flow-functions-getcreatefunnel-summary-1"></a>
+<a name="create-telemetry-create-flow-functions-getcreatefunnel-summary-2"></a>
 #### Summary
 `GetCreateFunnel(startDate: datetime, endDate: datetime)`
 
@@ -286,7 +348,7 @@ This functions calculates the create funnel KPI's for each extension's create bl
 <a name="create-telemetry-create-flow-functions-getcreatefunnelbyday"></a>
 ### GetCreateFunnelByDay
 
-<a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-summary-2"></a>
+<a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-summary-3"></a>
 #### Summary
 `GetCreateFunnelByDay(startDate: datetime, endDate: datetime)`
 
@@ -359,7 +421,7 @@ This functions calculates the create funnel KPI's for each extension's create bl
 <a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-getcreatefunnelbygallerypackageid"></a>
 #### GetCreateFunnelByGalleryPackageId
 
-<a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-summary-3"></a>
+<a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-summary-4"></a>
 #### Summary
 `GetCreateFunnelByGalleryPackageId(startDate: datetime, endDate: datetime)`
 
@@ -430,7 +492,7 @@ This functions calculates the create funnel KPI's by gallery package id, extensi
 <a name="create-telemetry-create-flow-functions-getcombinedcreatefunnel"></a>
 ### GetCombinedCreateFunnel
 
-<a name="create-telemetry-create-flow-functions-getcombinedcreatefunnel-summary-4"></a>
+<a name="create-telemetry-create-flow-functions-getcombinedcreatefunnel-summary-5"></a>
 #### Summary
 `GetCombinedCreateFunnel(startDate: datetime, endDate: datetime)`
 
