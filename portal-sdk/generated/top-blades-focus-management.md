@@ -44,7 +44,7 @@ Here is how this is done within the samples page:
 
 ```typescript
 
-this.validateBtn = Button.create(container, {
+this.validateBtn = Button.create(_container, {
     text: "Validate form",
     onClick: () => {
         this.context.form.triggerValidation(true /*focusOnFirstInvalid*/);
@@ -78,10 +78,10 @@ Here is how this is done within the samples page:
 
 ```typescript
 
-this.moveFocusBtn = Button.create(container, {
+this.moveFocusBtn = Button.create(_container, {
     text: "Focus on textbox 2",
     onClick: () => {
-        container.setFocus(".ext-focusfrombuttonclick").then((result) => { focusResultDebugHandler(result, "Focus Succeeds Button"); });
+        _container.setFocus(".ext-focusfrombuttonclick").then((result) => { focusResultDebugHandler(result, "Focus Succeeds Button"); });
     },
 });
 
@@ -100,7 +100,7 @@ const focusFromToolbarButton = new Toolbars.CommandButton({
             return true;
         }),
         execute: () => {
-            return container.setFocus(".ext-focusfromcommandbar").then((result) => { focusResultDebugHandler(result, "CommandBar"); });
+            return _container.setFocus(".ext-focusfromcommandbar").then((result) => { focusResultDebugHandler(result, "CommandBar"); });
         },
     },
 });

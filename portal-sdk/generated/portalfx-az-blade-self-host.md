@@ -83,7 +83,7 @@ import { PdlBladeReference as BladeReference } from "Fx/Composition/Selectable";
 
 ```typescript
 
-container.openBlade(new BladeReference(
+this._container.openBlade(new BladeReference(
     "SampleBlade",
     "SampleAzExtension",
     {

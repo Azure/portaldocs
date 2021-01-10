@@ -2,7 +2,7 @@
 <a name="microsoft-azureportal-test"></a>
 # @microsoft/azureportal-test
 
-Generated on 2021-01-08
+Generated on 2021-01-09
 
 * [@microsoft/azureportal-test](#microsoft-azureportal-test)
     * [Overview](#microsoft-azureportal-test-overview)
@@ -1402,15 +1402,15 @@ import testFx from '@microsoft/azureportal-test';
 
 1. If it is a specific part, like the essentials for example:
 ```
-	let thePart = blade.element(testFx.Parts.ResourceSummaryPart);
+	let thePart = await blade.find(testFx.Parts.ResourceSummaryPart);
 ```
 1. For a more generic part:
 ```
 	let thePart = blade.part({innerText: "some part text"});
-``` 
+```
 1. To get a handle of this part using something else than simple text you can also do this:
 ```
-	let thePart = blade.element(By.Classname("myPartClass")).AsType(testFx.Parts.Part);
+	let thePart =(await blade.find(By.Classname("myPartClass"))).AsType(testFx.Parts.Part);
 ```
 
 <a name="microsoft-azureportal-test-scenarios-parts-collectionpart"></a>
@@ -1418,7 +1418,7 @@ import testFx from '@microsoft/azureportal-test';
 
 The following example demonstrates how to:
 
-- get a reference to the collection part using `blade.element(...)`. 
+- get a reference to the collection part using `blade.find(...)`.
 - get the rollup count using `collectionPart.getRollupCount()`
 - get the rollup count lable using `collectionPart.getRollupLabel()`
 - get the grid rows using `collectionPart.grid.rows`
@@ -1469,7 +1469,7 @@ The following demonstrates how to use `Grid.findRow` to:
 use this for modeling the resouce group `CreateComboBoxField` on create blades.
 
 - use `selectOption(...)` to chose an existing resource group
-- use `setCreateValue(...)` and `getCreateValue(...)` to get and check the value of the create new field respectively 
+- use `setCreateValue(...)` and `getCreateValue(...)` to get and check the value of the create new field respectively
 
 ```ts
 return testFx.portal.goHome(40000).then(() => {
@@ -1481,20 +1481,21 @@ return testFx.portal.goHome(40000).then(() => {
 	)
 }).then((blade: testFx.Blades.CreateBlade) => {
 	//2. find the CreateComboBoxField
-	var createComboField = blade.element(CreateComboBoxField);
-	//3. set the value of the Create New text field for the resource group
-	return createComboField.setCreateValue("NewValue")
-		.then(() =>
-			createComboField.getCreateValue()
-		).then((value) =>
-			assert.equal("NewValue", value, "Set resource group name")
-		).then(() =>
-			createComboField.selectOption("OldValue_4")
-		).then(() =>
-			createComboField.getDropdownValue()
-		).then((value) =>
-			assert.equal("OldValue_4", value, "Set create combo dropdown")
-		);
+	return blade.find(CreateComboBoxField).then((createComboField) => {
+		//3. set the value of the Create New text field for the resource group
+		return createComboField.setCreateValue("NewValue")
+			.then(() =>
+				createComboField.getCreateValue()
+			).then((value) =>
+				assert.equal("NewValue", value, "Set resource group name")
+			).then(() =>
+				createComboField.selectOption("OldValue_4")
+			).then(() =>
+				createComboField.getDropdownValue()
+			).then((value) =>
+				assert.equal("OldValue_4", value, "Set create combo dropdown")
+			);
+	});
 });
 ```
 
@@ -1503,8 +1504,8 @@ return testFx.portal.goHome(40000).then(() => {
 
 use this for modeling the resouce group `ResourceGroupDropDownField` on create blades.
 
-- use `setSelectedResourceGroup(...)` and `getSelectedResourceGroup` to get and check the value of the dropdown field respectively 
-- use `setNewResourceGroup(...)` and `getNewResourceGroup(...)` to get and check the value of the create new field respectively 
+- use `setSelectedResourceGroup(...)` and `getSelectedResourceGroup` to get and check the value of the dropdown field respectively
+- use `setNewResourceGroup(...)` and `getNewResourceGroup(...)` to get and check the value of the create new field respectively
 
 ```ts
 
@@ -1710,6 +1711,7 @@ The following example demonstrates how to:
         }
         
 ```
+
 
 <a name="microsoft-azureportal-test-scenarios-command"></a>
 ### Command
@@ -2115,4 +2117,4 @@ Send an email to ibizadiscuss@microsoft.com
 
 [View thet API Reference](http://aka.ms/msportalfx-test/api)
 
-Generated on 2021-01-08
+Generated on 2021-01-09
