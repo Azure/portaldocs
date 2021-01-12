@@ -9,7 +9,8 @@
     * [Guides](#reactviews-guides)
         * [Getting Started - Onboarding your existing extension](#reactviews-guides-getting-started-onboarding-your-existing-extension)
         * [Creating a new ReactView experience](#reactviews-guides-creating-a-new-reactview-experience)
-        * [Unit Testing a ReactView](#reactviews-guides-unit-testing-a-reactview)
+        * [Unit testing a ReactView](#reactviews-guides-unit-testing-a-reactview)
+        * [End to end testing a ReactView](#reactviews-guides-end-to-end-testing-a-reactview)
         * [Migrating Knockout controls to React components](#reactviews-guides-migrating-knockout-controls-to-react-components)
     * [Libraries Explained](#reactviews-libraries-explained)
         * [Redux and React-Redux](#reactviews-libraries-explained-redux-and-react-redux)
@@ -104,9 +105,16 @@ Otherwise, if you are on a traditional extension this guide will onboard you to 
 - [Creating a new ReactView experience](react-guides-new-reactview.md)
 
 <a name="reactviews-guides-unit-testing-a-reactview"></a>
-### Unit Testing a ReactView
+### Unit testing a ReactView
 
-- [Unit Testing a ReactView](react-guides-unit-testing.md)
+- [Unit testing a ReactView](react-guides-unit-testing.md)
+
+<a name="reactviews-guides-end-to-end-testing-a-reactview"></a>
+### End to end testing a ReactView
+
+End to end testing a ReactView utilizes the Azure portal's supported end to end test framework [@microsoft/azureportal-test](top-extensions-node-js-test-framework.md).
+
+There are some specific ReactView utilities to help under `Index/Views`. See the `@microsoft/azureportal-test` documentation for more.
 
 <a name="reactviews-guides-migrating-knockout-controls-to-react-components"></a>
 ### Migrating Knockout controls to React components

@@ -45,6 +45,8 @@ Page layouts for common Azure scenarios including guidance on where commands, ta
 
 * [Filtering](design-patterns-page-filtering.md)
 
+* [Step wizard](design-patterns-step-wizard.md) a set of sequential steps to perform a task
+
 
 <a name="design-guidelines-design-patterns-page-design-patterns-quick-tips-on-page-design"></a>
 #### Quick tips on page design

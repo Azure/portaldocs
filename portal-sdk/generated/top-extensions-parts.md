@@ -160,7 +160,7 @@ private _getPartReferenceForPinning() {
     const partParameters = $.extend({}, parameters, { favoriteColor: favoriteColor });  // Here, supply extra parameters to the Part.
     const partSize = this._getPinnedPartSize(favoriteColor);
 
-    return PartReferences.forPart("PinnableBladePinnedPart").createReference({ parameters: partParameters, options: { initialSize: partSize }});  // Here, specify the initial size of the Part.
+    return PartReferences.forPart("PinnableBladePinnedPart").createReference({ parameters: partParameters, options: { initialSize: partSize } });  // Here, specify the initial size of the Part.
 }
 
 ```

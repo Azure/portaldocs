@@ -135,7 +135,7 @@ this.websitesQuery = new QueryCache<WebsiteModel, WebsiteQueryParams>({
 
         // this particular controller expects a sessionId as well but this is not the common case.
         // Unless your controller also requires a sessionId this can be omitted
-        return Util.appendSessionId(uri);
+        return uri;
     },
 });
 
@@ -163,7 +163,7 @@ this.websiteEntities = new EntityCache<WebsiteModel, number>({
     // call into the URI used to query the backend. In this case websites are identified by a number
     // which uriFormatter() will fill into the id spot of this URI. Again this particular endpoint
     // requires the sessionId parameter as well but yours probably doesn't.
-    sourceUri: FxData.uriFormatter(Util.appendSessionId(MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/{id}")), true),
+    sourceUri: FxData.uriFormatter(MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/{id}"), true),
 
     // this property is how the EntityCache looks up a website from the QueryCache. This way we share the same
     // data object across multiple views and make sure updates are reflected across all blades at the same time
@@ -341,7 +341,7 @@ When a Blade or Part view model is instantiated, its constructor is supplied wit
 
 ```typescript
 
-constructor(container: MsPortalFx.ViewModels.ContainerContract, dataContext: MasterDetailArea.DataContext) {
+constructor(container: MsPortalFx.ViewModels.ContainerContract, dataContext: MasterDetailArea.DataContext, _mock: AjaxMock) {
     super();
 
     this.title(ClientResources.masterDetailEditMasterBladeTitle);
@@ -440,7 +440,7 @@ From an API perspective these DataCache classes all share the same API and usage
 
 this.websiteEntities = new MsPortalFx.Data.EntityCache<WebsiteModel, number>({
     entityTypeName: WebsiteModelMetadata.name,
-    sourceUri: MsPortalFx.Data.uriFormatter(Util.appendSessionId(DataShared.websiteByIdUri), true),
+    sourceUri: MsPortalFx.Data.uriFormatter(DataShared.websiteByIdUri, true),
     findCachedEntity: {
         queryCache: this.websitesQuery,
         entityMatchesId: (website, id) => {
@@ -1169,7 +1169,7 @@ In many scenarios, users expect to see their rendered data update implicitly as 
 
 public robotsQuery = new MsPortalFx.Data.QueryCache<Robot, any>({
     entityTypeName: RobotMetadata.name,
-    sourceUri: () => Util.appendSessionId(RobotData._apiRoot),
+    sourceUri: () => RobotData._apiRoot,
     poll: true,
 });
 
@@ -1262,7 +1262,7 @@ As server data changes, there are scenario where the extension should *take expl
 
 public updateRobot(robot: Robot): FxBase.PromiseV<any> {
     return FxBaseNet.ajax({
-        uri: Util.appendSessionId(RobotData._apiRoot + robot.name()),
+        uri: RobotData._apiRoot + robot.name(),
         type: "PUT",
         contentType: "application/json",
         data: ko.toJSON(robot),
@@ -1317,7 +1317,7 @@ As mentioned above, this method will issue an AJAX call (either using the '`supp
 
 public updateRobot(robot: Robot): FxBase.PromiseV<any> {
     return FxBaseNet.ajax({
-        uri: Util.appendSessionId(RobotData._apiRoot + robot.name()),
+        uri: RobotData._apiRoot + robot.name(),
         type: "PUT",
         contentType: "application/json",
         data: ko.toJSON(robot),
@@ -1361,7 +1361,7 @@ public updateEngine(engine: EngineModel): Promise<void> {
            setAuthorizationHeader: true,
            setTelemetryHeader: "Update" + entityType,
            type: "PATCH",
-           uri: appendSessionId(EngineData._apiRoot + "&api-version=" + entityVersion),
+           uri: EngineData._apiRoot + "&api-version=" + entityVersion,
            data: ko.toJSON(convertToResource(engine)),
            contentType: applicationJson,
            useFxArmEndpoint: true,
@@ -1370,7 +1370,7 @@ public updateEngine(engine: EngineModel): Promise<void> {
        // Using local controller.
        promise = FxBaseNet.ajax({
            type: "PATCH",
-           uri: appendSessionId(EngineData._apiRoot + "?id=" + engine.id()),
+           uri: EngineData._apiRoot + "?id=" + engine.id(),
            data: ko.toJSON(convertToArmResource(engine)),
            contentType: applicationJson,
        });
@@ -1406,7 +1406,7 @@ In some scenarios, AJAX calls to the server to refresh cached data can be *avoid
 
 public createRobot(robot: Robot): FxBase.PromiseV<any> {
     return FxBaseNet.ajax({
-        uri: Util.appendSessionId(RobotData._apiRoot),
+        uri: RobotData._apiRoot,
         type: "POST",
         contentType: "application/json",
         data: ko.toJSON(robot),
@@ -1433,7 +1433,7 @@ public createRobot(robot: Robot): FxBase.PromiseV<any> {
 
 public deleteRobot(robot: Robot): FxBase.PromiseV<any> {
     return FxBaseNet.ajax({
-        uri: Util.appendSessionId(RobotData._apiRoot + robot.name()),
+        uri: RobotData._apiRoot + robot.name(),
         type: "DELETE",
     }).then(() => {
         // This will notify the shell that the robot is being removed.
@@ -1468,7 +1468,7 @@ Now, when the server data for a given cache entry *has been entirely deleted*, t
 
 public deleteComputer(computer: Computer): FxBase.PromiseV<any> {
     return FxBaseNet.ajax({
-        uri: Util.appendSessionId(ComputerData._apiRoot + computer.name()),
+        uri: ComputerData._apiRoot + computer.name(),
         type: "DELETE",
     }).then(() => {
         // This will notify the shell that the computer is being removed.
@@ -1886,13 +1886,6 @@ At the top of any C# file using the `TypeMetadataModel` annotation, the followin
 
 ```cs
 
-﻿//-----------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
-//-----------------------------------------------------------------------------
-
-using Microsoft.Portal.TypeMetadata;
-
-[assembly: IgnoreRuntimeTypeMetadataGeneration()]
 
 ```
 *Note*: This attribute ensures that no typesMetadata blob is generated at runtime and embedded in the home/index response thus bloating ExtensionLoad.
@@ -1906,99 +1899,6 @@ For an example of a model class which generates the TypeScript shown in the [Aut
 
 ```cs
 
-﻿//-----------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
-//-----------------------------------------------------------------------------
-using Microsoft.Portal.TypeMetadata;
-
-namespace Microsoft.Portal.Extensions.SamplesExtension.DataModels
-{
-    /// <summary>
-    /// Representation of a computer component used by the hubs/browse sample.
-    /// </summary>
-    [TypeMetadataModel(typeof(ComputerComponent), "DataModels")]
-    [Indexable]
-    public class ComputerComponent
-    {
-        /// <summary>
-        /// Gets or sets the name of the computer component.
-        /// </summary>
-        [Id]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the display text of the computer component.
-        /// </summary>
-        public string Display { get; set; }
-
-        /// <summary>
-        /// Gets or sets the type of the computer component.
-        /// </summary>
-        public ComponentType ComponentType { get; set; }
-
-        /// <summary>
-        /// Gets or sets the model of the computer component.
-        /// </summary>
-        public string Model { get; set; }
-
-        /// <summary>
-        /// Gets or sets the manufacturer of the computer component.
-        /// </summary>
-        public string Manufacturer { get; set; }
-
-        /// <summary>
-        /// Gets or sets the status of the computer component.
-        /// </summary>
-        public ComponentStatus Status { get; set; }
-    }
-
-    /// <summary>
-    /// The component type for the computer component.
-    /// </summary>
-    public enum ComponentType
-    {
-        /// <summary>
-        /// Processor component.
-        /// </summary>
-        Processor,
-
-        /// <summary>
-        /// Memory component.
-        /// </summary>
-        Memory,
-
-        /// <summary>
-        /// Video card component.
-        /// </summary>
-        VideoCard,
-
-        /// <summary>
-        /// Drive component.
-        /// </summary>
-        Drive
-    }
-
-    /// <summary>
-    /// The component status for the computer component.
-    /// </summary>
-    public enum ComponentStatus
-    {
-        /// <summary>
-        /// Component is normal (success state).
-        /// </summary>
-        Normal,
-
-        /// <summary>
-        /// Component is defective (error state).
-        /// </summary>
-        Defective,
-
-        /// <summary>
-        /// Component is in overheating state (warning).
-        /// </summary>
-        Overheating
-    }
-}
 
 
 ```
@@ -2007,48 +1907,6 @@ namespace Microsoft.Portal.Extensions.SamplesExtension.DataModels
 
 ```cs
 
-﻿//-----------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
-//-----------------------------------------------------------------------------
-using System.Collections.Generic;
-using Microsoft.Portal.TypeMetadata;
-
-namespace Microsoft.Portal.Extensions.SamplesExtension.DataModels
-{
-    /// <summary>
-    /// Representation of a computer used by the hubs/browse sample.
-    /// </summary>
-    [TypeMetadataModel(typeof(Computer), "DataModels")]
-    [Indexable]
-    public class Computer
-    {
-        /// <summary>
-        /// Gets or sets the name of the computer.
-        /// </summary>
-        [Id]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the display text of the computer.
-        /// </summary>
-        public string Display { get; set; }
-
-        /// <summary>
-        /// Gets or sets the model of the computer.
-        /// </summary>
-        public string Model { get; set; }
-
-        /// <summary>
-        /// Gets or sets the manufacturer of the computer.
-        /// </summary>
-        public string Manufacturer { get; set; }
-
-        /// <summary>
-        /// Gets or sets the collection of computer component of the computer.
-        /// </summary>
-        public IEnumerable<ComputerComponent> Components { get; set; }
-    }
-}
 
 
 ```

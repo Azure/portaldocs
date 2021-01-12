@@ -19,7 +19,7 @@ read the data from the server & `saveEditScopeChanges` will write it back:
 const editScopeCache = EditScopeCache.createNew<WebsiteModel, number>({
     supplyExistingData: (websiteId) => {
         return FxBaseNet.ajax<any>({
-            uri: Util.appendSessionId(MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/" + websiteId)), // this particular endpoint requires sessionId to be in query string
+            uri: MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/" + websiteId), // this particular endpoint requires sessionId to be in query string
             type: "GET",
             dataType: "json",
             cache: false,
@@ -44,7 +44,7 @@ const editScopeCache = EditScopeCache.createNew<WebsiteModel, number>({
 
         this._saving(true);
         return FxBaseNet.ajaxExtended({
-            uri: Util.appendSessionId(MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/" + websiteId)),
+            uri: MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/" + websiteId),
             type: "POST",
             dataType: "json",
             cache: false,

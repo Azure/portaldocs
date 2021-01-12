@@ -62,7 +62,7 @@ read the data from the server & `saveEditScopeChanges` will write it back:
 const editScopeCache = EditScopeCache.createNew<WebsiteModel, number>({
     supplyExistingData: (websiteId) => {
         return FxBaseNet.ajax<any>({
-            uri: Util.appendSessionId(MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/" + websiteId)), // this particular endpoint requires sessionId to be in query string
+            uri: MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/" + websiteId), // this particular endpoint requires sessionId to be in query string
             type: "GET",
             dataType: "json",
             cache: false,
@@ -87,7 +87,7 @@ const editScopeCache = EditScopeCache.createNew<WebsiteModel, number>({
 
         this._saving(true);
         return FxBaseNet.ajaxExtended({
-            uri: Util.appendSessionId(MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/" + websiteId)),
+            uri: MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/" + websiteId),
             type: "POST",
             dataType: "json",
             cache: false,
@@ -576,21 +576,7 @@ idProperties: [ "key" ],
 
 In C#:
 
-```csharp
 
-[TypeMetadataModel(typeof(Person), "DataModels")]
-[EntityType]
-public class Person
-{
-    /// <summary>
-    /// Gets or sets the SSN of the person.
-    /// The "Id" attribute will be serialized to TypeScript/JavaScript as part of type metadata, and will be used
-    /// by MsPortalFx.Data.DataSet in its "merge" method to merge data by identity.
-    /// </summary>
-    [Id]
-    public int SsnId { get; set; }
-    
-```
 
 <a name="track-edits"></a>
 * **Opting out of edit tracking** - There are Form scenarios where some properties on the EditScope/Form model are not meant for editing but are - possibly - for presentation only. In this situation, the extension can instruct EditScope to *not track* user edits for such EditScope/Form model properties, like so:

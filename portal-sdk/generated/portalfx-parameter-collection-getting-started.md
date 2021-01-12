@@ -141,7 +141,7 @@ public fixedStorageSlider: any;
 /**
  * Constructs an instance of ParameterProviderFormPartViewModel.
  */
-constructor(container: MsPortalFx.ViewModels.PartContainerContract) {
+constructor(container: MsPortalFx.ViewModels.PartContainerContract, _mock: AjaxMock) {
     super(container);
 
     this.parameterProvider = new MsPortalFx.ViewModels.ParameterProvider<ServerConfig, ProviderModels.ServerFormData>(container, {
@@ -252,6 +252,8 @@ import * as Di from "Fx/DependencyInjection";
 import * as ClientResources from "ClientResources";
 import { ServerConfig } from "DataModels/ServerConfig";
 
+import AjaxMock from "../../../../Mock/AjaxMock";
+
 /**
  * Parameter collector command view model class. The 'serverConfigCollector' property is referenced
  * in PDL and deals with sending initial data to the provider blade when it opens, and receiving
@@ -271,7 +273,7 @@ export class CollectorButtonViewModel extends MsPortalFx.ViewModels.ButtonPart {
      *
      * @param container The container into which the part is being placed.
      */
-    constructor(container: MsPortalFx.ViewModels.PartContainerContract) {
+    constructor(container: MsPortalFx.ViewModels.PartContainerContract, _mock: AjaxMock) {
         super();
         this.title(ClientResources.openProviderBlade);
 

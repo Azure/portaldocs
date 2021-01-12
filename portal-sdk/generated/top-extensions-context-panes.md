@@ -31,6 +31,8 @@ import * as FxCompositionBlade from "Fx/Composition/Pdl/Blade";
 import { ViewModels as ViewModelDefinitions } from "_generated/ExtensionDefinition";
 import { DataContext } from "../../NavigationArea";
 
+import AjaxMock from "../../../../Mock/AjaxMock";
+
 // import references to blades that are opened by these samples
 import * as Resources from "ClientResources";
 import { ViewModel as HotspotViewModel } from "Fx/Controls/HotSpot";
@@ -214,7 +216,7 @@ export class OpenBladeApiSamplesViewModel
 
     private _view: QueryView<Person, string>;
 
-    constructor(container: BladeContainer, dataContext: DataContext) {
+    constructor(container: BladeContainer, dataContext: DataContext, _mock: AjaxMock) {
         super();
         this.title(Resources.openBladeAPITitle);
         this.subtitle(Resources.navigationSamplesTitle);

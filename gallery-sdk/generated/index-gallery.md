@@ -439,9 +439,13 @@ To delete a azure gallery package run the following command.
 
 <a name="gallery-item-specificiations-gallery-package-management-configuring-the-azure-package-loader-tool"></a>
 #### Configuring the Azure Package Loader Tool
-In order to use the gallery loader you will need to download the following two test certificates here: [Certificate1](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Certificate/https://gallerypackagedeployment.vault.azure.net/certificates/GalleryPackageDeploymentCertificate/a24116111eaa4a78a6ea321cba42691f) and [Certificate2](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Certificate/https://gallerypackagedeployment.vault.azure.net/certificates/GalleryPrivilegedOperationsCertificate/6995728756084188b478e609a8c9dcb0) in PFX/PEM format. Install them without a password.
+In order to use the gallery loader you will need to download two test certificates from this [Azure key vault](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/resource/subscriptions/705c43bf-c68a-4e96-b683-77b0aa2dd09e/resourceGroups/GalleryPackageDeployment-RG/providers/Microsoft.KeyVault/vaults/GalleryPackageDeployment/certificates) 
 
-If you are a Microsoft FTE and do not have permissions to access the certificates, please join the right groups following instructions [here](../../portal-sdk/generated/top-onboarding.md#join-dls-and-request-permissions). If you are an external partner, request permissions through the Microsoft team you are collaborating with to light up your extension.
+Please download both in PFX/PEM format. Install them without a password.
+
+Certificates will be auto rotated every 90 days. You should always download the latest certificates.
+
+If you are a Microsoft FTE and do not have permissions to access the key vault, please join the right groups following instructions [here](../../portal-sdk/generated/top-onboarding.md#join-dls-and-request-permissions). If you are an external partner, request permissions through the Microsoft team you are collaborating with to light up your extension.
 
 In order to publish to production, create an ICM on "PFX-MIX-Marketplace Ingestion Experience/Marketplace Publishing" with your gallery package `.azpkg` file to get it published
 

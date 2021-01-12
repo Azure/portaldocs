@@ -9,7 +9,7 @@ In many scenarios, users expect to see their rendered data update implicitly as 
 
 public robotsQuery = new MsPortalFx.Data.QueryCache<Robot, any>({
     entityTypeName: RobotMetadata.name,
-    sourceUri: () => Util.appendSessionId(RobotData._apiRoot),
+    sourceUri: () => RobotData._apiRoot,
     poll: true,
 });
 
@@ -102,7 +102,7 @@ As server data changes, there are scenario where the extension should *take expl
 
 public updateRobot(robot: Robot): FxBase.PromiseV<any> {
     return FxBaseNet.ajax({
-        uri: Util.appendSessionId(RobotData._apiRoot + robot.name()),
+        uri: RobotData._apiRoot + robot.name(),
         type: "PUT",
         contentType: "application/json",
         data: ko.toJSON(robot),
@@ -157,7 +157,7 @@ As mentioned above, this method will issue an AJAX call (either using the '`supp
 
 public updateRobot(robot: Robot): FxBase.PromiseV<any> {
     return FxBaseNet.ajax({
-        uri: Util.appendSessionId(RobotData._apiRoot + robot.name()),
+        uri: RobotData._apiRoot + robot.name(),
         type: "PUT",
         contentType: "application/json",
         data: ko.toJSON(robot),
@@ -201,7 +201,7 @@ public updateEngine(engine: EngineModel): Promise<void> {
            setAuthorizationHeader: true,
            setTelemetryHeader: "Update" + entityType,
            type: "PATCH",
-           uri: appendSessionId(EngineData._apiRoot + "&api-version=" + entityVersion),
+           uri: EngineData._apiRoot + "&api-version=" + entityVersion,
            data: ko.toJSON(convertToResource(engine)),
            contentType: applicationJson,
            useFxArmEndpoint: true,
@@ -210,7 +210,7 @@ public updateEngine(engine: EngineModel): Promise<void> {
        // Using local controller.
        promise = FxBaseNet.ajax({
            type: "PATCH",
-           uri: appendSessionId(EngineData._apiRoot + "?id=" + engine.id()),
+           uri: EngineData._apiRoot + "?id=" + engine.id(),
            data: ko.toJSON(convertToArmResource(engine)),
            contentType: applicationJson,
        });
@@ -246,7 +246,7 @@ In some scenarios, AJAX calls to the server to refresh cached data can be *avoid
 
 public createRobot(robot: Robot): FxBase.PromiseV<any> {
     return FxBaseNet.ajax({
-        uri: Util.appendSessionId(RobotData._apiRoot),
+        uri: RobotData._apiRoot,
         type: "POST",
         contentType: "application/json",
         data: ko.toJSON(robot),
@@ -273,7 +273,7 @@ public createRobot(robot: Robot): FxBase.PromiseV<any> {
 
 public deleteRobot(robot: Robot): FxBase.PromiseV<any> {
     return FxBaseNet.ajax({
-        uri: Util.appendSessionId(RobotData._apiRoot + robot.name()),
+        uri: RobotData._apiRoot + robot.name(),
         type: "DELETE",
     }).then(() => {
         // This will notify the shell that the robot is being removed.
@@ -308,7 +308,7 @@ Now, when the server data for a given cache entry *has been entirely deleted*, t
 
 public deleteComputer(computer: Computer): FxBase.PromiseV<any> {
     return FxBaseNet.ajax({
-        uri: Util.appendSessionId(ComputerData._apiRoot + computer.name()),
+        uri: ComputerData._apiRoot + computer.name(),
         type: "DELETE",
     }).then(() => {
         // This will notify the shell that the computer is being removed.
