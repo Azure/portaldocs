@@ -1425,7 +1425,7 @@ The following example demonstrates how to:
 
 ```ts
 
-    it("Can get rollup count, rollup label and grid", async () => {
+    it.skip("Can get rollup count, rollup label and grid", async () => {
         const collectionBlade = testFx.portal.blade({ title: "Collection" });
 
         await testFx.portal.navigateToUriFragment("blade/SamplesExtension/CollectionPartIntrinsicInstructions");
