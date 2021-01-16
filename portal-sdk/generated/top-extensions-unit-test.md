@@ -512,7 +512,7 @@ Using karmajs for a single test run useful for scenarios such as running in CI
 
 `npm run test-ci` launches karmajs in your configured target browsers for a single run.
 
-Note that the karma.conf.js is configured to run your tests in both in Edge and Chrome. You may also pick and choose additional browsers via the launcher plugins [documented here](https://karma-runner.github.io/2.0/config/browsers.html).
+Note that the karma.conf.js is configured to run your tests in both in Microsoft Edge and Chrome. You may also pick and choose additional browsers via the launcher plugins [documented here](https://karma-runner.github.io/2.0/config/browsers.html).
 
 <a name="unit-test-framework-creating-a-project-from-scratch-with-visual-studio-code-test-results"></a>
 ### Test Results
@@ -551,11 +551,11 @@ Clicking through from the summary view to the ResourceOverviewBlade you can see 
 <a name="faq-examples-adding-tests-for-template-blades"></a>
 ## Examples Adding tests for template blades
 
- 
+
 
 Add a CreateBlade test to ./test/CreateBlade.test.ts.  This demonstrates how to provide the provisioning context to your CreateBlade that portal would normally provide via your gallery package. You can modify this example for your own extension.
 
- 
+
 
 ```typescript
 import { CreateBlade } from "Resource/Create/CreateBlade";

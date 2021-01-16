@@ -26,7 +26,7 @@
 |AzPtlCosmos       | ClientTelemetry   | This is all the Client Telemetry data that is collected from the Portal. This is the main table that should be good for most scenarios.              |
 |AzPtlCosmos       | ExtTelemetry      | This holds client events data for extensions using the Extension Telemetry feature.                                                                  |
 
-> **Important:** Data in both ClientTelemetry and ExtTelemetry tables will only include rows where the action is present in their respective allow list. If you need to query for actions that are not present in these tables, Kusto supports [cross-databases queries](https://kusto.azurewebsites.net/docs/queryLanguage/query_language_syntax.html?q=cross) allowing you to query the ClientTelemetry or ExtTelemetry directly from the AzurePortal database. 
+> **Important:** Data in both ClientTelemetry and ExtTelemetry tables will only include rows where the action is present in their respective allow list. If you need to query for actions that are not present in these tables, Kusto supports [cross-databases queries](https://kusto.azurewebsites.net/docs/queryLanguage/query_language_syntax.html?q=cross) allowing you to query the ClientTelemetry or ExtTelemetry directly from the AzurePortal database.
 
 Other useful Kusto tables are the ones where errors and warnings are getting logged. These tables are currently available only under AzurePortal database:
 
@@ -47,7 +47,7 @@ Other functions in the databases are available for exploration but are mainly in
 
 On a weekly basis, we send out a Weekly Ibiza Status mail where we cover the KPI numbers for all extensions among other things. For folks not getting these emails, please join one of the groups in the screenshot below.
 
-These emails have clickable Kusto links within the reported numbers. Clicking on these will take you to the Kusto query behind getting these numbers. We use functions to hide the complexity behind the queries that we use. To view the details about the queries, look under **Functions\Public**. Once you find the right function, if you right-click and do “Make a command script”, you will be able to see the details of that function. You can do this recursively for any functions underneath. 
+These emails have clickable Kusto links within the reported numbers. Clicking on these will take you to the Kusto query behind getting these numbers. We use functions to hide the complexity behind the queries that we use. To view the details about the queries, look under **Functions\Public**. Once you find the right function, if you right-click and do “Make a command script”, you will be able to see the details of that function. You can do this recursively for any functions underneath.
 
 ![Connection Scope](../media/portalfx-telemetry/connectionScope.png)
 
@@ -90,10 +90,10 @@ This field gives the actual time of the event according to the client's clock (w
 
 <a name="kusto-telemetry-clienttelemetry-azptlcosmos-data"></a>
 #### Data
-The Data field is the most dynamic field in telemetry. It is a JSON object with no set structure. They often contain information specific to a particular Action. 
+The Data field is the most dynamic field in telemetry. It is a JSON object with no set structure. They often contain information specific to a particular Action.
 
 Below is an example of the <b>Data</b> filed for <b>Action</b> "ProvisioningStarted"
-	
+
 ```json
 	{
 		"oldCreateApi": true,
@@ -123,7 +123,7 @@ This field gives the Lens name associated with the particular Action. This is de
 <a name="kusto-telemetry-clienttelemetry-azptlcosmos-name"></a>
 #### Name
 The Name field usually changes it's format based on the Action. In most scenarios, it usually has the following format
-		
+
         Extension/<extensionName>/Blade/<BladeName>/Lens/<LensName>/PartInstance/<PartName>
 
 <a name="kusto-telemetry-clienttelemetry-azptlcosmos-this-field-is-usually-used-to-identify-the-extension-blade-lens-part-associated-with-a-particular-action"></a>
@@ -131,7 +131,7 @@ The Name field usually changes it's format based on the Action. In most scenario
 
 <a name="kusto-telemetry-clienttelemetry-azptlcosmos-sessionid"></a>
 #### SessionId
-This represents each sessions that the user opens. SessionId refreshes everytime a user logs in\refreshes. 
+This represents each sessions that the user opens. SessionId refreshes everytime a user logs in\refreshes.
 
 <a name="kusto-telemetry-clienttelemetry-azptlcosmos-part"></a>
 #### Part
@@ -155,6 +155,6 @@ This represents the City that the User has used the Portal from. We derive this 
 
 <a name="kusto-telemetry-clienttelemetry-azptlcosmos-usercountry"></a>
 #### UserCountry
-This represents the Country that the User has used the Portal from. We derive this from the Users Client IP.
+This represents the Country/Region that the User has used the Portal from. We derive this from the Users Client IP.
 
 Read more about [Kusto query language](https://kusto.azurewebsites.net/docs/queryLanguage/query_language.html).

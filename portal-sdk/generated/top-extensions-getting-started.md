@@ -162,9 +162,9 @@ Ask questions on: [stackoverflow.microsoft.com](https://stackoverflow.microsoft.
 <a name="getting-started-with-the-portal-sdk-faq-i-receive-a-this-site-is-not-secure-or-your-connection-is-not-private-error-when-running-the-extension"></a>
 ### I receive a &quot;this site is not secure&quot; or &quot;your connection is not private&quot; error when running the extension
 
-Example in Edge:
+Example in Microsoft Edge:
 
-![alt-text](../media/top-extensions-getting-started/cert1.png "cert error in Edge")
+![alt-text](../media/top-extensions-getting-started/cert1.png "cert error in Microsoft Edge")
 
 Example in chrome Chrome:
 Your connection is not private

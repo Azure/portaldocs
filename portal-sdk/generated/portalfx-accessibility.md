@@ -64,12 +64,12 @@ Accessibility is about making the portal usable by people who have limitations t
 ## Testing for accessibility
 
 * **High-contrast**
-  Native support for IE/Edge with Windows High Contrast Mode (WHCM).
+  Native support for Internet Explorer/Microsoft Edge with Windows High Contrast Mode (WHCM).
   Other browsers do not support WHCM natively, and neither other OS system, therefore a custom theme is provided in the settings pane of the portal.
-	_**NOTE:** The custom theme is a good approximation of WCHM behavior and can be used to quickly verify your compliance. To properly verify though, please use High Contrast settings option 2 with Edge._
+	_**NOTE:** The custom theme is a good approximation of WCHM behavior and can be used to quickly verify your compliance. To properly verify though, please use High Contrast settings option 2 with Microsoft Edge._
 
 * **Screen reader**
-  Either combination of NVDA/Firefox or Narrator/Edge
+  Either combination of NVDA/Firefox or Narrator/Microsoft Edge
 	_**NOTE:** At this time, Chrome seems to ignore some aria properties and the native widgets are not all properly accessible._
 
 * **Accessibility audit**

@@ -207,7 +207,7 @@ npm run build
 
 and then run **Mocha** against the generated JavaScript file.
 
-**NOTE**: Using an elevated command prompt may cause Chrome to crash or hang. If so, try using a non-elevated command prompt:
+**NOTE**: Using an elevated command prompt may cause Chrome to crash or stop responding. If so, try using a non-elevated command prompt:
 
 ```ts
 npm test

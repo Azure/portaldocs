@@ -4,11 +4,11 @@ Use navigation patterns for the portal that fill the screen and behave like most
 
 <a name="full-screen-pages-context"></a>
 ## Context
-As users navigate the portal, they expect a common web interaction experience. 
+As users navigate the portal, they expect a common web interaction experience.
 
 <a name="full-screen-pages-problem"></a>
 ## Problem
-Earlier portal designs used narrow blades that stacked to the right into horizontally scrolling "journeys" as the user navigated.  These stacked blades often resulted in existing blades being partially displayed which made it hard for the user to know where to look and orient where in the portal they were.  Horizontal scrolling is also more foreign than the common vertical scrolling of long web pages.  
+Earlier portal designs used narrow blades that stacked to the right into horizontally scrolling "journeys" as the user navigated.  These stacked blades often resulted in existing blades being partially displayed which made it hard for the user to know where to look and understand where in the portal they were.  Horizontal scrolling is also more foreign than the common vertical scrolling of long web pages.
 
 Users have made it very clear they don’t like horizontal scrolling – in large part because it doesn’t match how they expect to interact with websites.   
 
@@ -38,7 +38,7 @@ These Azure resources are good examples of this design pattern 
 
 * Creating a VM - [Free account virtual machine](https://rc.portal.azure.com/#create/microsoft.freeaccountvirtualmachine)
 * Browsing all resources - [All resources](https://rc.portal.azure.com/#blade/HubsExtension/ArtBrowseBlade/resourceType/Microsoft.Resources%2Fresources)
-* Virtual Machine 
+* Virtual Machine
 
 <a name="full-screen-pages-use-when"></a>
 ## Use when
@@ -60,31 +60,31 @@ Full screen navigation involves:
 
 <a name="full-screen-pages-behavior"></a>
 ## Behavior
-The current blade should occupy the available screen space and any subsequent user interactions should seek to minimize navigating the user.  
+The current blade should occupy the available screen space and any subsequent user interactions should seek to minimize navigating the user.
 
 The user will invoke an action using one of the following items
 * menu
 * toolbar
 * button
 * link
-* card 
+* card
 
 In order to minimize the disruption to the user, an action should display subsequent UI as close to the user's previosu click target as possible by using one of the following approaches in priority order
 
 1. Take the action with no further user interaction needed, user may see updates to current page or portal notifcations.  Examples:
-    * Refreshing a page takes immediate affect with no further user input needed.  
+    * Refreshing a page takes immediate affect with no further user input needed.
     * Starting a VM immediately calls the API.  Portal notifications are used to track the start action and result.
-2. Open a dialog to display info or confirm the action.  Example: 
+2. Open a dialog to display info or confirm the action.  Example:
     * Deleting a VM invokes a dialog to explain the ramifications of the action and have the user confirm via Yes/No buttons.
 3. Open a context pane to display info and perform the action.  Example:
     * Edit columns in All Resources invokes a context pane for the user to configure columns and then save via an Apply button.
 4. Select an existing resource menu on the same page.  Example:
-    * Clicking the Blobs card on the Storage account overview page selects the Storage Accounts Blobs menu item.  
+    * Clicking the Blobs card on the Storage account overview page selects the Storage Accounts Blobs menu item.
 5. Open a new full screen page in the portal.  Example:
     * Clicking resource name on the resource group overview page opens the resource page.
-6. Open a website that is external to the Azure portal.  Example: 
+6. Open a website that is external to the Azure portal.  Example:
     * Clicking the links on the bottom of the monitor overview page will navigate you to a site outside the portal.
-    * Note whenever a link will result in the user leaving the portal, you should show the LaunchCurrent MsPortalFx.Base.Images.LaunchCurrent() icon after the link text as part of the link tag.  See [portalfx-icons-builtin.md](portalfx-icons-builtin.md) for full list of icons.  
+    * Note whenever a link will result in the user leaving the portal, you should show the LaunchCurrent MsPortalFx.Base.Images.LaunchCurrent() icon after the link text as part of the link tag.  See [portalfx-icons-builtin.md](portalfx-icons-builtin.md) for full list of icons.
 
 
 <a name="full-screen-pages-behavior-menu-blade"></a>
@@ -97,7 +97,7 @@ Toolbars are located at the top of the page and invoke actions.  Toolbar actions
 
 <a name="full-screen-pages-behavior-content-area"></a>
 ### Content area
-The content area of a page provides content, links, buttons, cards and content area actions - like adding a row to a grid.  These actions can leverage the appropriate action behavior, including leaving the portal.   
+The content area of a page provides content, links, buttons, cards and content area actions - like adding a row to a grid.  These actions can leverage the appropriate action behavior, including leaving the portal.
 
 <a name="full-screen-pages-behavior-context-pane"></a>
 ### Context pane
@@ -173,7 +173,7 @@ Developers can use the following information to get started implementing this pa
 <a name="for-developers-tips-and-tricks"></a>
 ## Tips and tricks
 
-* Set a max-width on your content in the CSS (blade/part templates) OR set initial DisplayState=“normal” in a blade’s PDL. 
+* Set a max-width on your content in the CSS (blade/part templates) OR set initial DisplayState=“normal” in a blade’s PDL.
 
 <a name="for-developers-related-documentation"></a>
 ## Related documentation
