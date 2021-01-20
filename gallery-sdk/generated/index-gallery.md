@@ -239,7 +239,7 @@ The manifest file contains all of the metadata for your gallery item. For a visu
     "screenshots": [ "string" ],
     "categories": [ "string" ],
     "filters": [
-        // type: Country, Subscription, Resources, HideKey, OfferType, OfferCategory
+        // type: Country/Region, Subscription, Resources, HideKey, OfferType, OfferCategory
         { "type": "string", "value": "string" }
     ]
 }
@@ -385,7 +385,7 @@ To upload the package run the following command.
 > Microsoft.Azure.Gallery.AzureGalleryUtility.exe upload -p ..\path\to\package.azpkg
 ```
 
-Provisioning your package to all the regions and Cache refresh might take up to 30 minutes to show up in Azure Marketplace. You can verify this using a public endpoints: 
+Provisioning your package to all the regions and Cache refresh might take up to 30 minutes to show up in Azure Marketplace. You can verify this using a public endpoints:
 ```
 https://df.catalogrp.azure-test.net/view/offers/<galleryItemId>?api-version=2018-08-01-beta
 ```
@@ -439,7 +439,7 @@ To delete a azure gallery package run the following command.
 
 <a name="gallery-item-specificiations-gallery-package-management-configuring-the-azure-package-loader-tool"></a>
 #### Configuring the Azure Package Loader Tool
-In order to use the gallery loader you will need to download two test certificates from this [Azure key vault](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/resource/subscriptions/705c43bf-c68a-4e96-b683-77b0aa2dd09e/resourceGroups/GalleryPackageDeployment-RG/providers/Microsoft.KeyVault/vaults/GalleryPackageDeployment/certificates) 
+In order to use the gallery loader you will need to download two test certificates from this [Azure key vault](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/resource/subscriptions/705c43bf-c68a-4e96-b683-77b0aa2dd09e/resourceGroups/GalleryPackageDeployment-RG/providers/Microsoft.KeyVault/vaults/GalleryPackageDeployment/certificates)
 
 Please download both in PFX/PEM format. Install them without a password.
 

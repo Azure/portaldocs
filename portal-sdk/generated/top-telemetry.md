@@ -156,7 +156,7 @@ Functions in the databases are available for exploration but are mainly intended
 | UserId | This field identifies a user by PUID. We can use this to perform queries like daily active users, unique users using my feature, etc. |
 | UserAgent | This represents the user agent of the user's browser. This is a standard UserAgentString - [User Agent](https://en.wikipedia.org/wiki/User_agent) |
 | UserCity | This represents the City that the User has used the Portal from. We derive this from the Users Client IP. |
-| UserCountry | This represents the Country that the User has used the Portal from. We derive this from the Users Client IP. |
+| UserCountry | This represents the Country/Region that the User has used the Portal from. We derive this from the Users Client IP. |
 
 <a name="overview-viewing-telemetry-custom-queries-table-structures-exttelmetry-azptlcosmos"></a>
 ##### ExtTelmetry (AzPtlCosmos)

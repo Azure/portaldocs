@@ -11,14 +11,14 @@
 <a name="national-community-clouds"></a>
 ## National / community clouds
 
-While Public Azure is available globally, Microsoft offers national and community clouds in several countries for compliance and commerical reasons. 
+While Public Azure is available globally, Microsoft offers national and community clouds in several countries/regions for compliance and commerical reasons.
 
-National clouds (sometimes called sovereign clouds) are 'cookie-cutter' deployments of the Public Azure hardware and services that differ from 
-Public Azure mainly in terms of configuration and access policies. Users access national clouds through URLs specific to each national cloud, and 
+National clouds (sometimes called sovereign clouds) are 'cookie-cutter' deployments of the Public Azure hardware and services that differ from
+Public Azure mainly in terms of configuration and access policies. Users access national clouds through URLs specific to each national cloud, and
 each Cloud is a physically separate, ring-fenced deployment.
 
-Community clouds on the other hand run on the Public Azure bits (i.e. on the same IP address and machines as portal.azure.com) and provide 
-vanity URL, extension filtering, and rebranding functionality to selected partners. In community clouds, the servers are making decisions 
+Community clouds on the other hand run on the Public Azure bits (i.e. on the same IP address and machines as portal.azure.com) and provide
+vanity URL, extension filtering, and rebranding functionality to selected partners. In community clouds, the servers are making decisions
 dynamically based on the URL used to access them.
 
 **Note:** [Microsoft Azure Government](https://azure.microsoft.com/en-us/features/gov/) is implemented as a national cloud rather than a community cloud.
@@ -36,13 +36,13 @@ there. Typical items to watch for are:
 
 1. Extensions must allow access from all community cloud URLs (*.portal.azure.com in Public Azure) they are enabled in
 
-These issues are discussed in more detail below. Many of these are best resolved through the 
+These issues are discussed in more detail below. Many of these are best resolved through the
 [Domain based configuration](portalfx-domain-based-configuration.md) pattern.
 
 <a name="national-community-clouds-hard-coded-links"></a>
 ### Hard-coded links
 Hardcoding URLs into source code is generally considered an anti-pattern as these can't be easily maintained. The recommended practice is to store
-these in configuration settings.  
+these in configuration settings.
 
 In the specific case of national and community clouds, hard-coded links cause considerable problems when trying to deploy the same code to different
 Clouds as external links (to SDKs, extension specific pricing pages, support, etc) are rarely the same between national clouds.
@@ -60,8 +60,8 @@ the global Accounts portal in Chinese, whereas a Chinese langauge user on portal
 ### Links to Classic Portal
 Not all clouds (notably Azure Germany) have a vClassic portal deployment.
 
-**Note:** Linking to the global Azure Managmentment portal (portal.azure.com) from these environments is not acceptable. Leaving aside potential 
-legal & contractual concerns, the public portal does not have access to this user's national clouds subscriptions (and often does not have access 
+**Note:** Linking to the global Azure Managmentment portal (portal.azure.com) from these environments is not acceptable. Leaving aside potential
+legal & contractual concerns, the public portal does not have access to this user's national clouds subscriptions (and often does not have access
 to the user's tenant).
 
 <a name="national-community-clouds-links-to-support"></a>
@@ -71,9 +71,9 @@ extension is either physically absent (or disabled) and the corresponding UI opt
 
 <a name="national-community-clouds-extensions-must-allow-access-from-that-deployments-community-urls"></a>
 ### Extensions must allow access from that deployments Community URLs
-Extensions maintain an allow list (via their `Microsoft.Portal.Framework.FrameworkConfiguration.AllowedParentFrame` setting) as to what domains 
-they can be referenced from. This needs to hold the correct value for the targeted Cloud. Additionally, if the environment supports additional 
-Community clouds, those clouds must either be a subdomain under an already allowed domain. For example, the a value of portal.azure.com also 
+Extensions maintain an allow list (via their `Microsoft.Portal.Framework.FrameworkConfiguration.AllowedParentFrame` setting) as to what domains
+they can be referenced from. This needs to hold the correct value for the targeted Cloud. Additionally, if the environment supports additional
+Community clouds, those clouds must either be a subdomain under an already allowed domain. For example, the a value of portal.azure.com also
 enables access from contoso.portal.azure.com and fujitsu.portal.azure.com.
 
 Cloud        |Type     |AllowedParentFrame

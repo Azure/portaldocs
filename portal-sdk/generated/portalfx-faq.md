@@ -30,7 +30,7 @@ A: There are a few ways to get help:
 A: Currently the portal supports:
 
 * Internet Explorer -> Version 11
-* Edge -> Latest version
+* Microsoft Edge -> Latest version
 * Firefox -> Latest version
 * Chrome -> Latest version
 * Safari -> Latest version

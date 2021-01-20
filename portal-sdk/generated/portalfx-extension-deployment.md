@@ -193,7 +193,7 @@ This document has moved to [Extension Hosting Service](top-extensions-hosting-se
 <a name="deploy-national-sovereign-clouds-overview-1"></a>
 ### Overview
 
-Sovereign clouds (aka "national clouds") are instances of Azure restricted to a particular group of users. This group may consist of one geopolitical boundary (e.g. country) or legal boundary (e.g. public sector).
+Sovereign clouds (aka "national clouds") are instances of Azure restricted to a particular group of users. This group may consist of one geopolitical boundary (e.g. country/region) or legal boundary (e.g. public sector).
 
 To get started in a sovereign cloud, talk to the Azure Global Ecosystems team or use the link to their wikis below.
 

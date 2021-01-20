@@ -2,13 +2,34 @@
 <a name="launching-blades-from-another-extension"></a>
 ### Launching blades from another extension
 
-When using `<BladeAction>`, you're generally going to be launching blades from your own extension.  In some cases, you may [import a part from another extension](portalfx-extension-sharing-pde.md).  Using this technique, the source of the shared part will control launching of the blade.  However - in some cases you may want to launch a blade from another extension using a part from the current extension.  This is where `BladeReference` is useful.  To use a `BladeReference`, you must import the PDE from another extension.  That extension must explicitly flag it's blades as exported:
+To open a external blade use the method `BladeReference.forExtension` when you are creating the blade reference.  
+The example below demonstrates this.  You can find additional documentation on how to open blades 
+here [top-blades-opening-and-closing.md](top-blades-opening-and-closing.md).
 
-```xml
-<Blade
-	Name="WebsiteBlade"
-	Export="True"  .. />
+```typescript
+
+// open the "control" menu item in the resource menu for a specific resource
+const resourceId = "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/web1";
+this._container.openBlade(BladeReferences.forExtension("HubsExtension").forMenuBlade("ResourceMenuBlade", "control").createReference({ parameters: { id: resourceId } }));
+
 ```
+
+
+<a name="referencing-external-parts"></a>
+### Referencing external parts
+In some cases, you may [import a part from another extension](portalfx-extension-sharing-pde.md).  Using this technique, the source of the shared part will control launching of the blade.
+
+You can also pin a external part to the customers dashboard.  When you create the part reference use the method PartReference.forExtension.
+
+```typescript
+
+public onPin() {
+    const { parameters } = this.context;
+    return PartReferences.forExtension("HubsExtension").forPart("ResourcePart").createReference({ parameters: parameters });
+}
+
+```
+
 
 <a name="the-pde-file"></a>
 ## The PDE File
@@ -61,26 +82,6 @@ After you've generated the PDE file, it needs to be added to the project of the 
 Save the file, right click on your project file, and choose 'Reload Project'.
 
 
-<a name="importing-the-pde-file-consuming-the-blade"></a>
-#### Consuming the blade
-
-To launch the blade referenced by the PDE file, use a `<BladeAction>` as usual, but specifying the extension:
-
-'\Client\ResourceTypes\ResourceTypes.pdl'
-
-```xml
-<BladeAction Blade="{BladeReference ResourceMapBlade, ExtensionName=HubsExtension}">
-  <BladeInput
-      Source="assetOwner"
-      Parameter="assetOwner" />
-  <BladeInput
-      Source="assetType"
-      Parameter="assetType" />
-  <BladeInput
-      Source="assetId"
-      Parameter="assetId" />
-</BladeAction>
-```
 
 
 <a name="importing-the-pde-file-remote-procedure-calls-rpc"></a>

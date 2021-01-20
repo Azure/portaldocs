@@ -154,7 +154,7 @@ console.log(Globalization.NumberFormat.create().format(number));
 // → 123.456,789
 
 // User locale is 'ar-EG'
-// Arabic in most Arabic speaking countries uses real Arabic digits
+// Arabic in most Arabic speaking countries/regions uses real Arabic digits
 console.log(Globalization.NumberFormat.create().format(number));
 // → ١٢٣٤٥٦٫٧٨٩
 
@@ -249,7 +249,7 @@ console.log(Globalization.DateTimeFormat.create().format(date));
 console.log(Globalization.DateTimeFormat.create().format(date));
 // → "2012. 12. 20."
 
-// Arabic in most Arabic speaking countries uses real Arabic digits
+// Arabic in most Arabic speaking countries/regions uses real Arabic digits
 // User locale is 'ar-EG'
 console.log(Globalization.DateTimeFormat.create().format(date));
 // → "٢٠‏/١٢‏/٢٠١٢"
