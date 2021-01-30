@@ -189,12 +189,6 @@ Add a custom target to call `npm run build` within your folder. Many teams creat
 
 Note: Portal team does not provide an npm/node executable to use at build time, you may have to go through extra steps depending on your configuration to ensure they are available.
 
-Finally, disable the `ProcessCss` target:
-
-```xml
-<Target Name="ProcessCss" />
-```
-
 Run a clean build of your extension, and fix any build breaks as needed before heading to the next step.
 
 <a name="onboarding-an-existing-extension-to-reactviews-validate"></a>

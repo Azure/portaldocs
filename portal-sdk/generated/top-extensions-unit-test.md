@@ -105,7 +105,7 @@ always-auth=true
     "karma-requirejs": "1.1.0",
     "karma-trx-reporter": "0.4.0",
     "mocha": "7.1.2",
-    "@microsoft/azureportal-ut": "file:../../packages/Microsoft.Portal.TestFramework.UnitTest.$(CURRENT_BUILD_VERSION)/microsoft-azureportal-ut-$(NPM_CURRENT_BUILD_VERSION).tgz",
+    "@microsoft/azureportal-ut": "$(NPM_CURRENT_BUILD_VERSION)",
     "nconf": "0.10.0",
     "requirejs": "2.3.6",
     "sinon": "7.2.3",
