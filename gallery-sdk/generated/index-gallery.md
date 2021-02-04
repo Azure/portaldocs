@@ -77,7 +77,7 @@ Items in the gallery should reflect what users are looking for. You should not s
 
 <a name="gallery-overview-gallery-service"></a>
 ## Gallery Service
-The entire gallery in the portal is driven by the gallery service. The gallery service is responsible for hosting and serving gallery content including metadata, icons, screenshots, and Azure Templates. You can see all of the items in the production gallery service at: [https://gallery.azure.com/Microsoft.Gallery/galleryitems?api-version=2015-10-01&includePreview=true](https://gallery.azure.com/Microsoft.Gallery/galleryitems?api-version=2015-10-01&includePreview=true).
+The entire gallery in the portal is driven by the gallery service. The gallery service is responsible for hosting and serving gallery content including metadata, icons, screenshots, and Azure Templates. You can see all of the items in the production gallery service at: [https://catalogapi.azure.com/offers?api-version=2018-08-01-beta](https://catalogapi.azure.com/offers?api-version=2018-08-01-beta).
 
 
 [gallery-items]: ../media/gallery-overview/gallery-items.png
