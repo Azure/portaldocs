@@ -76,15 +76,15 @@ Additionally, let's copy the `Test.ReactView.tsx` file from [here][Test ReactVie
 ## Onboarding to CLI Based Build
 
 Identify the output folder of your existing MsPortalFx base code relative to the ReactView folder.
-It might be something like: `../../Output/`, append the current folder structure to that to maintain the shape.
+It might be something like: `../../Output/Content/Scripts/`, append the current folder structure to that to maintain the shape.
 Within your `package.json` file, add the following script entries, substituting this new directory where appropriate:
 
 ```javascript
 {
     "scripts": {
-        "build": "reactview-build --outputDirectory ../../Output/ReactViews/",
-        "build:dev": "reactview-build --development --outputDirectory ../../Output/ReactViews/",
-        "watch": "reactview-build --watch --development --outputDirectory ../../Output/ReactViews/"
+        "build": "reactview-build --outputDirectory ../../Output/Content/Scripts/ReactViews/",
+        "build:dev": "reactview-build --development --outputDirectory ../../Output/Content/Scripts/ReactViews/",
+        "watch": "reactview-build --watch --development --outputDirectory ../../Output/Content/Scripts/ReactViews/"
     }
 }
 ```
