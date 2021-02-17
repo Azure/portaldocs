@@ -47,9 +47,8 @@ There are number of framework provided alerts:
     - Sev2 for over 90 days
 
     Note: You can set the time of the day at which you want to trigger an SDK age alert. Learn more about time zone based alerting [here](#time-zone-based-alerting).
-1. Extension Alive
 1. Telemetry Throttled
-    - Sev4 IcM incident for an extension when its ExtTelemetry logs reach above 500 events every 60 seconds per user per browser tab. We stop logging ExtTelemetry events until the next window starts.
+    - Sev4 IcM incident for an extension when its ExtTelemetry logs reach above 500 events every 60 seconds per user per browser tab. We stop logging ExtTelemetry events until the next 60 seconds start.
 1. Availability
 1. Client Error
 1. Create Regression
@@ -70,12 +69,12 @@ Similarly, to the non-configurable alerts, once the thresholds for any of the co
 ## What configurability is available
 Besides configuration for various alert types extension partners can configure when they'd like to receive an alert (for SDK age alert), who they'd like to assign an alert to and overwrite the default TSG links in IcM with TSG links owned and provided by extensions.
 1. [Time zone based alerting](#time-zone-based-alerting)
-1. [TSG overwrite](#Overwrite-default-TSG-with-extenions'-TSG)
+1. [TSG overwrite](#Overwrite-default-TSG-with-extenions-TSG)
 1. [Route alerts to another team](#Route-alerts-to-another-team-in-IcM)
 
 <a name="onboarding-and-faq"></a>
 ## Onboarding and FAQ
-1. [How do I onboard?](#How-do-I-onboard?)
+1. [How do I onboard?](#How-do-I-onboard)
 2. [FAQ](#FAQ)
 
 <a name="availability"></a>
@@ -112,7 +111,7 @@ To opt in you will need to submit a Pull Request to add Your_Extension_Name in "
 <a name="availability-two-types-of-availability-alerts"></a>
 ### Two types of availability alerts
 1. User Failed At Least Once (FALO): when users have at least one load failure.
-2. User Failed Always (FA): when users are not able to successfully load (they try to load at least once).
+2. User Failed Always (FA): when users do not have any successfully loads after they try to load at least once.
 
 <a name="availability-how-often-do-they-run"></a>
 ### How often do they run?
@@ -124,24 +123,56 @@ Currently extension, blade and part availability alert run 5, 10 and 15 minutes 
 
 Below two tables show different criteria for different alert types and different severities that applies for any extension, blade and part load in Azure Portal. 
 
-<a name="availability-when-do-the-alerts-trigger-sev2"></a>
-#### Sev2:
-| Alert Type  | Min Total User Count | Min Affected User Percentage |
-| -----  | ----- | ----- |
-| Failed At Least Once | 50 | 50% |
-| Failed Always | 50 | 25% |
-
 <a name="availability-when-do-the-alerts-trigger-sev3"></a>
 #### Sev3:
-| Alert Type  | Min Total User Count | Min Affected User Percentage |
-| -----  | ----- | ----- |
-| Failed At Least Once | 10 | 4% |
-| Failed Always | 10 | 2% |
+| Alert Type | Cloud | Min Total User Count | Min Affected User Percentage |
+| ----- | ----- | ----- | ----- |
+| Failed At Least Once | All Clouds* | 10 | 4% |
+| Failed Always | All Clouds* | 10 | 2% |
+
+<a name="availability-when-do-the-alerts-trigger-sev2"></a>
+#### Sev2:
+<table>
+    <thead>
+        <tr>
+            <th>Alert Type</th>
+            <th>Cloud</th>
+            <th>Min Total User Count</th>
+            <th>Min Affected User Percentage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=2>Failed At Least Once</td>
+            <td>Public</td>
+            <td>50</td>
+            <td rowspan=2>50%</td>
+        </tr>
+        <tr>
+            <td>Non-Public Clouds**</td>
+            <td>25</td>
+        </tr>
+        <tr>
+            <td rowspan=2>Failed Always</td>
+            <td>Public</td>
+            <td>50</td>
+            <td rowspan=2>25%</td>
+        </tr>
+        <tr>
+            <td>Non-Public Clouds**</td>
+            <td>25</td>
+        </tr>
+    </tbody>
+</table>
+
+> *All Clouds are Public, Fairfax, Mooncake, BlackForest and LX.
+
+> **Non-public clouds are Fairfax, Mooncake, BlackForest and LX.
 
 For any given monitor window (1, 2, 4, 8, 12 and 24 hours) the following three conditions must be met to fire an alert.
 1. total user count >= Min Total User Count
 2. affected user percentage >= Min Affected User Percentage
-3. affected user count >= 2 for 1, 2, 4, 8-hour period, >= 3 for 12-hour period, >=4 for 24-hour period
+3. affected user count >= 3 for 1, 2, 4, 8, 12-hour period and >=4 for 24-hour period
 
 > When alert firing conditions are true for both User Failed At Least Once and User Failed Always, only User Failed Always will be fired.
 

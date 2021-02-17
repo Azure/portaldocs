@@ -79,6 +79,8 @@ In the basic scenario Microsoft.Portal.Tools.targets will generate Ev2 templates
 
     **LastKnownGoodSupport**: A boolean value that will generate Ev2 templates that will enable keeping track of the last two deployments that completed the SDP process. If **HotfixDeployment** is also enabled, the last two completed Hotfix deployments will also be tracked.
 
+    **StagePreview**: A boolean value that will generate Ev2 templates that will enable flighting a different extension version in MPAC portal vs Production portal.
+
     Add `ServiceGroupRootReplacements.json` to the extension csproj, as in the following example.
 
     ```json

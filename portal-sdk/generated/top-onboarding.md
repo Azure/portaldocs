@@ -19,7 +19,7 @@ Azure portal onboarding process is updated and teams looking to onboard new exte
 
 * Partners won't be required to update any configuration files in Azure portal repositories.​
 
-* No need to raise pull requests or cherry-picking changes across different branches for onboarding or updating configuration. 
+* No need to raise pull requests or cherry-picking changes across different branches for onboarding or updating configuration.
 
 * Partners can onboard to the Azure portal using Easy Start experience that will update the corresponding service tree database.
 
@@ -191,7 +191,6 @@ Please review the following required and optional fields for Portal extension.
 | Redirect To | Required only if you intend to redirect the new extension to an existing one owned by your team | False | Microsoft_Azure_OldDemoExtension |
 | 1st Party AAD App ID | This should be a 1st party AAD App owned by your team | False | demoextension |
 | Flags | Pre-defined flags as listed | False | SupportsPrewarming, Disabled, ThirdPartyExtension |
-| Flights | Name of the flight | False | MpacFlight |
 
 <a name="phase-1-onboarding-get-the-sdk-docs-and-samples-to-your-developers-unsupported-scenarios-and-fields"></a>
 ### Unsupported scenarios and fields
@@ -488,7 +487,7 @@ Once the name of the extension is finalized, it is time to register the extensio
 <a name="phase-2-development-onboarding-to-out-of-the-box-alerts-for-your-extension"></a>
 ## Onboarding to out-of-the-box alerts for your extension
 
-In order to ensure that all teams meet quality standard to be included in the Azure Portal, we require teams onboard to our out-of-the box alerting infrastructure. This will not require any deployment on your part, but only submitting a PR with a JSON configuration specifying your thresholds, which you can learn more about in our [alerting onboarding documentation](./top-telemetry-alerting.md) 
+In order to ensure that all teams meet quality standard to be included in the Azure Portal, we require teams onboard to our out-of-the box alerting infrastructure. This will not require any deployment on your part, but only submitting a PR with a JSON configuration specifying your thresholds, which you can learn more about in our [alerting onboarding documentation](./top-telemetry-alerting.md)
 
 The following alerts are required:
 1. Extension SDK Age (automatically opted-in by default when onboarded to alerting)

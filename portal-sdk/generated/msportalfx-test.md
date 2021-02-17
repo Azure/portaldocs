@@ -2,7 +2,7 @@
 <a name="microsoft-azureportal-test"></a>
 # @microsoft/azureportal-test
 
-Generated on 2021-01-22
+Generated on 2021-02-16
 
 * [@microsoft/azureportal-test](#microsoft-azureportal-test)
     * [Overview](#microsoft-azureportal-test-overview)
@@ -729,10 +729,7 @@ import Feature from "./Feature";
 import BrowserResolution from "./BrowserResolution";
 import Timeout from "./Timeout";
 
-/**
- * Represents The set of options used to configure a Portal instance.
- */
-export default interface PortalContext {
+export class PortalContextBase {
     /**
      * The set of capabilities enabled in the webdriver session.
      * For a list of available capabilities, see https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities
@@ -750,56 +747,56 @@ export default interface PortalContext {
             /**
              * List of command-line arguments to use when starting Chrome.
              */
-            args: string[]
+            args: string[];
         };
 
         /**
          * The desired starting browser's resolution in pixels.
          */
         browserResolution: BrowserResolution;
-    };
+    } = null;
     /**
      * The browserstack url the tests should run on.
      * This field needs to be set if the tests are meant to run on browserstack
      * and should not be set if the tests are meant to run locally.
      */
-    browserStackUrl?: string;
+    browserStackUrl?: string = null;
     /**
      * The path to the ChromeDriver binary.
      */
-    chromeDriverPath?: string;
+    chromeDriverPath?: string = null;
     /**
      * The url of the Portal.
      */
-    portalUrl: string;
+    portalUrl: string = null;
     /**
      * The url of the page where signin is performed.
      */
-    signInUrl?: string;
+    signInUrl?: string = null;
     /**
      * Email of the user used to sign in to the Portal.
      */
-    signInEmail?: string;
+    signInEmail?: string = null;
     /**
      * Password of the user used to sign in to the Portal.
      */
-    signInPassword?: string;
+    signInPassword?: string = null;
     /**
      * The set of features to enable while navigating within the Portal.
      */
-    features?: Feature[];
+    features?: Feature[] = null;
     /**
      * The list of patch files to load within the Portal.
      */
-    patches?: string[];
+    patches?: string[] = null;
     /**
      * Flag to enable executing the provided patches in Portal shell in addition to the extensions
      */
-    patchShell?: boolean;
+    patchShell?: boolean = null;
     /**
      * The set of extensions to side load while navigating within the Portal.
      */
-    testExtensions?: TestExtension[];
+    testExtensions?: TestExtension[] = null;
     /**
      * The set of timeouts used to override the default timeouts.
      * e.g.
@@ -808,17 +805,31 @@ export default interface PortalContext {
      *      longTimeout: 70000 //Overrides the default long timetout of 60000 (60 seconds).
      * }
      */
-    timeouts?: Timeout;
+    timeouts?: Timeout = null;
 
     /**
      * browser session Id
      */
-    sessionId?: string;
+    sessionId?: string = null;
     /**
      * fake user Id
      */
-    fakeUser: string;
+    fakeUser: string = null;
 }
+
+/**
+ * Represents The set of options used to configure a Portal instance.
+ */
+export default interface PortalContext extends PortalContextBase {
+    [x: string]: any;
+}
+
+type PortalContextPropsArray = Array<keyof PortalContext>;
+
+/**
+ * Represents the set of keys for the default options.
+ */
+export const PortalContextPropNames: PortalContextPropsArray = Object.keys(new PortalContextBase()) as PortalContextPropsArray;
 
 ```
 
@@ -2117,4 +2128,4 @@ Send an email to ibizadiscuss@microsoft.com
 
 [View thet API Reference](http://aka.ms/msportalfx-test/api)
 
-Generated on 2021-01-22
+Generated on 2021-02-16
