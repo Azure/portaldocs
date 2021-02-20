@@ -10,8 +10,12 @@
 
 - Install the LTS of nodejs [download](https://nodejs.org/en/download)
 
-1. download [setup.js](https://aka.ms/portalfx/cli/setup) and place 'setup.js' inside the project or directory you are working on.
-1. run `node setup.js` and perform any actions it asks you to.
+Windows
+  1. download [setup.js](https://aka.ms/portalfx/cli/setup) and place 'setup.js' inside the project or directory you are working on.
+  1. run `node setup.js` and perform any actions it asks you to.
+
+MacOS
+  1. from the terminal run `curl -fsSL https://aka.ms/portalfx/xplat/setup/mac | bash`
 
 If you prefer follow along see the step by step:
 - [Manual one time Auth Setup and Installation steps](#manual-one-time-auth-setup-and-installation)
@@ -42,6 +46,7 @@ If you prefer follow along see the step by step:
 The following steps detail the one time configuration that must be applied to authenticate against the internal AzurePortal registry for both NuGet and npm.
 If you prefer follow along see the step by step: [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
 
+Windows:
 - Install the LTS of nodejs [download](https://nodejs.org/en/download)
 - Install the .NET 4.7.2 *Developer Pack* - [located here](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net472-developer-pack-offline-installer)
 - NuGet Credential provider
@@ -52,7 +57,7 @@ If you prefer follow along see the step by step: [Video:One time configuration s
 
 - NPM Auth Personal Access Token (PAT)
 
-Just as NuGet needed the credentidal provider npm requires a PAT for auth.  Which can be configured as follows.
+Just as NuGet needed the credential provider npm requires a PAT for auth.  Which can be configured as follows.
 
 1. Connect to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=connect&feed=AzurePortal
 1. Select npm under the npm header
@@ -87,11 +92,16 @@ If not present you can add the items to your path as follows:
 1. `rundll32.exe sysdm.cpl,EditEnvironmentVariables`
 1. In the dialog click `Edit` on the `Path` variable and add (note paths may vary depending on your environment and msbuiuld version)
     - for npm `C:\Users\youralias\AppData\Roaming\npm`
-    - for nuget and cred provider `C:\Users\youralias\.nuget`
+    - for NuGet and cred provider `C:\Users\youralias\.nuget`
     - for msbuild `C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin`
 
 If you have run into problems checkout the [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
 
+MacOS:
+- `curl -fsSL curl -fsSL https://aka.ms/portalfx/xplat/setup/mac | bash`
+- Or
+- download https://aka.ms/portalfx/xplat/setup/mac and save to mac-setup.sh
+- call bash mac-setup.sh
 <a name="extension-development-set-up-for-isvs-manual-one-time-auth-setup-and-installation-installing-the-azure-portal-extension-developer-cli"></a>
 ### Installing the Azure portal extension developer CLI
 
