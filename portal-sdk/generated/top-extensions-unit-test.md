@@ -481,11 +481,11 @@ module.exports = function (config) {
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ["Chrome_No_Sandbox", "Edge"],
+        browsers: ["Chrome_No_Sandbox"],
 
         customLaunchers: {
             Chrome_No_Sandbox: {
-                base: 'Chrome',
+                base: 'ChromeHeadless',
                 flags: ['--no-sandbox']
             }
         },
