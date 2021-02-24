@@ -169,7 +169,6 @@ import { ResourceKeysBladeParameters, ResourceKeysBlade } from "Views/ResourceKe
 import * as ClientResources from "ClientResources";
 import * as sinon from "sinon";
 import { TemplateBladeHarness } from "@microsoft/azureportal-ut/Harness";
-import { PcControl } from "Fx/Weave/Components/PcControl";
 
 describe("Resource Keys Blade Tests", () => {
     let server: sinon.SinonFakeServer;
@@ -213,7 +212,7 @@ describe("Resource Keys Blade Tests", () => {
         // can be supplied to execute custom test code
 
         // get blade instance with context initialized and onInitialized called
-        return TemplateBladeHarness.initializeBladeExtended(ResourceKeysBlade, {
+        return TemplateBladeHarness.initializeBlade(ResourceKeysBlade, {
             diContainer: Di.createContainer(),
             parameters: bladeParameters,
             afterOnInitializeCalled: (blade) => {
@@ -225,19 +224,10 @@ describe("Resource Keys Blade Tests", () => {
             afterRevealContentCalled: (blade) => {
                 console.log("after reveal called");
             },
-        }).then((result) => {
-            const resourceKeysBlade = result.blade;
+        }).then((resourceKeysBlade) => {
 
             assert.equal(resourceKeysBlade.title, ClientResources.resourceKeyBladeTitle);
             assert.equal(resourceKeysBlade.subtitle, ClientResources.resourceKeyBladeSubtitle);
-
-            const components = result.rootNode
-                .selectComponents({
-                    component: PcControl,
-                })
-                .resultSet;
-
-            assert.equal(components.length, 2);
         });
     });
 });
