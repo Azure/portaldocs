@@ -15,7 +15,8 @@ Windows
   1. run `node setup.js` and perform any actions it asks you to.
 
 MacOS
-  1. from the terminal run `curl -fsSL https://aka.ms/portalfx/xplat/setup/mac | bash`
+  1. download  [mac-setup.sh](https://aka.ms/portalfx/xplat/setup/mac) i.e `curl -fsSL https://aka.ms/portalfx/xplat/setup/mac > mac-setup.sh`
+  1. run `bash mac-setup.sh`
 
 If you prefer follow along see the step by step:
 - [Manual one time Auth Setup and Installation steps](#manual-one-time-auth-setup-and-installation)
