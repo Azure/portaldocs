@@ -20,7 +20,8 @@ Windows
    1. run `node setup.js` and perform any actions it asks you to.
 
 MacOS
-   1. from the terminal run `curl -fsSL https://aka.ms/portalfx/xplat/setup/mac | bash`
+   1. download  [mac-setup.sh](https://aka.ms/portalfx/xplat/setup/mac) i.e `curl -fsSL https://aka.ms/portalfx/xplat/setup/mac > mac-setup.sh`
+   1. run `bash mac-setup.sh`
 
 If you prefer follow along see the step by step:
  - [Manual one time Auth Setup and Installation steps](#manual-one-time-auth-setup-and-installation)
@@ -1069,3 +1070,28 @@ With the one time configuration steps complete you can now install the CLI as yo
 <!-- docs#manualsetup -->
 
 To validate that your dev machine is ready for Azure Portal Extension development start with the template extension in the [Getting Started Guide](top-extensions-getting-started.md)
+<a name="cli-overview-manual-one-time-auth-setup-and-installation-migrating-your-project-to-work-on-macos-osx"></a>
+### Migrating your project to work on MacOS/OSX
+
+The ap cli inner dev loop is now enabled for xplat on MacOS/OSX.
+<a name="cli-overview-manual-one-time-auth-setup-and-installation-migrating-your-project-to-work-on-macos-osx-pre-reqs"></a>
+#### Pre-reqs
+
+ 1. You have already migrated off C# TypeMetadata [https://aka.ms/portalfx/tmopt](https://aka.ms/portalfx/tmopt) - introduced 2019/02/01
+ 1. You are already on ap CLI [http://aka.ms/portalfx/apcli](http://aka.ms/portalfx/apcli) - introduced 2019/11/15
+ 1. Update to SDK 7.120.0.5
+ 1. Your build pipline is on either dotnet core or MSBuild 16.
+ 1. Device: until this statement is removed - this toolchain is not yet verified/supported on the new M1 hardware.
+
+<a name="cli-overview-manual-one-time-auth-setup-and-installation-migrating-your-project-to-work-on-macos-osx-migration-steps-for-extension-to-support-xplat-inner-dev-loop"></a>
+#### Migration steps for extension to support xplat inner dev loop
+
+The following steps are required to migrate your extension to support cross platform development on MacOS.
+A walkthrough of the process is given in the https://aka.ms/portalfx/xplatvideo and a reference to the changeset can be found here https://aka.ms/portalfx/xplatchanges.
+
+1. Update `Extension.csproj` to the new .net core sdk-style project
+    - [Official guidance for porting to dotnet core](https://docs.microsoft.com/en-us/dotnet/core/porting/)
+    - [Example Extension.csproj migration](https://aka.ms/portalfx/xplatchanges)
+1. Update `NuGet.Config` to support restore path in .net core [https://aka.ms/portalfx/xplatchanges/nuget](https://aka.ms/portalfx/xplatchanges/nuget)
+1. Update `devServerConfig.json` to use .net core paths [https://aka.ms/portalfx/xplatchanges/devserverconfig](https://aka.ms/portalfx/xplatchanges/devserverconfig)
+1. Remove `*.njsproj` and their references from `Default.sln` [https://aka.ms/portalfx/xplatchanges](https://aka.ms/portalfx/xplatchanges)
