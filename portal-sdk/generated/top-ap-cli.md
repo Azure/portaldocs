@@ -15,8 +15,12 @@ This document details the usage and extensibility points of the ap CLI.  The fol
 
  - Install the LTS of nodejs [download](https://nodejs.org/en/download)
 
-1. download [setup.js](https://aka.ms/portalfx/cli/setup) and place 'setup.js' inside the project or directory you are working on.
-1. run `node setup.js` and perform any actions it asks you to.
+Windows
+   1. download [setup.js](https://aka.ms/portalfx/cli/setup) and place 'setup.js' inside the project or directory you are working on.
+   1. run `node setup.js` and perform any actions it asks you to.
+
+MacOS
+   1. from the terminal run `curl -fsSL https://aka.ms/portalfx/xplat/setup/mac | bash`
 
 If you prefer follow along see the step by step:
  - [Manual one time Auth Setup and Installation steps](#manual-one-time-auth-setup-and-installation)
@@ -125,7 +129,7 @@ Runs msbuild.exe on the *.sln or *proj with /p:RunBundlerInDevMode=true. If no
 #### Arguments
 Argument | Description
 --- | ---
-* | All arguments supplied are passed through to the resolved build executable, generally msbuild or tsc.
+\* | All arguments supplied are passed through to the resolved build executable, generally msbuild or tsc.
 --help | Show help for build command
 
 <a name="cli-overview-command-reference-ap-build-example-usage"></a>
@@ -182,7 +186,7 @@ ap diag <arguments>
 
 This command emits diagnostics for an extension from clouds.
 Help developers understand what version of their extension is deployed in each of these different clouds and provide useful information about the extension.
-Diagnostics also include extension name, primary stamp version, shell version, extension portal side version, extension hosting service side version, SDK version, SDK age, stage definition, manifest errors, and last error in all common deplyment slots in all public clouds.
+Diagnostics also include extension name, primary stamp version, shell version, extension portal side version, extension hosting service side version, SDK version, SDK age, stage definition, manifest errors, and last error in all common deployment slots in all public clouds.
 
 
 <a name="cli-overview-command-reference-ap-diag-arguments-1"></a>
@@ -340,9 +344,9 @@ You can change your project to use the recommended set by updating your .eslintr
 
 To customize rule levels off/warn/error additional rules you have full control of of all content within your own .eslintrc* this follows the eslintrc schema and is documented at [configuring rules](https://eslint.org/docs/user-guide/configuring#configuring-rules). The rule set you may be most interested in customizing for your specific team are documented [here - typescript-eslint rules](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#supported-rules). We view the recommended set of rules as being extension developer community driven with the oversight of the azure portal team, if you believe rule configurations should be different/added in the recommeneded set please reach out to us to discuss.
 
-Before turning a rule off globally its worth considering just disabling the rule on the specific instance in the source file where it is flagged, at the same time it may be worth creating a work item to remediate the issue - this is particularly important for the custom azure portal rules i.e @microsoft/azureportal/* rules.  To disble a rule for a specific occurence see the inline comment syntax documentation - [disabling rules with inline comments](https://eslint.org/docs/user-guide/configuring#disabling-rules-with-inline-comments).
+Before turning a rule off globally its worth considering just disabling the rule on the specific instance in the source file where it is flagged, at the same time it may be worth creating a work item to remediate the issue - this is particularly important for the custom azure portal rules i.e @microsoft/azureportal/* rules.  To disble a rule for a specific occurrence see the inline comment syntax documentation - [disabling rules with inline comments](https://eslint.org/docs/user-guide/configuring#disabling-rules-with-inline-comments).
 
-If you have authored your own eslint plugin or custom ruleset please reach out to us as we would like to understand if it makese sense to role those rules into @microsoft/eslint-plugin-azureportal to enable all teams to use them. You can supply paths to your custom rulesets to the ap CLI using apCliConfig.json lintCustomRules property. Each rule in the collection will be supplied to eslint as a --rulesdir. example config
+If you have authored your own eslint plugin or custom ruleset please reach out to us as we would like to understand if it makes sense to role those rules into @microsoft/eslint-plugin-azureportal to enable all teams to use them. You can supply paths to your custom rulesets to the ap CLI using apCliConfig.json lintCustomRules property. Each rule in the collection will be supplied to eslint as a --rulesdir. example config
 
 ```json
 {
@@ -359,7 +363,7 @@ To learn more about linting and its configuration see [Video: Linting - custom p
 ap new <arguments>
 ```
 
-Creates/Scaffolds a new Portal Extension and corresponding test project with the supplied name to the target ouput folder. For a video walkthrough of scaffolding a new extension see [this video](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=1495).
+Creates/Scaffolds a new Portal Extension and corresponding test project with the supplied name to the target output folder. For a video walkthrough of scaffolding a new extension see [this video](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=1495).
 
 <a name="cli-overview-command-reference-ap-new-arguments-3"></a>
 #### Arguments
@@ -436,7 +440,7 @@ Runs msbuild.exe on the *.sln or *proj with /p:RunBundlerInDevMode=false;Configu
 #### Arguments
 Argument | Description
 --- | ---
-* | All arguments supplied are passed through to the resolved build executable, generally msbuild or tsc.
+\* | All arguments supplied are passed through to the resolved build executable, generally msbuild or tsc.
 --help | Show help for build command
 
 <a name="cli-overview-command-reference-ap-release-example-usage-5"></a>
@@ -494,7 +498,7 @@ ap restore <arguments>
 Installs node modules and restores NuGet packages for all package.json, *.sln
 and *.csproj recursively from the current working directory. Note that the following folders are ignored node_modules, obj, objd, objr, out, output, debug and release.
 
-Where recusive discovery of NuGet packages and node modules that need restoration is slow, such as in large projects, arguments or apCliConfig.json can be used to provide the collection of *.sln,*.csproj,package.json for restore/install.
+Where recursive discovery of NuGet packages and node modules that need restoration is slow, such as in large projects, arguments or apCliConfig.json can be used to provide the collection of *.sln,*.csproj,package.json for restore/install.
 
 Requires `nuget` and `npm.cmd` available on the path. See first time setup steps at top of this document.
 
@@ -503,7 +507,7 @@ Requires `nuget` and `npm.cmd` available on the path. See first time setup steps
 Argument | Alias | Description
 --- | --- | ---
 --nugetRestoreFiles | | optional. The *.sln, *.csproj or packages.config files to perform a NuGet restore upon. If more then one supplied separate using ';'. When supplied the command will not scan directories for files to restore.
---npmInstallPackageJsonFiles | | optional. The package.json files to perform a npm install upon. If more then one supplied separate using ';'. When supplied the command will not scan directories directories for package.json files to restore.
+--npmInstallPackageJsonFiles | | optional. The package.json files to perform a npm install upon. If more then one supplied separate using ';'. When supplied the command will not scan directories for package.json files to restore.
 --restoreInParallel | | optional. Run npm install and NuGet restore in parallel.
 --help | | Emits help and usage for the command
 
@@ -516,7 +520,7 @@ Most common usage, node modules and NuGet packages needing install/restore will 
 ap restore
 ```
 
-Examples specifying which files to perform NuGet restore restore against. In this case only the specified list will be restored using NuGet however node modules will still be discovered.
+Examples specifying which files to perform NuGet restore against. In this case only the specified list will be restored using NuGet however node modules will still be discovered.
 
 ```
 ap restore --nugetRestoreFiles ./SomeDir/Some.sln
@@ -532,7 +536,7 @@ ap restore --npmInstallPackageJsonFiles ./SomeDir/package.json
 ap restore --npmInstallPackageJsonFiles ./SomeDir/package.json;./OtherDir/package.json
 ```
 
-Supplying explicit set of Nuget and node module for restore and install. Note if used frequently rather then simple discovery see next section on supplying this via config.
+Supplying explicit set of NuGet and node module for restore and install. Note if used frequently rather then simple discovery see next section on supplying this via config.
 
 ```
 ap restore --nugetRestoreFiles ./SomeDir/Some.sln;./OtherDir/package.json --npmInstallPackageJsonFiles ./SomeDir/package.json;./OtherDir/package.json
@@ -550,8 +554,8 @@ When the restore command runs it will search up from the current working directo
 
 Property | Description
 --- | ---
-nugetRestoreFiles | Optional. An explicity collection of files e.g ./foo.sln and ./bar.csproj to perform nuget restore against.
-npmInstallPackageJsonFiles | Optional. An explicity collection of package.json *.sln and *.csproj to perform nuget restore against.
+nugetRestoreFiles | Optional. An explicitly collection of files e.g ./foo.sln and ./bar.csproj to perform NuGet restore against.
+npmInstallPackageJsonFiles | Optional. An explicitly collection of package.json *.sln and *.csproj to perform NuGet restore against.
 restoreInParallel | Optional. Run npm install and NuGet restore in parallel.
 
 Example apCliConfig.json configuration:
@@ -576,7 +580,7 @@ The `ap run` command provides straight passthrough to `npm run`. Typically used 
 #### Arguments
 Argument | Description
 --- | ---
-* | Required. All arguments are passed through directly to npm run. See usage examples
+\* | Required. All arguments are passed through directly to npm run. See usage examples
 --help | Emits help and usage for the command
 
 <a name="cli-overview-command-reference-ap-run-example-usage-7"></a>
@@ -610,7 +614,7 @@ A command to run the local hosting service. Optional arguments are passthrough t
 #### Arguments
 Argument | Description
 --- | ---
-* | Optional. All arguments are passed through directly to local hosting service. See usage examples
+\* | Optional. All arguments are passed through directly to local hosting service. See usage examples
 --help | Emits help and usage for the command
 
 <a name="cli-overview-command-reference-ap-serve-example-usage-8"></a>
@@ -724,7 +728,7 @@ ap start
 ```
 
 Provides a simple single command to restore, build, serve the extension via local hosting service and start the watch
-process to enable compile on save. This effectively enables compile on save based development with a full pipeline from save through local hosting service ingestion such taht you can see changes reflected within the browser as you undergo active development. The following video demonstrates this command - [Video: A single command for restoring dependencies, building, serving with local hosting service, sideloading and compile on save](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=1627).
+process to enable compile on save. This effectively enables compile on save based development with a full pipeline from save through local hosting service ingestion such that you can see changes reflected within the browser as you undergo active development. The following video demonstrates this command - [Video: A single command for restoring dependencies, building, serving with local hosting service, sideloading and compile on save](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=1627).
 
 Customization using apCliConfig.json as defined in the restore, build and watch commands will also apply to this command.
 
@@ -817,7 +821,7 @@ ap watch
 ```
 
 This command enables compile on save by running tsc.cmd in watch mode on the current working
-directory. When used in conjunction with serve command provides end to end compile on save and ingestion of udpated files into local hosting service for faster inner dev test loop.  For build environments where you may have your own alias abstracting tsc you can supply your own tscAlias within apCliConfig.json as defined in the build
+directory. When used in conjunction with serve command provides end to end compile on save and ingestion of updated files into local hosting service for faster inner dev test loop.  For build environments where you may have your own alias abstracting tsc you can supply your own tscAlias within apCliConfig.json as defined in the build
 
 Requires tsconfig.json to be present within the directory that this command is run within.
 
@@ -897,7 +901,7 @@ To extend the CLI with your own custom commands requires two things a custom com
 
 1. Build the foobar.ts file `..\node_modules\.bin\tsc.cmd foobar.ts --lib ES2015,dom`.
 
-1. update your apCliConfig.json, typically located in /src/apCliConfig.json, to specify the path to the build output, i.e *.js, for your custom comands. Note the output path you use will vary depedending on your build or if you are distributing using a node module.
+1. update your apCliConfig.json, typically located in /src/apCliConfig.json, to specify the path to the build output, i.e *.js, for your custom commands. Note the output path you use will vary depending on your build or if you are distributing using a node module.
 
     example with relative build output
     ```json
@@ -917,17 +921,17 @@ To extend the CLI with your own custom commands requires two things a custom com
 
 <a name="cli-overview-overriding-the-behavior-of-existing-commands"></a>
 ## Overriding the behavior of existing commands
-There are two ways to override and existing command within the cli.  This can be useful to teams that have very specific requirements that the configurability of the existing command aguments and apCliConfig.json do not allow you to control. note if you think your scenario should be supported reach out to us to discuss adding support.
+There are two ways to override and existing command within the cli.  This can be useful to teams that have very specific requirements that the configurability of the existing command arguments and apCliConfig.json do not allow you to control. note if you think your scenario should be supported reach out to us to discuss adding support.
 
 To override an existing either of the following approaches can be used:
 
-1. define the command within the scripts object of the package.json in the current working directory. e.g to override restore deinfe `"restore": "echo my restore"`. when you run `ap restore` it will now outut my estore rather then using the CLIs implementation. For more involved cases that cant be expressed in package.json see the following approach.
+1. define the command within the scripts object of the package.json in the current working directory. e.g to override restore define `"restore": "echo my restore"`. when you run `ap restore` it will now output my estore rather then using the CLIs implementation. For more involved cases that cant be expressed in package.json see the following approach.
 
 1. In the section above foobar.ts was added to extend the cli. This approach can also be used to override and existing command. Simply ensure the filename, class name and command property all express the same name of the command you wish to override.
 
 <a name="cli-overview-telemetry"></a>
 ## Telemetry
-Telemetry is collected to help improve ap and the extension developer experience. Writing remote telemetry can be disabled by setting `disableRemoteTelemetry` to true in apCliConfig.json AND apCliConfig.json exists in the current directory that ap is run within or any parent directory between where ap is run and the root of the drive drive. i.e it will find-up from the process.cwd().
+Telemetry is collected to help improve ap and the extension developer experience. Writing remote telemetry can be disabled by setting `disableRemoteTelemetry` to true in apCliConfig.json AND apCliConfig.json exists in the current directory that ap is run within or any parent directory between where ap is run and the root of the drive. i.e it will find-up from the process.cwd().
 
 <a name="cli-overview-contributions-and-feedback"></a>
 ## Contributions and feedback
@@ -965,7 +969,7 @@ The ap CLI is built by the Azure portal team for the extension developer communi
     The first time [Setup and Installation](./top-ap-cli.md#setup-and-installation) covers everything required. Visual Studio Code can be installed from [here](https://code.visualstudio.com/download)
 
 - What are the IDE specific installs required for Visual Studio?
-    Insall Visual Studio 2019 Professional or Enterpise from [https://visualstudio.microsoft.com/downloads/](https://visualstudio.microsoft.com/downloads/).
+    Install Visual Studio 2019 Professional or Enterprise from [https://visualstudio.microsoft.com/downloads/](https://visualstudio.microsoft.com/downloads/).
 
       * Select the following workloads from the *workloads* tab:
         * Node.js development
@@ -994,6 +998,7 @@ The ap CLI is built by the Azure portal team for the extension developer communi
 The following steps detail the one time configuration that must be applied to authenticate against the internal AzurePortal registry for both NuGet and npm.
 If you prefer follow along see the step by step: [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
 
+Windows:
 - Install the LTS of nodejs [download](https://nodejs.org/en/download)
 - Install the .NET 4.7.2 *Developer Pack* - [located here](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net472-developer-pack-offline-installer)
 - NuGet Credential provider
@@ -1004,7 +1009,7 @@ If you prefer follow along see the step by step: [Video:One time configuration s
 
 - NPM Auth Personal Access Token (PAT)
 
-    Just as NuGet needed the credentidal provider npm requires a PAT for auth.  Which can be configured as follows.
+    Just as NuGet needed the credential provider npm requires a PAT for auth.  Which can be configured as follows.
 
     1. Connect to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=connect&feed=AzurePortal
     1. Select npm under the npm header
@@ -1039,11 +1044,16 @@ If you prefer follow along see the step by step: [Video:One time configuration s
     1. `rundll32.exe sysdm.cpl,EditEnvironmentVariables`
     1. In the dialog click `Edit` on the `Path` variable and add (note paths may vary depending on your environment and msbuiuld version)
         - for npm `C:\Users\youralias\AppData\Roaming\npm`
-        - for nuget and cred provider `C:\Users\youralias\.nuget`
+        - for NuGet and cred provider `C:\Users\youralias\.nuget`
         - for msbuild `C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin`
 
 If you have run into problems checkout the [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
 
+MacOS:
+- `curl -fsSL curl -fsSL https://aka.ms/portalfx/xplat/setup/mac | bash`
+- Or
+    - download https://aka.ms/portalfx/xplat/setup/mac and save to mac-setup.sh
+    - call bash mac-setup.sh
 <a name="cli-overview-manual-one-time-auth-setup-and-installation-installing-the-azure-portal-extension-developer-cli"></a>
 ### Installing the Azure portal extension developer CLI
 
