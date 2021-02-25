@@ -1,5 +1,8 @@
 <a name="step-wizard"></a>
 # STEP WIZARD
+
+Last updated Nove 2020 (see [change logs](#change-logs))
+
 The Step Wizard pattern provides guidelines for a set of sequential steps to perform a task. This pattern is not recommended for Azure resource creation, refer to [Create a Resource pattern](design-patterns-resource-create.md). 
 
 <a name="step-wizard-context"></a>
@@ -136,3 +139,9 @@ Developers can use the following information to get started implementing this pa
 * [Top Extensions Create](top-extensions-create.md)
 * [Portal Forms](top-extensions-forms.md)
 * [Developing Forms](portalfx-forms.md)
+
+<a name="step-wizard-change-logs"></a>
+## Change logs
+<a name="step-wizard-change-logs-jul-2019"></a>
+### Jul 2019
+* Published

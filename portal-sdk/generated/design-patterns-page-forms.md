@@ -1,4 +1,7 @@
 ﻿# Forms
+
+Last updated Nov 2020 (see [change logs](#change-logs))
+
 The Form design pattern enables users to easily input information and successfully commit changes.
 
 <a name="context"></a>
@@ -500,3 +503,12 @@ Related documentation
 * [Context Pane](top-extensions-context-panes.md)
 * [Portal Forms](top-extensions-forms.md)
 * [Developing Forms](portalfx-forms.md)
+
+<a name="change-logs"></a>
+## Change logs
+<a name="change-logs-nov-2020"></a>
+### Nov 2020
+* Added six variances of form
+<a name="change-logs-jul-2019"></a>
+### Jul 2019
+* Published
