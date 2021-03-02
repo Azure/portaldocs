@@ -170,6 +170,7 @@ import * as ClientResources from "ClientResources";
 import * as sinon from "sinon";
 import { TemplateBladeHarness } from "@microsoft/azureportal-ut/Harness";
 import { PcControl } from "Fx/Weave/Components/PcControl";
+import { Section } from "Fx/Weave/Components/Section";
 
 describe("Resource Keys Blade Tests", () => {
     let server: sinon.SinonFakeServer;
@@ -231,13 +232,20 @@ describe("Resource Keys Blade Tests", () => {
             assert.equal(resourceKeysBlade.title, ClientResources.resourceKeyBladeTitle);
             assert.equal(resourceKeysBlade.subtitle, ClientResources.resourceKeyBladeSubtitle);
 
-            const components = result.rootNode
+            const section = result.rootNode
+                .selectComponents({
+                    component: Section,
+                    className: "msportalfx-form",
+                });
+
+            assert.equal(section.resultSet.length, 1);
+
+            const pcControl = section
                 .selectComponents({
                     component: PcControl,
-                })
-                .resultSet;
+                });
 
-            assert.equal(components.length, 2);
+            assert.equal(pcControl.resultSet.length, 2);
         });
     });
 });
