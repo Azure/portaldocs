@@ -19,7 +19,7 @@ Common navigation and interaction models across the portal
 
 * [Full screen navigation](design-patterns-page-fullscreen.md) ensures the portal behaves like a website with full screen pages and no horizontal scrolling
 
-* [Guidance and feedback](design-patterns-page-notifications.md) provide in-line guidance, feedback, validations, errors and portal notifications to users
+* [Notifications](design-patterns-page-notifications.md) provide in-line guidance, feedback, validations, errors and portal notifications to users
 
 <a name="design-guidelines-design-patterns-resource-management-patterns"></a>
 ### Resource management patterns

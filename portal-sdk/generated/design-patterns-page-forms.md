@@ -472,6 +472,8 @@ Summary of buttons and corresponding behaviors:
 <a name="related-design-guidelines"></a>
 ## Related design guidelines
 
+* [Azure Design Template ](https://www.figma.com/file/SkCj1C9nh5lZTuIz0uhcY2/Azure-Portal-Pattern-Templates?node-id=525%3A0)
+* [Design guidelines](top-design.md)
 * [Controls guidance](design-patterns-controls.md)
 * [InfoBalloon](design-patterns-controls-InfoBalloon.md)
 * [PasswordBox](design-patterns-controls-TextBox.md)
@@ -479,7 +481,6 @@ Summary of buttons and corresponding behaviors:
 * [Section](design-patterns-controls-Section.md)
 * [Full screen](design-patterns-page-fullscreen.md)
 * [Create a resource](design-patterns-resource-create.md)
-* [Design guidelines](top-design.md)
 
 <a name="research-and-usability"></a>
 ## Research and usability
