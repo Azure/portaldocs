@@ -34,9 +34,7 @@ Types  of notifications include:
 <a name="notification-guidelines-variations"></a>
 ## Variations
 <a name="notification-guidelines-variations-local-synchronous-notifications"></a>
-### >
-<li>Local synchronous notifications</li>
-<
+### 1. Local synchronous notifications
 <a name="notification-guidelines-variations-local-synchronous-notifications-examples"></a>
 #### Examples
 Example images
@@ -65,6 +63,7 @@ a. Dialog
 </div>
 
 Dialog shows a critical information message. Dialog will be dismissed when user clicks on the buttons of dialog or when user clicks on anywhere outside of dialog. Clicking on anywhere outside of dialog will be similar to click on Cancel button on dialog. Dialog is a high-level urgency notification.
+
 Checklist:
 * Triggered by user action
 * User cannot proceed without giving an input
@@ -85,6 +84,7 @@ b. Inline validation
 </div>
 
 Inline validation is a type of inline message that is used to inform user about validation or info message of an input field. Inline validation will not block user from interacting with other components of the page. The message will be dismissed programmatically when user update the input field with a valid value.
+
 Checklist:
 * The validation happens live
 * User needs contextual information on their input
@@ -98,6 +98,7 @@ c. Inline validation and message bar
 </div>
 
 Inline validation and message bar are combined to inform users about an error message of an input field. They will not block users from interacting with other components of the page. They will be dismissed when user updates the input field with a valid value.
+
 Checklist:
 * An error needs to be displayed after validation or it is hard to see the contextual error on its own
 * User needs contextual error information on their input and a high-level summary
@@ -111,6 +112,7 @@ d. Status indicator
 </div>
 
 Status indicated is a type of inline message that is used to inform user about an error or info message. They will not block user from interacting with other components of the page. 
+
 Checklist:
 * User needs lightweight contextual confirmation of their action or status of a process
 * The message is triggered by user action or system
@@ -133,6 +135,7 @@ e. Message bar
 </div>
 
 Message bar is used to inform user about an issue, error or subscription. It will not block user from interacting with other components of the page.
+
 Checklist:
 * The message relates to the state of the entire product or surface
 * The message is triggered by the system
@@ -146,15 +149,14 @@ f. Error page
 </div>
 
 Error page is  used to inform user about an error and empty state of a page.
+
 Checklist:
 * Error is preventing user to access app content
 * The message is triggered by the system
 * Error relates to a full page or a surface (card/panel, etc)
 
 <a name="notification-guidelines-variations-global-or-asynchronous-notification"></a>
-###  start="2">
-<li>Global or asynchronous notification</li>
-<
+### 2. Global or asynchronous notification
 <a name="notification-guidelines-variations-global-or-asynchronous-notification-examples-1"></a>
 #### Examples
 Example images
@@ -194,6 +196,7 @@ Toast  and panel notification
 
 
 Toast is used to notify user about an operational awareness. It is invoked programmatically and is dismissed manually or programmatically. It will not block user from interacting with other components of the page. User can click on the toast notification to expand it to a panel notification to see detailed information.
+
 Checklist:
 * Relevant messages that user opted-in need to be surfaced
 * Inform user about timely event
@@ -210,9 +213,7 @@ If user want to see historical data, they can view it from Activity Log
 
 
 <a name="notification-guidelines-variations-guiding-and-teaching-ui"></a>
-###  start="3">
-<li>Guiding and teaching UI</li>
-<
+### 3. Guiding and teaching UI
 <a name="notification-guidelines-variations-guiding-and-teaching-ui-examples-2"></a>
 #### Examples
 Example images
@@ -251,6 +252,7 @@ b. Tooltip
 </div>
 
 Tooltip is an infoballoon that is triggered by user to provide a few word to help user understand product better.
+
 Checklist:
 * User needs a few words to understand the purpose of non-textual control
 * The control is evergreen
@@ -263,6 +265,7 @@ c. Coachmark
 </div>
 
 Coachmark is a coachmark that is triggered by user to instruct user to complete a task. Refer to this [link]( https://developer.microsoft.com/en-us/fluentui#/controls/web/coachmark) for more details.
+
 Checklist:
 * Provide users evergreen contextual information on the content
 * The control is triggered by the user
@@ -278,12 +281,13 @@ d. Teaching bubble
 </div>
 
 Teaching bubble is triggered by system to help tutor user in a new feature. Refer to this [link]( https://developer.microsoft.com/en-us/fluentui#/controls/web/teachingbubble) for more details.
+
 Checklist:
 * User needs temporary teaching tips on how to use parts of the UI or learn about new features.
 * A sequence of steps may be needed. 
 * The tip relates to UI on how to use the service, not the content. 
 * Message is triggered by the system
-Teaching bubble is only available in react view. This is a new component, and we would like to keep track its usage to update the design pattern. If you want to use it, please contact our team [Azure Portal UXA](UXATL@microsoft.com).
+Teaching bubble is only available in react view. This is a new component, and we would like to keep track its usage to update the design pattern. If you want to use it, please contact our team [Azure Portal UXA](mailto:UXATL@microsoft.com).
 
 
 
@@ -301,12 +305,14 @@ Teaching bubble is only available in react view. This is a new component, and we
 
 <a name="notification-guidelines-related-design-guidelines"></a>
 ## Related design guidelines
+
+* [Azure Design Template ](https://www.figma.com/file/05KqaSJg4hLMxo2FeyAUag/Notification-guidelines?node-id=41%3A20590)
+* [Design guidelines](top-design.md)
 * Design toolkit notification elements
     * <a href="https://www.figma.com/file/Bwn8rmUOYtnPRwA3JoQTBn/Azure-Portal-Toolkit?node-id=3388%3A393118" target="_blank">Notification toasts</a>
     * <a href="https://www.figma.com/file/Bwn8rmUOYtnPRwA3JoQTBn/Azure-Portal-Toolkit?node-id=7781%3A2" target="_blank">StatusBar</a>
     * <a href="https://www.figma.com/file/Bwn8rmUOYtnPRwA3JoQTBn/Azure-Portal-Toolkit?node-id=21266%3A356689" target="_blank">InfoBox</a>
     * <a href="https://www.figma.com/file/Bwn8rmUOYtnPRwA3JoQTBn/Azure-Portal-Toolkit?node-id=3342%3A153" target="_blank">InfoBalloon</a>
-* Design guidelines [top-design.md](top-design.md)
 
 <a name="notification-guidelines-research-and-usability"></a>
 ## Research and usability
@@ -340,7 +346,7 @@ Go to the playground site to use the latest control and get source code for your
 ## Change logs
 <a name="notification-guidelines-change-logs-feb-2021"></a>
 ### Feb 2021
-* Aligned to fluent design
+* Aligned to fluent notification design
 * Added teaching guidance
 <a name="notification-guidelines-change-logs-jul-2019"></a>
 ### Jul 2019
