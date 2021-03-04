@@ -32,7 +32,7 @@ Name: AzPortalBF
 
 Name: AzPortalFF
 - Cloud: Fairfax
-- Data Source: https://azportalff.kusto.usgovcloudapi.ne
+- Data Source: https://azportalff.kusto.usgovcloudapi.net
 
 See the [National Clouds FAQ](#national-clouds) for more information
 
