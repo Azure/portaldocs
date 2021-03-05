@@ -157,11 +157,17 @@ describe("Resource Group Tests", function () {
 
 Remember to replace the signInEmail and signInPassword values with your test account credentials.  You can also use nconf to retrieve them from environment variables or windows credential manager (when using the included extension).
 
-**NOTE**: MFA-enabled `@microsoft.com` accounts are not supported.  The recommendation for testing is to use a non MFA-enabled @microsoft.com account on an isolated subscription that has no other services runnning.
-
 In this test we start by importing the @microsoft/azureportal-test module. Then the credentials are specified for the user that will sign in to the Portal. These should be the credentials of a user that already has an active Azure subscription.
 
 After that we can use the Portal object to drive a test scenario that opens the Create Resource Group Browse blade and waits for the correct blade to open. In the afterEach block we take a screenshot if the test fails and finally, call `quit()` to close the browser.
+
+<a name="overview-test-accounts"></a>
+### Test Accounts
+For external/third party teams, it is recommended to create a separate account on an isolated subscription that has no other services runnning.
+
+For internal Microsoft teams, see [here for guidance](https://eng.ms/docs/cloud-ai-platform/azure/azure-core-compute/bburns-team/azure-portal-ibizafx/azure-portal/testing).
+
+**NOTE**: MFA-enabled accounts are not supported.
 
 <a name="overview-add-the-configuration"></a>
 ### Add the configuration
@@ -236,6 +242,10 @@ If you run into a compilation error with `node.d.ts`, verify that you are using 
 `tsc --version`
 
 If the version is incorrect, then you may need to install the correct version, adjust your path variables or directly call the correct version of `tsc.exe`.
+
+<a name="overview-partner-deployment-tests"></a>
+### Partner Deployment Tests
+The Azure portal team is building support for running internal partner's tests during a Portal deployment.  It is currently in a limited preview for select internal partner teams.  The internal documentation is available at [Partner Deployment Tests](https://eng.ms/docs/cloud-ai-platform/azure/azure-core-compute/bburns-team/azure-portal-ibizafx/azure-portal/testing/portal-partner-deployment-tests.md)
 
 <a name="overview-more-documentation-and-examples"></a>
 ### More Documentation and Examples

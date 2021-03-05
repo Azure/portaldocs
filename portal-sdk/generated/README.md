@@ -278,13 +278,13 @@ Because your extension is Web code, you can make **AJAX** calls to various servi
 <a name="azure-portal-extension-development-documentation-testing"></a>
 ## Testing
 
-The Ibiza team provides limited testing support. Due to resource constraints the C# and Node.js frameworks are open source, so that partners can unblock themselves if the Ibiza team cannot make requested improvements as quickly as you might expect.
+The Ibiza team provides limited testing support. Due to resource constraints the C# and Node.js frameworks are inner source, so that partners can unblock themselves if the Ibiza team cannot make requested improvements as quickly as you might expect.
 
 * [Unit testing support](/portal-sdk/generated/top-extensions-unit-test.md)
 
-* [Node.js test framework (Open source)](/portal-sdk/generated/top-extensions-node-js-test-framework.md)
+* [Node.js test framework (Inner source)](/portal-sdk/generated/top-extensions-node-js-test-framework.md)
 
-* [C# test framework (Open source)](/portal-sdk/generated/top-extensions-csharp-test-framework.md)
+* [C# test framework (Inner source)](/portal-sdk/generated/top-extensions-csharp-test-framework.md)
 
 When asking for assistance with a debugging UI (not unit test) test framework specific issues on stackoverflow, please include the following (if applicable):
 
@@ -292,6 +292,7 @@ When asking for assistance with a debugging UI (not unit test) test framework sp
 * Call stack
 * Exception message
 * Code snippet where the test is failing
+* Version of the test framework being used
 
 [Ask a test-related question on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-test)
 
