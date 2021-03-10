@@ -40,6 +40,7 @@ container.openDialog({
         // this callback is invoked when the dialog is closed
         // result.button may be inspected to see which button was clicked.
     },
+    target: evt.target,
 });
 
 ```
@@ -102,6 +103,7 @@ container.openDialog({
                 break;
         }
     },
+    target: evt.target,
 });
 
 ```
@@ -135,6 +137,7 @@ container.openDialog({
     title: ClientResources.Dialog.Template.title,
     content: dialogContent,
     buttons: DialogButtons.OK,
+    target: evt.target,
 });
 
 ```

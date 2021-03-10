@@ -26,7 +26,7 @@ import { Person } from "DataModels/Person";
 import * as Di from "Fx/DependencyInjection";
 import * as OptionsGroup from "Fx/Controls/OptionsGroup";
 import * as TextBox from "Fx/Controls/TextBox";
-import { BladeReferences, BladeLink, ResourceLink, ClickableLink  } from "Fx/Composition";
+import { BladeReferences, BladeLink, ResourceLink, ClickableLink, OnClickHandler } from "Fx/Composition";
 import * as FxCompositionBlade from "Fx/Composition/Pdl/Blade";
 import { ViewModels as ViewModelDefinitions } from "_generated/ExtensionDefinition";
 import { DataContext } from "../../NavigationArea";
@@ -65,7 +65,7 @@ export class OpenBladeApiSamplesViewModel
 
     private _container: BladeContainer;
 
-    public onOpenChildBladeLinkClick: () => void;
+    public onOpenChildBladeLinkClick: OnClickHandler;
 
     /**
      * Renders a blade link as part of a standard HTML anchor tag from the template,
@@ -145,7 +145,7 @@ export class OpenBladeApiSamplesViewModel
      * - ResourceLink,
      * - ClickableLink.
      */
-    public readonly dynamicFxclick: KnockoutObservable<Function | BladeLink | ResourceLink | ClickableLink>;
+    public readonly dynamicFxclick: KnockoutObservable<OnClickHandler | BladeLink | ResourceLink | ClickableLink>;
 
     /**
      * Text to display on the dynamic fxclick link.
@@ -190,7 +190,7 @@ export class OpenBladeApiSamplesViewModel
     /**
      * Used as a showcase callback for the dynamic fxclick sample.
      */
-    private readonly _onCallbackFxclickClick: () => void;
+    private readonly _onCallbackFxclickClick: OnClickHandler;
 
     /**
      * Used as a showcase Blade Link for the dynamic fxclick sample.
