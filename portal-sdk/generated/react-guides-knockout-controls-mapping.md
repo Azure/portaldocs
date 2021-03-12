@@ -22,8 +22,8 @@ Currently (*) charting is a known parity gap, we're working to provide a common 
 | CheckBox               | Fx/Controls/CheckBox                          | [FluentUI Checkbox][FluentUI Checkbox]                                                                                                                       |
 | ClickableLink          | MsPortalFx.ViewModels.ClickableLink           | [AzurePortal-ReactView BladeLink][AzurePortal-ReactView BladeLink]                                                                                           |
 | Console                | Fx/Controls/Console                           | No Framework component provided                                                                                                                              |
-| CopyableLabel          | Fx/Controls/CopyableLabel                     | No Framework component provided                                                                                                                              |
-| CustomHtml             | Fx/Controls/CustomHtml                        | This is no longer applicable given ReactViews have DOM access                                                                                               |
+| CopyableLabel          | Fx/Controls/CopyableLabel                     | [AzurePortal-ReactView CopyButton][AzurePortal-ReactView CopyButton]                                                                                         |
+| CustomHtml             | Fx/Controls/CustomHtml                        | This is no longer applicable given ReactViews have DOM access                                                                                                |
 | DataGrid               | Fx/Controls/DataGrid                          | [FluentUI DetailsList][FluentUI DetailsList]                                                                                                                 |
 | DatePicker             | Fx/Controls/DatePicker                        | [FluentUI DatePicker][FluentUI DatePicker]                                                                                                                   |
 | DateTimePicker         | Fx/Controls/DateTimePicker                    | Requires custom configuration using [FluentUI TextField][FluentUI TextField] and [FluentUI DatePicker][FluentUI DatePicker]                                  |
@@ -59,8 +59,8 @@ Currently (*) charting is a known parity gap, we're working to provide a common 
 | OAuthButton            | Fx/Controls/OAuthButton                       | Not applicable                                                                                                                                               |
 | OptionsGroup           | Fx/Controls/OptionsGroup                      | [FluentUI ChoiceGroup][FluentUI ChoiceGroup]                                                                                                                 |
 | PasswordBox            | Fx/Controls/PasswordBox                       | [FluentUI TextField][FluentUI TextField]                                                                                                                     |
-| Pill                   | Fx/Controls/Pill                              | No Framework component provided                                                                                                                              |
-| PillCollection         | Fx/Controls/PillCollection                    | No Framework component provided                                                                                                                              |
+| Pill                   | Fx/Controls/Pill                              | Custom framework component in-progress                                                                                                                       |
+| PillCollection         | Fx/Controls/PillCollection                    | Custom framework component in-progress                                                                                                                       |
 | PricingControl         | Fx/Controls/PricingControl                    | No Framework component provided                                                                                                                              |
 | ProgressBar            | Fx/Controls/ProgressBar                       | [FluentUI ProgressIndicator][FluentUI ProgressIndicator]                                                                                                     |
 | QuotaGauge             | Fx/Controls/QuotaGuage                        | * No Framework component provided, if charting is needed please see [D3 Sample][D3 Sample]                                                                   |
@@ -85,7 +85,7 @@ Currently (*) charting is a known parity gap, we're working to provide a common 
 | Toolbar                |                                               | For command bars docked at the top of a view use [AzurePortal-ReactView][AzurePortal-ReactView CommandBar] for inline command bars use [FluentUI CommandBar] |
 | TreeView               | MsPortalFx.ViewModels.Controls.Lists.TreeView | [FluentUI Nav][FluentUI Nav]                                                                                                                                 |
 | TriStateCheckBox       | Fx/Controls/TriStateCheckBox                  | [FluentUI Checkbox][FluentUI Checkbox]                                                                                                                       |
-| Video                  | Fx/Controls/Video                             | This is no longer applicable given ReactViews have DOM access                                                                                               |
+| Video                  | Fx/Controls/Video                             | This is no longer applicable given ReactViews have DOM access                                                                                                |
 
 [FluentUI Button]: https://developer.microsoft.com/fluentui#/controls/web/button
 [FluentUI Checkbox]: https://developer.microsoft.com/fluentui#/controls/web/checkbox
@@ -110,6 +110,7 @@ Currently (*) charting is a known parity gap, we're working to provide a common 
 
 [AzurePortal-ReactView BladeLink]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FBladeLink.tsx
 [AzurePortal-ReactView CommandBar]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FCommandBar.tsx
+[AzurePortal-ReactView CopyButton]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FCopyButton.tsx
 [AzurePortal-ReactView CSS]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FCss.ts
 [AzurePortal-ReactView Dialog]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FDialog.tsx
 [AzurePortal-ReactView Essentials]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FEssentials.tsx
