@@ -2,6 +2,8 @@
 # Full screen pages
 Use navigation patterns for the portal that fill the screen and behave like most websites.
 
+Last updated Mar 2021 (see [change logs](#change-logs))
+
 <a name="full-screen-pages-context"></a>
 ## Context
 As users navigate the portal, they expect a common web interaction experience.
@@ -183,3 +185,15 @@ Developers can use the following information to get started implementing this pa
 * Dialog [top-extensions-dialogs.md](top-extensions-dialogs.md)
 * Notifications [top-extensions-notifications](top-extensions-notifications)
 * Built-in icons [portalfx-icons-builtin.md](portalfx-icons-builtin.md)
+
+
+<a name="for-developers-change-logs"></a>
+## Change logs
+
+<a name="for-developers-change-logs-mar-2021"></a>
+### Mar 2021
+* Updated UI screenshots to latest styles
+
+<a name="for-developers-change-logs-jul-2019"></a>
+### Jul 2019
+* Published

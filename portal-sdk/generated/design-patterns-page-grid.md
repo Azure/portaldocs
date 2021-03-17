@@ -1,6 +1,8 @@
 ﻿# Page with tables
 Most web pages and portals surface items in tables to show lists of items that can be searched, sorted and compared.
 
+Last updated Mar 2021 (see [change logs](#change-logs))
+
 <a name="context"></a>
 ## Context
 In Azure, users frequently interact with pages of items in tables.
@@ -115,3 +117,14 @@ Developers can use the following information to get started implementing this pa
 <a name="for-developers-related-documentation"></a>
 ## Related documentation
 * Grid control [portalfx-controls-grid.md](portalfx-controls-grid.md)
+
+<a name="for-developers-change-logs"></a>
+## Change logs
+
+<a name="for-developers-change-logs-mar-2021"></a>
+### Mar 2021
+* Updated UI styles to latest
+
+<a name="for-developers-change-logs-jul-2020"></a>
+### Jul 2020
+* Published

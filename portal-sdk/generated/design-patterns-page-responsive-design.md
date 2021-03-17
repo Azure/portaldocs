@@ -2,6 +2,8 @@
 # Responsive design
 Here are some guidelines for making your experience look good at all resolutions.
 
+Last updated Mar 2021 (see [change logs](#change-logs))
+
 <a name="responsive-design-context"></a>
 ## Context
 When we say responsive design, it’s shorthand for an Azure layout that responds dynamically to different browser window sizes or thresholds.
@@ -111,3 +113,14 @@ Developers can use the following information to get started implementing this pa
 <a name="for-developers-related-documentation"></a>
 ## Related documentation
 <!-- Links to related developer docs -->
+
+<a name="for-developers-change-logs"></a>
+## Change logs
+
+<a name="for-developers-change-logs-mar-2021"></a>
+### Mar 2021
+* Add change logs
+
+<a name="for-developers-change-logs-jul-2020"></a>
+### Jul 2020
+* Published

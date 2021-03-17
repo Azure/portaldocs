@@ -1,6 +1,8 @@
 ﻿# Controls
 Controls are the building blocks of the Azure UX. They allow users to view, edit, and analyze data. Using built in controls provides consistency across the portal.  Additionally, issues around usability, accessibility, security and any other fundamentals are handled by the Framework team.  For developer info see [top-extensions-controls.md](top-extensions-controls.md) 
 
+Last updated Jul 2020 (see [change logs](#change-logs))
+
 <a name="text-input"></a>
 ## Text input
 * [CopyableLabel](design-patterns-controls-CopyableLabel.md)
@@ -105,7 +107,7 @@ Controls are the building blocks of the Azure UX. They allow users to view, edit
 * [Blade](top-extensions-blades.md)
 * [ContextPane](top-extensions-context-panes.md)
 * [Dialog](top-extensions-dialogs.md)
-* Card (what is the name) []()
+* [Card] Card is implemented using [ListView] with a specific template
 
 <a name="utilities"></a>
 ## Utilities
@@ -122,3 +124,9 @@ Themes and colors are handled at the portal level see [portalfx-extensions-style
 ## Accessibility
 For accessibility information see [portalfx-accessibility.md](portalfx-accessibility.md)
 
+<a name="change-logs"></a>
+## Change logs
+
+<a name="change-logs-jul-2020"></a>
+### Jul 2020
+* Published
