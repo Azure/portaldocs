@@ -2,6 +2,8 @@
 # Filtering
 Filtering enables users to quickly winnow down a list, table or chart to display the result set they are seeking.
 
+Last updated Mar 2021 (see [change logs](#change-logs))
+
 <a name="filtering-context"></a>
 ## Context
 Users configure lists of resources and graphical representations of data to show only the information they want to see.
@@ -32,12 +34,8 @@ Dashboard
 </div>
 
 All resources
-<!-- TODO UX screenshot of new browse -->
-
-Activity log
-
 <div style="max-width:800px">
-<img alttext="Time range" src="../media/design-patterns-page-filtering/activity-log.png"  />
+<img alttext="Time range" src="../media/design-patterns-page-filtering/all-resources.png"  />
 </div>
 
 <a name="filtering-examples-example-uses"></a>
@@ -72,19 +70,6 @@ Wrapping behavior
 
 The single line of controls will wrap one control at a time.
 
-<div style="max-width:600px">
-<img alttext="Time range" src="../media/design-patterns-page-filtering/anatomy-page-wrap-1.PNG"  />
-</div>
-
-
-<div style="max-width:500px">
-<img alttext="Time range" src="../media/design-patterns-page-filtering/anatomy-page-wrap-2.PNG"  />
-</div>
-
-
-<div style="max-width:400px">
-<img alttext="Time range" src="../media/design-patterns-page-filtering/anatomy-page-wrap-3.PNG"  />
-</div>
 
 <a name="filtering-anatomy-search"></a>
 ### Search
@@ -126,14 +111,11 @@ The configuration dialog for `Add filter` is a searchable list of available filt
 <a name="filtering-anatomy-reset-filters"></a>
 ### Reset filters
 A link with text `Reset filters` that restores the page filters to the state when the page was opened
-<div style="max-width:200px">
-<img alttext="Time range" src="../media/design-patterns-page-filtering/reset-filters.PNG"  />
-</div>
 
 
 <a name="filtering-behavior"></a>
 ## Behavior
-<!-- TODO UX - resolve bldae pinning behavior - blade pinned with filter set?  resolve with activity logs -->
+<!-- TODO UX - resolve blade pinning behavior - blade pinned with filter set?  resolve with activity logs -->
 <a name="filtering-behavior-selecting-filter-value"></a>
 ### Selecting filter value
 Upon selection, the filter will open a dialog box that enables users to configure the filter
@@ -203,3 +185,14 @@ Developers can use the following information to get started implementing this pa
 <a name="for-developers-related-documentation"></a>
 ## Related documentation
 <!-- Links to related developer docs -->
+
+<a name="for-developers-change-logs"></a>
+## Change logs
+
+<a name="for-developers-change-logs-mar-2021"></a>
+### Mar 2021
+* Updated UI screenshots to latest styles
+
+<a name="for-developers-change-logs-jul-2019"></a>
+### Jul 2019
+* Published

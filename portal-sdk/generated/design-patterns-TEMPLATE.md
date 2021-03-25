@@ -4,6 +4,7 @@
 <!-- Fill in the name above and then write a short description of the design pattern.  For example
 "Forms are the manner in which we gather and validate user input."
 -->
+Last updated Month YYYY (see [change logs](#change-logs))
 
 <a name="design-pattern-name-context"></a>
 ## Context
@@ -88,3 +89,10 @@ Developers can use the following information to get started implementing this pa
 <a name="for-developers-related-documentation"></a>
 ## Related documentation
 <!-- Links to related developer docs -->
+
+<a name="for-developers-change-logs"></a>
+## Change logs
+
+<a name="for-developers-change-logs-month-yyyy"></a>
+### Month YYYY
+* Published
