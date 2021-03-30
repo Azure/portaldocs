@@ -2,7 +2,7 @@
 <a name="microsoft-azureportal-test"></a>
 # @microsoft/azureportal-test
 
-Generated on 2021-03-27
+Generated on 2021-03-30
 
 * [@microsoft/azureportal-test](#microsoft-azureportal-test)
     * [Overview](#microsoft-azureportal-test-overview)
@@ -1390,9 +1390,8 @@ The following example demonstrates how to:
 import testFx from '@microsoft/azureportal-test';
 ...
 
-        testFx.portal.blade({ title: "Samples", bladeType: SamplesBlade });
-        await testFx.portal.goHome(70000);
         await testFx.portal.navigateToUriFragment("blade/InternalSamplesExtension/BladeWithToolbar");
+        testFx.portal.blade({ title: "Samples", bladeType: SamplesBlade });
         let blade = testFx.portal.blade({ title: extensionResources.samplesExtensionStrings.SamplesBlade.bladeWithToolbar });
         blade = await blade.clickCommand("Form");
         //get a reference to a dialog by title
@@ -2128,4 +2127,4 @@ Send an email to ibizadiscuss@microsoft.com
 
 [View thet API Reference](http://aka.ms/msportalfx-test/api)
 
-Generated on 2021-03-27
+Generated on 2021-03-30

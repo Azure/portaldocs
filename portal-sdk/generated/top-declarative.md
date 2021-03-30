@@ -101,7 +101,7 @@ Learn more about building the overview view [here](portalfx-declarative-overview
 <a name="declarative-views-supported-declarative-views-get-started-experiences"></a>
 ### Get started experiences
 
-In some scenarios, an asset does not necessarily map to an ARM resource type. In such cases, the best experience for customers may be a landing page/get started experience. A get started experience lays out information for the customer to get started with the service in the form of cards. The get started experience can optionally have a menu. Learn more about get started views in the Azure Portal [here](portalfx-declarative-get-started.md).
+In some scenarios, an asset does not necessarily map to an ARM resource type. In such cases, the best experience for customers may be a landing page/get started experience. A get started experience lays out information for the customer to get started with the service in the form of cards. The get started experience can optionally have a menu. Learn more about get started views in the Azure Portal [here](portalfx-declarative-overview.md#getting-started).
 
 Example of the get started view for the Managed Apps center - 
 
