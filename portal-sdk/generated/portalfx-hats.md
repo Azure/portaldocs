@@ -25,6 +25,8 @@ A portion of the HaTSurvey prompts the user to select up to 5 portal tasks the u
 Extension owners can participate in the survey by contributing a prioritized list of extension specific tasks and checking these files into their respective repo.  The following two files should be included in ExtensionName\Extension\Client folder.
 
 
+> **Note**: Make sure to put a clear identifier in the key for your task name, as this is how we will be able to identify your task in the HaTs dashboard (e.g task_task1_ExtensionName_TaskName) as seen below.
+
 
 
 <a name="happiness-tracking-surveys-hats-how-to-contribute-list-of-tasks-hatsresources-resjson"></a>
@@ -32,11 +34,11 @@ Extension owners can participate in the survey by contributing a prioritized lis
 
 ```json
 {
-    "tasks_task1_DisplayName": "Try to find a specific Azure resource",
-    "tasks_task2_DisplayName": "Perform a bulk action (example: delete) on multiiple resources",
-    "tasks_task3_DisplayName": "Manage tags for Azure resources",
-    "tasks_task4_DisplayName": "Deploy a custom template",
-    "tasks_task5_DisplayName": "Author a query with Azure Resource Graph Explorer"
+    "tasks_task1_HubsExtension_FindSpecificResource_DisplayName": "Try to find a specific Azure resource",
+    "tasks_task2_HubsExtension_PerformBulkCommandAction_DisplayName": "Perform a bulk action (example: delete) on multiple resources",
+    "tasks_task3_HubsExtension_ManageTags_DisplayName": "Manage tags for Azure resources",
+    "tasks_task4_CreateUIDef_DeployCustomTemplate_DisplayName": "Deploy a custom template",
+    "tasks_task5_HubsExtension_AuthorQueryinARG_DisplayName": "Author a query with Azure Resource Graph Explorer"
 }
 ```
 <a name="happiness-tracking-surveys-hats-how-to-contribute-list-of-tasks-extensionsurvey-pdl"></a>
@@ -48,15 +50,15 @@ Extension owners can participate in the survey by contributing a prioritized lis
   <!-- Priority sets the order of importance for the survey task/question -->
   <!-- DisplayName must follow the following format: "Tasks.Task<Priority>.displayName" -->
   <Survey>
-    <SurveyTask DisplayName="{Resource Tasks.Task1.displayName, Module=HatsResources}"
+    <SurveyTask DisplayName="{Resource Tasks.Task1.HubsExtension.FindSpecificResource.displayName, Module=HatsResources}"
                 Priority="1" />
-    <SurveyTask DisplayName="{Resource Tasks.Task2.displayName, Module=HatsResources}"
+    <SurveyTask DisplayName="{Resource Tasks.Task2.HubsExtension.PerformBulkCommandAction.displayName, Module=HatsResources}"
                 Priority="2" />
-    <SurveyTask DisplayName="{Resource Tasks.Task3.displayName, Module=HatsResources}"
+    <SurveyTask DisplayName="{Resource Tasks.Task3.HubsExtension.ManageTags.displayName, Module=HatsResources}"
                 Priority="3" />
-    <SurveyTask DisplayName="{Resource Tasks.Task4.displayName, Module=HatsResources}"
+    <SurveyTask DisplayName="{Resource Tasks.Task4.CreateUIDef.DeployCustomTemplate.displayName, Module=HatsResources}"
                 Priority="4" />
-    <SurveyTask DisplayName="{Resource Tasks.Task5.displayName, Module=HatsResources}"
+    <SurveyTask DisplayName="{Resource Tasks.Task5.HubsExtension.AuthorQueryinARG.displayName, Module=HatsResources}"
                 Priority="5" />
   </Survey>
 </Definition>
@@ -67,10 +69,7 @@ If using an alternate file location, update the pdl Module definition.
 ##### Example:
 
 ```xml
-    <SurveyTask DisplayName="{Resource Tasks.Task5.displayName, Module=AlternateFolder\HatsResources}"
+    <SurveyTask DisplayName="{Resource Tasks.Task5.HubsExtension.AuthorQueryinARG.displayName, Module=AlternateFolder\HatsResources}"
                 Priority="1" />
 ```
 
-<a name="happiness-tracking-surveys-hats-telemetry"></a>
-### Telemetry
-Results are available via the [HaTSurvey Dashboard](https://msit.powerbi.com/groups/4f11aaa4-1faf-4bf3-9983-1dc7351bf5b6/reports/1935565b-9149-428a-ae7f-75db83e1b464?ctid=72f988bf-86f1-41af-91ab-2d7cd011db47).

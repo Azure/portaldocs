@@ -1,5 +1,5 @@
 <a name="step-wizard"></a>
-# STEP WIZARD
+# Step Wizard
 
 Last updated Dec 2020 (see [change logs](#change-logs))
 

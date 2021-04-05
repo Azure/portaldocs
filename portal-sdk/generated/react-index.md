@@ -35,6 +35,7 @@
         * [Teams](#reactviews-getting-support-teams)
         * [User voice](#reactviews-getting-support-user-voice)
         * [Filing bugs](#reactviews-getting-support-filing-bugs)
+        * [Office hours](#reactviews-getting-support-office-hours)
     * [Contribution](#reactviews-contribution)
     * [Internal Technical Details](#reactviews-internal-technical-details)
         * [Prewarming the IFrames](#reactviews-internal-technical-details-prewarming-the-iframes)
@@ -539,6 +540,14 @@ Feel free to cross-post the idea to the ReactView Teams channel to get more awar
 If you experience any functional or styling bugs while developing your ReactView experience which you believe is caused by the framework please initially post to
 our Stack overflow (process documented above). If you're certain this is a framework bug and you have a shareable reproduction please file the bug directly using
 [https://aka.ms/portalfx/reactbug][React Bug].
+
+<a name="reactviews-getting-support-office-hours"></a>
+### Office hours
+
+Every Tuesday and Thursday 1100 - 1200 Pacific time, we host by appointment office hours.
+Feel free to schedule a session!
+
+[https://aka.ms/portalfx/react/officehours](https://aka.ms/portalfx/react/officehours)
 
 <a name="reactviews-contribution"></a>
 ## Contribution

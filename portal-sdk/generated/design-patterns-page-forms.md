@@ -1,6 +1,6 @@
 ﻿# Forms
 
-Last updated Nov 2020 (see [change logs](#change-logs))
+Last updated Apr 2021 (see [change logs](#change-logs))
 
 The Form design pattern enables users to easily input information and successfully commit changes.
 
@@ -100,6 +100,12 @@ Button labels and behavior:
 * "\<same as action\>" – validate fields and either show invalid fields indication or perform the action and close the dialog
 * "Cancel" – close the dialog without performing validation
 
+If dialog is used to show information to users without getting any input, it will have one primary button "Close" as below:
+
+<div style="max-width:450px">
+<img alttext="Forms example - simple edit form in dialog" src="../media/design-patterns-page-forms/info-dialog-form.png"  />
+</div>
+
 <a name="variations-form-in-context-pane"></a>
 ### 2. Form in context pane
 
@@ -155,7 +161,7 @@ There are 2 types of form to use for context panes: simple edit form and action 
 * A notification toast should be provided at the top right corner to notify users of success or failure of the form submission
 
 The design of **simple edit form** in context pane is shown below:
-<div style="max-width:450px">
+<div style="max-width:800px">
 <img alttext="Forms example - simple edit form in context pane before" src="../media/design-patterns-page-forms/simple-edit-form-in-context-pane-before.png"  />
 </div>
 Button labels and behavior:
@@ -165,7 +171,7 @@ Button labels and behavior:
 
  The design of **action form** in context pane is shown below :
 
-<div style="max-width:450px">
+<div style="max-width:800px">
 <img alttext="Forms example - action form in context pane before" src="../media/design-patterns-page-forms/action-form-in-context-pane-before.png"  />
 </div>
 
@@ -176,8 +182,14 @@ Button labels and behavior:
 
 The design of a form in context pane with notification toast after submission is shown below:
 
-<div style="max-width:450px">
+<div style="max-width:800px">
 <img alttext="Forms example - simple edit form in context pane after submission" src="../media/design-patterns-page-forms/simple-edit-form-in-context-pane-after.png"  />
+</div>
+
+If context pane is used to show information to users without getting any input, it will have one primary button "Close" as below:
+
+<div style="max-width:800px">
+<img alttext="Forms example - simple edit form in dialog" src="../media/design-patterns-page-forms/info-context-pane-form.png"  />
 </div>
 
 <a name="variations-form-in-menu-page"></a>
@@ -235,7 +247,7 @@ See [common behavior section](#common-behavior)
 
 The design of form in menu page is shown below:
 
-<div style="max-width:450px">
+<div style="max-width:800px">
 <img alttext="Forms example - form in menu before submission" src="../media/design-patterns-page-forms/form-in-menu-before.png"  />
 </div>
 
@@ -246,7 +258,7 @@ Button labels and behavior:
 
 The design of form in menu page with status bar after submission is shown below:
 
-<div style="max-width:450px">
+<div style="max-width:800px">
 <img alttext="Forms example - form in menu after" src="../media/design-patterns-page-forms/form-in-menu-after.png"  />
 </div>
 
@@ -310,7 +322,7 @@ Complex edit form in full screen page is used for changing existing values and i
 
 The design of complex edit form in full screen page is shown below:
 
-<div style="max-width:450px">
+<div style="max-width:800px">
 <img alttext="Forms example - complex edit form in full screen before" src="../media/design-patterns-page-forms/complex-edit-form-in-full-screen-before.png"  />
 </div>
 
@@ -322,7 +334,7 @@ Button labels and behavior:
 
 The design of complex edit form in full screen page with status bar after submission is shown below:
 
-<div style="max-width:450px">
+<div style="max-width:800px">
 <img alttext="Forms example - complex edit form in full screen after" src="../media/design-patterns-page-forms/complex-edit-form-in-full-screen-after.png"  />
 </div>
 
@@ -336,7 +348,7 @@ Simple edit form in full screen page is used for changing existing values and it
 
 The design of simple edit form in full screen page is shown below:
 
-<div style="max-width:450px">
+<div style="max-width:800px">
 <img alttext="Forms example - simple edit form in full screen before" src="../media/design-patterns-page-forms/simple-edit-form-in-full-screen-before.png"  />
 </div>
 
@@ -347,7 +359,7 @@ Button labels and behavior:
 
 The design of action form in full screen page is shown below:
 
-<div style="max-width:450px">
+<div style="max-width:800px">
 <img alttext="Forms example - action form in full screen before" src="../media/design-patterns-page-forms/action-form-in-full-screen-before.png"  />
 </div>
 
@@ -358,7 +370,7 @@ Button labels and behavior:
 
 The design of form with notification toast after submission is shown below:
 
-<div style="max-width:450px">
+<div style="max-width:800px">
 <img alttext="Forms example - action form in full screen after" src="../media/design-patterns-page-forms/action-form-in-full-screen-after.png"  />
 </div>
 
@@ -367,7 +379,7 @@ The design of form with notification toast after submission is shown below:
 
 Tabs can be used inside a form to indicate multiple steps or aspects. They can be used in any type of forms such as menu page form, full page form, etc. They cannot be used above the form to avoid hierarchical confusion. When tabs are present, a line separator is visible at all time to indicate the buttons are at the form level as opposed to inside an individual tab.
 
-<div style="max-width:450px">
+<div style="max-width:800px">
 <img alttext="Forms example - form with tabs" src="../media/design-patterns-page-forms/form-with-tabs.png"  />
 </div>
 
@@ -507,6 +519,9 @@ Related documentation
 
 <a name="change-logs"></a>
 ## Change logs
+<a name="change-logs-apr-2021"></a>
+### Apr 2021
+* Add info form to dialog form and context pane form
 <a name="change-logs-nov-2020"></a>
 ### Nov 2020
 * Added six variances of form

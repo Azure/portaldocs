@@ -213,6 +213,7 @@ Follows the same format as ClientTelemetry but also includes:
 | Blade | BladeFullReady | The blade's constructor, onInitialize/onInputsSet have resolved and if the blade contains any parts, all part's constructor and onInputsSet have also resolved. |
 | Blade | BladeClosed | Fired when the blade is disposed, logs the `TotalTimeBladeOpen` in milliseconds under the action's data column |
 | Blade | CommandExecuted | When any of the Commands on a blade is clicked - like start, stop, etc. |
+| MenuBlade | MenuBladeFullReady | Log once per load a menu blade, fired once both the menu and the initially load child are both ready. |
 | Part | PartClick | Triggered when a part is clicked. |
 | Part | PartErrored | Triggered when loading a part failed. **This event is used to track part errors in our reliability metrics.** |
 | Part | PartReady | Triggered when the part has resolved onInputsSet(). |
@@ -229,6 +230,8 @@ Follows the same format as ClientTelemetry but also includes:
 
 <a name="overview-viewing-telemetry-custom-queries-common-queries"></a>
 #### Common queries
+
+> For a list of all our Kusto Tips & Tricks see our [Wiki](https://teams.microsoft.com/l/entity/com.microsoft.teamspace.tab.wiki/tab::d26de556-656a-4142-9720-e2ef5ac85470?context=%7B%22subEntityId%22%3A%22%7B%5C%22pageId%5C%22%3A2%2C%5C%22sectionId%5C%22%3A4%2C%5C%22origin%5C%22%3A2%7D%22%2C%22channelId%22%3A%2219%3Afc154cefe9cd42df8df5043ed68d8016%40thread.tacv2%22%7D&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47) in our Teams Community Forum. 
 
 <a name="overview-viewing-telemetry-custom-queries-common-queries-extension-load-performance-and-usage"></a>
 ##### Extension load performance and usage
