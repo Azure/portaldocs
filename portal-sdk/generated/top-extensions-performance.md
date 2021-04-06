@@ -256,7 +256,7 @@ blade which is not meeting the bar.
 Sure! Book in some time in the Azure performance office hours.
 
 - __When?__  Wednesdays from 13:00 to 16:00
-- __Where?__ B41 (Conf Room 41/44)
+- __Where?__ Teams meeting
 - __Contacts:__ Sean Watson (sewatson)
 - __Goals__
   - Help extensions to meet the performance bar
@@ -265,7 +265,7 @@ Sure! Book in some time in the Azure performance office hours.
 - __How to book time__: Send a meeting request with the following
   - TO: sewatson;
   - Subject: YOUR_EXTENSION_NAME: Azure performance office hours
-  - Location: Conf Room 41/44 (It is already reserved)
+  - Location: Teams meeting
 
 <a name="performance-best-practices"></a>
 # Performance best practices

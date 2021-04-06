@@ -2,7 +2,7 @@
 <a name="microsoft-azureportal-test"></a>
 # @microsoft/azureportal-test
 
-Generated on 2021-04-02
+Generated on 2021-04-06
 
 * [@microsoft/azureportal-test](#microsoft-azureportal-test)
     * [Overview](#microsoft-azureportal-test-overview)
@@ -868,11 +868,6 @@ FromLocalPackage
         await createEngineBlade.fillRequiredFields(resourceName, "800cc", "type1", subscriptionName, resourceName, locationDescription);
         await createEngineBlade.reviewAndCreateButton.click();
         await testFx.portal.wait(async () => !await createEngineBlade.createButton.hasClass(CssClassNames.Controls.buttonDisabled));
-        await createEngineBlade.createButton.click();
-        await testFx.portal.wait(
-            until.isPresent(testFx.portal.blade({ title: `${extensionResources.samplesExtensionStrings.Engine.engineNoPdl} - Overview` })),
-            120000,
-            "The resource blade was not opened, could be deployment timeout.");
         
 ...
 ```
@@ -894,11 +889,6 @@ import testFx from '@microsoft/azureportal-test';
         await createEngineBlade.fillRequiredFields(resourceName, "800cc", "type1", subscriptionName, resourceName, locationDescription);
         await createEngineBlade.reviewAndCreateButton.click();
         await testFx.portal.wait(async () => !await createEngineBlade.createButton.hasClass(CssClassNames.Controls.buttonDisabled));
-        await createEngineBlade.createButton.click();
-        await testFx.portal.wait(
-            until.isPresent(testFx.portal.blade({ title: `${extensionResources.samplesExtensionStrings.Engine.engineNoPdl} - Overview` })),
-            120000,
-            "The resource blade was not opened, could be deployment timeout.");
         
 ...
 ```
@@ -2127,4 +2117,4 @@ Send an email to ibizadiscuss@microsoft.com
 
 [View thet API Reference](http://aka.ms/msportalfx-test/api)
 
-Generated on 2021-04-02
+Generated on 2021-04-06
