@@ -166,7 +166,9 @@ const onCreateButtonClick = () => {
     // Create
     createButton.disabled(true);
     // All form and Arm validations have passed, deploy the template.
+    //docs#deployTemplate
     return provisioning.deployTemplate(this._supplyTemplateDeploymentOptions())
+        //docs#deployTemplate
         .then((val) => {
             // IMPORTANT: If you decide to log your TemplateDeploymentResults, particularly the parameters
             // property, make sure you do *NOT* log any secure strings or secure objects (e.g. passwords).
