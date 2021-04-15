@@ -1243,13 +1243,25 @@ module MsPortalFxForAsset {
             }
 
             /**
+             * The interface for menu command item display customizations.
+             */
+            export interface MenuItemCustomCommandOptions {
+                /**
+                 * The command content.
+                 *
+                 * Customizes rendering of menu command item @see `Toolbar.ToolbarItems.MenuItemCustomButtonOptions` for more details.
+                 */
+                readonly content?: string;
+            }
+
+            /**
              * The interface for selection based menu command.
              */
             export interface MenuSelectionCommand extends CommonCommandBase<SelectionCommandKind.MenuSelectionCommand>, RequiresSelection {
                 /**
                  * The list of commands.
                  */
-                readonly commands: ReadonlyArray<OpenBladeSelectionCommand | ArmCommand>; //If a new command type is supported in future, it'll be added to this list depending on whether it needs to be supported in the menu list.
+                readonly commands: ReadonlyArray<OpenBladeSelectionCommand & MenuItemCustomCommandOptions | ArmCommand>; //If a new command type is supported in future, it'll be added to this list depending on whether it needs to be supported in the menu list.
             }
 
             /**
@@ -1259,7 +1271,7 @@ module MsPortalFxForAsset {
                 /**
                  * The list of commands.
                  */
-                readonly commands: ReadonlyArray<OpenBladeCommand>;
+                readonly commands: ReadonlyArray<OpenBladeCommand & MenuItemCustomCommandOptions>;
             }
 
             /**
@@ -1381,6 +1393,39 @@ import { SvgType } from "Fx/Images";
                 marketplaceItemId: "Microsoft.EngineV3", // Opens marketplace create flow
             },
         },
+        {
+            kind: ForAsset.Commands.CommandKind.MenuCommand,
+            id: "MenuCommand",
+            label: ClientResources.AssetCommands.menuCommand,
+            icon: {
+                image: SvgType.PolyResourceLinked,
+            },
+            commands: [
+                {
+                    kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
+                    id: "OpenBladeCommand1",
+                    label: ClientResources.AssetCommands.openBlade1,
+                    icon: {
+                        image: SvgType.AzureQuickstart,
+                    },
+                    content: ClientResources.infoBalloonContent, // Adds the subtitle property for the menu command item.
+                    bladeReference: {
+                        blade: "SimpleTemplateBlade",
+                    },
+                },
+                {
+                    kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
+                    id: "OpenBladeCommand2",
+                    label: ClientResources.AssetCommands.openBlade2,
+                    icon: {
+                        image: SvgType.QuickStartPoly,
+                    },
+                    bladeReference: {
+                        blade: "DiTemplateBlade",
+                    },
+                },
+            ],
+        },
     ],
     selectionCommands: [ // Commands that require resource selection
         {
@@ -1458,6 +1503,7 @@ import { SvgType } from "Fx/Images";
                     icon: {
                         image: SvgType.AzureQuickstart,
                     },
+                    content: ClientResources.infoBalloonContent, // Adds the subtitle property for the menu command item.
                     bladeReference: {
                         blade: "SimpleTemplateBlade",
                     },
