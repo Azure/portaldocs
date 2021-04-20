@@ -432,7 +432,7 @@ export class PrinterViewModel
     * @return A promise which will be resolved with the resource menu configuration.
     */
    public getResourceMenuConfig(resourceId: string): FxBase.PromiseV<FxAssets.ResourceMenuConfig> {
-       const armId = ArmId.parse(resourceId);
+       const armId = ArmId.parse(resourceId, true);
        executeInDevelopmentModeOnly(() => {
            const resourceType = armId.resourceType.toLowerCase();
            if (resourceType !== entityResourceType) {
