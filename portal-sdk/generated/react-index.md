@@ -30,6 +30,7 @@
         * [Localization](#reactviews-additional-features-localization)
         * [Theming](#reactviews-additional-features-theming)
         * [LocalStorage and SessionStorage](#reactviews-additional-features-localstorage-and-sessionstorage)
+        * [Persistent Storage](#reactviews-additional-features-persistent-storage)
     * [Getting Support](#reactviews-getting-support)
         * [Stack overflow](#reactviews-getting-support-stack-overflow)
         * [Teams](#reactviews-getting-support-teams)
@@ -508,6 +509,11 @@ To ensure that a component re-renders when the theme is changed, any component t
 
 LocalStorage and SessionStorage are both supported in ReactViews.
 They can both be used in exactly the same way you would expect to use them by accessing `window.localStorage` or `window.sessionStorage`
+
+<a name="reactviews-additional-features-persistent-storage"></a>
+### Persistent Storage
+
+Pesistent storage is also available for those who need to store the settings per user per extension. 10Kb limits apply. [Read more](/portal-sdk/generated/top-extensions-persistent-storage.md).
 
 <a name="reactviews-getting-support"></a>
 ## Getting Support

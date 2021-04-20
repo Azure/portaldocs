@@ -69,7 +69,7 @@ container.openContextPane(BladeReferences.forBlade("InProductFeedbackBlade").cre
 <a name="in-product-feedback-how-to-review-the-results"></a>
 ## How to review the results
 
-Feedback results are available via the [IPF Dashboard](https://msit.powerbi.com/groups/4f11aaa4-1faf-4bf3-9983-1dc7351bf5b6/reports/64b8df41-a76b-4b7d-af5c-5b67c165ed64?ctid=72f988bf-86f1-41af-91ab-2d7cd011db47).
+Feedback results are available via the [IPF Dashboard](https://aka.ms/portalfx/dashboard/CESCVA).
 
 Survey results are also available in Kusto using the following query.
 
