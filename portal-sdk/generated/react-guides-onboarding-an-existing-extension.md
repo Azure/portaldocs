@@ -131,7 +131,7 @@ const path = require("path");
 const reactTools = require("@microsoft/azureportal-reactview-tools/webpack.config");
 const builder = new reactTools.ReactViewBuild(process.cwd(),path.resolve([relative path to your output directory]));
 // customizations here, in this example we've named our Resource files as ending in Strings
-reactViewConfig.addExternal(/Strings$/);
+builder.addExternal(/Strings$/);
 // customizations end
 builder.runWebPack(); // pass true in to watch
 ```
