@@ -1167,17 +1167,23 @@ If you’re using the hosting service, you can do this by updating the relevant 
     }
 ```
 
-<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-how-to-hide-your-asset-commands-in-different-environments-testing-hiding-commands-locally"></a>
-#### Testing hiding commands locally
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-how-to-hide-your-asset-commands-in-different-environments-testing-hiding-showing-commands-locally"></a>
+#### Testing hiding/showing commands locally
 
 For the desired environment append the following feature flags.
 
 ```txt
-    ?microsoft_azure_myextension_hideassettypecmmands={"MyAsset":["MyCommandId1", "MyCommandId2"]}
+    ?microsoft_azure_myextension_hideassettypecommands={"MyAsset":["MyCommandId1", "MyCommandId2"]}
 ```
 
 If you want to test hiding all your commands, you can specify ["*"].
 
 ```txt
-    ?microsoft_azure_myextension_hideassettypecmmands={"MyAsset":["*"]}
+    ?microsoft_azure_myextension_hideassettypecommands={"MyAsset":["*"]}
+```
+
+If you want to test commands by showing them locally that are hidden via config file changes, specify empty string [""]. This will ignore hidden commands and show all commands for a given asset type.
+
+```txt
+    ?microsoft_azure_myextension_hideassettypecommands={"MyAsset":[""]}
 ```
