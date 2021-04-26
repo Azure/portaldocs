@@ -513,7 +513,7 @@ They can both be used in exactly the same way you would expect to use them by ac
 <a name="reactviews-additional-features-persistent-storage"></a>
 ### Persistent Storage
 
-Pesistent storage is also available for those who need to store the settings per user per extension. 10Kb limits apply. [Read more](/portal-sdk/generated/top-extensions-persistent-storage.md).
+Pesistent storage is also available for those who need to store the settings per user per extension. 10Kb limits apply. [Read more](/portal-sdk/generated/persistent-storage.md).
 
 <a name="reactviews-getting-support"></a>
 ## Getting Support
