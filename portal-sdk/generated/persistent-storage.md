@@ -6,7 +6,7 @@
     * [Persistent Storage API](#persistent-storage-persistent-storage-api)
     * [Cache](#persistent-storage-cache)
     * [Telemetry](#persistent-storage-telemetry)
-        * [Kusto query pattern:](#persistent-storage-telemetry-kusto-query-pattern)
+        * [Kusto query pattern](#persistent-storage-telemetry-kusto-query-pattern)
     * [Examples](#persistent-storage-examples)
         * [React](#persistent-storage-examples-react)
         * [Knockout](#persistent-storage-examples-knockout)
@@ -20,7 +20,7 @@ _Persistent Storage_ is primarily meant to provide a performant, scalable, and f
 It utilizes the existing settings service infrastructure and enables extension authors to store key/value string pairs in both ReactView and Knockout blades.
 Extensions cannot cross reference each other's settings and, if settings aren't accessed once in 30 days, they get removed automatically.
 
-**NOTE**: We will not serialise or deserialise when writing or reading the data.
+> **NOTE**: We will not serialise or deserialise when writing or reading the data.
 
 If you and your team have an interest in _Persistent Storage_, this guide should answer most of your questions.
 We rely on you to handle any thrown errors and to be mindful when interacting with the storage since accidental deletion is possible.
@@ -41,6 +41,8 @@ An error might be thrown on **any** operation. Make sure you catch and handle th
 Additionally, **read** operations provide type safety and intellisense for the returning keys, and if there are no settings stored, return an empty object, making null checks unnecessary.
 
 Because _Persistent Storage_ is built on top of the existing settings manager, all operations are de-bounced, thus there may be some delay when updating the settings. To track the delay, returned promises can be used.
+
+> **IMPORTANT**: Do not use this API neither for data sharing purposes between Knockout blades and ReactViews nor for storing PII information; there are other options available for such scenarios, like DataCache (currently in development) and [React Model](https://github.com/Azure/portaldocs/blob/master/portal-sdk/generated/react-index.md#breaking-change).
 
 <a name="persistent-storage-cache"></a>
 ## Cache
@@ -73,7 +75,7 @@ There is telemetry provided with _Persistent Storage_ for free. Below is a list 
     - **extension name**, **duration** and **error** on failure;
 
 <a name="persistent-storage-telemetry-kusto-query-pattern"></a>
-#### Kusto query pattern:
+#### Kusto query pattern
 ```sql
 ClientTelemetry
 | where PreciseTimeStamp >= ago(1h)

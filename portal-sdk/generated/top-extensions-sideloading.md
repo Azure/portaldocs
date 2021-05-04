@@ -7,13 +7,15 @@ Side loading lets you run a local development version of your extension against 
 <a name="quick-reference-by-example"></a>
 ## Quick Reference by Example
 
+Both `ap serve` and `ap start` will compose a side load uri and load the browser for you [https://aka.ms/portalfx/apclidoc](https://aka.ms/portalfx/apclidoc).  If you are manually composing it see the following examples.
+
 * Sideload single extension from localhost
 
-	`https://portal.azure.com/?feature.canmodifyextensions=true#?testExtensions={"Microsoft_Azure_Demo":"https://localhost:44300/"}`
+	`https://portal.azure.com/?feature.canmodifyextensions=true#?testExtensions={"Microsoft_Azure_Demo":"https://localhost:1339/demo"}`
 
 * Sideload multiple extensions from localhost
 
-	`https://portal.azure.com/?feature.canmodifyextensions=true#?testExtensions={"Microsoft_Azure_Demo":"https://localhost:44300/","Microsoft_Azure_AnotherExtension":"https://localhost:44301/" }`
+	`https://portal.azure.com/?feature.canmodifyextensions=true#?testExtensions={"Microsoft_Azure_Demo":"https://localhost:1339/demo","Microsoft_Azure_AnotherExtension":"https://localhost:1340/anotherextension" }`
 
 * Sideload extension that is deployed on hosting service in friendly name or stage
 
@@ -29,10 +31,18 @@ Side loading lets you run a local development version of your extension against 
   );
   ```
 
-<a name="sideloading-step-by-step"></a>
-## Sideloading step by step
+<a name="automatically-sideloading-step-by-step"></a>
+## Automatically sideloading step by step
 
-<a name="sideloading-step-by-step-step-1"></a>
+<a name="automatically-sideloading-step-by-step-step-1"></a>
+### Step 1
+
+Run `ap serve` or ap `start`.
+
+<a name="manually-sideloading-step-by-step"></a>
+## Manually Sideloading step by step
+
+<a name="manually-sideloading-step-by-step-step-1-1"></a>
 ### Step 1
 
 Register the extension for side loading using one of the following two methods.
@@ -47,7 +57,7 @@ Register the extension for side loading using one of the following two methods.
 
 	The following is the syntax of a query string that can be used to load an extension by using the address bar in the browser.
 
-	`https://<environment>/?feature.canmodifyextensions=true#?testExtensions={"<extensionName>":"https://localhost:<portNumber>"}`
+	`https://<environment>/?feature.canmodifyextensions=true#?testExtensions={"<extensionName>":"https://localhost:<portNumber>/<extensionHostingServiceName>"}`
 
 	where
 
@@ -57,17 +67,19 @@ Register the extension for side loading using one of the following two methods.
 
 	* **extensionName**: Matches the name of the extension, without the angle brackets, as specified in the `<Extension>` element in the `extension.pdl` file.
 
-	* **portNumber**: Optional. The port number where the extension is hosted on the endpoint that serves the extension, as in the following example: `https://localhost:44300/`
+	* **portNumber**: Optional. The port number where the extension is hosted on the endpoint that serves the extension, as in the following example: `https://localhost:1339/demo`
+	
+	* **extensionHostingServiceName**: The value of property `extensionHostingServiceName` in devServerConfig.json
 
 	Example
 
-	The following complete URL was built using the previous syntax to sideload the extension named "Microsoft_Azure_Demo" into `portal.azure.com`, to run on localhost port 44300. It registers the extension only for the current user session.
+	The following complete URL was built using the previous syntax to sideload the extension named "Microsoft_Azure_Demo" into `portal.azure.com`, to run on localhost port 1339. It registers the extension only for the current user session.
 
-	`https://portal.azure.com/?feature.canmodifyextensions=true#?testExtensions={"Microsoft_Azure_Demo":"https://localhost:44300/"}`
+	`https://portal.azure.com/?feature.canmodifyextensions=true#?testExtensions={"Microsoft_Azure_Demo":"https://localhost:1339/demo"}`
 
 	On occasion your changes may span multiple extensions. The following demonstrates how to sideload multiple extensions running on localhost.
 
-	`https://portal.azure.com/?feature.canmodifyextensions=true#?testExtensions={"Microsoft_Azure_Demo":"https://localhost:44300/","Microsoft_Azure_AnotherExtension":"https://localhost:44301/" }`
+	`https://portal.azure.com/?feature.canmodifyextensions=true#?testExtensions={"Microsoft_Azure_Demo":"https://localhost:1339/demo","Microsoft_Azure_AnotherExtension":"https://localhost:1340/anotherextension" }`
 
 * If the extension is deployed using a friendly name in Hosting Service.
 
@@ -83,26 +95,26 @@ Register the extension for side loading using one of the following two methods.
 
 	For more information about testing extensions in the hosting service, see [top-extensions-hosting-service.md#friendly-names-and-sideloading](top-extensions-hosting-service.md#friendly-names-and-sideloading).
 
-<a name="sideloading-step-by-step-step-2-accept-the-allow-dialog"></a>
+<a name="manually-sideloading-step-by-step-step-2-accept-the-allow-dialog"></a>
 ### Step 2 Accept the allow dialog
 
 Click on the `Allow` button to sideload the extension, as in the following image.
 
 ![alt-text](../media/top-extensions-sideloading/allowDialog.png "Untrusted extension")
 	
-<a name="sideloading-step-by-step-step-3-verify-that-the-extension-side-loaded"></a>
+<a name="manually-sideloading-step-by-step-step-3-verify-that-the-extension-side-loaded"></a>
 ### Step 3 Verify that the extension side loaded
 
 Press  `ctl+alt+d` and click "Open Debug Hub". Locate the name of the sideloaded extension in the Debug pane.
 
-<a name="sideloading-step-by-step-step-4-test-and-debug-your-extension"></a>
+<a name="manually-sideloading-step-by-step-step-4-test-and-debug-your-extension"></a>
 ### Step 4 Test and debug your extension
 
 For general information about debugging and testing, see [top-extensions-debugging.md](top-extensions-debugging.md).
 
 For information about debugging switches or feature flags, see [top-extensions-flags.md](top-extensions-flags.md).
 
-<a name="sideloading-step-by-step-step-5-restore-default-configuration"></a>
+<a name="manually-sideloading-step-by-step-step-5-restore-default-configuration"></a>
 ### Step 5 Restore default configuration
 
 If you used the `registerTestExtension` method, restore the original extension configuration for your user by clicking the "Restore default configuration", as in the following image.
@@ -124,7 +136,7 @@ Example
 
 <!-- TODO:  FAQ Format is ###Link, ***title***, Description, Solution, 3 Asterisks -->
 
-<a name="sideloading-step-by-step-portal-never-shows-up"></a>
+<a name="manually-sideloading-step-by-step-portal-never-shows-up"></a>
 ### Portal never shows up
 
 ***When sideloading via the query string or fragment or via F5 the tab with the portal never shows up.***
@@ -135,7 +147,7 @@ Check that your browser's popup blocker is not blocking the second tab from bein
 
 * * *
 
-<a name="sideloading-step-by-step-extension-will-not-sideload"></a>
+<a name="manually-sideloading-step-by-step-extension-will-not-sideload"></a>
 ### Extension will not sideload
 
 ***My Extension fails to side load and I get an ERR_INSECURE_RESPONSE in the browser console***
@@ -154,7 +166,7 @@ Items that are specifically status codes or error messages can be located in [po
 
 * * *
 
-<a name="sideloading-step-by-step-sandboxed-iframe-security"></a>
+<a name="manually-sideloading-step-by-step-sandboxed-iframe-security"></a>
 ### Sandboxed iframe security
 
 ***I get an error 'Security of a sandboxed iframe is potentially compromised by allowing script and same origin access'. How do I fix this?***
@@ -164,7 +176,7 @@ You need to allow the Azure Portal to frame your extension URL. For more informa
 * * *
 
 
-<a name="sideloading-step-by-step-sideloading-in-chrome"></a>
+<a name="manually-sideloading-step-by-step-sideloading-in-chrome"></a>
 ### Sideloading in Chrome
 
 ***Ibiza sideloading in Chrome fails to load parts***
@@ -173,21 +185,21 @@ Enable the `allow-insecure-localhost` flag, as described in [https://stackoverfl
 
 * * *
 
-<a name="sideloading-step-by-step-where-are-the-faq-s-for-general-extension-debugging"></a>
+<a name="manually-sideloading-step-by-step-where-are-the-faq-s-for-general-extension-debugging"></a>
 ### Where are the FAQ&#39;s for general extension debugging?
 
 The FAQs for debugging extensions is located at [portalfx-extensions-faq-debugging.md](portalfx-extensions-faq-debugging.md).
 
 * * *
 
-<a name="sideloading-step-by-step-are-gallery-packages-sideloaded"></a>
+<a name="manually-sideloading-step-by-step-are-gallery-packages-sideloaded"></a>
 ### Are gallery packages sideloaded?
 
 When configured correctly gallery packages from the extension running on localhost are sideloaded and made available in the portal at  `+ Create a resource >  see all > Local Development`  if your gallery packages are not showing up there see [https://github.com/Azure/portaldocs/blob/master/gallery-sdk/generated/index-gallery.md#gallery-package-development-and-debugging](https://github.com/Azure/portaldocs/blob/master/gallery-sdk/generated/index-gallery.md#gallery-package-development-and-debugging).
 
 * * *
 
-<a name="sideloading-step-by-step-how-do-i-mark-automated-tests-as-test-synthetic-traffic-so-that-it-does-not-show-up-in-reporting"></a>
+<a name="manually-sideloading-step-by-step-how-do-i-mark-automated-tests-as-test-synthetic-traffic-so-that-it-does-not-show-up-in-reporting"></a>
 ### How do I mark automated tests as test/synthetic traffic so that it does not show up in reporting?
 
 Automated tests that run against a production environment should be marked as test/synthetic traffic. Use one of the following options to accomplish this.
@@ -199,7 +211,7 @@ TestTraffic-<TeamName>-<Component>
 
 * * *
 
-<a name="sideloading-step-by-step-i-need-to-load-my-extension-from-a-domain-other-than-localhost"></a>
+<a name="manually-sideloading-step-by-step-i-need-to-load-my-extension-from-a-domain-other-than-localhost"></a>
 ### I need to load my extension from a domain other than localhost
 
 We recommend that you sideload using localhost, as specified in [top-extensions-sideloading.md#step-1](top-extensions-sideloading.md#step-1). But if you do have scenarios where you need to sideload the extension that is  not running on localhost, or is mapped by using a `hosts` file to a named domain, use the `registerTestExtension` API. 
@@ -264,14 +276,14 @@ To load an extension, extension developers can use the following approach.
 
 * * * 
 
-<a name="sideloading-step-by-step-can-i-sideload-into-onestb"></a>
+<a name="manually-sideloading-step-by-step-can-i-sideload-into-onestb"></a>
 ### Can I sideload into onestb?
 
 Onebox-stb has been deprecated. Please do not use it. Instead sideload directly into df, mpac or production.
 
 * * *
 
-<a name="sideloading-step-by-step-how-can-i-side-load-my-extension-with-obsolete-bundles"></a>
+<a name="manually-sideloading-step-by-step-how-can-i-side-load-my-extension-with-obsolete-bundles"></a>
 ### How can I side load my extension with obsolete bundles?
 
 See [https://aka.ms/portalfx/obsoletebundles](https://aka.ms/portalfx/obsoletebundles).
