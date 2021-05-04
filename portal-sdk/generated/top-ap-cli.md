@@ -1081,7 +1081,6 @@ The ap cli inner dev loop is now enabled for xplat on MacOS/OSX.
  1. You are already on ap CLI [http://aka.ms/portalfx/apcli](http://aka.ms/portalfx/apcli) - introduced 2019/11/15
  1. Update to SDK 7.128.0.5
  1. Your build pipline is on either dotnet core or MSBuild 16.
- 1. Device: until this statement is removed - this toolchain is not yet verified/supported on the new M1 hardware.
 
 <a name="cli-overview-manual-one-time-auth-setup-and-installation-migrating-your-project-to-work-on-macos-osx-migration-steps-for-extension-to-support-xplat-inner-dev-loop"></a>
 #### Migration steps for extension to support xplat inner dev loop

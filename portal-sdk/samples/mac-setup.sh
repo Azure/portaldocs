@@ -1,7 +1,14 @@
 #!/bin/bash
 
+dotnetOpts=()
+if [[ $(uname -p) == 'arm' ]]; then
+  #if M1 install rosetta 
+  softwareupdate --install-rosetta
+  dotnetOps+=(--arch x64)
+fi
+
 #install dotnet core 3.1.202
-curl -fsSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin -Version 3.1.202
+curl -fsSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin -Version 3.1.202 ${dotnetOps[@]}
 
 if [[ $? -ne 0 ]]; then
   echo "Installing .NET Core failed, please try again." 2>&1
@@ -17,7 +24,13 @@ if [[ $? -ne 0 ]]; then
 fi
 
 #install brew for mono-libgdiplus dep
-curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash /dev/stdin
+if [[ $(uname -p) == 'arm' ]]; then
+  arch -x86_64 -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash /dev/stdin)"
+else
+  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash /dev/stdin
+fi
+
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
 
 if [[ $? -ne 0 ]]; then
   echo "Installing brew failed, please try again." 2>&1
@@ -25,7 +38,11 @@ if [[ $? -ne 0 ]]; then
 fi
 
 #mono-libgdiplus for gallery package utility dependency on System.Drawing - https://github.com/dotnet/runtime/issues/21980
-brew install mono-libgdiplus
+if [[ $(uname -p) == 'arm' ]]; then
+  arch -x86_64 /usr/local/bin/brew reinstall mono-libgdiplus
+else
+  brew reinstall mono-libgdiplus
+fi
 
 if [[ $? -ne 0 ]]; then
   echo "Installing mono-libgdiplus failed, please try again." 2>&1
@@ -55,8 +72,11 @@ npmrcTemplate='; begin auth token
 echo "${npmrcTemplate//\$CREDENTIAL_PLACEHOLDER\$/$patBase64}" > ~/.npmrc
 
 #install the latest cli
+echo "changing ownership of /usr/local/lib/node_modules"
+sudo chown -R $USER /usr/local/lib/node_modules
+echo "installing ap CLI"
 npm config set registry https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/
-npm install --no-optional @microsoft/azureportalcli@latest --registry https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/
+npm install -g --no-optional @microsoft/azureportalcli@latest --registry https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/
 
 if [[ $? -ne 0 ]]; then
   echo "Installing @microsoft/azureportalcli failed, please try again." 2>&1
