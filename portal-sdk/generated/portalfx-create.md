@@ -550,6 +550,13 @@ const createTagFieldValidation = (factory: PolicyValidationFactory) => factory.c
             }
             return acc;
         }, [] as PendingValues<FxTags.TaggedResource[]>[]);
+        pendingValues.push({
+            field: "tags",
+            valueToField: null,
+            fieldToDisplay: (field) => ({
+                displayField: clientStrings.tag.format(field.split(".").slice(1).join(".")),
+            }),
+        });
         return pendingValues;
     },
 }).validation;

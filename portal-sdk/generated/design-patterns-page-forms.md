@@ -222,10 +222,9 @@ A form in menu page is used when the input form is invoked directly from the res
 A form in menu page has the following features:
 
 1. Title
-2. Command bar
-3. Labels and corresponding fields
-4. Menu
-5. Buttons
+2. Labels and corresponding fields
+3. Menu
+4. Buttons
 
 <a name="variations-form-in-menu-page-title-2"></a>
 #### Title
@@ -240,8 +239,7 @@ See [common behavior section](#common-behavior)
 <a name="variations-form-in-menu-page-button-and-design-recommendation-2"></a>
 #### Button and Design Recommendation
 
-* Command bar can be placed above a form but it is not associated with the form
-* Commands perform tasks that are irrelevant of the form and do not interact with any form element
+* Command bar is not recommended in menu form. If you really need to use a command bar, the command bar should be placed above the form. Commands should perform tasks that are irrelevant of the form and do not interact with any form element
 * Use a status bar to inform the status of applied or discarded changes: successful (green), failed (red), or in progress (blue)
 * Keep the status bar visible until the form is edited again
 
@@ -255,12 +253,6 @@ Button labels and behavior:
 
 * "Apply" – validate fields and either show invalid fields indication or save the changes and remain on the same form
 * "Discard changes" – discard the changes and remain on the same form
-
-The design of form in menu page with status bar after submission is shown below:
-
-<div style="max-width:800px">
-<img alttext="Forms example - form in menu after" src="../media/design-patterns-page-forms/form-in-menu-after.png"  />
-</div>
 
 <a name="variations-form-in-full-screen-page"></a>
 ### 4. Form in full screen page
