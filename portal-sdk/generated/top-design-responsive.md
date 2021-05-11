@@ -1,6 +1,16 @@
 <a name="responsive-design-with-ibiza-sdk"></a>
 # Responsive design with Ibiza SDK
 
+Jump to:
+
+- [Ibiza portal responsiveness](#ibiza-portal-responsiveness)
+- [Evaluating existing content](#evaluating-existing-content)
+- [Migrating content to be responsive](#migrating-content-to-be-responsive)
+  - [Summary steps](#summary-steps)
+  - [Fixing content for responsiveness (terse section, with common traps and techniques)](#fixing-content-for-responsiveness)
+- [Iframe content](#iframe-content)
+- [Annotate content as responsive](#annotate-content-as-responsive)
+
 <a name="responsive-design-with-ibiza-sdk-the-web-is-an-unconstrained-canvas"></a>
 ## The web is an unconstrained canvas
 
@@ -42,10 +52,30 @@ Be aware of these notable control behaviors:
 - **Grids** are considered two dimensional content. They will render an horizontal scrollbar based on the sum of the column widths overflowing the container.
 - **Charts** are considered two dimensional content. They will render an horizontal scrollbar if the chart is overflowing its container.
 
+***
+
 <a name="responsive-design-with-ibiza-sdk-responsive-design-techniques"></a>
 ## Responsive design techniques
 
 This "[Responsive design techniques](https://docs.microsoft.com/en-us/windows/uwp/design/layout/responsive-design)" document is part of the Universal Windows Platform apps documentation. The design techniques illustrated within are the same for the web. These techniques were used to implement the responsive updates to the Ibiza portal. Familiarity with these techniques should help guide decisions when updating existing content for responsiveness.
+
+***
+
+<a name="responsive-design-with-ibiza-sdk-evaluating-existing-content"></a>
+## Evaluating existing content
+
+To help investigate the current state of readiness, the portal exposes an evaluation tool that hosts the content in a responsive container. An additional tool renders the content at the minimum width it shall render to pass the accessibility criterion for Reflow.
+
+>**Note:** It isn't always obvious if the tool is active or not since not all content reacts to it toggling on or off. The tool is active if the top bar of the portal adopts a green tint.
+
+<a name="responsive-design-with-ibiza-sdk-evaluating-existing-content-responsive-container-preview-tool"></a>
+### Responsive container preview tool
+
+This tool forces content to render in a container that is fully responsive. The content is rendered as if it was marked as `reflowReady`, the last step to enable responsive content. Browser window resize, or zoom actions, will influence the content rendering. All layout issues that cause scrolling in two dimensions should be investigated, as is content that is cut into the overflow without a scrollbar to access it.
+
+To activate this tool, while focus is within non-iframe content, access the portal debugging tools with the `Ctrl+Alt+D` keyboard shortcut. Alternatively, do a long press on the login avatar for 5 seconds and select `Debugging tools` in the dialog that appears. In the lower right corner, a crude UI with options will appear. Under the accessibility label, select the `Reflow flexible` option. Turn it off using the `Reflow off` option.
+
+>**Tip:** Most browsers' developer tools include a *"Responsive design mode"*. Using preset values, or the draggable size handles of the free form option, it is possible to preview how the content react to viewport size changes. Add a custom value of *ReflowMin* with 320px by 256px for evaluating the minimum required render without having to hassle with the browser window size or zoom!
 
 ***
 
@@ -64,57 +94,6 @@ Existing and new content should be adapted to responsive design principles follo
     - Use media queries where needed
     - Review common pitfalls of using certain techniques (like flexbox)
 3. Annotate content as responsive
-
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-evaluating-existing-content"></a>
-### Evaluating existing content
-
-To help investigate the current state of readiness, the portal exposes an evaluation tool that hosts the content in a responsive container. An additional tool renders the content at the minimum width it shall render to pass the accessibility criterion for Reflow.
-
->**Note:** It isn't always obvious if the tool is active or not since not all content reacts to it toggling on or off. The tool is active if the top bar of the portal adopts a green tint.
-
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-evaluating-existing-content-responsive-container-preview-tool"></a>
-#### Responsive container preview tool
-
-This tool forces content to render in a container that is fully responsive. The content is rendered as if it was marked as `reflowReady`, the last step to enable responsive content. Browser window resize, or zoom actions, will influence the content rendering. All layout issues that cause scrolling in two dimensions should be investigated, as is content that is cut into the overflow without a scrollbar to access it.
-
->**Tip:** Most browsers' developer tools include a *"Responsive design mode"*. Using preset values, or the draggable size handles of the free form option, it is possible to preview how the content react to viewport size changes. Add a custom value of *ReflowMin* with 320px by 256px for evaluating the minimum required render without having to hassle with the browser window size or zoom!
-
-To activate this tool, while focus is within non-iframe content, access the portal debugging tools with the `Ctrl+Alt+D` keyboard shortcut. Alternatively, do a long press on the login avatar for 5 seconds and select `Debugging tools` in the dialog that appears. In the lower right corner, a crude UI with options will appear. Under the accessibility label, select the `Reflow flexible` option. Turn it off using the `Reflow off` option.
-
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-evaluating-existing-content-minimum-container-width-preview-tool"></a>
-#### Minimum container width preview tool
-
-This tool is similar to the responsive container preview, but forces the content to be exactly 320px in width. This width is the minimum size the content should render without showing an horizontal scrollbar. While in that mode, empty space that would not be rendered is hashed out.
-
-To activate this tool, invoke the portal developer tools as described previously. Under the accessibility label, select the `Reflow min` option.
-
->**Note:** The min-width tool emulates the minimum width requirement of the accessibility criterion. It must be used when the portal is rendered in a relatively large resolution no less than 650px by 650px. Using browser zoom, or using a smaller resolution, would yield unexpected result as the normal portal responsiveness logic would kick in and interfere with the preview.
-
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-evaluating-existing-content-tool-bookmarklets"></a>
-#### Tool bookmarklets
-
-Create a shortcut to the tools as a bookmark! Create a new bookmark and edit its URI as follow:
-
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-evaluating-existing-content-tool-bookmarklets-reflowmin_-shortcut"></a>
-##### <em>ReflowMin</em> shortcut
-
-```javascript
-javascript:(function(){var ctrlAltDEvent = $.Event("keydown", { keyCode: 68, ctrlKey: true, altKey: true }); $("body").trigger(ctrlAltDEvent);setTimeout(function() { $($(".fxs-sticky-debugbox").find(".fxs-sticky-link").toArray().filter(function(s){return s.innerText === "Reflow min";})).click(); $("body").trigger(ctrlAltDEvent); } ) ;})();
-```
-
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-evaluating-existing-content-tool-bookmarklets-reflowflexible_-shortcut"></a>
-##### <em>ReflowFlexible</em> shortcut
-
-```javascript
-javascript:(function(){var ctrlAltDEvent = $.Event("keydown", { keyCode: 68, ctrlKey: true, altKey: true }); $("body").trigger(ctrlAltDEvent);setTimeout(function() { $($(".fxs-sticky-debugbox").find(".fxs-sticky-link").toArray().filter(function(s){return s.innerText === "Reflow flexible";})).click(); $("body").trigger(ctrlAltDEvent); } ) ;})();
-```
-
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-evaluating-existing-content-tool-bookmarklets-reflowoff_-shortcut"></a>
-##### <em>ReflowOff</em> shortcut
-
-```javascript
-javascript:(function(){var ctrlAltDEvent = $.Event("keydown", { keyCode: 68, ctrlKey: true, altKey: true }); $("body").trigger(ctrlAltDEvent);setTimeout(function() { $($(".fxs-sticky-debugbox").find(".fxs-sticky-link").toArray().filter(function(s){return s.innerText === "Reflow off";})).click(); $("body").trigger(ctrlAltDEvent); } ) ;})();
-```
 
 <a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-fixing-content-for-responsiveness"></a>
 ### Fixing content for responsiveness
@@ -453,10 +432,10 @@ A small addition for the documentation. Despite mentioning that columns should a
 
 >__Internal implementation note:__ Because Ibiza content isn't hosted in the viewport directly, but in containers, the layout grid was adapted to the Ibiza container width instead of the viewport. This abstraction allows content implementers not to worry if the Ibiza container width is influenced by docked sidebars, menu blade table of content, or other elements impacting the container width.
 
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-fixing-content-for-responsiveness-use-container-contentsize-api-when-the-content-cannot-be-fixed-with-css-or-the-layout-grid-alone"></a>
-#### Use <code>container.contentSize</code> API when the content cannot be fixed with CSS or the layout grid alone
+<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-fixing-content-for-responsiveness-use-container-contentsize-api"></a>
+#### Use <code>container.contentSize</code> API
 
-Some content might need code to be fixed. The `container.contentSize` API exists to support those scenarios.
+Some content might need code to be fixed. When the content cannot be fixed with CSS or the layout grid alone, the `container.contentSize` API exists to support those scenarios.
 
 ```typescript
 // An example usage of container.size API.
@@ -473,13 +452,6 @@ container.contentSize.subscribe(container, (size) => {
     }
 });
 ```
-
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-fixing-content-for-responsiveness-iframe-content-needs-special-treatment"></a>
-#### Iframe content needs special treatment
-
->**A note about iframe content:** While a lot of the guidances described here also applies to iframe content, certain aspects, like the layout grid, aren't necessarily available in the iframe content. Refer to your iframe layout library for support.
-
-*We are aware of an issue with iframe content when the height of the viewport is below 500px. In such cases, the portal would have to be aware of the content height of the iframe. Investigation is ongoing about the desired approach to take. It could be invasive (injecting a script to detect height change), or proactive from iframe owners (reporting back height to portal), or another technique not considered yet. A future update to this document will include how to address this problem.*
 
 <a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-fixing-content-for-responsiveness-bad-pattern-percentage-based-paddings-margins-borders"></a>
 #### Bad pattern: percentage based paddings/margins/borders
@@ -502,22 +474,40 @@ Percentage based paddings, margins, and borders, won't display properly at large
 
 ***
 
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-annotate-content-as-responsive"></a>
-### Annotate content as responsive
+<a name="responsive-design-with-ibiza-sdk-iframe-content"></a>
+## Iframe content
+
+The responsive guidance are the same for content in iframes. While a lot of the guidances described here also applies to iframe content, certain techniques, like the layout grid, aren't necessarily available in the iframe content. Others are more native, like `media queries`. Refer to your iframe layout library for support.
+
+A common source of problem in the iframe is the inadvertent addition of scrollbars. Usually it is due to miscalculating the position of the elements and how they contribute to overflow. Thorougly debug the element positions and responsive behavior at various viewport size so that scrollbar that appears are the ones expected. If the scrollbar is within the iframe, its behavior can be controlled by the content owner and the cause of overflow should be traceable.
+
+<a name="responsive-design-with-ibiza-sdk-iframe-content-viewport-constraint-behavior-on-iframes"></a>
+### Viewport constraint behavior on iframes
+
+Above 500px of height, the iframe will behave like all other content not in iframes on the portal, i.e., it will be constrained to the content section of the containing blade within that view.
+
+Below 500px of height, the iframe will be constrained to the viewport height minus the top bar that controls the portal. As such, content will have the header of blades scroll out of view so it solely is the content that remains. This _may_ cause double stacking scrollbars, but these will remain fully usable because of the containment within that viewport limit.
+
+Be careful of pinned UI within your iframe that may get really constrained at small viewport height. Consider adding a min-height rendering rule, or use media query to change the rendering behavior for such small viewport.
+
+***
+
+<a name="responsive-design-with-ibiza-sdk-annotate-content-as-responsive"></a>
+## Annotate content as responsive
 
 Once the content is deemed ready, the content owner has to signal to the framework that it should be rendered in a responsive container. This can be done in one of two ways.
 
 >__Note:__ The annotation works post SDK 1153.
 
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-annotate-content-as-responsive-content-level-reflowready-flag"></a>
-#### Content level <code>reflowReady</code> flag
+<a name="responsive-design-with-ibiza-sdk-annotate-content-as-responsive-content-level-reflowready-flag"></a>
+### Content level <code>reflowReady</code> flag
 
 When the content is ready to be fully flexible, mark the content as `reflowReady`. The flag usage differs depending on the type of content.
 
 >**Note:** The content level flag also turns on a rule that enforces the removal of any content width explicitly set on non-context pane content. If this is too much noise, consider the `reflowReadyDefault` flag, which doesn't have this enforcement enabled yet. Context pane width is exempt because it applies the maximum width constraint of the pane when rendered in a large enough resolution.
 
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-annotate-content-as-responsive-content-level-reflowready-flag-for-pdl-content"></a>
-##### For PDL content
+<a name="responsive-design-with-ibiza-sdk-annotate-content-as-responsive-content-level-reflowready-flag-for-pdl-content"></a>
+#### For PDL content
 
 Annotate `reflowReady` on the declaration of the blade as an attribute.
 
@@ -540,8 +530,8 @@ Annotate `reflowReady` on the declaration of the blade as an attribute.
 </TemplateBlade>
 ```
 
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-annotate-content-as-responsive-content-level-reflowready-flag-for-typescript-content"></a>
-##### For TypeScript content
+<a name="responsive-design-with-ibiza-sdk-annotate-content-as-responsive-content-level-reflowready-flag-for-typescript-content"></a>
+#### For TypeScript content
 
 Annotate `reflowReady` on the decorator as an additional option on the declaration.
 
@@ -561,8 +551,8 @@ export class TemplateBladeWithReflowReadyTrue {
 }
 ```
 
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-annotate-content-as-responsive-extension-wide-reflowreadydefault-flag"></a>
-#### Extension wide <code>reflowReadyDefault</code> flag
+<a name="responsive-design-with-ibiza-sdk-annotate-content-as-responsive-extension-wide-reflowreadydefault-flag"></a>
+### Extension wide <code>reflowReadyDefault</code> flag
 
 The `reflowReadyDefault` flag sets the default value of the content level `reflowReady` flag. For existing extension this is set to `false`, while all future new extensions have this flag set to `true`. If a significant portion of the content of the extension is ready for responsive rendering, consider changing this flag value instead of each individual content.
 
