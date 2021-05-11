@@ -1,4 +1,6 @@
 ﻿# Browse Resources
+Last updated May 2021 (see [Change Log](##change-log))
+
 The Browse Resources pattern provides discovery and management of resources across subscriptions and resource groups.
 
 <a name="context"></a>
@@ -102,7 +104,7 @@ The recommended general and selection commands for the Browse Resources toolbar 
 <a name="behavior-toolbar-general-commands"></a>
 #### General Commands:
 
-* **Add** invokes the resource create experience
+* **Create** invokes the resource create experience
 * **Manage View** provides options to edit the table view, save a view, or revert to default
 * **Refresh** repopulates the table with fresh record data
 * **Export to CSV** downloads a .csv file of the table data currently in view
@@ -112,9 +114,9 @@ The recommended general and selection commands for the Browse Resources toolbar 
 
 * **Assign tags** enables tagging for the selected grid items
 * **Delete** will permanently remove the selected grid items from Azure
-* **Feedback** opens a voluntary survey to collect feedback on the Azure experience
 
-Additional general and selection commands can be added on a case-by-case basis but should always go to the left and right of the separator in the toolbar, respectively.
+Additional general and selection commands can be added on a case-by-case basis but should always go to the left and right of the separator in the toolbar, respectively. When the "Feedback" command is added, it should be placed to the right of the Selection Commands with a separator in between.
+* **Feedback** opens a voluntary survey to collect feedback on the Azure experience
 
 <a name="behavior-search"></a>
 ### Search
@@ -222,3 +224,16 @@ Developers can use the following information to get started implementing this pa
     * Context menu commands [portalfx-browse.md#adding-context-menu-commands](portalfx-browse.md#adding-context-menu-commands)
 * Assets [portalfx-assets.md](portalfx-assets.md)
     * Empty state messaging [portalfx-assets.md#assets-defining-your-asset-type](portalfx-assets.md#assets-defining-your-asset-type)
+
+
+<a name="change-log"></a>
+## Change Log
+
+May 2021
+* Updated the example images as well as the change from "Add" to "Create" in the command bar.
+
+July 2020
+* Updated browse anatomy and examples with new design for ARG Browse. Added more detailed guidance and notes on behavior for pattern.
+
+2018
+* Published

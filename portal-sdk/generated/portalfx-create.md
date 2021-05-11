@@ -64,13 +64,13 @@ This can be done directly with a blade reference or a marketplace id
 ```ts
 ```typescript
 
-public readonly engineBladeLink: BladeLink = {
+public engineBladeLink: BladeLink = {
     bladeReference: BladeReferences.forMarketplace().createReference({
         marketplaceId: "Microsoft.EngineNoPdlV1",
         parameters: createEngineBladeParameters,
     }),
 };
-public readonly noMarketplaceEngineBladeLink: BladeLink = {
+public noMarketplaceEngineBladeLink: BladeLink = {
     bladeReference: BladeReferences.forBlade("CreateNoMarketplaceArmEngineBlade").createReference({
         doesProvisioning: true,
         parameters: createEngineBladeParameters,
@@ -171,11 +171,10 @@ This can be done directly with a blade reference or a marketplace id
 ```ts
 ```typescript
 
-import * as Weave from "Weave/SandboxMode";
-import { WeaveNode } from "Weave";
 import * as ClientResources from "ClientResources";
 import { BladeReferences, BladeLink } from "Fx/Composition";
-import * as TemplateBlade from "Fx/Composition/TemplateBlade2";
+import * as TemplateBlade from "Fx/Composition/TemplateBlade";
+import { DataContext } from "./CreateArea";
 
 ```
 ```typescript
@@ -184,64 +183,56 @@ import * as TemplateBlade from "Fx/Composition/TemplateBlade2";
 * This blade is an example of how to launch a provisioning blade
 * combined with a marketplace gallery id
 */
-@TemplateBlade.Decorator()
+@TemplateBlade.Decorator({
+   htmlTemplate: `
+   <div class='msportalfx-padding'>
+       <a data-bind='text: engineText, fxclick: engineBladeLink'></a>
+       <p></p>
+       <a data-bind='text: robotText, fxclick: robotBladeLink'></a>
+       <p></p>
+       <a data-bind='text: engineNoMarketplaceText, fxclick: noMarketplaceEngineBladeLink'></a>
+       <p></p>
+       <a data-bind='text: reactRobotText, fxclick: reactViewLink'></a>
+   </div>`,
+})
+@TemplateBlade.InjectableModel.Decorator(DataContext)
 export class CreateLauncherBlade {
-   public readonly title = ClientResources.createLauncher;
-   public readonly subtitle: string;
-   public readonly context: TemplateBlade.Context<void>;
-   public readonly engineText = ClientResources.createEngine;
-   public readonly engineNoMarketplaceText = ClientResources.createNoMarketplaceEngine;
-   public readonly robotText = ClientResources.createRobot;
-   public readonly reactRobotText = ClientResources.reactCreateRobot;
+   public title = ClientResources.createLauncher;
+   public subtitle: string;
+   public context: TemplateBlade.Context<void, DataContext>;
+   public engineText = ClientResources.createEngine;
+   public engineNoMarketplaceText = ClientResources.createNoMarketplaceEngine;
+   public robotText = ClientResources.createRobot;
+   public reactRobotText = ClientResources.reactCreateRobot;
 
-   public readonly robotBladeLink: BladeLink = {
+   public async onInitialize() {
+   }
+
+   public robotBladeLink: BladeLink = {
        bladeReference: BladeReferences.forBlade("CreateCustomRobotBlade").createReference({
            parameters: createCustomRobotBladeParameters,
            doesProvisioning: true,
        }),
    };
    //docs#launchProvisioningBlades
-   public readonly engineBladeLink: BladeLink = {
+   public engineBladeLink: BladeLink = {
        bladeReference: BladeReferences.forMarketplace().createReference({
            marketplaceId: "Microsoft.EngineNoPdlV1",
            parameters: createEngineBladeParameters,
        }),
    };
-   public readonly noMarketplaceEngineBladeLink: BladeLink = {
+   public noMarketplaceEngineBladeLink: BladeLink = {
        bladeReference: BladeReferences.forBlade("CreateNoMarketplaceArmEngineBlade").createReference({
            doesProvisioning: true,
            parameters: createEngineBladeParameters,
        }),
    };
    //docs#launchProvisioningBlades
-   public readonly reactViewLink: BladeLink = {
+   public reactViewLink: BladeLink = {
        bladeReference: BladeReferences.forBlade("CreateCustomRobot.ReactView").createReference({
            doesProvisioning: true,
        }),
    };
-   public readonly reactCreateExperienceLink: BladeLink = {
-       bladeReference: BladeReferences.forBlade("CreateExperience.ReactView").createReference({
-           parameters: {
-               title: ClientResources.reactCreate,
-           },
-       }),
-   };
-   public weave(): WeaveNode {
-       return (
-           <div className="msportalfx-padding">
-               <a fxclick={this.engineBladeLink}> {this.engineText}</a>
-               <p></p>
-               <a fxclick={this.robotBladeLink}>{this.robotText}</a>
-               <p></p>
-               <a fxclick={this.noMarketplaceEngineBladeLink}>{this.engineNoMarketplaceText}</a>
-               <p></p>
-               <a fxclick={this.reactViewLink}>{this.reactRobotText}</a>
-           </div>
-       );
-   }
-
-   public async onInitialize() {
-   }
 }
 
 ```

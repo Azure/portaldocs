@@ -155,15 +155,10 @@ You can control the behavior of the essentials via initialization [options](#ess
 
 ```typescript
 
-
-constructor(
-    private readonly _container: TemplateBlade.Container
-) {
-}
-
-public weave(): WeaveNode {
-    return <PcControl vm={this.essentials} container={this._container} />;
-}
+/**
+ * View model for the essentials.
+ */
+public essentials: Essentials.ResourceLayoutContract;
 
 /**
  * Creating an essentials and using data-loading for the blade.
@@ -174,8 +169,13 @@ public async onInitialize() {
 
     await mockAPI(2);
 
+    // Create an essentials
+    this._initializeControl();
+
+    const { container } = this.context;
+
     // Once the Essentials control is instantiated, this Blade contains enough UI that it can remove the blocking loading indicator
-    this._container.revealContent();
+    container.revealContent();
     
 ```
 
@@ -184,67 +184,74 @@ public async onInitialize() {
 ```typescript
 
 /**
- * View model for the essentials.
+ * Initializes the Essentials control.
  */
-public readonly essentials = Essentials.createDefaultResourceLayout(this._container, {
-    resourceId: "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/default1",
-    includeTags: true,
-    additionalRight: [{
-        label: ClientResources.essentialsItem,
-        value: ClientResources.essentialsSampleString,
-        icon: {
-            image: MsPortalFx.Base.Images.SmileyHappy(),
-            position: Essentials.IconPosition.Right,
-        },
-    }, {
-        label: ClientResources.essentialsItem,
-        value: "Bing.com",
-        onClick: new ClickableLink(ko.observable("http://www.bing.com")),
-    }, {
-        label: ClientResources.essentialsItem,
-        value: "Blade Link",
-        onClick: bladeLink,
-    }, {
-        label: ClientResources.essentialsItem,
-        value: "Resource Link",
-        onClick: resourceLink,
-    }, {
-        label: ClientResources.essentialsMultiLineItem,
-        lines: [{
-            value: ClientResources.essentialsLongString,
-        }, {
-            value: "Bing.com",
-            onClick: new ClickableLink(ko.observable("http://www.bing.com")),
+private _initializeControl(): void {
+    const bladeLink: BladeLink = {
+        bladeReference: BladeReferences.forBlade("NoParameterChildBlade").createReference(),
+    };
+    const resourceLink: ResourceLink = {
+        resourceId: "/subscriptions/sub123/resourceGroups/accounts/providers/Microsoft.test/accounts/Peter",
+    };
+    this.essentials =  Essentials.createDefaultResourceLayout(this.context.container, {
+        resourceId: "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/default1",
+        includeTags: true,
+        additionalRight: [{
+            label: ClientResources.essentialsItem,
+            value: ClientResources.essentialsSampleString,
             icon: {
                 image: MsPortalFx.Base.Images.SmileyHappy(),
-                position: Essentials.IconPosition.Left,
+                position: Essentials.IconPosition.Right,
             },
+        }, {
+            label: ClientResources.essentialsItem,
+            value: "Bing.com",
+            onClick: new ClickableLink(ko.observable("http://www.bing.com")),
+        }, {
+            label: ClientResources.essentialsItem,
+            value: "Blade Link",
+            onClick: bladeLink,
+        }, {
+            label: ClientResources.essentialsItem,
+            value: "Resource Link",
+            onClick: resourceLink,
+        }, {
+            label: ClientResources.essentialsMultiLineItem,
+            lines: [{
+                value: ClientResources.essentialsLongString,
+            }, {
+                value: "Bing.com",
+                onClick: new ClickableLink(ko.observable("http://www.bing.com")),
+                icon: {
+                    image: MsPortalFx.Base.Images.SmileyHappy(),
+                    position: Essentials.IconPosition.Left,
+                },
+            }],
         }],
-    }],
-    //essentials#bladeCallbacks
-    onBladeOpen: (origin: Essentials.BuiltInType) => {
-        switch (origin) {
-            case Essentials.BuiltInType.ResourceGroup:
-                this.essentials.modifyStatus(ClientResources.essentialsResourceGroupOpened);
-                break;
-            case Essentials.BuiltInType.SubscriptionName:
-                this.essentials.modifyStatus(ClientResources.essentialsSubscriptionOpened);
-                break;
-        }
-    },
-    onBladeClose: (origin: Essentials.BuiltInType) => {
-        switch (origin) {
-            case Essentials.BuiltInType.ResourceGroup:
-                this.essentials.modifyStatus(ClientResources.essentialsResourceGroupClosed);
-                break;
-            case Essentials.BuiltInType.SubscriptionName:
-                this.essentials.modifyStatus(ClientResources.essentialsSubscriptionClosed);
-                break;
-        }
-    },
-    //essentials#bladeCallbacks
-});
-
+        //essentials#bladeCallbacks
+        onBladeOpen: (origin: Essentials.BuiltInType) => {
+            switch (origin) {
+                case Essentials.BuiltInType.ResourceGroup:
+                    this.essentials.modifyStatus(ClientResources.essentialsResourceGroupOpened);
+                    break;
+                case Essentials.BuiltInType.SubscriptionName:
+                    this.essentials.modifyStatus(ClientResources.essentialsSubscriptionOpened);
+                    break;
+            }
+        },
+        onBladeClose: (origin: Essentials.BuiltInType) => {
+            switch (origin) {
+                case Essentials.BuiltInType.ResourceGroup:
+                    this.essentials.modifyStatus(ClientResources.essentialsResourceGroupClosed);
+                    break;
+                case Essentials.BuiltInType.SubscriptionName:
+                    this.essentials.modifyStatus(ClientResources.essentialsSubscriptionClosed);
+                    break;
+            }
+        },
+        //essentials#bladeCallbacks
+    });
+}
 
 ```
 
@@ -262,28 +269,36 @@ You can control the behavior of the essentials via initialization [options](#ess
 
 ```typescript
 
+/**
+ * View model for the essentials.
+ */
+public essentials: Essentials.ResourceLayoutContract;
 
 /**
  * Creating an essentials and not using data-loading for the blade.
  */
 public async onInitialize() {
+
+    // Create an essentials
+    this._initializeControl();
+
+    const { container } = this.context;
+
     // Once the Essentials control is instantiated, this Blade contains enough UI that it can remove the blocking loading indicator
-    this._container.revealContent();
-}
-
-
+    container.revealContent();
+    
 ```
 
 ...
 
 ```typescript
 
-
-constructor(
-    private readonly _container: TemplateBlade.Container
-) {
+/**
+ * Initializes the Essentials control.
+ */
+private _initializeControl(): void {
     let clickCounter = 0;
-    this.essentials = Essentials.createCustomResourceLayout(_container, {
+    this.essentials =  Essentials.createCustomResourceLayout(this.context.container, {
         resourceId: "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/default1",
         left: [
             Essentials.BuiltInType.Status,
@@ -335,9 +350,7 @@ constructor(
             }
         },
     });
-
 }
-
 
 ```
 
@@ -355,13 +368,27 @@ You can control the behavior of the essentials via initialization [options](#ess
 
 ```typescript
 
+/**
+ * View model for the essentials.
+ */
+public essentials: Essentials.NonResourceLayoutContract;
+
+/**
+ * Custom Status.
+ */
+private _customStatus: KnockoutObservable<string> = ko.observable(null);
 
 /**
  * Creating an essentials and not using data-loading for the blade.
  */
 public async onInitialize() {
+    // Create an essentials
+    this._initializeControl();
+
+    const { container } = this.context;
+
     // Once the Essentials control is instantiated, this Blade contains enough UI that it can remove the blocking loading indicator
-    this._container.revealContent();
+    container.revealContent();
     
 ```
 
@@ -369,10 +396,10 @@ public async onInitialize() {
 
 ```typescript
 
-
-constructor(
-    private readonly _container: TemplateBlade.Container
-) {
+/**
+ * Initializes the Essentials control.
+ */
+private _initializeControl(): void {
     let clickCounter = 0;
     this.essentials = Essentials.createNonResourceLayout(this.context.container, {
         left: [
@@ -427,7 +454,6 @@ constructor(
         ],
     });
 }
-
 
 ```
 

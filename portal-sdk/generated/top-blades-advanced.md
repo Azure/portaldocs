@@ -103,62 +103,54 @@ There is a sample for the status bar at [https://df.onecloud.azure-test.net/?fea
 
 If you have the source code to the samples you can find the source code at this path: `Client/V2/Blades/Template/TemplateBladeWithStatusBar.tsx`. It is also included in the following code.
 
-/* @jsx Weave */
-
-import * as Weave from "Weave/SandboxMode";
-import { WeaveNode } from "Weave";
 import * as ClientResources from "ClientResources";
 import { ClickableLink } from "Fx/Composition";
-import * as TemplateBlade from "Fx/Composition/TemplateBlade2";
+import * as TemplateBlade from "Fx/Composition/TemplateBlade";
 import * as Dropdown from "Fx/Controls/DropDown";
-import { PcControl } from "Fx/Weave/Components/PcControl";
 
-@TemplateBlade.Decorator()
+@TemplateBlade.Decorator({
+    htmlTemplate: `
+<div class="ext-bladewithstatus-root">
+    <div class="ext-statusoptions" data-bind="pcControl: statusBarState"/>
+</div>`,
+})
 export class TemplateBladeWithStatusBar {
-    public readonly title = ClientResources.templateBladeWithStatusBar;
-    public readonly subtitle: string;
+    public title = ClientResources.templateBladeWithStatusBar;
+    public subtitle: string;
 
     // Dropdown that manages the status of the blade and therefore the status bar
-    public readonly statusBarState = Dropdown.create<TemplateBlade.ContentState>(this._container, {
-        label: "Select the type of the status bar",
-        subLabel: "Note: 'None' means there is no Status and therefore no Status Bar",
-        suppressDirtyBehavior: true,
-        items: [
-            { text: "None", value: TemplateBlade.ContentState.None },
-            { text: "Warning", value: TemplateBlade.ContentState.Warning },
-            { text: "Error", value: TemplateBlade.ContentState.Error },
-            { text: "Dirty", value: TemplateBlade.ContentState.Dirty },
-            { text: "Info", value: TemplateBlade.ContentState.Info },
-            { text: "Upsell", value: TemplateBlade.ContentState.Upsell },
-            { text: "Complete", value: TemplateBlade.ContentState.Complete },
-        ],
-        value: TemplateBlade.ContentState.None,
-    });
+    public statusBarState: Dropdown.Contract<TemplateBlade.ContentState>;
 
-    public readonly context: TemplateBlade.Context<void>;
+    public context: TemplateBlade.Context<void>;
 
-    constructor(
-        private readonly _container: TemplateBlade.Container
-    ) {
+    public async onInitialize() {
+        const { container } = this.context;
+
+        // Create the Status dropdown
+        this.statusBarState = Dropdown.create<TemplateBlade.ContentState>(container, {
+            label: "Select the type of the status bar",
+            subLabel: "Note: 'None' means there is no Status and therefore no Status Bar",
+            suppressDirtyBehavior: true,
+            items: [
+                { text: "None", value: TemplateBlade.ContentState.None },
+                { text: "Warning", value: TemplateBlade.ContentState.Warning },
+                { text: "Error", value: TemplateBlade.ContentState.Error },
+                { text: "Dirty", value: TemplateBlade.ContentState.Dirty },
+                { text: "Info", value: TemplateBlade.ContentState.Info },
+                { text: "Upsell", value: TemplateBlade.ContentState.Upsell },
+                { text: "Complete", value: TemplateBlade.ContentState.Complete },
+            ],
+            value: TemplateBlade.ContentState.None,
+        });
+
         // Subscribe to the changes of statusBarState to dictate the Status Bar
-        this.statusBarState.value.subscribe(_container, statusBarState => {
-            _container.statusBar({
+        this.statusBarState.value.subscribe(container, statusBarState => {
+            container.statusBar({
                 text: ClientResources.templateBladeWithStatusBarMessage,
                 state: statusBarState,
                 onClick: new ClickableLink("http://www.bing.com"),
             });
         });
-    }
-
-    public weave(): WeaveNode {
-        return (
-            <div className="ext-bladewithstatus-root">
-                <PcControl className="ext-statusoptions" vm={this.statusBarState} container={this._container} />
-            </div>
-        );
-    }
-
-    public async onInitialize() {
     }
 }
 

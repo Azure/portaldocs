@@ -61,34 +61,29 @@ Here is an example of a very simple template blade, represented by a single TpeS
 
 ```typescript
 
-/* @jsx Weave */
+/// <reference path="../../../TypeReferences.d.ts" />
 
-import * as Weave from "Weave/SandboxMode";
-import { WeaveNode } from "Weave";
 import * as ClientResources from "ClientResources";
-import * as TemplateBlade from "Fx/Composition/TemplateBlade2";
+import * as TemplateBlade from "Fx/Composition/TemplateBlade";
 
 //docs#DecoratorReference
-@TemplateBlade.Decorator()
+@TemplateBlade.Decorator({
+htmlTemplate: "" +
+    "<div class='msportalfx-padding'>" +
+    "  <div>This is a Template Blade.</div>" +
+    "</div>",
+})
 @TemplateBlade.ForContextPane.Decorator({
 width: TemplateBlade.ForContextPane.Width.Small,
 })
 //docs#DecoratorReference
 export class SimpleTemplateBlade {
-public readonly title = ClientResources.simpleTemplateBlade;
-public readonly subtitle: string;
+public title = ClientResources.simpleTemplateBlade;
+public subtitle: string;
 
 //docs#Context
-public readonly context: TemplateBlade.Context<void>;
+public context: TemplateBlade.Context<void>;
 //docs#Context
-
-public weave(): WeaveNode {
-    return (
-        <div className="msportalfx-padding">
-            <div>This is a Template Blade.</div>
-        </div>
-    );
-}
 
 public async onInitialize() {
 }
@@ -100,7 +95,12 @@ This is the decorator code.  There are several options that can be specified as 
 
 ```typescript
 
-@TemplateBlade.Decorator()
+@TemplateBlade.Decorator({
+htmlTemplate: "" +
+    "<div class='msportalfx-padding'>" +
+    "  <div>This is a Template Blade.</div>" +
+    "</div>",
+})
 @TemplateBlade.ForContextPane.Decorator({
 width: TemplateBlade.ForContextPane.Width.Small,
 })
@@ -111,7 +111,7 @@ Additionally, the No-PDL programming model introduces (and requires) a context p
 
 ```typescript
 
-public readonly context: TemplateBlade.Context<void>;
+public context: TemplateBlade.Context<void>;
 
 ```
 
@@ -237,7 +237,7 @@ Declaring the type of this property can be a little tricky, and the declaration 
 
 ```typescript
 
-public readonly context: TemplateBlade.Context<void>;
+public context: TemplateBlade.Context<void>;
 
 ```
 
