@@ -973,7 +973,7 @@ These are the currently supported command types:
 ```typescript
 
 import { SvgType } from "Fx/Images";
-
+import { CommandVisibility } from "Fx/Assets";
 export = MsPortalFxForAsset;
 
 module MsPortalFxForAsset {
@@ -1012,6 +1012,49 @@ module MsPortalFxForAsset {
                  * Kind for the selection based menu command.
                  */
                 MenuSelectionCommand,
+            }
+
+            /**
+             * Visibility options for selection menu commands.
+             */
+            export const enum SelectionMenuCommandVisibility {
+                /**
+                 * Allows a command to appear on browse toolbar.
+                 */
+                BrowseToolbar = CommandVisibility.BrowseToolbar,
+            }
+
+            /**
+             * Visibility options for selection commands.
+             */
+            export const enum SelectionCommandVisibility {
+                /**
+                 * Allows a command to appear on browse toolbar.
+                 */
+                BrowseToolbar = CommandVisibility.BrowseToolbar,
+
+                /**
+                 * Allows a command to appear in browse context menu.
+                 *
+                 * NOTE: Only selection based commands with minSelection === 1 support this option.
+                 *       Menu commands do not support this option.
+                 */
+                 BrowseContextMenu = CommandVisibility.BrowseContextMenu,
+            }
+
+            /**
+             * Visibility options for non selection commands.
+             */
+            export const enum NonSelectionCommandVisibility {
+                /**
+                 * Allows a command to appear on browse toolbar.
+                 */
+                 BrowseToolbar = CommandVisibility.BrowseToolbar,
+
+                /**
+                 * Allows a command to appear on empty browse view.
+                 */
+                BrowseEmptyView = CommandVisibility.BrowseEmptyView,
             }
 
             /**
@@ -1255,6 +1298,44 @@ module MsPortalFxForAsset {
             }
 
             /**
+             * The interface for commands to specify visibility options.
+             *
+             * NOTE: Only applies to top level commands. i.e. Individual items in menu commands can't specify visibility options.
+             */
+            export interface SelectionCommandVisibilityOptions {
+                /**
+                 * The command visibility options.
+                 * Specify one or more options in the format: `SelectionCommandVisibility.BrowseToolbar | SelectionCommandVisibility.BrowseContextMenu`.
+                 */
+                readonly visibility?: SelectionCommandVisibility;
+            }
+
+            /**
+             * The interface for commands to specify visibility options.
+             *
+             * NOTE: Only applies to top level commands. i.e. Individual items in menu commands can't specify visibility options.
+             */
+            export interface NonSelectionCommandVisibilityOptions {
+                /**
+                 * The command visibility options.
+                 * Specify one or more options in the format: `NonSelectionCommandVisibility.BrowseToolbar | NonSelectionCommandVisibility.BrowseEmptyView`.
+                 */
+                readonly visibility?: NonSelectionCommandVisibility;
+            }
+
+            /**
+             * The interface for commands to specify visibility options.
+             *
+             * NOTE: Only applies to top level commands. i.e. Individual items in menu commands can't specify visibility options.
+             */
+            export interface SelectionMenuCommandVisibilityOptions {
+                /**
+                 * The command visibility options.
+                 */
+                readonly visibility?: SelectionMenuCommandVisibility;
+            }
+
+            /**
              * The interface for selection based menu command.
              */
             export interface MenuSelectionCommand extends CommonCommandBase<SelectionCommandKind.MenuSelectionCommand>, RequiresSelection {
@@ -1277,12 +1358,12 @@ module MsPortalFxForAsset {
             /**
              * The interface for commands that require resource selection.
              */
-            export type SelectionCommand = OpenBladeSelectionCommand | ArmCommand | MenuSelectionCommand;
+            export type SelectionCommand = OpenBladeSelectionCommand & SelectionCommandVisibilityOptions | ArmCommand & SelectionCommandVisibilityOptions | MenuSelectionCommand & SelectionMenuCommandVisibilityOptions;
 
             /**
              * The interface for command.
              */
-            export type Command = OpenBladeCommand | MenuCommand;
+            export type Command = OpenBladeCommand & NonSelectionCommandVisibilityOptions | MenuCommand & NonSelectionCommandVisibilityOptions;
 
             /**
              * The interface for command selection.
@@ -1425,6 +1506,7 @@ import { SvgType } from "Fx/Images";
                     },
                 },
             ],
+            visibility: ForAsset.Commands.NonSelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.NonSelectionCommandVisibility.BrowseEmptyView,
         },
     ],
     selectionCommands: [ // Commands that require resource selection
@@ -1449,6 +1531,7 @@ import { SvgType } from "Fx/Images";
                 title: ClientResources.AssetCommands.confirmDeleteTitle,
                 message: ClientResources.AssetCommands.confirmDeleteMessage,
             },
+            visibility: ForAsset.Commands.SelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.SelectionCommandVisibility.BrowseContextMenu, // Show this command on browse toolbar and browse context menu.
         },
         {
             kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,  // Executes ARM bulk operations
@@ -1486,7 +1569,7 @@ import { SvgType } from "Fx/Images";
         {
             kind: ForAsset.Commands.SelectionCommandKind.MenuSelectionCommand,
             id: "SelectionBasedMenuCommand",
-            label: ClientResources.AssetCommands.menuCommand,
+            label: ClientResources.AssetCommands.openBlade,
             icon: {
                 image: SvgType.PolyResourceLinked,
             },

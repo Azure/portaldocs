@@ -1,141 +1,113 @@
 * [Accessibility](#accessibility)
     * [What the framework provides](#accessibility-what-the-framework-provides)
-    * [Troubleshooting issues:](#accessibility-troubleshooting-issues)
-    * [Testing for accessibility](#accessibility-testing-for-accessibility)
-    * [Basic accessibility checklist:](#accessibility-basic-accessibility-checklist)
-    * [Best Practices](#accessibility-best-practices)
-    * [References](#accessibility-references)
+        * [Knockout and React views controls](#accessibility-what-the-framework-provides-knockout-and-react-views-controls)
+        * [Declarative views](#accessibility-what-the-framework-provides-declarative-views)
+        * [Portal theming](#accessibility-what-the-framework-provides-portal-theming)
+        * [Keyboard access](#accessibility-what-the-framework-provides-keyboard-access)
+        * [Focus management](#accessibility-what-the-framework-provides-focus-management)
+        * [Special screen reader announcements](#accessibility-what-the-framework-provides-special-screen-reader-announcements)
+        * [Responsive design support](#accessibility-what-the-framework-provides-responsive-design-support)
+    * [Troubleshooting and handling bugs assigned from accessibility testing team](#accessibility-troubleshooting-and-handling-bugs-assigned-from-accessibility-testing-team)
+        * [Always resolve bugs, never transfer](#accessibility-troubleshooting-and-handling-bugs-assigned-from-accessibility-testing-team-always-resolve-bugs-never-transfer)
+        * [Steps for resolution](#accessibility-troubleshooting-and-handling-bugs-assigned-from-accessibility-testing-team-steps-for-resolution)
+        * [Resources](#accessibility-troubleshooting-and-handling-bugs-assigned-from-accessibility-testing-team-resources)
+    * [Testing content for accessibility compliance](#accessibility-testing-content-for-accessibility-compliance)
 
 
 <a name="accessibility"></a>
 # Accessibility
 
-Accessibility is about making the portal usable by people who have limitations that prevent or impede the use of conventional user interfaces. For some situations, accessibility requirements are imposed by law. However, Microsoft requires all blocking accessibility issues to be addressed regardless of legal requirements so the portal caters to the largest possible audience. The framework team has taken an inclusive design approach in incorporating keyboard, programmatic, and visual design support throughout the portal. Extensions are responsible for any graphics, styling, and custom HTML templates they provide.
+Accessibility is about making the portal usable by everyone. There are many resources available at Microsoft to help on guidance, testing, and reporting. For terseness, this document assumes basic knowledge on the topic. Please refer to the [Microsoft Accessibility resources website](aka.ms/enable) for details if needed.
+
+This document focuses on how the framework enables content owner to implement accessible UI, and how to address bugs that are filed from the accessibility testing team.
 
 <a name="accessibility-what-the-framework-provides"></a>
 ## What the framework provides
 
-<a name="accessibility-what-the-framework-provides-the-framework-provides-reusable-tiles-parts-forms-and-controls-that-are-fully-accessible"></a>
-#### The framework provides reusable  tiles/parts, forms, and controls that are fully accessible.
+<a name="accessibility-what-the-framework-provides-knockout-and-react-views-controls"></a>
+### Knockout and React views controls
 
-* Using the Form creation helper, your form will be fully accessible.
+In Knockout and React views, the framework provides reusable and accessible controls. The documentation of each framework covers how to use the APIs of each control to maximize the accessible exposure. Note that controls have specific supported usage scenarios. Guidance is published in the documentation about those scenarios.
 
-* All portal:
-  * Chrome
-  * Panes
-  * Sidebar
-  * Top nav
-  * Context menus
-  * Widgets
+>**NOTE**: Using controls in non-supported scenarios are to be ensure accessible by content owners.
 
-* Keyboard shortcuts are provided and are listed within the help menu in the portal. The shortcuts must work when using your extension content.
+<a name="accessibility-what-the-framework-provides-declarative-views"></a>
+### Declarative views
 
-* A fully accessible default theme (Blue)
-  _**NOTE:** When using that theme, the contrast ratio for all text must meet <a href="http://www.interactiveaccessibility.com/web-accessibility-guidelines">AAA guidelines</a>._
+The Declarative views are fully supported as accessible.
 
-* The Portal supports HighContrast mode and should display controls and chrome accordingly.
+<a name="accessibility-what-the-framework-provides-portal-theming"></a>
+### Portal theming
 
-<a name="accessibility-what-the-framework-provides-focus-management-is-handled-by-the-framework-and-must-follow-those-rules-unless-focus-is-changed-by-the-user-first"></a>
-#### Focus management is handled by the framework and must follow those rules (unless focus is changed by the user first):
+All portal themes, including high contrast emulations, are accessible. Refer to the Knockout and React views documentation on how to adapt to themeing changes.
 
-* Focus moves to newly opened blade in the content section
-     _**NOTE:** Currently focus is on first focusable element however further usability testing will be required to determine final design._
+>**NOTE**: The high contrast themes of the portal are emulations of the actual Windows High Contrast Mode (WHCM). To ensure proper behavior, please test conformance using Edge with WHCM turned on.
 
-* Focus moves to context pane when opened
+<a name="accessibility-what-the-framework-provides-keyboard-access"></a>
+### Keyboard access
 
-* Focus should move freely across all elements visible in the Portal, except in the following cases:
-		* ContextMenu captures focus in a loop
-		* DropMenu captures focus in a loop
+The portal framework manages focus on navigation. Interactive elements, including controls, will manage keyboard access for most scenarios in both Knockout and React views.
 
+In Knockout views, content owners can add special interactivity via the `fxclick` API. The `fxclick` API will add the proper keyboard binding support based on the element calculated role.
 
-<a name="accessibility-troubleshooting-issues"></a>
-## Troubleshooting issues:
-- <a href="http://vstfrd:8080/Azure/RD/_workitems#path=Shared+Queries%2FAUX%2FIbiza%2FAccessibility%2FIbiza+Accessibility+-+Triaged+Active&_a=query">***Known issues*** </a>
+>**NOTE**: While the `fxclick` API will manage tabbability, it will not manage accessible role and attributes. Content owners should ensure they either use a proper semantic element like `button` or assign a `role` attribute, while also managing any relevant `aria-*` attributes for that role.
 
-- **Is this a control owned by the framework?**
-	`	<a href="http://aka.ms/portalfx/accessibility/bug">File a framework bug (internal only)</a>
-- **Missing text or labels?**
-	Use the attribute TITLE to add a description that is shown on hover. If still not possible, use aria-label as last resort. <a href="http://www.w3schools.com/html/html_attributes.asp">Learn more about HTML attributes.</a>
+<a name="accessibility-what-the-framework-provides-focus-management"></a>
+### Focus management
 
-- **Contrast too low?**
-    Use the <a href="http://leaverou.github.io/contrast-ratio/">WCAG color contrast tool</a> to adjust colors
+Focus management is handled mostly automatically. There are times where extension will need to manage focus if they perform certain operations that requires so.
 
-<a name="accessibility-testing-for-accessibility"></a>
-## Testing for accessibility
+* [Managing focus in Knockout views](https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/SDKMenuBlade/extensionfocus)
+* In React views, content owner should use the DOM API.
 
-* **High-contrast**
-  Native support for Internet Explorer/Microsoft Edge with Windows High Contrast Mode (WHCM).
-  Other browsers do not support WHCM natively, and neither other OS system, therefore a custom theme is provided in the settings pane of the portal.
-	_**NOTE:** The custom theme is a good approximation of WCHM behavior and can be used to quickly verify your compliance. To properly verify though, please use High Contrast settings option 2 with Microsoft Edge._
+<a name="accessibility-what-the-framework-provides-special-screen-reader-announcements"></a>
+### Special screen reader announcements
 
-* **Screen reader**
-  Either combination of NVDA/Firefox or Narrator/Microsoft Edge
-	_**NOTE:** At this time, Chrome seems to ignore some aria properties and the native widgets are not all properly accessible._
+There are scenarios where the screen reader should get additional callouts for operations triggered by the extension.
 
-* **Accessibility audit**
-  <a href="http://www.deque.com/products/axe/">aXe</a>: <a href="http://bitly.com/aXe-Chrome">Chrome plugin</a>, <a href="http://bit.ly/aXe-Firefox">Firefox plugin</a>, <a href="https://github.com/dequelabs/axe-core">axe-core</a> (unit testing)
+* [Adding announcements in Knockout views](https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/SDKMenuBlade/announceapi)
+* In React views, please refer to the API documentation of the UI framework used.
 
+<a name="accessibility-what-the-framework-provides-responsive-design-support"></a>
+### Responsive design support
 
-<a name="accessibility-basic-accessibility-checklist"></a>
-## Basic accessibility checklist:
-Before testing
+The portal support responsive UI principles that allow maximum content from extension to be visible and usable at all times. Please refer to the [responsive design documentation](top-design-responsive.md) for more details.
 
-- Extension should be updating to SDK version 788 or more recent.
+<a name="accessibility-troubleshooting-and-handling-bugs-assigned-from-accessibility-testing-team"></a>
+## Troubleshooting and handling bugs assigned from accessibility testing team
 
-- Extension should update to use supported controls.
-https://df.onecloud.azure-test.net/#blade/SamplesExtension/SDKMenuBlade/controls
-*Exceptions: (DiffEditor, DatePolyFills, PairedTimeline) are not supported by Framework*
+<a name="accessibility-troubleshooting-and-handling-bugs-assigned-from-accessibility-testing-team-always-resolve-bugs-never-transfer"></a>
+### Always resolve bugs, never transfer
 
-- Extension should ensure theming support in both Light and Dark mode when using custom colors
+The accessibility testing team is responsible for tracking all accessibility issues of the ecosystem for fixes and responsible parties. As such, bugs opened on a team need to be resolved back to the accessibility testing team and should not be transferred. Transferring the bug will not remove it to count against the extension compliance bar.
 
-- Extension should not interfere with High Contrast theming.
-	*Common mistake*: Using a `<div>` instead of an `<a>` for a link
+<a name="accessibility-troubleshooting-and-handling-bugs-assigned-from-accessibility-testing-team-steps-for-resolution"></a>
+### Steps for resolution
 
-- When introducing user actionable areas that are not based on supported controls, extension should use `fxClick` as documented. `click` binding is not supported.
+Follow these questions to resolve accessibility bugs filed against the content.
 
-- Extensions creating custom implementation of supported controls should be identified.
+*Is the bug located in content owned by another extension?*
 
-- Image and logos that are part of the Narrator Items mode should be labelled properly, or marked as aria-hidden if not significant.
+Determine the extension owner, and add a comment to the bug discussion to that effect. Resolve the bug as external to that extension.
 
-- Review all controls and ensure that labels are being used. If labels are omitted then use aria labels in the viewmodel.
+*Is the bug related to using a screen reader?*
 
-- Verify keyboard accessibility of your blade content and forms. Navigate to your content in the portal and ensure focus is captured to your content in the expected way (autofocus on open provided by the framework)
+The bug should contain description that this was tested with specific combinations. The supported combinations are Firefox/NVDA, Chrome/JAWS, and Edge/Narrator. Any other combinations are invalid. The bug should also state which combinations fail and which do not fail. If there are successful combinations, while one fails, this is usually an indication the issues is external to the browser/screen reader combo. Proceed with the additional questions below for completeness. You may resolve the bug as external to the tooling afterward.
 
-- Verify your content follows [responsive design](top-design-responsive.md)
+*Is the bug related to using portal SDK controls or UI elements?*
 
-After Testing report is given to extension
-- Ibiza provides a list of common pattern that are not issues with justifications
-- Ibiza provides a list of external product bugs that are not issues to fix with justifications and bug links
+Determine which control the bug relates to. Controls have supported usage scenarios, and provide APIs to cover most accessibility concerns like missing labels or state management. Determine if you are using the controls for supported scenarios, and ensure all APIs entry point that can help solve the issue have been investigated and used. If there is nothing as the content owner you can do, add a comment to the bug discussion to that effect and mention the control used or the portal element. Resolve the bug as external to the framework.
 
-<a name="accessibility-best-practices"></a>
-## Best Practices
-* Design and code with accessibility in mind
+*Is the bug not covered by any questions above?*
 
-* Use portal tiles/parts, forms, and controls whenever possible, as those are designed to be accessible
+The bug is most likely fixable by the content owner.
 
-* Use HTML semantics when using custom HTML <a href="http://www.w3schools.com/html/html5_semantic_elements.asp">Web semantics</a>
-	For example, don't create a button with a styled DIV tag. Use the BUTTON tag instead.
+<a name="accessibility-troubleshooting-and-handling-bugs-assigned-from-accessibility-testing-team-resources"></a>
+### Resources
 
-* Avoid using aria-*
-	If you find yourself using those attributes, review your design and try to use HTML semantics as much as possible.
+There are many answers available for accessibility on Ibiza that can be searched from [Questions tagged 'ibiza-accessibility' on StackOverflow@Microsoft](https://stackoverflow.microsoft.com/posts/tagged/6752). If you cannot find an answer, please post a new question with the `ibiza-accessibility` tag.
 
+<a name="accessibility-testing-content-for-accessibility-compliance"></a>
+## Testing content for accessibility compliance
 
-* Provide concise, meaningful instructions for user input
-
-* Scrub your content for consistent terminology and iconography before releasing it to the public
-
-* Always use multiple sensory cues to convey information. Never use the position, orientation, size, shape, or color  of a UI element alone to communicate important information to the user
-
-<a name="accessibility-references"></a>
-## References
-
-* <a href="https://www.1eswiki.com/wiki/Trusted_Tester_with_Keros#What_is_Trusted_Tester.3F">What is Trusted Tester? (internal only)</a>
-* <a href="https://www.1eswiki.com/wiki/Trusted_Tester_with_Keros#What_is_Keros.3F">What is Keros? (internal only)</a>
-* <a href="https://www.1eswiki.com/wiki/Trusted_Tester_with_Keros#What_is_Keros.3F">Baseline accessibility assessment (internal only)</a>
-* <a href="https://www.1eswiki.com/wiki/Trusted_Tester_with_Keros#Full_MAS_compliance_assessment">Full MAS compliance assessment (internal only)</a>
-* <a href="http://leaverou.github.io/contrast-ratio/">WCAG color contrast tool</a>
-* <a href="http://webaim.org/articles/">WebAIM Accessibility</a>
-* <a href="http://www.interactiveaccessibility.com/web-accessibility-guidelines">AAA guidelines</a>
-* <a href="http://www.w3schools.com/html/html_attributes.asp">HTML Attributes</a>
-* <a href="https://www.paciellogroup.com/blog/2014/08/using-the-tabindex-attribute/">Natural tab order</a>
-* <a href="http://www.w3schools.com/html/html5_semantic_elements.asp">Web semantics</a>
+The test framework `msportalfx-test` supports regression testing that matches the automated check done with the Accessibility Insights tool. Refer to the documentation of the test framework on usage. Content should also add any additional tests they may need to cover their compliance level.

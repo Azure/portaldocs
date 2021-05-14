@@ -61,6 +61,7 @@ The problem is lessened for elements that are able to relayout on the page, for 
   - Content that has fixed size in the “width” direction risk of getting cut off if it doesn’t fit the paged media format.
 - Use semantics, as it helps fragmentation decision. While not guaranteed, the fragmentation engine will try to respect the rules when possible.
 - Content that resize with JavaScript callbacks should be kept to minimum.
+- Annotate content fragmentation hints with [CSS Fragmentation properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fragmentation)
 
 <a name="how-to-get-well-formed-printout-from-your-content-faq"></a>
 ## FAQ
@@ -75,7 +76,7 @@ As an example, let's assume this paged media format and settings:
 - Portrait orientation
 - Margins of 0.5in on left and right
 - Content at 100% scaling
-- Browser printout engine generates output at 72DPI
+- Browser printout engine generates output at 96DPI
 
  This example translates to about 720px of screen pixels on the output.
 
@@ -83,7 +84,7 @@ As an example, let's assume this paged media format and settings:
 
 **A. The framework offers the following telemetry for tracking the print functionality usage.**
 
-Use any of these queries in Kusto Explorer.
+Use any of these queries in Kusto Explorer and customize as needed for specific queries.
 
 *Which view is print requested from?*
 
@@ -114,6 +115,18 @@ ClientTelemetry
 | where action == "PrintRequest"
 | extend displayMode = tostring(parse_json(data)["displayMode"])
 | summarize count() by displayMode
+```
+
+*Which menu blade context is in effect when print was invoked?*
+
+```kql
+ClientTelemetry
+| where PreciseTimeStamp > ago(1d)
+| where userTypeHint == ""
+| where action == "PrintRequest"
+| extend datajson = parse_json(data)
+| extend ctxMenu = tostring(datajson.menuBladeCtx)
+| summarize count() by ctxMenu, name
 ```
 
 *Did the user complete or cancelled the print operation?*

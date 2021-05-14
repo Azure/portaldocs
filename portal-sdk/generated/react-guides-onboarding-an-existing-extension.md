@@ -68,9 +68,9 @@ You can always migrate from CLI to Node interface easily, migrating back may not
 
 Regardless of which method you choose, the first step is to copy the `tsconfig.extension.json` file from the `@microsoft/azureportal-reactview-tools` package. into your new ReactView folder, and rename it to `tsconfig.json`.
 
-Additionally, let's copy the `Test.ReactView.tsx` file from [here][Test ReactView], so we can test our build with it. Don't worry about the contents for now.
+Additionally, let's copy the `HelloWorld.ReactView.tsx` file from [here][HelloWorld ReactView], so we can test our build with it. Don't worry about the contents for now.
 
-[Test ReactView]: https://msazure.visualstudio.com/One/_git/AzureUX-TemplateExtension?path=%2Fsrc%2FDefault%2FExtension%2FClient%2FReactViews%2FTest.ReactView.tsx
+[HelloWorld ReactView]: https://msazure.visualstudio.com/One/_git/AzureUX-TemplateExtension?path=%2Fsrc%2FDefault%2FExtension%2FClient%2FReactViews%2FHelloWorld.ReactView.tsx
 
 <a name="onboarding-an-existing-extension-to-reactviews-onboarding-to-cli-based-build"></a>
 ## Onboarding to CLI Based Build
@@ -115,7 +115,7 @@ import something = require("someModule"); // this should be converted to the thi
 
 These odd style of imports are most often used with open source libraries that were hand converted to AMD modules or client resource files.
 
-Otherwise, head to the directory was configured, and check if `Test.ReactView.js` was emitted. If not, try running `npm run build -- --traceOutput` to see where each file is being emitted with more verbosity.
+Otherwise, head to the directory was configured, and check if `HelloWorld.ReactView.js` was emitted. If not, try running `npm run build -- --traceOutput` to see where each file is being emitted with more verbosity.
 
 If the file, is there, everything is working as expected! [Skip to integration](#integrate).
 
@@ -158,7 +158,7 @@ You will likely want to enhance your script to take parameters for watch, and de
 }
 ```
 
-Finally, run `npm run build` and tweak config as needed until no errors are returned, and the `Test.ReactView.js` file is emitted in the output directory.
+Finally, run `npm run build` and tweak config as needed until no errors are returned, and the `HelloWorld.ReactView.js` file is emitted in the output directory.
 For the most part, the errors are not portal specific and can be solved using your favorite search engine.
 
 <a name="onboarding-an-existing-extension-to-reactviews-integrate"></a>
@@ -195,7 +195,7 @@ Run a clean build of your extension, and fix any build breaks as needed before h
 ## Validate
 
 Once your build worked, you should be able to build and sideload your extension using whichever method your team prefers (e.g `ap serve`),
-and navigate to the added Test.ReactView by going to the deeplink: `#blade/[ExtensionName]/Test.ReactView` (e.g `#blade/Microsoft_Azure_Compute/Test.Reactview`).
-You should see a view load that has just a piece of text stating that you have successfully onboarded to ReactViews.
+and navigate to the added HelloWorld.ReactView by going to the deeplink: `#blade/[ExtensionName]/HelloWorld.ReactView` (e.g `#blade/Microsoft_Azure_Compute/HelloWorld.Reactview`).
+You should see a view load that has some texts and a textbox.
 
 If that's what you see, then head to the [Guides](react-index.md/#guides) to start building and migrating experiences!
