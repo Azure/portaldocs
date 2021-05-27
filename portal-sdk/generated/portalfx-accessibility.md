@@ -41,7 +41,7 @@ The Declarative views are fully supported as accessible.
 
 All portal themes, including high contrast emulations, are accessible. Refer to the Knockout and React views documentation on how to adapt to themeing changes.
 
->**NOTE**: The high contrast themes of the portal are emulations of the actual Windows High Contrast Mode (WHCM). To ensure proper behavior, please test conformance using Edge with WHCM turned on.
+>**NOTE**: The high contrast themes of the portal are emulations of the actual Windows High Contrast Mode (WHCM). To ensure proper behavior, please test conformance using Microsoft Edge with WHCM turned on.
 
 <a name="accessibility-what-the-framework-provides-keyboard-access"></a>
 ### Keyboard access
@@ -92,7 +92,7 @@ Determine the extension owner, and add a comment to the bug discussion to that e
 
 *Is the bug related to using a screen reader?*
 
-The bug should contain description that this was tested with specific combinations. The supported combinations are Firefox/NVDA, Chrome/JAWS, and Edge/Narrator. Any other combinations are invalid. The bug should also state which combinations fail and which do not fail. If there are successful combinations, while one fails, this is usually an indication the issues is external to the browser/screen reader combo. Proceed with the additional questions below for completeness. You may resolve the bug as external to the tooling afterward.
+The bug should contain description that this was tested with specific combinations. The supported combinations are Mozilla Firefox with NVDA, Google Chrome with JAWS, and Microsoft Edge with Narrator. Any other combinations are invalid. The bug should also state which combinations fail and which do not fail. If there are successful combinations, while one fails, this is usually an indication the issues is external to the browser/screen reader combo. Proceed with the additional questions below for completeness. You may resolve the bug as external to the tooling afterward.
 
 *Is the bug related to using portal SDK controls or UI elements?*
 

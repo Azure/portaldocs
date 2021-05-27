@@ -1022,6 +1022,11 @@ module MsPortalFxForAsset {
                  * Allows a command to appear on browse toolbar.
                  */
                 BrowseToolbar = CommandVisibility.BrowseToolbar,
+
+                /**
+                 * Allows a command to appear on resource hover card.
+                 */
+                ResourceHoverCard = CommandVisibility.ResourceHoverCard,
             }
 
             /**
@@ -1039,7 +1044,12 @@ module MsPortalFxForAsset {
                  * NOTE: Only selection based commands with minSelection === 1 support this option.
                  *       Menu commands do not support this option.
                  */
-                 BrowseContextMenu = CommandVisibility.BrowseContextMenu,
+                BrowseContextMenu = CommandVisibility.BrowseContextMenu,
+
+                /**
+                 * Allows a command to appear on resource hover card.
+                 */
+                ResourceHoverCard = CommandVisibility.ResourceHoverCard,
             }
 
             /**
@@ -1049,7 +1059,7 @@ module MsPortalFxForAsset {
                 /**
                  * Allows a command to appear on browse toolbar.
                  */
-                 BrowseToolbar = CommandVisibility.BrowseToolbar,
+                BrowseToolbar = CommandVisibility.BrowseToolbar,
 
                 /**
                  * Allows a command to appear on empty browse view.

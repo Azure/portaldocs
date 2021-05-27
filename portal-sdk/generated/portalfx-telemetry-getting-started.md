@@ -242,31 +242,41 @@ If you already have an application, you can skip forward to the PowerShell part
 1. Go to https://ms.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApp.
 1. Click 'New application registration'
 1. Fill out the application registration.
-	- Name: Your application's friendly name
-	- Application Type: Choice only matters if you have users signing into your app. Pick the type most appropriate to you.
-	- Sign-on URL / Redirect URL: Choice only matters if you have users signing into your app. 
+    - Name: Your application's friendly name
+    - Application Type: Choice only matters if you have users signing into your app. Pick the type most appropriate to you.
+    - Sign-on URL / Redirect URL: Choice only matters if you have users signing into your app. 
 1. Click 'Create'.The creates the application and a default service principal. Make a note of the Application ID GUID.
 
-Using Powershell to add a certificate credential to a service principal:
+Follow either method below to upload the generated certificate
 
-1. Install the [Azure Active Directory (MSOnline)](https://docs.microsoft.com/en-us/powershell/azure/install-msonlinev1?view=azureadps-2.0) CommandLets if you haven’t already, and open an elevated PowerShell prompt (an elevated shell is required to run New-MsolServicePrincipalCredential (step 3)).
-1. Execute the following code to get the public key from a cert file (feel free to get the public key another way, such as by thumbprint).
-	``` powershell
-	$cer = New-Object System.Security.Cryptography.X509Certificates.X509Certificate 
-	$cer.Import("C:\temp\ServicePrincipalCertPublicKey.cer")
-	$binCert = $cer.GetRawCertData()
-	$credValue = [System.Convert]::ToBase64String($binCert);
-	```
-1. Connect to AAD, and get a reference to your application's SP, and add the certificate.
-	``` powershell 
-	import-module MSOnline Connect-MsolService
-	$sp = Get-AzureRmADServicePrincipal -ServicePrincipalName yourApplicationId
-	New-MsolServicePrincipalCredential -ObjectId $sp.Id -Type asymmetric -Value 
-	$credValue -StartDate $cer.GetEffectiveDateString() -EndDate
-	$cer.GetExpirationDateString()
-    ```
+1. UI
+   1. Go to your AAD app in the portal UI (https://ms.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps)
+   2. Select 'Certificates & secrets' from the App's menu items
+   3. Click 'Upload certificate'
+   4. Find and upload your certificate
+2. Powershell
+   1. Install the [Azure Active Directory (MSOnline)](https://docs.microsoft.com/powershell/azure/active-directory/install-msonlinev1) CommandLets if you haven’t already, and open an elevated PowerShell prompt (an elevated shell is required to run New-MsolServicePrincipalCredential (step 3)).
+   2. Execute the following code to get the public key from a cert file (feel free to get the public key another way, such as by thumbprint).
 
-Rotating a certificate is done by running the New-MsolServicePrincipalCredential for the new certificate, then removing (when ready to do so) the old certificate through Remove-MsolServicePrincipalCredential.
+      ``` powershell
+      $cer = New-Object System.Security.Cryptography.X509Certificates.X509Certificate 
+      $cer.Import("C:\temp\ServicePrincipalCertPublicKey.cer")
+      $binCert = $cer.GetRawCertData()
+      $credValue = [System.Convert]::ToBase64String($binCert);
+      ```
+
+   3. Connect to AAD, and get a reference to your application's SP, and add the certificate.
+
+      ``` powershell
+      import-module MSOnline 
+         Connect-MsolService
+      $sp = Get-AzureRmADServicePrincipal -ServicePrincipalName yourApplicationId
+      New-MsolServicePrincipalCredential -ObjectId $sp.Id -Type asymmetric -Value 
+      $credValue -StartDate $cer.GetEffectiveDateString() -EndDate
+      $cer.GetExpirationDateString()
+      ```
+
+   Rotating a certificate is done by running the New-MsolServicePrincipalCredential for the new certificate, then removing (when ready to do so) the old certificate through Remove-MsolServicePrincipalCredential.
 
 > **Note:** You may also use [AAD Managed Identities](https://azure.microsoft.com/en-us/blog/keep-credentials-out-of-code-introducing-azure-ad-managed-service-identity/) to add a service principal to an already existing application.
 
