@@ -593,7 +593,8 @@ const websiteName = new (TextBox.ViewModel as any)(
         validations: ko.observableArray([
             new FxViewModels.RequiredValidation(ClientResources.masterDetailEditWebsiteNameRequired),
         ]),
-        valueUpdateTrigger: ValueUpdateTrigger.Input, // by default textboxes only update the value when the user moves focus. Since we don't do any expensive validation we can get updates on keypress
+        // TODO, #9968182, Remove this before associated control implementation is removed.
+        valueUpdateTrigger: (ValueUpdateTrigger as any).Input, // by default textboxes only update the value when the user moves focus. Since we don't do any expensive validation we can get updates on keypress
     });
 
 // Section
