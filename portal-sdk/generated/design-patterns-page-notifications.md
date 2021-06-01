@@ -72,6 +72,18 @@ Checklist:
 * There is a critical service event, or the action is irreversible
 * User doesn’t anticipate the popup to happen
 
+If dialog doesn't require any action, it can have only one primary close button, as below:
+
+<div style="max-width:800px">
+<img alttext="" src="../media/design-patterns-page-notifications/info-dialog-form.png"  />
+</div>
+
+In case if notification message is big, a context pane can be used instead of a dialog. If it doesn't require any action, it can have only one primary close action, as below:
+
+<div style="max-width:800px">
+<img alttext="" src="../media/design-patterns-page-notifications/info-context-pane-form.png"  />
+</div>
+
 b. Inline validation
  
 <div style="max-width:800px">

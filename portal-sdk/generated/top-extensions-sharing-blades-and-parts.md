@@ -46,6 +46,11 @@ Exporting a Blade or Part from your extension requires a couple of simple steps.
 ```typescript
 
 @TemplateBlade.Decorator({
+htmlTemplate: "" +
+    "<div class='msportalfx-padding'>" +
+    "  <div>This Blade is exported for use by other extensions.</div>" +
+    "  <div data-bind='visible: bladeParameterValue'>The Blade was passed parameter value '<span data-bind='text: bladeParameterValue'></span>'.</div>" +
+    "</div>",
 forExport: true,
 })
 export class ExportedBlade {
@@ -91,7 +96,7 @@ You'll find that you have to fix up any type references to your Parameters type,
 
 ```typescript
 
-public readonly context: TemplateBlade.Context<SamplesExtension.ExportedBlade.Parameters>;
+public context: TemplateBlade.Context<SamplesExtension.ExportedBlade.Parameters>;
 
 ```
 

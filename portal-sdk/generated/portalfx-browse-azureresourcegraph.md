@@ -593,7 +593,7 @@ These are the currently supported command types:
 ```typescript
 
 import { SvgType } from "Fx/Images";
-
+import { CommandVisibility } from "Fx/Assets";
 export = MsPortalFxForAsset;
 
 module MsPortalFxForAsset {
@@ -632,6 +632,59 @@ module MsPortalFxForAsset {
                  * Kind for the selection based menu command.
                  */
                 MenuSelectionCommand,
+            }
+
+            /**
+             * Visibility options for selection menu commands.
+             */
+            export const enum SelectionMenuCommandVisibility {
+                /**
+                 * Allows a command to appear on browse toolbar.
+                 */
+                BrowseToolbar = CommandVisibility.BrowseToolbar,
+
+                /**
+                 * Allows a command to appear on resource hover card.
+                 */
+                ResourceHoverCard = CommandVisibility.ResourceHoverCard,
+            }
+
+            /**
+             * Visibility options for selection commands.
+             */
+            export const enum SelectionCommandVisibility {
+                /**
+                 * Allows a command to appear on browse toolbar.
+                 */
+                BrowseToolbar = CommandVisibility.BrowseToolbar,
+
+                /**
+                 * Allows a command to appear in browse context menu.
+                 *
+                 * NOTE: Only selection based commands with minSelection === 1 support this option.
+                 *       Menu commands do not support this option.
+                 */
+                BrowseContextMenu = CommandVisibility.BrowseContextMenu,
+
+                /**
+                 * Allows a command to appear on resource hover card.
+                 */
+                ResourceHoverCard = CommandVisibility.ResourceHoverCard,
+            }
+
+            /**
+             * Visibility options for non selection commands.
+             */
+            export const enum NonSelectionCommandVisibility {
+                /**
+                 * Allows a command to appear on browse toolbar.
+                 */
+                BrowseToolbar = CommandVisibility.BrowseToolbar,
+
+                /**
+                 * Allows a command to appear on empty browse view.
+                 */
+                BrowseEmptyView = CommandVisibility.BrowseEmptyView,
             }
 
             /**
@@ -875,6 +928,44 @@ module MsPortalFxForAsset {
             }
 
             /**
+             * The interface for commands to specify visibility options.
+             *
+             * NOTE: Only applies to top level commands. i.e. Individual items in menu commands can't specify visibility options.
+             */
+            export interface SelectionCommandVisibilityOptions {
+                /**
+                 * The command visibility options.
+                 * Specify one or more options in the format: `SelectionCommandVisibility.BrowseToolbar | SelectionCommandVisibility.BrowseContextMenu`.
+                 */
+                readonly visibility?: SelectionCommandVisibility;
+            }
+
+            /**
+             * The interface for commands to specify visibility options.
+             *
+             * NOTE: Only applies to top level commands. i.e. Individual items in menu commands can't specify visibility options.
+             */
+            export interface NonSelectionCommandVisibilityOptions {
+                /**
+                 * The command visibility options.
+                 * Specify one or more options in the format: `NonSelectionCommandVisibility.BrowseToolbar | NonSelectionCommandVisibility.BrowseEmptyView`.
+                 */
+                readonly visibility?: NonSelectionCommandVisibility;
+            }
+
+            /**
+             * The interface for commands to specify visibility options.
+             *
+             * NOTE: Only applies to top level commands. i.e. Individual items in menu commands can't specify visibility options.
+             */
+            export interface SelectionMenuCommandVisibilityOptions {
+                /**
+                 * The command visibility options.
+                 */
+                readonly visibility?: SelectionMenuCommandVisibility;
+            }
+
+            /**
              * The interface for selection based menu command.
              */
             export interface MenuSelectionCommand extends CommonCommandBase<SelectionCommandKind.MenuSelectionCommand>, RequiresSelection {
@@ -897,12 +988,12 @@ module MsPortalFxForAsset {
             /**
              * The interface for commands that require resource selection.
              */
-            export type SelectionCommand = OpenBladeSelectionCommand | ArmCommand | MenuSelectionCommand;
+            export type SelectionCommand = OpenBladeSelectionCommand & SelectionCommandVisibilityOptions | ArmCommand & SelectionCommandVisibilityOptions | MenuSelectionCommand & SelectionMenuCommandVisibilityOptions;
 
             /**
              * The interface for command.
              */
-            export type Command = OpenBladeCommand | MenuCommand;
+            export type Command = OpenBladeCommand & NonSelectionCommandVisibilityOptions | MenuCommand & NonSelectionCommandVisibilityOptions;
 
             /**
              * The interface for command selection.
@@ -1045,6 +1136,7 @@ import { SvgType } from "Fx/Images";
                     },
                 },
             ],
+            visibility: ForAsset.Commands.NonSelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.NonSelectionCommandVisibility.BrowseEmptyView,
         },
     ],
     selectionCommands: [ // Commands that require resource selection
@@ -1069,6 +1161,7 @@ import { SvgType } from "Fx/Images";
                 title: ClientResources.AssetCommands.confirmDeleteTitle,
                 message: ClientResources.AssetCommands.confirmDeleteMessage,
             },
+            visibility: ForAsset.Commands.SelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.SelectionCommandVisibility.BrowseContextMenu, // Show this command on browse toolbar and browse context menu.
         },
         {
             kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,  // Executes ARM bulk operations
@@ -1106,7 +1199,7 @@ import { SvgType } from "Fx/Images";
         {
             kind: ForAsset.Commands.SelectionCommandKind.MenuSelectionCommand,
             id: "SelectionBasedMenuCommand",
-            label: ClientResources.AssetCommands.menuCommand,
+            label: ClientResources.AssetCommands.openBlade,
             icon: {
                 image: SvgType.PolyResourceLinked,
             },
@@ -1187,3 +1280,53 @@ If you want to test commands by showing them locally that are hidden via config 
 ```txt
     ?microsoft_azure_myextension_hideassettypecommands={"MyAsset":[""]}
 ```
+
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-controlling-the-visibility-of-your-commands"></a>
+### Controlling the visibility of your commands
+
+Portal now allows extension authors to integrate their extensible commands across various areas in portal such as empty browse view, context menu, etc.
+
+You can use `visibility` property on the command to specify areas in portal where the given command needs to be shown.
+Here's a sample of a command that uses `visibility` property which states that the command should appear on browse toolbar and context menu:
+
+```typescript
+
+    {
+        kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,  // Executes ARM bulk operations
+        id: "BulkDelete",
+        label: ClientResources.AssetCommands.delete,
+        icon: {
+            image: SvgType.Delete,
+        },
+        definitions: {
+            "microsoft.test/virtualservers": {
+                httpMethodType: "DELETE",
+                uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
+                asyncOperation: {
+                    pollingHeaderOverride: "Azure-AsyncOperation",
+                },
+            },
+        },
+        isDelete: true,  // Launches the default bulk delete confirmation blade provided by Fx on user click
+        confirmation: {
+            title: ClientResources.AssetCommands.confirmDeleteTitle,
+            message: ClientResources.AssetCommands.confirmDeleteMessage,
+        },
+        visibility: ForAsset.Commands.SelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.SelectionCommandVisibility.BrowseContextMenu, // Show thiscommand on browse toolbar and browse context menu.
+    },
+```
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-controlling-the-visibility-of-your-commands-criteria"></a>
+#### Criteria
+Notice that not all commands can support all the visibility options. e.g. you can not specify BrowseContextMenu as the visibility option for non selection commands as they are not resource specific.
+
+| Command type | BrowseContextMenu | BrowseToolbar | BrowseEmptyView |
+| ------------ | ----------------- | ------------- | --------------- |
+| Non selection commands | N/A | Yes | Yes |
+| Non selection menu commands | N/A | Yes | Yes |
+| Selection commands | Yes | Yes | N/A |
+| Selection menu commands | N/A | Yes | N/A |
+
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-controlling-the-visibility-of-your-commands-default-behavior"></a>
+#### Default behavior
+1. All commands appear on BrowseToolbar by default unless explicitly hidden via config OR a command has visibility property specified which doesn't include `BrowseToolbar`
+2. All selection (non menu) commands with minSelectedItems === 1 appear in context menu by default unless a command has visibility property specified which doesn't include `BrowseContextMenu`

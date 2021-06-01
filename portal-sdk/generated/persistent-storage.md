@@ -100,7 +100,7 @@ You can start using Persistent Storage right away. It's as easy as writing a sin
     import * as PersistentStorage from "Fx/PersistentStorage";
 ```
 
-**NOTE**: For your convenience you can find the following examples in Persistent Storage [React](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FStorageUse.ReactView.tsx&version=GBproduction&_a=contents) and [Knockout](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FInternalSamplesExtension%2FExtension%2FClient%2FPersistentStorage%2FStorageUseBlade.ts&version=GBproduction&_a=contents) sample blades.
+**NOTE**: For your convenience you can find the following examples in Persistent Storage [React](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FFrameworkIntegration%2FStorageUse.ReactView.tsx&version=GBproduction&_a=contents) and [Knockout](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FInternalSamplesExtension%2FExtension%2FClient%2FPersistentStorage%2FStorageUseBlade.ts&version=GBproduction&_a=contents) sample blades.
 
 
 * *writeSetting*
@@ -110,14 +110,18 @@ You can start using Persistent Storage right away. It's as easy as writing a sin
     // React
     onChange = {(_event, checked) => {
         // unchecked - v1, checked - v2
-        this.setState({ v1Selected: !checked });
+        setV1Selected(!checked);
         PersistentStorage.writeSetting("v1Selected", String(!checked)).catch((error) => {
-            this.setState({ errorMessage: error.message, v1Selected: checked });
+            // revert local state on error
+            setV1Selected(checked);
+            setErrorMessage(error.message);
         });
     }}
     // Knockout
     onClick: () => {
-        PersistentStorage.writeSetting("v1Selected", String(this._v1Selected())).catch((error) => this._errorMessage(error.message));
+        PersistentStorage.writeSetting("v1Selected", String(this._v1Selected())).catch((error) => {
+            this._errorMessage(error.message));
+        });
     },
     ```
 
@@ -126,20 +130,18 @@ You can start using Persistent Storage right away. It's as easy as writing a sin
 
     ```tsx
     // React
-    private _readSettings(): Promise<void> {
-        return PersistentStorage.readSettings("v1Selected", "theWord").then((settings) => {
-            this.setState({
-                v1Selected: settings.v1Selected === "true" || false,
-                theWord: settings.theWord || "",
-            });
-        });
-    }
+    const readSettings = () => {
+        return PersistentStorage.readSettings("v1Selected", "storedString").then(settings => {
+            setV1Selected(settings.v1Selected === "true" || false);
+            setStoredString(settings.storedString || "");
+        }).catch((error) => setErrorMessage(error.message));
+    };
     // Knockout
-    private _readSettings(): Promise<void> {
-        return PersistentStorage.readSettings("v1Selected", "theWord").then(settings => {
+    private _readSettings() {
+        return PersistentStorage.readSettings("v1Selected", "storedString").then(settings => {
             this._v1Selected(settings.v1Selected === "true" || false);
-            this._wordToSave(settings.theWord || "");
-        });
+            this._storedString(settings.storedString || "");
+        }).catch(error => this._errorMessage(error.message));
     }
     ```
     > Remember that we receive string pairs, thus we are making a boolean by manually checking the string value:
@@ -150,7 +152,7 @@ You can start using Persistent Storage right away. It's as easy as writing a sin
     > Because settings might not exist, make sure you always have a default value for your state:
 
     ```typescript
-    settings.theWord || "",
+    settings.storedString || "",
     ```
 
 * *removeSettings*
@@ -158,33 +160,31 @@ You can start using Persistent Storage right away. It's as easy as writing a sin
     > You can see once again how we interact with settings directly inside components event handlers via arrow functions.
     ```tsx
     // React
-    { Object.keys(this.state.storedSettings).map(key => {
+    {Object.keys(settings).map(key => {
         return (
             <div key={key}>
-                <p>{key}: {this.state.storedSettings[key]}</p>
-                <DefaultButton text={ClientResources.Label.removeSetting} onClick={()=> {
-                    PersistentStorage.removeSettings(key);
-                }}/>
+                <p>{key}: {settings[key]}</p>
+                <DefaultButton text={ClientResources.Label.removeSetting} onClick={() => {
+                    PersistentStorage.removeSettings(key).catch((error) => setErrorMessage(error.message));
+                }} />
             </div>
         );
-    }) }
+    })}
     // Knockout
-    this._listSection(Section.create(this._container, {
-        children: Object.keys(settings).map((settingKey) => {
-            return Section.create(this._container, {
-                children: [
-                    { htmlTemplate: `<p>${settingKey}: ${(settings as any)[settingKey]}</p>` },
-                    Button.create(this._container, {
-                        text: ClientResources.Label.removeSetting,
-                        style: Button.Style.Secondary,
-                        onClick: () => {
-                            PersistentStorage.removeSettings(settingKey);
-                        },
-                    }),
-                ],
-            });
-        }),
-    }));
+    Object.keys(settings).map((key) => {
+        return Section.create(this._container, {
+            children: [
+                { htmlTemplate: `<p>${key}: ${(settings as any)[key]}</p>` },
+                Button.create(this._container, {
+                    text: ClientResources.Label.removeSetting,
+                    style: Button.Style.Secondary,
+                    onClick: () => {
+                        PersistentStorage.removeSettings(key).catch((error) => this._errorMessage(error.message));
+                    },
+                }),
+            ],
+        });
+    });
     ```
 
 * *clear*
@@ -192,14 +192,14 @@ You can start using Persistent Storage right away. It's as easy as writing a sin
     ```tsx
     // React
     <DefaultButton text={ClientResources.Label.clearAllSettings} onClick={() => {
-        PersistentStorage.clear();
+        PersistentStorage.clear().catch((error) => setErrorMessage(error.message));;
     } }/>
     // Knockout
     this._clearButton = Button.create(this._container, {
         text: ClientResources.Label.clearAllSettings,
         style: Button.Style.Secondary,
         onClick: () => {
-            PersistentStorage.clear();
+            PersistentStorage.clear().catch((error) => this._errorMessage(error.message));
         },
     });
     ```

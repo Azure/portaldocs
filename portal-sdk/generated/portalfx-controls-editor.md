@@ -73,7 +73,7 @@ export class EditorInstructionsPartViewModel
    /**
     * View model for the editor.
     */
-   public editorVM: MsPortalFx.ViewModels.Controls.Documents.Editor.Contract; // tslint:disable-line:deprecation
+   public editorVM: any;
 
    /**
     * View model for the save button.

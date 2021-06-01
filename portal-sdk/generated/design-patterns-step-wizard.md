@@ -3,24 +3,24 @@
 
 Last updated Dec 2020 (see [change logs](#change-logs))
 
-The Step Wizard pattern provides guidelines for a set of sequential steps to perform a task. This pattern is not recommended for Azure resource creation, refer to [Create a Resource pattern](design-patterns-resource-create.md). 
+The Step Wizard pattern provides guidelines for a set of sequential steps to perform a task. This pattern is not recommended for Azure resource creation, refer to [Create a Resource pattern](design-patterns-resource-create.md).
 
 <a name="step-wizard-context"></a>
 ## Context
-Users need to complete a set of steps to perform a task in Azure. 
+Users need to complete a set of steps to perform a task in Azure.
 
 <a name="step-wizard-problem"></a>
 ## Problem
-To perform a task in Azure, users need an intuitive and consistent way to provide complex information in sequential steps. 
+To perform a task in Azure, users need an intuitive and consistent way to provide complex information in sequential steps.
 
 <a name="step-wizard-solution"></a>
 ## Solution
-The Step Wizard design pattern offers an approach that enables users to walk through a series of steps in sequential order. The experience uses a full screen page with tabs to separate related configuration steps and guide users during the process. 
+The Step Wizard design pattern offers an approach that enables users to walk through a series of steps in sequential order. The experience uses a full screen page with tabs to separate related configuration steps and guide users during the process.
 
 <a name="step-wizard-solution-also-known-as"></a>
 ### Also known as
-* Sequential wizard 
-* Wizard 
+* Sequential wizard
+* Wizard
 
 <a name="step-wizard-examples"></a>
 ## Examples
@@ -38,7 +38,7 @@ The Step Wizard design pattern offers an approach that enables users to walk thr
 <div style="max-width:800px">
 <img alttext="example-middle.png" src="../media/design-patterns-step-wizard/example-middle.png"  />
 </div>
- 
+
 <a name="step-wizard-examples-example-images-step-wizard-with-the-last-tab"></a>
 #### Step wizard with the last tab
 <div style="max-width:800px">
@@ -47,7 +47,7 @@ The Step Wizard design pattern offers an approach that enables users to walk thr
 
 <a name="step-wizard-examples-example-uses"></a>
 ### Example uses
-Configure backup in the Backup Center. Go to Backup Center in Azure portal, click on add backup button, choose datasource type “Azure Database for PostgreSQL servers”, and click proceed button. 
+Configure backup in the Backup Center. Go to Backup Center in Azure portal, click on add backup button, choose datasource type “Azure Database for PostgreSQL servers”, and click proceed button.
 
 <a name="step-wizard-use-when"></a>
 ## Use when
@@ -58,7 +58,7 @@ Step Wizard pattern should be used for sequential tasks that the next steps are 
 <div style="max-width:800px">
 <img alttext="anatomy.png" src="../media/design-patterns-step-wizard/anatomy.png"  />
 </div>
- 
+
 The Step Wizard pattern is a full-screen experience that offers the following features:
 1.	Title
 2.	Badges
@@ -78,7 +78,7 @@ Validations are done at every step of the wizard. If there is at least one valid
 <div style="max-width:800px">
 <img alttext="validation.png" src="../media/design-patterns-step-wizard/validation.png"  />
 </div>
- 
+
 <a name="step-wizard-behavior-tabs"></a>
 ### Tabs
 Tabs and corresponding sections are used to organize sequential content. Tabs are disabled until users reach the given step of the process. Once active, users can interact with the content on that tab.
@@ -91,7 +91,7 @@ Badges are used to make it easy for the user to understand the state of the give
 <div style="max-width:800px">
 <img alttext="light-theme.png" src="../media/design-patterns-step-wizard/light-theme.png"  />
 </div>
- 
+
 <a name="step-wizard-behavior-badges-dark-theme-badges"></a>
 #### Dark theme badges
 <div style="max-width:800px">

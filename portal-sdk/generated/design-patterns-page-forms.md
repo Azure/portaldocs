@@ -100,11 +100,7 @@ Button labels and behavior:
 * "\<same as action\>" – validate fields and either show invalid fields indication or perform the action and close the dialog
 * "Cancel" – close the dialog without performing validation
 
-If dialog is used to show information to users without getting any input, it will have one primary button "Close" as below:
-
-<div style="max-width:450px">
-<img alttext="Forms example - simple edit form in dialog" src="../media/design-patterns-page-forms/info-dialog-form.png"  />
-</div>
+If dialog is used to show information to users without getting any input, it can have only one primary button "Close", refer to [Notification design pattern](design-patterns-page-notifications.md).
 
 <a name="variations-form-in-context-pane"></a>
 ### 2. Form in context pane
@@ -186,11 +182,7 @@ The design of a form in context pane with notification toast after submission is
 <img alttext="Forms example - simple edit form in context pane after submission" src="../media/design-patterns-page-forms/simple-edit-form-in-context-pane-after.png"  />
 </div>
 
-If context pane is used to show information to users without getting any input, it will have one primary button "Close" as below:
-
-<div style="max-width:800px">
-<img alttext="Forms example - simple edit form in dialog" src="../media/design-patterns-page-forms/info-context-pane-form.png"  />
-</div>
+If context pane is used to show information to users without getting any input, it can have only one primary button "Close", refer to [Notification design pattern](design-patterns-page-notifications.md).
 
 <a name="variations-form-in-menu-page"></a>
 ### 3. Form in menu page

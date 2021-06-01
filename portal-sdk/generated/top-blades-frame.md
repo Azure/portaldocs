@@ -40,7 +40,9 @@ To create a FrameBlade, you need to create 3 artifacts.
 /**
 * View model for a FrameBlade.
 */
-@FrameBlade.Decorator()
+@FrameBlade.Decorator({
+   reflowReady: true,
+})
 export class SampleFrameBlade {
    public title = ClientResources.sampleFrameBladeTitle;
    public subtitle: string;  // This FrameBlade doesn't make use of a subtitle.
