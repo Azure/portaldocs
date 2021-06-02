@@ -99,6 +99,10 @@ export class SampleFrameBlade {
     <h1 class="fxs-frame-header" style="margin: 0;">Frame Blade</h1>
     <div class="fxs-frame-token"></div>
     <div class="fxs-frame-content"></div>
+    <div class="fxs-frame-documentation-link">More information and best practices for FrameBlades can be found in our <a
+            href="https://github.com/Azure/portaldocs/blob/master/portal-sdk/generated/top-blades-frameblade.md"
+            target="_blank">documentation
+            page</a>.</div>
     <button class="fxs-frame-button" type="button">Open Blade</button>
     <!-- Define frameSignature and allowed origin list -->
     <script>
@@ -106,6 +110,7 @@ export class SampleFrameBlade {
         var allowedParentFrameAuthorities = ["df.onecloud.azure-test.net", "portal.azure.com"];
     </script>
     <script src="../Scripts/IFrameSample/FramePage.js"></script>
+    <script src="../Scripts/IFrameSample/IdleBehavior.js"></script>
 </body>
 
 </html>
@@ -242,6 +247,7 @@ export class SampleFrameBlade {
 
     // This is an example of posting the 'getAuthToken' event to Portal.
     postMessageToParent("getAuthToken");
+
 })();
 
 ```
