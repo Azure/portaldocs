@@ -639,6 +639,13 @@ module MsPortalFxForAsset {
              */
             export const enum SelectionMenuCommandVisibility {
                 /**
+                 * Allows a command to be hidden by default.
+                 *
+                 * NOTE: This is useful if you are experimenting with command bar layout and wish to only show a command via experimentation.
+                 */
+                HiddenByDefault = CommandVisibility.HiddenByDefault,
+
+                /**
                  * Allows a command to appear on browse toolbar.
                  */
                 BrowseToolbar = CommandVisibility.BrowseToolbar,
@@ -653,6 +660,13 @@ module MsPortalFxForAsset {
              * Visibility options for selection commands.
              */
             export const enum SelectionCommandVisibility {
+                /**
+                 * Allows a command to be hidden by default.
+                 *
+                 * NOTE: This is useful if you are experimenting with command bar layout and wish to only show a command via experimentation.
+                 */
+                HiddenByDefault = CommandVisibility.HiddenByDefault,
+
                 /**
                  * Allows a command to appear on browse toolbar.
                  */
@@ -676,6 +690,13 @@ module MsPortalFxForAsset {
              * Visibility options for non selection commands.
              */
             export const enum NonSelectionCommandVisibility {
+                /**
+                 * Allows a command to be hidden by default.
+                 *
+                 * NOTE: This is useful if you are experimenting with command bar layout and wish to only show a command via experimentation.
+                 */
+                HiddenByDefault = CommandVisibility.HiddenByDefault,
+
                 /**
                  * Allows a command to appear on browse toolbar.
                  */
@@ -1138,6 +1159,21 @@ import { SvgType } from "Fx/Images";
             ],
             visibility: ForAsset.Commands.NonSelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.NonSelectionCommandVisibility.BrowseEmptyView,
         },
+        {
+            kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
+            id: "OpenBladeCommandIdV2",  // Unique identifier used for controlling visibility of commands
+            label: ClientResources.AssetCommands.openBlade,
+            ariaLabel: ClientResources.AssetCommands.openBlade,
+            icon: {
+                image: SvgType.AddTile,
+            },
+            bladeReference: {
+                blade: "SimpleTemplateBlade",
+                extension: "SamplesExtension", // An optional extension name, however, must be provided when opening a blade from a different extension
+                inContextPane: true, // An optional property to open the pane in context pane
+            },
+            visibility: ForAsset.Commands.NonSelectionCommandVisibility.HiddenByDefault,  // Hide this command by defualt in all environments. Can be enabled via experiementation config for certain users.
+        },
     ],
     selectionCommands: [ // Commands that require resource selection
         {
@@ -1161,7 +1197,7 @@ import { SvgType } from "Fx/Images";
                 title: ClientResources.AssetCommands.confirmDeleteTitle,
                 message: ClientResources.AssetCommands.confirmDeleteMessage,
             },
-            visibility: ForAsset.Commands.SelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.SelectionCommandVisibility.BrowseContextMenu, // Show this command on browse toolbar and browse context menu.
+            visibility: ForAsset.Commands.SelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.SelectionCommandVisibility.BrowseContextMenu | ForAsset.Commands.SelectionCommandVisibility.ResourceHoverCard, // Show this command on browse toolbar and browse context menu.
         },
         {
             kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,  // Executes ARM bulk operations
@@ -1312,7 +1348,7 @@ Here's a sample of a command that uses `visibility` property which states that t
             title: ClientResources.AssetCommands.confirmDeleteTitle,
             message: ClientResources.AssetCommands.confirmDeleteMessage,
         },
-        visibility: ForAsset.Commands.SelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.SelectionCommandVisibility.BrowseContextMenu, // Show thiscommand on browse toolbar and browse context menu.
+        visibility: ForAsset.Commands.SelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.SelectionCommandVisibility.BrowseContextMenu | ForAsset.Commands.SelectionCommandVisibility.ResourceHoverCard, // Show this command on browse toolbar, browse context menu and resource hover card.
     },
 ```
 <a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-controlling-the-visibility-of-your-commands-criteria"></a>
@@ -1330,3 +1366,82 @@ Notice that not all commands can support all the visibility options. e.g. you ca
 #### Default behavior
 1. All commands appear on BrowseToolbar by default unless explicitly hidden via config OR a command has visibility property specified which doesn't include `BrowseToolbar`
 2. All selection (non menu) commands with minSelectedItems === 1 appear in context menu by default unless a command has visibility property specified which doesn't include `BrowseContextMenu`
+3. All selection comamnds with minSelectedItems === 1 appear in resource hover cards by default unless a command has visibility property specified which doesn't include `ResourceHoverCard`
+
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-experimenting-with-extensible-commands-in-browse-command-bar"></a>
+### Experimenting with extensible commands in browse command bar
+
+Portal now supports experiementing with asset type commands in browse command bar using Exp platform.
+    1. Extension authors can create an Experiment in Control Tower with a value that overrides their default browse commands. The variable name has to be a well-known string that uniquely identifies the asset type. The format should be of the form described below:
+        BrowseCommands-ExtensionNameAssetTypeName The variable name should start with `BrowseCommands-` followed by extension name and asset type name without any underscores. e.g. this would translate to below for Virtual Machine resource type:
+        `BrowseCommands-MicrosoftAzureComputeVirtualMachines`
+
+        The variable must be created under `AzurePortal` namespace.
+
+        The value for above variable must be set to one of the keys of the map defined below in the Control Tower which will determine which flight/progression user will see in the current session.
+        i.e."commandBarLayout1" or "commandBarLayout2" or "commandBarLayout3"
+
+        Extension authors must choose HubsExtension as the value for Extension filter while setting up the experiment.
+
+        Extension authors must specify the environment filter in control tower. Experimentation changes will only affect the environment based on this filter.
+
+    2. Extension authors define the map of different browse command bar layouts that are part of given experiment in their environmental config files. i.e. default.json
+```json
+        {
+            "assetTypeCommandExperiments": {
+                "VirtualMachines": {
+                    "commandBarLayout1": {
+                        commands: ["cmdId1", "cmdId2", "cmdId3"],
+                        selectionCommands: ["cmdId5", "cmdId6"]
+                    },
+                    "commandBarLayout2": {
+                        selectionCommands: ["cmdId5", "cmdId6"]
+                    },
+                    "commandBarLayout3": {
+                        commands: ["cmdId3", "cmdId1", "cmdId4"]
+                    }
+                }
+            }
+        }
+```
+
+        `commands` array defines the layout for non selection based commands by specifying command ids. `selectionCommands` array defines the selection based commands by specifying command ids. Extensions can decide to experiement with only one section of the toolbar i.e. either selection commands or non selection commands. Rest of the commands would be read from the default set of commands supplied by extension.
+
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-experimenting-with-extensible-commands-in-browse-command-bar-how-to-experiment-with-a-new-command"></a>
+#### How to experiment with a new command
+
+If you are looking to enable a new command in browse command bar only for certain users and want to hide it by default for rest of the users in all environments, use `HiddenByDefault` visibility option when you define the command in your decorator. This visibility option will hide a given command across all areas where extensible commands are integrated such as browse context menu, hover cards and empty browse view.
+
+```typescript
+    {
+        kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
+        id: "OpenBladeCommandIdV2",  // Unique identifier used for controlling visibility of commands
+        label: ClientResources.AssetCommands.openBlade,
+        ariaLabel: ClientResources.AssetCommands.openBlade,
+        icon: {
+            image: SvgType.AddTile,
+        },
+        bladeReference: {
+            blade: "SimpleTemplateBlade",
+            extension: "SamplesExtension", // An optional extension name, however, must be provided when opening a blade from a different extension
+            inContextPane: true, // An optional property to open the pane in context pane
+        },
+        visibility: ForAsset.Commands.NonSelectionCommandVisibility.HiddenByDefault  // Hide this command by defualt in all environments. Can be enabled via experiementation config for certain users.
+    },
+```
+
+In the environment config, you can specify this command id for one of your layouts and users hitting the flight with that experiment will only see the new command in browse command bar. e.g:
+ ```json
+    {
+        "assetTypeCommandExperiments": {
+            "VirtualMachines": {
+                "commandBarLayout1": {
+                    commands: ["OpenBladeCommandIdV2", "cmdId2", "cmdId3"],
+                    selectionCommands: ["cmdId5", "cmdId6"]
+                },
+                "commandBarLayout2": {
+                    selectionCommands: ["cmdId5", "cmdId6"]
+                },
+            }
+        }
+    }
