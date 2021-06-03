@@ -1371,7 +1371,7 @@ Notice that not all commands can support all the visibility options. e.g. you ca
 <a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-experimenting-with-extensible-commands-in-browse-command-bar"></a>
 ### Experimenting with extensible commands in browse command bar
 
-Portal now supports experiementing with asset type commands in browse command bar using Exp platform.
+Portal now supports experiementing with asset type commands in browse command bar by using [Ibiza experimentation platform](https://microsoft.sharepoint.com/teams/Ibizaexperimentation).
     1. Extension authors can create an Experiment in Control Tower with a value that overrides their default browse commands. The variable name has to be a well-known string that uniquely identifies the asset type. The format should be of the form described below:
         BrowseCommands-ExtensionNameAssetTypeName The variable name should start with `BrowseCommands-` followed by extension name and asset type name without any underscores. e.g. this would translate to below for Virtual Machine resource type:
         `BrowseCommands-MicrosoftAzureComputeVirtualMachines`
@@ -1382,8 +1382,9 @@ Portal now supports experiementing with asset type commands in browse command ba
         i.e."commandBarLayout1" or "commandBarLayout2" or "commandBarLayout3"
 
         Extension authors must choose HubsExtension as the value for Extension filter while setting up the experiment.
+[Configuring your experiment in Control Tower](https://microsoft.sharepoint.com/teams/Ibizaexperimentation/SitePages/Experiment-configuration,-start,-and-management.aspx).
 
-        Extension authors must specify the environment filter in control tower. Experimentation changes will only affect the environment based on this filter.
+        Extension authors must specify the environment filter in Control Tower. Experimentation changes will only affect the environment based on this filter (e.g MPAC, RC).
 
     2. Extension authors define the map of different browse command bar layouts that are part of given experiment in their environmental config files. i.e. default.json
 ```json
@@ -1406,6 +1407,14 @@ Portal now supports experiementing with asset type commands in browse command ba
 ```
 
         `commands` array defines the layout for non selection based commands by specifying command ids. `selectionCommands` array defines the selection based commands by specifying command ids. Extensions can decide to experiement with only one section of the toolbar i.e. either selection commands or non selection commands. Rest of the commands would be read from the default set of commands supplied by extension.
+
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-experimenting-with-extensible-commands-in-browse-command-bar-how-to-force-a-specific-treatment-variable-with-query-strings-for-local-testing"></a>
+#### How to force a specific treatment variable with query strings for local testing
+
+If you want to verify the command bar layout for a specific treatment variable value, it can be tested with query strings:
+      ?exp.AzurePortal.BrowseCommands-MicrosoftAzureComputeVirtualMachines=commandBarLayout1
+
+More info can be found here: (https://microsoft.sharepoint.com/teams/Ibizaexperimentation/SitePages/Code-integration-for-A-B-testing.aspx)
 
 <a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-experimenting-with-extensible-commands-in-browse-command-bar-how-to-experiment-with-a-new-command"></a>
 #### How to experiment with a new command
