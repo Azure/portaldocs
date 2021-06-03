@@ -194,13 +194,25 @@ Create a file named `config.json` next to `portaltests.ts`. Paste this in the fi
     "enableFiddler": "false",
     "managementEndpoint": "https://management.core.windows.net/",
     "allowUnauthorizedCert": "true",
-    "LOGIN_NAME": "<someone@someCompany.com>"
+    "LOGIN_NAME": "<someone@someCompany.com>",
+    "partnerTeamEmail": "partnerEmail@partnerCompany.com"
 }
 ```
 
-Replace the LOGIN_NAME with the account being used to login.  If your machine automatically logs you in via corp signin then no password is needed.  Else store the password in windows credential manager and update the sign in password line in the test code to retrieve it.
+Replace the `LOGIN_NAME` with the account being used to login.  If your machine automatically logs you in via corp signin then no password is needed.  Else store the password in windows credential manager and update the sign in password line in the test code to retrieve it.
 
-This configuration tells **@microsoft/azureportal-test** that **Google Chrome** should be used for the test session and `https://portal.azure.com` should be the Portal under test.  You may
+Also, replace the `partnerTeamEmail` with the name of your team that runs the tests. This variable is **REQUIRED**. More details in the section [Partner team email](#partner-team-email).
+
+This configuration tells **@microsoft/azureportal-test** that **Google Chrome** should be used for the test session and `https://portal.azure.com` should be the Portal under test.
+
+<a name="overview-partner-team-email"></a>
+### Partner team email
+
+It is required to specify a team email (**the one used when you registered the extension to the portal**) when running the tests. This will help us to identify which extensions' tests belong to which team. There are three ways to specify the team name variable:
+
+1. Assigning the team name to `partnerTeamEmail` configuration value in config.json file.
+2. Setting the partnerTeamEmail environment variable by running either `set partnerTeamEmail "partnerEmail@partnerCompany.com"` if you want to set that variable **ONLY** for the current command prompt or `setx partnerTeamEmail "partnerEmail@partnerCompany.com"` if you'd like to propagate that variable for all the future command prompts.
+3. If a test is run via VSCode, set the `--partnerTeamEmail` args for the appropriate configuration in .vscode/launch.json file, e.g. `"--partnerTeamEmail", "partnerEmail@partnerCompany.com"`.
 
 <a name="overview-compile-and-run"></a>
 ### Compile and run

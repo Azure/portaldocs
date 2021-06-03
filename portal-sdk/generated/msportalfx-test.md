@@ -815,6 +815,10 @@ export class PortalContextBase {
      * fake user Id
      */
     fakeUser: string = null;
+    /**
+     * Partner team running the tests.
+     */
+    partnerTeamEmail: string = null;
 }
 
 /**
