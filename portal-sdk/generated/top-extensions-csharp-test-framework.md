@@ -90,15 +90,18 @@ To create a test project that can use the Portal Test Framework, use the followi
 
   <!-- Amount of time to wait for the Portal to load before timing out (seconds) -->
   <add key="TestFramework.Portal.PortalLoadTimeOut" value="60" />
-  
+
   <!-- The uri of the target Portal server -->
   <add key="PortalUri" value="https://portal.azure.com" />
-  
+
   <!-- The uri of your deployed extension -->
   <add key="ExtensionUri" value="https://mscompute2.iaas.ext.azure.com/ComputeContent/ComputeIndex" />
-  
+
   <!-- The default webdriver server timeout for requests to be processed and returned (not the same as the waitUntil timeout) -->
   <add key="TestFramework.WebDriver.DefaultTimeout" value="60"/>
+
+  <!-- Team's email alias for identifying the owners of the test  -->
+  <add key="PartnerTeamEmail" value="myTeamEmail@microsoft.com" />
 </appSettings>
 
 ```
