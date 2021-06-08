@@ -127,8 +127,8 @@ Below two tables show different criteria for different alert types and different
 #### Sev3:
 | Alert Type | Cloud | Min Total User Count | Min Affected User Percentage |
 | ----- | ----- | ----- | ----- |
-| Failed At Least Once | All Clouds* | 10 | 4% |
-| Failed Always | All Clouds* | 10 | 2% |
+| Failed At Least Once | All Clouds* | 10 | 7% |
+| Failed Always | All Clouds* | 10 | 5% |
 
 <a name="availability-when-do-the-alerts-trigger-sev2"></a>
 #### Sev2:

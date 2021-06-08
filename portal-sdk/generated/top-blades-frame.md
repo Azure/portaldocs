@@ -33,7 +33,7 @@ To create a FrameBlade, you need to create 3 artifacts.
 
 **NOTE**: In this discussion, `<dir>` is the `SamplesExtension\Extension\` directory, and  `<dirParent>`  is the `SamplesExtension\` directory, based on where the samples were installed when the developer set up the SDK. If there is a working copy of the sample in the Dogfood environment, it is also included.
 
-1. Register the FrameBlade with your extension by creating a TypeScript class with the @FrameBlade decorator. The samples extension file for this is located at   `<dir>/Client/V2/Blades/FrameBlade/SampleFrameBlade.ts` and in the following example.
+1. Register the FrameBlade with your extension by creating a TypeScript class with the @FrameBlade decorator. The samples extension file for this is located at `<dir>/Client/V2/Blades/FrameBlade/SampleFrameBlade.ts` and in the following example.
 
 ```typescript
 
@@ -99,6 +99,10 @@ export class SampleFrameBlade {
     <h1 class="fxs-frame-header" style="margin: 0;">Frame Blade</h1>
     <div class="fxs-frame-token"></div>
     <div class="fxs-frame-content"></div>
+    <div class="fxs-frame-documentation-link">More information and best practices for FrameBlades can be found in our <a
+            href="https://github.com/Azure/portaldocs/blob/master/portal-sdk/generated/top-blades-frameblade.md"
+            target="_blank">documentation
+            page</a>.</div>
     <button class="fxs-frame-button" type="button">Open Blade</button>
     <!-- Define frameSignature and allowed origin list -->
     <script>
@@ -106,13 +110,14 @@ export class SampleFrameBlade {
         var allowedParentFrameAuthorities = ["df.onecloud.azure-test.net", "portal.azure.com"];
     </script>
     <script src="../Scripts/IFrameSample/FramePage.js"></script>
+    <script src="../Scripts/IFrameSample/IdleBehavior.js"></script>
 </body>
 
 </html>
 
 ```
 
-3. Create a script that will communicate with your extension by using post messages. This is how your extension can get the auth token, respond to theme changes, and other tasks. The samples extension file for this is located        is located at  `<dir>/Content/Scripts/framepage.js`, and is also in the following example.
+3. Create a script that will communicate with your extension by using post messages. This is how your extension can get the auth token, respond to theme changes, notify when it is idle, and other tasks. The samples extension file for this is located at `<dir>/Content/Scripts/framepage.js`, and is also in the following example.
 
 ```js
 (function() {
@@ -242,9 +247,38 @@ export class SampleFrameBlade {
 
     // This is an example of posting the 'getAuthToken' event to Portal.
     postMessageToParent("getAuthToken");
+
 })();
 
 ```
+
+4. To ensure that the portal behaves correctly when idle, so the user is automatically logged out after a period of inactivity they have specified, you'd need to add the following code to the script mentioned above:
+
+```ts
+// Send message to indicate to parent that we are idle
+window.addEventListener("blur", () => {
+    window.parent.postMessage(
+        {
+            signature: window.frameSignature,
+            kind: "frameidle",
+        },
+        "*"
+    );
+});
+
+// Send message to indicate to parent that we are active
+window.addEventListener("focus", () => {
+    window.parent.postMessage(
+        {
+            signature: window.frameSignature,
+            kind: "framebusy",
+        },
+        "*"
+    );
+});
+
+```
+
 
 <a name="changing-ui-themes"></a>
 ## Changing UI themes

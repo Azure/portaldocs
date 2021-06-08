@@ -1019,6 +1019,13 @@ module MsPortalFxForAsset {
              */
             export const enum SelectionMenuCommandVisibility {
                 /**
+                 * Allows a command to be hidden by default.
+                 *
+                 * NOTE: This is useful if you are experimenting with command bar layout and wish to only show a command via experimentation.
+                 */
+                HiddenByDefault = CommandVisibility.HiddenByDefault,
+
+                /**
                  * Allows a command to appear on browse toolbar.
                  */
                 BrowseToolbar = CommandVisibility.BrowseToolbar,
@@ -1033,6 +1040,13 @@ module MsPortalFxForAsset {
              * Visibility options for selection commands.
              */
             export const enum SelectionCommandVisibility {
+                /**
+                 * Allows a command to be hidden by default.
+                 *
+                 * NOTE: This is useful if you are experimenting with command bar layout and wish to only show a command via experimentation.
+                 */
+                HiddenByDefault = CommandVisibility.HiddenByDefault,
+
                 /**
                  * Allows a command to appear on browse toolbar.
                  */
@@ -1056,6 +1070,13 @@ module MsPortalFxForAsset {
              * Visibility options for non selection commands.
              */
             export const enum NonSelectionCommandVisibility {
+                /**
+                 * Allows a command to be hidden by default.
+                 *
+                 * NOTE: This is useful if you are experimenting with command bar layout and wish to only show a command via experimentation.
+                 */
+                HiddenByDefault = CommandVisibility.HiddenByDefault,
+
                 /**
                  * Allows a command to appear on browse toolbar.
                  */
@@ -1518,6 +1539,21 @@ import { SvgType } from "Fx/Images";
             ],
             visibility: ForAsset.Commands.NonSelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.NonSelectionCommandVisibility.BrowseEmptyView,
         },
+        {
+            kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
+            id: "OpenBladeCommandIdV2",  // Unique identifier used for controlling visibility of commands
+            label: ClientResources.AssetCommands.openBlade,
+            ariaLabel: ClientResources.AssetCommands.openBlade,
+            icon: {
+                image: SvgType.AddTile,
+            },
+            bladeReference: {
+                blade: "SimpleTemplateBlade",
+                extension: "SamplesExtension", // An optional extension name, however, must be provided when opening a blade from a different extension
+                inContextPane: true, // An optional property to open the pane in context pane
+            },
+            visibility: ForAsset.Commands.NonSelectionCommandVisibility.HiddenByDefault,  // Hide this command by defualt in all environments. Can be enabled via experiementation config for certain users.
+        },
     ],
     selectionCommands: [ // Commands that require resource selection
         {
@@ -1541,7 +1577,7 @@ import { SvgType } from "Fx/Images";
                 title: ClientResources.AssetCommands.confirmDeleteTitle,
                 message: ClientResources.AssetCommands.confirmDeleteMessage,
             },
-            visibility: ForAsset.Commands.SelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.SelectionCommandVisibility.BrowseContextMenu, // Show this command on browse toolbar and browse context menu.
+            visibility: ForAsset.Commands.SelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.SelectionCommandVisibility.BrowseContextMenu | ForAsset.Commands.SelectionCommandVisibility.ResourceHoverCard, // Show this command on browse toolbar and browse context menu.
         },
         {
             kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,  // Executes ARM bulk operations
