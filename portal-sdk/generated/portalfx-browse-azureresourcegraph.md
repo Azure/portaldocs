@@ -1372,48 +1372,44 @@ Notice that not all commands can support all the visibility options. e.g. you ca
 ### Experimenting with extensible commands in browse command bar
 
 Portal now supports experiementing with asset type commands in browse command bar by using [Ibiza experimentation platform](https://microsoft.sharepoint.com/teams/Ibizaexperimentation).
-    1. Extension authors can create an Experiment in Control Tower with a value that overrides their default browse commands. The variable name has to be a well-known string that uniquely identifies the asset type. The format should be of the form described below:
-        BrowseCommands-ExtensionNameAssetTypeName The variable name should start with `BrowseCommands-` followed by extension name and asset type name without any underscores. e.g. this would translate to below for Virtual Machine resource type:
-        `BrowseCommands-MicrosoftAzureComputeVirtualMachines`
 
-        The variable must be created under `AzurePortal` namespace.
+1. Extension authors can create an Experiment in Control Tower with a value that overrides their default browse commands.
+   - The variable name has to be a well-known string that uniquely identifies the asset type. The format should be of the form described below:
+BrowseCommands-ExtensionNameAssetTypeName The variable name should start with `BrowseCommands-` followed by extension name and asset type name without any underscores. e.g. this would translate to `BrowseCommands-MicrosoftAzureComputeVirtualMachines` for Virtual Machine resource type.
+   - The variable must be created under `AzurePortal` namespace.
+   - In the Control Tower, the value for above variable must be set to one of the keys of the map defined in step 2. which will determine the flight/progression user will see in the current session.
+i.e."commandBarLayout1" or "commandBarLayout2" or "commandBarLayout3"
+   - Extension authors must choose HubsExtension as the value for Extension filter while setting up the experiment.[Configuring your experiment in Control Tower](https://microsoft.sharepoint.com/teams/Ibizaexperimentation/SitePages/Experiment-configuration,-start,-and-management.aspx).
+   - Extension authors must specify the environment filter in Control Tower. Experimentation changes will only affect the environment based on this filter (e.g MPAC, RC).
 
-        The value for above variable must be set to one of the keys of the map defined below in the Control Tower which will determine which flight/progression user will see in the current session.
-        i.e."commandBarLayout1" or "commandBarLayout2" or "commandBarLayout3"
-
-        Extension authors must choose HubsExtension as the value for Extension filter while setting up the experiment.
-[Configuring your experiment in Control Tower](https://microsoft.sharepoint.com/teams/Ibizaexperimentation/SitePages/Experiment-configuration,-start,-and-management.aspx).
-
-        Extension authors must specify the environment filter in Control Tower. Experimentation changes will only affect the environment based on this filter (e.g MPAC, RC).
-
-    2. Extension authors define the map of different browse command bar layouts that are part of given experiment in their environmental config files. i.e. default.json
+2. Extension authors define the map of different browse command bar layouts that are part of given experiment in their environmental config files. i.e. default.json
 ```json
         {
             "assetTypeCommandExperiments": {
                 "VirtualMachines": {
                     "commandBarLayout1": {
-                        commands: ["cmdId1", "cmdId2", "cmdId3"],
-                        selectionCommands: ["cmdId5", "cmdId6"]
+                        "commands": ["cmdId1", "cmdId2", "cmdId3"],
+                        "selectionCommands": ["cmdId5", "cmdId6"]
                     },
                     "commandBarLayout2": {
-                        selectionCommands: ["cmdId5", "cmdId6"]
+                        "selectionCommands": ["cmdId5", "cmdId6"]
                     },
                     "commandBarLayout3": {
-                        commands: ["cmdId3", "cmdId1", "cmdId4"]
+                        "commands": ["cmdId3", "cmdId1", "cmdId4"]
                     }
                 }
             }
         }
 ```
-
-        `commands` array defines the layout for non selection based commands by specifying command ids. `selectionCommands` array defines the selection based commands by specifying command ids. Extensions can decide to experiement with only one section of the toolbar i.e. either selection commands or non selection commands. Rest of the commands would be read from the default set of commands supplied by extension.
+`commands` array defines the layout for non selection based commands by specifying command ids. `selectionCommands` array defines the selection based commands by specifying command ids. Extensions can decide to experiement with only one section of the toolbar i.e. either selection commands or non selection commands. Rest of the commands would be read from the default set of commands supplied by extension.
 
 <a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-experimenting-with-extensible-commands-in-browse-command-bar-how-to-force-a-specific-treatment-variable-with-query-strings-for-local-testing"></a>
 #### How to force a specific treatment variable with query strings for local testing
 
 If you want to verify the command bar layout for a specific treatment variable value, it can be tested with query strings:
+```txt
       ?exp.AzurePortal.BrowseCommands-MicrosoftAzureComputeVirtualMachines=commandBarLayout1
-
+```
 More info can be found here: (https://microsoft.sharepoint.com/teams/Ibizaexperimentation/SitePages/Code-integration-for-A-B-testing.aspx)
 
 <a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-experimenting-with-extensible-commands-in-browse-command-bar-how-to-experiment-with-a-new-command"></a>
@@ -1445,11 +1441,11 @@ In the environment config, you can specify this command id for one of your layou
         "assetTypeCommandExperiments": {
             "VirtualMachines": {
                 "commandBarLayout1": {
-                    commands: ["OpenBladeCommandIdV2", "cmdId2", "cmdId3"],
-                    selectionCommands: ["cmdId5", "cmdId6"]
+                    "commands": ["OpenBladeCommandIdV2", "cmdId2", "cmdId3"],
+                    "selectionCommands": ["cmdId5", "cmdId6"]
                 },
                 "commandBarLayout2": {
-                    selectionCommands: ["cmdId5", "cmdId6"]
+                    "selectionCommands": ["cmdId5", "cmdId6"]
                 },
             }
         }
