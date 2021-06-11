@@ -6,25 +6,28 @@ The Favorites in the left nav and the 'All services' menu are the primary ways t
 <a name="browse-building-browse-experiences"></a>
 ## Building browse experiences
 
-There are 2 ways you can be surfaced in Browse:
+The most optimized and efficient method for browse is to on board tracked resources into the Azure Resource Graph (ARG) resources tables.  The flexibility and features for filtering and summarizing resource in the resource group tables is far superior for those resources that can be onboarded.  If the resources cannot be onboarded, there is a fallback to use Azure Resource Manager (ARM) instead.
 
-1. [Browse](#browse-for-arm-resources) for ARM resources
+The first step to having an entry in the 'All services' menu and in global search which can launch the browse experience is to define an asset type and set the options to use ARG browse.  If ARG browse is not available, for ARM browse, the asset type is still required, so lets start there.
 
-    - Upgrading your browse to utilise [Azure Resource Graph](#browse-with-azure-resource-graph)
+If you already have an asset type and wish to update to use ARG, you can skip ahead to this section: [Azure Resource Graph](#browse-with-azure-resource-graph)
 
-1. [Custom blade](#custom-blade) if you have a single instance and not a list of resources
+If you need to use a custom blade for complete control, once the asset type is ready, skip to this section: [Custom blade](#custom-blade)
 
-<a name="browse-for-arm-resources"></a>
-# Browse for ARM resources
+Lastly, if you need to use ARM browse for your resources, once the asset type is ready, skip to this section:  [Azure Resource Manager](#customization-of-browse-for-resources-not-available-in-azure-resource-graph)
 
-ARM Browse automatically queries ARM for resources of a specific type and displays them in a grid. The performance and experience benefits of moving to utilize the Azure Resource Graph are outlined below and all new tracked resources should be implementing browse with the Azure Resource Graph. Follow the instructions outlined here to set up browse for ARM resources and then extend that to use browse using Azure Resource Graph in the section here [Azure Resource Graph](#browse-with-azure-resource-graph). If you already have an asset type using ARM browse, please follow the instructions in the Azure Resource Graph section to upgrade your browse experience today.
+<a name="start-with-asset-type-definition"></a>
+# Start with Asset Type Definition
 
-Simply;
+Browse automatically queries the Azure Resource Graph (ARG) or Azure Resource Manager (ARM) for resources of a specific type and displays them in a grid. The performance and experience benefits of moving to utilize the Azure Resource Graph are outlined below and all new tracked resources should be implementing browse with ARG. Follow the instructions outlined here to set up browse for resources and then extend that to use browse using ARG in the section here [Azure Resource Graph](#browse-with-azure-resource-graph). If you already have an asset type using ARM browse, please follow the instructions in the Azure Resource Graph section to upgrade your browse experience today.
+
+In this section we will explore the following:
 
 1. Define an asset type in PDL
 1. Specify the resource type
 1. Indicate that it should be visible in Browse
-1. Specify the API version that hubs extension should use to call ARM for the resource type.
+1. Specify the API version that hubs extension should use to call ARM for the resource type
+1. Specify the browse type
 
 That's it, you can see an example of that below
 
@@ -47,7 +50,7 @@ All asset types have the following requirements:
 1. The asset id **_must_** be the string resource id
 1. The ARM RP manifest should include a RP, resource type, and resource kind metadata
 
-<a name="browse-for-arm-resources-defining-your-asset-type"></a>
+<a name="start-with-asset-type-definition-defining-your-asset-type"></a>
 ## Defining your asset type
 
 To define your asset type, simply add the following snippet to PDL:
@@ -70,19 +73,75 @@ To define your asset type, simply add the following snippet to PDL:
 </AssetType>
 ```
 
-The name can be anything, since it's scoped to your extension. You'll be typing this a lot, so keep it succinct, yet clear -- it will be used to identify asset types in telemetry.
+The name can be anything, since it's scoped to your extension. You'll be typing this a lot, so keep it succinct, yet clear -- it will be used to identify asset types in telemetry. It is advised that the name not contain any white space.
 
-In order to provide a modern voice and tone within the portal, asset types have 4 different display names. The portal will use the most appropriate display name given the context. If your asset type display name includes an acronym or product name that is always capitalized, use the same values for upper and lower display name properties (e.g. `PluralDisplayName` and `LowerPluralDisplayName` may both use `SQL databases`). Do not share strings between singular and plural display name properties.
+In order to provide a modern voice and tone within the portal, asset types have 4 different display names. The portal will use the most appropriate display name given the context. If your asset type display name includes an acronym or product name that is always capitalized, use the same values for upper and lower display name properties (e.g. `PluralDisplayName` and `LowerPluralDisplayName` may both use `SQL databases`). Do not share strings between singular and plural display name properties. The display names should use sentence casing where acronyms, trademark/product names and the first letter of the uppercase display name should be capitalized but the rest should be lower case, ie use "Virtual machine" instead of "Virtual Machine" or use "Azure SQL database" instead of "Azure SQL Database".
 
 - The 'All services' (browse) menu shows the `ServiceDisplayName` in the list of browseable asset types. If `ServiceDisplayName` is not available, `PluralDisplayName` will be shown instead
 - The All Resources blade uses the `SingularDisplayName` in the Type column, when visible
-- Browse v2 uses the `LowerPluralDisplayName` when there are no resources (e.g. "No web apps to display")
-- Browse v2 uses the `LowerPluralDisplayName` as the text filter placeholder
+- Browse uses the `LowerPluralDisplayName` when there are no resources (e.g. "No web apps to display")
+- Browse uses the `LowerPluralDisplayName` as the text filter placeholder
 
 Filtering functionality within the 'All services' (browse) menu searches over `Keywords`. `Keywords` is a comma-separated set of words or phrases which
 allow users to search for your asset by identifiers other than than the set display names.
 
+<a name="start-with-asset-type-definition-defining-your-asset-type-display-name-determination"></a>
+### Display Name Determination
+
+For the type display name, the asset type can define the display name values. The way that the type display name is derived works like this:
+
+1. If there is a ServiceDisplayName on the asset type, use that.
+1. Otherwise if there is a CompositeDisplayName (or individual display names) on the asset type, use the appropriate case and plurality of that value.
+1. If there are no display names available, use the raw resource type string.
+
 Remember, your part and blade should both have a single `id` input parameter, which is the resource id:
+
+```ts
+/**
+ * View model for the asset tile.
+ */
+@TemplatePart.Decorator({
+    supportedSizes: [
+        TemplatePart.Size.Normal,
+        TemplatePart.Size.Wide,
+        TemplatePart.Size.Large,
+    ],
+    initialSize: TemplatePart.Size.Wide,
+    htmlTemplate: "Tile.html",
+    styleSheets: ["Tile.css"],
+    forAsset: {
+        assetIdParameter: "id",
+        assetType: "MyAsset",
+    },
+})
+@TemplatePart.InjectableModel.Decorator(DataContext)
+export class MyAssetPart {
+    // Required. Must be the only input parameter.
+    public context: TemplatePart.Context<{ id: string }, DataContext>;
+    // ...
+}
+
+/**
+ * View model for the asset blade.
+ */
+@TemplateBlade.Decorator({
+    htmlTemplate: "Blade.html",
+    styleSheets: ["Blade.css"],
+    forAsset: {
+        assetIdParameter: "id",
+        assetType: "MyAsset",
+    },
+})
+@TemplateBlade.Pinnable.Decorator()
+@TemplateBlade.InjectableModel.Decorator(DataContext)
+export class MyAssetBlade {
+    // Required. Must be the only input parameter.
+    public context: TemplateBlade.Context<{ id: string }, DataContext>;
+    // ...
+}
+```
+
+If still using older PDL part and tile definitions:
 
 ```xml
 <Part Name="MyAssetPart" ViewModel="MyAssetPartViewModel" AssetType="MyAsset" AssetIdProperty="id" ...>
@@ -110,7 +169,7 @@ Remember, your part and blade should both have a single `id` input parameter, wh
 
 If your asset type is in preview, set the `IsPreview="true"` property. If the asset type is GA, simply remove the property (the default is `false`).
 
-<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments"></a>
+<a name="start-with-asset-type-definition-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments"></a>
 ### How to hide or show your asset in different environments
 
 You can hide or show your asset in different environments by setting the assettypeoptions extension feature flag in your config which is a rich object
@@ -132,9 +191,11 @@ The "options" value is a comma-separated list of options which will be applied t
 Options| Result
 --- | ---
 HideAssetType | Hides the asset type from the All services left navigation
-HideInstances | Hides any instances of the asset type in browse and global search
+HideInstances | Hides any instances of the asset type in browse all resources and global search
 HideAssetType,HideInstance | Hide the asset type from left navigation AND hides any instances in browse and global search
 *empty string* | This will show the asset type in left navigation AND shows instances in browse and global search
+
+*Importantly*, if HideInstances is used on an asset type, using resource type-specific browse will show those instances in that browse.
 
 The case of empty string strips off any visibility options provided in PDL. The options are applied to the asset type, essentially replacing the options in PDL.
 
@@ -156,12 +217,12 @@ not apply to kind, only the 'HideInstances' option.
 
 There is also no way to show hidden asset types or hide / show specific kinds using the old configuration flags, so please move to 'assettypeoptions'.
 
-<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-self-hosted"></a>
+<a name="start-with-asset-type-definition-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-self-hosted"></a>
 #### Self hosted
 
 This now reads the config JSON file for the appropriate environment, so follow the same procedure as for the Hosting service next.
 
-<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-hosting-service"></a>
+<a name="start-with-asset-type-definition-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-hosting-service"></a>
 #### Hosting service
 
 If you’re using the hosting service, you can do this by updating your domainname.json (e.g. portal.azure.cn.json file)
@@ -180,7 +241,7 @@ If you’re using the hosting service, you can do this by updating your domainna
 **IMPORTANT** These flags cannot be mixed with the legacy 'hideassettypes' flag. If the config provides an 'assettypeoptions' flag, 'hideassettypes' flag
 will be ignored. This is one reason that using 'assettypeoptions' is preferred and use of 'hideassettypes' should be deprecated.
 
-<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-testing-your-hidden-asset"></a>
+<a name="start-with-asset-type-definition-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-testing-your-hidden-asset"></a>
 #### Testing your hidden asset
 
 To test enable your hidden asset for testing purposes, you will need to update the hide asset feature flag to exclude the asset you want to show and ensure you have feature.canmodifyextensions set.
@@ -198,7 +259,7 @@ https://rc.portal.azure.com/?microsoft_azure_compute_assettypes={"VirtualMachine
 or testing the hiding of an asset can be achieved with:
 https://rc.portal.azure.com/?microsoft_azure_compute_assettypes={"VirtualMachine":{"options":"HideAssetType"}}&microsoft_azure_compute=true&feature.canmodifyextensions=true
 
-<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-how-the-options-are-applied-from-pdl-from-the-config-json-file-and-from-the-url"></a>
+<a name="start-with-asset-type-definition-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-how-the-options-are-applied-from-pdl-from-the-config-json-file-and-from-the-url"></a>
 #### How the options are applied from PDL, from the config JSON file and from the URL
 
 There is a definitive recipe for how visibility options are applied to asset types and kinds from the various sources of PDL, config JSON files and via
@@ -226,22 +287,20 @@ Also, if 'assettypeoptions', 'showassettypes' and 'hideassettypes' are all prese
 and if only 'showassettypes' and 'hideassettypes' are specified, 'hideassettypes' will be ignored. Both 'showassettypes' and 'hideassettypes' are both considered to be legacy
 and should be replaced with 'assettypeoptions'.
 
-<a name="browse-for-arm-resources-defining-your-asset-type-handling-arm-kinds"></a>
+<a name="start-with-asset-type-definition-defining-your-asset-type-handling-arm-kinds"></a>
 ### Handling ARM kinds
 
 If the resource you wish to expose does not have kinds then please skip to the next topic.
 
-ARM has the capability for a resource to define kinds, in some cases you may want to
-treat those kinds separately in the portal.
+ARM has the capability for a resource to define kinds, in some cases you may want to treat those kinds separately in the portal.
 
-To define a kind for your asset, you need to declare the kind as a child of the `Asset` within PDL.
-Firstly you will need to specify a default kind, this kind inherits the blade/part defined in the Asset.
-The default kind is identified with `IsDefault="true"`.
+To define a kind for your asset, you need to declare the kind as a child of the `Asset` within PDL. Firstly you will need to specify a default kind,
+this kind inherits the blade/part defined in the Asset. The default kind is identified with `IsDefault="true"`.
 
 If your resource exposes multiple kinds you can declare them as siblings of the default kind.
 
-Exposing your kind within the 'All services' menu will require your kind/asset to be curated within the Portal Framework. The framework also offers ways for grouping kinds together when browsing to those kinds.
-There are two options you can use group your kinds:
+Exposing your kind within the 'All services' menu will require your kind/asset to be curated within the Portal Framework. The framework also offers 
+ways for grouping kinds together when browsing to those kinds. There are two options you can use group your kinds:
 
 1. KindGroup
     - This will define a separate `KindGroup` within your extensions definition which can be used as a way to define a single view for multiple kinds while also keeping the individual kind view.
@@ -330,8 +389,98 @@ There are two options you can use group your kinds:
   </AssetType>
 ```
 
-<a name="browse-for-arm-resources-defining-your-asset-type-add-command"></a>
-### Add command
+<a name="start-with-asset-type-definition-defining-your-asset-type-display-name-overrides-for-kinds"></a>
+### Display Name Overrides for Kinds
+
+For the type display name, the kind can override the values on the asset type. The way that the type display name is derived works like this:
+
+1. If there is a kind which matches the resource's kind, use the kind's ServiceDisplayName if present.
+1. Otherwise, if the kind's CompositeDisplayName is present (or individual display names), use the appropriate case and plurality of that value.
+1. If there kind has not display name or no kind is found or there is no kind, fall back to the asset type display name.
+1. If there is a ServiceDisplayName on the asset type, use that.
+1. Otherwise if there is a CompositeDisplayName (or individual display names) on the asset type, use the appropriate case and plurality of that value.
+1. If there are no display names available, use the raw resource type string.
+
+<a name="start-with-asset-type-definition-defining-your-asset-type-overriding-visibility-of-kinds"></a>
+### Overriding Visibility of Kinds
+
+Just as the type display name, blade, part and icon can be overridden per kind in the Kind entries, visibility of the 
+kind and instances of resources of the kind can be overridden using the Options property on the Kind.
+
+```json
+    {
+        "assettypeoptions": {
+          "YOUR_ASSET_NAME": { "kinds": { "apple": { "options": "ShowInstances" }, "lg": { "options": "HideAssetType" } } }
+        }
+    }
+```
+
+The "options" value is a comma-separated list of options which will be applied to the asset type:
+
+Options| Result
+--- | ---
+HideAssetType | Hides any curated kind-based asset type entry from the All services left navigation
+ShowAssetType | Shows any curated kind-based asset type entry in the All services left navigation - used to show a kind where the parent asset type is hiding the asset type (override)
+HideInstances | Hides any instances of the asset type with the kind in browse all resources and global search
+ShowInstances | Shows any instances of the asset type with the kind in browse all resources and global search - used to show instances of a resource with the kind where the parent asset type is hiding instances (override)
+HideAssetType,HideInstance | Hide the asset type from left navigation AND hides any instances in browse and global search
+HideAssetType,ShowInstance | Hide the asset type from left navigation BUT shows any instances in browse and global search
+ShowAssetType,HideInstance | Show the asset type in left navigation BUT hides any instances in browse and global search
+ShowAssetType,ShowInstance | Show the asset type in left navigation AND shows any instances in browse and global search
+*empty string* | This will show the asset type in left navigation AND shows instances in browse and global search
+
+Importantly, if HideInstances is used on a kind, using resource type-specific browse with a kind filter will show those 
+instances in that browse.
+
+<a name="start-with-asset-type-definition-defining-your-asset-type-choosing-asset-type-and-kind-visibility-options"></a>
+### Choosing Asset Type and Kind Visibility Options
+
+Choosing the visibility options for the asset type and kinds is very powerful and configurable to ensure customers see 
+what they should be seeing.
+
+<a name="start-with-asset-type-definition-defining-your-asset-type-choosing-asset-type-and-kind-visibility-options-asset-type-only"></a>
+#### Asset Type Only
+
+First, if your resource type has no kinds (or the kinds do not affect visibility), it is fairly straight-forward to 
+choose the options.
+
+Entry in All Services / Global Search | Show Resources in Browse All / Global Search | Options to use
+-|-|-
+Show entry | Show resources | no Options, empty string OR "ShowAssetType,ShowInstances"
+Show entry | Hide resources | "HideInstances" OR "ShowAssetType,HideInstances"
+Hide entry | Show resources | "HideAssetType" OR "HideAssetType,ShowInstances"
+Hide entry | Hide resources | "HideAssetType,HideInstances"
+
+<a name="start-with-asset-type-definition-defining-your-asset-type-choosing-asset-type-and-kind-visibility-options-asset-type-and-kinds"></a>
+#### Asset Type And Kinds
+
+However, if you have Kind entries with different visibility needs, it is a bit more complicated to choose the options 
+for the asset type and the kinds. The visibility of the asset type entry and the instances is split into two charts, but
+the flags can be combined separated by a comma to achieve the end result.
+
+Asset type entry in All Services / Global Search | Kind entry in All Services / Global Search | Asset Type Options | Kind Options
+-|-|-|-
+Show entry | Show entry | no Options OR empty | no Options OR empty
+Show entry | Hide entry | no Options OR empty | "HideInstances"
+Hide entry | Show entry | "HideInstances" | "ShowInstances"
+Hide entry | Hide entry | "HideInstances" | no Options OR empty
+
+Show Resources in Browse All / Global Search | Show Resources with Kind in Browse All / Global Search | Asset Type Options | Kind Options
+-|-|-|-
+Show resources | Show resources | no Options OR empty | no Options OR empty
+Show resources | Hide resources | no Options OR empty | "HideInstances"
+Hide resources | Show resources | "HideInstances" | "ShowInstances"
+Hide resources | Hide resources | "HideInstances" | no Options OR empty
+
+So, as an example, if you wanted to show the asset type in the all services menu but hide instances in Browse All AND has a kind 
+which you wanted to hide in the all services menu but show instances of the kind in Browse All, the asset type would have the 
+Options "HideInstances" (since ShowAssetType is implied) and the Kind would have the Options "HideAssetType,ShowInstances".
+
+But utilizing the Options (which can be set per-environment in the config JSON files), there exists a powerful mechanism to show and
+hide resources with and without kinds to provide the appropriate experience for your customers.
+
+<a name="start-with-asset-type-definition-defining-your-asset-type-add-command-create"></a>
+### Add command (Create)
 
 To allow people to create new resources from Browse, you can associate your asset type with a Marketplace item or category:
 
@@ -346,9 +495,12 @@ To allow people to create new resources from Browse, you can associate your asse
 </AssetType>
 ```
 
-The Browse blade will launch the Marketplace item, if specified; otherwise, it will launch the Marketplace category blade for the specific menu item id (e.g. `gallery/virtualMachines/recommended` for Virtual machines > Recommended). To determine the right Marketplace category, contact the <a href="mailto:1store?subject=Marketplace menu item id">Marketplace team</a>. If neither is specified, the Add command won't be available.
+The Browse blade will launch the Marketplace item, if specified; otherwise, it will launch the Marketplace category blade for the specific 
+menu item id (e.g. `gallery/virtualMachines/recommended` for Virtual machines > Recommended). To determine the right Marketplace category, 
+contact the <a href="mailto:1store?subject=Marketplace menu item id">Marketplace team</a>. If neither is specified, the Add command won't 
+be available.
 
-<a name="browse-for-arm-resources-defining-your-asset-type-handling-empty-browse"></a>
+<a name="start-with-asset-type-definition-defining-your-asset-type-handling-empty-browse"></a>
 ### Handling empty browse
 
 The framework offers the ability to display a description and links in the case that the users filters return no results.
@@ -369,39 +521,6 @@ To opt in to this experience you need to provide a `description` and a `link`, t
     <Link Title="{Resource MyAsset.linkTitle2, Module=ClientResources}" Uri="http://www.bing.com"/>
     ...
   </AssetType>
-```
-
-<a name="browse-for-arm-resources-defining-your-asset-type-adding-an-informational-message-link"></a>
-### Adding an informational message/link
-
-If you need to display an informational message and/or link above the list of resources, add an `infoBox` to your Browse config:
-
-```ts
-class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.BookViewModel.Contract {
-
-    public getBrowseConfig(): PromiseV<MsPortalFx.Assets.BrowseConfig> {
-        return Q.resolve({
-            infoBox: {
-                image: MsPortalFx.Base.Images.Info(),
-                text: resx.browseBookInfoBoxText,
-
-                // optionally specify a blade to launch when the infobox is clicked
-                blade: <MsPortalFx.ViewModels.DynamicBladeSelection>{
-                    detailBlade: "BookInfoBlade",
-                    detailBladeInputs: null
-                },
-
-                // ...or link to an external web page
-                uri: "http://microsoftpress.com"
-
-                // NOTE: Blade is preferred over link, if both are specified.
-           },
-            ...
-        });
-    }
-
-    ...
-}
 ```
 
 <a name="browse-with-azure-resource-graph"></a>
@@ -444,25 +563,25 @@ Due to which there the following required from extension authors to onboard.
 <a name="browse-with-azure-resource-graph-onboarding-an-asset-to-arg"></a>
 ## Onboarding an asset to ARG
 
-Firstly you'll need to craft a KQL query which represents all possible data for your desired browse view, this includes the required framework columns.
+Firstly you'll need to craft a [KQL query](#kql-query) which represents all possible data for your desired browse view, this includes the required framework columns.
 
 <a name="browse-with-azure-resource-graph-onboarding-an-asset-to-arg-expected-framework-columns"></a>
 ### Expected Framework columns
 
-| Display name | Expected Column Name | PDL Reference |
-| ------------ | -------------------- | ------------- |
-| Name | name | N/A - Injected as the first column |
-| Resource Id | id | FxColumns.ResourceId |
-| Subscription | N/A | FxColumns.Subscription |
-| SubscriptionId | subscriptionId | FxColumns.SubscriptionId |
-| Resource Group | resourceGroup | FxColumns.ResourceGroup |
-| Resource Group Id | N/A | FxColumns.ResourceGroupId |
-| Location | location | FxColumns.Location |
-| Location Id | N/A | FxColumns.LocationId |
-| Resource Type | N/A | FxColumns.ResourceType |
-| Type | type | FxColumns.AssetType |
-| Kind | kind | FxColumns.Kind |
-| Tags | tags | FxColumns.Tags |
+| Display name | Expected Column Name | PDL Reference | Default Width |
+| ------------ | -------------------- | ------------- | ------------- |
+| Name | name | N/A - Injected as the first column | 200fr |
+| Resource Id | id | FxColumns.ResourceId | 100fr |
+| Subscription | N/A | FxColumns.Subscription | 100fr |
+| SubscriptionId | subscriptionId | FxColumns.SubscriptionId | 100fr |
+| Resource Group | resourceGroup | FxColumns.ResourceGroup | 100fr |
+| Resource Group Id | N/A | FxColumns.ResourceGroupId | 100fr |
+| Location | location | FxColumns.Location | 100fr |
+| Location Id | N/A | FxColumns.LocationId | 100fr |
+| Resource Type | N/A | FxColumns.ResourceType | 100fr |
+| Type | type | FxColumns.AssetType | 100fr |
+| Kind | kind | FxColumns.Kind | 100fr |
+| Tags | tags | FxColumns.Tags | 100fr |
 
 <a name="browse-with-azure-resource-graph-kql-query"></a>
 ## KQL Query
@@ -494,13 +613,10 @@ PDL in our extension providing localized display strings.
 where type =~ 'microsoft.web/sites'
 | extend state = tolower(properties.state)
 | extend status = case(
-state == 'stopped',
-'Stopped',
-state == 'running',
-'Running',
-'Other')
-| project name,resourceGroup,kind,location,id,type,subscriptionId,tags
-, status
+    state == 'stopped', 'Stopped',
+    state == 'running', 'Running',
+    'Other')
+| project name,resourceGroup,kind,location,id,type,subscriptionId,tags,status
 ```
 
 As an example the below query can be used to replicate the 'App Services' ARM based browse experience in ARG.
@@ -512,47 +628,37 @@ where type =~ 'microsoft.web/sites'
 | extend state = tolower(properties.state)
 | extend sku = tolower(properties.sku)
 | extend pricingTier = case(
-sku == 'free',
-'Free',
-sku == 'shared',
-'Shared',
-sku == 'dynamic',
-'Dynamic',
-sku == 'isolated',
-'Isolated',
-sku == 'premiumv2',
-'PremiumV2',
-sku == 'premium',
-'Premium',
-'Standard')
+    sku == 'free', 'Free',
+    sku == 'shared', 'Shared',
+    sku == 'dynamic', 'Dynamic',
+    sku == 'isolated', 'Isolated',
+    sku == 'premiumv2', 'PremiumV2',
+    sku == 'premium', 'Premium',
+    'Standard')
 | extend status = case(
-state == 'stopped',
-'Stopped',
-state == 'running',
-'Running',
-'Other')
+    state == 'stopped', 'Stopped',
+    state == 'running', 'Running',
+    'Other')
 | extend appType = case(
-kind contains 'botapp',
-'Bot Service',
-kind contains 'api',
-'Api App',
-kind contains 'functionapp',
-'Function App',
-'Web App')
-| project name,resourceGroup,kind,location,id,type,subscriptionId,tags
-, appServicePlanId, pricingTier, status, appType
+    kind contains 'botapp', 'Bot Service',
+    kind contains 'api', 'Api App',
+    kind contains 'functionapp', 'Function App',
+    'Web App')
+| project name,resourceGroup,kind,location,id,type,subscriptionId,tags,
+          appServicePlanId,pricingTier,status,appType
 ```
 
 <a name="browse-with-azure-resource-graph-pdl-definition"></a>
 ## PDL Definition
 
-In your extension you'll have a `<Asset>` tag declared in PDL which represents your ARM resource. In order to enable Azure Resource Graph (ARG) support for that asset we'll need to update the `<Browse>` tag to include a reference to the `Query`, `DefaultColumns`, and custom column meta data - if you have any.
+In your extension you'll have a `<AssetType>` tag declared in PDL which represents your ARM resource. In order to enable Azure Resource Graph (ARG) support for that asset we'll need to update the `<Browse>` tag to include a reference to the `Query`, `DefaultColumns`, and custom column meta data - if you have any.
 
 <a name="browse-with-azure-resource-graph-pdl-definition-query-for-pdl"></a>
 ### Query for PDL
 
 Create a new file, we'll use `AppServiceQuery.kml`, and save your query in it.
-You can update any display strings with references to resource files using following syntax `'{{Resource name, Module=ClientResources}}'`.
+You can update any display strings with references to resource files using following syntax `'{{Resource name, Module=ClientResources}}'`. This will allow
+for localization of the display strings in your .resx file.
 
 The following is an example using the resource reference syntax.
 
@@ -605,7 +711,7 @@ A column tag has 5 properties.
       DisplayName="{Resource Columns.status, Module=ClientResources}"
       Description="{Resource Columns.statusDescription, Module=ClientResources}"
       Format="String"
-      WidthInPixels="90" />
+      Width="90fr" />
 ```
 
 | Property | Description |
@@ -789,22 +895,22 @@ It also declares the default columns and their ordering for what a new user of t
                   DisplayName="{Resource Columns.status, Module=ClientResources}"
                   Description="{Resource Columns.statusDescription, Module=ClientResources}"
                   Format="String"
-                  WidthInPixels="90" />
+                  Width="90fr" />
             <Column Name="appType"
                   DisplayName="{Resource Columns.appType, Module=ClientResources}"
                   Description="{Resource Columns.appTypeDescription, Module=ClientResources}"
                   Format="String"
-                  WidthInPixels="90" />
+                  Width="90fr" />
             <Column Name="appServicePlanId"
                   DisplayName="{Resource Columns.appServicePlanId, Module=ClientResources}"
                   Description="{Resource Columns.appServicePlanIdDescription, Module=ClientResources}"
                   Format="Resource"
-                  WidthInPixels="90" />
+                  Width="90fr" />
             <Column Name="pricingTier"
                   DisplayName="{Resource Columns.pricingTier, Module=ClientResources}"
                   Description="{Resource Columns.pricingTierDescription, Module=ClientResources}"
                   Format="String"
-                  WidthInPixels="90" />
+                  Width="90fr" />
     </Browse>
     <ResourceType
         ResourceTypeName="Microsoft.Samples/appservices"
@@ -812,10 +918,63 @@ It also declares the default columns and their ordering for what a new user of t
 </AssetType>
 ```
 
+<a name="browse-with-azure-resource-graph-pdl-definition-adding-an-informational-info-box-with-optional-link-to-arg-browse"></a>
+### Adding an informational info box with optional link to ARG browse
+
+If you need to display an informational message and/or link above the list of resources, add a `BrowseInfoBox` to your Browse PDL:
+
+```xml
+  <AssetType Name="MyAsset"
+             ...>
+    <Browse Type="ResourceType">
+      <BrowseInfoBox Display="{Resource MyAsset.upsellInfoBox, Module=ClientResources}"
+                     Style="Upsell">
+        <LinkTarget Uri="https://azure.microsoft.com" /> <!-- external link -->
+      </BrowseInfoBox>
+    </Browse>
+    <ResourceMenu ResourceProvidedBy="NoResource"
+                  UseStaticOverview="true" />
+    <ResourceType ResourceTypeName="Microsoft.Test/myresources"
+                  ApiVersion="2019-08-09" />
+  </AssetType>
+```
+
+or 
+
+```xml
+  <AssetType Name="MyAsset"
+             ...>
+    <Browse Type="ResourceType">
+      <BrowseInfoBox Display="{Resource MyAsset.upsellInfoBox, Module=ClientResources}"
+                     Style="Upsell">
+        <BladeTarget BladeName="BrowseAll" ExtensionName="HubsExtension" /> <!-- blade -->
+      </BrowseInfoBox>
+    </Browse>
+    <ResourceMenu ResourceProvidedBy="NoResource"
+                  UseStaticOverview="true" />
+    <ResourceType ResourceTypeName="Microsoft.Test/myresources"
+                  ApiVersion="2019-08-09" />
+  </AssetType>
+```
+
+The `BladeTarget` entry must have a `BladeName` and optional `ExtensionName` (if the blade is from another extension) and can have an optional `OpenBladeAsContextPane` to open the blade as a context pane (the blade must be capable of opening as a context pane).
+
+<a name="browse-with-azure-resource-graph-pdl-definition-adding-an-informational-info-box-with-optional-link-to-arg-browse-browse-info-box-styles"></a>
+#### Browse Info Box Styles
+
+The styles for the info box match the styles for the InfoBox control:
+
+| Style | Description |
+|-|-|
+| Default | The default info box style |
+| Info | The standard informational info box style |
+| Upsell | The style used for up-sell information |
+| Success | A success style (included for parity) |
+| Warning | A warning style (included for parity) |
+| Error | An error style (included for parity) |
+
 <a name="browse-with-azure-resource-graph-releasing-the-azure-resource-graph-experience"></a>
 ## Releasing the Azure Resource Graph experience
-
-Ensure the SDK version that you use is `5.0.302.27001` or later.
 
 Per Asset you can configure extension side feature flags to control the release of your assets Azure Resource Graph browse experience.
 
@@ -835,6 +994,15 @@ Within your extension config, either hosting service or self hosted, you will ne
 | ForceOptIn | Allows users to opt in/out of the new experience but will default to the new experience. This will show a 'Try preview' button on the old browse blade and an 'Opt out of preview' button on the ARG browse blade |
 | Force | This will force users to the new experience. There wil be no 'Opt out of preview' button on the ARG browse blade |
 | Disable | This will force users to the old experience. This is the default experience if not flags are set. There wil be no 'Try preview' button on the ARG browse blade |
+
+The default for simple asset types without customized columns OR asset types with a browse query but no browse options defined in 'Force' 
+meaning customers will see the new experience. If you need to change that behavior, set the argbrowseoptions value appropriately to allow
+opt in/out and whether the default is to use the old experience or use the new experience. It is recommended to not use an option or set
+the option to 'Force' to give customers the best experience possible.
+
+It is important to note that if a query is added to the asset type's browse, then the default option will be different due to how we onboarded
+ARG browse and partner extension asset types. Once the query is added, the default becomes 'AllowOptIn', it is advised that you change this to 
+'Force' to ensure your asset type is using ARG.
 
 To test each variation or to test when side loading you can use:
 
@@ -1676,22 +1844,181 @@ If you’re using the hosting service, you can do this by updating the relevant 
     }
 ```
 
-<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-how-to-hide-your-asset-commands-in-different-environments-testing-hiding-commands-locally"></a>
-#### Testing hiding commands locally
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-how-to-hide-your-asset-commands-in-different-environments-testing-hiding-showing-commands-locally"></a>
+#### Testing hiding/showing commands locally
 
 For the desired environment append the following feature flags.
 
 ```txt
-    ?microsoft_azure_myextension_hideassettypecmmands={"MyAsset":["MyCommandId1", "MyCommandId2"]}
+    ?microsoft_azure_myextension_hideassettypecommands={"MyAsset":["MyCommandId1", "MyCommandId2"]}
 ```
 
 If you want to test hiding all your commands, you can specify ["*"].
 
 ```txt
-    ?microsoft_azure_myextension_hideassettypecmmands={"MyAsset":["*"]}
+    ?microsoft_azure_myextension_hideassettypecommands={"MyAsset":["*"]}
 ```
 
-<a name="custom-blade"></a>
+If you want to test commands by showing them locally that are hidden via config file changes, specify empty string [""]. This will ignore hidden commands and show all commands for a given asset type.
+
+```txt
+    ?microsoft_azure_myextension_hideassettypecommands={"MyAsset":[""]}
+```
+
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-controlling-the-visibility-of-your-commands"></a>
+### Controlling the visibility of your commands
+
+Portal now allows extension authors to integrate their extensible commands across various areas in portal such as empty browse view, context menu, etc.
+
+You can use `visibility` property on the command to specify areas in portal where the given command needs to be shown.
+Here's a sample of a command that uses `visibility` property which states that the command should appear on browse toolbar and context menu:
+
+```typescript
+
+    {
+        kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,  // Executes ARM bulk operations
+        id: "BulkDelete",
+        label: ClientResources.AssetCommands.delete,
+        icon: {
+            image: SvgType.Delete,
+        },
+        definitions: {
+            "microsoft.test/virtualservers": {
+                httpMethodType: "DELETE",
+                uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
+                asyncOperation: {
+                    pollingHeaderOverride: "Azure-AsyncOperation",
+                },
+            },
+        },
+        isDelete: true,  // Launches the default bulk delete confirmation blade provided by Fx on user click
+        confirmation: {
+            title: ClientResources.AssetCommands.confirmDeleteTitle,
+            message: ClientResources.AssetCommands.confirmDeleteMessage,
+        },
+        visibility: ForAsset.Commands.SelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.SelectionCommandVisibility.BrowseContextMenu | ForAsset.Commands.SelectionCommandVisibility.ResourceHoverCard, // Show this command on browse toolbar, browse context menu and resource hover card.
+    },
+```
+
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-controlling-the-visibility-of-your-commands-criteria"></a>
+#### Criteria
+Notice that not all commands can support all the visibility options. e.g. you can not specify BrowseContextMenu as the visibility option for non selection commands as they are not resource specific.
+
+| Command type | BrowseContextMenu | BrowseToolbar | BrowseEmptyView |
+| ------------ | ----------------- | ------------- | --------------- |
+| Non selection commands | N/A | Yes | Yes |
+| Non selection menu commands | N/A | Yes | Yes |
+| Selection commands | Yes | Yes | N/A |
+| Selection menu commands | N/A | Yes | N/A |
+
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-controlling-the-visibility-of-your-commands-default-behavior"></a>
+#### Default behavior
+1. All commands appear on BrowseToolbar by default unless explicitly hidden via config OR a command has visibility property specified which doesn't include `BrowseToolbar`
+2. All selection (non menu) commands with minSelectedItems === 1 appear in context menu by default unless a command has visibility property specified which doesn't include `BrowseContextMenu`
+3. All selection commands with minSelectedItems === 1 appear in resource hover cards by default unless a command has visibility property specified which doesn't include `ResourceHoverCard`
+
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-experimenting-with-extensible-commands-in-browse-command-bar"></a>
+### Experimenting with extensible commands in browse command bar
+
+Portal now supports experimenting with asset type commands in browse command bar by using [Ibiza experimentation platform](https://microsoft.sharepoint.com/teams/Ibizaexperimentation).
+
+1. Extension authors can create an Experiment in Control Tower with a value that overrides their default browse commands.
+   - The variable name has to be a well-known string that uniquely identifies the asset type. The format should be of the form described below:
+BrowseCommands-ExtensionNameAssetTypeName The variable name should start with `BrowseCommands-` followed by extension name and asset type name without any underscores. e.g. this would translate to `BrowseCommands-MicrosoftAzureComputeVirtualMachines` for Virtual Machine resource type.
+   - The variable must be created under `AzurePortal` namespace.
+   - In the Control Tower, the value for above variable must be set to one of the keys of the map defined in step 2. which will determine the flight/progression user will see in the current session.
+i.e."commandBarLayout1" or "commandBarLayout2" or "commandBarLayout3"
+   - Extension authors must choose HubsExtension as the value for Extension filter while setting up the experiment.[Configuring your experiment in Control Tower](https://microsoft.sharepoint.com/teams/Ibizaexperimentation/SitePages/Experiment-configuration,-start,-and-management.aspx).
+   - Extension authors must specify the environment filter in Control Tower. Experimentation changes will only affect the environment based on this filter (e.g MPAC, RC).
+
+2. Extension authors define the map of different browse command bar layouts that are part of given experiment in their environmental config files. i.e. default.json
+```json
+        {
+            "assetTypeCommandExperiments": {
+                "VirtualMachines": {
+                    "commandBarLayout1": {
+                        "commands": ["cmdId1", "cmdId2", "cmdId3"],
+                        "selectionCommands": ["cmdId5", "cmdId6"]
+                    },
+                    "commandBarLayout2": {
+                        "selectionCommands": ["cmdId5", "cmdId6"]
+                    },
+                    "commandBarLayout3": {
+                        "commands": ["cmdId3", "cmdId1", "cmdId4"]
+                    }
+                }
+            }
+        }
+```
+`commands` array defines the layout for non selection based commands by specifying command ids. `selectionCommands` array defines the selection based commands by specifying command ids. Extensions can decide to experiement with only one section of the toolbar i.e. either selection commands or non selection commands. Rest of the commands would be read from the default set of commands supplied by extension.
+
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-experimenting-with-extensible-commands-in-browse-command-bar-how-to-force-a-specific-treatment-variable-with-query-strings-for-local-testing"></a>
+#### How to force a specific treatment variable with query strings for local testing
+
+If you want to verify the command bar layout for a specific treatment variable value, it can be tested with query strings:
+```txt
+      ?exp.AzurePortal.BrowseCommands-MicrosoftAzureComputeVirtualMachines=commandBarLayout1
+```
+More info can be found here: (https://microsoft.sharepoint.com/teams/Ibizaexperimentation/SitePages/Code-integration-for-A-B-testing.aspx)
+
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-experimenting-with-extensible-commands-in-browse-command-bar-how-to-experiment-with-a-new-command"></a>
+#### How to experiment with a new command
+
+If you are looking to enable a new command in browse command bar only for certain users and want to hide it by default for rest of the users in all environments, use `HiddenByDefault` visibility option when you define the command in your decorator. This visibility option will hide a given command across all areas where extensible commands are integrated such as browse context menu, hover cards and empty browse view.
+
+```typescript
+    {
+        kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
+        id: "OpenBladeCommandIdV2",  // Unique identifier used for controlling visibility of commands
+        label: ClientResources.AssetCommands.openBlade,
+        ariaLabel: ClientResources.AssetCommands.openBlade,
+        icon: {
+            image: SvgType.AddTile,
+        },
+        bladeReference: {
+            blade: "SimpleTemplateBlade",
+            extension: "SamplesExtension", // An optional extension name, however, must be provided when opening a blade from a different extension
+            inContextPane: true, // An optional property to open the pane in context pane
+        },
+        visibility: ForAsset.Commands.NonSelectionCommandVisibility.HiddenByDefault  // Hide this command by default in all environments. Can be enabled via experimentation config for certain users.
+    },
+```
+
+In the environment config, you can specify this command id for one of your layouts and users hitting the flight with that experiment will only see the new command in browse command bar. e.g:
+ ```json
+    {
+        "assetTypeCommandExperiments": {
+            "VirtualMachines": {
+                "commandBarLayout1": {
+                    "commands": ["OpenBladeCommandIdV2", "cmdId2", "cmdId3"],
+                    "selectionCommands": ["cmdId5", "cmdId6"]
+                },
+                "commandBarLayout2": {
+                    "selectionCommands": ["cmdId5", "cmdId6"]
+                },
+            }
+        }
+    }
+```
+
+# Curating browse assets
+
+When adding a new 'Asset' to your extension and exposing it through the 'All services' menu, by default it will be grouped in the 'Other' category.
+In order to get your 'Asset' correctly categorized you will need to make a request to the Portal Framework to curate your 'Asset'.
+
+For the portal to correct curate your 'Asset' we will need the 'ExtensionName' and 'AssetName' as defined in your extension.
+
+Please contact [ibizafxpm@microsoft.com](mailto:ibizafxpm@microsoft.com) with the following template:
+
+Subject: 'Browse curation request - YourAssetName'
+Body:
+
+- 'ExtensionName - YourExtensionName'
+- 'AssetName - YourAssetName'
+- 'KindName - YourKindName' (If applicable)
+- 'Category - DesiredCategory'
+- 'Portal environment - portal.azure.com (etc...)'
+
 # Custom blade
 
 If you don't have a list of resources and simply need to add a custom blade to Browse, you can define an asset type with a `Browse` type of `AssetTypeBlade`. This tells Browse to launch the blade associated with the asset type. Note that the asset type doesn't actually refer to an instance of a resource in this case. This is most common for services that are only provisioned once per directory or horizontal services (Cost Management, Monitoring, Azure Advisor etc...). In this case, the `PluralDisplayName` is used in the 'All services' menu, but the other display names are ignored. Feel free to set them to the same value.
@@ -1706,31 +2033,10 @@ If you don't have a list of resources and simply need to add a custom blade to B
 </AssetType>
 ```
 
-<a name="curating-browse-assets"></a>
-# Curating browse assets
-
-When adding a new 'Asset' to your extension and exposing it through the 'All services' menu, by default it will be grouped in the 'Other' category.
-In order to get your 'Asset' correctly categorized you will need to make a request to the Portal Framework to curate your 'Asset'.
-
-For the portal to correct curate your 'Asset' we will need the 'ExtensionName' and 'AssetName' as defined in your extension.
-
-Please contact [ibizafxpm@microsoft.com](mailto:ibizafxpm@microsoft.com) with the following template:
-
-Subject: 'Browse curation requestion - YourAssetName'
-Body:
-
-- 'ExtensionName - YourExtensionName'
-- 'AssetName - YourAssetName'
-- 'KindName - YourKindName' (If applicable)
-- 'Category - DesiredCategory'
-- 'Portal environment - portal.azure.com (etc...)'
-
-<a name="customization-of-browse-for-resources-not-available-in-azure-resource-graph"></a>
 # Customization of Browse for Resources not available in Azure Resource Graph
 
 If your resource type is not available in Azure Resource Graph, you can still customize the browse experience. While there are compelling reasons to move your resource type to the Azure Resource Graph, if your resources are untracked, currently you cannot use the Azure Resource Group. Using ARM browse as a fallback is a possibility until more support for untracked resources is available.
 
-<a name="customization-of-browse-for-resources-not-available-in-azure-resource-graph-customizing-columns"></a>
 ### Customizing columns
 
 By default, ARM Browse only shows the resource name, group, location, and subscription. To customize the columns, add a view-model to the `AssetType` and indicate that you have custom Browse config:
@@ -1806,7 +2112,6 @@ Notice that the genre column actually renders 2 properties: genre and subgenre. 
 
 At this point, you should be able to compile and see your columns show up in your Browse blade. Of course, you still need to populate your supplemental data. Let's do that now...
 
-<a name="customization-of-browse-for-resources-not-available-in-azure-resource-graph-providing-supplemental-data"></a>
 ### Providing supplemental data
 
 In order to specify supplemental data to display on top of the standard resource columns, you'll need to opt in to specifying supplemental data in PDL:
@@ -1895,7 +2200,38 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
 
 Now, you should have supplemental data getting populated. Great! Let's add context menu commands...
 
-<a name="customization-of-browse-for-resources-not-available-in-azure-resource-graph-adding-context-menu-commands"></a>
+### Adding an informational message/link to ARM browse
+
+If you need to display an informational message and/or link above the list of resources, add an `infoBox` to your Browse config:
+
+```ts
+class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.BookViewModel.Contract {
+
+    public getBrowseConfig(): PromiseV<MsPortalFx.Assets.BrowseConfig> {
+        return Q.resolve({
+            infoBox: {
+                image: MsPortalFx.Base.Images.Info(),
+                text: resx.browseBookInfoBoxText,
+
+                // optionally specify a blade to launch when the infobox is clicked
+                blade: <MsPortalFx.ViewModels.DynamicBladeSelection>{
+                    detailBlade: "BookInfoBlade",
+                    detailBladeInputs: null
+                },
+
+                // ...or link to an external web page
+                uri: "http://microsoftpress.com"
+
+                // NOTE: Blade is preferred over link, if both are specified.
+           },
+            ...
+        });
+    }
+
+    ...
+}
+```
+
 ## Adding context menu commands
 
 Context menu commands in Browse must take a single `id` input parameter that is the resource id of the specific resource. To specify commands, add the name of the command group defined in PDL to Browse config:
