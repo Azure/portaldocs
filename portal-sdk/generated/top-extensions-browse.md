@@ -1254,6 +1254,13 @@ module MsPortalFxForAsset {
                  * Allows a command to appear on empty browse view.
                  */
                 BrowseEmptyView = CommandVisibility.BrowseEmptyView,
+
+                /**
+                 * Allows a command to replace default "create" button on a service hover card.
+                 *
+                 * NOTE: Only one command with this flag is supported per asset type.
+                 */
+                ServiceHoverCard = CommandVisibility.ServiceHoverCard,
             }
 
             /**
@@ -1705,7 +1712,10 @@ import { SvgType } from "Fx/Images";
                     },
                 },
             ],
-            visibility: ForAsset.Commands.NonSelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.NonSelectionCommandVisibility.BrowseEmptyView,
+            visibility:
+                ForAsset.Commands.NonSelectionCommandVisibility.BrowseToolbar |
+                ForAsset.Commands.NonSelectionCommandVisibility.BrowseEmptyView |
+                ForAsset.Commands.NonSelectionCommandVisibility.ServiceHoverCard,
         },
         {
             kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
