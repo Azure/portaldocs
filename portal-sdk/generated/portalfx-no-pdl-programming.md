@@ -211,6 +211,12 @@ export class TemplateBladesBlade {
                                 return BladeReferences.forBlade("ForContextPaneLauncherBlade").createReference();
                             },
                         },
+                        {
+                            id: "cloudShellBlade",
+                            displayText: ClientResources.executeInCloudShellCommand,
+                            icon: null,
+                            supplyBladeReference: () => BladeReferences.forBlade("CloudShellBlade").createReference(),
+                        },
                     ],
                 },
             ],
