@@ -299,7 +299,7 @@ this kind inherits the blade/part defined in the Asset. The default kind is iden
 
 If your resource exposes multiple kinds you can declare them as siblings of the default kind.
 
-Exposing your kind within the 'All services' menu will require your kind/asset to be curated within the Portal Framework. The framework also offers 
+Exposing your kind within the 'All services' menu will require your kind/asset to be curated within the Portal Framework. The framework also offers
 ways for grouping kinds together when browsing to those kinds. There are two options you can use group your kinds:
 
 1. KindGroup
@@ -404,7 +404,7 @@ For the type display name, the kind can override the values on the asset type. T
 <a name="start-with-asset-type-definition-defining-your-asset-type-overriding-visibility-of-kinds"></a>
 ### Overriding Visibility of Kinds
 
-Just as the type display name, blade, part and icon can be overridden per kind in the Kind entries, visibility of the 
+Just as the type display name, blade, part and icon can be overridden per kind in the Kind entries, visibility of the
 kind and instances of resources of the kind can be overridden using the Options property on the Kind.
 
 ```json
@@ -429,19 +429,19 @@ ShowAssetType,HideInstance | Show the asset type in left navigation BUT hides an
 ShowAssetType,ShowInstance | Show the asset type in left navigation AND shows any instances in browse and global search
 *empty string* | This will show the asset type in left navigation AND shows instances in browse and global search
 
-Importantly, if HideInstances is used on a kind, using resource type-specific browse with a kind filter will show those 
+Importantly, if HideInstances is used on a kind, using resource type-specific browse with a kind filter will show those
 instances in that browse.
 
 <a name="start-with-asset-type-definition-defining-your-asset-type-choosing-asset-type-and-kind-visibility-options"></a>
 ### Choosing Asset Type and Kind Visibility Options
 
-Choosing the visibility options for the asset type and kinds is very powerful and configurable to ensure customers see 
+Choosing the visibility options for the asset type and kinds is very powerful and configurable to ensure customers see
 what they should be seeing.
 
 <a name="start-with-asset-type-definition-defining-your-asset-type-choosing-asset-type-and-kind-visibility-options-asset-type-only"></a>
 #### Asset Type Only
 
-First, if your resource type has no kinds (or the kinds do not affect visibility), it is fairly straight-forward to 
+First, if your resource type has no kinds (or the kinds do not affect visibility), it is fairly straight-forward to
 choose the options.
 
 Entry in All Services / Global Search | Show Resources in Browse All / Global Search | Options to use
@@ -454,7 +454,7 @@ Hide entry | Hide resources | "HideAssetType,HideInstances"
 <a name="start-with-asset-type-definition-defining-your-asset-type-choosing-asset-type-and-kind-visibility-options-asset-type-and-kinds"></a>
 #### Asset Type And Kinds
 
-However, if you have Kind entries with different visibility needs, it is a bit more complicated to choose the options 
+However, if you have Kind entries with different visibility needs, it is a bit more complicated to choose the options
 for the asset type and the kinds. The visibility of the asset type entry and the instances is split into two charts, but
 the flags can be combined separated by a comma to achieve the end result.
 
@@ -472,8 +472,8 @@ Show resources | Hide resources | no Options OR empty | "HideInstances"
 Hide resources | Show resources | "HideInstances" | "ShowInstances"
 Hide resources | Hide resources | "HideInstances" | no Options OR empty
 
-So, as an example, if you wanted to show the asset type in the all services menu but hide instances in Browse All AND has a kind 
-which you wanted to hide in the all services menu but show instances of the kind in Browse All, the asset type would have the 
+So, as an example, if you wanted to show the asset type in the all services menu but hide instances in Browse All AND has a kind
+which you wanted to hide in the all services menu but show instances of the kind in Browse All, the asset type would have the
 Options "HideInstances" (since ShowAssetType is implied) and the Kind would have the Options "HideAssetType,ShowInstances".
 
 But utilizing the Options (which can be set per-environment in the config JSON files), there exists a powerful mechanism to show and
@@ -495,9 +495,9 @@ To allow people to create new resources from Browse, you can associate your asse
 </AssetType>
 ```
 
-The Browse blade will launch the Marketplace item, if specified; otherwise, it will launch the Marketplace category blade for the specific 
-menu item id (e.g. `gallery/virtualMachines/recommended` for Virtual machines > Recommended). To determine the right Marketplace category, 
-contact the <a href="mailto:1store?subject=Marketplace menu item id">Marketplace team</a>. If neither is specified, the Add command won't 
+The Browse blade will launch the Marketplace item, if specified; otherwise, it will launch the Marketplace category blade for the specific
+menu item id (e.g. `gallery/virtualMachines/recommended` for Virtual machines > Recommended). To determine the right Marketplace category,
+contact the <a href="mailto:1store?subject=Marketplace menu item id">Marketplace team</a>. If neither is specified, the Add command won't
 be available.
 
 <a name="start-with-asset-type-definition-defining-your-asset-type-handling-empty-browse"></a>
@@ -939,7 +939,7 @@ If you need to display an informational message and/or link above the list of re
   </AssetType>
 ```
 
-or 
+or
 
 ```xml
   <AssetType Name="MyAsset"
@@ -995,13 +995,13 @@ Within your extension config, either hosting service or self hosted, you will ne
 | Force | This will force users to the new experience. There wil be no 'Opt out of preview' button on the ARG browse blade |
 | Disable | This will force users to the old experience. This is the default experience if not flags are set. There wil be no 'Try preview' button on the ARG browse blade |
 
-The default for simple asset types without customized columns OR asset types with a browse query but no browse options defined in 'Force' 
+The default for simple asset types without customized columns OR asset types with a browse query but no browse options defined in 'Force'
 meaning customers will see the new experience. If you need to change that behavior, set the argbrowseoptions value appropriately to allow
 opt in/out and whether the default is to use the old experience or use the new experience. It is recommended to not use an option or set
 the option to 'Force' to give customers the best experience possible.
 
 It is important to note that if a query is added to the asset type's browse, then the default option will be different due to how we onboarded
-ARG browse and partner extension asset types. Once the query is added, the default becomes 'AllowOptIn', it is advised that you change this to 
+ARG browse and partner extension asset types. Once the query is added, the default becomes 'AllowOptIn', it is advised that you change this to
 'Force' to ensure your asset type is using ARG.
 
 To test each variation or to test when side loading you can use:
@@ -1878,10 +1878,10 @@ If you want to test commands by showing them locally that are hidden via config 
 <a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-controlling-the-visibility-of-your-commands"></a>
 ### Controlling the visibility of your commands
 
-Portal now allows extension authors to integrate their extensible commands across various areas in portal such as empty browse view, context menu, etc.
+Portal now allows extension authors to integrate their extensible commands across various areas in portal such as empty browse view, context menu, service hover card and resource hover card.
 
 You can use `visibility` property on the command to specify areas in portal where the given command needs to be shown.
-Here's a sample of a command that uses `visibility` property which states that the command should appear on browse toolbar and context menu:
+Here's a sample of a command that uses `visibility` property which states that the command should appear on browse toolbar, context menu and resource hover card:
 
 ```typescript
 
@@ -1914,12 +1914,12 @@ Here's a sample of a command that uses `visibility` property which states that t
 #### Criteria
 Notice that not all commands can support all the visibility options. e.g. you can not specify BrowseContextMenu as the visibility option for non selection commands as they are not resource specific.
 
-| Command type | BrowseContextMenu | BrowseToolbar | BrowseEmptyView |
-| ------------ | ----------------- | ------------- | --------------- |
-| Non selection commands | N/A | Yes | Yes |
-| Non selection menu commands | N/A | Yes | Yes |
-| Selection commands | Yes | Yes | N/A |
-| Selection menu commands | N/A | Yes | N/A |
+| Command type | BrowseContextMenu | BrowseToolbar | BrowseEmptyView | ResourceHoverCard | ServiceHoverCard |
+| ------------ | ----------------- | ------------- | --------------- | ----------------- | ---------------- |
+| Non selection commands | N/A | Yes | Yes | N/A | Yes |
+| Non selection menu commands | N/A | Yes | Yes | N/A | Yes |
+| Selection commands | Yes | Yes | N/A | Yes | N/A |
+| Selection menu commands | N/A | Yes | N/A | Yes | N/A |
 
 <a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-controlling-the-visibility-of-your-commands-default-behavior"></a>
 #### Default behavior
