@@ -61,7 +61,6 @@ In most cases, your blade will be launched from the Marketplace, a deep link, or
 
 This can be done directly with a blade reference or a marketplace id
 
-```ts
 ```typescript
 
 public engineBladeLink: BladeLink = {
@@ -78,7 +77,6 @@ public noMarketplaceEngineBladeLink: BladeLink = {
 };
 
 ```
-```
 
 <a name="building-custom-create-forms-design-for-a-single-blade"></a>
 ### Design for a single blade
@@ -92,12 +90,10 @@ A provisioning decorator is another component of template blades.
 
 The [typescript decorator framework](portalfx-no-pdl.md) enables you to build UX to collect data from the user. If you're not familiar with decorator blades, now is a good time to read more about it.
 
-```ts
 ```typescript
 
 @TemplateBlade.DoesProvisioning.Decorator({ supportsPostProvisioning: true })
 
-```
 ```
 
 This decorator adds a provisioning property to the context of your blade which enables you to harness the framework's provisioning capabilities, and it includes the ability to require this blade be launched with a marketplace item.
@@ -107,7 +103,6 @@ There are 2 specific scenarios which the provisioning decorator covers.
 1. ARM provisioning:
 (Refer to the full CreateArmEngineBlade sample to see the full create blade)
 
-```ts
 ```typescript
 
 private _supplyTemplateDeploymentOptions(): TemplateBlade.DoesProvisioning.DeployTemplateOptions
@@ -140,11 +135,9 @@ return {
 return provisioning.deployTemplate(this._supplyTemplateDeploymentOptions())
     
 ```
-```
 
 2. Custom provisioning:
 (Refer to the full CreateCustomRobotBlade sample to see the full create blade)
-```ts
 ```typescript
 
 const provisioningPromise = provisioning.deployCustom({
@@ -160,7 +153,6 @@ const provisioningPromise = provisioning.deployCustom({
 });
 
 ```
-```
 
 <a name="building-custom-create-forms-launching-a-provisioning-blade"></a>
 ### Launching a provisioning blade
@@ -168,7 +160,6 @@ In most cases, your blade will be launched from the Marketplace, a deep link, or
 
 This can be done directly with a blade reference or a marketplace id
 
-```ts
 ```typescript
 
 import * as ClientResources from "ClientResources";
@@ -235,7 +226,6 @@ export class CreateLauncherBlade {
    };
 }
 
-```
 ```
 
 <a name="building-custom-create-forms-build-your-form"></a>

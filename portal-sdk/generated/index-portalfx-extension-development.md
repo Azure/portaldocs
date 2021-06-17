@@ -28,10 +28,6 @@
 <a name="development-common-scenarios"></a>
 ## Common scenarios
 * [Building browse experiences](portalfx-browse.md#building-browse-experiences)
-    * [No-code Browse](portalfx-browse.md#no-code-browse)
-    * [Using Azure Resource Graph for Browse](portalfx-browse.md#using-azure-resource-graph-for-browse)
-    * [Resources not Available in Azure Resource Graph](portalfx-browse.md#resources-not-available-in-azure-resource-graph)
-    * [Custom blade](portalfx-browse.md#custom-blade)
 
 * [Building create experiences](portalfx-create.md#building-create-experiences)
 * [Building custom create forms](portalfx-create.md#building-custom-create-forms)
