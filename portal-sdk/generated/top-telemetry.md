@@ -351,21 +351,26 @@ ClientTelemetry
 <a name="overview-viewing-telemetry-custom-queries-common-queries-per-extension-feedback"></a>
 ##### Per extension feedback
 
-Ensure to update the `data` filter to use your extension name.
+Ensure to update the `experienceFilter` filter to use your extension name.
 
-[Link to query](https://azportalpartner.kusto.windows.net:443/AzurePortal?query=H4sIAAAAAAAEAGWQwU7DMAyG70i8g7VLOykwxH0nNBickBinaYcs%2fTUy1qTY3qASD0%2fSMrWCW%2fzn%2byzbdwePoCscUEO5vbz4ps83MOgo4FXbYOmD0nxOk8nwZ536GLr0AQHs3T1Qba17H0GVVUsuBrU%2bCE0WX4ogSZstj1sZqs5ALqtOeZLcmRrLgn16l%2bsix8VmSiPSxbpOc0siz9L1ORthqGM%2f6UD9RmMonBKgUZR92JXSHLyWjI8jRF%2fZGypmhaHb6fpmMx1pjF3f%2bo%2bZ7nYCP1bJuyrMoDUc93BKzwznBStf40Vt3Zju1JkXSD5JfvbNTZ7NnLcwNN5QIitt23%2ftqIK4H9lce6jWAQAA)
+[Link to query](https://aka.ms/portalfx/kusto/feedback)
 
 ```txt
+let experienceFilter = "Extension/HubsExtension/";
 ClientTelemetry
 | where userTypeHint == ""
 | where action == "GenericFeedback"
-| where data contains "Extension/HubsExtension/"
-| extend dataJson = parsejson(['data'])
-| extend comments = dataJson.comments
-| extend emotion = dataJson.emotion
+| where actionModifier == "mark"
+| where data contains experienceFilter
+| extend data = parsejson(['data'])
+| extend extension = data.currentBladeInfo.extensionName
+| extend view = data.currentBladeInfo.bladeName
+| where view contains experienceFilter
+| extend comments = data.comments
+| extend emotion = data.emotion
 | extend env = tostring(split(requestUri, '/', 2)[0])
 | extend region = tostring(split(serverId, '-',2)[0])
-| project PreciseTimeStamp, userId, sessionId, region, env, emotion, comments
+| project PreciseTimeStamp, userId, sessionId, region, env, extension, view, emotion, comments
 | sort by PreciseTimeStamp desc
 ```
 
