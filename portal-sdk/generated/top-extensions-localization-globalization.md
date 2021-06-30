@@ -11,7 +11,8 @@ The display language will be one of the 18 language below. All extensions are re
 | German                	| de           	|
 | Spanish               	| es           	|
 | French                	| fr           	|
-| Italian               	| it           	|
+| Italian         	        | it            |
+| Indonesian                    | id            |
 | Japanese              	| ja           	|
 | Korean                	| ko           	|
 | Portuguese (Brazil)   	| pt-BR        	|
@@ -26,7 +27,7 @@ The display language will be one of the 18 language below. All extensions are re
 | Swedish               	| sv           	|
 | Turkish               	| tr           	|
 
-For more information about internationalization requirements for your extension and the process to get the extension localized see [http://aka.ms/AzureGR](http://aka.ms/AzureGR). For onboarding localization, please reach out to Bruno Lewin and the Internationalization team at <a href="mailto:ibiza-interntnl@microsoft.com?subject=Onboarding localization">Internationalization team</a>.
+For more information about internationalization requirements for your extension and the process to get the extension localized see [http://aka.ms/AzureGR](http://aka.ms/AzureGR). For onboarding localization, please reach out to the DevRel Global Experiences Localization team at drlocprodpm@microsoft.com.
 
 <a name="localization-localizing-build"></a>
 ### Localizing build
