@@ -3,7 +3,7 @@
 
 The Azure Portal is localized and globalized on two dimensions: the display language and the format culture. The display language is used to determine the language of the UI text strings. The format culture is used to determine the culture formatting of dates and currency. The portal uses a combination of heuristics and user settings to determine both these values for a given user. These values are provided to an extension at the time it is loaded. The heuristics used is open to modifications in the future to improve user experience.
 
-The display language will be one of the 18 language below. All extensions are required to provide UI text strings for all of the 18 languages.
+The display language will be one of the 19 languages below. All extensions are required to provide UI text strings for all of the 19 languages.
 
 | Language              	| Culture Code 	|
 |-----------------------	|--------------	|
@@ -13,6 +13,7 @@ The display language will be one of the 18 language below. All extensions are re
 | French                	| fr           	|
 | Italian               	| it           	|
 | Japanese              	| ja           	|
+| Indonesian				| id			|
 | Korean                	| ko           	|
 | Portuguese (Brazil)   	| pt-BR        	|
 | Russian               	| ru           	|
@@ -26,7 +27,7 @@ The display language will be one of the 18 language below. All extensions are re
 | Swedish               	| sv           	|
 | Turkish               	| tr           	|
 
-For more information about internationalization requirements for your extension and the process to get the extension localized see [http://aka.ms/AzureGR](http://aka.ms/AzureGR). For onboarding localization, please reach out to Bruno Lewin and the Internationalization team at <a href="mailto:ibiza-interntnl@microsoft.com?subject=Onboarding localization">Internationalization team</a>.
+For more information about internationalization requirements for your extension and the process to get the extension localized see [http://aka.ms/AzureGR](http://aka.ms/AzureGR). For onboarding localization, please reach out to the [DevRel Global Experiences Localization team](mailto:drlocprodpm@microsoft.com). 
 
 <a name="localization-localizing-build"></a>
 ### Localizing build
