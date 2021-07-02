@@ -22,7 +22,7 @@
 
 Language detection in the Azure portal works similar to how most systems in place will detect language. When the user makes a request to the Portal, the language/locale of the user is given in the request. This language is then checked against our list of supported languages. If the language is supported by the portal then it is accepted and set as the user language.
 
-All language detection occurs by the Portal and is given to the extension at the time it is loaded. All extensions will be required to support all 18 mandatory languages.
+All language detection occurs by the Portal and is given to the extension at the time it is loaded. All extensions will be required to support all 19 mandatory languages.
 
 <a name="understanding-localization-language-fallback"></a>
 ### Language fallback
@@ -42,6 +42,7 @@ English	 				| en
 German   				| de
 Spanish  				| es
 French   				| fr
+Indonesian				| id
 Italian  				| it
 Japanese 				| ja
 Korean   				| ko
