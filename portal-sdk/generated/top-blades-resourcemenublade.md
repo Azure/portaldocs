@@ -505,8 +505,6 @@ const MenuKeywords = ClientResources.ResourceMenuKeyword.Printer;
 * Constants for the column IDs for the custom browse config.
 */
 module BrowseColumns {
-   "use strict";
-
    /**
     * The status column.
     */
