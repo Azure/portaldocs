@@ -80,33 +80,12 @@ Besides configuration for various alert types extension partners can configure w
 <a name="availability"></a>
 ## Availability
 
-The alerts have extension, blade and part load availability on different environments including sovereign and LX clouds.
+The alerts have extension, blade and part load availability on different environments including sovereign and air-gapped clouds.
 
 <a name="availability-opted-in"></a>
 ### Opted in
 
-To opt in you will need to submit a Pull Request to add Your_Extension_Name in "monitoredExtensions" array as below json shows in [AzureFxg_Percentage_Availability.alerting.json][4]. Refer to [How do I onboard](#How-do-I-onboard) for details about submitting Pull Request.
-
-```json
-{
-    "extensionName": "Ibiza_Gauge",
-    "enabled": true,
-    "environments": [
-        {
-            "environment": ["PROD", "MC", "FF", "BF", "USNAT", "USSEC"],
-            "percentageAvailability": [
-                {
-                    "enabled": true,
-                    "monitoredExtensions": [
-                       "Your_Extension_Name",
-                       ...
-                    ]
-                }
-            ]
-        }
-    ]
-}
-```
+Every extension in Azure Portal is opted in automatically by default. No action is needed from extension partner end.
 
 <a name="availability-two-types-of-availability-alerts"></a>
 ### Two types of availability alerts
@@ -165,9 +144,9 @@ Below two tables show different criteria for different alert types and different
     </tbody>
 </table>
 
-> *All Clouds are Public, Fairfax, Mooncake, BlackForest and LX.
+> *All Clouds are Public, Fairfax, Mooncake, BlackForest and air-gapped clouds.
 
-> **Non-public clouds are Fairfax, Mooncake, BlackForest and LX.
+> **Non-public clouds are Fairfax, Mooncake, BlackForest and air-gapped clouds.
 
 For any given monitor window (1, 2, 4, 8, 12 and 24 hours) the following three conditions must be met to fire an alert.
 1. total user count >= Min Total User Count
@@ -247,7 +226,7 @@ At a high level you define:
 #### What is environment?
 
 "environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com
-or any other legit portal domain name, a.k.a., national cloud and LX cloud domain names are supported too. Multiple values can be set for an "environment" property.
+or any other legit portal domain name, a.k.a., national cloud and air-gapped cloud domain names are supported too. Multiple values can be set for an "environment" property.
 
 <a name="client-error-configuration-what-is-enabled"></a>
 #### What is enabled?
@@ -440,7 +419,7 @@ At a high level you define;
 #### What is environment?
 
 "environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com
-or any other legit portal domain name, a.k.a., national cloud and LX cloud domain names are supported too. Multiple values can be set for an "environment" property.
+or any other legit portal domain name, a.k.a., national cloud and air-gapped cloud domain names are supported too. Multiple values can be set for an "environment" property.
 
 <a name="create-regression-configuration-1-what-is-enabled-1"></a>
 #### What is enabled?
@@ -572,7 +551,7 @@ Per each of those, you can define a set of criteria like the below.
 #### What is environment?
 
 "environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com
-or any other legit portal domain name, a.k.a., national cloud and LX cloud domain names are supported too. Multiple values can be set for an "environment" property.
+or any other legit portal domain name, a.k.a., national cloud and air-gapped cloud domain names are supported too. Multiple values can be set for an "environment" property.
 
 <a name="performance-configuration-2-what-is-enabled-2"></a>
 #### What is enabled?
@@ -684,7 +663,7 @@ Currently performance alerts run every 10 minutes assessing the previous 90 minu
 
 > For public and national clouds the configuration updates take effect immediately after the PR gets completed.
 
-> For LX clouds we deploy configuration updates to LX clouds once every two weeks. USNat domain name is [portal.azure.eaglex.ic.gov][3] and USSec domain name is [portal.azure.microsoft.scloud][2].
+> For air-gapped clouds we deploy configuration updates to air-gapped clouds once every month. USNat domain name is [portal.azure.eaglex.ic.gov][3] and USSec domain name is [portal.azure.microsoft.scloud][2].
 
 2. Set up correlation rules in ICM
 
@@ -705,13 +684,15 @@ Currently performance alerts run every 10 minutes assessing the previous 90 minu
 
 | Alert | Correlation ID |
 | ----- | -------------- |
+| Availability | PercentageBasedAvailability |
 | Create - Regression | CreateBladeSuccessRate |
 | Error - AffectedUserPercentage | ErrorAffectedUserPercentage |
 | Error - Message | ErrorMessage |
-| Availability | PercentageBasedAvailability |
+| Extension SDK Age* | ExtensionAge |
 | Performance - Extension | ExtensionLoadPerformance |
 | Performance - Blade | BladeLoadPerformance |
 | Performance - Part | PartLoadPerformance|
+> *It's required when extension team's tenant in IcM owns multiple extensions in Azure Portal. Without it the extension age alerts fired for different extensions would be correlated into one IcM per cloud.
 
 <a name="time-zone-based-alerting"></a>
 ## Time zone based alerting
@@ -749,7 +730,7 @@ If no value is specified for `businessHourStartTimeUtc`, alerts are triggered in
 
 <a name="overwrite-default-tsg-with-extenions-tsg"></a>
 ## Overwrite default TSG with extenions&#39; TSG
-Extension team can overwrite the default TSG links in IcM that are set by Azure Portal team by specifying their own TSG links in extension's customization JSON. The TSG link can be any valid URL that points to the TSG owned by extension team although it's preferably a URL in [Engineering Hub][5] because it can be accessible in LX or any other air-gapped clouds without extra work. The [Engineering Hub][5] takes care of translating it to a URL in air-gapped clouds and makes sure it can be accessible in air-gapped clouds behind the scenes.
+Extension team can overwrite the default TSG links in IcM that are set by Azure Portal team by specifying their own TSG links in extension's customization JSON. The TSG link can be any valid URL that points to the TSG owned by extension team although it's preferably a URL in [Engineering Hub][5] because it can be accessible in air-gapped clouds without extra work. The [Engineering Hub][5] takes care of translating it to a URL in air-gapped clouds and makes sure it can be accessible in air-gapped clouds behind the scenes.
 Here is an example of how to specify the `tsgLinks` in the customization JSON config.
 
 ```json
@@ -816,7 +797,7 @@ If one or more **clouds** are not specified in customization JSON, the IcM incid
 <a name="route-alerts-to-another-team-in-icm-step-3"></a>
 ### Step 3
 
-The last step is to create routing rules to route different IcMs to different teams in IcM site.
+The last step is to create routing rules to route different IcMs to different teams at IcM site. Please reach out to [ICM support](mailto:icmsupport@microsoft.com) team to opt in the Export/Import feature to bulk update IcM routing rules.
 
 <a name="faq"></a>
 ## FAQ
