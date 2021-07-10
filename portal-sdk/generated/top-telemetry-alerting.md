@@ -5,8 +5,9 @@
 * [Availability](#availability)
     * [Opted in](#availability-opted-in)
     * [Two types of availability alerts](#availability-two-types-of-availability-alerts)
+    * [Is availability alert configurable?](#availability-is-availability-alert-configurable)
     * [How often do they run?](#availability-how-often-do-they-run)
-    * [When do the alerts trigger?](#availability-when-do-the-alerts-trigger)
+    * [What are the alerts triggering criteria?](#availability-what-are-the-alerts-triggering-criteria)
 * [Client Error](#client-error)
     * [Configuration](#client-error-configuration)
     * [How often client error alerts run?](#client-error-how-often-client-error-alerts-run)
@@ -85,31 +86,35 @@ The alerts have extension, blade and part load availability on different environ
 <a name="availability-opted-in"></a>
 ### Opted in
 
-Every extension in Azure Portal is opted in automatically by default. No action is needed from extension partner end.
+Every extension in Azure Portal is opted in automatically by default. No action is needed from extension partner.
 
 <a name="availability-two-types-of-availability-alerts"></a>
 ### Two types of availability alerts
 1. User Failed At Least Once (FALO): when users have at least one load failure.
 2. User Failed Always (FA): when users do not have any successfully loads after they try to load at least once.
 
+<a name="availability-is-availability-alert-configurable"></a>
+### Is availability alert configurable?
+Percentage based availability alert is not configurable. The same set of [alerts triggering criteria](#What-are-the-alerts-triggering-criteria) are used for extension, blade and part respectively.
+
 <a name="availability-how-often-do-they-run"></a>
 ### How often do they run?
 
 Currently extension, blade and part availability alert run 5, 10 and 15 minutes respectively assessing the previous 1, 2, 4, 8, 12 and 24 hours of data.
 
-<a name="availability-when-do-the-alerts-trigger"></a>
-### When do the alerts trigger?
+<a name="availability-what-are-the-alerts-triggering-criteria"></a>
+### What are the alerts triggering criteria?
 
-Below two tables show different criteria for different alert types and different severities that applies for any extension, blade and part load in Azure Portal. 
+Below two tables show different criteria for different alert types and different severities that appliy for any extension, blade and part load in Azure Portal. 
 
-<a name="availability-when-do-the-alerts-trigger-sev3"></a>
+<a name="availability-what-are-the-alerts-triggering-criteria-sev3"></a>
 #### Sev3:
 | Alert Type | Cloud | Min Total User Count | Min Affected User Percentage |
 | ----- | ----- | ----- | ----- |
 | Failed At Least Once | All Clouds* | 10 | 7% |
 | Failed Always | All Clouds* | 10 | 5% |
 
-<a name="availability-when-do-the-alerts-trigger-sev2"></a>
+<a name="availability-what-are-the-alerts-triggering-criteria-sev2"></a>
 #### Sev2:
 <table>
     <thead>
@@ -179,7 +184,7 @@ At a high level you define:
     "enabled": true,
     "environments": [
         {
-            "environment": ["portal.azure.com", "portal.azure.cn", "portal.azure.eaglex.ic.gov", "portal.azure.microsoft.scloud"],
+            "environment": ["portal.azure.com", "portal.azure.cn"],
             "availability": [...],
             "clientError": [
                 {
@@ -500,7 +505,7 @@ At a high level you define;
     "enabled": true,
     "environments": [
         {
-            "environment": ["portal.azure.com", "portal.azure.cn", "portal.azure.eaglex.ic.gov", "portal.azure.microsoft.scloud"],
+            "environment": ["portal.azure.com", "portal.azure.cn"],
             "availability": [...],
             "clientError": [...],
             "create": [...],
@@ -632,7 +637,7 @@ Datacenter code can be "`*`", "AM", "BY", etc. "`*`" represents all Azure Portal
 Datacenter code is optional. If you do not specify the datacenterCode property in criteria, when alerting calculates percentileDuration and affectedUserCount, it does not take datacenter into consideration. So you will not have percentileDuration and affectedUserCount per datacenter. For such a case percentileDurationThresholdInMilliseconds, minAffectedUserCount and bottomMinAffectedUserCount specified in criteria are for all (combined, overall) the datacenters.
 For the complete list of datacenter code names, go to [datacenter code list](https://aka.ms/portalfx/alerting/datacenter-code-name)
 
-<a name="performance-configuration-2-when-do-the-alerts-trigger-1"></a>
+<a name="performance-configuration-2-when-do-the-alerts-trigger"></a>
 #### When do the alerts trigger?
 
 Every 10 minutes, we get percentile load duration for the last 90 minutes. We get the most recent 6 sample points and calculate a weighted percentile load duration based on the following formula.
@@ -663,7 +668,7 @@ Currently performance alerts run every 10 minutes assessing the previous 90 minu
 
 > For public and national clouds the configuration updates take effect immediately after the PR gets completed.
 
-> For air-gapped clouds we deploy configuration updates to air-gapped clouds once every month. USNat domain name is [portal.azure.eaglex.ic.gov][3] and USSec domain name is [portal.azure.microsoft.scloud][2].
+> For air-gapped clouds we deploy configuration updates to air-gapped clouds once every month.
 
 2. Set up correlation rules in ICM
 
@@ -730,7 +735,7 @@ If no value is specified for `businessHourStartTimeUtc`, alerts are triggered in
 
 <a name="overwrite-default-tsg-with-extenions-tsg"></a>
 ## Overwrite default TSG with extenions&#39; TSG
-Extension team can overwrite the default TSG links in IcM that are set by Azure Portal team by specifying their own TSG links in extension's customization JSON. The TSG link can be any valid URL that points to the TSG owned by extension team although it's preferably a URL in [Engineering Hub][5] because it can be accessible in air-gapped clouds without extra work. The [Engineering Hub][5] takes care of translating it to a URL in air-gapped clouds and makes sure it can be accessible in air-gapped clouds behind the scenes.
+Extension team can overwrite the default TSG links in IcM that are set by Azure Portal team by specifying their own TSG links in extension's customization JSON. The TSG link can be any valid URL that points to the TSG owned by extension team although it's preferably a URL in [Engineering Hub][2] because it can be accessible in air-gapped clouds without extra work. The [Engineering Hub][2] takes care of translating it to a URL in air-gapped clouds and makes sure it can be accessible in air-gapped clouds behind the scenes.
 Here is an example of how to specify the `tsgLinks` in the customization JSON config.
 
 ```json
@@ -767,7 +772,7 @@ Certificate is used by IcM service to authenticate with the alerting service who
 <a name="route-alerts-to-another-team-in-icm-step-2"></a>
 ### Step 2
 
-Submit and complete a PR to add **IcM connector info** into alerting customization JSON so that alerting service knows what connector is used when sending incidents for that extension. The supported cloud values are Public, BlackForest, Fairfax, Mooncake, USNat or USSec.
+Submit and complete a PR to add **IcM connector info** into alerting customization JSON so that alerting service knows what connector is used when sending incidents for that extension. The supported cloud values are Public, BlackForest, Fairfax, Mooncake and air-gapped clouds.
 
 If one or more **clouds** are not specified in customization JSON, the IcM incidents will be created and sent to Azure Portal (IbizaFx) team through IbizaFx's custom connector for the cloud instance(s) that're not specified in the extension's customization JSON. And IbizaFx's IcM routing rule auto-routes the incidents to the corresponding service and team in IcM
 
@@ -822,7 +827,4 @@ A: Azure Portal partner team's IcM info is collected during partner onboarding p
 > The IcM routing rule is in format 'AIMS://AZUREPORTAL\Portal\{ExtensionName}'.
 
   [1]: https://icmdocs.azurewebsites.net/developers/Connectors/ConnectorOnboarding.html
-  [2]: http://portal.azure.microsoft.scloud
-  [3]: http://portal.azure.eaglex.ic.gov
-  [4]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx-Alerting?path=%2Fproducts%2FAzure%20Portal%20(IbizaFx)%2FGauge%2FAzureFxg_Percentage_Availability.alerting.json
-  [5]: http://aka.ms/EngineeringHub
+  [2]: http://aka.ms/EngineeringHub
