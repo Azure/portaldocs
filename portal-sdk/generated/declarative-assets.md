@@ -18,7 +18,7 @@
 <a name="azure-portal-assets"></a>
 # Azure Portal assets
 
-To have a presence in the Azure Portal [All Services menu](https://portal.azure.com/?feature.customportal=false#allservices) and other entry points such as the global search bar in the Portal, an asset has be to defined. Each entry you see in the Portal's all services list is an asset. This doc talks about creating and customizing your asset. An asset represents a service in Azure and most assets map to an ARM resource type. 
+To have a presence in the Azure Portal [All Services menu](https://portal.azure.com/?feature.customportal=false#allservices) and other entry points such as the global search bar in the Portal, an asset has be to defined. Each entry you see in the Portal's all services list is an asset. This doc talks about creating and customizing your asset. An asset represents a service in Azure and most assets map to an ARM resource type.
 
 Example of the storage account asset showing up in the Portal's global search -
 
@@ -31,7 +31,7 @@ Example of the storage account asset showing up in the Portal's All Services Men
 <a name="azure-portal-assets-defining-an-asset"></a>
 ## Defining an asset
 
-Assets are defined as JSON objects in your extension. To add a new asset, you need to add a JSON file in your extension that defines the asset type. There are primarily two types of assets - 
+Assets are defined as JSON objects in your extension. To add a new asset, you need to add a JSON file in your extension that defines the asset type. There are primarily two types of assets -
 
 1. An asset that opens a browse for ARM resources
 1. An asset that opens a custom view
@@ -39,7 +39,7 @@ Assets are defined as JSON objects in your extension. To add a new asset, you ne
 <a name="azure-portal-assets-defining-an-asset-an-asset-that-opens-browse-for-arm-resources"></a>
 ### An asset that opens browse for ARM resources
 
-In this category, when a customer clicks on the asset, they are taken to a browse view. The browse view is a list of all resources of the given ARM resource type. This information of all resources for a given resource type comes from [Azure Resource Graph](https://docs.microsoft.com/azure/governance/resource-graph/). Most assets in the Azure Portal belong to this category such as VMs, Storage accounts etc. 
+In this category, when a customer clicks on the asset, they are taken to a browse view. The browse view is a list of all resources of the given ARM resource type. This information of all resources for a given resource type comes from [Azure Resource Graph](https://docs.microsoft.com/azure/governance/resource-graph/). Most assets in the Azure Portal belong to this category such as VMs, Storage accounts etc.
 
 Below is a sample JSON definition for an asset that opens a browse for ARM resources. When the value of `assetType.browse.type` is set to `ResourceType`, this results in an asset that opens browse for ARM resources. In this case, the ARM resource is `Providers.Test/statefulIbizaEngines` and the API version that will be used is `2014-04-01`.
 
@@ -49,7 +49,7 @@ Below is a sample JSON definition for an asset that opens a browse for ARM resou
   "stringSource": "Resources/MyAssetStrings.resjson",
   "assetType": {
     "name": "ExtensionResource",
-    "keywords":"keywords", 
+    "keywords":"keywords",
     "displayNames": {
       "singular": "singular",
       "plural": "plural",
@@ -85,7 +85,7 @@ Below is a sample JSON definition for an asset that opens a custom view. When th
   "stringSource": "Resources/MyAssetStrings.resjson",
   "assetType": {
     "name": "Hub",
-    "keywords":"keywords", 
+    "keywords":"keywords",
     "displayNames":{
       "singular": "HubSingular",
       "plural": "HubPlural",
@@ -129,7 +129,7 @@ Below is a sample JSON definition for an asset that opens a custom view. When th
 
 If your asset is of type `ResourceType` for an ARM resource, you can customize and configure browse. Browse is powered by Azure Resource Graph. If you aren’t familiar Azure Resource Graph, it’s a service which provides a query-able caching layer over ARM. This gives us the capability to sort, filter, and search server side.
 
-Here is a summary on how to customize browse - 
+Here is a summary on how to customize browse -
 
 - Define the columns which you wish to expose
 - Craft the query to power your data set
@@ -242,7 +242,7 @@ kind contains 'functionapp',
 <a name="azure-portal-assets-configuring-browse-json-assettype-definition"></a>
 ### JSON AssetType Definition
 
-In your extension, you'll have a `assetType` JSON object which represents your ARM resource. In order to customize browse for that asset we'll need to update the `assetType.browse` object to include a reference to the `query`, `defaultColumns`, and custom column meta data - if you have any.
+In your extension, you'll have a `assetType` JSON object which represents your ARM resource. In order to customize browse for that asset we'll need to update the `assetType.browse` object to include a reference to the `query`, `defaultColumns`, `excludeColumns` and custom column meta data - if you have any.
 
 <a name="azure-portal-assets-configuring-browse-json-assettype-definition-query-for-assettype-definition"></a>
 #### Query for assetType Definition
@@ -303,12 +303,12 @@ To define a custom column you will need to create a `column` collection in JSON 
           "description": "Displays the status of the resource",
           "format":"String",
           "width": "120fr"
-        
+
         }
       ]
 ```
 
-Here are the properties a column supports - 
+Here are the properties a column supports -
 
 | Property | Description |
 | -- | -- |
@@ -335,7 +335,7 @@ Note for `BladeParameterColumn`:
 - If this is set and the result is a string, the column name will be the parameter name with that value.
 - If this is set and the result is an object, that object will be the entire parameters for the blade.
 
-Here are the format options for a column - 
+Here are the format options for a column -
 
 | Format option | Description |
 | -- | -- |
@@ -348,7 +348,7 @@ Here are the format options for a column -
 | Tenant | String representation of an ARM tenant ID from the display name for the tenant (column should return tenant ID) |
 | Status | String rendering of your column with an icon which is return by `IconColumn`.  Currently only StatusBadge icons are supported (see list below) |
 
-Here are the source units a column supports - 
+Here are the source units a column supports -
 
 The delineated sections below show possible appropriate units in groups (ie, 20,000 metric bytes will show as 20 KB and 1,363,148 SI bytes will show as 1.3 GB).
 
@@ -435,7 +435,7 @@ where type == 'microsoft.web/sites'
 | project name,resourceGroup,kind,location,id,type,subscriptionId,tags,status,statusIcon
 ```
 
-Here are valid column icons - 
+Here are valid column icons -
 
 | Icon | Description |
 | -- | -- |
@@ -462,6 +462,15 @@ Default columns is a comma separated list of column names, a mix of custom colum
 
 For example `DefaultColumns="status, appType, appServicePlanId, FxColumns.Location"`.
 
+<a name="azure-portal-assets-configuring-browse-json-assettype-definition-exclude-columns"></a>
+#### Exclude columns
+
+You can specify `excludeColumns` property on your `browse` JSON object to indicate which default columns should be excluded from the browse experience. It can be used for example for tenant-level resources.
+Exclude columns is an array of column names, where values can come from the set `["FxColumns.SubscriptionId", "FxColumns.ResourceGroup", "FxColumns.Location", "FxColumns.Tags"]`.
+Excluded columns won't appear in the grid, Kusto query, filter pills, groupBy dropdown, visualizations and column chooser.
+
+For example `"excludeColumns": ["FxColumns.SubscriptionId", "FxColumns.ResourceGroup", "FxColumns.Location"],`.
+
 <a name="azure-portal-assets-configuring-browse-bulk-commanding"></a>
 ### Bulk commanding
 
@@ -473,13 +482,13 @@ Coming soon
 <a name="azure-portal-assets-configuring-the-resource-menu-resource-menu"></a>
 ### Resource menu
 
-When a customer clicks on a particular resource in browse, they are taken to a page specific to that particular resource. A resource menu serves as a table of content for the resource and is present on the left side of the page. The resource menu is a list  of different options available to manage the resource. Authors can add new menu sections and menu items based on the necessary functionality for their resources. Additionally, a few menu items are available to all resources for free such as Activity log, Tags etc. 
+When a customer clicks on a particular resource in browse, they are taken to a page specific to that particular resource. A resource menu serves as a table of content for the resource and is present on the left side of the page. The resource menu is a list  of different options available to manage the resource. Authors can add new menu sections and menu items based on the necessary functionality for their resources. Additionally, a few menu items are available to all resources for free such as Activity log, Tags etc.
 
 Example of the resource menu for storage accounts -
 
 ![alt-text](../media/declarative-assets/resourceMenu.png "Resource menu for a storage account resource")
 
-This resource menu can be configured by editing the `menu` object in the `assetType` JSON object. Here is an example - 
+This resource menu can be configured by editing the `menu` object in the `assetType` JSON object. Here is an example -
 
 ```json
 {
@@ -654,6 +663,3 @@ As shown, if 'assettypeoptions' and 'hideassettypes' are all present in the conf
 
 Also, if 'assettypeoptions', 'showassettypes' and 'hideassettypes' are all present in the URL, the 'showassettypes' and 'hideassettypes' will be ignored
 and if only 'showassettypes' and 'hideassettypes' are specified, 'hideassettypes' will be ignored. Both 'showassettypes' and 'hideassettypes' are both considered to be legacy and should be replaced with 'assettypeoptions'.
-
-
-
