@@ -1944,7 +1944,7 @@ i.e."commandBarLayout1" or "commandBarLayout2" or "commandBarLayout3"
 2. Extension authors define the map of different browse command bar layouts that are part of given experiment in their environmental config files. i.e. default.json
 ```json
         {
-            "assetTypeCommandExperiments": {
+            "assetTypeBrowseCommandsExperiments": {
                 "VirtualMachines": {
                     "commandBarLayout1": {
                         "commands": ["cmdId1", "cmdId2", "cmdId3"],
@@ -1997,7 +1997,7 @@ If you are looking to enable a new command in browse command bar only for certai
 In the environment config, you can specify this command id for one of your layouts and users hitting the flight with that experiment will only see the new command in browse command bar. e.g:
  ```json
     {
-        "assetTypeCommandExperiments": {
+        "assetTypeBrowseCommandsExperiments": {
             "VirtualMachines": {
                 "commandBarLayout1": {
                     "commands": ["OpenBladeCommandIdV2", "cmdId2", "cmdId3"],
