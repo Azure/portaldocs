@@ -39,7 +39,6 @@ Consider the following component:
 @ReactView.Decorator<ComponentProps, ComponentState, ReduxState, ResourceAction>({
     store,
     viewReady: (state) => state.loading !== LoadingStatus.LOADING && state.loading !== LoadingStatus.NOT_LOADED,
-    versionId,
 })
 @ReactView.ReactReduxConnect.Decorator<ReduxState>(
     mapStateToProps,
