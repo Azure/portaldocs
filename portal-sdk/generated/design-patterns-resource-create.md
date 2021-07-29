@@ -1,7 +1,7 @@
 ﻿# Create a Resource
 The Create a Resource pattern guides users through the process of creating Azure resources.
 
-Last updated April 2021 (see [Change Log](##change-log))
+Last updated July 2021 (see [Change Log](##change-log))
 
 <a name="context"></a>
 ## Context
@@ -156,6 +156,22 @@ The <strong>Basics</strong> step should have the following in the footer area:
 <div style="text-align:center">
 <img alttext="Create a resource - footer" src="../media/design-patterns-resource-create/Example3_Create-a-Resource_Basics-Tab-Footer-Navigation.png" style="width:50%">
 </div>
+
+If a resource works across multiple regions (non-regional resource or global resource), the field Region is a read only textbox with value “Global” and an info message is shown below the textbox. When user creates a new resource group while creating resource, a new field “Resource group location” will be added. 
+
+Design of a global resource create when user selects an existing resource group: 
+
+<div style="text-align:center">
+<img alttext="Create a resource - global resource" src="../media/design-patterns-resource-create/Example28_Global_resource_create.png" style="width:75%">
+</div>
+
+Design of a global resource create when user creates a new resource group: 
+
+<div style="text-align:center">
+<img alttext="Create a resource - global resource" src="../media/design-patterns-resource-create/Example29_Global_resource_create_select_new_RG.png" style="width:75%">
+</div>
+
+The above design can be implemented in declarative approach by setting the value of config isGlobalResource to true. Some examples of global resource creates are Azure Maps accounts and Bing Resource. 
 
 <a name="behavior-create-a-resource-optional-steps-steps-1-additional-steps"></a>
 #### Additional Steps
@@ -607,6 +623,9 @@ The declarative approach can significantly reduce your development costs (under 
 
 <a name="change-log"></a>
 ## Change Log
+
+July 2021
+* Added guidance of region and resource group location for non-regional create (global create)
 
 April 2021
 * Added change log. Updated guidance for hiding/disabling tabs in Optional Steps & Required Steps.

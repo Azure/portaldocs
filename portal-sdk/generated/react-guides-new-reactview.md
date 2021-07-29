@@ -39,15 +39,11 @@ Every ReactView needs a root component with a decorator on it. This results in b
 ```tsx
 import * as React from "react"; // this is needed for all react code, regardless of whether or not it's explicitly referenced
 import * as ReactView from "@microsoft/azureportal-reactview/ReactView"; // this import gives us decorators for initializing and rendering the view
-import { versionId } from "@microsoft/azureportal-reactview/major-version/1"; // this enables the ReactView runtime to know which major version is being run
 import { setTitle } from "@microsoft/azureportal-reactview/Az"; // allows us to set the title of the ReactView
 
 setTitle("Getting Started"); // this can be called anywhere, in production scenarios this should be passed a localized string
 
-@ReactView.ReduxFree.Decorator({ // We use the redux-free decorator for now, later in the guide we'll switch to using redux to reduce complexity
-    versionId, // versionId always gets passed into the decorators
-    viewReady: () => true // When this function evaluates to true, the view is asserted ready and the user is shown the experience
-})
+@ReactView.ReduxFree.Decorator() 
 export class GettingStarted extends React.Component { // a completely empty React class component, needed
     public render() {
         return <span>Getting Started</span>;
@@ -91,7 +87,6 @@ interface GettingStartedState { // typing for the state, you can also anonymousl
 }
 
 @ReactView.ReduxFree.Decorator({
-    versionId,
     viewReady: (state: GettingStartedState) => !!state.resources // now that we load data in our experience, we want to wait to assert ready until we've loaded it
 })
 class GettingStarted extends React.Component<{}, GettingStartedState> { // the first generic is for props, since we don't need any we leave it empty
@@ -412,7 +407,6 @@ Here's the full set of code that drives the experience:
 ```tsx
 import * as ReactView from "@microsoft/azureportal-reactview/ReactView";
 import * as React from "react";
-import { versionId } from "@microsoft/azureportal-reactview/major-version/1";
 import { List } from "@fluentui/react/lib/List";
 import { Stack, StackItem } from "@fluentui/react/lib/Stack";
 import { mergeStyleSets } from "@fluentui/react/lib/Styling";
@@ -488,7 +482,6 @@ const onRenderCell = (resource: ResourceMetadata) => {
 };
 
 @ReactView.ReduxFree.Decorator({
-    versionId,
     viewReady: (state: GettingStartedState) => !!state.resources,
 })
 export class GettingStarted extends React.Component<{}, GettingStartedState> {
