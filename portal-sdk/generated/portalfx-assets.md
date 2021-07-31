@@ -412,9 +412,9 @@ Note both lg and samsung in the example below will be exposed as entries too.
 The portal includes many references to assets, like pinned parts on the dashboard, recent items, and more. All references
 are persisted to user settings and available when the user signs in again. When an asset is deleted, the portal needs to be
 notified that these references need to be cleaned up. To do that, simply call
-`MsPortalFx.UI.AssetManager.notifyAssetDeleted()`.
+`MsPortalFx.UI.AssetManager.notifyResourceDeleted()` in Knockout blades or `notifyResourceDeleted()` from `@microsoft/azureportal-reactview/ResourceManagement` in React Views.
 
-It's important to note that assets can obviously be deleted outside the portal. When an asset is deleted outside of the portal and `notifyAssetDeleted()` cannot be called, these references will not be cleaned up. When the user signs in again, they will still see pinned parts, for instance. These parts will most likely fail to load due to a 404 from your back-end service due to the asset not existing anymore. When you get a 404 for an asset id, always call `notifyAssetDeleted()` to ensure the portal has a chance to clean up.
+It's important to note that assets can obviously be deleted outside the portal. When an asset is deleted outside of the portal and `notifyResourceDeleted()` cannot be called, these references will not be cleaned up. When the user signs in again, they will still see pinned parts, for instance. These parts will most likely fail to load due to a 404 from your back-end service due to the asset not existing anymore. When you get a 404 for an asset id, always call `notifyResourceDeleted()` to ensure the portal has a chance to clean up.
 
 <a name="assets-linking-notifications-to-assets"></a>
 ### Linking notifications to assets
