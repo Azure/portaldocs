@@ -205,9 +205,9 @@ The values listed in the "Extension value" column are recommended values, althou
 
 | Setting name / notes | Default Value | Extension Value |
 | -------------------- | ------------ | ---------- |
-| accessDetails<sup>2</sup> | #blade/HubsExtension/MyAccessBlade/resourceId/ |	blank (verify that menu item is hidden) | 
-| accountPortal<sup>1</sup> | https://account.windowsazure.com/ | blank (verify that menu item is hidden) | 
-| classicPortal<sup>1</sup> | https://manage.windowsazure.com/	 | same  | 
+| accessDetails<sup>2</sup> | #blade/HubsExtension/MyAccess.ReactView/resourceId/ |	blank (verify that menu item is hidden) |
+| accountPortal<sup>1</sup> | https://account.windowsazure.com/ | blank (verify that menu item is hidden) |
+| classicPortal<sup>1</sup> | https://manage.windowsazure.com/	 | same  |
 | createSupportRequest | #create/Microsoft.Support | same |
 | giveFeedback | [https://go.microsoft.com/fwLink/?LinkID=522329](https://go.microsoft.com/fwLink/?LinkID=522329) | [https://go.microsoft.com/fwlink/?linkid=838978](https://go.microsoft.com/fwlink/?linkid=838978) | 
 | helpAndSupport | 	#blade/Microsoft_Azure_Support/HelpAndSupportBlade | same | 
