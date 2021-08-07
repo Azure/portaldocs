@@ -320,7 +320,7 @@ add a ./test-main.js file as the main entrypoint for your app
 window.fx.environment.armEndpoint = "https://management.azure.com";
 window.fx.environment.armApiVersion = "2014-04-01";
 
-const allTestFiles = []
+const allTestFiles = [];
 if (window.__karma__) {
     const TEST_REGEXP = /^\/base\/Extension.UnitTests\/Output\/.*(spec|test)\.js$/i;
     // Get a list of all the test files to include
@@ -329,8 +329,8 @@ if (window.__karma__) {
             // Normalize paths to RequireJS module names.
             // If you require sub-dependencies of test files to be loaded as-is (requiring file extension)
             // then do not normalize the paths
-            const normalizedTestModule = file.replace(/^\/base\/Extension.UnitTests\/|\.js$/g, "")
-            allTestFiles.push(normalizedTestModule)
+            const normalizedTestModule = file.replace(/^\/base\/Extension.UnitTests\/|\.js$/g, "");
+            allTestFiles.push(normalizedTestModule);
         }
     });
 }
@@ -339,7 +339,7 @@ mocha.setup({
     ui: "bdd",
     timeout: 60000,
     ignoreLeaks: false,
-    globals: []
+    globals: [],
 });
 
 rjs = require.config({
@@ -355,7 +355,7 @@ rjs = require.config({
     deps: allTestFiles,
 
     // kickoff karma or mocha
-    callback: window.__karma__ ? window.__karma__.start : function () { return mocha.run(); }
+    callback: window.__karma__ ? window.__karma__.start : function () { return mocha.run(); },
 });
 
 
@@ -394,7 +394,7 @@ module.exports = function (config) {
             require("karma-coverage"), // Include if you want coverage
             require("karma-chrome-launcher"),
             require("karma-junit-reporter"),  // Include if you want junit reporting
-            require("karma-trx-reporter")   // Include if you want trx reporting
+            require("karma-trx-reporter"),   // Include if you want trx reporting
         ],
         // list of files / patterns to load in the browser
         files: [
@@ -427,8 +427,8 @@ module.exports = function (config) {
         client: {
             mocha: {
                 reporter: "html",
-                ui: "bdd"
-            }
+                ui: "bdd",
+            },
         },
 
         // list of files / patterns to exclude
@@ -454,16 +454,16 @@ module.exports = function (config) {
             useBrowserName: true, // add browser name to report and classes names
             nameFormatter: undefined, // function (browser, result) to customize the name attribute in xml testcase element
             classNameFormatter: undefined, // function (browser, result) to customize the classname attribute in xml testcase element
-            properties: {} // key value pair of properties to add to the <properties> section of the report
+            properties: {}, // key value pair of properties to add to the <properties> section of the report
         },
 
         mochaReporter: {
-            showDiff: true
+            showDiff: true,
         },
 
         coverageReporter: {
             type: "html",
-            dir: "./Extension.UnitTests/TestResults/coverage/"
+            dir: "./Extension.UnitTests/TestResults/coverage/",
         },
 
         // web server port
@@ -485,9 +485,9 @@ module.exports = function (config) {
 
         customLaunchers: {
             Chrome_No_Sandbox: {
-                base: 'ChromeHeadless',
-                flags: ['--no-sandbox']
-            }
+                base: "ChromeHeadless",
+                flags: ["--no-sandbox"],
+            },
         },
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
@@ -496,8 +496,8 @@ module.exports = function (config) {
         // Concurrency level
         // how many browser should be started simultaneous
         concurrency: Infinity,
-    })
-}
+    });
+};
 
 
 ```

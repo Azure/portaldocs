@@ -22,7 +22,7 @@ reducerMap: {
     },
     resourceGroup: {
         order: 1,
-        buildResourceDetails: (resourceDetails, val: { isNew: boolean, resourceGroup: string }) => {
+        buildResourceDetails: (resourceDetails, val: { isNew: boolean; resourceGroup: string }) => {
             const requestScope = resourceDetails.scope;
             //add the resource group to the subscription to set the scope to the resource group
             resourceDetails.scope = val.resourceGroup;

@@ -219,7 +219,7 @@ export class ExampleCustomPartViewModel {
 
    public buttonClickHandler = () => {
        this.numberOfClicks(this.numberOfClicks() + 1);
-   }
+   };
 }
 
 ```
