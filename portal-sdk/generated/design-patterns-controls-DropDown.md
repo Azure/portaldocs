@@ -51,6 +51,7 @@ DropDown offers the following options:
  
 <a name="developer-tips-and-tricks"></a>
 ### Developer tips and tricks
+* For nested DropDown items, i.e. whenever header items are used, Extension developers should make use of the \`ariaLabel\` options in both [simple Item](#blade/Microsoft_Azure_Playground/F_Ctrl_DropDown_Item_I) and [Group item](#blade/Microsoft_Azure_Playground/F_Ctrl_DropDown_Group_I) APIs for all drop-down items to reference the text content of their respective item-headers.
 
 
 

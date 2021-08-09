@@ -174,14 +174,14 @@ export class SampleFrameBlade {
 
     // Capture the client session ID to use to correlate user actions and events within this
     // client session.
-    var sessionId = location.hash.substr(1);
+    let sessionId = location.hash.substr(1);
 
-    var queryMap = (function() {
-        var query = window.location.search.substring(1);
-        var parameterList = query.split("&");
-        var map = {};
-        for (var i = 0; i < parameterList.length; i++) {
-            var pair = parameterList[i].split("=");
+    let queryMap = (function() {
+        let query = window.location.search.substring(1);
+        let parameterList = query.split("&");
+        let map = {};
+        for (let i = 0; i < parameterList.length; i++) {
+            let pair = parameterList[i].split("=");
             map[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
         }
         return map;
@@ -194,7 +194,7 @@ export class SampleFrameBlade {
     function postMessageToParent(kind) {
         window.parent.postMessage({
             signature: frameSignature,
-            kind: kind
+            kind: kind,
         }, trustedParentOrigin);
     }
 
@@ -204,13 +204,13 @@ export class SampleFrameBlade {
 
     // Get the below trusted origins from configuration to include the origin of the portal in
     // which the page needs to be iframe'd.
-    var allowedParentFrameAuthorities = ["localhost:55555", "portal.azure.com"];
+    let allowedParentFrameAuthorities = ["localhost:55555", "portal.azure.com"];
 
     // Capture the origin of the parent and validate that it is trusted. If it is not a trusted
     // origin, then DO NOT setup any listeners and IGNORE messages from the parent/owner window
     var trustedParentOrigin = getQueryParameter("trustedAuthority");
-    var isTrustedOrigin = (function() {
-        var trustedAuthority = (trustedParentOrigin.split("//")[1] || "").toLowerCase();
+    let isTrustedOrigin = (function() {
+        let trustedAuthority = (trustedParentOrigin.split("//")[1] || "").toLowerCase();
 
         return allowedParentFrameAuthorities.some(function(origin) {
             // Verify that the requested trusted authority is either an allowed origin or is a
@@ -238,7 +238,7 @@ export class SampleFrameBlade {
             return;
         }
 
-        var msg = evt.data;
+        let msg = evt.data;
 
         // Check that the signature of the message matches that of frame parts.
         if (!msg || msg.signature !== frameSignature) {

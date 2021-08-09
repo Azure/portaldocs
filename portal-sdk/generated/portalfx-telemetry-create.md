@@ -2,11 +2,13 @@
     * [Create Flow Telemetry Dashboards](#create-telemetry-create-flow-telemetry-dashboards)
     * [Create Flow table](#create-telemetry-create-flow-table)
     * [Create Flow Functions](#create-telemetry-create-flow-functions)
-        * [AzurePortal Database VS. AzPtlCosmos Database functions](#create-telemetry-create-flow-functions-azureportal-database-vs-azptlcosmos-database-functions)
-        * [GetCreateFlows](#create-telemetry-create-flow-functions-getcreateflows)
-        * [GetCreateFunnel](#create-telemetry-create-flow-functions-getcreatefunnel)
-        * [GetCreateFunnelByDay](#create-telemetry-create-flow-functions-getcreatefunnelbyday)
-        * [GetCombinedCreateFunnel](#create-telemetry-create-flow-functions-getcombinedcreatefunnel)
+        * [`AzurePortal` Database VS. `AzPtlCosmos` Database functions](#create-telemetry-create-flow-functions-azureportal-database-vs-azptlcosmos-database-functions)
+        * [`GetCreateFlows`](#create-telemetry-create-flow-functions-getcreateflows)
+        * [Examples](#create-telemetry-create-flow-functions-examples)
+        * [`GetCreateFunnel`](#create-telemetry-create-flow-functions-getcreatefunnel)
+        * [Examples](#create-telemetry-create-flow-functions-examples-1)
+        * [`GetCreateFunnelByDay`](#create-telemetry-create-flow-functions-getcreatefunnelbyday)
+        * [`GetCombinedCreateFunnel`](#create-telemetry-create-flow-functions-getcombinedcreatefunnel)
 
 
 <a name="create-telemetry"></a>
@@ -21,83 +23,81 @@
 <a name="create-telemetry-create-flow-table"></a>
 ## Create Flow table
 
-CreateFlow table in Kusto database **AzPtlCosmos** called **CreateFlows**
+`CreateFlows` table in Kusto database `AzPtlCosmos` containing Portal extensions' create related telemetry information.
 
-Accessible through using the function: **GetCreateFlows(startDate: datetime, endDate: datetime)**
+Accessible through using the function: `GetCreateFlows(startDate: datetime, endDate: datetime)`
 
 **Description**
 
-A CreateFlow row is a flattened telemetry timeline comprised of the following create related telemetry events (in order of their trigger in the timeline of a create flow):
-- CreateFlowLaunched (CFL) - Marketplace create blade opened
-- ProvisioningBladeOpened (PBO) - Nonpdl blade that creates resources opened (can be from marketplace or not)
-- ProvisioningStarted (PS) - Portal create started
-- CreateDeploymentStart (CDS) - Create accepted by ARM
-- CreateDeploymentEnd (CDE) - Create completed by ARM
-- ProvisioningEnded (PE) - Portal create completed
+A `CreateFlows` table row is a flattened telemetry timeline comprised of the following create related telemetry events (in order of their trigger in the timeline of a create flow):
+- `CreateFlowLaunched` (CFL) - Marketplace create blade opened
+- `ProvisioningBladeOpened` (PBO) - Non-pdl blade that creates resources opened (can be from marketplace or not)
+- `ProvisioningStarted` (PS) - Portal create started
+- `CreateDeploymentStart` (CDS) - Create accepted by ARM
+- `CreateDeploymentEnd` (CDE) - Create completed by ARM
+- `ProvisioningEnded` (PE) - Portal create completed
 
 **Rules about the which events make up a create flow**
 
-- Every CreateFlow row will have the PS,PE,CDS,CDE events
-- A createflow used to be only started with a CFL event, but now can be started with a ProvisioningBladeOpened PBO event as well.
-- A createflow can have either the CFL or the PBO event, or only 1, but must have at least 1.
+- Every `CreateFlows` table row will have the PS, PE, CDS, CDE events
+- A create flow used to be only started with a CFL event, but now can be started with a `ProvisioningBladeOpened` PBO event as well.
+- A create flow can have either the CFL or the PBO event, or only 1, but must have at least 1.
 
 **Rules about which events start a create flow (CFL and PBO)**
 
 - CFL but no PBO
-  - FromMarketplace == true
+  - `FromMarketplace` == true
     - This is a marketplace create with an old pdl blade
-  - FromMarketplace == false
-    - This is a nonmarketplace create with an old pdl blade
+  - `FromMarketplace` == false
+    - This is a non-Marketplace create with an old pdl blade
 - PBO but no CFL
-  - This is always a nonmarketplace create with a nonpdl blade, so FromMarketplace will alway be false
+  - This is always a non-Marketplace create with a non-pdl blade, so `FromMarketplace` will always be false
 - CFL and PBO
-  - This is always a marketplace create with a nonpdl blade, so FromMarketplace will always be true
+  - This is always a Marketplace create with a non-pdl blade, so `FromMarketplace` will always be true
 
 <a name="create-telemetry-create-flow-functions"></a>
 ## Create Flow Functions
 
 <a name="create-telemetry-create-flow-functions-azureportal-database-vs-azptlcosmos-database-functions"></a>
-### AzurePortal Database VS. AzPtlCosmos Database functions
+### <code>AzurePortal</code> Database VS. <code>AzPtlCosmos</code> Database functions
 
-There are two Kusto databases that are supported with Create Flow related functions for you to use. Although in some cases the functions may have the same names, they have some differenes that are worth noting.
+There are two Kusto databases that are supported with create flow related functions for you to use. Although in some cases the functions may have the same names, they have some differences that are worth noting.
 
 <a name="create-telemetry-create-flow-functions-azureportal-database-vs-azptlcosmos-database-functions-azureportal-create-functions"></a>
-#### AzurePortal Create functions
+#### <code>AzurePortal</code> Create functions
 
 Found under: `Functions\CreateFlows`
 
-* The intended purpose of the AzurePoral.GetCreateFlows function is for Live-site alert debugging and test verification.
+* The intended purpose of the `AzurePortal.GetCreateFlows` function is for Live-site alert debugging and test verification.
 * Creates completed in the Portal will be available here typically within 10-15 minutes.
 * Creates here will include **test traffic** and will be with the column `isTestTraffic=true`.
 * Queries will be much slower as all raw telemetry must be queried over in-real-time.
-* For most use-cases, please try to query only hours of data at a time with this query for best results. If the create you are searching for has occured in the last 24 hours, or is test traffic, then this is the best function for you to use.
+* For most use-cases, please try to query only hours of data at a time with this query for best results. If the create you are searching for has occurred in the last 24 hours, or is test traffic, then this is the best function for you to use.
 
 Common cases for traffic being marked as test:
 * If any feature flags are used
 * Test account is used
-* Stamp of extension is manually overriden
+* Stamp of extension is manually overridden
 
 Note:
-* The AzPtlCosmos.GetCreateFlows function provides additional optional filtering parameters that can be passed in to drastically improve query time - these options are not available in the AzurePortal.GetCreateFlows function as these queries all occur in-real-time.
+* The `AzPtlCosmos.GetCreateFlows` function provides additional optional filtering parameters that can be passed in to drastically improve query time - these options are not available in the `AzurePortal.GetCreateFlows` function as these queries all occur in-real-time.
 
 <a name="create-telemetry-create-flow-functions-azureportal-database-vs-azptlcosmos-database-functions-azptlcosmos-create-functions"></a>
-#### AzPtlCosmos Create functions
+#### <code>AzPtlCosmos</code> Create functions
 
 Found under: `Functions\CreateFlows`
 
-* The intended purpose of the AzPtlCosmos.getCreateFlows function is for KPI tracking, dashboards, and general use.
-* All telemetry in this database goes through a pipeline to improve and filter the results, which causes a significant delay up to 24 hours for CreateFlows (no SLA).
+* The intended purpose of the `AzPtlCosmos.GetCreateFlows` function is for KPI tracking, dashboards, and general use.
+* All telemetry in this database goes through a pipeline to improve and filter the results, which causes a significant delay up to 24 hours for `CreateFlows` (no SLA).
   * The result is drastically improved results and query speed.
-* If the creates you want to capture span more than 24 hours, but have occured more than 24 hours ago, and are not test traffic, then this is the correct function to use.
+* If the creates you want to capture span more than 24 hours, but have occurred more than 24 hours ago, and are not test traffic, then this is the correct function to use.
 
 <a name="create-telemetry-create-flow-functions-getcreateflows"></a>
-### GetCreateFlows
+### <code>GetCreateFlows</code>
 
 <a name="create-telemetry-create-flow-functions-getcreateflows-summary"></a>
 #### Summary
 <a name="create-telemetry-create-flow-functions-getcreateflows-summary"></a>
-<a name="create-telemetry-create-flow-functions-getcreateflows-summary-1"></a>
-#### Summary
 
 ```
 GetCreateFlows(
@@ -115,13 +115,13 @@ GetCreateFlows(
 )
 ```
 
-This function returns the list of Portal Azure service deployment lifecycles, also known as 'create flows', for a given time range.
-* Each create flow represents the lifecycle of a create with the beginning being marked by the moment the create blade is opened and ending the moment that the create has been concluded and logged by the Portal.
+This function returns the list of Portal Azure service deployment life-cycles, also known as 'create flows', for a given time range.
+* Each create flow represents the life-cycle of a create with the beginning being marked by the moment the create blade is opened and ending the moment that the create has been concluded and logged by the Portal.
 * Data for each create is curated and joined between Portal data logs and available ARM deployment data logs.
 
 <a name="create-telemetry-create-flow-functions-getcreateflows-common-use-cases"></a>
 #### Common Use Cases
-* Identifying the number of creates completed for a given Extension or for a particular Azure marketplace gallery package.
+* Identifying the number of creates completed for a given Extension or for a particular Azure Marketplace gallery package.
 * Calculating the percentage of successful creates initiated by an Extension's create blade.
 * Debugging failed deployments by retrieving error message information logged for failed creates.
 * Calculating the number of creates that were abandoned by the user before being initiated and completed.
@@ -131,7 +131,7 @@ This function returns the list of Portal Azure service deployment lifecycles, al
 <a name="create-telemetry-create-flow-functions-getcreateflows-underlying-function-resources"></a>
 #### Underlying Function Resources
 * `cluster("Azportalpartner").database("AzPtlCosmos").CreateFlows`
-  * The source of the Azure create lifecycle deployment information.
+  * The source of the Azure create life-cycle deployment information.
 * `cluster("Armprod").database("ARMProd").Deployments`
   * The source of the ARM deployment information
 * `cluster("Armprod").database("ARMProd").HttpIncomingRequests`
@@ -141,152 +141,230 @@ This function returns the list of Portal Azure service deployment lifecycles, al
 
 <a name="create-telemetry-create-flow-functions-getcreateflows-parameters"></a>
 #### Parameters
-* startDate: ***required*** The date to mark the inclusive start of the time range.
-* endDate: ***required*** The date to mark the exclusive end of the time range.
-* match_Extention: *optional* Filter by extension name.
-* match_Blade: *optional* Filter by blade name.
-* match_SessionId: *optional* Filter by session id.
-* match_SubscriptionId: *optional* Filter by subscription id.
-* match_TelemetryId: *optional* Filter by telemetry id.
-* match_CorrelationId: *optional* Filter by correlation id.
-* match_GalleryPackageId: *optional* Filter by gallery package id.
-* match_BuildNumber: *optional* Filter by build number.
-* exclude_NonMarketplace: *optional* Filter out creates that were not initiated from the marketplace. True by default.
+* `startDate`: ***required*** The date to mark the inclusive start of the time range.
+* `endDate`: ***required*** The date to mark the exclusive end of the time range.
+* `match_Extention`: *optional* Filter by extension name.
+* `match_Blade`: *optional* Filter by blade name.
+* `match_SessionId`: *optional* Filter by session id.
+* `match_SubscriptionId`: *optional* Filter by subscription id.
+* `match_TelemetryId`: *optional* Filter by telemetry id.
+* `match_CorrelationId`: *optional* Filter by correlation id.
+* `match_GalleryPackageId`: *optional* Filter by gallery package id.
+* `match_BuildNumber`: *optional* Filter by build number.
+* `exclude_NonMarketplace`: *optional* Filter out creates that were not initiated from the Marketplace. True by default.
 
 <a name="create-telemetry-create-flow-functions-getcreateflows-output-columns"></a>
 #### Output Columns
-* PreciseTimeStamp
+* `PreciseTimeStamp`
   * Time of which the create blade was opened
   * When the create flow launched event is logged by the server
-* TelemetryId
+* `TelemetryId`
   * The unique identifier of this Azure Portal create flow.
-* Extension
+* `Extension`
   * The extension which initiated the deployment.
-* Blade
+* `Blade`
   * The name of the blade which was used to initiated the deployment.
-* GalleryPackageId
+* `GalleryPackageId`
   * The Azure service market place gallery package that was created.
-* ExecutionStatus
+* `ExecutionStatus`
   * The final result of the create execution.
   * Possible execution statuses
-    * Succeeded
+    * `Succeeded`
       * The create was successfully completed.
-      * If ARMExecutionStatus is "Succeeded" or if ARMExecutionStatus is blank and PortalExecutionStatus is "Succeeded"
-    * Canceled
+      * If `ARMExecutionStatus` is "Succeeded" or if `ARMExecutionStatus` is blank and `PortalExecutionStatus` is "Succeeded"
+    * `Canceled`
       * The create was canceled before completion
-      * If ARMExecutionStatus is "Canceled" or if ARMExecutionStatus is blank and PortalExecutionStatus is "Canceled"
-    * Failed
+      * If `ARMExecutionStatus` is "Canceled" or if `ARMExecutionStatus` is blank and `PortalExecutionStatus` is "Canceled"
+    * `Failed`
       * The create failed to complete.
-      * If ARMExecutionStatus is "Failed" or if ARMExecutionStatus is blank and PortalExecutionStatus is "Failed"
-    * BillingError
+      * If `ARMExecutionStatus` is "Failed" or if `ARMExecutionStatus` is blank and `PortalExecutionStatus` is "Failed"
+    * `BillingError`
       * The create failed to completed because of the error, "We could not find a credit card on file for your azure subscription. Please make sure your azure subscription has a credit card."
-    * Unknown
+    * `Unknown`
       * The status of the create is unable to be determined.
-      * If ARMExecutionStatus is blank and PortalExecutionStatus is blank
-    * Abandoned
+      * If `ARMExecutionStatus` is blank and `PortalExecutionStatus` is blank
+    * `Abandoned`
       * The create blade was closed before a create was initialized.
-* Excluded
+* `Excluded`
   * Boolean which represents if this Create Flow is to be excluded from create funnel KPI calculations.
-  * A Create Flow is marked Excluded = true if ExecutionStatus is "Canceled", "CommerceError", or "Unknown".
-* CorrelationId
+  * A Create Flow is marked `Excluded` = true if `ExecutionStatus` is "Canceled", "CommerceError", or "Unknown".
+* `CorrelationId`
   * The unique ARM identifier of this deployment.
-* ArmDeploymentName
+* `ArmDeploymentName`
   * The name of the resource group deployment from ARM.
-* ArmExecutionStatus
+* `ArmExecutionStatus`
   * The result of the deployment from ARM.
-* PortalExecutionStatus
+* `PortalExecutionStatus`
   * The result of the deployment execution logged by the Portal.
-* ArmStatusCode
+* `ArmStatusCode`
   * The ARM status code of the deployment .
-* ArmErrorCode
+* `ArmErrorCode`
   * The error code of a failed deployment logged by ARM.
-* ArmErrorMessage
+* `ArmErrorMessage`
   * The error message of a failed deployment logged by ARM.
-* PortalErrorCode
+* `PortalErrorCode`
   * The error code of a failed deployment logged by the Portal.
-* PortalErrorMessage
+* `PortalErrorMessage`
   * The error message of a failed deployment logged by the Portal.
-* CreateBladeOpened
+* `CreateBladeOpened`
   * Boolean representing if the create blade was opened.
-  * Logged as a CreateFlowLaunched event at the time that the create blade is opened and logged by the Portal.
-* CreateBladeOpened_ActionModifier
-  * Context for CreateBladeOpened.
-* CreateBladeOpened_TimeStamp
+  * Logged as a `CreateFlowLaunched` event at the time that the create blade is opened and logged by the Portal.
+* `CreateBladeOpened_ActionModifier`
+  * Context for `CreateBladeOpened`.
+* `CreateBladeOpened_TimeStamp`
   * Time when the create blade was opened.
-* PortalCreateStarted
+* `PortalCreateStarted`
   * Boolean representing if a Portal create was started for this create flow.
-  * Logged by a ProvisioningStarted event when the create is initiated.
-* PortalCreateStarted_ActionModifier
-  * Context for PortalCreateStarted.
-* PortalCreateStarted_TimeStamp
+  * Logged by a `ProvisioningStarted` event when the create is initiated.
+* `PortalCreateStarted_ActionModifier`
+  * Context for `PortalCreateStarted`.
+* `PortalCreateStarted_TimeStamp`
   * Time when the Portal create was started and logged by the Portal.
-* ArmDeploymentStarted
+* `ArmDeploymentStarted`
   * Boolean representing if a deployment request was accepted by ARM.
-  * Logged when the deployment request is acknowledged by ARM and a CreateDeploymentStart event was logged by the Portal.
-* ArmDeploymentStarted_ActionModifier
-  * Context for the ArmDeploymentStarted.
-* ArmDeploymentStarted_TimeStamp
+  * Logged when the deployment request is acknowledged by ARM and a `CreateDeploymentStart` event was logged by the Portal.
+* `ArmDeploymentStarted_ActionModifier`
+  * Context for the `ArmDeploymentStarted`.
+* `ArmDeploymentStarted_TimeStamp`
   * The time when the ARM deployment request response was logged by the Portal.
-* ArmDeploymentEnded
+* `ArmDeploymentEnded`
   * Boolean representing if a deployment was completed by ARM.
-  * Logged when ARM has completed status for the deployment and a CreateDeploymentEnd event was logged by the Portal.
-* ArmDeploymentEnded_ActionModifier
-  * Context for ArmDeploymentEnded.
-* ArmDeploymentEnded_TimeStamp
-  * The time when the CreateDeploymetEnd event was logged.
-* PortalCreateEnded
+  * Logged when ARM has completed status for the deployment and a `CreateDeploymentEnd` event was logged by the Portal.
+* `ArmDeploymentEnded_ActionModifier`
+  * Context for `ArmDeploymentEnded`.
+* `ArmDeploymentEnded_TimeStamp`
+  * The time when the `CreateDeploymetEnd` event was logged.
+* `PortalCreateEnded`
   * Boolean representing if a Portal create was completed for this create flow.
-  * Logged when all operations relating to the create have completed and a ProvisioningEnded event was logged by the Portal.
-* PortalCreateEnded_ActionModifier
-  * Context for PortalCreateEnded.
-* ProvisioningEnded_TimeStamp
+  * Logged when all operations relating to the create have completed and a `ProvisioningEnded` event was logged by the Portal.
+* `PortalCreateEnded_ActionModifier`
+  * Context for `PortalCreateEnded`.
+* `ProvisioningEnded_TimeStamp`
   * Time when the Portal create was completed and logged by the Portal.
-* ArmPreciseStartTime
+* `ArmPreciseStartTime`
   * Start time of the deployment through ARM
-* ArmPreciseEndTime
+* `ArmPreciseEndTime`
   * End time of the deployment through ARM.
-* ArmPreciseDuration
+* `ArmPreciseDuration`
   * Duration of the deployment through ARM.
-* PortalCreateStartTime
+* `PreValidationLogs`
+  * Contains the pre-validation logs communicated between ARM, the Portal, and the RP in order of execution.
+  * Some extensions may opt out of this check, for which this will be empty.
+  * ARM documentation regarding validation: [https://docs.microsoft.com/en-us/rest/api/resources/Deployments/Validate](https://docs.microsoft.com/en-us/rest/api/resources/Deployments/Validate)
+  * **Note**: does not contain the initiated pre-validation log `start`, only contains `Succeeded` and `Failed` logs.
+* `PortalCreateStartTime`
   * Start time of the Portal create.
-* PortalCreateEndTime
+* `PortalCreateEndTime`
   * End time of the Portal create.
-* PortalCreateDuration
+* `PortalCreateDuration`
   * Duration of the Portal create.
-  * PortalCreateDuration = PortalCreateEndTime - PortalCreateStartTime
-* Data
+  * `PortalCreateDuration = PortalCreateEndTime - PortalCreateStartTime`
+* `Data`
   * The entire collection of logged create events' telemetry data in JSON format.
-* BuildNumber
+* `BuildNumber`
   * The Portal SDK and environment in which the deployment was initiated.
-* DataCenterId
+* `DataCenterId`
   * The data center in which the deployment telemetry originated.
-* SessionId
+* `SessionId`
   * The session in which the deployment was initiated.
-* UserId
+* `UserId`
   * The user identification which initiated the deployment.
-* SubscriptionId
+* `SubscriptionId`
   * The subscription Id
-* TenantId
+* `TenantId`
   * The tenant Id
-* Template
+* `Template`
   * The type of the create template used.
-* OldCreateApi
+* `OldCreateApi`
   * Boolean representing if the deployment was initiated using the latest supported Provisioning API.
-* CustomDeployment
+* `CustomDeployment`
   * Boolean representing if the deployment was initiated using the Portal ARM Provisioning Manager.
 
-<a name="create-telemetry-create-flow-functions-getcreatefunnel"></a>
-### GetCreateFunnel
+<a name="create-telemetry-create-flow-functions-examples"></a>
+### Examples
 
-<a name="create-telemetry-create-flow-functions-getcreatefunnel-summary-2"></a>
+Get an extension's blade's failed creates for the last 7 days:
+
+```
+GetCreateFlows(
+    startDate=ago(8d),
+    endDate=ago(1d),
+    match_Extention="WebsitesExtension",
+    match_Blade="AppServiceWebAppCreateV3Blade"
+)
+```
+
+Get the creates for a specific `SessionId`:
+
+```
+GetCreateFlows(
+    startDate=ago(15d),
+    endDate=ago(1d),
+    match_SessionId="<sessionId>"
+)
+```
+
+Get the creates that occurred with a specific Portal SDK build number:
+
+```
+GetCreateFlows(
+    startDate=ago(15d),
+    endDate=ago(1d),
+    match_BuildNumber="8.101.0.5"
+)
+```
+
+Get an extension's blade's failed creates for the last 7 days **BUT** the create blade is not launched via the Marketplace:
+
+```
+GetCreateFlows(
+    startDate=ago(8d),
+    endDate=ago(1d),
+    match_Extention="WebsitesExtension",
+    match_Blade="AppServiceWebAppCreateV3Blade",
+    exclude_NonMarketplace=false
+)
+```
+
+Get extension's blade's creates that were abandoned and pre-validation failed.
+
+```
+GetCreateFlows(
+    startDate=ago(8d),
+    endDate=ago(1d),
+    match_Extention="WebsitesExtension",
+    match_Blade="AppServiceWebAppCreateV3Blade"
+)
+| where ExecutionStatus == "Abandoned" and isnotempty(PreValidationLogs) and PreValidationLogs !has "Succeeded"
+```
+
+<a name="create-telemetry-create-flow-functions-getcreatefunnel"></a>
+### <code>GetCreateFunnel</code>
+
+<a name="create-telemetry-create-flow-functions-getcreatefunnel-summary-1"></a>
 #### Summary
-`GetCreateFunnel(startDate: datetime, endDate: datetime)`
+
+```
+GetCreateFunnel(
+    startDate:datetime,                 // required
+    endDate:datetime,                   // required
+    match_Extention:string="",          // optional
+    match_Blade:string="",              // optional
+    match_SessionId:string="",          // optional
+    match_SubscriptionId:string="",     // optional
+    match_TelemetryId:string="",        // optional
+    match_CorrelationId:string="",      // optional
+    match_GalleryPackageId:string="",   // optional
+    match_BuildNumber:string="",        // optional
+    exclude_NonMarketplace:bool=true    // optional
+)
+```
 
 This functions calculates the create funnel KPI's for each extension's create blade for a given time range.
 
 <a name="create-telemetry-create-flow-functions-getcreatefunnel-common-use-cases-1"></a>
 #### Common Use Cases
-* Retrieving the percentage of successful create initated by an Extension's create blade for a week.
+* Retrieving the percentage of successful create initiated by an Extension's create blade for a week.
 * Retrieving the number of the failed creates.
 * Retrieving the drop off rate of customers attempting a create (how often creates are abandoned).
 
@@ -296,61 +374,99 @@ This functions calculates the create funnel KPI's for each extension's create bl
 
 <a name="create-telemetry-create-flow-functions-getcreatefunnel-parameters-1"></a>
 #### Parameters
-* startDate: The date to mark the inclusive start of the time range.
-* endDate: The date to mark the exclusive end of the time range.
+* `startDate`: ***required*** The date to mark the inclusive start of the time range.
+* `endDate`: ***required*** The date to mark the exclusive end of the time range.
+* `match_Extention`: *optional* Filter by extension name.
+* `match_Blade`: *optional* Filter by blade name.
+* `match_SessionId`: *optional* Filter by session id.
+* `match_SubscriptionId`: *optional* Filter by subscription id.
+* `match_TelemetryId`: *optional* Filter by telemetry id.
+* `match_CorrelationId`: *optional* Filter by correlation id.
+* `match_GalleryPackageId`: *optional* Filter by gallery package id.
+* `match_BuildNumber`: *optional* Filter by build number.
+* `exclude_NonMarketplace`: *optional* Filter out creates that were not initiated from the Marketplace. True by default.
 
 <a name="create-telemetry-create-flow-functions-getcreatefunnel-output-columns-1"></a>
 #### Output Columns
-* Extension
+* `Extension`
   * The Extension which initiated the creates.
-* Blade
-  * The create blade which inititated the creates.
-* CreateBladeOpened
+* `Blade`
+  * The create blade which initiated the creates.
+* `CreateBladeOpened`
   * The number of times the create blade was opened.
   * Calculated by taking the count of the number of Create Flows for each blade from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) which had:
     * `CreateBladeOpened == true`.
-* Started
+* `Started`
   * The number of creates that were started.
-  * Calculated by taking the count of the number of Create Flows for each blade from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) which had:
+  * Calculated by taking the count of the number of create flows for each blade from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) which had:
     * `PortalCreateStarted == true`
     * or `ArmDeploymentStarted == true`
-  * *Note - We check both of these for redundancy proof becuase we know that as long as one of these properties are true then we know a create was started.*
-* Excluded
+  * *Note - We check both of these for redundancy proof because we know that as long as one of these properties are true then we know a create was started.*
+* `Excluded`
   * The number of creates from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) that were marked as Excluded.
   * *See [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) documentation for Excluded details.*
-* Completed
+* `Completed`
   * The number of creates that were completed.
-  * Completed = Started - Excluded
-* StartRate
+  * `Completed = Started - Excluded`
+* `StartRate`
   * The rate of create blades that are opened which leads to a create being started.
-  * StartRate = Started / CreateBladeOpened
-* Succeeded
+  * `StartRate = Started / CreateBladeOpened`
+* `Succeeded`
   * The number of creates that succeeded.
-* SuccessRate
+* `SuccessRate`
   * The rate of completed creates which succeeded.
-  * SuccessRate = Succeeded / Completed
-* Failed
+  * `SuccessRate = Succeeded / Completed`
+* `Failed`
   * The number of creates that failed.
-* FailureRate
+* `FailureRate`
   * The rate of completed creates which failed.
-  * FailureRate = Failed / Completed
-* Canceled
+  * `FailureRate = Failed / Completed`
+* `Canceled`
   * The number of creates which were canceled.
-* CommerceError
+* `CommerceError`
   * The number of creates which were aborted due to a commerce error.
-* Unknown
+* `Unknown`
   * The number of creates which do not have a known result.
-* OldCreateApi
+* `OldCreateApi`
   * Represents if the create blade deployments were initiated using a deprecated version of the ARM provisioning API provided by the Portal SDK
-* CustomDeployment
+* `CustomDeployment`
   * Represents if the create blade deployments were initiated without using the official ARM provisioning API provided by the portal SDK
 
-<a name="create-telemetry-create-flow-functions-getcreatefunnelbyday"></a>
-### GetCreateFunnelByDay
+<a name="create-telemetry-create-flow-functions-examples-1"></a>
+### Examples
 
-<a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-summary-3"></a>
+Get an extension's blade's create KPIs for the last 7 days:
+
+```
+GetCreateFunnel(
+    startDate=ago(8d),
+    endDate=ago(1d),
+    match_Extention="WebsitesExtension",
+    match_Blade="AppServiceWebAppCreateV3Blade"
+)
+```
+
+<a name="create-telemetry-create-flow-functions-getcreatefunnelbyday"></a>
+### <code>GetCreateFunnelByDay</code>
+
+<a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-summary-2"></a>
 #### Summary
-`GetCreateFunnelByDay(startDate: datetime, endDate: datetime)`
+
+```
+GetCreateFunnelByDay(
+    startDate:datetime,                 // required
+    endDate:datetime,                   // required
+    match_Extention:string="",          // optional
+    match_Blade:string="",              // optional
+    match_SessionId:string="",          // optional
+    match_SubscriptionId:string="",     // optional
+    match_TelemetryId:string="",        // optional
+    match_CorrelationId:string="",      // optional
+    match_GalleryPackageId:string="",   // optional
+    match_BuildNumber:string="",        // optional
+    exclude_NonMarketplace:bool=true    // optional
+)
+```
 
 This functions calculates the create funnel KPI's for each extension's create blade for each day over a given time range.
 
@@ -365,65 +481,88 @@ This functions calculates the create funnel KPI's for each extension's create bl
 
 <a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-parameters-2"></a>
 #### Parameters
-* startDate: The date to mark the inclusive start of the time range.
-* endDate: The date to mark the exclusive end of the time range.
+* `startDate`: ***required*** The date to mark the inclusive start of the time range.
+* `endDate`: ***required*** The date to mark the exclusive end of the time range.
+* `match_Extention`: *optional* Filter by extension name.
+* `match_Blade`: *optional* Filter by blade name.
+* `match_SessionId`: *optional* Filter by session id.
+* `match_SubscriptionId`: *optional* Filter by subscription id.
+* `match_TelemetryId`: *optional* Filter by telemetry id.
+* `match_CorrelationId`: *optional* Filter by correlation id.
+* `match_GalleryPackageId`: *optional* Filter by gallery package id.
+* `match_BuildNumber`: *optional* Filter by build number.
+* `exclude_NonMarketplace`: *optional* Filter out creates that were not initiated from the Marketplace. True by default.
 
 <a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-output-columns-2"></a>
 #### Output Columns
-* Date
+* `Date`
   * The date at midnight of the day which the create flow was started.
-* Extension
+* `Extension`
   * The Extension which initiated the creates.
-* Blade
-  * The create blade which inititated the creates.
-* GalleryPackageId
+* `Blade`
+  * The create blade which initiated the creates.
+* `GalleryPackageId`
   * The gallery package id that was created.
-* CreateBladeOpened
+* `CreateBladeOpened`
   * The number of times the create blade was opened.
-  * Calculated by taking the count of the number of Create Flows  for each blade from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) which had:
+  * Calculated by taking the count of the number of create flows for each blade from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) which had:
     * `CreateBladeOpened == true`.
-* Started
+* `Started`
   * The number of creates that were started.
-  * Calculated by taking the count of the number of Create Flows  for each blade from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) which had:
+  * Calculated by taking the count of the number of create flows for each blade from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) which had:
     * `PortalCreateStarted == true`
     * or `ArmDeploymentStarted == true`
-  * *Note - We check both of these for redundancy proof becuase we know that as long as one of these properties are true then we know a create was started.*
-* Excluded
+  * *Note - We check both of these for redundancy proof because we know that as long as one of these properties are true then we know a create was started.*
+* `Excluded`
   * The number of creates from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) that were marked as Excluded.
   * *See [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) documentation for Excluded details.*
-* Completed
+* `Completed`
   * The number of creates that were completed.
-  * Completed = Started - Excluded
-* StartRate
+  * `Completed = Started - Excluded`
+* `StartRate`
   * The rate of create blades that are opened which leads to a create being started.
-  * StartRate = Started / CreateBladeOpened
-* Succeeded
+  * `StartRate = Started / CreateBladeOpened`
+* `Succeeded`
   * The number of creates that succeeded.
-* SuccessRate
+* `SuccessRate`
   * The rate of completed creates which succeeded.
-  * SuccessRate = Succeeded / Completed
-* Failed
+  * `SuccessRate = Succeeded / Completed`
+* `Failed`
   * The number of creates that failed.
-* FailureRate
+* `FailureRate`
   * The rate of completed creates which failed.
-  * FailureRate = Failed / Completed
-* Canceled
+  * `FailureRate = Failed / Completed`
+* `Canceled`
   * The number of creates which were canceled.
-* CommerceError
+* `CommerceError`
   * The number of creates which were aborted due to a commerce error.
-* Unknown
+* `Unknown`
   * The number of creates which do not have a known result.
-* OldCreateApi
+* `OldCreateApi`
   * Represents if the create blade deployments were initiated using a deprecated version of the ARM provisioning API provided by the Portal SDK
-* CustomDeployment
+* `CustomDeployment`
   * Represents if the create blade deployments were initiated without using the official ARM provisioning API provided by the portal SDK
 
 <a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-getcreatefunnelbygallerypackageid"></a>
-#### GetCreateFunnelByGalleryPackageId
+#### <code>GetCreateFunnelByGalleryPackageId</code>
 
-<a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-summary-4"></a>
+<a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-summary-3"></a>
 #### Summary
-`GetCreateFunnelByGalleryPackageId(startDate: datetime, endDate: datetime)`
+```
+GetCreateFunnelByGalleryPackageId(
+    startDate:datetime,                 // required
+    endDate:datetime,                   // required
+    match_Extention:string="",          // optional
+    match_Blade:string="",              // optional
+    match_SessionId:string="",          // optional
+    match_SubscriptionId:string="",     // optional
+    match_TelemetryId:string="",        // optional
+    match_CorrelationId:string="",      // optional
+    match_GalleryPackageId:string="",   // optional
+    match_BuildNumber:string="",        // optional
+    exclude_NonMarketplace:bool=true    // optional
+)
+```
 
 This functions calculates the create funnel KPI's by gallery package id, extension, and create blade over a given time range.
 
@@ -438,61 +577,70 @@ This functions calculates the create funnel KPI's by gallery package id, extensi
 
 <a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-parameters-3"></a>
 #### Parameters
-* startDate: The date to mark the inclusive start of the time range.
-* endDate: The date to mark the exclusive end of the time range.
+* `startDate`: ***required*** The date to mark the inclusive start of the time range.
+* `endDate`: ***required*** The date to mark the exclusive end of the time range.
+* `match_Extention`: *optional* Filter by extension name.
+* `match_Blade`: *optional* Filter by blade name.
+* `match_SessionId`: *optional* Filter by session id.
+* `match_SubscriptionId`: *optional* Filter by subscription id.
+* `match_TelemetryId`: *optional* Filter by telemetry id.
+* `match_CorrelationId`: *optional* Filter by correlation id.
+* `match_GalleryPackageId`: *optional* Filter by gallery package id.
+* `match_BuildNumber`: *optional* Filter by build number.
+* `exclude_NonMarketplace`: *optional* Filter out creates that were not initiated from the Marketplace. True by default.
 
 <a name="create-telemetry-create-flow-functions-getcreatefunnelbyday-output-columns-3"></a>
 #### Output Columns
-* Extension
+* `Extension`
   * The Extension which initiated the creates.
-* Blade
-  * The create blade which inititated the creates.
-* GalleryPackageId
+* `Blade`
+  * The create blade which initiated the creates.
+* `GalleryPackageId`
   * The gallery package id that was created.
-* CreateBladeOpened
+* `CreateBladeOpened`
   * The number of times the create blade was opened.
-  * Calculated by taking the count of the number of Create Flows for each blade from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) which had:
+  * Calculated by taking the count of the number of create flows for each blade from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) which had:
     * `CreateBladeOpened == true`.
-* Started
+* `Started`
   * The number of creates that were started.
-  * Calculated by taking the count of the number of Create Flows for each blade  from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) which had:
+  * Calculated by taking the count of the number of create flows for each blade  from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) which had:
     * `PortalCreateStarted == true`
     * or `ArmDeploymentStarted == true`
-  * *Note - We check both of these for redundancy proof becuase we know that as long as one of these properties are true then we know a create was started.*
-* Excluded
+  * *Note - We check both of these for redundancy proof because we know that as long as one of these properties are true then we know a create was started.*
+* `Excluded`
   * The number of creates from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) that were marked as Excluded.
   * *See [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) documentation for Excluded details.*
-* Completed
+* `Completed`
   * The number of creates that were completed.
-  * Completed = Started - Excluded
-* StartRate
+  * `Completed = Started - Excluded`
+* `StartRate`
   * The rate of create blades that are opened which leads to a create being started.
-  * StartRate = Started / CreateBladeOpened
-* Succeeded
+  * `StartRate = Started / CreateBladeOpened`
+* `Succeeded`
   * The number of creates that succeeded.
-* SuccessRate
+* `SuccessRate`
   * The rate of completed creates which succeeded.
-  * SuccessRate = Succeeded / Completed
-* Failed
+  * `SuccessRate = Succeeded / Completed`
+* `Failed`
   * The number of creates that failed.
-* FailureRate
+* `FailureRate`
   * The rate of completed creates which failed.
-  * FailureRate = Failed / Completed
-* Canceled
+  * `FailureRate = Failed / Completed`
+* `Canceled`
   * The number of creates which were canceled.
-* CommerceError
+* `CommerceError`
   * The number of creates which were aborted due to a commerce error.
-* Unknown
+* `Unknown`
   * The number of creates which do not have a known result.
-* OldCreateApi
+* `OldCreateApi`
   * Represents if the create blade deployments were initiated using a deprecated version of the ARM provisioning API provided by the Portal SDK
-* CustomDeployment
+* `CustomDeployment`
   * Represents if the create blade deployments were initiated without using the official ARM provisioning API provided by the portal SDK
 
 <a name="create-telemetry-create-flow-functions-getcombinedcreatefunnel"></a>
-### GetCombinedCreateFunnel
+### <code>GetCombinedCreateFunnel</code>
 
-<a name="create-telemetry-create-flow-functions-getcombinedcreatefunnel-summary-5"></a>
+<a name="create-telemetry-create-flow-functions-getcombinedcreatefunnel-summary-4"></a>
 #### Summary
 `GetCombinedCreateFunnel(startDate: datetime, endDate: datetime)`
 
@@ -511,43 +659,43 @@ This functions calculates the overall create funnel KPIs for the Portal.
 
 <a name="create-telemetry-create-flow-functions-getcombinedcreatefunnel-parameters-4"></a>
 #### Parameters
-* startDate: The date to mark the inclusive start of the time range.
-* endDate: The date to mark the exclusive end of the time range.
+* `startDate`: ***required*** The date to mark the inclusive start of the time range.
+* `endDate`: ***required*** The date to mark the exclusive end of the time range.
 
 <a name="create-telemetry-create-flow-functions-getcombinedcreatefunnel-output-columns-4"></a>
 #### Output Columns
-* CreateBladeOpened
+* `CreateBladeOpened`
   * The total number of times create blade were opened.
   * Calculated by taking the total count of the number of Create Flows from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) which had:
     * `CreateBladeOpened == true`.
-* Started
+* `Started`
   * The total number of creates that were started.
   * Calculated by taking the total count of the number of Create Flows from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) which had:
     * `PortalCreateStarted == true`
     * or `ArmDeploymentStarted == true`
-  * *Note - We check both of these for redundancy proof becuase we know that as long as one of these properties are true then we know a create was started.*
-* Excluded
+  * *Note - We check both of these for redundancy proof because we know that as long as one of these properties are true then we know a create was started.*
+* `Excluded`
   * The total number of creates from [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) that were marked as Excluded.
   * *See [GetCreateFlows()](#create-telemetry-create-flow-functions-getcreateflows) documentation for Excluded details.*
-* Completed
+* `Completed`
   * The total number of creates that were completed.
-  * Completed = Started - Excluded
-* StartRate
+  * `Completed = Started - Excluded`
+* `StartRate`
   * The rate of create blades that are opened which leads to a create being started.
-  * StartRate = Started / CreateBladeOpened
-* Succeeded
+  * `StartRate = Started / CreateBladeOpened`
+* `Succeeded`
   * The total number of creates that succeeded.
-* SuccessRate
+* `SuccessRate`
   * The overall rate of completed creates which succeeded.
-  * SuccessRate = Succeeded / Completed
-* Failed
+  * `SuccessRate = Succeeded / Completed`
+* `Failed`
   * The total number of creates that failed.
-* FailureRate
-  * The overrall rate of completed creates which failed.
-  * FailureRate = Failed / Completed
-* Canceled
+* `FailureRate`
+  * The overall rate of completed creates which failed.
+  * `FailureRate = Failed / Completed`
+* `Canceled`
   * The total number of creates which were canceled.
-* CommerceError
+* `CommerceError`
   * The total number of creates which were aborted due to a commerce error.
-* Unknown
+* `Unknown`
   * The total number of creates which do not have a known result.

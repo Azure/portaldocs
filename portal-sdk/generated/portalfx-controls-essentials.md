@@ -506,7 +506,7 @@ onBladeClose: (origin: Essentials.BuiltInType) => {
 // Generate array of Essentials.Item | Essentials.MultiLineItem from the results
 const items: ((Essentials.Item | Essentials.MultiLineItem)[]) = results.map((data: any): Essentials.Item | Essentials.MultiLineItem => {
     switch (data.type) {
-        case "connectionString":
+        case "connectionString": {
             const connectionString = ko.observable(ClientResources.essentialsConnectionStringValue);
             return {
                 label: data.label,
@@ -515,6 +515,7 @@ const items: ((Essentials.Item | Essentials.MultiLineItem)[]) = results.map((dat
                     connectionString(data.value);
                 },
             };
+        }
         case "text":
             return {
                 label: data.label,
