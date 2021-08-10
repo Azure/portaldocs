@@ -31,14 +31,14 @@ const initialSpecData: FxSpecPicker.InitialData = {
     ],
 };
 
-const specsDropDown = new FxSpecsDropDown(container, { // tslint:disable-line:deprecation
+const specsDropDown = new FxSpecsDropDown(container, { // tslint:disable-line:deprecation
     initialData: ko.observable(initialSpecData),
     specPickerExtender: new BillingSpecPickerV3Extender(container),
     // Make sure to use a blade reference factory, DynamicBladeReferences do not work with no pdl
     pricingBladeReference: BladeReferences.forBlade("BillingSpecPickerV3"),
     validations: ko.observableArray([new Validations.Required()]),
     contextPane: true,
-} as FxSpecsDropDown.OptionsWithBladeReference); // tslint:disable-line:deprecation
+} as FxSpecsDropDown.OptionsWithBladeReference); // tslint:disable-line:deprecation
 
 ```
 

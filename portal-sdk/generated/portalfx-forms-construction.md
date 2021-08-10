@@ -134,7 +134,7 @@ saveCommand.command = {
     canExecute: ko.pureComputed(() => {
         // user can save when edit scope is dirty and we're not in the middle of a save operation
         const editScope = this._editScopeView.editScope();
-        const editScopeDirty = !!editScope ? editScope.dirty() : false;
+        const editScopeDirty = editScope ? editScope.dirty() : false;
         return !this._saving() && editScopeDirty;
     }),
     execute: (): FxBase.Promise => {
@@ -150,7 +150,7 @@ discardCommand.command = {
     canExecute: ko.pureComputed(() => {
         // user can save when edit scope is dirty and we're not in the middle of a save operation
         const editScope = this._editScopeView.editScope();
-        const editScopeDirty = !!editScope ? editScope.dirty() : false;
+        const editScopeDirty = editScope ? editScope.dirty() : false;
         return !this._saving() && editScopeDirty;
     }),
     execute: (): FxBase.Promise => {
