@@ -43,7 +43,7 @@ import { setTitle } from "@microsoft/azureportal-reactview/Az"; // allows us to 
 
 setTitle("Getting Started"); // this can be called anywhere, in production scenarios this should be passed a localized string
 
-@ReactView.ReduxFree.Decorator() 
+@ReactView.ReduxFree.Decorator()
 export class GettingStarted extends React.Component { // a completely empty React class component, needed
     public render() {
         return <span>Getting Started</span>;

@@ -6,7 +6,6 @@ When modifying or creating resources, there are many situations where policies m
 In react the portal has a policy api that can construct resource details with fields in your blades, and provide validation messages with details on how the user is violating policies. It does this by allowing you to define components which are aware of how your blade is going to set the details of the resources being modified or created.
 
 In this example we create and export some basic policy components.
-```tsx
 ```typescript
 
 export const { PolicyContext: VMPolicyContext, PolicyField: VMPolicyField } = createPolicyComponents({
@@ -68,21 +67,17 @@ customizeRequest: (policyRequest) => {
 });
 
 ```
-```
 
 <a name="creating-policy-components-policy-context"></a>
 ### Policy Context
 The VM's policy context can be imported.
-```tsx
 ```typescript
 
 import { VMPolicyContext } from "./Components/CreateExperienceVMPolicy";
 
 ```
-```
 
 When the VM's policy context is used within the blade, it will track the state of the fields within your react form and allow resource details to validate against all other relevant fields.
-```tsx
 ```typescript
 
 return <Fabric>
@@ -143,20 +138,16 @@ return <Fabric>
     </VMPolicyContext>
     
 ```
-```
 
 <a name="creating-policy-components-policy-field"></a>
 ### Policy Field
 Within the basics section is a control intended to update a field within the resource details. To hook up the context to that field, import and use the policy field of that policy context to update the resource details with value changes from controls
-```tsx
 ```typescript
 
 import { VMPolicyField } from "./CreateExperienceVMPolicy";
 
 ```
-```
 Then add the validation to the control. Within this component is a callback attribute that will be passed a react hook which needs to be passed in the field intended to be updated and the new value. The field will constrict the type of value that can be passed in to update the details.
-```tsx
 ```typescript
 
 }
@@ -172,5 +163,4 @@ Then add the validation to the control. Within this component is a callback attr
 </FormLabel>
 {
     
-```
 ```
