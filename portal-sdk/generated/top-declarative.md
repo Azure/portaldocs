@@ -47,7 +47,7 @@ Declarative supports most popular patterns that are used repeatedly in the Azure
 <a name="declarative-views-supported-declarative-views-all-services-integration"></a>
 ### All services integration
 
-To have a presence in the Azure Portal [All Services menu](https://portal.azure.com/?feature.customportal=false#allservices) and other entry points such as the global search bar in the Portal, an asset has be to defined. This asset can be defined declaratively. An asset represents a service in Azure and most assets map to an ARM resource type. 
+To have a presence in the Azure Portal [All Services menu](https://portal.azure.com/?feature.customportal=false#allservices) and other entry points such as the global search bar in the Portal, an asset has to be defined. This asset can be defined declaratively. An asset represents a service in Azure and most assets map to an ARM resource type. 
 
 [Learn more about defining assets in the Azure Portal](declarative-assets.md).
 
