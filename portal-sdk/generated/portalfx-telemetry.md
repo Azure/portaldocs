@@ -104,6 +104,8 @@ Args can be provided for additional information to get logged together with the 
 
 Errors and warnings are logged to ExtEvents table, which is available in Kusto only in AzurePortal database.
 
+For best practices on how to log your client error as well as how to analyze them, see [Extension Client Errors](https://github.com/Azure/portaldocs/blob/dev/portal-sdk/generated/portalfx-telemetry-extension-errors.md).
+
 **NOTE:** Verbose logging is currently disabled in mpac/production, in order to prevent overly aggressive logging. We recommend you to use verbose logging only for debugging.
 
 We have built [Extension Errors Dashboard](portalfx-telemetry-extension-errors.md) for giving you the ability to analyze easier the errors and warnings thrown by your extension.
@@ -151,4 +153,3 @@ Call this method after a user starts the deletion process for a resource. Shell 
 Read more about [Kusto query language](https://kusto.azurewebsites.net/docs/queryLanguage/query_language.html).
 
 Ask questions on: [https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza-telemetry](https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza-telemetry)
-
