@@ -198,7 +198,7 @@ const onCreateButtonClick = () => {
 };
 
 // Set up the create button.
-createButton = this.createButton = FxButton.create(container, {
+const createButton = this.createButton = FxButton.create(container, {
     text: ClientResources.reviewAndCreate,
     onClick: onCreateButtonClick,
 });

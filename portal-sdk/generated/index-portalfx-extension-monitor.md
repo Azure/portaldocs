@@ -132,7 +132,9 @@
     * [My Blade is below the reliability bar, what should I do](portalfx-reliability.md#my-blade-is-below-the-reliability-bar-what-should-i-do)
     * [My Part is below the reliability bar, what should I do](portalfx-reliability.md#my-part-is-below-the-reliability-bar-what-should-i-do)
 
-* [How to analyze client errors](portalfx-telemetry-extension-errors.md#how-to-analyze-client-errors)
+* [Extension Client Errors](portalfx-telemetry-extension-errors.md#extension-client-errors)
+    * [How to log errors](portalfx-telemetry-extension-errors.md#how-to-log-errors)
+    * [How to analyze client errors](portalfx-telemetry-extension-errors.md#how-to-analyze-client-errors)
 
 
 <a name="telemetry-create"></a>

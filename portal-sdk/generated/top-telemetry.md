@@ -231,7 +231,7 @@ Follows the same format as ClientTelemetry but also includes:
 <a name="overview-viewing-telemetry-custom-queries-common-queries"></a>
 #### Common queries
 
-> For a list of all our Kusto Tips & Tricks see our [Wiki](https://teams.microsoft.com/l/entity/com.microsoft.teamspace.tab.wiki/tab::d26de556-656a-4142-9720-e2ef5ac85470?context=%7B%22subEntityId%22%3A%22%7B%5C%22pageId%5C%22%3A2%2C%5C%22sectionId%5C%22%3A4%2C%5C%22origin%5C%22%3A2%7D%22%2C%22channelId%22%3A%2219%3Afc154cefe9cd42df8df5043ed68d8016%40thread.tacv2%22%7D&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47) in our Teams Community Forum. 
+> For a list of all our Kusto Tips & Tricks see our [Wiki](https://teams.microsoft.com/l/entity/com.microsoft.teamspace.tab.wiki/tab::d26de556-656a-4142-9720-e2ef5ac85470?context=%7B%22subEntityId%22%3A%22%7B%5C%22pageId%5C%22%3A2%2C%5C%22sectionId%5C%22%3A4%2C%5C%22origin%5C%22%3A2%7D%22%2C%22channelId%22%3A%2219%3Afc154cefe9cd42df8df5043ed68d8016%40thread.tacv2%22%7D&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47) in our Teams Community Forum.
 
 <a name="overview-viewing-telemetry-custom-queries-common-queries-extension-load-performance-and-usage"></a>
 ##### Extension load performance and usage
@@ -446,6 +446,8 @@ To log errors/warnings, you can call the `error`/`warning` methods as shown belo
 Args can be provided for additional information to get logged together with the message. Pass it as an object and do not stringify it before passing it through.
 
 Errors and warnings are logged to ExtEvents table, which is available in Kusto only in AzurePortal database.
+
+For best practices on how to log your client error as well as how to analyze them, see [Extension Client Errors](https://github.com/Azure/portaldocs/blob/dev/portal-sdk/generated/portalfx-telemetry-extension-errors.md).
 
 **NOTE:** Verbose logging is currently disabled in mpac/production, in order to prevent overly aggressive logging. We recommend you to use verbose logging only for debugging.
 

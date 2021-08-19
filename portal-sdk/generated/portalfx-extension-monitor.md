@@ -20,7 +20,9 @@
     * [Using Console Logs](portalfx-telemetry-live-telemetry.md#using-console-logs)
     * [Using Fiddler](portalfx-telemetry-live-telemetry.md#using-fiddler)
 
-* [How to analyze client errors](portalfx-telemetry-extension-errors.md#how-to-analyze-client-errors)
+* [Extension Client Errors](portalfx-telemetry-extension-errors.md#extension-client-errors)
+    * [How to log errors](portalfx-telemetry-extension-errors.md#how-to-log-errors)
+    * [How to analyze client errors](portalfx-telemetry-extension-errors.md#how-to-analyze-client-errors)
 
 * [Create Telemetry](portalfx-telemetry-create.md#create-telemetry)
     * [Create Flow Telemetry Dashboards](portalfx-telemetry-create.md#create-flow-telemetry-dashboards)
