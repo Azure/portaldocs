@@ -918,7 +918,7 @@ import testFx from '@microsoft/azureportal-test';
         await this.element(By.className(tabClass)).click();
         const state = await this.primaryEngine.getValidationState();
         //assert state matches expected
-        // tslint:disable-next-line: deprecation
+        // eslint-disable-next-line deprecation/deprecation
         assert.equal(state, testFx.Constants.ControlValidationState.invalid, "name should have invalid state");
         
 ...
@@ -1224,7 +1224,7 @@ import testFx from '@microsoft/azureportal-test';
             const nameProperty = present && await copyableLabel.value();
             return nameProperty || await property.value.getText();
         });
-        // tslint:disable-next-line: deprecation
+        // eslint-disable-next-line deprecation/deprecation
         return assert.equal(nameProperty, resourceName, testFx.Utils.String.format("Expected the value for the 'NAME' property to be '{0}' but found '{1}'.", resourceName, nameProperty));
         
 ...
@@ -1436,10 +1436,10 @@ The following example demonstrates how to:
         await testFx.portal.wait(() => collectionBlade.waitUntilBladeAndAllTilesLoaded());
         const collectionPart = collectionBlade.element(testFx.Parts.CollectionPart);
         const rollupCount = await collectionPart.getRollupCount();
-        // tslint:disable-next-line: deprecation
+        // eslint-disable-next-line deprecation/deprecation
         assert.equal(4, rollupCount, "expected rollupcount to be 4");
         const label = await collectionPart.getRollupLabel();
-        // tslint:disable-next-line: deprecation
+        // eslint-disable-next-line deprecation/deprecation
         assert.equal(extensionResources.samplesExtensionStrings.Robots, label, "expected rollupLabel is Robots");
         const count = await collectionPart.grid.rows.count();
         assert.ok(count > 0, "expect the grid to have rows");
@@ -1526,12 +1526,12 @@ use this for modeling the resouce group `ResourceGroupDropDownField` on create b
         //4a. set the value of the Create New text field for the resource group
         await resourceGroup.setNewResourceGroup("NewResourceGroup");
         const rgName = await resourceGroup.getNewResourceGroup();
-        // tslint:disable-next-line: deprecation
+        // eslint-disable-next-line deprecation/deprecation
         assert.equal("NewResourceGroup", rgName, "Set resource group name");
         //4b. set the value of the Use Existing dropdown
         await resourceGroup.setSelectedResourceGroup("Default-Storage-WestUS");
         const selectedRGName = await resourceGroup.getSelectedResourceGroup();
-        // tslint:disable-next-line: deprecation
+        // eslint-disable-next-line deprecation/deprecation
         assert.equal("Default-Storage-WestUS", selectedRGName, "Set resource group dropdown");
         await createEngineBlade.clickClose();
         await testFx.portal.acceptAlert();
@@ -1564,7 +1564,7 @@ The following example demonstrates how to:
         editor.viewModelName = "editorVM";
 
         const content = await editor.read();
-        // tslint:disable-next-line: deprecation
+        // eslint-disable-next-line deprecation/deprecation
         assert.equal(content, expectedContent, "expectedContent is not matching");
         await editor.empty();
         await editor.sendKeys("document.");
@@ -1578,7 +1578,7 @@ The following example demonstrates how to:
             return content === "document.";
         });
         const count = await editor.workerIFramesCount();
-        // tslint:disable-next-line: deprecation
+        // eslint-disable-next-line deprecation/deprecation
         assert.equal(count, 0, "We did not find the expected number of iframes in the portal.  It is likely that the editor is failing to start web workers and is falling back to creating new iframes");
         
 ```
@@ -1629,14 +1629,14 @@ The following example demonstrates how to:
             expandedState = essentialsInfo[1];
             const hasViewAll = essentialsInfo[2];
             // Essentials item count, expanded state and viewAll button state check
-        // tslint:disable-next-line: deprecation
+        // eslint-disable-next-line deprecation/deprecation
             assert.equal(countItems, 10, "Essentials should have 10 items at the beginning, found " + countItems);
             assert.ok(expandedState, "Essentials should be expanded");
             assert.ok(hasViewAll, "Essentials has the ViewAll button at the beginning");
             await essentials.getViewAllButton().click();
             const count = await essentials.countItems();
             // Essentials item count after click ViewAll button
-        // tslint:disable-next-line: deprecation
+        // eslint-disable-next-line deprecation/deprecation
             assert.equal(count, 12, "Essentials should have 12 items after adding dynamic properties, found " + count);
             // Item label and properties check
             await Promise.all([
