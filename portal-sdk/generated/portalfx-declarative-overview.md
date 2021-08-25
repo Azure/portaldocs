@@ -13,7 +13,7 @@ The following Views that are supported:
 
 1. Getting Started
 2. Monitoring
-3. Tutorial
+3. Tutorials
 4. Information
 
 <a name="declarative-resource-overview-experience-getting-started-with-declarative-resource-overview-blade"></a>
@@ -63,7 +63,7 @@ The following views are supported -
 ****
 1. [Getting Started](#getting-started)
 2. [Monitoring](#monitoring)
-3. [Tutorial](#tutorial)
+3. [Tutorials](#tutorials)
 4. [Information](#information)
 
 <a name="declarative-resource-overview-experience-configuring-views-getting-started"></a>
@@ -184,13 +184,13 @@ To add the Monitoring view, add the following example to the `properties.tabs` s
         {
             "title": "CPU (average)",
             "metrics": [
-            {
-                "id": "Percentage CPU",
-                "aggregationType": "Avg",
-                "resourceMetadata": {
-                "id": "[parameters('id')]"
+                {
+                    "id": "Percentage CPU",
+                    "aggregationType": "Avg",
+                    "resourceMetadata": {
+                        "id": "[parameters('id')]"
+                    }
                 }
-            }
             ]
         }
     ]
@@ -199,39 +199,88 @@ To add the Monitoring view, add the following example to the `properties.tabs` s
 Example
 ![alt-text](../media/portalfx-cuid/MonitoringTab.png "Monitoring tab")
 
-<a name="declarative-resource-overview-experience-configuring-views-tutorial"></a>
-#### Tutorial
-The tutorial view supports embedding video and learn more links.
+<a name="declarative-resource-overview-experience-configuring-views-tutorials"></a>
+#### Tutorials
+The tutorials view supports embedding tiles, videos and links.
 
-To add the Tutorial view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#resource-overview-schema)
+To add the Tutorials view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#resource-overview-schema)
 
 ```
 {
     "kind": "Tutorials",
-    "displayName": {
-        "property": "tab2DisplayName"
-    },
-    "features": [
-        {
-            "title": {
-                "property": "tab2feature1Title"
-            },
-            "description": {
-                "property": "tab2feature1Description"
-            },
-            "learnMore": {
-                "url": "https://www.azure.com",
-                "ariaLabel": "Learn more about Azure"
-            },
-            "video": {
-                "src": "https://www.youtube.com/watch?v=KXkBZCe699A"
+    "tilesGroup": {
+        "displayName": {
+            "property": "freeTrainingsFromMicrosoft"
+        },
+        "items": [
+            {
+                "title": {
+                    "property": "tile1Title"
+                },
+                "icon": "MsPortalFx.Base.Images.Polychromatic.Learn",
+                "subtitle": {
+                    "property": "tile1Subtitle"
+                },
+                "description": {
+                    "property": "tile1Description"
+                },
+                "action": {
+                    "url": "https://www.azure.com",
+                    "displayName": {
+                        "property": "start"
+                    }
+                }
             }
-        }
-    ]
+        ]
+    },
+    "videosGroup": {
+        "displayName": {
+            "property": "tab2videosTitle"
+        },
+        "items": [
+            {
+                "title": {
+                    "property": "tab2feature1Title"
+                },
+                "description": {
+                    "property": "tab2feature1Description"
+                },
+                "learnMore": {
+                    "url": "https://www.azure.com",
+                    "ariaLabel": "Learn more about Azure"
+                },
+                "video": {
+                    "src": "https://www.youtube.com/watch?v=KXkBZCe699A"
+                }
+            }
+        ]
+    },
+    "linksGroup": {
+        "displayName": "Useful links",
+        "items": [
+            {
+                "title": "Concepts",
+                "action": [
+                    {
+                        "url": "https://azure.microsoft.com/en-us/",
+                        "displayName": "Azure Managed applications overview"
+                    },
+                    {
+                        "url": "https://azure.microsoft.com/en-us/",
+                        "displayName": "Service Catalog applications"
+                    },
+                    {
+                        "url": "https://azure.microsoft.com/en-us/",
+                        "displayName": "Managed applications in Azure Marketplace"
+                    }
+                ]
+            }
+        ]
+    }
 }
 ```
 Example
-![alt-text](../media/portalfx-cuid/TutorialTab.png "Tutorial tab")
+![alt-text](../media/portalfx-cuid/TutorialsTab.png "Tutorials tab")
 
 <a name="declarative-resource-overview-experience-configuring-views-information"></a>
 #### Information
