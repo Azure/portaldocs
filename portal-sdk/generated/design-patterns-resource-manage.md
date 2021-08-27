@@ -81,7 +81,7 @@ The Overview Page offers the following features:
 
 <a name="behavior-overview-page-title"></a>
 ### Title
-The title of a Manage a Resource page should reflect the name of the resource instance. For example, if the name of a VM instance was “Azure VM,” then the title of the Manage a Resource page should show as “Azure VM”.  The subtitle shows the resource type “Virtual machine”.
+The title of a Manage a Resource page should reflect the name of the resource instance. For example, if the name of a VM instance was “Azure VM,” then the title of the Manage a Resource page should show as “Azure VM”. The subtitle shows the resource type “Virtual machine”.
 
 <a name="behavior-overview-page-resource-menu-1"></a>
 ### Resource Menu
@@ -317,6 +317,8 @@ As shown above, when multiple Content Areas exists, this content should be place
   * Features should be displayed using a borderless card layout that includes an icon, a short description (header), a long description (body), and a call-to-action (CTA) button or a “Learn more” link.
     * CTA buttons should link to resource-menu items and navigate the user to that resource page.
     * Learn more links are used when hyperlinking to documentation or other external resources that live outside of Azure Portal.
+
+The Get Started design can be used in the first menu "Overview", not in any other menu item.
 
 <a name="anatomy-overview-page-content-area-behavior-overview-page-content-area-strong-example-properties-content-strong"></a>
 #### <strong> Example: Properties Content </strong>

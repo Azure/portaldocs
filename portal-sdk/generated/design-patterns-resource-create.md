@@ -1,7 +1,7 @@
 ﻿# Create a Resource
 The Create a Resource pattern guides users through the process of creating Azure resources.
 
-Last updated July 2021 (see [Change Log](##change-log))
+Last updated Aug 2021 (see [Change Log](##change-log))
 
 <a name="context"></a>
 ## Context
@@ -212,17 +212,23 @@ The “Review + create” step of the process allows the user to verify all sett
 * Use the summary control to help organize content from multiple steps.
 * Disable the create button until validation succeeds.
 
-Validation should occur when the user navigates to the last step, <strong>Review + create</strong>, with the following behavior when validation passes and fails:
+Validation should occur when the user navigates to the last step, <strong>Review + create</strong>, with the following behavior when validation is in progress or fails or passes:
+
+* <strong>In progress</strong>
+    * Display an in-progress icon with a message below tab name.</br></br>
+    <div style="text-align:center">
+    <img alttext="Review + create step (pass)" src="../media/design-patterns-resource-create/Example7_Create-a-Resource_Review&Create(inprogress).png" style="width:50%">
+    </div>
 
 * <strong>Pass</strong>
-    * Display an success message at the top of the page using the success icon and the text "Validation passed.”</br></br>
+    * Show summary of fields and DO NOT use any green infobox.</br></br>
     <div style="text-align:center">
     <img alttext="Review + create step (pass)" src="../media/design-patterns-resource-create/Example7_Create-a-Resource_Review&Create(pass).png" style="width:50%">
     </div>
 
 * <strong>Fail</strong>
     * Display an error message at the top of the page using the error icon and the text "Validation failed. Required information is missing or not valid.
-    * Mark each step which contains an invalid field with a red dot after the step name
+    * Mark each step which contains an invalid field with an invalid icon before the step name.
 </br></br>
     <div style="text-align:center">
     <img alttext="Review + create step (pass)" src="../media/design-patterns-resource-create/Example7_Create-a-Resource_Review&Create(fail).png" style="width:50%">
@@ -258,7 +264,7 @@ Input fields are used to collect the information required for resource configura
 
 <a name="behavior-create-a-resource-optional-steps-sub-create"></a>
 ### Sub-Create
-The sub-create allows users to configure services or to create resources that are related to the main resource that's being created, without losing the overall context. Dialogs, context panes or full screen pages can be used for sub-creates within the create flow.
+The sub-create allows users to configure services or to create resources that are related to the main resource that's being created, without losing the overall context. Dialogs, context panes or full screen pages can be used for sub-creates within the create flow. The text of sub-create link must be in this format "Create a xxx", for example "Create a resource group".
 
 <div style="width:100%">
 <img alttext="Create a Resource - Sub-Create" src="../media/design-patterns-resource-create/Example9_Create-a-Resource_Sub-Create.png"  />
@@ -624,10 +630,13 @@ The declarative approach can significantly reduce your development costs (under 
 <a name="change-log"></a>
 ## Change Log
 
-July 2021
-* Added guidance of region and resource group location for non-regional create (global create)
+Aug 2021
+* Updated the guidance for link text of sub-screate and design of create validation.
 
-April 2021
+Jul 2021
+* Added guidance of region and resource group location for non-regional create (global create).
+
+Apr 2021
 * Added change log. Updated guidance for hiding/disabling tabs in Optional Steps & Required Steps.
 
 Jul 2020

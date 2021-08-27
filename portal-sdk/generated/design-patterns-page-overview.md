@@ -51,7 +51,7 @@ The overview page is the home page for an Azure service. The overview page provi
 <a name="overview-page-use-when"></a>
 ## Use when
 
-Use the overview page pattern when you are designing the home page for an Azure service. 
+Use the overview page pattern when you are designing the home page for an Azure service.
 
 <a name="overview-page-anatomy"></a>
 ## Anatomy
@@ -98,6 +98,8 @@ Tabs at the top of the page allow for extensibility of the design and provide ac
 * **Body text** a more verbose description of the offering that should include a **Learn more** link to docs. 
 
 * **Cardless card** communicates 3 scenarios using concise action-oriented language that avoids delving into Azure service taxonomies. A card of Azure service has an **illustration** or an **icon** on the top, a short scenario description, long description, learn more link and call to action. Each card can have up to 3 **calls to action** "CTAs" with the most important using a primary button and the others a link. 
+
+The Get Started design can be used in the first menu "Overview" or in a non-menu overview page, not in any other menu item.
 
 <a name="overview-page-behavior-tabs-other-tabs"></a>
 #### Other tabs
