@@ -38,6 +38,7 @@ Use the Map control when you have geographical data with longitude and latitude 
 
 * Provide enough room on the page for the Map control to fully display
 * Provide meaningful icons to correspond with each datapoint
+* By design the map control is not made to be accessible via keyboard, instead all the data it contains must be available outside of it. Eg. Show them in List, Grid etc.
 
 <a name="best-practices-don-t"></a>
 #### Don&#39;t
