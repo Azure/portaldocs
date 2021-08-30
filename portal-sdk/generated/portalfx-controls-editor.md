@@ -26,7 +26,7 @@ You can control the behavior and features of the editor via initialization `opti
 /**
 * ViewModel class for the editor sample.
 */
-export class SampleEditorViewModel extends MsPortalFx.ViewModels.Controls.Documents.Editor.ViewModel { // tslint:disable-line:deprecation
+export class SampleEditorViewModel extends MsPortalFx.ViewModels.Controls.Documents.Editor.ViewModel { // eslint-disable-line deprecation/deprecation
    /**
     * Editor view model constructor.
     */
