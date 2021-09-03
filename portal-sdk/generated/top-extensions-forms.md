@@ -110,7 +110,7 @@ It depends on the scenario that drives the UX. If the form will capture some dat
 | Term                 | Meaning |
 | ---                  | --- |
 | compile-time verified lambda | A lambda expression that is verified at compile time.  |
-| eirty | The contents of a textbox or similar object have been changed from the time that they were originally displayed or instantiated. Related to the most recent value of a variable or observable. |
+| dirty | The contents of a textbox or similar object have been changed from the time that they were originally displayed or instantiated. Related to the most recent value of a variable or observable. |
 | DOM              | Document Object Model   |
 | journey  | A user-defined collection of Azure blades to which the user has navigated in order to accomplish a specific goal or task. A set of experiences, each of which has its own goals, that combine to result in a greater level of competency or knowledge. |
 | lambda expression | An anonymous function that is used to create delegates or expression tree types. |
