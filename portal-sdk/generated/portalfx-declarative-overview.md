@@ -12,9 +12,12 @@ The Declarative Resource Overview blade includes the following sections:
 The following Views that are supported:
 
 1. Getting Started
-2. Monitoring
-3. Tutorials
-4. Information
+2. Properties
+3. Monitoring
+4. Recommendations
+5. Tutorials
+6. DataBrowse
+7. Information
 
 <a name="declarative-resource-overview-experience-getting-started-with-declarative-resource-overview-blade"></a>
 ## Getting started with Declarative Resource Overview blade
@@ -62,18 +65,22 @@ The `essentials` section defines what is rendered in Essentials.  The `commands`
 The following views are supported -
 ****
 1. [Getting Started](#getting-started)
-2. [Monitoring](#monitoring)
-3. [Tutorials](#tutorials)
-4. [Information](#information)
+2. [Properties](#properties)
+3. [Monitoring](#monitoring)
+4. [Recommendations](#recommendations)
+5. [Tutorials](#tutorials)
+6. [DataBrowse](#data-browse)
+7. [Information](#information)
 
 <a name="declarative-resource-overview-experience-configuring-views-getting-started"></a>
 #### Getting Started
 The Getting Started view is the primary view that users first see in Declarative Resource Overview blade. The purpose of the Getting Started view is to help the user learn about the resource and service. The Getting Started view consist of free form text followed by `features`, which can include actions such as URL, Blade and Menu open actions. The Menu action opens a menu item as defined with the `id`. In the example below, `tags` will open the Tags menu blade. [Learn more about configuring the resource menu](declarative-assets.md#configuring-the-resource-menu).
 
-To add the Getting Started view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#resource-overview-schema)
+To add the Getting Started view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#declarative-resource-overview-schema)
 
 ```
 {
+    "kind": "GetStarted",
     "title": {
         "property": "tab1Title"
     },
@@ -85,81 +92,162 @@ To add the Getting Started view, add the following example to the `properties.ta
         "ariaLabel": "Learn more about Azure Portal"
     },
     "features": [
-    {
-        "title": {
-            "property": "tab1feature1Title"
-        },
-        "description": {
-            "property": "tab1feature1Description"
-        },
-        "learnMore": {
-            "url": "https://azure.microsoft.com/en-us/features/azure-portal/",
-            "ariaLabel": "Learn more about Azure Portal"
-        },
-        "icon": {
-            "file": "../../Content/svg/engine.svg"
-        },
-        "action": {
-            "menu": "tags",
-            "displayName": {
-                "property": "tab1feature1actionDisplayName"
-            }
-        }
-    },
-    {
-        "title": {
-            "property": "tab1feature2Title"
-        },
-        "description": {
-            "property": "tab1feature2Description"
-        },
-        "learnMore": {
-            "url": "https://azure.microsoft.com/en-us/features/azure-portal/",
-            "ariaLabel": "Learn more about Azure Portal"
-        },
-        "icon": {
-            "file": "../../Content/svg/engine.svg"
-        },
-        "action": {
-            "blade": {
-                "name": "ActiveDirectoryMenuBlade",
-                "extension": "Microsoft_AAD_IAM"
+        {
+            "title": {
+                "property": "tab1feature1Title"
             },
-            "displayName": {
-                "property": "tab1feature2actionDisplayName"
+            "description": {
+                "property": "tab1feature1Description"
+            },
+            "learnMore": {
+                "url": "https://azure.microsoft.com/en-us/features/azure-portal/",
+                "ariaLabel": "Learn more about Azure Portal"
+            },
+            "icon": {
+                "file": "../../Content/svg/engine.svg"
+            },
+            "action": {
+                "menu": "tags",
+                "displayName": {
+                    "property": "tab1feature1actionDisplayName"
+                }
+            }
+        },
+        {
+            "title": {
+                "property": "tab1feature2Title"
+            },
+            "description": {
+                "property": "tab1feature2Description"
+            },
+            "learnMore": {
+                "url": "https://azure.microsoft.com/en-us/features/azure-portal/",
+                "ariaLabel": "Learn more about Azure Portal"
+            },
+            "icon": {
+                "file": "../../Content/svg/engine.svg"
+            },
+            "action": {
+                "blade": {
+                    "name": "ActiveDirectoryMenuBlade",
+                    "extension": "Microsoft_AAD_IAM"
+                },
+                "displayName": {
+                    "property": "tab1feature2actionDisplayName"
+                }
+            }
+        },
+        {
+            "title": {
+                "property": "tab1feature3Title"
+            },
+            "description": {
+                "property": "tab1feature3Description"
+            },
+            "learnMore": {
+                "url": "https://azure.microsoft.com/en-us/features/azure-portal/",
+                "ariaLabel": "Learn more about Azure Portal"
+            },
+            "icon": {
+                "file": "../../Content/svg/msi.svg"
+            },
+            "action": {
+                "url": "https://www.azure.com",
+                "displayName": {
+                    "property": "tab1feature3actionDisplayName"
+                }
             }
         }
-    },
-    {
-        "title": {
-            "property": "tab1feature3Title"
-        },
-        "description": {
-            "property": "tab1feature3Description"
-        },
-        "learnMore": {
-            "url": "https://azure.microsoft.com/en-us/features/azure-portal/",
-            "ariaLabel": "Learn more about Azure Portal"
-        },
-        "icon": {
-            "file": "../../Content/svg/msi.svg"
-        },
-        "action": {
-            "url": "https://www.azure.com",
-            "displayName": {
-                "property": "tab1feature3actionDisplayName"
-            }
-        }
-    }
     ]
 }
 ```
 Example
 ![alt-text](../media/portalfx-cuid/GettingStartedTab.png "Getting Started tab")
 
+<a name="declarative-resource-overview-experience-configuring-views-properties"></a>
+#### Properties
+The Properties view is used to showcase additional resource-specific properties that are frequently accessed by users for the given resource. It supports adding Secret and Date formats for secure string and datetime value. It supports adding sourceUnits and maximumFractionDigits for number value. SourceUnits indicates the initial unit which can be calculated with the value for the display value and unit. MaximumFractionDigits indicates the maximum fraction digits for the display value. It supports adding an action link to an URL, a resource or a blade.
+
+To add the Properties view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#declarative-resource-overview-schema)
+
+```
+{
+    "kind": "Properties",
+    "groups": [
+        {
+            "displayName": "Virtual machine",
+            "icon": "MsPortalFx.Base.Images.Polychromatic.VirtualMachine",
+            "description": "This is a virtual machine.",
+            "items": [
+                {
+                    "displayName": "Resource name",
+                    "value": "[resources().name]",
+                    "description": "This is the resource name."
+                },
+                {
+                    "displayName": "Computer name",
+                    "value": "abc",
+                    "valueMapping": [
+                        {
+                            "value": "abc",
+                            "displayName": "def"
+                        }
+                    ]
+                },
+                {
+                    "displayName": "Key",
+                    "value": "[resources().id]",
+                    "format": "Secret"
+                },
+                {
+                    "displayName": "Creation time",
+                    "value": "2021-03-23T21:24:47.7856737Z",
+                    "format": "Date"
+                },
+                {
+                    "displayName": "Disk Size",
+                    "value": "[resources().properties.diskSize]",
+                    "sourceUnits": "Gigabytes",
+                    "maximumFractionDigits": 2
+                },
+                {
+                    "displayName": "Azure portal",
+                    "value": "https://azure.microsoft.com/",
+                    "action": {
+                        "url": "https://azure.microsoft.com/"
+                    }
+                },
+                {
+                    "displayName": "Open a resource",
+                    "value": "Resource name",
+                    "action": {
+                        "resourceId": "/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/{provider}/{resourceType}/{resourceName}"
+                    }
+                },
+                {
+                    "displayName": "Open a blade",
+                    "value": "Blade name",
+                    "action": {
+                        "blade": {
+                            "name": "A blade name",
+                            "extension": "An extension name",
+                            "parameters": {
+                                "resId": "[resources().id]"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
+```
+Example
+![alt-text](../media/portalfx-cuid/PropertiesTab.png "Properties tab")
+
 <a name="declarative-resource-overview-experience-configuring-views-monitoring"></a>
 #### Monitoring
-The Monitoring view allows you to add customized metrics for your resource.  The metrics are derived from Azure Monitor.  
+The Monitoring view is used to display the most useful resource-specific charts and metrics. The metrics are derived from Azure Monitor.  
 
 Metrics can be defined as such 
 ```
@@ -175,7 +263,7 @@ And the `id` and `aggregationType` must match what is available in Azure Monitor
 
 ![alt-text](../media/portalfx-cuid/MetricsMonitoring.png "Declarative Resource Overview")
 
-To add the Monitoring view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#resource-overview-schema)
+To add the Monitoring view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#declarative-resource-overview-schema)
 
 ```
 {
@@ -199,11 +287,25 @@ To add the Monitoring view, add the following example to the `properties.tabs` s
 Example
 ![alt-text](../media/portalfx-cuid/MonitoringTab.png "Monitoring tab")
 
+<a name="declarative-resource-overview-experience-configuring-views-recommendations"></a>
+#### Recommendations
+The Recommendations view is used to show the active Azure Advisor recommendations for the resource.
+
+To add the Recommendations view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#declarative-resource-overview-schema)
+
+```
+{
+    "kind": "Recommendations"
+}
+```
+Example
+![alt-text](../media/portalfx-cuid/RecommendationsTab.png "Recommendations tab")
+
 <a name="declarative-resource-overview-experience-configuring-views-tutorials"></a>
 #### Tutorials
-The tutorials view supports embedding tiles, videos and links.
+The Tutorials view is used to display the most useful resource-specific Microsoft training, videos, and useful links to “How to…” documents.
 
-To add the Tutorials view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#resource-overview-schema)
+To add the Tutorials view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#declarative-resource-overview-schema)
 
 ```
 {
@@ -282,12 +384,97 @@ To add the Tutorials view, add the following example to the `properties.tabs` se
 Example
 ![alt-text](../media/portalfx-cuid/TutorialsTab.png "Tutorials tab")
 
+<a name="declarative-resource-overview-experience-configuring-views-data-browse"></a>
+#### Data Browse
+The Data Browse view is used to display the array data in a table.
+
+To add the Data Browse view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#declarative-resource-overview-schema)
+
+Example for static array data source.
+
+```
+{
+    "kind": "DataBrowse",
+    "displayName": "Data browse",
+    "ariaLabel": "Data browse",
+    "data": [
+        {
+            "diskSize": 100,
+            "price": 100,
+            "displayName": "a",
+            "creationTime": "2021-03-23T21:24:47.7856737Z"
+        },
+        {
+            "diskSize": 10000,
+            "price": 10000,
+            "displayName": "b",
+            "creationTime": "2021-04-24T21:24:47.7856737Z"
+        },
+        {
+            "diskSize": 1500,
+            "price": 1500,
+            "displayName": "c",
+            "creationTime": "2021-05-25T21:24:47.7856737Z"
+        }
+    ],
+    "columns": [
+        {
+            "displayName": "Disk Size",
+            "name": "diskSize",
+            "format": "Number",
+            "sourceUnits": "Gigabytes",
+            "maximumFractionDigits": 2
+        },
+        {
+            "displayName": "Price",
+            "name": "price"
+        },
+        {
+            "displayName": "Display Names",
+            "name": "displayName"
+        },
+        {
+            "displayName": "Creation time",
+            "name": "creationTime",
+            "format": "Date"
+        }
+    ]
+}
+```
+
+Example for resources() data source, the output for resources().resources must be an array.
+
+```
+{
+    "kind": "DataBrowse",
+    "displayName": "Data browse",
+    "ariaLabel": "Data browse",
+    "data": "[resources().resources]",
+    "columns": [
+        {
+            "displayName": "Name",
+            "name": "name"
+        },
+        {
+            "displayName": "VM Type",
+            "name": "type"
+        },
+        {
+            "displayName": "Location",
+            "name": "location"
+        }
+    ]
+}
+```
+Example
+![alt-text](../media/portalfx-cuid/DataBrowseTab.png "DataBrowse tab")
+
 <a name="declarative-resource-overview-experience-configuring-views-information"></a>
 #### Information
-The Information view allow you to specify an array of actions including URL, Blade and Menu open actions.
+The Information view allows you to specify an array of actions including URL, Blade and Menu open actions.
 
 
-To add the Information view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#resource-overview-schema)
+To add the Information view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#declarative-resource-overview-schema)
 
 ```
 {
@@ -323,6 +510,17 @@ To add the Information view, add the following example to the `properties.tabs` 
 ```
 Example
 ![alt-text](../media/portalfx-cuid/InformationTab.png "Information tab")
+
+<a name="declarative-resource-overview-experience-configuring-views-default-tab"></a>
+#### Default tab
+The Declarative Resource Overview allows you to set any tab as the default tab when rendering the page. If there are multiple tabs with "default: true", only the first one will be set as the default tab.
+
+
+To set the default tab, add the following example to any of the above tabs.
+
+```
+"default": true
+```
 
 <a name="declarative-resource-overview-experience-configuring-the-command-bar"></a>
 ## Configuring the command bar
@@ -479,7 +677,8 @@ We support the following custom essential types -
 
 1. [String Content](#string-content)
 2. [Action URL](#action-url)
-3. [Action Blade](#action-blade)
+3. [Action Resource](#action-resource)
+4. [Action Blade](#action-blade)
 
 <a name="declarative-resource-overview-experience-configuring-essentials-to-configure-custom-properties-in-essentials-string-content"></a>
 ##### String Content
@@ -508,6 +707,24 @@ Action URL allows you to open the `url` in a browser window.  Example json -
             "value": "action url",
             "action": {
                 "url": "https://www.azure.com"
+            }
+        }
+    ]
+}
+```
+<a name="declarative-resource-overview-experience-configuring-essentials-to-configure-custom-properties-in-essentials-action-resource"></a>
+##### Action Resource
+<a name="actionresource"></a>
+Action Resource allows you to open a resource by resourceId.  Example json - 
+
+```
+"essentials": {
+    "properties": [
+        {
+            "displayName": "propertydisplayname",
+            "value": "action resource",
+            "action": {
+                "resourceId": "/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/{provider}/{resourceType}/{resourceName}"
             }
         }
     ]
