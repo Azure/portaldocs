@@ -94,7 +94,7 @@ If not present you can add the items to your path as follows:
 1. In the dialog click `Edit` on the `Path` variable and add (note paths may vary depending on your environment and msbuiuld version)
     - for npm `C:\Users\youralias\AppData\Roaming\npm`
     - for NuGet and cred provider `C:\Users\youralias\.nuget`
-    - for msbuild `C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin`
+    - for msbuild `C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\bin`
 
 If you have run into problems checkout the [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
 
