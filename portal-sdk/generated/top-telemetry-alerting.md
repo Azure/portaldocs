@@ -11,9 +11,9 @@
 * [Client Error](#client-error)
     * [Configuration](#client-error-configuration)
     * [How often client error alerts run?](#client-error-how-often-client-error-alerts-run)
-* [Create regression](#create-regression)
-    * [Configuration](#create-regression-configuration-1)
-    * [How often do create alerts run?](#create-regression-how-often-do-create-alerts-run)
+* [Create prevalidation and regression](#create-prevalidation-and-regression)
+    * [Configuration](#create-prevalidation-and-regression-configuration-1)
+    * [How often do create alerts run?](#create-prevalidation-and-regression-how-often-do-create-alerts-run)
 * [Performance](#performance)
     * [Configuration](#performance-configuration-2)
     * [How often do they run?](#performance-how-often-do-they-run-1)
@@ -52,14 +52,14 @@ There are number of framework provided alerts:
     - Sev4 IcM incident for an extension when its ExtTelemetry logs reach above 500 events every 60 seconds per user per browser tab. We stop logging ExtTelemetry events until the next 60 seconds start.
 1. Availability
 1. Client Error
-1. Create Regression
+1. Create Prevalidation and Regression
 1. Performance
 
 Some of these alert types are configurable per extension. The following alerts types currently support extension configuration:
 
 1. [Availability](#Availability)
 1. [Client Error](#client-error)
-1. [Create regression](#create-regression)
+1. [Create prevalidation and regression](#create-prevalidation-and-regression)
 1. [Performance](#performance)
 
 To onboard to the configurable alerts please see the relevant sub section below.
@@ -105,7 +105,7 @@ Currently extension, blade and part availability alert run 5, 10 and 15 minutes 
 <a name="availability-what-are-the-alerts-triggering-criteria"></a>
 ### What are the alerts triggering criteria?
 
-Below two tables show different criteria for different alert types and different severities that appliy for any extension, blade and part load in Azure Portal. 
+Below two tables show different criteria for different alert types and different severities that appliy for any extension, blade and part load in Azure Portal.
 
 <a name="availability-what-are-the-alerts-triggering-criteria-sev3"></a>
 #### Sev3:
@@ -366,18 +366,18 @@ For the complete list of datacenter code names, go to [datacenter code list](htt
 
 Currently error percentage alerts run every 15 minutes and error message alerts run every 5 minutes assessing the previous 60 minutes of data.
 
-<a name="create-regression"></a>
-## Create regression
+<a name="create-prevalidation-and-regression"></a>
+## Create prevalidation and regression
 
-The alerts can be configured for create blade extension on different environments including national clouds.
+The create prevalidation and regression alerts can be configured for create blade extension on different environments. Prevalidation alert is supported only in public cloud, whereas the regression alert is supported in all clouds.
 
-<a name="create-regression-configuration-1"></a>
+<a name="create-prevalidation-and-regression-configuration-1"></a>
 ### Configuration
 
 At a high level you define;
 
 1. N number of environment within "environments" property like the below.
-2. The create configuration for the alerts within that environment
+2. The create prevalidation or regression configuration for the alerts within that environment
 
 ```json
 {
@@ -385,19 +385,19 @@ At a high level you define;
     "enabled": true,
     "environments": [
         {
-            "environment": ["portal.azure.com", "portal.azure.cn"],
-            "availability": [...],
-            "clientError": [...],
+            "environment": ["portal.azure.com", "ms.portal.azure.com"], // prevalidation type is only supported in public clouds
+            "availability": [...], // Optional
+            "clientError": [...], // Optional.
             "create": [
                  {
-                    "type": "regression",
+                    "type": "regression", // "regression" or "prevalidation" are supported types
                     "enabled": true,
                     "criteria": [
                        ...
                     ]
                 }
             ],
-            "performance": [...],
+            "performance": [...], // Optional.
         },
         {
             "environment": ["ms.portal.azure.com"],
@@ -415,22 +415,20 @@ At a high level you define;
 }
 ```
 
-<a name="create-regression-configuration-1-what-is-environments-1"></a>
+<a name="create-prevalidation-and-regression-configuration-1-what-is-environments-1"></a>
 #### What is environments?
 
 "environments" property is an array. Each of its elements represents a set of alerting criteria for an environment.
 
-<a name="create-regression-configuration-1-what-is-environment-1"></a>
+<a name="create-prevalidation-and-regression-configuration-1-what-is-environment-1"></a>
 #### What is environment?
 
-"environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com
-or any other legit portal domain name, a.k.a., national cloud and air-gapped cloud domain names are supported too. Multiple values can be set for an "environment" property.
+"environment" property is an array. Its supported value for this alert is portal.azure.com or ms.portal.azure.com. For regression alerts, cn or canary.portal.azure.com or any other legit portal domain name, a.k.a., national cloud and air-gapped cloud domain names are supported too. Prevalidation alerts are only available in ms.portal.azure.com and the portal.azure.com portal domains. Mutiple values can be set for an "environment" property.
 
-<a name="create-regression-configuration-1-what-is-enabled-1"></a>
+<a name="create-prevalidation-and-regression-configuration-1-what-is-enabled-1"></a>
 #### What is enabled?
 
-"enabled" property is used to enable (when "enabled" is true) or disable ("enabled" is false) alerts on various level
-depending on where it is in customization json. For details, see "enabled" property in json snippet.
+"enabled" property is used to enable (when "enabled" is true) or disable ("enabled" is false) alerts on various level depending on where it's located in customization json. For details, see "enabled" property in json snippet.
 
 You can define N number of criteria like the below.
 
@@ -442,49 +440,59 @@ You can define N number of criteria like the below.
     "minSuccessRateOverPast24Hours":94.0,
     "minSuccessRateOverPastHour":94.0,
     "minTotalCountOverPast24Hours":50,
-    "minTotalCountOverPastHour":3
+    "minTotalCountOverPastHour":3,
+    "errorCodesToExclude": [""] // Optional and only supported in prevalidation alerts
 }
 ```
-
-<a name="create-regression-configuration-1-what-is-severity-1"></a>
+<a name="create-prevalidation-and-regression-configuration-1-what-is-severity-1"></a>
 #### What is severity?
 
 This is the severity value that an IcM alert would have when an alert is fired.
 
-<a name="create-regression-configuration-1-what-is-bladename"></a>
+<a name="create-prevalidation-and-regression-configuration-1-what-is-bladename"></a>
 #### What is bladeName?
 
 The list of the create blade name.
 
-<a name="create-regression-configuration-1-what-is-minsuccessrateoverpast24hours"></a>
+<a name="create-prevalidation-and-regression-configuration-1-what-is-minsuccessrateoverpast24hours"></a>
 #### What is minSuccessRateOverPast24Hours?
 
-This is the minimum create blade success rate over the past 24 hours.
+This is the minimum create blade success rate or the create prevalidation success rate over the past 24 hours.
 
-<a name="create-regression-configuration-1-what-is-minsuccessrateoverpasthour"></a>
+<a name="create-prevalidation-and-regression-configuration-1-what-is-minsuccessrateoverpasthour"></a>
 #### What is minSuccessRateOverPastHour?
 
-This is the minimum create blade success rate over the past hour.
+This is the minimum create blade success rate or the create prevalidation success rate over the past hour.
 
-<a name="create-regression-configuration-1-what-is-mintotalcountoverpast24hours"></a>
+<a name="create-prevalidation-and-regression-configuration-1-what-is-mintotalcountoverpast24hours"></a>
 #### What is minTotalCountOverPast24Hours?
 
-This is the minimum number of create that gets kicked off over the past 24 hours.
+This is the minimum number of creates or create prevalidations that get kicked off over the past 24 hours.
 
-<a name="create-regression-configuration-1-what-is-mintotalcountoverpasthour"></a>
+<a name="create-prevalidation-and-regression-configuration-1-what-is-mintotalcountoverpasthour"></a>
 #### What is minTotalCountOverPastHour?
 
-This is the minimum number of create that gets kicked off over the past hour.
+This is the minimum number of creates or create prevalidations that get kicked off over the past hour.
 
-<a name="create-regression-how-often-do-create-alerts-run"></a>
+<a name="create-prevalidation-and-regression-configuration-1-what-is-errorcodestoexclude"></a>
+#### What is errorCodesToExclude?
+
+The optional list of create prevalidation error codes which need to be excluded while evaluating the alert. This is only supported for prevalidation alerts.
+
+<a name="create-prevalidation-and-regression-configuration-1-is-national-cloud-supported"></a>
+#### Is National Cloud Supported?
+
+1. For regressions, the alert is available in all clouds including national clouds.
+2. For prevalidations, the alert is only available in public cloud.
+
+<a name="create-prevalidation-and-regression-how-often-do-create-alerts-run"></a>
 ### How often do create alerts run?
 
-Every 60 minutes, we get create success rate and create total count for the last 60 minutes and the last 24 hours.
-
+Every 60 minutes, we get create or prevalidation success rate and create or prevalidation total count for the last 60 minutes and the last 24 hours.
 Alerts will only trigger when the following criteria are met.
 
-1. Hourly create success rate is below {minSuccessRateOverPastHour} and hourly create total count is above {minTotalCountOverPastHour}
-1. 24-hour create success rate is below {minSuccessRateOverPast24Hours} and 24-hour create total count is above {minTotalCountOverPast24Hours}
+1. Hourly create or prevalidation success rate is below {minSuccessRateOverPastHour} and hourly create or prevalidation total count is above {minTotalCountOverPastHour}
+1. 24-hour create or prevalidation success rate is below {minSuccessRateOverPast24Hours} and 24-hour create or prevalidation total count is above {minTotalCountOverPast24Hours}
 
 <a name="performance"></a>
 ## Performance
@@ -660,7 +668,7 @@ Currently performance alerts run every 10 minutes assessing the previous 90 minu
 ## How do I onboard?
 
 1. Submit and complete a Pull Request in [Azure Portal Alerting Repo a.k.a. Alerting Repo](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx-Alerting).
-> For availability alert refer to [Availability Opted in](#Opted-in) 
+> For availability alert refer to [Availability Opted in](#Opted-in)
 
 > For non-create alert the customization JSON should be located at `products/{YourServiceNameInIcM}/{ExtensionName}.alerting.json`. It is recommended to have an `owners.txt` in the same folder as the customization JSON file. The `owners.txt` has AAD enabled email alias or/and individual MSFT aliases. Anyone from `owners.txt` can approve the Pull Request for any changes within that folder or its subfolder. The PR becomes eligible to complete once it gets an approval from `owners.txt` and the merge validation passes.
 
@@ -767,7 +775,7 @@ By default all the alerts are fired against Azure Portal (IbizaFx) team and Ibiz
 
 Onboard a custom IcM connector per cloud instance following the IcM doc [Onboard a connector for a Service][1]. Alerting service will use the custom connector owned by your team to inject IcM incidents directly to your service in IcM. Only the service admin has the rights to onboard a new or update an existing connector.
 
-Certificate is used by IcM service to authenticate with the alerting service who sends incidents to IcM service. We are using Azure Key Vault managed certificate. You will need to add **DSTS.PHMS.AZUREWEBSITES.NET** as one of "Certificates SAN(s)" on connector edit or onboarding page. 
+Certificate is used by IcM service to authenticate with the alerting service who sends incidents to IcM service. We are using Azure Key Vault managed certificate. You will need to add **DSTS.PHMS.AZUREWEBSITES.NET** as one of "Certificates SAN(s)" on connector edit or onboarding page.
 
 <a name="route-alerts-to-another-team-in-icm-step-2"></a>
 ### Step 2
