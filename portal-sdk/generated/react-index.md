@@ -415,7 +415,7 @@ _.chunk(['a', 'b', 'c', 'd'], 3);
 // => [['a', 'b', 'c'], ['d']]
 ```
 
-You can see all the various functionality in the [Lodash documentation](Lodash Docs).
+You can see all the various functionality in the [Lodash documentation](https://lodash.com/docs/).
 
 <a name="reactviews-libraries-explained-npm-modules"></a>
 ### NPM Modules
