@@ -43,7 +43,7 @@ For more information about performance and reliability, see the following resour
 
 * Checklist
 
-    [portalfx-performance.md](top-extensions-performance.md)
+    [portalfx-performance.md](performance.md)
 
 <a name="production-ready-metrics-and-quality-metrics-reliability"></a>
 ### Reliability

@@ -19,7 +19,7 @@ We also recommend that extensions deploy broadly across all regions in an active
 <a name="custom-extension-deployment-infrastructure-resiliency-and-failover"></a>
 ### Resiliency and failover
 
-Having a presence in all geographies is important for good performance. Extensions experience much higher latencies and reliability issues when servers are not geo-located with their users. For more information on performance, please refer to our performance doc [here](/portal-sdk/generated/top-extensions-performance-profiling.md).
+Having a presence in all geographies is important for good performance. Extensions experience much higher latencies and reliability issues when servers are not geo-located with their users. For more information on performance, please refer to our performance doc [here](/portal-sdk/generated/performance-overview-profiling.md).
 
 Use the following steps to deploy an extension to all regions.
 

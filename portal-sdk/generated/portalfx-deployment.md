@@ -158,7 +158,7 @@ We also recommend that extensions use a CDN, such as Azure CDN, to move the most
 
 Having a presence in all geographies is important for good performance.
 We see much higher latencies and reliability issues when servers are not geo-located with their users.
-(For more tips, see the [performance page](top-extensions-performance.md).)
+(For more tips, see the [performance page](performance.md).)
 
 In order to deploy to all regions:
 1.	Use [Extension Hosting Service](portalfx-extension-hosting-service.md) to deploy UI

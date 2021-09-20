@@ -32,7 +32,7 @@ Watch this tutorial to understand, implement debug forms using EditScope
 
 [![Performance brownbag](../media/videos/performancebrownbag.png)](https://msit.microsoftstream.com/video/ade5a3ff-0400-86e8-f06c-f1ea75dd663f)
 
-[Learn More](top-extensions-performance.md)
+[Learn More](performance.md)
 [PowerPoint](https://auxdocs.blob.core.windows.net/videos/PerfBrownbag_8_26_2015.pptx)
 
 <a name="videos-no-pdl-typescript"></a>

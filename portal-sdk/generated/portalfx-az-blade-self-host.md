@@ -36,7 +36,7 @@ Following this technique, your web UI will be displayed in the browser using a c
 
 Initializing a child `<iframe>` can be costly and **will slow your end-to-end Blade-rendering performance** relative to displaying your web UI on its native site (that is, not rehosted in the Azure Portal).
 
-All Azure Portal Blades ('`Az`' Blades included) are required to meet performance goals for 'BladeFullReady' rendering time (see [here](./portalfx-performance-overview.md#blade-performance)).  This is particularly difficult for '`Az`' Blades, given the cost of a child `<iframe>`.
+All Azure Portal Blades ('`Az`' Blades included) are required to meet performance goals for 'BladeFullReady' rendering time (see [here](./portalfx-performance.md#blade-performance)).  This is particularly difficult for '`Az`' Blades, given the cost of a child `<iframe>`.
 
 Some (hopefully helpful) advice to be successful with '`Az`' Blades:
 - **Do not** assume that your web UI will render as fast in the Azure Portal as it does standalone.  Budget for Azure Portal-specific performance analysis/optimization.

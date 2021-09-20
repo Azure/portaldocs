@@ -125,7 +125,7 @@ Following are some of the dashboards that we support. If you do not have access 
 
 | Name                            | Metrics Docs                                                                                                                                     |
 | ---- | ------------ |
-| Performance Docs | [top-extensions-performance.md](top-extensions-performance.md) |
+| Performance Docs | [performance.md](performance.md) |
 | Reliability Docs | [portalfx-reliability.md](portalfx-reliability.md) |
 | Create Telemetry Docs | [portalfx-telemetry-create.md](portalfx-telemetry-create.md) |
 | How to analyze client errors | [portalfx-telemetry-extension-errors.md](portalfx-telemetry-extension-errors.md) |
