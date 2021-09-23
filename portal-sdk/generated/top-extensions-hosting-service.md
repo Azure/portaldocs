@@ -439,7 +439,7 @@ Each extension gets its own diagnostics endpoint, by adding the extension name t
 
 Friendly name allows you to test new versions of your extension before rolling them out to customers. You can side load the version associated with the friendly name in the portal by specifying a couple of feature flags. For example, in the config above, if you want to load version 2.0.0.0 in the portal, you could using the below url -
 
-[https://portal.azure.com?feature.canmodifystamps&Microsoft_Azure_MyExtension=friendlyname](https://portal.azure.com?feature.canmodifystamps&Microsoft_Azure_MyExtension=friendlyname)
+[https://portal.azure.com?feature.canmodifystamps=true&Microsoft_Azure_MyExtension=friendlyname](https://portal.azure.com?feature.canmodifystamps=true&Microsoft_Azure_MyExtension=friendlyname)
 
 - `feature.canmodifystamps=true` is required for side-loading.
 - replace `Microsoft_Azure_MyExtension` with unique name of extension defined in `extension.pdl`.
