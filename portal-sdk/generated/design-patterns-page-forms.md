@@ -385,6 +385,12 @@ The title should reflect the action, for example: "Edit properties", "Stop this 
 
 Labels should be kept concise and not provide instructions, for example: "Machine name"
 
+The L-bracket can be used to represent a strict containment hierarchy relationship only (Sub/RG, Vnet/Subnet, etc), and is restricted to only single level and single child:
+
+A
+
+L  B
+
 <a name="common-behavior-validation"></a>
 ### Validation
 
@@ -427,6 +433,9 @@ Provide highly visible and specific error messages.
 <a name="common-behavior-control-recommendations"></a>
 ### Control Recommendations
 
+* The RadioButtons is recommended for 2-7 values and values of RadioButtons must be stacked vertically. Dropdown is recommended for a long list. OptionsGroup control is not recommended in Portal.
+* Label and controls should be on the same line. The smartAlignLabel option for TabControl and Section controls will enable this behavior. The reflow will be taken care itself as long as fiels are wrapped with the Section control.
+
 Visit the control guidance to help you in selecting the right control for your page: [Controls guidance](design-patterns-controls.md)
 
 <a name="common-behavior-design-recommendations"></a>
@@ -440,6 +449,8 @@ The design for submitting and canceling a form should follow these recommendatio
 * Use a single Close button if experience is informational only
 * Use Yes and No buttons for destructive actions and include a confirmation question in the dialog - "Delete this VM?"
 * Use Ok and Cancel as a last resort if a better action name is not apparent
+* All input fields and labels (including grid) should conform to the create form container width
+* Grid in form isn't allowed to to be associated with a label that participates in smart alignment layout
 
 Summary of buttons and corresponding behaviors:
 
@@ -503,9 +514,12 @@ Related documentation
 
 <a name="change-logs"></a>
 ## Change logs
+<a name="change-logs-sep-2021"></a>
+### Sep 2021
+* Added guidelines for L-bracket input fields, grid width, smartAlignLabel configuration and RadioButtons control
 <a name="change-logs-apr-2021"></a>
 ### Apr 2021
-* Add info form to dialog form and context pane form
+* Added info form to dialog form and context pane form
 <a name="change-logs-nov-2020"></a>
 ### Nov 2020
 * Added six variances of form

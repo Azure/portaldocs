@@ -235,13 +235,15 @@ In addition to the zip files, the hosting service expects a config file in the s
 
 **stage(1-5):** stage(1-5) are mandatory attributes and should always be defined in the `config.json` with a valid version number associated with it. Safe deployment requires that extensions should be rolled out to all data centers in a staged manner. Out of the box hosting service provides extension the capability to rollout extension in 5 stages. From extension developer's point of view the stages correspond to datacenters:
 
-- stage1: centraluseuap
+- stage1: "Virtual" stage (does not correspond to any real region - see note below)
 - stage2: westcentralus
 - stage3: southcentralus
 - stage4: westus
 - stage5: All other public azure regions
 
 This essentially means that if a user request the extension to be loaded in portal, then, based on the nearest data center, portal will decide which version of extension to load. For example, based on the above mentioned `config.json` if a user from Central US region requests to load `Microsoft_Azue_MyExtension` then hosting service will load the stage 1 version i.e. 1.0.0.5 to the user. However, if a user from Singapore loads the extension then the user will be served 1.0.0.1 of the extension.
+
+_Note on stage1:_ This used to be a stage for Central US EUAP, but since the portal no longer deploys there, this stage has no real region associated with it. Instead, you can use this region as part of your deployment verification by leveraging the "stage1" stamp name with some portal feature flags to test your changes before they are exposed to any users. E.g. https://canary.portal.azure.com?feature.canmodifystamps=true&YourExtensionName=stage1 (where `YourExtensionName` is the name of your extension).
 
 **`$customStageDefinition`:** The hosting service provides a default rollout stages as described above. If those do not meet your requirements, you can modify them by supplying a custom stage definition file for your extension. To tell the hosting service that it should use a custom stage definition for your extension, set this property to true in your `config.json` file.
 
@@ -439,7 +441,7 @@ Each extension gets its own diagnostics endpoint, by adding the extension name t
 
 Friendly name allows you to test new versions of your extension before rolling them out to customers. You can side load the version associated with the friendly name in the portal by specifying a couple of feature flags. For example, in the config above, if you want to load version 2.0.0.0 in the portal, you could using the below url -
 
-[https://portal.azure.com?feature.canmodifystamps&Microsoft_Azure_MyExtension=friendlyname](https://portal.azure.com?feature.canmodifystamps&Microsoft_Azure_MyExtension=friendlyname)
+[https://portal.azure.com?feature.canmodifystamps=true&Microsoft_Azure_MyExtension=friendlyname](https://portal.azure.com?feature.canmodifystamps=true&Microsoft_Azure_MyExtension=friendlyname)
 
 - `feature.canmodifystamps=true` is required for side-loading.
 - replace `Microsoft_Azure_MyExtension` with unique name of extension defined in `extension.pdl`.

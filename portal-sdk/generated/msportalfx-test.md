@@ -2,7 +2,7 @@
 <a name="microsoft-azureportal-test"></a>
 # @microsoft/azureportal-test
 
-Generated on 2021-09-23
+Generated on 2021-09-24
 
 * [@microsoft/azureportal-test](#microsoft-azureportal-test)
     * [Overview](#microsoft-azureportal-test-overview)
@@ -206,7 +206,7 @@ Now, create a **portaltests.ts** file in your e2etests directory and paste the f
 
 import assert from 'assert';
 import testFx from '@microsoft/azureportal-test';
-import nconf from 'nconf';
+import WindowsCM = testFx.Utils.WindowsCredentialManager;
 import until = testFx.until;
 
 describe('Cloud Service Tests', function () {
@@ -214,19 +214,8 @@ describe('Cloud Service Tests', function () {
 
 	it('Can Browse To A Cloud Service', () => {
 
-		
-        // Load command line arguments, environment variables and config.json into nconf
-        nconf.argv()
-            .env()
-            .file(__dirname + "/config.json");
-
-        //provide windows credential manager as a fallback to the above three
-        nconf[testFx.Utils.NConfWindowsCredentialManager.ProviderName] = testFx.Utils.NConfWindowsCredentialManager;
-        nconf.use(testFx.Utils.NConfWindowsCredentialManager.ProviderName);
-        
-
 		testFx.portal.portalContext.signInEmail = 'johndoe@outlook.com';
-		testFx.portal.portalContext.signInPassword = nconf.get('microsoft-azureportal-test/johndoe@outlook.com/signInPassword');
+		testFx.portal.portalContext.signInPassword = WindowsCM.getWindowsCredentialSync('microsoft-azureportal-test/johndoe@outlook.com/signInPassword');
 
 		// Update this variable to use the dns name of your actual cloud service
 		let dnsName = "mycloudservice";
@@ -1860,7 +1849,7 @@ You will need to initialize the portalContext->patches to the local server addre
 
 ```ts
 
-        const proxy = await ArmProxy.create(nconf.get("armEndpoint"), 5000, armManager, null, true);
+        const proxy = await ArmProxy.create(armEndpoint, 5000, armManager, null, true);
         armProxy = proxy;
         testFx.portal.portalContext.patches = [proxy.patchAddress];
         
@@ -2121,4 +2110,4 @@ Send an email to ibizadiscuss@microsoft.com
 
 [View thet API Reference](http://aka.ms/msportalfx-test/api)
 
-Generated on 2021-09-23
+Generated on 2021-09-24
