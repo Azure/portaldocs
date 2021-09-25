@@ -217,6 +217,8 @@ Many experiences require the user to enter data into a form. The Ibiza controls 
 
 * [Notifications](/portal-sdk/generated/top-extensions-notifications.md)
 
+* [Iris Notifications](/portal-sdk/generated/portalfx-notifictions-iris.md)
+
 ### Loading and managing data
 
 Because your extension is Web code, you can make **AJAX** calls to various services to load data into your UI. The framework provides a data library you can use to manage this data.
