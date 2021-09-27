@@ -254,9 +254,15 @@ When creating a form that includes several fields related to a particular subjec
 Input fields are used to collect the information required for resource configuration.
 
 * <strong>Alignment</strong>
-    * Label and controls should be on the same line. The <strong>smartAlignLabels</strong> option for TabControl and Section controls will enable this behavior
+    * Label and controls should be on the same line. The <strong>smartAlignLabel</strong> option for TabControl and Section controls will enable this behavior. The reflow will be taken care itself as long as fiels are wrapped with the Section control.
+* <strong>Width</strong>
+    * All input fields and labels should conform to the create form container width, instead of full-screen. This guideline also applies to grid in create form.  Grid isn't allowed to to be associated with a label that participates in smart alignment layout.
+* <strong>L-bracket</strong>
+    * The L-bracket can be used to represent a strict containment hierarchy relationship only (Sub/RG, Vnet/Subnet, etc), and is restricted to only single level and single child.
 * <strong>Info Bubbles</strong>
     * If you have input fields that may not be immediately familiar to users, include an info bubble that shows more information.
+* <strong>Radio buttons vs dropdown</strong>
+    * The RadioButtons is recommended for 2-7 values and values of RadioButtons must be stacked vertically. Dropdown is recommended for a long list. OptionsGroup control is not recommended in Portal.
 * <strong>Required values</strong>
     * Fields should indicate whether the input is required
 * <strong>Validation</strong>
@@ -629,18 +635,26 @@ The declarative approach can significantly reduce your development costs (under 
 
 <a name="change-log"></a>
 ## Change Log
+<a name="change-log-sep-2021"></a>
+### Sep 2021
+* Added guidelines for L-bracket input fields, grid width, smartAlignLabel configuration and RadioButtons control
 
-Aug 2021
+<a name="change-log-aug-2021"></a>
+### Aug 2021
 * Updated the guidance for link text of sub-screate and design of create validation.
 
-Jul 2021
+<a name="change-log-jul-2021"></a>
+### Jul 2021
 * Added guidance of region and resource group location for non-regional create (global create).
 
-Apr 2021
+<a name="change-log-apr-2021"></a>
+### Apr 2021
 * Added change log. Updated guidance for hiding/disabling tabs in Optional Steps & Required Steps.
 
-Jul 2020
+<a name="change-log-jul-2020"></a>
+### Jul 2020
 * Updated guidance to include more details for Create (Optional Steps) and Create (Required Steps).
 
-Jul 2019
+<a name="change-log-jul-2019"></a>
+### Jul 2019
 * Published

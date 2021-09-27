@@ -1,7 +1,6 @@
 * [Installation](#installation)
 * [Parts](#parts)
     * [ResourceTagsPart](#parts-resourcetagspart)
-    * [ResourceFilterPart](#parts-resourcefilterpart)
     * [PricingTierLauncherV3](#parts-pricingtierlauncherv3)
     * [SpecPickerListViewPartV3](#parts-specpickerlistviewpartv3)
     * [PricingTierLauncher](#parts-pricingtierlauncher)
@@ -55,11 +54,6 @@ Install-Package Microsoft.Portal.Extensions.Hubs -Source https://msazure.pkgs.vi
 ## ResourceTagsPart
 
 This part should not be used directly. Using the ResourceSummaryPart (essentials) will include showing tags for your resource.
-
-<a name="parts-resourcefilterpart"></a>
-## ResourceFilterPart
-
-To use this part contact Umair Aftab <ibiza-hubs@microsoft.com>.
 
 <a name="parts-pricingtierlauncherv3"></a>
 ## PricingTierLauncherV3

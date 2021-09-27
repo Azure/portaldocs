@@ -1,3 +1,69 @@
+<a name="browse-table-of-contents"></a>
+# Browse - Table of Contents
+
+- [Browse - Table of Contents](#browse---table-of-contents)
+- [Browse](#browse)
+  - [Building browse experiences](#building-browse-experiences)
+- [Start with Asset Type Definition](#start-with-asset-type-definition)
+  - [Defining your asset type](#defining-your-asset-type)
+    - [Display Name Determination](#display-name-determination)
+    - [How to hide or show your asset in different environments](#how-to-hide-or-show-your-asset-in-different-environments)
+      - [Self hosted](#self-hosted)
+      - [Hosting service](#hosting-service)
+      - [Testing your hidden asset](#testing-your-hidden-asset)
+      - [How the options are applied from PDL, from the config JSON file and from the URL](#how-the-options-are-applied-from-pdl-from-the-config-json-file-and-from-the-url)
+    - [Handling ARM kinds](#handling-arm-kinds)
+    - [Display Name Overrides for Kinds](#display-name-overrides-for-kinds)
+    - [Overriding Visibility of Kinds](#overriding-visibility-of-kinds)
+    - [Choosing Asset Type and Kind Visibility Options](#choosing-asset-type-and-kind-visibility-options)
+      - [Asset Type Only](#asset-type-only)
+      - [Asset Type And Kinds](#asset-type-and-kinds)
+    - [Add command (Create)](#add-command-create)
+    - [Handling empty browse](#handling-empty-browse)
+- [Browse with Azure Resource Graph](#browse-with-azure-resource-graph)
+  - [Benefits to Tracking Resources with Azure Resource Graph](#benefits-to-tracking-resources-with-azure-resource-graph)
+    - [Moving Forward](#moving-forward)
+  - [Onboarding an asset to ARG](#onboarding-an-asset-to-arg)
+    - [Expected Framework columns](#expected-framework-columns)
+  - [KQL Query](#kql-query)
+  - [PDL Definition](#pdl-definition)
+    - [Adding a Query to PDL](#adding-a-query-to-pdl)
+    - [Adding Custom columns](#adding-custom-columns)
+    - [Column Formats](#column-formats)
+    - [Source Units for Number Columns](#source-units-for-number-columns)
+    - [Column Icons](#column-icons)
+      - [Valid Icons for a `Status` Column](#valid-icons-for-a-status-column)
+    - [Possible Summary Visualizations](#possible-summary-visualizations)
+    - [Default columns](#default-columns)
+    - [Full Asset Browse definition](#full-asset-browse-definition)
+    - [Adding an informational info box with optional link to ARG browse](#adding-an-informational-info-box-with-optional-link-to-arg-browse)
+      - [Browse Info Box Styles](#browse-info-box-styles)
+  - [Releasing the Azure Resource Graph experience](#releasing-the-azure-resource-graph-experience)
+  - [Column Summaries for Extension-provided Columns](#column-summaries-for-extension-provided-columns)
+    - [Preventing the Column Summary](#preventing-the-column-summary)
+    - [Specifying Visualizations to Show for Column Summary](#specifying-visualizations-to-show-for-column-summary)
+    - [Custom Column Handling for Summary Views](#custom-column-handling-for-summary-views)
+    - [Dealing with Non-scalar Values in Summary](#dealing-with-non-scalar-values-in-summary)
+  - [Extensible commanding for ARG browse](#extensible-commanding-for-arg-browse)
+    - [How to hide your asset commands in different environments](#how-to-hide-your-asset-commands-in-different-environments)
+      - [Testing hiding/showing commands locally](#testing-hidingshowing-commands-locally)
+    - [Controlling the visibility of your commands](#controlling-the-visibility-of-your-commands)
+      - [Criteria](#criteria)
+      - [Default behavior](#default-behavior)
+    - [Experimenting with extensible commands in browse command bar](#experimenting-with-extensible-commands-in-browse-command-bar)
+      - [How to force a specific treatment variable with query strings for local testing](#how-to-force-a-specific-treatment-variable-with-query-strings-for-local-testing)
+      - [How to experiment with a new command](#how-to-experiment-with-a-new-command)
+- [Curating browse assets](#curating-browse-assets)
+- [Providing a Custom Browse Hub](#providing-a-custom-browse-hub)
+  - [Providing Menu Items for Related Asset Types](#providing-menu-items-for-related-asset-types)
+  - [Example Menu Blade for Browse Hub](#example-menu-blade-for-browse-hub)
+- [Custom browse blade](#custom-browse-blade)
+- [Customization of Browse for Resources not available in Azure Resource Graph](#customization-of-browse-for-resources-not-available-in-azure-resource-graph)
+  - [Customizing columns](#customizing-columns)
+  - [Providing supplemental data](#providing-supplemental-data)
+  - [Adding an informational message/link to ARM browse](#adding-an-informational-messagelink-to-arm-browse)
+  - [Adding context menu commands](#adding-context-menu-commands)
+
 <a name="browse"></a>
 # Browse
 
@@ -12,7 +78,7 @@ The first step to having an entry in the 'All services' menu and in global searc
 
 If you already have an asset type and wish to update to use ARG, you can skip ahead to this section: [Azure Resource Graph](#browse-with-azure-resource-graph)
 
-If you need to use a custom blade for complete control, once the asset type is ready, skip to this section: [Custom blade](#custom-blade)
+If you need to use a custom blade for complete control, once the asset type is ready, skip to this section: [Custom browse blade](#custom-browse-blade)
 
 Lastly, if you need to use ARM browse for your resources, once the asset type is ready, skip to this section:  [Azure Resource Manager](#customization-of-browse-for-resources-not-available-in-azure-resource-graph)
 
@@ -31,12 +97,33 @@ In this section we will explore the following:
 
 That's it, you can see an example of that below
 
+DX.json:
+```json
+"assetType": {
+    "name": "Book",
+    //...
+    "browse": {
+        "type": "ResourceType",
+        //...
+    },
+    "resourceType": {
+        "name": "Microsoft.Press/books",
+        "apiVersion": "2016-01-01"
+    }
+}
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
 ```xml
 <AssetType Name="Book" ... >
   <Browse Type="ResourceType" />
   <ResourceType ResourceTypeName="Microsoft.Press/books" ApiVersion="2016-01-01" />
 </AssetType>
 ```
+</p>
+</details>
 
 ![No-code Browse grid](../media/portalfx-browse/nocode.png)
 
@@ -55,6 +142,30 @@ All asset types have the following requirements:
 
 To define your asset type, simply add the following snippet to PDL:
 
+DX.json:
+```json
+"assetType": {
+    "name": "MyAsset",
+    "service": { "property": "MyAsset.service", "module": "../../ClientResources" },
+    "displayNames": {
+        "singular": { "property": "MyAsset.singular", "module": "../../ClientResources" },
+        "plural": { "property": "MyAsset.plural", "module": "../../ClientResources" },
+        "lowerSingular": { "property": "MyAsset.lowerSingular", "module": "../../ClientResources" },
+        "lowerPlural": { "property": "MyAsset.lowerPlural", "module": "../../ClientResources" }
+    },
+    "keywords": { "property": "MyAsset.keywords", "module": "../..ClientResources" },
+    "description": { "property": "MyAsset.description", "module": "../..ClientResources" },
+    "icon": { "file": "../../Svg/MyAsset.svg" },
+    "blade": "MyAssetBlade",
+    "part": "MyAssetPart",
+    "preview": true,
+    // ...
+}
+```
+<details>
+<summary>Legacy PDL </summary>
+<p><!-- do not remove following empty line -->
+
 ```xml
 <AssetType
     Name="MyAsset"
@@ -72,17 +183,19 @@ To define your asset type, simply add the following snippet to PDL:
   ...
 </AssetType>
 ```
+</p>
+</details>
 
 The name can be anything, since it's scoped to your extension. You'll be typing this a lot, so keep it succinct, yet clear -- it will be used to identify asset types in telemetry. It is advised that the name not contain any white space.
 
-In order to provide a modern voice and tone within the portal, asset types have 4 different display names. The portal will use the most appropriate display name given the context. If your asset type display name includes an acronym or product name that is always capitalized, use the same values for upper and lower display name properties (e.g. `PluralDisplayName` and `LowerPluralDisplayName` may both use `SQL databases`). Do not share strings between singular and plural display name properties. The display names should use sentence casing where acronyms, trademark/product names and the first letter of the uppercase display name should be capitalized but the rest should be lower case, ie use "Virtual machine" instead of "Virtual Machine" or use "Azure SQL database" instead of "Azure SQL Database".
+In order to provide a modern voice and tone within the portal, asset types have 4 different display names. The portal will use the most appropriate display name given the context. If your asset type display name includes an acronym or product name that is always capitalized, use the same values for upper and lower display name properties (e.g. `displayNames.plural` and `displayNames.lowerPlural` in JSON (or `PluralDisplayName` and `LowerPluralDisplayName` in PDL) may both use `SQL databases`). Do not share strings between singular and plural display name properties. The display names should use sentence casing where acronyms, trademark/product names and the first letter of the uppercase display name should be capitalized but the rest should be lower case, ie use "Virtual machine" instead of "Virtual Machine" or use "Azure SQL database" instead of "Azure SQL Database".
 
-- The 'All services' (browse) menu shows the `ServiceDisplayName` in the list of browseable asset types. If `ServiceDisplayName` is not available, `PluralDisplayName` will be shown instead
-- The All Resources blade uses the `SingularDisplayName` in the Type column, when visible
-- Browse uses the `LowerPluralDisplayName` when there are no resources (e.g. "No web apps to display")
-- Browse uses the `LowerPluralDisplayName` as the text filter placeholder
+- The 'All services' (browse) menu shows the `service` display name in JSON (or `ServiceDisplayName` in PDL) in the list of browseable asset types. If `service` in JSON (or `ServiceDisplayName` in PDL) is not available, `displayNames.plural` in JSON (or `PluralDisplayName` in PDL) will be shown instead.
+- The All Resources blade uses the `displayNames.singular` in JSON (or `SingularDisplayName` in PDL) in the Type column, when visible.
+- Browse uses the `displayNames.lowerPlural` in JSON (or `LowerPluralDisplayName` in PDL) when there are no resources (e.g. "No web apps to display").
+- Browse uses the `displayNames.lowerPlural` in JSON (or `LowerPluralDisplayName` in PDL) as the text filter placeholder.
 
-Filtering functionality within the 'All services' (browse) menu searches over `Keywords`. `Keywords` is a comma-separated set of words or phrases which
+Filtering functionality within the 'All services' (browse) menu searches over `keywords` in JSON (or `Keywords` in PDL). `Keywords` is a comma-separated set of words or phrases which
 allow users to search for your asset by identifiers other than than the set display names.
 
 <a name="start-with-asset-type-definition-defining-your-asset-type-display-name-determination"></a>
@@ -141,6 +254,10 @@ export class MyAssetBlade {
 }
 ```
 
+<details>
+<summary>Legacy PDL</summary>
+<p>
+
 If still using older PDL part and tile definitions:
 
 ```xml
@@ -166,8 +283,10 @@ If still using older PDL part and tile definitions:
   ...
 </Blade>
 ```
+</p>
+</details>
 
-If your asset type is in preview, set the `IsPreview="true"` property. If the asset type is GA, simply remove the property (the default is `false`).
+If your asset type is in preview, set the `preview=true` in JSON (or `IsPreview="true"` in PDL) property. If the asset type is GA, simply remove the property (the default is `false`).
 
 <a name="start-with-asset-type-definition-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments"></a>
 ### How to hide or show your asset in different environments
@@ -294,18 +413,147 @@ If the resource you wish to expose does not have kinds then please skip to the n
 
 ARM has the capability for a resource to define kinds, in some cases you may want to treat those kinds separately in the portal.
 
-To define a kind for your asset, you need to declare the kind as a child of the `Asset` within PDL. Firstly you will need to specify a default kind,
-this kind inherits the blade/part defined in the Asset. The default kind is identified with `IsDefault="true"`.
+To define a kind for your asset, you need to declare the kind as a child of the `ResourceType` within PDL. Firstly you will need to specify a default kind,
+this kind inherits the blade/part defined in the Asset. The default kind is identified with `"default"=true` in JSON (or `IsDefault="true"` in PDL).
 
 If your resource exposes multiple kinds you can declare them as siblings of the default kind.
 
 Exposing your kind within the 'All services' menu will require your kind/asset to be curated within the Portal Framework. The framework also offers
 ways for grouping kinds together when browsing to those kinds. There are two options you can use group your kinds:
 
-1. KindGroup
-    - This will define a separate `KindGroup` within your extensions definition which can be used as a way to define a single view for multiple kinds while also keeping the individual kind view.
-1. MergedKind
-    - Similar to `KindGroup` `MergedKind`s will group various kinds together and present them in a single view, except `MergedKind` forces any instance of the individual kinds to be viewed as the merged view.
+1. Kind groups
+    - This will define a separate kind group within your extensions definition which can be used as a way to define a single view for multiple kinds while also keeping the individual kind view.  In JSON, the kind object should include a `groupedKinds` property which is the array of references to other kinds.  In PDL, use `KindGroup` instead of `Kind` for the group and include the `KindReferences`.
+2. Merged kinds
+    - Similar to kind groups merged kinds will group various kinds together and present them in a single view, except merged kind forces any instance of the individual kinds to be viewed as the merged view.  In JSON, the kind object should include a `mergedKinds` property which is the array of kind objects to be merged together.  In PDL use `MergedKind` instead of `Kind` for the merged kinds and include `Kind` entries inside.
+
+DX.json:
+```json
+// This asset type represents a watch instance.
+
+// An asset type represents an asset object in the system independent of other objects in the system.
+// It represents a singular class of objects distinctively but without connection to other objects.
+
+// This asset type includes a resource type which represents a watch instance in the resource map.
+
+// A resource type represents an asset specifically in a resource map where the connections between
+// objects is important.  It represents a way to map resources in a resource map to the underlying
+// assets in the system.
+
+// It includes the resource map icons which are used in the resource map control.
+
+// Watch is an "abstract" asset type, there is no such thing as a "watch", the default
+// watch type is a "apple" watch.  Other specializations are based on function.
+"assetType": {
+  "name": "Watch",
+  "displayNames": "AssetTypeNames.Watch",
+  "viewModel": { "name": "WatchViewModel", "module": "AssetType/Watch" },
+  "icon": { "file": "../../Svg/Watches/generic.svg" },
+  "part": "AppleWatchTile",
+  "blade": "AppleWatchBlade",
+  "create": { "marketplacePackageId": "Microsoft/watch" },
+  "resourceMenu": { "resourceProvidedBy": "ProvidedByResourceMenu" },
+  "browse": {
+    "type": "ResourceType",
+    "query": { "file": "WatchQuery.kml" },
+    "defaultColumns": ["model", "status"],
+    "customConfig": { "useSupplementalData": true },
+    "columns": [
+      {
+        "name": "model",
+        "displayName": "Columns.Watch.model",
+        "description": "Columns.Watch.modelDescription",
+        "format": "String",
+        "width": "90fr"
+      },
+      {
+        "name": "status",
+        "displayName": "Columns.Watch.status",
+        "description": "Columns.Watch.statusDescription",
+        "format": "Status",
+        "width": "80fr",
+        "iconColumn": "statusIcon"
+      }
+    ]
+  },
+  "resourceType": {
+    "name": "Microsoft.Test/watches",
+    "apiVersion": "2017-04-01",
+    "kinds": [
+      {
+        "name": "apple",
+        "default": true,
+        "displayNames": "AssetTypeNames.Watch.Apple",
+        "icon": { "file": "../../Svg/Watches/apple.svg" },
+        "create": { "marketplacePackageId": "Microsoft/applewatch" }
+      },
+      {
+        "name": "astro",
+        "displayNames": "AssetTypeNames.Watch.Astro",
+        "icon": { "file": "../../Svg/Watches/astro.svg" },
+        "part": "AstroWatchTile",
+        "blade": "AstroWatchBlade"
+      },
+      {
+        "name": "lg",
+        "displayNames": "AssetTypeNames.Watch.LG",
+        "icon": { "file": "../../Svg/Watches/lg.svg" },
+        "preview": true,
+        "part": "LgWatchTile",
+        "blade": "LgWatchBlade"
+      },
+      {
+        "name": "samsung",
+        "displayNames": "AssetTypeNames.Watch.Samsung",
+        "icon": { "file": "../../Svg/Watches/samsung.svg" },
+        "preview": true,
+        "part": "SamsungWatchTile",
+        "blade": "SamsungWatchBlade"
+      },
+      {
+        "name": "fitbit",
+        "displayNames": "AssetTypeNames.Watch.Fitbit",
+        "icon": { "file": "../../Svg/Watches/fitbit.svg" },
+        "part": "FitbitWatchTile",
+        "blade": "FitbitWatchBlade"
+      },
+      {
+          "name": "android",
+          "displayNames": "AssetTypeNames.Watch.Android",
+          "icon": { "file": "../../Svg/Watches/android.svg" },
+          "groupedKinds": ["lg", "samsung"]
+      },
+      {
+        "name": "garmin-merged",
+        "mergedKinds": [
+          {
+            "name": "garmin",
+            "displayNames": "AssetTypeNames.Watch.Garmin",
+            "icon": { "file": "../../Svg/Watches/garmin.svg" },
+            "part": "GarminWatchTile",
+            "blade": "GarminWatchBlade"
+          },
+          {
+            "name": "garmin2",
+            "displayNames": "AssetTypeNames.Watch.Garmin2",
+            "icon": { "file": "../../Svg/Watches/garmin2.svg" },
+            "part": "Garmin2WatchTile",
+            "blade": "Garmin2WatchBlade"
+          }
+        ]
+      },
+      {
+        "name": "fitness",
+        "displayNames": "AssetTypeNames.Watch.Fitness",
+        "icon": { "file": "../../Svg/Watches/fitness.svg" },
+        "groupedKinds": ["apple", "lg", "fitbit", "garmin-merged"]
+      }
+    ]
+  }
+}
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
 
 ```xml
 <!--
@@ -388,6 +636,8 @@ ways for grouping kinds together when browsing to those kinds. There are two opt
     </ResourceType>
   </AssetType>
 ```
+</p>
+</details>
 
 <a name="start-with-asset-type-definition-defining-your-asset-type-display-name-overrides-for-kinds"></a>
 ### Display Name Overrides for Kinds
@@ -484,16 +734,35 @@ hide resources with and without kinds to provide the appropriate experience for 
 
 To allow people to create new resources from Browse, you can associate your asset type with a Marketplace item or category:
 
+DX.json:
+```json
+"assetType": {
+    "name": "Book",
+    "create": {
+        "marketplacePackageId": "Microsoft.Book"
+        // or "marketplaceMenuItemId": "menu/book"
+    },
+    // ...
+    "browse": { "type": "ResourceType" },
+    "resourceType": { "name": "Microsoft.Test/book", "apiVersion": "2021-02-01" }
+}
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
 ```xml
 <AssetType
     Name="Book"
     MarketplaceItemId="Microsoft.Book"
-    MarketplaceMenuItemId="menu/submenu"
+    <!-- or MarketplaceMenuItemId="menu/book" -->
     ...>
   <Browse Type="ResourceType" />
   <ResourceType ResourceTypeName="Microsoft.Press/books" ApiVersion="2016-01-01" />
 </AssetType>
 ```
+</p>
+</details>
 
 The Browse blade will launch the Marketplace item, if specified; otherwise, it will launch the Marketplace category blade for the specific
 menu item id (e.g. `gallery/virtualMachines/recommended` for Virtual machines > Recommended). To determine the right Marketplace category,
@@ -511,17 +780,43 @@ The framework offers the ability to display a description and links in the case 
 
 To opt in to this experience you need to provide a `description` and a `link`, these are properties that you provide on your Asset.
 
+DX.json:
+```json
+"assetType": {
+    "name": "MyAsset",
+    // ...
+    "description": { "property": "MyAsset.description", "module": "../..ClientResources" },
+    // ...
+    "links": [
+        {
+            "title": { "property": "MyAsset.linkTitle1", "module": "../../ClientResources" },
+            "uri": "http://www.bing.com"
+        },
+        {
+            "title": { "property": "MyAsset.linkTitle2", "module": "../../ClientResources" },
+            "uri": "http://www.bing.com"
+        }
+    ]
+    // ...
+}
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
 ```xml
 <AssetType
     Name="MyAsset"
     ...
     Description="{Resource MyAsset.description, Module=ClientResources}">
     ...
-    <Link Title="{Resource MyAsset..linkTitle1, Module=ClientResources}" Uri="http://www.bing.com"/>
+    <Link Title="{Resource MyAsset.linkTitle1, Module=ClientResources}" Uri="http://www.bing.com"/>
     <Link Title="{Resource MyAsset.linkTitle2, Module=ClientResources}" Uri="http://www.bing.com"/>
     ...
   </AssetType>
 ```
+</p>
+</details>
 
 <a name="browse-with-azure-resource-graph"></a>
 # Browse with Azure Resource Graph
@@ -653,8 +948,8 @@ where type =~ 'microsoft.web/sites'
 
 In your extension you'll have a `<AssetType>` tag declared in PDL which represents your ARM resource. In order to enable Azure Resource Graph (ARG) support for that asset we'll need to update the `<Browse>` tag to include a reference to the `Query`, `DefaultColumns`, and custom column meta data - if you have any.
 
-<a name="browse-with-azure-resource-graph-pdl-definition-query-for-pdl"></a>
-### Query for PDL
+<a name="browse-with-azure-resource-graph-pdl-definition-adding-a-query-to-pdl"></a>
+### Adding a Query to PDL
 
 Create a new file, we'll use `AppServiceQuery.kml`, and save your query in it.
 You can update any display strings with references to resource files using following syntax `'{{Resource name, Module=ClientResources}}'`. This will allow
@@ -699,41 +994,59 @@ where type == 'microsoft.web/sites'
 , appServicePlanId, pricingTier, status, appType
 ```
 
-<a name="browse-with-azure-resource-graph-pdl-definition-custom-columns"></a>
-### Custom columns
+<a name="browse-with-azure-resource-graph-pdl-definition-adding-custom-columns"></a>
+### Adding Custom columns
 
-To define a custom column you will need to create a `Column` tag in PDL within your `Browse` tag.
+To define a custom column you will need to create a `columns` property within your `browse` object in JSON (or add a `Column` entry in PDL within your `Browse` entry in PDL).
 
-A column tag has 5 properties.
+A column has 5 required properties.
+
+DX.json:
+```json
+"columns": [
+    {
+        "name": "status",
+        "displayName": { "property": "Columns.status", "module": "../../ClientResources" },
+        "description": { "property": "Columns.statusDescription", "module": "../../ClientResources" },
+        "format": "String",
+        "width": "90fr"
+    }
+]
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
 
 ```xml
 <Column Name="status"
-      DisplayName="{Resource Columns.status, Module=ClientResources}"
-      Description="{Resource Columns.statusDescription, Module=ClientResources}"
-      Format="String"
-      Width="90fr" />
+        DisplayName="{Resource Columns.status, Module=ClientResources}"
+        Description="{Resource Columns.statusDescription, Module=ClientResources}"
+        Format="String"
+        Width="90fr" />
 ```
+</p>
+</details>
 
 | Property | Description |
 | -- | -- |
-| Name | The identifier which is used to uniquely refer to your column |
-| DisplayName | A display string, __this has to be a reference to a resource__ |
-| LowerDisplayName | A lowercase display string, __this has to be a reference to a resource__ |
-| Description | A description string, __this has to be a reference to a resource__ |
-| Format | See below table for [`possible formats`](###Column%20Formats) |
-| Width | String, which represents the default width of the column (e.g. "120fr" - fractional units or "100px" - pixels) |
-| SortColumn | Optional name of a separate column returned by the query for sorting. If the column returned as `Name` is formatted, the `SortColumn` can be used to return a sortable format of the value (possibly original value) for sorting in the grid |
-| SourceUnits | Optional source units for a `Number` format column used to render the best appropriate units for the value (ie, bytes, KB, MB, etc.). See below table for [`possible units`](###Source%20Units) |
-| MaximumFractionDigits | Optional precision for a `Number` format column if the column might show fraction digits - often useful when using SourceUnits |
-| Blade | Optional blade reference for a `BladeLink` format column to specify the blade to launch when the link is clicked. Required for `BladeLink` format columns |
-| BladeParameterColumn | Optional parameter column for a `BladeLink` format column to specify the parameters for the blade. Required for `BladeLink` format columns.  See note below * |
-| OpenBladeAsContextPane | Optional boolean to open a `BladeLink` format column blade in the context pane. Default is to open as a blade, use `true` to open in context pane |
-| IconColumn | Optional name of separate column returned by the query for the icon for a `Status` format column. [`See notes about icons below`](###Column%20Icons). Required for `Status` format columns |
-| PreventSummary | Optional flag when summary (visualization) of the column should be prevented |
-| ColumnQueryForSummary | Optional column query for the summarization for this column used for the summary query drilldown |
-| SummaryQuery | Optional summarization query for this column if normal count() summarization is not appropriate. When the `ColumnQueryForSummary` property is set, that is prepended to the summary query |
-| SummaryColumn | Optional column name to be used for the summary for this column. This is only valid with there is a summary query. The value column should have this name and the count column should have this name with the 'Column' suffix. For example, if the SummaryColumn is 'mySummary', the query value column should be 'mySummary' and the count column should be 'mySummaryCount' |
-| SummaryVisualizations | Optional summary visualizations for the column. If not set, standard bar and donut charts along with grid (list) are used. See below table for [`possible summary visualizations`](###Possible%20Summary%20Visualizations). Comma-delimited list of possible values |
+| name | The identifier which is used to uniquely refer to your column |
+| displayName | A display string, __this has to be a reference to a resource__ |
+| lowerDisplayName | A lowercase display string, __this has to be a reference to a resource__ |
+| description | A description string, __this has to be a reference to a resource__ |
+| format | See below table for [`possible formats`](###Column%20Formats) |
+| width | String, which represents the default width of the column (e.g. "120fr" - fractional units or "100px" - pixels) |
+| sortColumn | Optional name of a separate column returned by the query for sorting. If the column returned as `Name` is formatted, the `SortColumn` can be used to return a sortable format of the value (possibly original value) for sorting in the grid |
+| sourceUnits | Optional source units for a `Number` format column used to render the best appropriate units for the value (ie, bytes, KB, MB, etc.). See below table for [`possible units`](###Source%20Units) |
+| maximumFractionDigits | Optional precision for a `Number` format column if the column might show fraction digits - often useful when using SourceUnits |
+| blade | Optional blade reference for a `BladeLink` format column to specify the blade to launch when the link is clicked. Required for `BladeLink` format columns |
+| bladeParameterColumn | Optional parameter column for a `BladeLink` format column to specify the parameters for the blade. Required for `BladeLink` format columns.  See note below * |
+| openBladeAsContextPane | Optional boolean to open a `BladeLink` format column blade in the context pane. Default is to open as a blade, use `true` to open in context pane |
+| iconColumn | Optional name of separate column returned by the query for the icon for a `Status` format column. [`See notes about icons below`](###Column%20Icons). Required for `Status` format columns |
+| preventSummary | Optional flag when summary (visualization) of the column should be prevented |
+| columnQueryForSummary | Optional column query for the summarization for this column used for the summary query drilldown |
+| summaryQuery | Optional summarization query for this column if normal count() summarization is not appropriate. When the `ColumnQueryForSummary` property is set, that is prepended to the summary query |
+| summaryColumn | Optional column name to be used for the summary for this column. This is only valid with there is a summary query. The value column should have this name and the count column should have this name with the 'Column' suffix. For example, if the SummaryColumn is 'mySummary', the query value column should be 'mySummary' and the count column should be 'mySummaryCount' |
+| summaryVisualizations | Optional summary visualizations for the column. If not set, standard bar and donut charts along with grid (list) are used. See below table for [`possible summary visualizations`](###Possible%20Summary%20Visualizations). Comma-delimited list of possible values |
 
 Note for `BladeParameterColumn`:
 - If this is set and the result is a string, the column name will be the parameter name with that value.
@@ -752,8 +1065,8 @@ Note for `BladeParameterColumn`:
 | Tenant | String representation of an ARM tenant ID from the display name for the tenant (column should return tenant ID) |
 | Status | String rendering of your column with an icon which is return by `IconColumn`.  Currently only StatusBadge icons are supported (see list below) |
 
-<a name="browse-with-azure-resource-graph-pdl-definition-source-units"></a>
-### Source Units
+<a name="browse-with-azure-resource-graph-pdl-definition-source-units-for-number-columns"></a>
+### Source Units for Number Columns
 The delineated sections below show possible appropriate units in groups (ie, 20,000 metric bytes will show as 20 KB and 1,363,148 SI bytes will show as 1.3 GB).
 
 | Unit | Description |
@@ -884,44 +1197,115 @@ In the above query example there are 4 custom columns, the below Asset `PDL` dec
 
 It also declares the default columns and their ordering for what a new user of the browse experience should see.
 
+DX.json:
+```json
+"assetType": {
+    // other asset type properties
+    "browse": {
+        "type": "ResourceType",
+        "query": { "file": "./MyAssetQuery.kml" },
+        "defaultColumns": ["status", "appType", "FxColumns.Location"],
+        "columns": [
+            {
+                "name": "status",
+                "displayName": { "property": "Columns.status", "module": "../../ClientResources" },
+                "description": { "property": "Columns.statusDescription", "module": "../../ClientResources" },
+                "format": "String",
+                "width": "90fr"
+            },
+            {
+                "name": "appType",
+                "displayName": { "property": "Columns.appType", "module": "../../ClientResources" },
+                "description": { "property": "Columns.appTypeDescription", "module": "../../ClientResources" },
+                "format": "String",
+                "width": "90fr"
+            }
+        ]
+    },
+    "resourceType": {
+        "name": "Microsoft.Test/myresources",
+        "apiVersion": "2016-01-01"
+    }
+}
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
 ```xml
 <AssetType>
     <!-- other asset type properties -->
     <Browse
         Type="ResourceType"
-        Query="{Query File=./AppServiceQuery.kml}"
-        DefaultColumns="status, appType, appServicePlanId, FxColumns.Location">
-            <Column Name="status"
-                  DisplayName="{Resource Columns.status, Module=ClientResources}"
-                  Description="{Resource Columns.statusDescription, Module=ClientResources}"
-                  Format="String"
-                  Width="90fr" />
-            <Column Name="appType"
-                  DisplayName="{Resource Columns.appType, Module=ClientResources}"
-                  Description="{Resource Columns.appTypeDescription, Module=ClientResources}"
-                  Format="String"
-                  Width="90fr" />
-            <Column Name="appServicePlanId"
-                  DisplayName="{Resource Columns.appServicePlanId, Module=ClientResources}"
-                  Description="{Resource Columns.appServicePlanIdDescription, Module=ClientResources}"
-                  Format="Resource"
-                  Width="90fr" />
-            <Column Name="pricingTier"
-                  DisplayName="{Resource Columns.pricingTier, Module=ClientResources}"
-                  Description="{Resource Columns.pricingTierDescription, Module=ClientResources}"
-                  Format="String"
-                  Width="90fr" />
+        Query="{Query File=./MyAssetQuery.kml}"
+        DefaultColumns="status, appType, FxColumns.Location">
+        <Column Name="status"
+              DisplayName="{Resource Columns.status, Module=ClientResources}"
+              Description="{Resource Columns.statusDescription, Module=ClientResources}"
+              Format="String"
+              Width="90fr" />
+        <Column Name="appType"
+              DisplayName="{Resource Columns.appType, Module=ClientResources}"
+              Description="{Resource Columns.appTypeDescription, Module=ClientResources}"
+              Format="String"
+              Width="90fr" />
     </Browse>
     <ResourceType
-        ResourceTypeName="Microsoft.Samples/appservices"
+        ResourceTypeName="Microsoft.Test/myresources"
         ApiVersion="2016-01-01" />
 </AssetType>
 ```
+</p>
+</details>
 
 <a name="browse-with-azure-resource-graph-pdl-definition-adding-an-informational-info-box-with-optional-link-to-arg-browse"></a>
 ### Adding an informational info box with optional link to ARG browse
 
-If you need to display an informational message and/or link above the list of resources, add a `BrowseInfoBox` to your Browse PDL:
+If you need to display an informational message and/or link above the list of resources, add a `infoBox` to your `browse` in JSON (or `BrowseInfoBox` to your Browse in PDL):
+
+DX.json:
+```json
+"assetType": {
+    "name": "MyAsset"
+    // other asset type properties
+    "browse": {
+        "type": "ResourceType",
+        "infoBox": {
+            "display": "MyAsset.upsellInfoBox",
+            "style": "Upsell",
+            "link": { "uri": "https://azure.microsoft.com" } // external link
+        }
+    },
+    "resourceType": {
+        "name": "Microsoft.Test/myresources",
+        "apiVersion": "2016-01-01"
+    }
+}
+```
+
+or
+
+```json
+"assetType": {
+    "name": "MyAsset"
+    // other asset type properties
+    "browse": {
+        "type": "ResourceType",
+        "infoBox": {
+            "display": "MyAsset.upsellInfoBox",
+            "style": "Upsell",
+            "blade": { "name": "BrowseAll", "extension": "HubsExtension" } // blade
+        }
+    },
+    "resourceType": {
+        "name": "Microsoft.Test/myresources",
+        "apiVersion": "2016-01-01"
+    }
+}
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
 
 ```xml
   <AssetType Name="MyAsset"
@@ -932,8 +1316,6 @@ If you need to display an informational message and/or link above the list of re
         <LinkTarget Uri="https://azure.microsoft.com" /> <!-- external link -->
       </BrowseInfoBox>
     </Browse>
-    <ResourceMenu ResourceProvidedBy="NoResource"
-                  UseStaticOverview="true" />
     <ResourceType ResourceTypeName="Microsoft.Test/myresources"
                   ApiVersion="2019-08-09" />
   </AssetType>
@@ -950,14 +1332,14 @@ or
         <BladeTarget BladeName="BrowseAll" ExtensionName="HubsExtension" /> <!-- blade -->
       </BrowseInfoBox>
     </Browse>
-    <ResourceMenu ResourceProvidedBy="NoResource"
-                  UseStaticOverview="true" />
     <ResourceType ResourceTypeName="Microsoft.Test/myresources"
                   ApiVersion="2019-08-09" />
   </AssetType>
 ```
+</p>
+</details>
 
-The `BladeTarget` entry must have a `BladeName` and optional `ExtensionName` (if the blade is from another extension) and can have an optional `OpenBladeAsContextPane` to open the blade as a context pane (the blade must be capable of opening as a context pane).
+In JSON, the `blade` object must have a `name` and optional `extension` property.  In PDL, the `BladeTarget` entry must have a `BladeName` and optional `ExtensionName` (if the blade is from another extension) and can have an optional `openBladeAsContextPane` to open the blade as a context pane (the blade must be capable of opening as a context pane).
 
 <a name="browse-with-azure-resource-graph-pdl-definition-adding-an-informational-info-box-with-optional-link-to-arg-browse-browse-info-box-styles"></a>
 #### Browse Info Box Styles
@@ -1020,30 +1402,68 @@ In addition, we are also adding extension-provided columns for browse for a spec
 
 There are cases where a column is simply not useful as a summary. The `Column` can be marked with the `PreventSummary` property:
 
-```xml
-      <Column Name="someColumn"
-              DisplayName="{Resource Columns.someColumn, Module=ClientResources}"
-              Description="{Resource Columns.someColumn, Module=ClientResources}"
-              Format="string"
-              Width="80fr"
-              PreventSummary="true" />
+DX.json:
+```json
+"columns": [
+  {
+    "name": "someColumn",
+    "displayName": "Columns.someColumn",
+    "description": "Columns.someColumnDescription",
+    "format": "String",
+    "width": "80fr",
+    "preventSummary": true
+  }
+]
 ```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
+```xml
+<Column Name="someColumn"
+        DisplayName="{Resource Columns.someColumn, Module=ClientResources}"
+        Description="{Resource Columns.someColumnDescription, Module=ClientResources}"
+        Format="String"
+        Width="80fr"
+        PreventSummary="true" />
+```
+</p>
+</details>
 
 In addition, all columns with the `Format` of `BladeLink` are excluded from summaries.
 
-<a name="browse-with-azure-resource-graph-column-summaries-for-extension-provided-columns-specifying-which-visualizations-to-show-for-column-summary"></a>
-### Specifying Which Visualizations to Show for Column Summary
+<a name="browse-with-azure-resource-graph-column-summaries-for-extension-provided-columns-specifying-visualizations-to-show-for-column-summary"></a>
+### Specifying Visualizations to Show for Column Summary
 
 There are cases where the default visualizations for location-based columns (map, bar chart, donut chart and grid) or non-location-based columns (bar chart, donut chart and grid) are not desirable. The `Column` can be marked with the `SummaryVisualizations` property:
 
-```xml
-      <Column Name="someColumn"
-              DisplayName="{Resource Columns.someColumn, Module=ClientResources}"
-              Description="{Resource Columns.someColumn, Module=ClientResources}"
-              Format="string"
-              Width="80fr"
-              SummaryVisualizations="DonutChart,Grid" />
+DX.json:
+```json
+"columns": [
+  {
+    "name": "someColumn",
+    "displayName": "Columns.someColumn",
+    "description": "Columns.someColumnDescription",
+    "format": "String",
+    "width": "80fr",
+    "summaryVisualizations": ["DonutChart", "Grid"]
+  }
+]
 ```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
+```xml
+<Column Name="someColumn"
+        DisplayName="{Resource Columns.someColumn, Module=ClientResources}"
+        Description="{Resource Columns.someColumnDescription, Module=ClientResources}"
+        Format="string"
+        Width="80fr"
+        SummaryVisualizations="DonutChart,Grid" />
+```
+</p>
+</details>
 
 These are the available values (can be combined using comma as shown above):
 
@@ -1064,14 +1484,33 @@ The order of the visualizations does not matter and will not change the order of
 
 If you have a column which doesn't map well to a straight `count() of column` summarization, you can provide queries to change the summarization for the columns. If the summarization is based on an existing column (has a `Column` value), only the `summaryQuery` property needs to be set on the `Column`:
 
-```xml
-      <Column Name="someColumn"
-              DisplayName="{Resource Columns.someColumn, Module=ClientResources}"
-              Description="{Resource Columns.someColumn, Module=ClientResources}"
-              Format="string"
-              Width="80fr"
-              SummaryQuery="{Query File=./QueryForSomeColumnSummary.kml" />
+DX.json:
+```json
+"columns": [
+  {
+    "name": "someColumn",
+    "displayName": "Columns.someColumn",
+    "description": "Columns.someColumnDescription",
+    "format": "String",
+    "width": "80fr",
+    "summaryQuery": { "file": "QueryForSomeColumnSummary.kml" }
+  }
+]
 ```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
+```xml
+<Column Name="someColumn"
+        DisplayName="{Resource Columns.someColumn, Module=ClientResources}"
+        Description="{Resource Columns.someColumnDescription, Module=ClientResources}"
+        Format="string"
+        Width="80fr"
+        SummaryQuery="{Query File=./QueryForSomeColumnSummary.kml" />
+```
+</p>
+</details>
 
 Then the query file would include only the summarize portion of the query:
 
@@ -1083,16 +1522,37 @@ The result of the count summarization must be the column name with `Count` appen
 
 If a new column must be generated for the summarize, however, then the `columnQueryForSummary` property must point to a query which will produce (extend) that new column separately from the `summaryQuery` because the summary view drill down blade will use that portion of the query to provide the list of resources that match the clicked value:
 
-```xml
-      <Column Name="someColumn"
-              DisplayName="{Resource Columns.someColumn, Module=ClientResources}"
-              Description="{Resource Columns.someColumn, Module=ClientResources}"
-              Format="string"
-              Width="80fr"
-              ColumnQueryForSummary="{Query File=./SomeColumnQueryForSummary.kml}"
-              SummaryQuery="{Query File=./SomeColumnSummaryQuery.kml}"
-              SummaryColumn="someColumnSummaryColumn" />
+DX.json:
+```json
+"columns": [
+  {
+    "name": "someColumn",
+    "displayName": "Columns.someColumn",
+    "description": "Columns.someColumnDescription",
+    "format": "String",
+    "width": "80fr",
+    "columnQueryForSummary": { "file": "SomeColumnQueryForSummary.kml" },
+    "summaryQuery": { "file": "SomeColumnSummaryQuery.kml" },
+    "summaryColumn": "someColumnSummaryColumn",
+  }
+]
 ```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
+```xml
+<Column Name="someColumn"
+        DisplayName="{Resource Columns.someColumn, Module=ClientResources}"
+        Description="{Resource Columns.someColumnDescription, Module=ClientResources}"
+        Format="string"
+        Width="80fr"
+        ColumnQueryForSummary="{Query File=./SomeColumnQueryForSummary.kml}"
+        SummaryQuery="{Query File=./SomeColumnSummaryQuery.kml}"
+        SummaryColumn="someColumnSummaryColumn" />
+```
+</p>
+</details>
 
 Then the column query file would include only the extend portion of the query:
 
@@ -1109,7 +1569,7 @@ Then the summary query file would include only the summarize portion of the quer
 summarize someColumnSummaryColumnCount=count() by someColumnSummaryColumn
 ```
 
-The `SummaryColumn` property needs to be set to the name of the produced (extended) column and again, the count summarization must be the summary column name with `Count` appended (`SummaryColumn` is `someColumnSummaryColumn` and the count must be `someColumnSummaryColumnCount`).
+The `summaryColumn` property needs to be set to the name of the produced (extended) column and again, the count summarization must be the summary column name with `Count` appended (`summaryColumn` is `someColumnSummaryColumn` and the count must be `someColumnSummaryColumnCount`).
 
 <a name="browse-with-azure-resource-graph-column-summaries-for-extension-provided-columns-dealing-with-non-scalar-values-in-summary"></a>
 ### Dealing with Non-scalar Values in Summary
@@ -2029,25 +2489,177 @@ Body:
 - 'Category - DesiredCategory'
 - 'Portal environment - portal.azure.com (etc...)'
 
-# Custom blade
+# Providing a Custom Browse Hub
+
+If you have a collection of related resources or browse items which are similar from the user's perspective, you can create a hub for the assets.  Multiple asset types can point to the same hub and by using a menu blade, you can provide an entry point / overview for the resources, have each asset type point to a menu item with the browse experience for that asset type or provide an introduction page.
+
+NOTE: One caveat to providing a hub page, your extension will need to be loaded to display the hub, so there is a slight performance hit.  The default browse experience in the Hubs extension is preloaded and prewarmed to provide the fastest possible access, but this is not possible for each extension providing a custom browse hub.  You need to weigh the performance hit versus the convenience to the user.
+
+To provide a custom hub blade, simply add the `DeepLink` property to the `Browse` entry:
+
+DX.json:
+```json
+"assetType": {
+  "name": "Book",
+  // ...
+  "browse": {
+    "type": "ResourceType",
+    "deepLink": "#blade/MyExtension/BookMenuBlade"
+  },
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
+```xml
+  <AssetType Name="Book"
+             ...>
+    <Browse Type="ResourceType"
+            DeepLink="#blade/MyExtension/BookMenuBlade" />
+  </AssetType>
+```
+</p>
+</details>
+
+## Providing Menu Items for Related Asset Types
+
+The `DeepLink` must be a standard `#blade` deep link to your blade and if your blade is a menu blade, the deep link can provide a menu item (which must be handled by your menu blade code):
+
+DX.json:
+```json
+"assetType": {
+  "name": "Manual",
+  // ...
+  "browse": {
+    "type": "ResourceType",
+    "deepLink": "#blade/MyExtension/BookMenuBlade/menuid/manuals"
+  },
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
+```xml
+  <AssetType Name="Manual"
+             ...>
+    <Browse Type="ResourceType"
+            DeepLink="#blade/MyExtension/BookMenuBlade/menuid/manuals" />
+  </AssetType>
+```
+</p>
+</details>
+
+## Example Menu Blade for Browse Hub
+
+The code for our sample menu blade can be seen here:
+
+```typescript
+/**
+ * Menu blade for the books browse deep link.
+ */
+@MenuBlade.Decorator()
+export class BookMenuBlade {
+    /**
+     * Menu blade view model properties.
+     */
+    public title = ClientResources.AssetTypeNames.Book.plural;
+    public subtitle = "";
+    public context: MenuBlade.Context<Parameters>;
+    public viewModel: MenuBlade.ViewModel2;
+
+    /**
+     * Blade view model constructor.
+     */
+    public onInitialize() {
+        const { container, parameters } = this.context;
+
+        this.viewModel = MenuBlade.ViewModel2.create(container, {
+            groups: [
+                {
+                    id: "types",
+                    displayText: ClientResources.AssetTypeNames.Book.plural,
+                    items: [
+                        {
+                            id: "overview",
+                            displayText: ClientResources.AssetTypeNames.Book.plural,
+                            icon: Images.book,
+                            supplyBladeReference: () => BladeReferences
+                                .forBlade("BookOverview")
+                                .createReference({
+                                    parameters: null,
+                                }),
+                        },
+                        {
+                            id: "manuals",
+                            displayText: ClientResources.AssetTypeNames.Manual.plural,
+                            icon: Images.manual,
+                            supplyBladeReference: () => BladeReferences
+                                .forExtension("HubsExtension")
+                                .forBlade("ARGBrowseResourcesInMenu")
+                                .createReference({
+                                    parameters: {
+                                        resourceType: "Microsoft.test/manuals",
+                                    },
+                                }),
+                        },
+                        {
+                            id: "novels",
+                            displayText: ClientResources.AssetTypeNames.Novel.plural,
+                            icon: Images.novel,
+                            supplyBladeReference: () => BladeReferences
+                                .forExtension("HubsExtension")
+                                .forBlade("ARGBrowseResourcesInMenu")
+                                .createReference({
+                                    parameters: {
+                                        resourceType: "Microsoft.test/novels",
+                                    },
+                                }),
+                        },
+                    ],
+                },
+            ],
+            // The default menu item is the overview unless the deeplink had a 'menuid'.
+            defaultId: parameters.menuid || "overrview",
+        });
+
+        return Q();  // This sample loads no data.
+    }
+}
+```
+
+# Custom browse blade
 
 If you don't have a list of resources and simply need to add a custom blade to Browse, you can define an asset type with a `Browse` type of `AssetTypeBlade`. This tells Browse to launch the blade associated with the asset type. Note that the asset type doesn't actually refer to an instance of a resource in this case. This is most common for services that are only provisioned once per directory or horizontal services (Cost Management, Monitoring, Azure Advisor etc...). In this case, the `PluralDisplayName` is used in the 'All services' menu, but the other display names are ignored. Feel free to set them to the same value.
+
+DX.json:
+```json
+"assetType": {
+  "name": "CompanyLibrary",
+  "blade": "CompanyLibraryBlade"
+  // ...
+  "browse": { "type": "AssetTypeBlade" }
+}
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
 
 ```xml
 <AssetType
     Name="CompanyLibrary"
     BladeName="CompanyLibraryBlade"
-    PluralDisplayName="..."
     ... >
   <Browse Type="AssetTypeBlade" />
 </AssetType>
 ```
+</p>
+</details>
 
 # Customization of Browse for Resources not available in Azure Resource Graph
 
 If your resource type is not available in Azure Resource Graph, you can still customize the browse experience. While there are compelling reasons to move your resource type to the Azure Resource Graph, if your resources are untracked, currently you cannot use the Azure Resource Group. Using ARM browse as a fallback is a possibility until more support for untracked resources is available.
 
-### Customizing columns
+## Customizing columns
 
 By default, ARM Browse only shows the resource name, group, location, and subscription. To customize the columns, add a view-model to the `AssetType` and indicate that you have custom Browse config:
 
@@ -2122,7 +2734,7 @@ Notice that the genre column actually renders 2 properties: genre and subgenre. 
 
 At this point, you should be able to compile and see your columns show up in your Browse blade. Of course, you still need to populate your supplemental data. Let's do that now...
 
-### Providing supplemental data
+## Providing supplemental data
 
 In order to specify supplemental data to display on top of the standard resource columns, you'll need to opt in to specifying supplemental data in PDL:
 
@@ -2210,7 +2822,7 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
 
 Now, you should have supplemental data getting populated. Great! Let's add context menu commands...
 
-### Adding an informational message/link to ARM browse
+## Adding an informational message/link to ARM browse
 
 If you need to display an informational message and/or link above the list of resources, add an `infoBox` to your Browse config:
 

@@ -20,7 +20,6 @@
 * [Installation](portalfx-hubsextension-pde.md#installation)
 * [Parts](portalfx-hubsextension-pde.md#parts)
     * [ResourceTagsPart](portalfx-hubsextension-pde.md#resourcetagspart)
-    * [ResourceFilterPart](portalfx-hubsextension-pde.md#resourcefilterpart)
     * [PricingTierLauncherV3](portalfx-hubsextension-pde.md#pricingtierlauncherv3)
     * [SpecPickerListViewPartV3](portalfx-hubsextension-pde.md#specpickerlistviewpartv3)
     * [PricingTierLauncher](portalfx-hubsextension-pde.md#pricingtierlauncher)
