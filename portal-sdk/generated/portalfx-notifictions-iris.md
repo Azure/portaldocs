@@ -109,7 +109,7 @@ export const enum ToastDuration {
     Suppress = 3,
 
     /**
-     * Modal toast notification.
+     * Modal toast notification. By default this option won't be allowed unless white listed. If you need to onboard a modal notification, please contact the Portal team.
      */
     Modal = 4,
 }
