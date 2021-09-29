@@ -1614,20 +1614,8 @@ The following example demonstrates how to:
 
             const essentials: Essentials = blade.essentials;
             const essentialsInfo = await Promise.all([essentials.countItems(), essentials.getExpandedState(), essentials.hasViewAll()]);
-            const countItems = essentialsInfo[0];
             expandedState = essentialsInfo[1];
-            const hasViewAll = essentialsInfo[2];
-            // Essentials item count, expanded state and viewAll button state check
-        // eslint-disable-next-line deprecation/deprecation
-            assert.equal(countItems, 10, "Essentials should have 10 items at the beginning, found " + countItems);
-            assert.ok(expandedState, "Essentials should be expanded");
-            assert.ok(hasViewAll, "Essentials has the ViewAll button at the beginning");
-            await essentials.getViewAllButton().click();
-            const count = await essentials.countItems();
-            // Essentials item count after click ViewAll button
-        // eslint-disable-next-line deprecation/deprecation
-            assert.equal(count, 12, "Essentials should have 12 items after adding dynamic properties, found " + count);
-            // Item label and properties check
+            // eslint-disable-next-line deprecation/deprecation
             await Promise.all([
                 itemAssertionHelper(essentials, {
                     label: "Resource group",
@@ -1668,41 +1656,7 @@ The following example demonstrates how to:
                 });
             }
             // Item label and properties check after clicking "status will be changed"
-            await itemAssertionHelper(essentials, {
-                label: "Status",
-                hasMoveResource: false,
-                side: "left",
-                properties: [
-                    { type: EssentialsItemPropertyType.Text, valueOptions: ["1 times clicked!"] },
-                ],
-            });
-            const propElement = await essentials.getPropertyElementByValue("snowtraxpsx600");
-            await propElement.click().delay(500);
-            await essentials.getExpander().click().delay(200);
-            let essentialsState = await Promise.all([essentials.getExpandedState(), essentials.items.isDisplayed()]);
-            expandedState = essentialsState[0];
-            let isDisplayed = essentialsState[1];
-            // check expander state and items' visibilities after closing expander
-            assert.ok(!expandedState, "expander should be closed");
-            isDisplayed.forEach((state: boolean) => {
-                assert.ok(!state, "items should be invisible");
-            });
-            await essentials.getExpander().click().delay(200);
-            essentialsState = await Promise.all([essentials.getExpandedState(), essentials.items.isDisplayed()]);
-            expandedState = essentialsState[0];
-            isDisplayed = essentialsState[1];
-            // check expander state and items' visibilities after opening expander
-            assert.ok(expandedState, "expander should be opened");
-            isDisplayed.forEach((state: boolean, index: number) => {
-                assert.ok(state, "items should be visible");
-            });
-        } catch (error) {
-            console.log("Error:");
-            console.log(error);
-            console.log(error && error.stack);
-            throw error;
-        }
-        
+            
 ```
 
 
