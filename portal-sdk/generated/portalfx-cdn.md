@@ -7,7 +7,7 @@ Extension authors may choose to use a CDN to serve static images, scripts, and s
 ### Creating the CDN account
 Follow this guide to set up your CDN account:
 
-<a href="http://www.windowsazure.com/en-us/documentation/articles/cdn-how-to-use/" target="_blank">http://www.windowsazure.com/en-us/documentation/articles/cdn-how-to-use/</a>
+<a href="https://www.windowsazure.com/en-us/documentation/articles/cdn-how-to-use/" target="_blank">https://www.windowsazure.com/en-us/documentation/articles/cdn-how-to-use/</a>
 
 <a name="configuring-your-cdn-service"></a>
 ### Configuring your CDN service
@@ -28,7 +28,7 @@ After setting up your CDN, you will receive a url which can be used to access yo
 This is the prefix for your CDN service. Your production service should be configured to use this prefix. In your local web.config, can set this with the following `appSetting`:
 
 ```xml
-<add key="Microsoft.Portal.Extensions.SamplesExtension.ApplicationConfiguration.CdnPrefix" 
+<add key="Microsoft.Portal.Extensions.SamplesExtension.ApplicationConfiguration.CdnPrefix"
      value="//<MyCDNNamespace>.vo.msecnd.net/" />
 ```
 
@@ -86,7 +86,7 @@ public class ApplicationConfiguration : ConfigurationSettings
 	/// Development mode turns minification off
     /// </summary>
     /// <remarks>
-	/// Development mode turns minification off. 
+	/// Development mode turns minification off.
 	/// It also disables any caching that be happening.
 	/// </remarks>
     [ConfigurationSetting]
@@ -97,7 +97,7 @@ public class ApplicationConfiguration : ConfigurationSettings
     }
 
     /// <summary>
-    /// Gets a value indicating a custom location where browser should 
+    /// Gets a value indicating a custom location where browser should
 	/// find cache-able content (rather than from the application itself).
     /// </summary>
     [ConfigurationSetting]
@@ -126,7 +126,7 @@ The url used for the request is in the following form:
 
 `http://myextension.cloudapp.net/CDN/Content/jquery.js`
 
-The */CDN/* portion of this url is inserted after the host address, and before the rest of the route for requested content. The request handling code in the SDK automatically handles incoming requests of the form /CDN/Content/... and /Content/...   
+The */CDN/* portion of this url is inserted after the host address, and before the rest of the route for requested content. The request handling code in the SDK automatically handles incoming requests of the form /CDN/Content/... and /Content/...
 
 <a name="invalidating-content-on-the-cdn"></a>
 ### Invalidating content on the CDN
@@ -181,4 +181,3 @@ You will need to contact the portal team in order to find a way to get past this
 
 - I am not seeing paths w/ versioning during debug.
     - Ensure IsDevelomentMode in your *.config is set to false
-

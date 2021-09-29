@@ -215,9 +215,9 @@ interface UserInfo {
 ### Access claims from the extension server
 
 While not recommended, the token used to communicate with your server also contains claims that can be read from the
-server by using the **ASP.NET** claims API specified in [http://msdn.microsoft.com/en-us/library/ee517271.aspx](http://msdn.microsoft.com/en-us/library/ee517271.aspx). To simplify development, the `HttpContext.User` property specified in [http://aka.ms/portalfx/httpContextUser](http://aka.ms/portalfx/httpContextUser) has been augmented with the most commonly used claims.
+server by using the **ASP.NET** claims API specified in [https://msdn.microsoft.com/en-us/library/ee517271.aspx](https://msdn.microsoft.com/en-us/library/ee517271.aspx). To simplify development, the `HttpContext.User` property specified in [https://aka.ms/portalfx/httpContextUser](https://aka.ms/portalfx/httpContextUser) has been augmented with the most commonly used claims.
 
-The extension uses the API to read additional claims from the token. Due to size constraints, additional information required by an extension cannot be added to the token. Instead, the extension obtains it from the AAD Graph API that is specified in [http://aka.ms/portalfx/AADGraphAPI](http://aka.ms/portalfx/AADGraphAPI).
+The extension uses the API to read additional claims from the token. Due to size constraints, additional information required by an extension cannot be added to the token. Instead, the extension obtains it from the AAD Graph API that is specified in [https://aka.ms/portalfx/AADGraphAPI](https://aka.ms/portalfx/AADGraphAPI).
 
 The following code sample retrieves common claims.
 
@@ -305,7 +305,7 @@ The following code sample retrieves common claims.
     }
     ```
 
-For more information about default claims that are provided by AAD, see the "Azure AD token reference" article located at [http://aka.ms/portalfx/tokensandclaims](http://aka.ms/portalfx/tokensandclaims).
+For more information about default claims that are provided by AAD, see the "Azure AD token reference" article located at [https://aka.ms/portalfx/tokensandclaims](https://aka.ms/portalfx/tokensandclaims).
 
 
  ### Session expiration

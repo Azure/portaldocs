@@ -49,7 +49,7 @@ All configurable properties on the control, like `value`, `validations`, or `dir
 <a name="portal-forms-form-control-input-options-form-layout"></a>
 ### Form Layout
 
-Because form controls are often grouped together, it is important to keep the layout of the controls consistent. Consequently, most form layout is controlled by using sections. For more information about sections, see  [http://aka.ms/portalfx/playground](http://aka.ms/portalfx/playground).
+Because form controls are often grouped together, it is important to keep the layout of the controls consistent. Consequently, most form layout is controlled by using sections. For more information about sections, see  [https://aka.ms/portalfx/playground](https://aka.ms/portalfx/playground).
 
 The section has two properties that allow for layout control. They are as follows.
 

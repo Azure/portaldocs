@@ -5,7 +5,7 @@
 ## Checklist
 
 - Migrate to the [hosting service](top-extensions-hosting-service.md#extension-hosting-service)
-- Enable [prewarming](http://aka.ms/portalfx/docs/prewarming), running your extension in a web worker
+- Enable [prewarming](https://aka.ms/portalfx/docs/prewarming), running your extension in a web worker
 - Ensure your extension isn't using [shims](#extension-load-shim-dependencies-removing-shims)
 - Migrate your extension to [dependency injection](performance-dependency-injection.md)
 - Migrate your extension to [Fast extension load](performance-fast-extension-load.md)
@@ -43,7 +43,7 @@
 
 - Reduce network calls
   - Ideally 1 network call per blade
-  - Utilise `batch` to make network requests, see our [batch documentation](http://aka.ms/portalfx/docs/batch)
+  - Utilise `batch` to make network requests, see our [batch documentation](https://aka.ms/portalfx/docs/batch)
 - Remove automatic polling
   - If you need to poll, only poll on the second request and ensure `isBackgroundTask: true` in the batch call
 - Remove all dependencies on obsoleted code
@@ -96,7 +96,7 @@ Ensure you verify:
 - If you do require your own token, assess if that is necessary and migrate to the Portal’s token if possible.
 - If you’re relying on server side validation, please update that validation to validate the Portal App Id instead – if that is sufficient for you.
 
-To fix this it is a simple change to the Portal’s config here: [extensions.prod.json](http://aka.ms/portalfx/extensionsprodjson)
+To fix this it is a simple change to the Portal’s config here: [extensions.prod.json](https://aka.ms/portalfx/extensionsprodjson)
 See below for further details.
 
 Please send a pull request to the portal’s config with your change. Unfortunately, we don’t like to make config changes on behalf of extensions.

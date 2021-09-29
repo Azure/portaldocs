@@ -36,7 +36,7 @@ Committed to maintaining
 <img src="../media/design-patterns-toolkits/sketch.png" style="border-style:solid; border-width:2px; border-color:gray" width="100" alt="Sketch toolkit">
 <br>Sketch toolkit </a>
 <br>Available from UNI/
-<br>Load as a Sketch Library. 
+<br>Load as a Sketch Library.
 <br>Do not open the Sketch version of the toolkit as a file.
 </td>
 <td valign="top">
@@ -71,9 +71,8 @@ We will support if/as time allows
 <a name="templates-and-toolkits-for-designing-azure-experiences-how-to-submit-new-controls-or-file-bugs"></a>
 ## How to submit new controls or file bugs
 
-If you are interested in submitting new controls to include or have bugs to file, please [contact us](http://aka.ms/azureportaltoolkitsfeedback) with the control details. 
+If you are interested in submitting new controls to include or have bugs to file, please [contact us](https://aka.ms/azureportaltoolkitsfeedback) with the control details.
 
 <a name="design-guidelines"></a>
 # Design guidelines
 * Design guidelines [top-design.md](top-design.md)
-

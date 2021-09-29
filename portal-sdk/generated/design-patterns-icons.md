@@ -13,7 +13,7 @@ The SDK framework includes a large library of icons for common uses so you shoul
 
 * Service icons are polychromatic and represent Azure services and resources
 * Command icons use a flat style and represent actions in the portal
-* Status icons are a special set of icons to convey common status states 
+* Status icons are a special set of icons to convey common status states
 
 <div style="max-width:400px">
 <img alttext="Icons" src="../media/design-patterns-icons/icons.png"  />
@@ -23,7 +23,7 @@ The SDK framework includes a large library of icons for common uses so you shoul
 ### Browsing existing icons
 The portal provides many <a href="https://ms.portal.azure.com/?Microsoft_Azure_Playground=true#blade/Microsoft_Azure_Playground/PlaygroundBlade/IconsSearchBlade" target="_blank">icons built-in to the SDK</a>, use the SDK icon and do not download and include an SDK icon in your extension.
 
-You can browse the comprehensive Azure icon repository -  http://aka.ms/AzureIconRepository to see whether your icon has already been delivered and whether it is included in the SDK.
+You can browse the comprehensive Azure icon repository -  https://aka.ms/AzureIconRepository to see whether your icon has already been delivered and whether it is included in the SDK.
 
 <div style="max-width:800px">
 <img alttext="Icons repository" src="../media/design-patterns-icons/icon-repo.png"  />
@@ -35,13 +35,13 @@ Check the repository before requesting an icon since new icons are added over ti
 
 If your service’s icons are missing from the repo, email azure-icons@Microsoft.com
 
-The icon request process  
+The icon request process
 * Lives in DevOps
-* Operates on a queue basis. 
+* Operates on a queue basis.
 * Reviews go through 2 iterations
 * Service icons go through Marketing and Brand review
 
-Request icons at: http://aka.ms/AzureIconAndIllustrationRequests
+Request icons at: https://aka.ms/AzureIconAndIllustrationRequests
 
 <a name="illustrations"></a>
 ## Illustrations
@@ -57,11 +57,11 @@ Link to site?
 
 <a name="illustrations-how-to-request-an-illustration"></a>
 ### How to request an illustration
-When filing a request for an illustration we need to know where the illustration will be used.  
+When filing a request for an illustration we need to know where the illustration will be used.
 
 For get started illustrations, include the title, description and actions from the get started call to action card.
 
-Request illustrations at: http://aka.ms/AzureIconAndIllustrationRequests
+Request illustrations at: https://aka.ms/AzureIconAndIllustrationRequests
 
 <a name="do"></a>
 ## Do
@@ -85,7 +85,7 @@ Developers can use the following information to get started with icons and illus
 ## Icons available in the SDK
 The playground site displays the icons that are built-in to the SDK
 
-*  <a href="https://ms.portal.azure.com/?Microsoft_Azure_Playground=true#blade/Microsoft_Azure_Playground/PlaygroundBlade/IconsSearchBlade" target="_blank">Built-in SDK icons in the playground</a> 
+*  <a href="https://ms.portal.azure.com/?Microsoft_Azure_Playground=true#blade/Microsoft_Azure_Playground/PlaygroundBlade/IconsSearchBlade" target="_blank">Built-in SDK icons in the playground</a>
 
 <a name="for-developers-related-documents"></a>
 ## Related documents

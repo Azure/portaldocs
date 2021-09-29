@@ -156,13 +156,14 @@ Generated on 2021-09-29
 <a name="microsoft-azureportal-test-getting-started-installation"></a>
 ### Installation
 
-1. Install [Node.js](https://nodejs.org) if you have not done so. This will also install npm, which is the package manager for Node.js.  We have only verified support for LTS Node versions 4.5 and 5.1 which can be found in the "previous downloads" section.  Newer versions of Node are known to have compilation errors.  
+1. Install [Node.js](https://nodejs.org) if you have not done so. This will also install npm, which is the package manager for Node.js.  We have only verified support for LTS Node versions 4.5 and 5.1 which can be found in the "previous downloads" section.  Newer versions of Node are known to have compilation errors.
 1. Install [Node Tools for Visual Studio](https://www.visualstudio.com/en-us/features/node-js-vs.aspx)
-1. Install [TypeScript](http://www.typescriptlang.org/) 1.8.10 or greater.
+1. Install [TypeScript](https://www.typescriptlang.org/) 1.8.10 or greater.
 1. Verify that your:
     - node version is v8.11.3 LTS using `node -v`
     - npm version is 5.6.0 or greater using `npm -v`.  To update npm version use `npm install npm -g`
     - tsc version is 1.8.10 or greater using tsc -v.
+
 
 1. Open a command prompt and create a directory for your test files.
 
@@ -578,7 +579,7 @@ ct -t "amd64\CloudTest\TestMap.xml" -tenant Default -BuildId "GUID" -props worke
 <a name="microsoft-azureportal-test-running-ci-windows-azure-engineering-system-waes"></a>
 #### Windows Azure Engineering System (WAES)
 
-See [WAES](http://aka.ms/WAES)
+See [WAES](https://aka.ms/WAES)
 
 <a name="microsoft-azureportal-test-running-ci-jenkins"></a>
 #### Jenkins
@@ -2049,7 +2050,7 @@ the output of the composed TEMPLATE.md will be written to ./README.md and the ge
 
 <a name="microsoft-azureportal-test-scenarios-to-run-the-tests-to-submit-your-contribution"></a>
 #### To submit your contribution
-Submit a pull request to the repo [http://aka.ms/portalfx/microsoft-azureportal-test/src](http://aka.ms/portalfx/microsoft-azureportal-test/src)
+Submit a pull request to the repo [https://aka.ms/portalfx/microsoft-azureportal-test/src](https://aka.ms/portalfx/microsoft-azureportal-test/src)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
@@ -2062,6 +2063,6 @@ Send an email to ibizadiscuss@microsoft.com
 <a name="microsoft-azureportal-test-scenarios-api-reference"></a>
 ### API Reference
 
-[View thet API Reference](http://aka.ms/msportalfx-test/api)
+[View thet API Reference](https://aka.ms/msportalfx-test/api)
 
 Generated on 2021-09-29

@@ -52,7 +52,7 @@ The following is the signin process that is performed by the Portal.
 
     * Server side API
 
-        The extension's server-side code can exchange its current access token for another access token that allows it to use resources, as described in [http://aka.ms/portalfx/onbehalfof](http://aka.ms/portalfx/onbehalfof). Details of how this is achieved is outlined in [top-extensions-authentication-procedures.md](top-extensions-authentication-procedures.md)
+        The extension's server-side code can exchange its current access token for another access token that allows it to use resources, as described in [https://aka.ms/portalfx/onbehalfof](https://aka.ms/portalfx/onbehalfof). Details of how this is achieved is outlined in [top-extensions-authentication-procedures.md](top-extensions-authentication-procedures.md)
 
     *  Direct external services call
 

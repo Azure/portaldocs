@@ -125,7 +125,7 @@ All of these perf costs are represented under the one `PartReady` action.
 
 There are two methods to assess your performance:
 
-1. Visit the IbizaFx provided PowerBi report [Extension performance/reliability report](http://aka.ms/portalfx/dashboard/extensionperf)
+1. Visit the IbizaFx provided PowerBi report [Extension performance/reliability report](https://aka.ms/portalfx/dashboard/extensionperf)
 1. Run Kusto queries locally to determine your numbers, see below for the individual queries
 
 > If you have permission issues with either the PowerBi dashboard or Kusto cluster follow the [telemetry onboarding guide](portalfx-telemetry-getting-started.md)
@@ -239,7 +239,7 @@ PartPerformance will return a table with the following columns:
 1. Are you using the Portal's ARM token? If no, verify if you can use the Portal's ARM token and if yes, follow: [Using the Portal's ARM token](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-api-authentication)
 1. Are you on the hosting service? If no, migrate to the hosting service: [Hosting service documentation](portalfx-extension-hosting-service.md#extension-hosting-service)
     - If you are, have you enabled prewarming?
-        - Follow http://aka.ms/portalfx/docs/prewarming to enable prewarming for your extension load.
+        - Follow https://aka.ms/portalfx/docs/prewarming to enable prewarming for your extension load.
 1. Are you using obsolete bundles?
     - If yes, remove your dependency to them and then remove the obsolete bitmask. This is a blocking download before your extension load. See below for further details.
 1. See our [best practices](performance-best-practices.md)
@@ -256,7 +256,7 @@ PartPerformance will return a table with the following columns:
 1. Assess what is happening in your Blades's `onInitialize` (no-PDL) or constructor and `onInputsSet` (PDL). [Profile your scenario](performance-profiling.md)
     1. Can that be optimized?
 1. If there are any AJAX calls;
-    1. Can they use batch? If so, migrate over to use the [batch api](http://aka.ms/portalfx/docs/batch).
+    1. Can they use batch? If so, migrate over to use the [batch api](https://aka.ms/portalfx/docs/batch).
     1. Wrap them with custom telemetry and ensure they you aren't spending a large amount of time waiting on the result. If you are to do this, please only log one event per blade load, this will help correlate issues but also reduce unneccesary load on telemetry servers.
 1. Are you using an old PDL "Blade containing Parts"? How many parts are on the blade?
     - If there is only a single part, if you're not using a no-pdl blade or `<TemplateBlade>` migrate your current blade to a no-pdl blade.
@@ -272,7 +272,7 @@ PartPerformance will return a table with the following columns:
 1. Assess what is happening in your Part's `onInitialize` (no-PDL) or constructor and `onInputsSet` (PDL), including time taken in any async operations associated with the returned Promise. [Profile your scenario](performance-profiling.md)
     1. Can that be optimized?
 1. If there are any AJAX calls;
-    1. Can they use batch? If so, migrate over to use the [batch api](http://aka.ms/portalfx/docs/batch).
+    1. Can they use batch? If so, migrate over to use the [batch api](https://aka.ms/portalfx/docs/batch).
     1. Wrap them with custom telemetry and ensure they you aren't spending a large amount of time waiting on the result. If you are to do this, please only log one event per part load, this will help correlate issues but also reduce unneccesary load on telemetry servers.
 1. See our [best practices](performance-best-practices.md)
 

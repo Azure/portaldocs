@@ -15,6 +15,6 @@ Join the following groups to stay current on Ibiza product road map, get news on
 
 * PMs, Developers, and Developer Leads  should join Stackoverflow Forums that are located at [https://stackoverflow.microsoft.com](https://stackoverflow.microsoft.com)  to let us know if you have any questions. Remember to tag questions with supported tags that are monitored by the Ibiza team. All supported tags are documented in [portalfx-stackoverflow.md](portalfx-stackoverflow.md).
 
-* Developers who want to contribute to the test framework should join groups from the site located at [http://aka.ms/azuregithub](http://aka.ms/azuregithub).
+* Developers who want to contribute to the test framework should join groups from the site located at [https://aka.ms/azuregithub](https://aka.ms/azuregithub).
 
 <!-- docs#jointheecosysytem -->

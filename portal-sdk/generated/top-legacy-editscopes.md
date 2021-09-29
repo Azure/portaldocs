@@ -81,7 +81,7 @@ idProperties: [ "key" ],
 
 The C# sample is located at `<dirParent>\SamplesExtension.DataModels/Person.cs`. This code is also included in the following working copy.
 
- 
+
 
 
 The following enumerations simplify the conversation between the `EditScope` and the `EditScopeCache`.
@@ -658,7 +658,7 @@ this.commandBar.setItems([saveCommand, discardCommand]);
 
 Because the `EditScope` is being used, the save/discard commands can just call the `saveChanges()` or `revertAll()` methods on the edit scope to trigger the right action.
 
-For more information, see [http://knockoutjs.com/documentation/computed-writable.html](http://knockoutjs.com/documentation/computed-writable.html).
+For more information, see [https://knockoutjs.com/documentation/computed-writable.html](https://knockoutjs.com/documentation/computed-writable.html).
 
 #### Editscope request
 

@@ -9,7 +9,7 @@
 #### Q: I want to create a new extension. How do I start?
 
 A: To contribute an extension to the portal, you don't need to clone our repository; extensions can be built in their own source code trees.
-You can write an extension using the [Ibiza SDK](http://aka.ms/portalfx/docs), deploy it to your own machine, and load it into the portal at runtime.
+You can write an extension using the [Ibiza SDK](https://aka.ms/portalfx/docs), deploy it to your own machine, and load it into the portal at runtime.
 When you're ready to register your extension in the preview or production environments, reach out to Ibiza team on: [https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza](https://stackoverflow.microsoft.com/questions/tagged?tagnames=ibiza).
 
 See also: [How the portal works](portalfx-howitworks.md)

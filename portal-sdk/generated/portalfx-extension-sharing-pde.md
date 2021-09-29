@@ -66,7 +66,7 @@ To share your PDE with other teams please follow these guidelines:
     $item = $project.ProjectItems.Item("Client").ProjectItems.Item("_extensions").ProjectItems.Item("Your Folder Name that nuproj puts the pde in").ProjectItems.Item("SomeExtension.pde") 
     $item.Properties.Item("ItemType").Value = "ExtensionReference"
     # open the documentation for consuming exposed content from the pde. use an aka.ms link so you can change out the target content without having to republish
-    $DTE.ItemOperations.Navigate("http://aka.ms/portalfx/somepde")
+    $DTE.ItemOperations.Navigate("https://aka.ms/portalfx/somepde")
 
     ```
 
@@ -74,8 +74,8 @@ To share your PDE with other teams please follow these guidelines:
 
     - [Check your access to the doc repo portalfx-docs-pr](https://github.com/Azure/portaldocs)
 
-        - if you don’t have access follow the instructions [here](http://aka.ms/azuregithub) to enable 2FA on your github account and link your microsoft account
-		- Then through [here](http://aka.ms/azuregithub) request access to portalfxdocs
+        - if you don’t have access follow the instructions [here](https://aka.ms/azuregithub) to enable 2FA on your github account and link your microsoft account
+		- Then through [here](https://aka.ms/azuregithub) request access to portalfxdocs
 
 - The resulting NuGet is to be published from your official builds to [https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=Official&_a=feed](https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=Official&_a=feed). See OneBranch guidance to [publish your package](https://microsoft.sharepoint.com/teams/WAG/EngSys/Implement/OneBranch/Publish%20your%20package.aspx)
 
@@ -427,7 +427,7 @@ This part should not be used directly. Using the ResourceSummaryPart (essentials
 <a name="parts-pricingtierlauncherv3"></a>
 ## PricingTierLauncherV3
 
-* [See live sample](http://aka.ms/portalfx/samples#blade/SamplesExtension/PricingV3Blade)
+* [See live sample](https://aka.ms/portalfx/samples#blade/SamplesExtension/PricingV3Blade)
 * See sample code  file://%userprofile%/documents/PortalSDK/FrameworkPortal/Extensions/SamplesExtension/Extension/Client/Hubs/PricingV3
 
 <a name="parts-specpickerlistviewpartv3"></a>
@@ -590,10 +590,10 @@ group or a resource ID (/subscriptions/..subID../resourcegroups/..resgroupID../p
 to show only the nested resources under the given resource.
 
 Normal browse resource blade:
-* [See live sample](http://aka.ms/portalfx/samples#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Test%2Fhosts)
+* [See live sample](https://aka.ms/portalfx/samples#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Test%2Fhosts)
 
 Scoped browse resource blade:
-* [See live sample](http://aka.ms/portalfx/samples#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.test%2Fhosts/scope/%2Fsubscriptions%2Fsub123%2Fresourcegroups%2Fservicetest)
+* [See live sample](https://aka.ms/portalfx/samples#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.test%2Fhosts/scope/%2Fsubscriptions%2Fsub123%2Fresourcegroups%2Fservicetest)
 * See sample code file://%userprofile%/documents/PortalSDK/FrameworkPortal/Extensions/SamplesExtension/Extension/Client/Hubs/ScopedBrowse/ViewModels/ScopedBrowseLauncherPartViewModel.ts
 * See sample code file://%userprofile%/documents/PortalSDK/FrameworkPortal/Extensions/SamplesExtension/Extension/Client/Hubs/ScopedBrowse/ScopedBrowse.pdl
 
@@ -608,10 +608,10 @@ group or a resource ID (/subscriptions/..subID../resourcegroups/..resgroupID../p
 to show only the nested resources under the given resource.
 
 Normal browse all resources blade:
-* [See live sample](http://aka.ms/portalfx/samples#blade/HubsExtension/BrowseAllResourcesBlade)
+* [See live sample](https://aka.ms/portalfx/samples#blade/HubsExtension/BrowseAllResourcesBlade)
 
 Scoped browse all resources blade:
-* [See live sample](http://aka.ms/portalfx/samples#blade/HubsExtension/BrowseAllResourceBlade/scope/%2Fsubscriptions%2Fsub123%2Fresourcegroups%2Fservicetest)
+* [See live sample](https://aka.ms/portalfx/samples#blade/HubsExtension/BrowseAllResourceBlade/scope/%2Fsubscriptions%2Fsub123%2Fresourcegroups%2Fservicetest)
 * See sample code file://%userprofile%/documents/PortalSDK/FrameworkPortal/Extensions/SamplesExtension/Extension/Client/Hubs/ScopedBrowse/ViewModels/ScopedBrowseLauncherPartViewModel.ts
 * See sample code file://%userprofile%/documents/PortalSDK/FrameworkPortal/Extensions/SamplesExtension/Extension/Client/Hubs/ScopedBrowse/ScopedBrowse.pdl
 
@@ -630,10 +630,10 @@ should appear in the list and should only be a fully qualified subscription ID (
 the resource groups from the given subscription.
 
 Normal browse resource blade:
-* [See live sample](http://aka.ms/portalfx/samples#blade/HubsExtension/BrowseResourceGroupBlade/resourceType/Microsoft.Resources%2Fsubscriptions%2Fresourcegroups)
+* [See live sample](https://aka.ms/portalfx/samples#blade/HubsExtension/BrowseResourceGroupBlade/resourceType/Microsoft.Resources%2Fsubscriptions%2Fresourcegroups)
 
 Scoped browse resource blade:
-* [See live sample](http://aka.ms/portalfx/samples#blade/HubsExtension/BrowseResourceGroupBlade/resourceType/Microsoft.Resources%2Fsubscriptions%2Fresourcegroups/scope/%2Fsubscriptions%2Fsub123)
+* [See live sample](https://aka.ms/portalfx/samples#blade/HubsExtension/BrowseResourceGroupBlade/resourceType/Microsoft.Resources%2Fsubscriptions%2Fresourcegroups/scope/%2Fsubscriptions%2Fsub123)
 * See sample code file://%userprofile%/documents/PortalSDK/FrameworkPortal/Extensions/SamplesExtension/Extension/Client/Hubs/ScopedBrowse/ViewModels/ScopedBrowseLauncherPartViewModel.ts
 * See sample code file://%userprofile%/documents/PortalSDK/FrameworkPortal/Extensions/SamplesExtension/Extension/Client/Hubs/ScopedBrowse/ScopedBrowse.pdl
 

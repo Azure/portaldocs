@@ -110,7 +110,7 @@ GetExtensionFailuresSummary(ago(1d), now())
 Updating the extensionName to be your extension, and increase the time range if the last 24 hours isn't sufficient.
 Address the highest impacting issues, per occurence/affected users.
 
-The query will return a summary of all the events which your extension failed to load. 
+The query will return a summary of all the events which your extension failed to load.
 
 | Field name        | Definition |
 | ----------------- | ---------- |
@@ -123,7 +123,7 @@ The query will return a summary of all the events which your extension failed to
 | any_sessionId     | A sample of an affected session |
 | any_message       | A sample message of what would normally be returned given errorState/error |
 
-Once you have ran the query you will be shown a list of errorStates and errors, for more greater details you can use the any_sessionId 
+Once you have ran the query you will be shown a list of errorStates and errors, for more greater details you can use the any_sessionId
 to investigate further.
 
 <a name="reliability-frequently-asked-questions-faq-my-extension-is-below-the-reliability-bar-what-should-i-do-error-states"></a>
@@ -155,7 +155,7 @@ to investigate further.
             HomePageTimedOut
         </td>
         <td>
-            The index page failed to load within the max time period 
+            The index page failed to load within the max time period
         </td>
         <td>
             // Need steps to action on
@@ -387,7 +387,7 @@ Once you have that, correlate the error reasons with the below list to see the g
             The FX failed to restore the blade during journey restoration because of an unexpected error.
         </td>
         <td>
-            This should not occur but if it does file a [shell bug](http://aka.ms/portalfx/shellbug).
+            This should not occur but if it does file a [shell bug](https://aka.ms/portalfx/shellbug).
         </td>
     </tr>
 </table>
@@ -452,8 +452,8 @@ Once you have that, correlate the error reasons with the below list to see the g
         <td>
             The FX was unable to retrieve the part view model from the Extension.
         </td>
-        <td> 
-            You can correlate the start of thesample message with one of the below for common explanations. 
+        <td>
+            You can correlate the start of thesample message with one of the below for common explanations.
             <ul>
                 <li>
                      ETIMEOUT - This may be caused by a flooding of the RPC layer.
@@ -469,7 +469,7 @@ Once you have that, correlate the error reasons with the below list to see the g
                 </li>
             </ul>
             For all the above if enough information was not provided via the message explore the raw events function or reference a sample session in
-            the ClientEvents kusto table as there should be correlating events before the failure. 
+            the ClientEvents kusto table as there should be correlating events before the failure.
         </td>
     </tr>
     <tr>
@@ -508,7 +508,7 @@ Once you have that, correlate the error reasons with the below list to see the g
 </table>
 
 [TelemetryOnboarding]: <portalfx-telemetry-getting-started.md>
-[Ext-Perf/Rel-Report]: <http://aka.ms/portalfx/dashboard/extensionperf>
+[Ext-Perf/Rel-Report]: <https://aka.ms/portalfx/dashboard/extensionperf>
 [portalfx-cdn]: <portalfx-cdn>
 [kusto-extension-reliability-summary]: <https://azportal.kusto.windows.net:443/AzurePortal?query=H4sIAAAAAAAEAHNPLXGtKEnNK87Mz3NLzMwpLUotDi7NzU0sqtRITM%2fXMEzR1FHIyy%2fX0NTk5apRKM9ILUpVSIXpUEjOzytJzMwrVlDyzUwuyi%2fOTyuJd6wCGhLvnJ9bUFqSqsTLxcsFALeT50BlAAAA>
 [kusto-blade-reliabiltiy-summary]: <https://azportal.kusto.windows.net:443/AzurePortal?query=H4sIAAAAAAAEAHNPLXHKSUxJdUvMzCktSi0OLs3NTSyq1EhMz9cwTNHUUcjLL9fQ1OTlqlEoz0gtSlVIrShJzSvOzM9TSM7PK0nMzCtWUPLNTC7KL85PK4l3rAIaEu%2bcn1tQWpKqxMvFywUAav8eqGEAAAA%3d>

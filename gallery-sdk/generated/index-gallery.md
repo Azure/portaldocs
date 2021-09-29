@@ -59,7 +59,7 @@
 The gallery is the single place where users will go to find anything that can be created. The gallery includes both the create hub as well as the gallery blades. The entire gallery is driven from the gallery service which serves both gallery items and curation data. Placement of your resource or app in the gallery is driven by a controlled curation process.
 
 
-> [WACOM.NOTE] In order to receive important notices and alerts about the gallery service, please subscribe to the [Azure Gallery Announcements](http://idwebelements/GroupManagement.aspx?Group=azuregallery&Operation=join) alias.
+> [WACOM.NOTE] In order to receive important notices and alerts about the gallery service, please subscribe to the [Azure Gallery Announcements](https://idwebelements/GroupManagement.aspx?Group=azuregallery&Operation=join) alias.
 
 <a name="gallery-overview-onboarding-to-the-gallery"></a>
 ## OnBoarding to the Gallery
@@ -81,6 +81,7 @@ The entire gallery in the portal is driven by the gallery service. The gallery s
 
 
 [gallery-items]: ../media/gallery-overview/gallery-items.png
+
 
 <properties title="" pageTitle="Updated Azure Package Publishing Process (May 2019 Onwards)" description="" authors="ansud" />
 
@@ -175,7 +176,7 @@ The manifest file contains all of the metadata for your gallery item. For a visu
     "$schema": "https://gallery.azure.com/schemas/2014-09-01/manifest.json#",
     "name": "string", // [A-Za-z0-9]+ (offer + plan namespace)
     "publisher": "string", // [A-Za-z0-9]+ (publisher namespace)
-    "version": "string", // SemVer v2 Format - see http://semver.org/
+    "version": "string", // SemVer v2 Format - see https://semver.org/
     "displayName": "string", // max of 256 characters (plan name)
     "publisherDisplayName": "string", // max of 256 characters (publisher name)
     "publisherLegalName": "string", // max of 256 characters -->
@@ -451,7 +452,7 @@ In order to publish to production, create an ICM on "PFX-MIX-Marketplace Ingesti
 
 <a name="gallery-item-specificiations-versioning"></a>
 ### Versioning
-Package and template versioning must use [SemVer 2.0.0](http://semver.org) for version numbers. The rules for SemVer should be applied to the Gallery Item and reflect changes to the content that will be installed with the package. For example, if the content of your package will cause breaking changes to existing users you must increment the MAJOR version numner for your gallery item package.
+Package and template versioning must use [SemVer 2.0.0](https://semver.org) for version numbers. The rules for SemVer should be applied to the Gallery Item and reflect changes to the content that will be installed with the package. For example, if the content of your package will cause breaking changes to existing users you must increment the MAJOR version numner for your gallery item package.
 
 Given a version number MAJOR.MINOR.PATCH, increment the:
 
@@ -575,7 +576,7 @@ Below you will find a list of all metadata that is collected with a gallery item
 | ------------- | -------- | ------- | -------------------------------------- | -------------------------------------- |
 | Name          | X        | string  | [A-Za-z0-9]+                           |                                        |
 | Publisher     | X        | string  | [A-Za-z0-9]+                           |    									   |
-| Version       | X        | string  | [SemVer v2](http://semver.org)         |										   |
+| Version       | X        | string  | [SemVer v2](https://semver.org)        |										   |
 
 
 
@@ -588,7 +589,7 @@ Below you will find a list of all metadata that is collected with a gallery item
 | PublisherDisplayName | X        | string    | recommendation 30 characters		   | if longer than 30, Portal may not display your publisher name gracefully    	|
 | PublisherLegalName   | X        | string    | max of 256 characters                  |																				|
 | Summary              | X        | string    | 60 to 100 characters	               |																				|
-| LongSummary          | X        | string    | 140 to 256 characters                  | used on hero image, will fall back to summary   								|							
+| LongSummary          | X        | string    | 140 to 256 characters                  | used on hero image, will fall back to summary   								|
 | Description          | X        | [html][1] | 500 to 5000 characters                 |                                    		         							|
 
 
@@ -610,7 +611,7 @@ Below is the list of icons used in the gallery.
 
 <a name="gallery-item-metadata-component-metadata"></a>
 ## Component Metadata
-You can include any number of components. Components are used to primarily to specify pricing and legal data. 
+You can include any number of components. Components are used to primarily to specify pricing and legal data.
 
 | Name                 | Required | Type      | Constraints                            | Description                                             |
 | -------------------- | -------- | --------- | -------------------------------------- | ------------------------------------------------------- |
@@ -625,14 +626,14 @@ You can include any number of components. Components are used to primarily to sp
 
 <a name="gallery-item-metadata-categories"></a>
 ## Categories
-Each gallery item can be "tagged" with a variety of categories. 
+Each gallery item can be "tagged" with a variety of categories.
 You can categorize the offer to be under L1 (Level 1) category or L2 (Level 2) category
 In order to appear under L2 category you will need to provide both the L2 and the L1 parent category id.
 
 The following are common L1 categories.
 The left hand side is the category id that needs to be provided, and the right hand side is the category display name:
 
-* **compute** - Compute 
+* **compute** - Compute
 * **networking** - Networking
 * **database** - Database
 * **security** - Security

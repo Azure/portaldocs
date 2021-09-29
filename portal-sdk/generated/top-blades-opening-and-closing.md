@@ -4,7 +4,7 @@
 <a name="navigating-to-other-content-opening-blades"></a>
 ## Opening blades
 
-This section describes how to open blades using container APIs. A working copy of blades that open and close is located at [http://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/openbladeapi](http://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/openbladeapi).
+This section describes how to open blades using container APIs. A working copy of blades that open and close is located at [https://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/openbladeapi](https://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/openbladeapi).
 
 **NOTE**: In this discussion, `<dir>` is the `SamplesExtension\Extension\` directory, and  `<dirParent>`  is the `SamplesExtension\` directory, based on where the samples were installed when the developer set up the SDK. If there is a working copy of the sample in the Dogfood environment, it is also included.
 

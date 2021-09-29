@@ -21,7 +21,7 @@ To enable this, here are the steps you need to take:
     - We implement this for your extension by default for you by using the version of your assembly.
     If this value changes between different servers of the same deployment, the home page caching will not be very effective.
     - Also if this value does not change between updates to your extension, then existing users will continue to load the previous version of your extension even after you update.
-1.  Once you have deployed and verified your extension. Send a pull request to the portal's dev branch removing the cachability setting from your extensions configuration. http://aka.ms/portalfx/extensionsprodjson
+1.  Once you have deployed and verified your extension. Send a pull request to the portal's dev branch removing the cachability setting from your extensions configuration. https://aka.ms/portalfx/extensionsprodjson
 
 <a name="how-home-page-caching-works"></a>
 ### How home page caching works
@@ -54,7 +54,7 @@ https://ms.portal.azure.com/?YOUR_EXTENSION_NAME-cacheability=manifest&feature.c
 And then load your extensions experience (a part/blade).
 
 This will cause the extension named "Your_Extension" to load with "manifest" level caching (instead of its default setting on the server.
-You also need to add "feature.canmodifyextensions=true" so that we know that the portal is running in test mode.  
+You also need to add "feature.canmodifyextensions=true" so that we know that the portal is running in test mode.
 
 To verify that the browser serves your extension entirely from cache on subsequent requests:
 
@@ -66,5 +66,4 @@ To verify that the browser serves your extension entirely from cache on subseque
 <a name="co-ordinating-these-changes-with-the-portal"></a>
 ### Co-ordinating these changes with the portal
 
-Again, once you have deployed and verified your extension. Send a pull request to the portal's dev branch removing the cachability setting from your extensions configuration. http://aka.ms/portalfx/extensionsprodjson
-
+Again, once you have deployed and verified your extension. Send a pull request to the portal's dev branch removing the cachability setting from your extensions configuration. https://aka.ms/portalfx/extensionsprodjson

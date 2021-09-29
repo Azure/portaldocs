@@ -38,7 +38,7 @@ See the [National Clouds FAQ](#national-clouds) for more information
 
 <a name="getting-started-user-access-and-permissions"></a>
 ## User Access and Permissions
->**Note:** access is database specific, i.e. access to one database does not indicate access to another in the cluster. 
+>**Note:** access is database specific, i.e. access to one database does not indicate access to another in the cluster.
 
 We do not grant individuals direct access to our Kusto Clusters. If you require manual access, you must first join your respective team's standard access group.
 Your team should have a standard access group you can join from  [aka.ms/myaccess](https://aka.ms/myaccess) which is configured to inherit the required, valid permissions.
@@ -49,7 +49,7 @@ All Azure Employees should have access to our Kusto Clusters. Permissions are gr
 
 Though permissions are granted through these top-level groups, you may not join them directly. In order to acquire the permissions granted from these groups, you must join a group that inherits from one. This group is your team's group.
 
-1. Visit [http://aka.ms/standardaccess](http://aka.ms/standardaccess)
+1. Visit [https://aka.ms/standardaccess](https://aka.ms/standardaccess)
 1. On the standard access page you will find a table of team projects 'Active ​Azure  Team Projects'
 1. Search the table for your team's group (if you are unware of which group to join ask your colleagues)
 1. Once you have found the correct group join that group via [aka.ms/myaccess](https://aka.ms/myaccess) or reach out to team's support alias for further help.
@@ -59,8 +59,8 @@ Though permissions are granted through these top-level groups, you may not join 
 
 <a name="getting-started-programmatic-access"></a>
 ## Programmatic Access
-Please note that we already offer pretty extensive and customized alerting for extensions that may reduce (often eliminates) the need for you to request programmatic accesses. See https://aka.ms/portalfx/docs/alerting for more details. 
- 
+Please note that we already offer pretty extensive and customized alerting for extensions that may reduce (often eliminates) the need for you to request programmatic accesses. See https://aka.ms/portalfx/docs/alerting for more details.
+
 **If there does not appear to be an existing product or service that meets your needs and/or requirements, please first email [Ibiza Telemetry](mailto:ibiza-telemetry@microsoft.com).** We are always working to increase our available services and need partners' help identifying new use cases.
 
 If needs and/or requirements cannot be met without programmatic access to our cluster(s) we may, at our discretion, onboard partners to our dedicated follower cluster: **AzPortalPartner**. Access to the **AzurePortal**, **AzPtlCosmos**, and **hostingservice** databases are granted through this follower cluster.
@@ -68,7 +68,7 @@ If needs and/or requirements cannot be met without programmatic access to our cl
 > **Note:** Only Viewer (read) access will be provided for the requested database(s).
 
 > **Note:** As part of the onboarding process, we will review your provided queries. Please provide all the queries you know will be executed as part of your access as part of the form.  Please also review the [Kusto Query Best Practices](https://kusto.azurewebsites.net/docs/query/best-practices.html) before submitting your queries.
- 
+
 <a name="getting-started-programmatic-access-onboard-request-process"></a>
 ### Onboard Request Process
 To onboard programmatic access, please copy and paste the [Onboarding Request Form](#onboarding-request-form) in an e-mail to [azurefxg@microsoft.com](mailto:azurefxg@microsoft.com) with your answers in-line. We require all fields to be answer for our records.
@@ -83,7 +83,7 @@ Once all the information is received, the team will review the request. Question
 #### Onboard Request Approval
 When your approval has been successfuly processed, you will recieve an email confirmation from a member of the [azurefxg@microsoft.com](mailto:azurefxg@microsoft.com) team.
 
-When we approve the onboarding request, we’ll call you as an anti-phishing step. Your app ID will then be enabled with Viewer access for the requested databases. There is no propagation delay between enabling programmatic access and it taking effect. 
+When we approve the onboarding request, we’ll call you as an anti-phishing step. Your app ID will then be enabled with Viewer access for the requested databases. There is no propagation delay between enabling programmatic access and it taking effect.
 
 Please note that Kusto is shared capacity system. As such, we have to reserve the right to shut down applications that put excessive load on the system. To date, we have never had to do this.
 
@@ -94,34 +94,34 @@ Please note that Kusto is shared capacity system. As such, we have to reserve th
 
 1. What is your team name?
 
-1. Please provide a brief, but thorough, reason you require access. 
- 
+1. Please provide a brief, but thorough, reason you require access.
+
 1. To which database(s) (AzurePortal, AzPtlCosmos, hostingservice) will you need access?
- 
-1. Please acknowledge you understand that programmatic access to these databases potentially allows 'anonymous' access to the uncensored production logs, and your usage must not allow this. 
- 
-1. Please acknowledge you are following Microsoft best practices for key storage. Typically, this means storing the certificate in KeyVault (not, for example, in source code repositories) and rotating the key at the appropriate frequency. 
- 
+
+1. Please acknowledge you understand that programmatic access to these databases potentially allows 'anonymous' access to the uncensored production logs, and your usage must not allow this.
+
+1. Please acknowledge you are following Microsoft best practices for key storage. Typically, this means storing the certificate in KeyVault (not, for example, in source code repositories) and rotating the key at the appropriate frequency.
+
 1. Please acknowledge your handling of **any** data you access must comply with Microsoft PII & GDPR policies.
-    This means, but is no way limited to: 
-    - Not copying or downloading non-anonymized logs (even to secure systems, unless you have registered those systems with GDPR for deletion and export).  
-    - Not making available anonymous access by proxy. For example, a web site or other access mechanism that allows the caller (authed or not) to make non-Delegated requests as the service principal (example: a log search tool that connects directly as the Service Principal or dSTS Service Identity rather than using delegated auth) 
- 
-1. Please acknowledge your application must not put excessive load on the cluster, particular over popular times (5-7pm PST, 0-1am UTC). 
+    This means, but is no way limited to:
+    - Not copying or downloading non-anonymized logs (even to secure systems, unless you have registered those systems with GDPR for deletion and export).
+    - Not making available anonymous access by proxy. For example, a web site or other access mechanism that allows the caller (authed or not) to make non-Delegated requests as the service principal (example: a log search tool that connects directly as the Service Principal or dSTS Service Identity rather than using delegated auth)
+
+1. Please acknowledge your application must not put excessive load on the cluster, particular over popular times (5-7pm PST, 0-1am UTC).
 
 1. Please supply examples of the queries you will be executing, as well as the schedule/frequency.
- 
-1. What is the AAD App ID of your Service Principal or the dSTS App Id of your dSTS Service Identity? 
- 
+
+1. What is the AAD App ID of your Service Principal or the dSTS App Id of your dSTS Service Identity?
+
 1. If you are using an AAD Service Principal: please confirm your application uses certificate-based authentication for its Service Principal. See: [Creating a Certificate-backed Partner Service Principal](#creating-a-certificate-backed-partner-service-principal) for details.
 	>**Note:** Certificate-based authentication is required. Your request will be denied until certificate-based authentication is used.
-	
-1. Please provide a contact e-mail for this application that we can reach out to in cases of outage, capacity planning, etc. This should be a team alias rather than an individual. 
- 
-1. If you are using the [Kusto Client SDK](https://kusto.azurewebsites.net/docs/api/netfx/about-kusto-data.html) to connect, confirm your application sets ClientRequestProperties.Application to reflect your application name (older libraries, [no longer documented on Kusto](https://kusto.azurewebsites.net/docs/api/using_the_kusto_client_library.html)) or [embed it the ClientRequestId](https://kusto.azurewebsites.net/docs/api/netfx/request-properties.html#the-clientrequestid-x-ms-client-request-id-property) (newer libraries). 
-	
-	>If you are using another access method that supports a similar feature (e.g. the REST API directly), please confirm use of the feature. 
- 
+
+1. Please provide a contact e-mail for this application that we can reach out to in cases of outage, capacity planning, etc. This should be a team alias rather than an individual.
+
+1. If you are using the [Kusto Client SDK](https://kusto.azurewebsites.net/docs/api/netfx/about-kusto-data.html) to connect, confirm your application sets ClientRequestProperties.Application to reflect your application name (older libraries, [no longer documented on Kusto](https://kusto.azurewebsites.net/docs/api/using_the_kusto_client_library.html)) or [embed it the ClientRequestId](https://kusto.azurewebsites.net/docs/api/netfx/request-properties.html#the-clientrequestid-x-ms-client-request-id-property) (newer libraries).
+
+	>If you are using another access method that supports a similar feature (e.g. the REST API directly), please confirm use of the feature.
+
 1. Do you need to create your own functions and tables (i.e. require write access) in Kusto? This will involve creating a dedicated database for your team which you will then be responsible for maintaining (and registering with the GDPR scanner, etc). If yes, then please provide a suitable database name. If you are not sure, start with No and change your mind to Yes later.
 ---
 <a name="getting-started-faq"></a>
@@ -158,7 +158,7 @@ Other possibilities:
 #### &quot;I do not know which group to join&quot; or &quot;I cannot find a group&quot;
 If you are unable to find a group to join within the table, you may need to create a new group. First confirm with your colleagues a group does not exist, the group may be named non-intuitively.
 
-If there is still no group you can join, you will need to create a new group. To do this please follow documentation on [http://aka.ms/standardaccess](http://aka.ms/standardaccess). Look for the link named ['Azure RBAC Getting Started Guide'](http://aka.ms/portalfx/telemetryaccess/newgroup). There are various steps to follow, unfortunately the Ibiza team does not own this process. The standard access team have step by step videos you can use to follow along. If you need further assistance with creating a new group please contact the 'MyAccess' support team.
+If there is still no group you can join, you will need to create a new group. To do this please follow documentation on [https://aka.ms/standardaccess](https://aka.ms/standardaccess). Look for the link named ['Azure RBAC Getting Started Guide'](https://aka.ms/portalfx/telemetryaccess/newgroup). There are various steps to follow, unfortunately the Ibiza team does not own this process. The standard access team have step by step videos you can use to follow along. If you need further assistance with creating a new group please contact the 'MyAccess' support team.
 
 For all other questions please reach out to [Ibiza Telemetry](mailto:ibiza-telemetry@microsoft.com).
 
@@ -194,7 +194,7 @@ Loads on the national clouds mut be very light; Azure Gauge does not own any of 
 
 <a name="getting-started-faq-what-is-the-future-of-the-partner-database"></a>
 ### What is the Future of the &#39;Partner&#39; Database
-We previously provided a shared database called Partner for this purpose. We are decommissioning that model due to low take-up by partners, partners not respecting naming conventions in the shared space, a large number (literally in the 100s) of abandoned and 'V1/V2/V3' functions, permissions issues to edit functions, and partners tables causing false-positive GDPR S360 alerts to the gauge team. 
+We previously provided a shared database called Partner for this purpose. We are decommissioning that model due to low take-up by partners, partners not respecting naming conventions in the shared space, a large number (literally in the 100s) of abandoned and 'V1/V2/V3' functions, permissions issues to edit functions, and partners tables causing false-positive GDPR S360 alerts to the gauge team.
 
 Going forward, partners who demonstrate an unavoidable need to create their own functions and tables will be given a database of their own that the partner is admin on. The partner will be responsible for maintaining Security & GDPR compliance (including registration) of that database.
 
@@ -203,14 +203,14 @@ Going forward, partners who demonstrate an unavoidable need to create their own 
 
 <a name="getting-started-resources-obsolete-best-practices"></a>
 ### Obsolete Best Practices
->**Note:** With the move to follower clusters and other changes, the following advice is no longer relevant and can be ignored: 
+>**Note:** With the move to follower clusters and other changes, the following advice is no longer relevant and can be ignored:
 - *Prefixing you function and table names with your team identifier.* Since you own the database, you can adopt whatever conventions you like.
 - *Runners executing through the Partner database rather against AzurePortal / AzPltCosmos databases directly.* This advice was to make it easier for us to identify and disable rouge application. In practice, it didn't work (most partners did not follow the advice, and we can usually identify the runner either by the application name or the nature of the query anyway).Please run through your query from whatever database makes most sense to you.
 
 <a name="getting-started-resources-kusto-documentation-links"></a>
 ### Kusto Documentation &amp; Links
 
-[Documentation](http://kusto.azurewebsites.net/docs)
+[Documentation](https://kusto.azurewebsites.net/docs)
 
 [Kusto Discussions](http://idwebelements/GroupManagement.aspx?Group=KusTalk&Operation=join)
 
@@ -220,11 +220,11 @@ Going forward, partners who demonstrate an unavoidable need to create their own 
 
 <a name="getting-started-resources-kusto-tips-and-tricks"></a>
 ### Kusto Tips and Tricks
-When testing your queries, you can see the performance cost of current query in the Query Summary tab of the results window. You can also see 30 days of history of queries you have run via *.show* queries command. 
+When testing your queries, you can see the performance cost of current query in the Query Summary tab of the results window. You can also see 30 days of history of queries you have run via *.show* queries command.
 
 >**Note:** *where* and other clauses can be applied to the output of the *.show* command.
 
-You can see the statistics and load history for the AzPortalPartner cluster at https://aka.ms/GaugePartnerCluster. 
+You can see the statistics and load history for the AzPortalPartner cluster at https://aka.ms/GaugePartnerCluster.
 
 <a name="getting-started-resources-creating-a-certificate-backed-partner-service-principal"></a>
 ### Creating a Certificate-backed Partner Service Principal
@@ -244,7 +244,7 @@ If you already have an application, you can skip forward to the PowerShell part
 1. Fill out the application registration.
     - Name: Your application's friendly name
     - Application Type: Choice only matters if you have users signing into your app. Pick the type most appropriate to you.
-    - Sign-on URL / Redirect URL: Choice only matters if you have users signing into your app. 
+    - Sign-on URL / Redirect URL: Choice only matters if you have users signing into your app.
 1. Click 'Create'.The creates the application and a default service principal. Make a note of the Application ID GUID.
 
 Follow either method below to upload the generated certificate
@@ -259,7 +259,7 @@ Follow either method below to upload the generated certificate
    2. Execute the following code to get the public key from a cert file (feel free to get the public key another way, such as by thumbprint).
 
       ``` powershell
-      $cer = New-Object System.Security.Cryptography.X509Certificates.X509Certificate 
+      $cer = New-Object System.Security.Cryptography.X509Certificates.X509Certificate
       $cer.Import("C:\temp\ServicePrincipalCertPublicKey.cer")
       $binCert = $cer.GetRawCertData()
       $credValue = [System.Convert]::ToBase64String($binCert);
@@ -268,10 +268,10 @@ Follow either method below to upload the generated certificate
    3. Connect to AAD, and get a reference to your application's SP, and add the certificate.
 
       ``` powershell
-      import-module MSOnline 
+      import-module MSOnline
          Connect-MsolService
       $sp = Get-AzureRmADServicePrincipal -ServicePrincipalName yourApplicationId
-      New-MsolServicePrincipalCredential -ObjectId $sp.Id -Type asymmetric -Value 
+      New-MsolServicePrincipalCredential -ObjectId $sp.Id -Type asymmetric -Value
       $credValue -StartDate $cer.GetEffectiveDateString() -EndDate
       $cer.GetExpirationDateString()
       ```
@@ -289,4 +289,3 @@ Follow either method below to upload the generated certificate
 [Ibiza Create](mailto:ibiza-create@microsoft.com) - Telemetry PM for Ibiza Create Telemetry
 
 [Azure Fx Gauge Team](mailto:azurefxg@microsoft.com) - Telemetry Team
-

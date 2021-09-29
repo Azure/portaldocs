@@ -32,7 +32,7 @@ All Azure employees should have access to our Kusto clusters. The way permission
 
 If you don't have access, please follow the below steps:
 
-1. Visit [http://aka.ms/standardaccess](http://aka.ms/standardaccess)
+1. Visit [https://aka.ms/standardaccess](https://aka.ms/standardaccess)
 1. On the standard access page you will find a table of team projects 'Active ​Azure  Team Projects'
 1. Search the table for your team's group (if you are unware of which group to join ask your colleagues)
 1. Once you have found the correct group join that group via //myaccess or reach out to team's support alias for further help.
@@ -43,8 +43,8 @@ If you don't have access, please follow the below steps:
 
 If you are unable to find a group to join within the table, you may need to create a new group. First confirm that with your colleagues, there may be a group that is named non-intuitively.
 
-If there is still no group you can join, you will need to create a new group. To do that please follow documentation on [http://aka.ms/standardaccess](http://aka.ms/standardaccess).
-Look for the link named ['Azure RBAC Getting Started Guide'](http://aka.ms/portalfx/telemetryaccess/newgroup).
+If there is still no group you can join, you will need to create a new group. To do that please follow documentation on [https://aka.ms/standardaccess](https://aka.ms/standardaccess).
+Look for the link named ['Azure RBAC Getting Started Guide'](https://aka.ms/portalfx/telemetryaccess/newgroup).
 There are various steps to follow, unfortunately the Ibiza team do not own this process. The standard access team have step by step videos you can use to follow along. If you need further assistance with creating a new group please contact the 'MyAccess' support team.
 
 For all other questions please reach out to [Ibiza Telemetry](mailto:ibiza-telemetry@microsoft.com).
@@ -65,7 +65,7 @@ Following are some of the dashboards that we support. If you do not have access 
 
 | Name | Link |
 | ---- | ------------ |
-| Portal Extension insights | [https://aka.ms/portalfx/workbooks/extension](http://aka.ms/portalfx/workbooks/extension) |
+| Portal Extension insights | [https://aka.ms/portalfx/workbooks/extension](https://aka.ms/portalfx/workbooks/extension) |
 | Portal High-usage Performance Dashboard | [https://aka.ms/portalfx/performance/viewer](https://aka.ms/portalfx/performance/viewer) |
 
 
@@ -469,7 +469,7 @@ We have built [Extension Errors Dashboard](portalfx-telemetry-extension-errors.m
 <a name="overview-logging-telemetry-verifying-live-telemetry-using-fiddler"></a>
 #### Using Fiddler
 
-1. Install Fiddler - [http://www.telerik.com/fiddler](http://www.telerik.com/fiddler)
+1. Install Fiddler - [https://www.telerik.com/fiddler](https://www.telerik.com/fiddler)
 1. Open Fiddler and configure the "Filters" as below
     ![Fiddler](../media/portalfx-telemetry/fiddler.png)
 1. Open Portal and you should see all relevant telemetry logs emitted here.

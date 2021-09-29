@@ -135,7 +135,7 @@ Portal Azure localization uses .NET localization as it's foundation. Please ensu
 
 To get ready for a localized version of the API, the samples demonstrate building an extension which is localizable.
 
-All strings are placed inside of a standard [.NET RESX file](http://msdn.microsoft.com/en-us/library/ekyft91f.aspx), which can be found at `ClientResources.resx`. This file contains all localizable strings in the extension. You can also add multiple resx files if desired. In the csproj file, the resx is configured with a few additional properties:
+All strings are placed inside of a standard [.NET RESX file](https://msdn.microsoft.com/en-us/library/ekyft91f.aspx), which can be found at `ClientResources.resx`. This file contains all localizable strings in the extension. You can also add multiple resx files if desired. In the csproj file, the resx is configured with a few additional properties:
 
 ```xml
 <EmbeddedResource Include="Client\ClientResources.resx">

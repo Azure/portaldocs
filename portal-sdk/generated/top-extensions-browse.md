@@ -819,8 +819,8 @@ DX.json:
     ...
     Description="{Resource MyAsset.description, Module=ClientResources}">
     ...
-    <Link Title="{Resource MyAsset.linkTitle1, Module=ClientResources}" Uri="http://www.bing.com"/>
-    <Link Title="{Resource MyAsset.linkTitle2, Module=ClientResources}" Uri="http://www.bing.com"/>
+    <Link Title="{Resource MyAsset.linkTitle1, Module=ClientResources}" Uri="https://www.bing.com"/>
+    <Link Title="{Resource MyAsset.linkTitle2, Module=ClientResources}" Uri="https://www.bing.com"/>
     ...
   </AssetType>
 ```
@@ -3228,7 +3228,7 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
                 },
 
                 // ...or link to an external web page
-                uri: "http://microsoftpress.com"
+                uri: "https://microsoftpress.com"
 
                 // NOTE: Blade is preferred over link, if both are specified.
            },

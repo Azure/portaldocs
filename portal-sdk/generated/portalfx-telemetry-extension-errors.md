@@ -112,7 +112,7 @@ try {
 
 **Extension Errors dashboard** gives you the ability to look into the errors and warnings thrown by your extension.
 
-To view the Extension Errors PowerBi dashboard follow this link: [Extension Errors PowerBi dashboard](http://aka.ms/portalfx/dashboard/ExtensionErrors)
+To view the Extension Errors PowerBi dashboard follow this link: [Extension Errors PowerBi dashboard](https://aka.ms/portalfx/dashboard/ExtensionErrors)
 
 <a name="extension-client-errors-how-to-analyze-client-errors-prerequisites"></a>
 ### Prerequisites
