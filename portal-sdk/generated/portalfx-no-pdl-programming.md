@@ -61,8 +61,6 @@ Here is an example of a very simple template blade, represented by a single TpeS
 
 ```typescript
 
-/// <reference path="../../../TypeReferences.d.ts" />
-
 import * as ClientResources from "ClientResources";
 import * as TemplateBlade from "Fx/Composition/TemplateBlade";
 
@@ -122,8 +120,6 @@ Below is an example of a menu blade build using decorators.  It uses the `@MenuB
 
 1.  It makes the public `viewModel` property required.  The property is of type `MenuBlade.ViewModel2` and provides you with APIs to setup the menu.
 2.  It makes the public 'context' property required.  The property is of type `MenuBlade.Context`.
-
-/// <reference path="../../../TypeReferences.d.ts" />
 
 import * as ClientResources from "ClientResources";
 import { BladeReferences } from "Fx/Composition";

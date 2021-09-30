@@ -60,6 +60,7 @@ export class SimpleTemplatePart {
 If you need more control over the DOM and are willing to take on additional burdens regarding accessibility and theming then you can also choose to build a `FramePart` where the contents of the part are implemented by using an iFrame that you can control. The following  example demonstrates  a simple FramePart that shows how to communicate between the visible iFrame and the hidden extension iFrame.
 
 ```
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="../../../FramePage.d.ts" />
 
 import { BladeReferences } from "Fx/Composition";

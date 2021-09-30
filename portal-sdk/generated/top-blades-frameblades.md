@@ -36,7 +36,8 @@ To create a FrameBlade, you need to create 3 artifacts.
 1. Register the FrameBlade with your extension by creating a TypeScript class with the @FrameBlade decorator. The samples extension file for this is located at
   `<dir>/Client/V2/Blades/FrameBlade/SampleFrameBlade.ts` and in the following example.
 
-  /// <reference path="../../../FramePage.d.ts" />
+  // eslint-disable-next-line @typescript-eslint/triple-slash-reference
+/// <reference path="../../../FramePage.d.ts" />
 
 import * as ClientResources from "ClientResources";
 import { BladeReferences } from "Fx/Composition";
