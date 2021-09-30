@@ -21,7 +21,7 @@ this.textBox = TextBox.create(container, {
 And then either:
 - inserting it as a member of a Section, or
 - including it in an HTML template via a 'pcControl' binding.
-You can see examples running in SamplesExtension [here](http://aka.ms/portalfx/samples#blade/SamplesExtension/Textboxblade) along with the source code here: `SamplesExtension\Extension\Client\V2\Controls\TextBox\TextBoxBlade.ts`.
+You can see examples running in SamplesExtension [here](https://aka.ms/portalfx/samples#blade/SamplesExtension/Textboxblade) along with the source code here: `SamplesExtension\Extension\Client\V2\Controls\TextBox\TextBoxBlade.ts`.
 
 
 <a name="migrating-from-older-textbox"></a>

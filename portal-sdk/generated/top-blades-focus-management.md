@@ -31,7 +31,7 @@ It is important to note that focus operations should be performed solely as a re
 <a name="focus-management-focus-handling-by-extension-focus-apis-sample-page"></a>
 ### Focus APIs sample page
 
-A sample page with live examples is available in the Samples extension at [http://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/extensionfocus](http://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/extensionfocus)
+A sample page with live examples is available in the Samples extension at [https://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/extensionfocus](https://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/extensionfocus)
 
 <a name="focus-management-focus-handling-by-extension-focusing-first-invalid-form-control-after-validation"></a>
 ### Focusing first invalid form control after validation

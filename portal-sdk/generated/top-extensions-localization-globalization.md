@@ -27,7 +27,7 @@ The display language will be one of the 19 languages below. All extensions are r
 | Swedish               	| sv           	|
 | Turkish               	| tr           	|
 
-For more information about internationalization requirements for your extension and the process to get the extension localized see [http://aka.ms/AzureGR](http://aka.ms/AzureGR). For onboarding localization, please reach out to the [DevRel Global Experiences Localization team](mailto:drlocprodpm@microsoft.com). 
+For more information about internationalization requirements for your extension and the process to get the extension localized see [https://aka.ms/AzureGR](https://aka.ms/AzureGR). For onboarding localization, please reach out to the [DevRel Global Experiences Localization team](mailto:drlocprodpm@microsoft.com).
 
 <a name="localization-localizing-build"></a>
 ### Localizing build
@@ -110,7 +110,7 @@ Note: This recommendation is specific to links to external sites. When content f
 #### Creating a link to a doc
 
 1. For external links to docs.microsoft.com/azure.microsoft.com/MSLearn always use language-neutral destination URLs as specified above. Once you have this language neutral URL, create a FWLink for the URL you would like to link to using the [URL Manager Tool](https://sftools.trafficmanager.net/am/redirection/home?options=host:go.microsoft.com). Make sure you are using `go.microsoft.com` as the Host when you create this link.
-1. If you own an Azure extension, let your [localization contact](http://aka.ms/AzureGR) know that this content is being linked to in the portal to possibly prioritize localization of the linked content.
+1. If you own an Azure extension, let your [localization contact](https://aka.ms/AzureGR) know that this content is being linked to in the portal to possibly prioritize localization of the linked content.
 1. Verify that the link works correctly. Inspect the link to ensure they do NOT have hard-coded langugage in them (`docs.microsoft.com/en-us/azure` is bad, `docs.microsoft.com/azure` is good)
 1. For FWLink redirects, inspect HTTP traffic and look for hard-coded language during the initial redirect response as shown below.
 

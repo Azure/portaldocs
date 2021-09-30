@@ -835,4 +835,4 @@ A: Azure Portal partner team's IcM info is collected during partner onboarding p
 > The IcM routing rule is in format 'AIMS://AZUREPORTAL\Portal\{ExtensionName}'.
 
   [1]: https://icmdocs.azurewebsites.net/developers/Connectors/ConnectorOnboarding.html
-  [2]: http://aka.ms/EngineeringHub
+  [2]: https://aka.ms/EngineeringHub

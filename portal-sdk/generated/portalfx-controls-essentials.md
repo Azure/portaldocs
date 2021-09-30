@@ -56,7 +56,7 @@ When there are more than 5 items in any panes, only first 5 items in each panes 
 {
     lable: "Sample Label",
     value: "Bing.com",
-    onClick: new ClickableLink(ko.observable("http://www.bing.com"))
+    onClick: new ClickableLink(ko.observable("https://www.bing.com"))
 }
 ```
 <a name="essentials-control-types-1-type-of-properties-customlink"></a>
@@ -135,7 +135,7 @@ A label with multiple [properties](#essentialsProperties)
         },
         {
             value: "Bing.com",
-            onClick: new ClickableLink(ko.observable("http://www.bing.com"))
+            onClick: new ClickableLink(ko.observable("https://www.bing.com"))
         }
     ]
 }

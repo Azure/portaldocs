@@ -15,7 +15,7 @@ What the framework provides-
 	    * Widgets
 
     * Keyboard shortcuts are provided and are listed within the Help Menu in the Portal. The shortcuts must work when using your extension content.
-    * A fully accessible default theme (Blue). When using the blue theme, the contrast ratio for all text must meet the AAA guidelines that are located [here](http://www.interactiveaccessibility.com/web-accessibility-guideline).
+    * A fully accessible default theme (Blue). When using the blue theme, the contrast ratio for all text must meet the AAA guidelines that are located [here](https://www.interactiveaccessibility.com/web-accessibility-guidelines).
     * The Portal supports `HighContrast` mode and should display controls and chrome accordingly.
 
 1. Focus management is handled by the Framework and follows those rules, unless the focus is changed by the user first.
@@ -34,7 +34,7 @@ There are items for accessibility whose absence may result in bugs for the Frame
 
 1. Extensions should update to SDK version 1240 or more recent.
 
-1. Extension should update to use supported controls. An inventory of the latest, fully supported controls is located [here](http://aka.ms/portalfx/playground).
+1. Extension should update to use supported controls. An inventory of the latest, fully supported controls is located [here](https://aka.ms/portalfx/playground).
     NOTE: `DiffEditor`, `DatePolyFills`, and `PairedTimeline` are not supported by Framework.
 
 1. Extensions should ensure theming support in both Light and Dark mode when using custom colors.
@@ -52,9 +52,9 @@ There are items for accessibility whose absence may result in bugs for the Frame
 
 1. Verify keyboard accessibility of your blade content and forms. Navigate to your content in the Portal and ensure focus is captured to your content in the expected way. Autofocus on open provided by the framework.
 
-1. Screen items have titles that are displayed on hover. If text or labels are missing from the screen, use the `TITLE` attribute to display them. If the `TITLE` attribute cannot display the information, use `aria-label`. For more information about HTML attributes, see [http://www.w3schools.com/html/html_attributes.asp](http://www.w3schools.com/html/html_attributes.asp).
+1. Screen items have titles that are displayed on hover. If text or labels are missing from the screen, use the `TITLE` attribute to display them. If the `TITLE` attribute cannot display the information, use `aria-label`. For more information about HTML attributes, see [https://www.w3schools.com/html/html_attributes.asp](https://www.w3schools.com/html/html_attributes.asp).
 
-1. Screen contrast has a minimum value. If the contrast is too low, use the WCAG color contrast tool that is located at [http://leaverou.github.io/contrast-ratio/](http://leaverou.github.io/contrast-ratio/) to adjust colors.
+1. Screen contrast has a minimum value. If the contrast is too low, use the WCAG color contrast tool that is located at [https://leaverou.github.io/contrast-ratio/](https://leaverou.github.io/contrast-ratio/) to adjust colors.
 
 <a name="accessibility-before-testing"></a>
 ### Before testing
@@ -105,15 +105,15 @@ The following Websites provide accessibility test engines.
 
 | Name                                                                                       	| Purpose                                                	|
 |--------------------------------------------------------------------------------------------	|--------------------------------------------------------	|
-| [aXe: the Accessibility Engine](http://www.deque.com/products/axe/)                        	| An open source rules library for accessibility testing 	|
-| [Accessibility testing in Chrome Developer Tools](http://bitly.com/aXe-Chrome)             	| Chrome plugin                                          	|
+| [aXe: the Accessibility Engine](https://www.deque.com/products/axe/)                        	| An open source rules library for accessibility testing 	|
+| [Accessibility testing in Chrome Developer Tools](https://bitly.com/aXe-Chrome)             	| Chrome plugin                                          	|
 | [aXe Developer Tools](http://bit.ly/aXe-Firefox)                                           	| Firefox plugin                                         	|
 | [Accessibility engine for automated Web UI testing](https://github.com/dequelabs/axe-core) 	| axe-core (unit testing)                                	|
 
 <a name="accessibility-troubleshooting-issues"></a>
 ### Troubleshooting issues
 
-After developing and testing an extension for accessibility, if there are still issues, they may be known by the Framework team. Review [this site](http://vstfrd:8080/Azure/RD/_workitems#path=Shared+Queries%2FAUX%2FIbiza%2FAccessibility%2FIbiza+Accessibility+-+Triaged+Active&_a=query) to determine whether there are any known issues. If this is a new issue, you can file a Framework bug [here](http://aka.ms/portalfx/accessibility/bug) on controls owned by the Framework.
+After developing and testing an extension for accessibility, if there are still issues, they may be known by the Framework team. Review [this site](http://vstfrd:8080/Azure/RD/_workitems#path=Shared+Queries%2FAUX%2FIbiza%2FAccessibility%2FIbiza+Accessibility+-+Triaged+Active&_a=query) to determine whether there are any known issues. If this is a new issue, you can file a Framework bug [here](https://aka.ms/portalfx/accessibility/bug) on controls owned by the Framework.
 
 <a name="accessibility-accessibility-planning"></a>
 ### Accessibility Planning
@@ -225,11 +225,11 @@ For more information about developing extensions with accessibility, see the fol
 - [Trusted Tester with Keros (internal only)](https://www.1eswiki.com/wiki/Trusted_Tester_with_Keros#What_is_Trusted_Tester.3F)
 - [What is Keros? (internal only) Baseline accessibility assessment (internal only)](https://www.1eswiki.com/wiki/Trusted_Tester_with_Keros#What_is_Keros.3F)
 - [Full MAS compliance assessment (internal only)](https://www.1eswiki.com/wiki/Trusted_Tester_with_Keros#Full_MAS_compliance_assessment)
-- [WCAG color contrast tool](http://leaverou.github.io/contrast-ratio/)
-- [WebAIM Accessibility](http://webaim.org/articles/)
-- [AAA guidelines](http://www.interactiveaccessibility.com/web-accessibility-guidelines)
+- [WCAG color contrast tool](https://leaverou.github.io/contrast-ratio/)
+- [WebAIM Accessibility](https://webaim.org/articles/)
+- [AAA guidelines](https://www.interactiveaccessibility.com/web-accessibility-guidelines)
 - [Natural tab order](https://www.paciellogroup.com/blog/2014/08/using-the-tabindex-attribute/)
-- [Web semantics](http://www.w3schools.com/html/html5_semantic_elements.asp)
+- [Web semantics](https://www.w3schools.com/html/html5_semantic_elements.asp)
 
 <a name="accessibility-best-practices"></a>
 ### Best Practices
@@ -238,7 +238,7 @@ For more information about developing extensions with accessibility, see the fol
 
 1. Use Portal tiles/parts, forms, and controls whenever possible, as those are designed to be accessible
 
-1. Use HTML semantics when using custom HTML, as described in http://www.w3schools.com/html/html5_semantic_elements.asp. For example, create buttons with the BUTTON tag instead of a styled DIV tag.
+1. Use HTML semantics when using custom HTML, as described in https://www.w3schools.com/html/html5_semantic_elements.asp. For example, create buttons with the BUTTON tag instead of a styled DIV tag.
 
 1. Avoid using aria-* attributes. If you find yourself using those attributes, review your design and try to use HTML semantics as much as possible.
 

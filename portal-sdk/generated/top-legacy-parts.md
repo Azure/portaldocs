@@ -71,7 +71,7 @@ The following example of a Button part contains an icon and a label that navigat
 
 * `<dir>\Client\V1\Parts\Intrinsic\ViewModels\ButtonPartViewModel.ts`
 
-A working copy of the sample is located at [http://aka.ms/portalfx/samples#blade/SamplesExtension/ButtonPartIntrinsicInstructions/selectedItem/ButtonPartIntrinsicInstructions/selectedValue/ButtonPartIntrinsicInstructions](http://aka.ms/portalfx/samples#blade/SamplesExtension/ButtonPartIntrinsicInstructions/selectedItem/ButtonPartIntrinsicInstructions/selectedValue/ButtonPartIntrinsicInstructions).
+A working copy of the sample is located at [https://aka.ms/portalfx/samples#blade/SamplesExtension/ButtonPartIntrinsicInstructions/selectedItem/ButtonPartIntrinsicInstructions/selectedValue/ButtonPartIntrinsicInstructions](https://aka.ms/portalfx/samples#blade/SamplesExtension/ButtonPartIntrinsicInstructions/selectedItem/ButtonPartIntrinsicInstructions/selectedValue/ButtonPartIntrinsicInstructions).
 
 The following procedure demonstrates how to use a button part.
 
@@ -130,7 +130,7 @@ The following is an example of a custom part. The three files used for the custo
 
 * `<dir>\Client\V1\Parts\Custom\ViewModels\ExampleCustomPartViewModel.ts`
 
-A working copy is located at [http://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/custompart](http://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/custompart).
+A working copy is located at [https://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/custompart](https://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/custompart).
 
 The following procedure demonstrates how to use a custom part.
 
@@ -302,7 +302,7 @@ If the part that is being developed is associated with an Ibiza asset like an AR
 
 There is a significant amount of flexibility when sizing extension tiles. All size options are included in the `<CustomPart>` tag in the PDL file located at `<dir>\Client/V1/Parts/PartSizes/PartSizes.pdl`.
 
-A working copy is located at [http://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/partsizes](http://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/partsizes).
+A working copy is located at [https://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/partsizes](https://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/partsizes).
 
 1. The following part supports only the large, standard size.
 

@@ -416,22 +416,22 @@ There are several options for dynamic definition of a grid.
 - [Editable Grid Sample][EditableSample]
 - [All Controls in a Grid Sample][AllControlsSample]
 
-[GridSamples]: http://aka.ms/portalfx/samples#blade/SamplesExtension/GridInstructions/selectedItem/GridInstructions/selectedValue/GridInstructions
-[BasicSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/BasicGridInstructions
-[FormattedSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/FormattedGridInstructions
-[SelectableSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/SelectableGridInstructions
-[ContextMenuSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/ContextMenuShortcutGridInstructions
-[GroupedSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/GroupedGridInstructions
-[FilterableSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/FilterableGridInstructions
-[PageableSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/PageableGridInstructions
-[HierarchicalSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/HierarchicalGridInstructions
-[ScrollableSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/ScrollableGridInstructions
-[SortableSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/SortableColumnGridInstructions
-[ReorderSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/ReorderGridInstructions
-[ResizeableSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/ResizableColumnGridInstructions
-[EditableSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/EditableGridInstructions
-[AllControlsSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/AllControlsGridInstructions
-[PageableHierarchicalSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/PageableHierarchicalGridInstructions
-[WorkitemScenarioSample]: http://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/scenariosworkitem
+[GridSamples]: https://aka.ms/portalfx/samples#blade/SamplesExtension/GridInstructions/selectedItem/GridInstructions/selectedValue/GridInstructions
+[BasicSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/BasicGridInstructions
+[FormattedSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/FormattedGridInstructions
+[SelectableSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/SelectableGridInstructions
+[ContextMenuSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/ContextMenuShortcutGridInstructions
+[GroupedSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/GroupedGridInstructions
+[FilterableSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/FilterableGridInstructions
+[PageableSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/PageableGridInstructions
+[HierarchicalSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/HierarchicalGridInstructions
+[ScrollableSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/ScrollableGridInstructions
+[SortableSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/SortableColumnGridInstructions
+[ReorderSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/ReorderGridInstructions
+[ResizeableSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/ResizableColumnGridInstructions
+[EditableSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/EditableGridInstructions
+[AllControlsSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/AllControlsGridInstructions
+[PageableHierarchicalSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/PageableHierarchicalGridInstructions
+[WorkitemScenarioSample]: https://aka.ms/portalfx/samples#blade/SamplesExtension/SDKMenuBlade/scenariosworkitem
 [IntlAPIDateTime] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat
 [IntlAPINumber] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat

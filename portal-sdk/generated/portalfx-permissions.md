@@ -18,7 +18,7 @@ In addition to the built-in roles, AAD will soon introduce new roles to manage g
 
 Actions are specific operations, like create a website or backup a database. Instead of checking for roles, your UI needs to check for the specific actions required by that UI element, whether it be a blade, part, command, form, or individual control. This will be especially critical when custom roles are available.
 
-For more information, read the full [RBAC documentation](http://aka.ms/azurerbac).
+For more information, read the full [RBAC documentation](https://aka.ms/azurerbac).
 
 
 <a name="principles"></a>
@@ -364,5 +364,3 @@ MsPortalFx.Extension.hasPermission(​resourceUri, ​["rdfe"]​).then((hasAcce
     /* do awesome stuff */ ​
 });
 ```
-
-

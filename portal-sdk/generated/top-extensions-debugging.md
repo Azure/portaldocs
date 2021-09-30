@@ -11,7 +11,7 @@ Other samples and tools are also available to assist in the debugging process.  
 
 Here are a few tips that help get extension development back on track. If you still have questions, reach out to Ibiza team by using the Stackoverflow tags as specified in [StackOverFlow Forums](portalfx-stackoverflow.md).
 
-To test your local extension against the production portal, see [top-extensions-sideloading.md](top-extensions-sideloading.md).  
+To test your local extension against the production portal, see [top-extensions-sideloading.md](top-extensions-sideloading.md).
 
 For more information about deploying the extension, see [portalfx-deployment.md](portalfx-deployment.md).
 
@@ -90,11 +90,11 @@ The `IsDevelopmentMode` setting can be used on the server to alter the default o
 
 The Portal tracks the state of the desktop for users as they navigate through the Portal. It stores the list of opened blades, active journeys, part selection status, and various other states of the Portal. At development time, it is often necessary to clear this information. If new parts are not displayed as expected, this is often the cause.
 
-The default settings can be restored by  using the Settings pane, which is activated by clicking on the `settings` icon in the navigation bar, as in the following image.  
+The default settings can be restored by  using the Settings pane, which is activated by clicking on the `settings` icon in the navigation bar, as in the following image.
 
  ![alt-text](../media/top-extensions-debugging/settings.png "Settings Pane")
 
-Next, click the `Restore default settings` option, as in the following image.  
+Next, click the `Restore default settings` option, as in the following image.
 
  ![alt-text](../media/top-extensions-debugging/restoreDefaultSettings.png "Restore Settings")
 
@@ -119,7 +119,7 @@ If the extension is not loaded, or if the extension site is not running, another
 ## Debug console errors
 
 The Portal logs a significant amount of information into the browser developer console. Often this surfaces common errors and problems.
-Most modern browsers include tools that make it easy to debug JavaScript. To understand how the JavaScript debugging tools work in **Chrome**, view  "Chrome DevTools Overview" that is located at [https://developer.chrome.com/devtools](https://developer.chrome.com/devtools). For **Microsoft Edge**, the F12 tools guide is located at [https://docs.microsoft.com/en-us/microsoft-edge/f12-devtools-guide/debugger](https://docs.microsoft.com/en-us/microsoft-edge/f12-devtools-guide/debugger). The debugging tools in other popular browsers are outside of the scope of this document.  The following examples demonstrate Azure debugging techniques using the tools in **Internet Explorer**.  
+Most modern browsers include tools that make it easy to debug JavaScript. To understand how the JavaScript debugging tools work in **Chrome**, view  "Chrome DevTools Overview" that is located at [https://developer.chrome.com/devtools](https://developer.chrome.com/devtools). For **Microsoft Edge**, the F12 tools guide is located at [https://docs.microsoft.com/en-us/microsoft-edge/f12-devtools-guide/debugger](https://docs.microsoft.com/en-us/microsoft-edge/f12-devtools-guide/debugger). The debugging tools in other popular browsers are outside of the scope of this document.  The following examples demonstrate Azure debugging techniques using the tools in **Internet Explorer**.
 
 To open up the **Internet Explorer** debugger tools, click the **F12** key. The console will not start logging messages unless it is already opened.  After opening the developer tools in the browser, locate and open the console, as in the following image.
 
@@ -181,11 +181,11 @@ Often, the focus of debugging is not the contents of the data variables,  but ra
 The JavaScript `debugger` keyword, as described in  [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger), will tell the browser to break when the code encounters the keyword. The process to do this is as follows.
 
 1. Access the ViewModel by using  `ko.dataFor`, as in the following statement.
-  
+
     ```var myProperty = ko.dataFor($0).observablePropertyICareAbout;```
 
 1. Subscribe to the ViewModel, as in the following statement.
-  
+
     ```myProperty.subscribe(function (value) { debugger; })```
 
 This causes the debugger to break whenever the specified property changes, as long as the browser dev tools are open when that happens. After the injected breakpoint is encountered, the call stack can be examined to determine what caused this to trigger. The variable `value` is the new value being set to your observable.
@@ -224,7 +224,7 @@ For more information:
 
 * Knockout.js Troubleshooting Strategies
 
-    [http://www.knockmeout.net/2013/06/knockout-debugging-strategies-plugin.html](http://www.knockmeout.net/2013/06/knockout-debugging-strategies-plugin.html)
+    [https://www.knockmeout.net/2013/06/knockout-debugging-strategies-plugin.html](https://www.knockmeout.net/2013/06/knockout-debugging-strategies-plugin.html)
 
 * Essential Knockout and JavaScript Tips
 

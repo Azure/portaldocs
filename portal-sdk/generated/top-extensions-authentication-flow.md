@@ -15,15 +15,15 @@ The following is the signin process that is performed by the Portal.
 
 1. User browses to the Portal.
 
-1. The Portal redirects to AAD to sign in. 
+1. The Portal redirects to AAD to sign in.
 
-1. AAD redirects to the `portal.azure.com/signin` with an id_token. The audience of the id_token is the Azure Portal app.
+1. AAD redirects to the `portal.azure.com/signin/index/` with an id_token. The audience of the id_token is the Azure Portal app.
 
 1. The Portal server exchanges this code for an access token. This refresh token is returned to the browser, as part of the Portal Shell UI and is stored in memory.
 
 1. When the user triggers the loading of the extension, the extension home page is downloaded from the location in the extension configuration, as specified in [portalfx-extensions-configuration-overview.md](portalfx-extensions-configuration-overview.md). This provides information required by the Shell to bootstrap the extension UI.
 
-1. When an extension asks for a token, it makes a request to the Portal `DelegationToken` controller endpoint. This endpoint requires the refresh token that was just acquired, in addition to the extension name and the resource name that the extension requested. This endpoint returns access tokens to the browser. 
+1. When an extension asks for a token, it makes a request to the Portal `DelegationToken` controller endpoint. This endpoint requires the refresh token that was just acquired, in addition to the extension name and the resource name that the extension requested. This endpoint returns access tokens to the browser.
 
     * Sample request:
         ```
@@ -36,23 +36,23 @@ The following is the signin process that is performed by the Portal.
     * Sample response:
         ```
         "value":{
-        "authHeader":"Bearer eyJ0...",
-        "authorizationHeader":"Bearer ...",
-        "expiresInMs":3299000,
-        "refreshToken":"MIIF...",
-        "error":null,
-        "errorMessage":null
+            "authHeader":"Bearer eyJ0...",
+            "authorizationHeader":"Bearer ...",
+            "expiresInMs":3299000,
+            "refreshToken":"MIIF...",
+            "error":null,
+            "errorMessage":null
         },
         "portalAuthorization":"MIIF..."
         ```
 
-    **NOTE**: Tokens are cached in memory on the server. In this example, the `resourceName:self` indicates that this extension only calls itself from the client.
+    **NOTE**: Tokens are cached in memory on the server. In this example, the `resourceName: self` indicates that this extension only calls itself from the client.
 
-1. Now the extension's client side can call server side API's, or call external services directly. 
+1. Now the extension's client side can call server side API's, or call external services directly.
 
-    * Server side API 
+    * Server side API
 
-        The extension's server-side code can exchange its current access token for another access token that allows it to use resources, as described in [http://aka.ms/portalfx/onbehalfof](http://aka.ms/portalfx/onbehalfof). The developer manages the permissions and dependencies for the extension by registering the application and coordinating with AAD Onboarding, as specified in [portalfx-extensions-onboarding-aad.md](portalfx-extensions-onboarding-aad.md). The registered  extension's server side code exchanges its access token for an access token for AAD Graph. 
+        The extension's server-side code can exchange its current access token for another access token that allows it to use resources, as described in [https://aka.ms/portalfx/onbehalfof](https://aka.ms/portalfx/onbehalfof). Details of how this is achieved is outlined in [top-extensions-authentication-procedures.md](top-extensions-authentication-procedures.md)
 
     *  Direct external services call
 

@@ -53,6 +53,15 @@
     - [Experimenting with extensible commands in browse command bar](#experimenting-with-extensible-commands-in-browse-command-bar)
       - [How to force a specific treatment variable with query strings for local testing](#how-to-force-a-specific-treatment-variable-with-query-strings-for-local-testing)
       - [How to experiment with a new command](#how-to-experiment-with-a-new-command)
+- [Merging Resource Types and Kinds](#merging-resource-types-and-kinds)
+  - [Adding Additional Resource Type or Types to an Existing Asset Type](#adding-additional-resource-type-or-types-to-an-existing-asset-type)
+    - [Original Asset Type and Query](#original-asset-type-and-query)
+    - [Step One - Add the Merged Resource Type](#step-one---add-the-merged-resource-type)
+    - [Step Two - Alter the Query to Include Both Resource Types](#step-two---alter-the-query-to-include-both-resource-types)
+    - [Step Three - Add the new Asset Type](#step-three---add-the-new-asset-type)
+  - [Merging Resources only with Specific Kind](#merging-resources-only-with-specific-kind)
+  - [Controlling Initial Selection of Merged Resource Types](#controlling-initial-selection-of-merged-resource-types)
+  - [Using Virtual Asset Types with Merged Resource Types](#using-virtual-asset-types-with-merged-resource-types)
 - [Curating browse assets](#curating-browse-assets)
 - [Providing a Custom Browse Hub](#providing-a-custom-browse-hub)
   - [Providing Menu Items for Related Asset Types](#providing-menu-items-for-related-asset-types)
@@ -98,7 +107,7 @@ In this section we will explore the following:
 That's it, you can see an example of that below
 
 DX.json:
-```json
+```jsonc
 "assetType": {
     "name": "Book",
     //...
@@ -143,7 +152,7 @@ All asset types have the following requirements:
 To define your asset type, simply add the following snippet to PDL:
 
 DX.json:
-```json
+```jsonc
 "assetType": {
     "name": "MyAsset",
     "service": { "property": "MyAsset.service", "module": "../../ClientResources" },
@@ -295,7 +304,7 @@ You can hide or show your asset in different environments by setting the assetty
 structure which allows changing not only asset types, but also hiding and showing asset instances in browse and global search as well as hiding and showing
 asset instances with a specific resource kind. *This supersedes the legacy hideassettypes extension feature flag.*
 
-```json
+```jsonc
     {
         "assettypeoptions": {
           "YOUR_ASSET_NAME": { "options": "HideAssetType" },
@@ -320,7 +329,7 @@ The case of empty string strips off any visibility options provided in PDL. The 
 
 As mentioned above, visibility of instances with a specific resource kind can also be controlled if the kind is specified in the PDL:
 
-```json
+```jsonc
     {
         "assettypeoptions": {
           "YOUR_ASSET_NAME": { "options": "HideAssetType" },
@@ -346,7 +355,7 @@ This now reads the config JSON file for the appropriate environment, so follow t
 
 If you’re using the hosting service, you can do this by updating your domainname.json (e.g. portal.azure.cn.json file)
 
-```json
+```jsonc
     {
         "assettypeoptions": {
           "YOUR_ASSET_NAME": { "options": "HideAssetType" },
@@ -427,7 +436,7 @@ ways for grouping kinds together when browsing to those kinds. There are two opt
     - Similar to kind groups merged kinds will group various kinds together and present them in a single view, except merged kind forces any instance of the individual kinds to be viewed as the merged view.  In JSON, the kind object should include a `mergedKinds` property which is the array of kind objects to be merged together.  In PDL use `MergedKind` instead of `Kind` for the merged kinds and include `Kind` entries inside.
 
 DX.json:
-```json
+```jsonc
 // This asset type represents a watch instance.
 
 // An asset type represents an asset object in the system independent of other objects in the system.
@@ -657,7 +666,7 @@ For the type display name, the kind can override the values on the asset type. T
 Just as the type display name, blade, part and icon can be overridden per kind in the Kind entries, visibility of the
 kind and instances of resources of the kind can be overridden using the Options property on the Kind.
 
-```json
+```jsonc
     {
         "assettypeoptions": {
           "YOUR_ASSET_NAME": { "kinds": { "apple": { "options": "ShowInstances" }, "lg": { "options": "HideAssetType" } } }
@@ -735,7 +744,7 @@ hide resources with and without kinds to provide the appropriate experience for 
 To allow people to create new resources from Browse, you can associate your asset type with a Marketplace item or category:
 
 DX.json:
-```json
+```jsonc
 "assetType": {
     "name": "Book",
     "create": {
@@ -781,7 +790,7 @@ The framework offers the ability to display a description and links in the case 
 To opt in to this experience you need to provide a `description` and a `link`, these are properties that you provide on your Asset.
 
 DX.json:
-```json
+```jsonc
 "assetType": {
     "name": "MyAsset",
     // ...
@@ -810,8 +819,8 @@ DX.json:
     ...
     Description="{Resource MyAsset.description, Module=ClientResources}">
     ...
-    <Link Title="{Resource MyAsset.linkTitle1, Module=ClientResources}" Uri="http://www.bing.com"/>
-    <Link Title="{Resource MyAsset.linkTitle2, Module=ClientResources}" Uri="http://www.bing.com"/>
+    <Link Title="{Resource MyAsset.linkTitle1, Module=ClientResources}" Uri="https://www.bing.com"/>
+    <Link Title="{Resource MyAsset.linkTitle2, Module=ClientResources}" Uri="https://www.bing.com"/>
     ...
   </AssetType>
 ```
@@ -1002,7 +1011,7 @@ To define a custom column you will need to create a `columns` property within yo
 A column has 5 required properties.
 
 DX.json:
-```json
+```jsonc
 "columns": [
     {
         "name": "status",
@@ -1198,7 +1207,7 @@ In the above query example there are 4 custom columns, the below Asset `PDL` dec
 It also declares the default columns and their ordering for what a new user of the browse experience should see.
 
 DX.json:
-```json
+```jsonc
 "assetType": {
     // other asset type properties
     "browse": {
@@ -1264,9 +1273,9 @@ DX.json:
 If you need to display an informational message and/or link above the list of resources, add a `infoBox` to your `browse` in JSON (or `BrowseInfoBox` to your Browse in PDL):
 
 DX.json:
-```json
+```jsonc
 "assetType": {
-    "name": "MyAsset"
+    "name": "MyAsset",
     // other asset type properties
     "browse": {
         "type": "ResourceType",
@@ -1285,9 +1294,9 @@ DX.json:
 
 or
 
-```json
+```jsonc
 "assetType": {
-    "name": "MyAsset"
+    "name": "MyAsset",
     // other asset type properties
     "browse": {
         "type": "ResourceType",
@@ -1362,7 +1371,7 @@ Per Asset you can configure extension side feature flags to control the release 
 
 Within your extension config, either hosting service or self hosted, you will need to specify config for your assets with one of the following:
 
-```json
+```jsonc
 {
     "argbrowseoptions": {
         "YOUR_ASSET_NAME": "OPTION_FROM_THE_TABLE_BELOW",
@@ -1403,7 +1412,7 @@ In addition, we are also adding extension-provided columns for browse for a spec
 There are cases where a column is simply not useful as a summary. The `Column` can be marked with the `PreventSummary` property:
 
 DX.json:
-```json
+```jsonc
 "columns": [
   {
     "name": "someColumn",
@@ -1438,7 +1447,7 @@ In addition, all columns with the `Format` of `BladeLink` are excluded from summ
 There are cases where the default visualizations for location-based columns (map, bar chart, donut chart and grid) or non-location-based columns (bar chart, donut chart and grid) are not desirable. The `Column` can be marked with the `SummaryVisualizations` property:
 
 DX.json:
-```json
+```jsonc
 "columns": [
   {
     "name": "someColumn",
@@ -1485,7 +1494,7 @@ The order of the visualizations does not matter and will not change the order of
 If you have a column which doesn't map well to a straight `count() of column` summarization, you can provide queries to change the summarization for the columns. If the summarization is based on an existing column (has a `Column` value), only the `summaryQuery` property needs to be set on the `Column`:
 
 DX.json:
-```json
+```jsonc
 "columns": [
   {
     "name": "someColumn",
@@ -1523,7 +1532,7 @@ The result of the count summarization must be the column name with `Count` appen
 If a new column must be generated for the summarize, however, then the `columnQueryForSummary` property must point to a query which will produce (extend) that new column separately from the `summaryQuery` because the summary view drill down blade will use that portion of the query to provide the list of resources that match the clicked value:
 
 DX.json:
-```json
+```jsonc
 "columns": [
   {
     "name": "someColumn",
@@ -2304,7 +2313,7 @@ You can specify a comma separated list of asset command ids or "*" to hide all t
 
 If you’re using the hosting service, you can do this by updating the relevant environment configuration file (e.g. portal.azure.cn.json file)
 
-```json
+```jsonc
     {
         "hideAssetTypeCommands": {
           "YOUR_ASSETTYPE_NAME_DEFINED_IN_PDL": ["YOUR_COMMAND_ID_TO_HIDE"],
@@ -2402,7 +2411,7 @@ i.e."commandBarLayout1" or "commandBarLayout2" or "commandBarLayout3"
    - Extension authors must specify the environment filter in Control Tower. Experimentation changes will only affect the environment based on this filter (e.g MPAC, RC).
 
 2. Extension authors define the map of different browse command bar layouts that are part of given experiment in their environmental config files. i.e. default.json
-```json
+```jsonc
         {
             "assetTypeBrowseCommandsExperiments": {
                 "VirtualMachines": {
@@ -2455,7 +2464,7 @@ If you are looking to enable a new command in browse command bar only for certai
 ```
 
 In the environment config, you can specify this command id for one of your layouts and users hitting the flight with that experiment will only see the new command in browse command bar. e.g:
- ```json
+ ```jsonc
     {
         "assetTypeBrowseCommandsExperiments": {
             "VirtualMachines": {
@@ -2469,6 +2478,383 @@ In the environment config, you can specify this command id for one of your layou
             }
         }
     }
+```
+
+# Merging Resource Types and Kinds
+
+Often there are multiple resource types which may have a different namespace (RP) or type but from the customer's perspective are the same or closely related.  To enforce that mental map of being similar, it is often advantageous to keep those resources together and show more than one resource type or a combination of resource type and kind in a singular browse list.  The merged resource types feature allows this by allowing multiple resource types and/or kinds in a single browse list.  Normally a browse list using the Azure Resource Graph is a list of a single resource type (or all resource types).  By specifying additional merged resource types however, more than one resource type will appear in browse merged into a single list.
+
+## Adding Additional Resource Type or Types to an Existing Asset Type
+
+The simple case is where a new resource type should appear with an existing set of resources.  In this case, simply add a new asset type for the new resource type and then add the resource type as a merged resource type to the browse of the original asset type.  The new asset type is required for the type display name, the icon, the blade and any other associated properties for the new resource type.
+
+### Original Asset Type and Query
+
+DX.json:
+```json
+"assetType": {
+  "name": "OriginalAsset",
+  // ...
+  "browse": {
+    "type": "ResourceType",
+    "query": { "file": "./OriginalAssetQuery.kml" },
+    "defaultColumns": ["status", "FxColumns.AssetType", "technology"],
+    "columns": [
+        // ...
+    ]
+  },
+  "resourceType": {
+    "name": "Microsoft.Test/originalresources",
+    "apiVersion": "2020-01-31"
+  },
+  // ...
+}
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
+```xml
+<AssetType Name="OriginalAsset"
+           ...>
+  <Browse Type="ResourceType"
+          Query="{Query File=./OriginalAssetQuery.kml}"
+          DefaultColumns="status, FxColumns.AssetType, technology">
+    ...
+  </Browse>
+  <ResourceType ResourceTypeName="Microsoft.Test/originalresources"
+                ApiVersion="2017-04-01" />
+  ...
+</AssetType>
+```
+</p>
+</details>
+
+Query:
+```kusto
+resources
+| where type =~ 'microsoft.test/originalresources'
+// ...
+| project id, name, type, location, subscriptionId, resourceGroup, kind, tags, status, statusIcon, technology
+```
+
+### Step One - Add the Merged Resource Type
+
+Add the `mergedResourceTypes` array to the `browse` object in JSON (or add a `MergedResourceType` entry to the `Browse` entry in PDL).  The `name` property should be the full name like the `name` property on the `resourceType` object in JSON (or `ResourceTypeName` property on the `ResourceType` entry in PDL).
+
+DX.json:
+```json
+"assetType": {
+  "name": "OriginalAsset",
+  // ...
+  "browse": {
+    "type": "ResourceType",
+    "query": { "file": "./OriginalAssetQuery.kml" },
+    "defaultColumns": ["status", "FxColumns.AssetType", "technology"],
+    "columns": [
+        // ...
+    ],
+    "mergedResourceTypes": [{ "name": "microsoft.test/newresources" }]
+  },
+  "resourceType": {
+    "name": "Microsoft.Test/originalresources",
+    "apiVersion": "2020-01-31"
+  },
+  // ...
+}
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
+```xml
+<AssetType Name="OriginalAsset"
+           ...>
+  <Browse Type="ResourceType"
+          Query="{Query File=./OriginalAssetQuery.kml}"
+          DefaultColumns="status, FxColumns.AssetType, technology">
+    ...
+    <MergedResourceType ResourceTypeName="Microsoft.Test/newresources" />
+  </Browse>
+  <ResourceType ResourceTypeName="Microsoft.Test/originalresources"
+                ApiVersion="2020-01-31" />
+  ...
+</AssetType>
+```
+</p>
+</details>
+
+### Step Two - Alter the Query to Include Both Resource Types
+
+Updated Query:
+```kusto
+resources
+| where type =~ ('microsoft.test/originalresources', 'microsoft.test/newresources')
+// ...
+| project id, name, type, location, subscriptionId, resourceGroup, kind, tags, status, statusIcon, technology
+```
+
+Using the 'in' operator is an efficient way to check for multiple resource types.  If the columns need to be generated from different properties, be sure to use the `extend` operator in the query to ensure valid values are used from both or if properties are only available from one resource type, it is advisable to `extend` null into the column when appropriate.
+
+### Step Three - Add the new Asset Type
+
+Provide the new asset type for the new resource type.  It is a good idea to merge in the original resource type from the new resource type (that way the merge will go both ways).  Here we reuse the query from the original asset type since the query should be the same.  Provide the new icon, localizable display names, blades and optional parts for the new asset type.
+
+DX.json:
+```json
+"assetType": {
+  "name": "NewAsset",
+  // ...
+  "browse": {
+      "type": "ResourceType",
+      "query": { "file": "./OriginalAssetQuery.kml" }, // reuse query
+      "defaultColumns": ["status", "FxColumns.AssetType", "technology"],
+      "columns": [
+          // ...
+      ],
+      "mergedResourceTypes": [{ "name": "microsoft.test/originalresources" }]
+  },
+  "resourceType": {
+      "name": "Microsoft.Test/newresources",
+      "apiVersion": "2021-01-31"
+  },
+  // ...
+}
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
+```xml
+<AssetType Name="NewAsset"
+           ...>
+ <Browse Type="ResourceType"
+         Query="{Query File=./OriginalAssetQuery.kml}" // reuse query
+         DefaultColumns="status, FxColumns.AssetType, technology">
+  ...
+  <MergedResourceType ResourceTypeName="Microsoft.Test/originalresources" />
+ </Browse>
+ <ResourceType ResourceTypeName="Microsoft.Test/newresources"
+               ApiVersion="2021-01-31" />
+  ...
+</AssetType>
+```
+</p>
+</details>
+
+If the new asset type should not appear in the all services menu as a separate entry, you can mark the new asset type as 'HideAssetType' using the asset type 'options' property in JSON (or 'Options' property in PDL).
+
+## Merging Resources only with Specific Kind
+
+It is possible to merge resources from another resource type which have a specific kind.
+
+DX.json:
+```json
+"assetType": {
+  "name": "OriginalAsset",
+  // ...
+  "browse": {
+    // ...
+    "mergedResourceTypes": [
+      { "name": "microsoft.test/newresources", "kind": "bluekind" },
+      { "name": "microsoft.Test/newresources2", "kind": "roundkind", 
+        "additionalKinds": ["squarekind", "pentagonkind"] }
+    ]
+  },
+  "resourceType": {
+      "name": "Microsoft.Test/originalresources",
+      "apiVersion": "2020-01-31"
+  },
+  // ...
+}
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
+```xml
+<AssetType Name="OriginalAsset"
+           ...>
+  <Browse ...>
+    ...
+    <MergedResourceType ResourceTypeName="Microsoft.Test/newresources" ResourceKindName="bluekind" />
+    <MergedResourceType ResourceTypeName="Microsoft.Test/newresources2" ResourceKindName="roundkind">
+      <AdditionalKind ResourceKindName="squarekind" />
+      <AdditionalKind ResourceKindName="pentagonkind" />
+    </MergedResourceType>
+  </Browse>
+  <ResourceType ResourceTypeName="Microsoft.Test/originalresources"
+                ApiVersion="2020-01-31" />
+  ...
+</AssetType>
+```
+</p>
+</details>
+
+Also, as shown, it is possible to include multiple kinds by using the `additionalKinds` property in JSON (or `AdditionalKind` entries on the `MergedResourceKind` entry in PDL).
+
+## Controlling Initial Selection of Merged Resource Types
+
+By default, when browse sees any merged resource types, those types will be "filtered in" (shown) by default when browse first loads.  However, it is possible to control the default visibility of the merged resource types.  This is often useful when provide different virtual asset types where one asset type will show all resource types by default and another will selectively show resources.  The user can alway use the type filter to alter visilibility from the initial view, but this allows the initial view to be controlled.  The `mergedResourceType` has a `selected` property in JSON (or the `MergedResourceType` entry has a `Selected` property in PDL) which will control the initial visibility.  In the following example, the original resources and the new resources will be shown by design, but the new resources 2 will not be shown until the user changes the type filter.
+
+DX.json:
+```json
+"assetType": {
+  "name": "OriginalAsset",
+  // ...
+  "browse": {
+    // ...
+    "mergedResourceTypes": [
+      { "name": "microsoft.test/newresources", "selected": "true" },
+      { "name": "microsoft.Test/newresources2", "selected": "false" }
+    ]
+  },
+  "resourceType": {
+      "name": "Microsoft.Test/originalresources",
+      "apiVersion": "2020-01-31"
+  },
+  // ...
+}
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
+```xml
+<AssetType Name="OriginalAsset"
+           ...>
+  <Browse ...>
+    ...
+    <MergedResourceType ResourceTypeName="Microsoft.Test/newresources" Selected="true" />
+    <MergedResourceType ResourceTypeName="Microsoft.Test/newresources2" Selected="false" />
+  </Browse>
+  <ResourceType ResourceTypeName="Microsoft.Test/originalresources"
+                ApiVersion="2020-01-31" />
+  ...
+</AssetType>
+```
+</p>
+</details>
+
+## Using Virtual Asset Types with Merged Resource Types
+
+We have been asked a few times how to provide browse entries for different combinations of merged resource types, sometimes with different initial visibility, or providing different browse hub options.  The best way of handling this situations to by using the concept of "virtual asset types".  Virtual asset types are asset types with a "fake" or "virtual" resource type.  That is, a resource type which does not actually exist in the given namespace (RP).  These are useful for providing an all services (and global search) entry with specific merged resources.
+
+An example of this would be a collection of related resources where there is a resource which is a child of a server where the server and the resource are closely related and there is a desire to show both resources together.  However, the partner team would like to show the combined view (the "uber" view) from one all services entry and individual resources from separate entries (there may be existing entries and favorites which are important to maintain).  Here is an example:
+
+Asset Type / All Services Entry|Resources to Show
+---|---
+Operating Systems|Operating System Servers + Operating System Instances
+Operating System Servers|Operating System Servers
+Operating System Instances|Operating System Instances
+
+In this case, there should be three asset types - one virtual asset type for the Operating Systems entry and one real asset type for the Operating System Servers and Operating System Instances respectively.  The Operating Systems virtual asset type needs to have a virtual resource type and **our recommendation is that the resource type use the same (or the common) namespace and use a resource type that will not be added in the future**.  The other asset types would then use the concrete (or actual) resource types.
+
+DX.json:
+```json
+"assetType": {
+  "name": "OperatingSystem",
+  // ...
+  "browse": {
+    // ...
+    "mergedResourceTypes": [
+      { "name": "microsoft.os/servers" },   // real resource type
+      { "name": "microsoft.os/instances" }  // real resource type
+    ]
+  },
+  "resourceType": {
+      "name": "microsoft.os/virtual_operatingsystems",  // virtual resource type (same namespace)
+      "apiVersion": "2021-01-31"
+  },
+  // ...
+},
+"assetType": {
+  "name": "OperatingSystemServer",
+  // ...
+  "browse": {
+    // ...
+  },
+  "resourceType": {
+      "name": "microsoft.os/servers",  // real resource type
+      "apiVersion": "2020-01-31"
+  },
+  // ...
+},
+"assetType": {
+  "name": "OperatingSystemInstance",
+  // ...
+  "browse": {
+    // ...
+  },
+  "resourceType": {
+      "name": "microsoft.os/instances",  // real resource type
+      "apiVersion": "2020-05-25"
+  },
+  // ...
+}
+```
+<details>
+<summary>Legacy PDL</summary>
+<p><!-- do not remove following empty line -->
+
+```xml
+<AssetType Name="OperatingSystem"
+           ...>
+  <Browse ...>
+    ...
+    <MergedResourceType ResourceTypeName="microsoft.os/servers" />
+    <MergedResourceType ResourceTypeName="microsoft.os/instances" />
+  </Browse>
+  <ResourceType ResourceTypeName="microsoft.os/virtual_operatingsystems"
+                ApiVersion="2021-01-31" />
+  ...
+</AssetType>
+<AssetType Name="OperatingSystemServer"
+           ...>
+  <Browse ...>
+    ...
+  </Browse>
+  <ResourceType ResourceTypeName="microsoft.os/servers"
+                ApiVersion="2020-01-31" />
+  ...
+</AssetType>
+<AssetType Name="OperatingSystemInstance"
+           ...>
+  <Browse ...>
+    ...
+  </Browse>
+  <ResourceType ResourceTypeName="microsoft.os/instances"
+                ApiVersion="2020-05-25" />
+  ...
+</AssetType>
+```
+</p>
+</details>
+
+The query for the virtual asset type should include resources with the two resource types but not the virtual resource type (though it should not matter given the resource type is virtual and should not have any isntances).
+
+OperatingSystem.kml:
+
+```kusto
+resources
+| where type in~ ('microsoft.os/servers','microsoft.os/instances')
+| project id, name, type, location, subscriptionId, resourceGroup, kind, tags
+```
+
+OperationSystemServer.kml:
+
+```kusto
+resources
+| where type =~ 'microsoft.os/servers'
+| project id, name, type, location, subscriptionId, resourceGroup, kind, tags
+```
+
+OperationSystemInstance.kml:
+
+```kusto
+resources
+| where type =~ 'microsoft.os/instances'
+| project id, name, type, location, subscriptionId, resourceGroup, kind, tags
 ```
 
 # Curating browse assets
@@ -2498,7 +2884,7 @@ NOTE: One caveat to providing a hub page, your extension will need to be loaded 
 To provide a custom hub blade, simply add the `DeepLink` property to the `Browse` entry:
 
 DX.json:
-```json
+```jsonc
 "assetType": {
   "name": "Book",
   // ...
@@ -2526,7 +2912,7 @@ DX.json:
 The `DeepLink` must be a standard `#blade` deep link to your blade and if your blade is a menu blade, the deep link can provide a menu item (which must be handled by your menu blade code):
 
 DX.json:
-```json
+```jsonc
 "assetType": {
   "name": "Manual",
   // ...
@@ -2632,10 +3018,10 @@ export class BookMenuBlade {
 If you don't have a list of resources and simply need to add a custom blade to Browse, you can define an asset type with a `Browse` type of `AssetTypeBlade`. This tells Browse to launch the blade associated with the asset type. Note that the asset type doesn't actually refer to an instance of a resource in this case. This is most common for services that are only provisioned once per directory or horizontal services (Cost Management, Monitoring, Azure Advisor etc...). In this case, the `PluralDisplayName` is used in the 'All services' menu, but the other display names are ignored. Feel free to set them to the same value.
 
 DX.json:
-```json
+```jsonc
 "assetType": {
   "name": "CompanyLibrary",
-  "blade": "CompanyLibraryBlade"
+  "blade": "CompanyLibraryBlade",
   // ...
   "browse": { "type": "AssetTypeBlade" }
 }
@@ -2842,7 +3228,7 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
                 },
 
                 // ...or link to an external web page
-                uri: "http://microsoftpress.com"
+                uri: "https://microsoftpress.com"
 
                 // NOTE: Blade is preferred over link, if both are specified.
            },

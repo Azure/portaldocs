@@ -641,7 +641,7 @@ When a customer clicks the Create button, it should succeed. This includes all t
 using the wrong location to exceeding quotas  to unhandled exceptions in the backend. [Adding validation to your form fields](portalfx-forms-field-validation.md)
 will help avoid failures and surface errors before deployment.
 
-In an effort to resolve Create success regressions as early as possible, sev 2 [ICM](http://icm.ad.msft.net) (internal only)
+In an effort to resolve Create success regressions as early as possible, sev 2 [ICM](https://icm.ad.msft.net) (internal only)
 incidents will be created and assigned to extension teams whenever the success rate
 drops 5% or more for 50+ deployments over a rolling 24-hour period.
 

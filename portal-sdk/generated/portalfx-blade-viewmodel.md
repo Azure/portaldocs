@@ -277,7 +277,7 @@ a blade can make tens or hundreds of such savings they will add up.
 
 You might have noticed unlike `ko.reactor` or knockout's observable subscribe method the portal's version of the knockout
 `pureComputed()` has not been modified to take a lifetime manager. Knockout has some good documentation on pureComputeds
-[here](http://knockoutjs.com/documentation/computed-pure.html) but in a nut shell
+[here](https://knockoutjs.com/documentation/computed-pure.html) but in a nut shell
 the reason is that any knockout dependencies (which are the things that will pin a computed or observable in memory) associated
 with the pureComputed are allocated only when someone is listening to the pureComputed and are cleaned up as soon everyone stops
 listening to the pureComputed. This works great for 'pure' functions where there are no side effects which applies to the vast majority

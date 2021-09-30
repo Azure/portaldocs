@@ -66,7 +66,7 @@ To share your PDE with other teams please follow these guidelines:
     $item = $project.ProjectItems.Item("Client").ProjectItems.Item("_extensions").ProjectItems.Item("Your Folder Name that nuproj puts the pde in").ProjectItems.Item("SomeExtension.pde") 
     $item.Properties.Item("ItemType").Value = "ExtensionReference"
     # open the documentation for consuming exposed content from the pde. use an aka.ms link so you can change out the target content without having to republish
-    $DTE.ItemOperations.Navigate("http://aka.ms/portalfx/somepde")
+    $DTE.ItemOperations.Navigate("https://aka.ms/portalfx/somepde")
 
     ```
 
@@ -74,7 +74,7 @@ To share your PDE with other teams please follow these guidelines:
 
     - [Check your access to the doc repo portalfx-docs-pr](https://github.com/Azure/portaldocs)
 
-        - if you don’t have access follow the instructions [here](http://aka.ms/azuregithub) to enable 2FA on your github account and link your microsoft account
-		- Then through [here](http://aka.ms/azuregithub) request access to portalfxdocs
+        - if you don’t have access follow the instructions [here](https://aka.ms/azuregithub) to enable 2FA on your github account and link your microsoft account
+		- Then through [here](https://aka.ms/azuregithub) request access to portalfxdocs
 
 - The resulting NuGet is to be published from your official builds to [https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=Official&_a=feed](https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=Official&_a=feed). See OneBranch guidance to [publish your package](https://microsoft.sharepoint.com/teams/WAG/EngSys/Implement/OneBranch/Publish%20your%20package.aspx)

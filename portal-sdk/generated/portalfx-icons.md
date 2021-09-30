@@ -69,7 +69,7 @@ The framework offers a few special functions to render images for certain specif
 <a name="icons-tips-tricks-naming"></a>
 ### Naming
 
-Do not name your SVGs with <a href="http://msdn.microsoft.com/en-us/library/ie/0779sbks(v=vs.94).aspx" target="_blank">JavaScript reserved words</a> (ex: delete).
+Do not name your SVGs with <a href="https://msdn.microsoft.com/en-us/library/ie/0779sbks(v=vs.94).aspx" target="_blank">JavaScript reserved words</a> (ex: delete).
 
 <a name="icons-tips-tricks-using-custom-svgs-in-pdl"></a>
 ### Using custom SVGs in PDL

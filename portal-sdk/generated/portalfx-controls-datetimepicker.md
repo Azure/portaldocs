@@ -22,7 +22,7 @@ this.dateTimePicker = DateTimePicker.create(container, {
 And then either:
 - inserting it as a member of a Section, or
 - including it in an HTML template via a 'pcControl' binding.
-You can see examples running in SamplesExtension [here](http://aka.ms/portalfx/samples#blade/SamplesExtension/DateTimePickerInstructions/selectedItem/DateTimePickerInstructions/selectedValue/DateTimePickerInstructions) along with the source code here: `SamplesExtension\Extension\Client\V1\Controls\DateTimePicker\ViewModels\DateTimePickerViewModels.ts`.
+You can see examples running in SamplesExtension [here](https://aka.ms/portalfx/samples#blade/SamplesExtension/DateTimePickerInstructions/selectedItem/DateTimePickerInstructions/selectedValue/DateTimePickerInstructions) along with the source code here: `SamplesExtension\Extension\Client\V1\Controls\DateTimePicker\ViewModels\DateTimePickerViewModels.ts`.
 
 By default, this control displays date according to the user's local [timezoneoffset](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTimezoneOffset). If the `showTimezoneDropdown` option is supplied as `true`, users can choose a timezoneoffset using the Timezone Dropdown. The viewmodel's `value` property will *always* normalize the date/time value to the user's local timezoneoffset. Typically, backends will return UTC dates, and these will be converted by the DateTimePicker control such that the view model `value` property will reflect the user's locale.
 

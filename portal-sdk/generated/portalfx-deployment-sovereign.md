@@ -15,9 +15,9 @@ To get started in a sovereign cloud, talk to the Azure Global Ecosystems team or
 | Cloud          | Portal domain            | Extension domain        | More information |
 |----------------|--------------------------|-------------------------|------------------|
 | (Public Azure) | portal.azure.com         | *.ext.azure.com         |       (N/A)      |
-| Blackforest    | portal.microsoftazure.de | *.ext.microsoftazure.de | [Blackforest wiki](http://aka.ms/blackforest) |
-| Mooncake       | portal.azure.cn          | *.ext.azure.cn          | [Mooncake wiki](http://aka.ms/mooncake/)    |
-| Fairfax        | portal.azure.us          | *.ext.azure.us          | [Fairfax wiki](http://aka.ms/fairfax/)     |
+| Blackforest    | portal.microsoftazure.de | *.ext.microsoftazure.de | [Blackforest wiki](https://aka.ms/blackforest) |
+| Mooncake       | portal.azure.cn          | *.ext.azure.cn          | [Mooncake wiki](https://aka.ms/mooncake/)    |
+| Fairfax        | portal.azure.us          | *.ext.azure.us          | [Fairfax wiki](https://aka.ms/fairfax/)     |
 
 
 <a name="per-cloud-information-common-gotchas"></a>

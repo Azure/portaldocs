@@ -102,7 +102,7 @@ Here is an example of the monitoring extension -
     <add key="Microsoft.Portal.Extensions.MonitoringExtension.ApplicationConfiguration.IsDevelopmentMode" value="false"/>
 ```
 
-If you wish to achieve this only on release builds a [`web.Release.config`](http://go.microsoft.com/fwlink/?LinkId=125889) transform can be used.
+If you wish to achieve this only on release builds a [`web.Release.config`](https://go.microsoft.com/fwlink/?LinkId=125889) transform can be used.
 
 #### Step 4: Switch to use Portal logging for telemetry and traces
 
@@ -480,7 +480,7 @@ The primary cause of this issue is that your `web.config` appSetting for `IsDeve
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<!-- For more information on using web.config transformation visit http://go.microsoft.com/fwlink/?LinkId=125889 -->
+<!-- For more information on using web.config transformation visit https://go.microsoft.com/fwlink/?LinkId=125889 -->
     <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
         <appSettings>
             <!-- dont forget to ensure the Key is correct for your specific extension -->

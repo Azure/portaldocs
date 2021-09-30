@@ -5,7 +5,7 @@ These design guidelines provide solutions for common scenarios in Azure.  We for
 
 <a name="design-guidelines-controls-design-guidance"></a>
 ## Controls design guidance
-Controls are the building blocks of the Azure UX. They allow users to view, edit, and analyze data. Using built in controls provides consistency across the portal. Additionally, issues around usability, accessibility, security and any other fundamentals are handled by the Framework team.   
+Controls are the building blocks of the Azure UX. They allow users to view, edit, and analyze data. Using built in controls provides consistency across the portal. Additionally, issues around usability, accessibility, security and any other fundamentals are handled by the Framework team.
 * [Controls list and design guidance](design-patterns-controls.md)
 
 
@@ -69,12 +69,7 @@ Design templates, toolkits and resources are available so that you can easily cr
 
 <a name="design-guidelines-writing-guides"></a>
 ## Writing guides
-Writing guides are key resources to brand voice and content style and standards for Azure and the Business Applications Group within the Cloud + AI division. These two guides supply quick answers and essential direction for anyone who creates content — whether for brand naming, product design, documentation, marketing, PR, events, or other customer communications. 
+Writing guides are key resources to brand voice and content style and standards for Azure and the Business Applications Group within the Cloud + AI division. These two guides supply quick answers and essential direction for anyone who creates content — whether for brand naming, product design, documentation, marketing, PR, events, or other customer communications.
 
  * [Microsoft Cloud Style Guide](https://worldready.cloudapp.net/Styleguide/Read?id=2696&topicid=25351)
- * [Microsoft Writing Style Guide](http://aka.ms/style)
-
-
-
-
-
+ * [Microsoft Writing Style Guide](https://aka.ms/style)

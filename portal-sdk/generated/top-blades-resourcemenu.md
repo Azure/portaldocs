@@ -224,12 +224,12 @@ The following options are available on the `options` property.
 | `enableAlerts`                | Create, view, and update alert rules. | No  | No |
 | `enableAppInsights`           | View Application Insights monitoring. | No  | No |
 | `enableDiagnostics`           | View monitoring diagnostics. | No  | No |
-| `enableExportTemplate`        |  Export a template of the resource group to automate redeployments. RPs must provide [template schemas](http://aka.ms/armschema) for this. Does not support classic resources. | Yes | Resources, resource groups |
+| `enableExportTemplate`        |  Export a template of the resource group to automate redeployments. RPs must provide [template schemas](https://aka.ms/armschema) for this. Does not support classic resources. | Yes | Resources, resource groups |
 | `enableLocks`                 | Lock resources to avoid accidental deletion and/or editing. | Yes | Resources, resource groups, subscriptions |
 | `enableLogAnalytics`          | View OMS workspace. | No  | No |
 | `enableLogSearch`             | Search logs. | No  | No |
 | `enableMetrics`               | View monitoring metrics. | No  | No |
-| `enableProperties`            | Generic properties blade for resources. Only includes standard ARM properties today, but may be integrated with the supplemental data, if needed. (Please file a [partner request](http://aka.ms/portalfx/request).) Does not support non-tracked resources. | No  | No |
+| `enableProperties`            | Generic properties blade for resources. Only includes standard ARM properties today, but may be integrated with the supplemental data, if needed. (Please file a [partner request](https://aka.ms/portalfx/request).) Does not support non-tracked resources. | No  | No |
 | `enableRbac`                  | Manage user/role assignments for this resource. | Yes | All ARM resource types |
 | `enableSupportEventLogs`      | View all operations and events | Yes | Resources, resource groups, subscriptions |
 | `enableSupportHelpRequest`    | Create a support request for this resource, resource group, or subscription. | Yes | All ARM resource types |

@@ -11,7 +11,7 @@ To view the Ibiza Create Flow PowerBi dashboard follow this link: [Ibiza Create 
 <a name="ibiza-create-flow-powerbi-dashboard-prerequisites-getting-access-to-the-ibiza-create-flow-dashboard"></a>
 #### Getting access to the Ibiza Create Flow Dashboard
 
-In order to get acess to the Create Flow Dashbaord, you will need to get access to the [Security Group 'Azure Portal Data' (auxdatapartners)](http://idwebelements/GroupManagement.aspx?Group=auxdatapartners&Operation=join).
+In order to get acess to the Create Flow Dashbaord, you will need to get access to the [Security Group 'Azure Portal Data' (auxdatapartners)](https://idwebelements/GroupManagement.aspx?Group=auxdatapartners&Operation=join).
 
 <a name="ibiza-create-flow-powerbi-dashboard-prerequisites-optional-running-or-creating-modified-kusto-queries"></a>
 #### Optional: Running or Creating Modified Kusto Queries
@@ -27,17 +27,17 @@ All queries performed here are against the **AzurePortal.AzPtlCosmos** database 
 ### Overview
 
 This report gives you ability to look at your extensions live create flow telemetry which gives you a overview of your create blade's usage and deployment success numbers.
-    
+
 <a name="ibiza-create-flow-powerbi-dashboard-create-flow-funnel-description-of-data-fields"></a>
 ### Description of data fields
 
 - **Create Flow Launched** - The number of times your create blade has been opened by users.
 - **Deployment Started** - The number of times that a create has been started by your create blade.
-- **Deployment Started %** - A percentage representing how often your create blade being opened leads to a create being started. 
+- **Deployment Started %** - A percentage representing how often your create blade being opened leads to a create being started.
 - **Deployment Succeeded** - The number of successful create deployements.
 - **Deployment Succeeded %** - The percentage of creates that led to a successful deployment. Unsunsuccessful deployments would include cancellations and failures.
 - **Old Create API**
-    - If true, this means that your create blade is using the old deprecated Parameter Collector (Parameter Collector V1 or V2) and therefore your create telemetry is not dependable and is potentially innacurrate. 
+    - If true, this means that your create blade is using the old deprecated Parameter Collector (Parameter Collector V1 or V2) and therefore your create telemetry is not dependable and is potentially innacurrate.
     - It is recommended to get this field to 'false', by updating your create blade to use the new Parameter Collector (Parameter Collector V3).
         - [Parameter Collector V3 - Getting Started](portalfx-parameter-collection-getting-started.md)
 - **Custom Deployment**
@@ -77,23 +77,23 @@ let startDate = GetStartDateForLastNDays(timeSpan);
 let endDate = GetEndDateForTimeSpanQueries();
 GetCreateFunnelByDay(startDate, endDate)
 | extend DeploymentSucceededPerc = iff(DeploymentStarted == 0, 0.0, todouble(DeploymentSucceeded)/DeploymentStarted)
-| project Date, ExtensionName, CreateBladeName, DeploymentSucceededPerc 
+| project Date, ExtensionName, CreateBladeName, DeploymentSucceededPerc
 ```
 
 <a name="ibiza-create-flow-powerbi-dashboard-create-flow-funnel-how-these-numbers-are-generated-create-flow-funnel-weekly-deployment-success-kusto-query"></a>
 #### Create Flow Funnel Weekly Deployment Success - Kusto Query
 
 ```js
-let today = floor(now(),1d); 
-let fri= today - dayofweek(today) - 2d; 
-let sat = fri - 6d; 
-let startDate = sat-35d; 
-let endDate = fri; 
-GetCreateFunnelByDay(startDate, endDate) 
-| where Unsupported == 0 and CustomDeployment == 0 
-| extend startOfWeek = iff(dayofweek(Date) == 6d,Date , Date - dayofweek(Date) - 1d) 
-| summarize sum(CreateFlowLaunched), sum(DeploymentStartedWithExclusions), sum(DeploymentSucceeded) by startOfWeek, ExtensionName 
-| extend ["Deployment Success %"] = iff(sum_DeploymentStartedWithExclusions == 0, todouble(0), bin(todouble(sum_DeploymentSucceeded)/sum_DeploymentStartedWithExclusions*100 + 0.05, 0.1)) 
+let today = floor(now(),1d);
+let fri= today - dayofweek(today) - 2d;
+let sat = fri - 6d;
+let startDate = sat-35d;
+let endDate = fri;
+GetCreateFunnelByDay(startDate, endDate)
+| where Unsupported == 0 and CustomDeployment == 0
+| extend startOfWeek = iff(dayofweek(Date) == 6d,Date , Date - dayofweek(Date) - 1d)
+| summarize sum(CreateFlowLaunched), sum(DeploymentStartedWithExclusions), sum(DeploymentSucceeded) by startOfWeek, ExtensionName
+| extend ["Deployment Success %"] = iff(sum_DeploymentStartedWithExclusions == 0, todouble(0), bin(todouble(sum_DeploymentSucceeded)/sum_DeploymentStartedWithExclusions*100 + 0.05, 0.1))
 | project startOfWeek, ["Extension"] = ExtensionName, ["Deployment Success %"]
 ```
 
@@ -119,35 +119,35 @@ This report gives you an overview of where your create blade is being linked to 
 
 <a name="ibiza-create-flow-powerbi-dashboard-create-flow-origins-how-these-numbers-are-generated-1-create-flow-origins-kusto-query"></a>
 #### Create Flow Origins - Kusto Query
- 
+
 ```js
 let timeSpan = 30d;
-let selectedData = 
+let selectedData =
 GetClientTelemetryByTimeSpan(timeSpan, false)
 | union (GetExtTelemetryByTimeSpan(timeSpan, false));
 
 selectedData
 | where Action == "CreateFlowLaunched"
-| extend 
+| extend
     CreateBladeName = _GetCreateBladeNameFromData(Data, ActionModifier),
     ExtensionId = _GetCreateExtensionNameFromData(Data, ActionModifier),
     OriginFromMenuItemId = extractjson("$.menuItemId", Data, typeof(string)),
     DataContext = extractjson("$.context", Data, typeof(string))
 | extend OriginFromDataContext = extract('([^,"]*Blade[^,"]*)', 1, DataContext)
-| project CreateBladeName, ExtensionId, Origin = iff(OriginFromMenuItemId == "recentItems" or OriginFromMenuItemId == "deepLinking", OriginFromMenuItemId, OriginFromDataContext), DataContext 
+| project CreateBladeName, ExtensionId, Origin = iff(OriginFromMenuItemId == "recentItems" or OriginFromMenuItemId == "deepLinking", OriginFromMenuItemId, OriginFromDataContext), DataContext
 | extend Origin = iff(Origin == "", DataContext, Origin)
 | summarize CreateFlowLaunched = count() by ExtensionId, CreateBladeName, Origin
-| summarize 
-    CreateFlowLaunched = sum(CreateFlowLaunched), 
+| summarize
+    CreateFlowLaunched = sum(CreateFlowLaunched),
     New = sum(iff(Origin contains "recentItems" or Origin contains "GalleryCreateMenuResultsListBlade", CreateFlowLaunched, 0)),
     Browse = sum(iff(Origin contains "BrowseResourceBlade", CreateFlowLaunched, 0)),
     Marketplace = sum(iff(Origin contains "GalleryItemDetailsBlade" or Origin contains "GalleryResultsListBlade" or Origin contains "GalleryHeroBanner", CreateFlowLaunched, 0)),
     DeepLink = sum(iff(Origin contains "deepLinking", CreateFlowLaunched, 0))
-  by ExtensionId, CreateBladeName 
+  by ExtensionId, CreateBladeName
 | join kind = inner (ExtensionLookup | extend ExtensionId = Extension) on ExtensionId
 | project
-    ["Extension Name"] = ExtensionName, 
-    ["Create Blade Name"] = CreateBladeName, 
+    ["Extension Name"] = ExtensionName,
+    ["Create Blade Name"] = CreateBladeName,
     ["Create Flow Launched"] = CreateFlowLaunched,
     ["+New"] = New,
     ["+New (%)"] = todouble(New) / CreateFlowLaunched,
@@ -183,7 +183,7 @@ This report gives you an overview of create blades create errors, billing issues
 - **Deployment Status Unknown %** - The percentage of failed deployments that was because of the error "Deployment Status Unknown".
 - **Invalid Args %** - The percentage of failed deployments that was because of the error "Invalid Args".
 - **Old Create API**
-    - If true, this means that your create blade is using the old deprecated Parameter Collector (Parameter Collector V1 or V2) and therefore your create telemetry is not dependable and is potentially innacurrate. 
+    - If true, this means that your create blade is using the old deprecated Parameter Collector (Parameter Collector V1 or V2) and therefore your create telemetry is not dependable and is potentially innacurrate.
     - It is recommended to get this field to 'false', by updating your create blade to use the new Parameter Collector (Parameter Collector V3).
         - [Parameter Collector V3 - Getting Started](portalfx-parameter-collection-getting-started.md)
 - **Custom Deployment**
@@ -202,7 +202,7 @@ let timeSpan = 30d;
 let startDate = GetStartDateForLastNDays(timeSpan);
 let endDate = GetEndDateForTimeSpanQueries();
 
-let errors = 
+let errors =
 (GetClientTelemetryByDateRange(startDate, endDate, false)
 | union (GetExtTelemetryByDateRange(startDate, endDate, false))
 | where Action == "ProvisioningEnded" and ActionModifier == "Failed" and isnotempty(Name))
@@ -211,24 +211,24 @@ let errors =
     Date = bin(PreciseTimeStamp, 1d)
     | join kind = leftouter (
         _GetCreateBladesMapping(startDate, endDate)
-        | project Date, Name, 
-            ExtensionIdCurrent = ExtensionId, 
-            CreateBladeNameCurrent = CreateBladeName, 
-            UnsupportedCurrent = Unsupported, 
+        | project Date, Name,
+            ExtensionIdCurrent = ExtensionId,
+            CreateBladeNameCurrent = CreateBladeName,
+            UnsupportedCurrent = Unsupported,
             CustomDeploymentCurrent = CustomDeployment
-      ) on Date, Name 
+      ) on Date, Name
     // Join again on previous day's mappings to cover case when mapping is not found in current day
     | join kind = leftouter (
         _GetCreateBladesMapping(startDate - 1d, endDate - 1d)
-        | project Date, Name, 
-            ExtensionIdPrev = ExtensionId, 
-            CreateBladeNamePrev = CreateBladeName, 
-            UnsupportedPrev = Unsupported, 
+        | project Date, Name,
+            ExtensionIdPrev = ExtensionId,
+            CreateBladeNamePrev = CreateBladeName,
+            UnsupportedPrev = Unsupported,
             CustomDeploymentPrev = CustomDeployment
         | extend Date = Date + 1d
-      ) on Date, Name 
+      ) on Date, Name
     // Use current day's mapping if available, otherwise, use previous day
-    | extend 
+    | extend
         ExtensionId = iff(isnotempty(ExtensionIdCurrent), ExtensionIdCurrent, ExtensionIdPrev),
         CreateBladeName = iff(isnotempty(ExtensionIdCurrent), CreateBladeNameCurrent, CreateBladeNamePrev),
         Unsupported = iff(isnotempty(ExtensionIdCurrent), UnsupportedCurrent, UnsupportedPrev),
@@ -318,7 +318,7 @@ ClientTelemetry
   oldCreateApi = extractjson("$.oldCreateApi", Data, typeof(string)),
   launchingContext = extract('"launchingContext"\\s?:\\s?{([^}]+)', 1, Data)
 | where isnotempty(launchingContext) and isempty(extract("^(\"telemetryId\":\"[^\"]*\")$", 1, launchingContext)) and oldCreateApi != "true" and isCustomProvisioning != "true" and provisioningStatus != "DeploymentCanceled"
-| where Data !contains "We could not find a credit card on file for your azure subscription." 
+| where Data !contains "We could not find a credit card on file for your azure subscription."
 | summarize ["Error Count"] = count() by ["Error"] = provisioningStatus
 | order by ["Error Count"] desc
 ```
@@ -338,7 +338,7 @@ ClientTelemetry
   oldCreateApi = extractjson("$.oldCreateApi", Data, typeof(string)),
   launchingContext = extract('"launchingContext"\\s?:\\s?{([^}]+)', 1, Data)
 | where isnotempty(launchingContext) and isempty(extract("^(\"telemetryId\":\"[^\"]*\")$", 1, launchingContext)) and oldCreateApi != "true" and isCustomProvisioning != "true" and provisioningStatus != "DeploymentCanceled"
-| where Data !contains "We could not find a credit card on file for your azure subscription." 
+| where Data !contains "We could not find a credit card on file for your azure subscription."
 | summarize ["Error Count"] = count() by Extension
 | order by ["Error Count"] desc
 ```
@@ -360,9 +360,9 @@ ClientTelemetry
   launchingContext = extract('"launchingContext"\\s?:\\s?{([^}]+)', 1, Data)
 | where isnotempty(launchingContext) and isempty(extract("^(\"telemetryId\":\"[^\"]*\")$", 1, launchingContext)) and oldCreateApi != "true"
 | where provisioningStatus != "DeploymentFailed" and provisioningStatus != "DeploymentCanceled" and isCustomProvisioning != "true"
-| where Data !contains "We could not find a credit card on file for your azure subscription." 
+| where Data !contains "We could not find a credit card on file for your azure subscription."
 | summarize ["Error Count"] = count() by ["Error Code"] = eCode
-| order by ["Error Count"] desc 
+| order by ["Error Count"] desc
 ```
 
 <a name="ibiza-create-flow-powerbi-dashboard-error-distribution-how-these-numbers-are-generated-3-create-inner-most-error-distribution-kusto-query"></a>

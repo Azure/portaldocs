@@ -86,7 +86,7 @@ Use the following three steps to create a template blade.
             this.subtitle("InfoBox Playground");
 
             this.text = ko.observable<string>("Go to the Azure Portal");
-            this.url = ko.observable<string>("http://portal.azure.com");
+            this.url = ko.observable<string>("https://portal.azure.com");
         }
 
         public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
@@ -104,7 +104,7 @@ Use the following three steps to create a template blade.
     <a data-bind="text: text, attr: { href: url }" target="_blank"></a>
     ```
 
-For more information about **Knockout**, see [http://knockoutjs.com](http://knockoutjs.com/).
+For more information about **Knockout**, see [https://knockoutjs.com](https://knockoutjs.com/).
 
 <a name="legacy-templateblades-with-pdl-adding-controls"></a>
 ### Adding controls
@@ -136,7 +136,7 @@ Ibiza provides an extensive controls library that can be used in the HTML templa
             this.infoBox = new MsPortalFx.ViewModels.Controls.InfoBox.LinkViewModel(container, {
                 text: ko.observable<string>('Go to the Azure Portal'),
                 image: ko.observable(MsPortalFx.Base.Images.Info()),
-                clickableLink: ko.observable(MsPortalFx.ViewModels.Part.createClickableLinkViewModel(ko.observable<string>('http://portal.azure.com'))
+                clickableLink: ko.observable(MsPortalFx.ViewModels.Part.createClickableLinkViewModel(ko.observable<string>('https://portal.azure.com'))
             });
         }
 
@@ -186,7 +186,7 @@ Blades can receive input parameters that are part of the signature for the blade
             this.infoBox = new MsPortalFx.ViewModels.Controls.InfoBox.LinkViewModel(container, {
                 text: ko.observable<string>('Go to the Azure Portal'),
                 image: ko.observable(MsPortalFx.Base.Images.Info()),
-                clickableLink: ko.observable(MsPortalFx.ViewModels.Part.createClickableLinkViewModel(ko.observable<string>('http://portal.azure.com'))
+                clickableLink: ko.observable(MsPortalFx.ViewModels.Part.createClickableLinkViewModel(ko.observable<string>('https://portal.azure.com'))
             });
         }
 
@@ -240,11 +240,11 @@ The working copy of the sample in the Dogfood environment is located at  [https:
             this.infoBox = new MsPortalFx.ViewModels.Controls.InfoBox.LinkViewModel(container, {
                 text: ko.observable<string>('Go to the Azure Portal'),
                 image: ko.observable(MsPortalFx.Base.Images.Info()),
-                clickableLink: ko.observable(MsPortalFx.ViewModels.Part.createClickableLinkViewModel(ko.observable<string>('http://portal.azure.com'))
+                clickableLink: ko.observable(MsPortalFx.ViewModels.Part.createClickableLinkViewModel(ko.observable<string>('https://portal.azure.com'))
             });
 
             // initialize the toolbar
-            var button = new Toolbars.OpenLinkButton("http://azure.com");
+            var button = new Toolbars.OpenLinkButton("https://azure.com");
             button.label("azure.com");
             button.icon(MsPortalFx.Base.Images.Hyperlink());
             this.commandBar = new Toolbars.Toolbar(container);

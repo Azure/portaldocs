@@ -211,7 +211,7 @@ Developers can use the following information to get started implementing this pa
 
 * Set your icon - `AssetType` icon Icon="{Resource CommonImages.snowmobile, Module=V1/ResourceTypes/Common/CommonLogos}"
 * Set your description for use in empty browse - `AssetType` description Description="{Resource AssetTypeNames.Snowmobile.linkTitle, Module=ClientResources}"
-* Empty message/link - `AssetType` link <Link Title="{Resource AssetTypeNames.Snowmobile.linkTitle, Mobile=ClientResources}" Uri="http://www.bing.com"/>
+* Empty message/link - `AssetType` link <Link Title="{Resource AssetTypeNames.Snowmobile.linkTitle, Mobile=ClientResources}" Uri="https://www.bing.com"/>
 
 
 <a name="implementation-engineering-documentation"></a>

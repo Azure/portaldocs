@@ -76,9 +76,9 @@ Only ibiza has the authority to mint tokens so in order to call external resours
 
 Here is an example that walks you through on how to enable Contoso_Extension, a sample extension, that can query Graph APIs from extension client :
 
-1. To query graph API's, an extension owner would submit [RDTask](http://aka.ms/portalfx/newextension) to onboard AAD Application with the portal.AAD Onboarding can take 5-6 weeks so we recommend extension developers to think about this scenarios early in the design phase.
+1. To query graph API's, an extension owner would submit [RDTask](https://aka.ms/portalfx/newextension) to onboard AAD Application with the portal.AAD Onboarding can take 5-6 weeks so we recommend extension developers to think about this scenarios early in the design phase.
 1. Once ibiza team has created the app in [AAD onboarding app](https://aadonboardingsite.cloudapp.net/) you can reach out to  [AAD Onboarding Team](mailto:aadonboarding@microsoft.com) to expedite the process.
-1. Submit [RDTask](http://aka.ms/portalfx/newextension) to register the AAD Applciation created in Step 1 into the portal's extension config. This step can be done in parallel to Step 2.
+1. Submit [RDTask](https://aka.ms/portalfx/newextension) to register the AAD Applciation created in Step 1 into the portal's extension config. This step can be done in parallel to Step 2.
    In this case the resourceAccess config for your extension in portal would look something like the following:
 
     ```json
@@ -134,7 +134,7 @@ The workflow in this case will be a little different from the one we described o
 
 1. To query graph API's, an extension author needs to create AAD application on [https://aadonboardingsite.cloudapp.net/](https://aadonboardingsite.cloudapp.net/). AAD Onboarding can take 5-6 weeks so we recommend extension developers to think about this scenarios early in the design phase.
 1. Once you have created the app you can reach out to  [aadonboarding@microsoft.com](aadonboarding@microsoft.com) to expedite the process.
-1. Once you have the App Id submit [RDTask](http://aka.ms/portalfx/newextension) to register the AAD Applciation created in Step 1 into the portal's extension config. This step can be done in parallel to Step 2.
+1. Once you have the App Id submit [RDTask](https://aka.ms/portalfx/newextension) to register the AAD Applciation created in Step 1 into the portal's extension config. This step can be done in parallel to Step 2.
    In this case the resourceAccess config for your extension in portal would look something like the following:
 
 ```json
@@ -248,8 +248,8 @@ interface UserInfo {
 <a name="calling-alternate-resources-accessing-claims-accessing-claims-from-your-server"></a>
 #### Accessing claims from your server
 While not recommended, the token used to communicate with your server also contains claims that can be read from the
-server using the [ASP.NET claims API](http://msdn.microsoft.com/en-us/library/ee517271.aspx). To simplify development,
-the [HttpContext.User](http://msdn.microsoft.com/library/system.web.httpcontext.user.aspx) has been augmented with the
+server using the [ASP.NET claims API](https://msdn.microsoft.com/en-us/library/ee517271.aspx). To simplify development,
+the [HttpContext.User](https://msdn.microsoft.com/library/system.web.httpcontext.user.aspx) has been augmented with the
 most commonly used claims.
 
 First, reference the following assemblies:
@@ -315,7 +315,7 @@ Second, add the following to your **web.config** file:
 </configuration>
 ```
 
-Lastly, use [HttpContext.User](http://msdn.microsoft.com/library/system.web.httpcontext.user.aspx) to retrieve the common claims:
+Lastly, use [HttpContext.User](https://msdn.microsoft.com/library/system.web.httpcontext.user.aspx) to retrieve the common claims:
 
 ```cs
 // use IPortalIdentity for email and tenant id
@@ -335,9 +335,9 @@ if (aadUser != null)
 }
 ```
 
-If you require additional claims, use the [ASP.NET claims API](http://msdn.microsoft.com/en-us/library/ee517271.aspx) to read the desired claims from the token. The [Supported token and claim types](http://msdn.microsoft.com/en-us/library/windowsazure/dn195587.aspx#BKMK_JWT) article on MSDN covers the default claims provided by AAD.
+If you require additional claims, use the [ASP.NET claims API](https://msdn.microsoft.com/en-us/library/ee517271.aspx) to read the desired claims from the token. The [Supported token and claim types](https://msdn.microsoft.com/en-us/library/windowsazure/dn195587.aspx#BKMK_JWT) article on MSDN covers the default claims provided by AAD.
 
-Due to token size constraints, additional information cannot be added to the token. Instead, any additional information required by an extension must be obtained from [AAD Graph API](http://msdn.microsoft.com/en-us/library/windowsazure/hh974482.aspx).
+Due to token size constraints, additional information cannot be added to the token. Instead, any additional information required by an extension must be obtained from [AAD Graph API](https://msdn.microsoft.com/en-us/library/windowsazure/hh974482.aspx).
 
 
 <a name="calling-alternate-resources-faqs"></a>
@@ -360,9 +360,9 @@ This generally happens after a few hours of usage (8 to 24 hours based on the ty
 
 By default, authentication is not configured in the local portal to simplify development. Use the following to enable authentication:
 
-1. Install [Internet Information Services (IIS)](http://msdn.microsoft.com/en-us/library/ms181052%28v=vs.80%29.aspx) (not IIS Express)
-2. Install the [URL Rewrite module for IIS](http://www.iis.net/downloads/microsoft/url-rewrite)
-3. Install the [Azure SDK](http://www.windowsazure.com/en-us/downloads)
+1. Install [Internet Information Services (IIS)](https://msdn.microsoft.com/en-us/library/ms181052%28v=vs.80%29.aspx) (not IIS Express)
+2. Install the [URL Rewrite module for IIS](https://www.iis.net/downloads/microsoft/url-rewrite)
+3. Install the [Azure SDK](https://www.windowsazure.com/en-us/downloads)
 4. Execute the **%programfiles(x86)%\Microsoft SDKs\PortalSDK\Tools\Setup-OneCloud.cmd** script
 
 The **Setup-OneCloud.cmd** script creates a new IIS site configured to use the CURRENT test environment, which includes AAD-PPE and MSA-PROD. The new site can be accessed at [http://onestb.cloudapp.net/](http://onestb.cloudapp.net/). This site is located in the following folder on your system:

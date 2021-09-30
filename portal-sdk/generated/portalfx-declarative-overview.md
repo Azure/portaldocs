@@ -1,9 +1,9 @@
 <a name="declarative-resource-overview-experience"></a>
 # Declarative Resource Overview experience
 
-This document will guide you on how to create the Declarative Resource Overview blade. The Declarative Resource Overview blade is is the home page for your resource, which provides the purpose, top actions and key information so that users can quickly get value from your resource. 
+This document will guide you on how to create the Declarative Resource Overview blade. The Declarative Resource Overview blade is is the home page for your resource, which provides the purpose, top actions and key information so that users can quickly get value from your resource.
 
-The Declarative Resource Overview blade includes the following sections: 
+The Declarative Resource Overview blade includes the following sections:
 
 1. Command bar - Define actions for your resource
 2. Essentials - Display key properties of your resource
@@ -247,9 +247,9 @@ Example
 
 <a name="declarative-resource-overview-experience-configuring-views-monitoring"></a>
 #### Monitoring
-The Monitoring view is used to display the most useful resource-specific charts and metrics. The metrics are derived from Azure Monitor.  
+The Monitoring view is used to display the most useful resource-specific charts and metrics. The metrics are derived from Azure Monitor.
 
-Metrics can be defined as such 
+Metrics can be defined as such
 ```
 {
     "id": "Percentage CPU",
@@ -490,7 +490,7 @@ To add the Information view, add the following example to the `properties.tabs` 
                 },
                 {
                     "displayName": "Declarative Form Sandbox",
-                    "url": "http://aka.ms/form/sandbox"
+                    "url": "https://aka.ms/form/sandbox"
                 },
                 {
                     "displayName": "Open Active Directory",
@@ -552,7 +552,7 @@ This command allows you to open another blade either in full screen or as a cont
 ```
 <a name="declarative-resource-overview-experience-configuring-the-command-bar-openmarketplacecommand"></a>
 #### OpenMarketplaceCommand
-This command allows you to open the Create experience for a Marketplace package as defined by the `marketplaceItemId` property. The `marketplaceItemId` must exists in the Azure Marketplace.  Example of OpenMarketplaceCommand - 
+This command allows you to open the Create experience for a Marketplace package as defined by the `marketplaceItemId` property. The `marketplaceItemId` must exists in the Azure Marketplace.  Example of OpenMarketplaceCommand -
 
 ```
     {
@@ -565,7 +565,7 @@ This command allows you to open the Create experience for a Marketplace package 
 ```
 <a name="declarative-resource-overview-experience-configuring-the-command-bar-armcommand"></a>
 #### ArmCommand
-This command allows you to make an ARM request. The ARM request method and URI are defined in the `definition` property.  Example of ArmCommand - 
+This command allows you to make an ARM request. The ARM request method and URI are defined in the `definition` property.  Example of ArmCommand -
 
 ```
     {
@@ -581,7 +581,7 @@ This command allows you to make an ARM request. The ARM request method and URI a
 ```
 <a name="declarative-resource-overview-experience-configuring-the-command-bar-menucommand"></a>
 #### MenuCommand
-This command allows you to group multiple commands and displays them in a menu.  Example of MenuCommand - 
+This command allows you to group multiple commands and displays them in a menu.  Example of MenuCommand -
 ```
     {
         "kind": "MenuCommand",
@@ -613,7 +613,7 @@ This command allows you to group multiple commands and displays them in a menu. 
 ```
 <a name="declarative-resource-overview-experience-configuring-the-command-bar-movecommand"></a>
 #### MoveCommand
-The Move command allows the user to move the resource to another subscription or resource group.  Example of MoveCommand - 
+The Move command allows the user to move the resource to another subscription or resource group.  Example of MoveCommand -
 ```
     {
         "kind": "MoveCommand",
@@ -624,7 +624,7 @@ The Move command allows the user to move the resource to another subscription or
 ```
 <a name="declarative-resource-overview-experience-configuring-the-command-bar-refreshcommand"></a>
 #### RefreshCommand
-The Refresh command allows the user to refresh the blade. Example of RefreshCommand - 
+The Refresh command allows the user to refresh the blade. Example of RefreshCommand -
 ```
     {
         "kind": "RefreshCommand",
@@ -635,7 +635,7 @@ The Refresh command allows the user to refresh the blade. Example of RefreshComm
 ```
 <a name="declarative-resource-overview-experience-configuring-the-command-bar-deletecommand"></a>
 #### DeleteCommand
-The Delete command allows the user to delete the resource. A confirmation dialog will appear to re-confirm the delete action. The `definition.apiVersion` must match the supported API version of the Resource Provider. Example of DeleteCommand - 
+The Delete command allows the user to delete the resource. A confirmation dialog will appear to re-confirm the delete action. The `definition.apiVersion` must match the supported API version of the Resource Provider. Example of DeleteCommand -
 ```
     {
         "kind": "DeleteCommand",
@@ -697,7 +697,7 @@ String content can be dynamic or static. Using the `resources()` function, you c
 <a name="declarative-resource-overview-experience-configuring-essentials-to-configure-custom-properties-in-essentials-action-url"></a>
 ##### Action URL
 <a name="actionurl"></a>
-Action URL allows you to open the `url` in a browser window.  Example json - 
+Action URL allows you to open the `url` in a browser window.  Example json -
 
 ```
 "essentials": {
@@ -715,7 +715,7 @@ Action URL allows you to open the `url` in a browser window.  Example json -
 <a name="declarative-resource-overview-experience-configuring-essentials-to-configure-custom-properties-in-essentials-action-resource"></a>
 ##### Action Resource
 <a name="actionresource"></a>
-Action Resource allows you to open a resource by resourceId.  Example json - 
+Action Resource allows you to open a resource by resourceId.  Example json -
 
 ```
 "essentials": {

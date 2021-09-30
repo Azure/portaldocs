@@ -1,7 +1,7 @@
 <a name="post-a-what-s-new-notification"></a>
 ## Post a what&#39;s new notification
 
-Publish these notifications as often as possible to inform customers about the new features and bug fixes included in your release. 
+Publish these notifications as often as possible to inform customers about the new features and bug fixes included in your release.
 
 1. Publish a new blog post to the Azure.com Service Updates blog
 
@@ -14,4 +14,4 @@ Publish these notifications as often as possible to inform customers about the n
     1. Tag your post with `Azureportal` to ensure it shows up in the portal
     1. Publish :-)
 
-You can also promote updates via the [@AzurePortal](http://twitter.com/azureportal) Twitter account. To request that, please email [ibizafxpm](mailto:ibizafxpm@microsoft.com).
+You can also promote updates via the [@AzurePortal](https://twitter.com/azureportal) Twitter account. To request that, please email [ibizafxpm](mailto:ibizafxpm@microsoft.com).

@@ -27,7 +27,7 @@ provide the end-to-end experience, each deployed to separate endpoints:
 <a name="overview-portal"></a>
 ### Portal
 
-The portal is deployed to all [public Azure regions](http://azure.microsoft.com/regions) and uses geographical
+The portal is deployed to all [public Azure regions](https://azure.microsoft.com/regions) and uses geographical
 load-balancing via Azure Traffic Manager (using the "Performance" profile).
 (For more information about Azure Traffic Manager, see their
 [introduction](https://azure.microsoft.com/en-us/documentation/articles/traffic-manager-overview/).)

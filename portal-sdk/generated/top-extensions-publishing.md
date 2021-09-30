@@ -26,7 +26,7 @@ The configuration file for the extension that will be cherry-picked should be si
 
 All the pull requests should be sent first to the dev branch. To add or update or your extension's configuration, use the following process to send a pull request to the reviewers that you can specify in the request.
 
-1. Open or locate the associated bug at [http://aka.ms/portalfx/exec/bug](http://aka.ms/portalfx/exec/bug). Then use the bug ID and bug title in the git commit message.
+1. Open or locate the associated bug at [https://aka.ms/portalfx/exec/bug](https://aka.ms/portalfx/exec/bug). Then use the bug ID and bug title in the git commit message.
 
 1. In the framework repository, the extension configuration files for all Portal environments are located at `<repoRoot>\src\RDPackages\OneCloud`, where `<repoRoot>` is the root of the repository.  The developer can communicate with the remote repository by setting up a local git repository. To manage the extension's configuration, make a clone by using the following commands at the command line.
 

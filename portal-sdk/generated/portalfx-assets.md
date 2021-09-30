@@ -240,8 +240,8 @@ To opt in to this experience you need to provide a `description` and a `link`, t
     ...
     Description="{Resource MyAsset.description, Module=ClientResources}">
     ...
-    <Link Title="{Resource MyAsset..linkTitle1, Module=ClientResources}" Uri="http://www.bing.com"/>
-    <Link Title="{Resource MyAsset.linkTitle2, Module=ClientResources}" Uri="http://www.bing.com"/>
+    <Link Title="{Resource MyAsset..linkTitle1, Module=ClientResources}" Uri="https://www.bing.com"/>
+    <Link Title="{Resource MyAsset.linkTitle2, Module=ClientResources}" Uri="https://www.bing.com"/>
     ...
   </AssetType>
 ```
@@ -260,7 +260,7 @@ If a blade, part, or command represents or acts on multiple assets, use the prim
 To show up in the Browse menu, your asset type must specify the `<Browse Type="" />` node. The `Type` informs the Browse menu
 how to interact with your asset type. Learn more about [Browse integration](top-extensions-browse.md).
 
-Services that use [resource kinds](#resource-kinds) can also be added to the Browse menu, but that must be configured by the Fx team. To do this, [create a partner request](http://aka.ms/portalfx/request) with the asset type name and kind value.
+Services that use [resource kinds](#resource-kinds) can also be added to the Browse menu, but that must be configured by the Fx team. To do this, [create a partner request](https://aka.ms/portalfx/request) with the asset type name and kind value.
 
 <a name="assets-showing-up-in-browse-recent"></a>
 ### Showing up in Browse &gt; Recent
