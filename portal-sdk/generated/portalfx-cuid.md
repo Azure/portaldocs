@@ -180,8 +180,7 @@ The `DeploymentTemplate.json` for our example looks like this -
 
 ![alt-text](../media/portalfx-cuid/ResjsonAuthoring.png "Authoring a resjson")
 
-4. In the CreateForm.Dx.json, replace the display string with the key corresponding to that display string between two pairs of curly braces.
-
+1. In the CreateForm.Dx.json, replace the display string with the key corresponding to that display string, defined in the `property` item.  Add this key to the Strings.resjson as a key value pair.  Finally, add a `stringSource` element which contains a relative path to the Strings.resjson.
 ![alt-text](../media/portalfx-cuid/FormWithLocalization.png "FormWithLocalization.json")
 
 5. You need to generate the resjson in all 18 languages the portal supports. For eg, for Spanish, you need to generate a resjson with Spanish strings called Strings.es.json. This can be done using capabilities of the localization pipeline. You need not check in the localized files as they will be generated during each official build. The exact instructions depend on the build system you are using. Please refer to [this doc](https://aka.ms/locv3) to learn how to do this for your extension based on the build system you are on. For eg, if you are using CoreXt, add the following to your extension csproj –
