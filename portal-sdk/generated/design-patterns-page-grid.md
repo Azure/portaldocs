@@ -1,7 +1,7 @@
 ﻿# Page with tables
 Most web pages and portals surface items in tables to show lists of items that can be searched, sorted and compared.
 
-Last updated Mar 2021 (see [change logs](#change-logs))
+Last updated Oct 2021 (see [change logs](#change-logs))
 
 <a name="context"></a>
 ## Context
@@ -77,6 +77,10 @@ This pattern allows users to expand a parent row to directly see the parent’s 
 ### Editable grid
 Inline add allows a user to quickly add or edit an item in the context of the list, without having to open a context pane or a new page. This interaction model is ideal for objects that don’t require a great deal of fields to fill out. The editable grid allows for various controls within a list item, like dropdowns or checkboxes.
 
+<a name="behaviors-empty-grid"></a>
+### Empty grid
+If there is no item to be shown, grid should follow the design of an empty grid. Refer to [notification design pattern](design-patterns-page-notifications.md) for more details.
+
 <a name="behaviors-contextual-commands"></a>
 ### Contextual commands
 Actions can be pulled out of the command bar to be in closer proximity to the grid objects they’re related to. This is valuable when there are multiple grids on the page or the grid is far from the command bar. However if the grid is the only content on a page, common design practice is to use the global command bar.
@@ -120,6 +124,10 @@ Developers can use the following information to get started implementing this pa
 
 <a name="for-developers-change-logs"></a>
 ## Change logs
+
+<a name="for-developers-change-logs-oct-2021"></a>
+### Oct 2021
+* Add empty grid info
 
 <a name="for-developers-change-logs-mar-2021"></a>
 ### Mar 2021

@@ -1,6 +1,6 @@
 ﻿# Forms
 
-Last updated Apr 2021 (see [change logs](#change-logs))
+Last updated Sep 2021 (see [change logs](#change-logs))
 
 The Form design pattern enables users to easily input information and successfully commit changes.
 

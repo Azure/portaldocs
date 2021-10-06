@@ -35,6 +35,8 @@
       - [Valid Icons for a `Status` Column](#valid-icons-for-a-status-column)
     - [Possible Summary Visualizations](#possible-summary-visualizations)
     - [Default columns](#default-columns)
+    - [Exclude columns](#exclude-columns)
+    - [Default filters](#default-filters)
     - [Full Asset Browse definition](#full-asset-browse-definition)
     - [Adding an informational info box with optional link to ARG browse](#adding-an-informational-info-box-with-optional-link-to-arg-browse)
       - [Browse Info Box Styles](#browse-info-box-styles)
@@ -955,7 +957,7 @@ where type =~ 'microsoft.web/sites'
 <a name="browse-with-azure-resource-graph-pdl-definition"></a>
 ## PDL Definition
 
-In your extension you'll have a `<AssetType>` tag declared in PDL which represents your ARM resource. In order to enable Azure Resource Graph (ARG) support for that asset we'll need to update the `<Browse>` tag to include a reference to the `Query`, `DefaultColumns`, and custom column meta data - if you have any.
+In your extension you'll have a `"assetType"` property declared in JSON (or <AssetType> tag declared in legacy PDL) which represents your ARM resource. In order to enable Azure Resource Graph (ARG) support for that asset we'll need to update the `"browse"` property to include a reference to the `query`, `defaultColumns`, `excludeColumns`, `defaultFilters`, and custom column meta data - if you have any.
 
 <a name="browse-with-azure-resource-graph-pdl-definition-adding-a-query-to-pdl"></a>
 ### Adding a Query to PDL
@@ -1194,10 +1196,29 @@ where type == 'microsoft.web/sites'
 <a name="browse-with-azure-resource-graph-pdl-definition-default-columns"></a>
 ### Default columns
 
-To specify default columns you need to declare a property `DefaultColumns` on your `Browse` `PDL` tag.
+To specify default columns you need to declare a property `defaultColumns` on your `browse` JSON object.
 Default columns is a comma separated list of column names, a mix of custom columns and framework defined columns from the earlier table. All framework columns are prefixed with `FxColumns.`.
 
-For example `DefaultColumns="status, appType, appServicePlanId, FxColumns.Location"`.
+For example `"defaultColumns": ["status", "appType", "appServicePlanId", "FxColumns.Location"]`
+(or in legacy PDL: `DefaultColumns="status, appType, appServicePlanId, FxColumns.Location"`).
+
+<a name="browse-with-azure-resource-graph-pdl-definition-exclude-columns"></a>
+### Exclude columns
+
+You can specify `excludeColumns` property on your `browse` JSON object to indicate which default columns should be excluded from the browse experience. It can be used for example for tenant-level resources.
+Exclude columns is an array of column names, where values can come from the set `["FxColumns.SubscriptionId", "FxColumns.ResourceGroup", "FxColumns.Location", "FxColumns.Tags"]`.
+Excluded columns won't appear in the grid, Kusto query, filter pills, groupBy dropdown, visualizations and column chooser.
+
+For example `"excludeColumns": ["FxColumns.SubscriptionId", "FxColumns.ResourceGroup", "FxColumns.Location"]`.
+
+<a name="browse-with-azure-resource-graph-pdl-definition-default-filters"></a>
+### Default filters
+
+By default, 3 filter pills are displayed in your Browse experience: Subscription, Resource Group and Location (unless some of these columns are exclued by `excludeColumns` property).
+If you want to render additional filter pills by default, you can achieve that by specifying `defaultFilters` property.
+`defaultFilters` is an array of column names, accepting only values that are specified in `columns` property.
+
+For example `"defaultFilters": ["status"]`.
 
 <a name="browse-with-azure-resource-graph-pdl-definition-full-asset-browse-definition"></a>
 ### Full Asset Browse definition
@@ -1229,7 +1250,9 @@ DX.json:
                 "format": "String",
                 "width": "90fr"
             }
-        ]
+        ],
+        "excludeColumns": ["FxColumns.ResourceGroup"],
+        "defaultFilters": ["status"]
     },
     "resourceType": {
         "name": "Microsoft.Test/myresources",
@@ -2657,7 +2680,7 @@ DX.json:
     // ...
     "mergedResourceTypes": [
       { "name": "microsoft.test/newresources", "kind": "bluekind" },
-      { "name": "microsoft.Test/newresources2", "kind": "roundkind", 
+      { "name": "microsoft.Test/newresources2", "kind": "roundkind",
         "additionalKinds": ["squarekind", "pentagonkind"] }
     ]
   },
