@@ -1,5 +1,5 @@
 ﻿# Manage a Resource
-Last updated Mar 2021 (see [Change Log](##change-log))
+Last updated Oct 2021 (see [Change Log](#change-log))
 
 The Manage a Resource pattern guides users through the complete configuration of a single Azure resource.
 
@@ -445,7 +445,8 @@ As shown above, when multiple Content Areas exists, this content should be place
 
 * Build your resource menu and overview page using the declarative framework
 * Ensure you have efficient APIs to get data for your overview page
-* Do leverage a status bar for resource level or page level messaging (error, warning, info, upsell)  
+* Do leverage a status bar for resource level or page level messaging (error, warning, info, upsell)
+* Use empty page design if blade has no instance to show, refer to [notification design pattern](design-patterns-page-notifications.md) for more details
 
 
 <a name="don-t"></a>
@@ -530,8 +531,14 @@ Many of the views described in the design pattern are offered as declarative vie
 <a name="implementation-change-log"></a>
 ## Change Log
 
-Mar 2021
+<a name="implementation-change-log-oct-2021"></a>
+### Oct 2021
+* Added empty blade info
+
+<a name="implementation-change-log-mar-2021"></a>
+### Mar 2021
 * Added detailed guidance for the Overview Page Toolbar, Essentials Area, and Content Area.
 
-Jul 2019
+<a name="implementation-change-log-jul-2019"></a>
+### Jul 2019
 * Published

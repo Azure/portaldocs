@@ -1,7 +1,7 @@
 <a name="notification-guidelines"></a>
 # Notification Guidelines
 
-Last updated Feb 2021 (see [change logs](#change-logs))
+Last updated Oct 2021 (see [change logs](#change-logs))
 
 The notification design pattern enables users to understand the result of actions. 
 
@@ -35,34 +35,27 @@ Types  of notifications include:
 ## Variations
 <a name="notification-guidelines-variations-local-synchronous-notifications"></a>
 ### 1. Local synchronous notifications
-<a name="notification-guidelines-variations-local-synchronous-notifications-examples"></a>
-#### Examples
-Example images
- 
+
+There are 6 variants of local synchronous notifications:
 <div style="max-width:800px">
-<img alttext="" src="../media/design-patterns-page-notifications/message-bar-and-inline-message.png"  />
+<img alttext="" src="../media/design-patterns-page-notifications/local-asynchronous-example.png"  />
 </div>
 
-Example uses
-
-Go to Create a resource group, choose a subscription that you don’t have the permission to create a resource, enter a resource group name and click another component of the page. A synchronous system status will be displayed to indicate the error message.
-
-<a name="notification-guidelines-variations-local-synchronous-notifications-use-when"></a>
-#### Use when
-Displaying a notification that relates to the current user flow, immediately responds to a user’s action.
-
-<a name="notification-guidelines-variations-local-synchronous-notifications-anatomy"></a>
-#### Anatomy
- 
-<a name="notification-guidelines-variations-local-synchronous-notifications-behavior"></a>
-#### Behavior
-a. Dialog
-  
+<a name="notification-guidelines-variations-local-synchronous-notifications-a-dialog"></a>
+#### a. Dialog
+<a name="notification-guidelines-variations-local-synchronous-notifications-a-dialog-examples"></a>
+##### Examples
 <div style="max-width:800px">
-<img alttext="" src="../media/design-patterns-page-notifications/simple-dialog.png"  />
+<img alttext="" src="../media/design-patterns-page-notifications/dialog-example.png"  />
 </div>
 
-Dialog shows a critical information message. Dialog will be dismissed when user clicks on the buttons of dialog or when user clicks on anywhere outside of dialog. Clicking on anywhere outside of dialog will be similar to click on Cancel button on dialog. Dialog is a high-level urgency notification.
+<a name="notification-guidelines-variations-local-synchronous-notifications-a-dialog-use-when"></a>
+##### Use when
+Dialog shows a critical information message.
+
+<a name="notification-guidelines-variations-local-synchronous-notifications-a-dialog-behavior"></a>
+##### Behavior
+Dialog will be dismissed when user clicks on the buttons of dialog or when user clicks on anywhere outside of dialog. Clicking on anywhere outside of dialog will be similar to click on Cancel button on dialog. Dialog is a high-level urgency notification.
 
 Checklist:
 * Triggered by user action
@@ -75,7 +68,7 @@ Checklist:
 If dialog doesn't require any action, it can have only one primary close button, as below:
 
 <div style="max-width:800px">
-<img alttext="" src="../media/design-patterns-page-notifications/info-dialog-form.png"  />
+<img width=400px alttext="" src="../media/design-patterns-page-notifications/info-dialog-form.png"  />
 </div>
 
 In case if notification message is big, a context pane can be used instead of a dialog. If it doesn't require any action, it can have only one primary close action, as below:
@@ -84,18 +77,28 @@ In case if notification message is big, a context pane can be used instead of a 
 <img alttext="" src="../media/design-patterns-page-notifications/info-context-pane-form.png"  />
 </div>
 
-b. Inline validation
- 
+<a name="notification-guidelines-variations-local-synchronous-notifications-b-inline-message"></a>
+#### b. Inline message
+<a name="notification-guidelines-variations-local-synchronous-notifications-b-inline-message-examples-1"></a>
+##### Examples
 <div style="max-width:800px">
-<img alttext="" src="../media/design-patterns-page-notifications/inline-message.png"  />
+<img width=400px alttext="" src="../media/design-patterns-page-notifications/inline-message-with-input-field-example.png"  />
 </div>
 
- 
 <div style="max-width:800px">
-<img width=700px alttext="" src="../media/design-patterns-page-notifications/inline-message-format.png"  />
+<img width=400px alttext="" src="../media/design-patterns-page-notifications/inline-message-example.png"  />
 </div>
 
-Inline validation is a type of inline message that is used to inform user about validation or info message of an input field. Inline validation will not block user from interacting with other components of the page. The message will be dismissed programmatically when user update the input field with a valid value.
+The icon can be one of five options: purple rocket, blue "i", yellow warning triangle, green check, or red "x".
+The body text should concisely describe the information to the user, ideally in a single sentence. It can include hyperlinks to navigate users to other pages to see more information. Its width needs to align with the field width above. Max 110 characters per line for the body text.
+
+<a name="notification-guidelines-variations-local-synchronous-notifications-b-inline-message-use-when-1"></a>
+##### Use when
+Inline validation is a type of inline message that is used to inform user about validation or info message of an input field.
+
+<a name="notification-guidelines-variations-local-synchronous-notifications-b-inline-message-behavior-1"></a>
+##### Behavior
+Inline validation will not block user from interacting with other components of the page. The message will be dismissed programmatically when user update the input field with a valid value.
 
 Checklist:
 * The validation happens live
@@ -103,73 +106,122 @@ Checklist:
 * The information relates to a form field
 * The message is triggered by user action
 
-c. Inline validation and message bar
- 
+<a name="notification-guidelines-variations-local-synchronous-notifications-c-status-indicator"></a>
+#### c. Status indicator
+<a name="notification-guidelines-variations-local-synchronous-notifications-c-status-indicator-examples-2"></a>
+##### Examples
 <div style="max-width:800px">
-<img alttext="" src="../media/design-patterns-page-notifications/inline-message-and-message-bar.png"  />
+<img width=400px alttext="" src="../media/design-patterns-page-notifications/status-indicator-example.png"  />
 </div>
 
-Inline validation and message bar are combined to inform users about an error message of an input field. They will not block users from interacting with other components of the page. They will be dismissed when user updates the input field with a valid value.
+<a name="notification-guidelines-variations-local-synchronous-notifications-c-status-indicator-use-when-2"></a>
+##### Use when
+Status indicator is a type of inline message that is used to inform user about an error or info message. 
 
-Checklist:
-* An error needs to be displayed after validation or it is hard to see the contextual error on its own
-* User needs contextual error information on their input and a high-level summary
-* The information relates to a form field
-* The message is triggered by user action
-
-d. Status indicator
- 
-<div style="max-width:800px">
-<img alttext="" src="../media/design-patterns-page-notifications/status-indicator.png"  />
-</div>
-
-Status indicated is a type of inline message that is used to inform user about an error or info message. They will not block user from interacting with other components of the page. 
+<a name="notification-guidelines-variations-local-synchronous-notifications-c-status-indicator-behavior-2"></a>
+##### Behavior
+Satus indicator will not block user from interacting with other components of the page. 
 
 Checklist:
 * User needs lightweight contextual confirmation of their action or status of a process
 * The message is triggered by user action or system
 * There is no other UI change that would clearly indicate that the system registered user’s action
 
-e. Message bar
- 
+<a name="notification-guidelines-variations-local-synchronous-notifications-d-info-box"></a>
+#### d. Info box
+<a name="notification-guidelines-variations-local-synchronous-notifications-d-info-box-examples-3"></a>
+##### Examples
 <div style="max-width:800px">
-<img alttext="" src="../media/design-patterns-page-notifications/message-bar.png"  />
+<img width=400px alttext="" src="../media/design-patterns-page-notifications/info-box-example.png"  />
 </div>
 
- 
-<div style="max-width:800px">
-<img alttext="" src="../media/design-patterns-page-notifications/message-bar-context-pane.png"  />
-</div>
+The optional close "x" button can be used to close info box temporarily
+The icon can be one of five options: purple rocket, blue "i", yellow warning triangle, green check, or red "x".
+The body text should concisely describe the information to the user, ideally in a single sentence. It can include hyperlinks to navigate users to other pages to see more information. Its width needs to align with the field width above. Max 110 characters per line for the body text.
 
- 
-<div style="max-width:800px">
-<img width=700px alttext="" src="../media/design-patterns-page-notifications/message-bar-format.png"  />
-</div>
+<a name="notification-guidelines-variations-local-synchronous-notifications-d-info-box-use-when-3"></a>
+##### Use when
+Info box is used to inform user about an message (issue, warning, info) that is related to a section of page.
 
-Message bar is used to inform user about an issue, error or subscription. It will not block user from interacting with other components of the page.
+<a name="notification-guidelines-variations-local-synchronous-notifications-d-info-box-behavior-3"></a>
+##### Behavior
+Info box will not block user from interacting with other components of the page.
+
+Checklist:
+* The message related to state of the section that info box belongs
+* The information doesn’t require immediate action
+* Texts, links and buttons can be included
+
+<a name="notification-guidelines-variations-local-synchronous-notifications-e-status-bar"></a>
+#### e. Status bar
+<a name="notification-guidelines-variations-local-synchronous-notifications-e-status-bar-examples-4"></a>
+##### Examples
+<div style="max-width:800px">
+<img width=400px alttext="" src="../media/design-patterns-page-notifications/status-bar-example.png"  />
+</div>
+The icon can be one of five options: purple rocket, blue "i", yellow warning triangle, green check, or red "x".
+The body text should be brief, and limit to one line if possible. Be succinct and your users are more likely to read everything you say. Embed links can be used in the message to help users solve the problem. 
+
+<a name="notification-guidelines-variations-local-synchronous-notifications-e-status-bar-use-when-4"></a>
+##### Use when
+Status bar is used to inform user about an message (issue, warning, info) that is related to whole page. 
+
+<a name="notification-guidelines-variations-local-synchronous-notifications-e-status-bar-behavior-4"></a>
+##### Behavior
+Status bar will not block user from interacting with other components of the page.
 
 Checklist:
 * The message relates to the state of the entire product or surface
-* The message is triggered by the system
 * The information doesn’t require immediate action
 * The message can relate to an upgrade
+* There is not close icon in top right
+* Only texts are allowed
+* Bar can be clickable
 
-f. Error page
- 
+Example of status bar, info box and inline message in a page:
 <div style="max-width:800px">
-<img alttext="" src="../media/design-patterns-page-notifications/error-page.png"  />
+<img alttext="" src="../media/design-patterns-page-notifications/status-bar-info-box-inline-message.png"  />
 </div>
 
-Error page is  used to inform user about an error and empty state of a page.
+<a name="notification-guidelines-variations-local-synchronous-notifications-f-empty-page"></a>
+#### f. Empty page
+<a name="notification-guidelines-variations-local-synchronous-notifications-f-empty-page-examples-5"></a>
+##### Examples
+<div style="max-width:800px">
+<img width=400px alttext="" src="../media/design-patterns-page-notifications/empty-page-design.png"  />
+</div>
+
+<a name="notification-guidelines-variations-local-synchronous-notifications-f-empty-page-use-when-5"></a>
+##### Use when
+Empty page can be used in an empty grid or an empty blade that doesn't have any instance.
+
+Empty grid
+<div style="max-width:800px">
+<img alttext="" src="../media/design-patterns-page-notifications/empty-grid.png"  />
+</div>
+
+Empty blade
+<div style="max-width:800px">
+<img alttext="" src="../media/design-patterns-page-notifications/empty-blade.png"  />
+</div>
+
+<a name="notification-guidelines-variations-local-synchronous-notifications-f-empty-page-behavior-5"></a>
+##### Behavior
 
 Checklist:
-* Error is preventing user to access app content
-* The message is triggered by the system
-* Error relates to a full page or a surface (card/panel, etc)
+* The grid header is required for empty grid
+* Icon is required and should match the resource menu icon shown in the blade header with grayscale and 50% opacity 
+* Greeting string is required and should say “No [object name] to display
+* Body text is optional and is used to explain what the item is and why the user might need it
+* Call to action primary button is required  to add or create something so that the grid is no longer empty
+* Secondary button can be added
+* External links are optional and can be used to lead to documentation or Azure.com
+
+
 
 <a name="notification-guidelines-variations-global-or-asynchronous-notification"></a>
 ### 2. Global or asynchronous notification
-<a name="notification-guidelines-variations-global-or-asynchronous-notification-examples-1"></a>
+<a name="notification-guidelines-variations-global-or-asynchronous-notification-examples-6"></a>
 #### Examples
 Example images
  
@@ -180,34 +232,30 @@ Example images
 Example uses
 
 Go to Create a storage account. After clicking on create, go to another Azure service (such as Virtual Machine or Bot Services). When system deploys a storage account, it will show an asynchronous toast notification to inform user about the completion.
-<a name="notification-guidelines-variations-global-or-asynchronous-notification-use-when-1"></a>
+<a name="notification-guidelines-variations-global-or-asynchronous-notification-use-when-6"></a>
 #### Use when
 Displaying a notification that does not relate to the current user flow.
-<a name="notification-guidelines-variations-global-or-asynchronous-notification-anatomy-1"></a>
-#### Anatomy
+
+<a name="notification-guidelines-variations-global-or-asynchronous-notification-behavior-6"></a>
+#### Behavior
+	
+The position of notification toast and notification panel are as follow:
+<div style="max-width:800px">
+<img alttext="" src="../media/design-patterns-page-notifications/notification-toast-page.png"  />
+</div>
  
+<div style="max-width:800px">
+<img alttext="" src="../media/design-patterns-page-notifications/notification-panel-page.png"  />
+</div>
+
+Variants of notification toast
 <div style="max-width:800px">
 <img width=600px alttext="" src="../media/design-patterns-page-notifications/toast-format.png"  />
 </div>
 
+Notification toast is used to notify user about an operational awareness. It is invoked programmatically and is dismissed manually or programmatically. It will not block user from interacting with other components of the page. User can click on the toast notification to expand it to a notification panel to see detailed information. Notification toast and notification panel are only storing data per section.
 
-<a name="notification-guidelines-variations-global-or-asynchronous-notification-behavior-1"></a>
-#### Behavior
-	
-Toast  and panel notification
-
- 
-<div style="max-width:800px">
-<img alttext="" src="../media/design-patterns-page-notifications/toast-design.png"  />
-</div>
-
- 
-<div style="max-width:800px">
-<img alttext="" src="../media/design-patterns-page-notifications/full-toast-design.png"  />
-</div>
-
-
-Toast is used to notify user about an operational awareness. It is invoked programmatically and is dismissed manually or programmatically. It will not block user from interacting with other components of the page. User can click on the toast notification to expand it to a panel notification to see detailed information.
+In a notification toast, title can go up to two lines, and links can be internal or external. Only one primary button can be added to a notification toast.
 
 Checklist:
 * Relevant messages that user opted-in need to be surfaced
@@ -216,8 +264,7 @@ Checklist:
 * Information is useful but not critical
 * All content from toasts gets archived in the notification center
 
-If user want to see historical data, they can view it from Activity Log 
-
+If user want to see historical data, they can view it from Activity Log. Activity Log stores everything from notification center.
  
 <div style="max-width:800px">
 <img alttext="" src="../media/design-patterns-page-notifications/activity-log.png"  />
@@ -226,7 +273,7 @@ If user want to see historical data, they can view it from Activity Log
 
 <a name="notification-guidelines-variations-guiding-and-teaching-ui"></a>
 ### 3. Guiding and teaching UI
-<a name="notification-guidelines-variations-guiding-and-teaching-ui-examples-2"></a>
+<a name="notification-guidelines-variations-guiding-and-teaching-ui-examples-7"></a>
 #### Examples
 Example images
  
@@ -237,12 +284,12 @@ Example images
 Example uses
 
 Go to Create a resource group and hover mouse to a label tooltip.
-<a name="notification-guidelines-variations-guiding-and-teaching-ui-use-when-2"></a>
+<a name="notification-guidelines-variations-guiding-and-teaching-ui-use-when-7"></a>
 #### Use when
 Helping user to better understand a feature and to easier complete a task.
-<a name="notification-guidelines-variations-guiding-and-teaching-ui-anatomy-2"></a>
+<a name="notification-guidelines-variations-guiding-and-teaching-ui-anatomy"></a>
 #### Anatomy
-<a name="notification-guidelines-variations-guiding-and-teaching-ui-behavior-2"></a>
+<a name="notification-guidelines-variations-guiding-and-teaching-ui-behavior-7"></a>
 #### Behavior
 a. Texts  on the page 
  
@@ -260,7 +307,7 @@ Text on page can impact users’ decisions when there is enough space: section n
 b. Tooltip
  
 <div style="max-width:800px">
-<img width=800px alttext="" src="../media/design-patterns-page-notifications/tooltip.png"  />
+<img width=400px alttext="" src="../media/design-patterns-page-notifications/tooltip.png"  />
 </div>
 
 Tooltip is an infoballoon that is triggered by user to provide a few word to help user understand product better.
@@ -276,7 +323,7 @@ c. Coachmark
 <img alttext="" src="../media/design-patterns-page-notifications/callout.png"  />
 </div>
 
-Coachmark is a coachmark that is triggered by user to instruct user to complete a task. Refer to this [link]( https://developer.microsoft.com/en-us/fluentui#/controls/web/coachmark) for more details.
+Coachmark is a callout that is triggered by user to instruct user to complete a task. Refer to this [link]( https://developer.microsoft.com/en-us/fluentui#/controls/web/coachmark) for more details.
 
 Checklist:
 * Provide users evergreen contextual information on the content
@@ -356,6 +403,9 @@ Go to the playground site to use the latest control and get source code for your
 
 <a name="notification-guidelines-change-logs"></a>
 ## Change logs
+<a name="notification-guidelines-change-logs-oct-2021"></a>
+### Oct 2021
+* Converted lo-fi impages to hi-fi images for notification design and added details for empty page design
 <a name="notification-guidelines-change-logs-feb-2021"></a>
 ### Feb 2021
 * Aligned to fluent notification design

@@ -1,7 +1,7 @@
 ﻿# Create a Resource
 The Create a Resource pattern guides users through the process of creating Azure resources.
 
-Last updated Aug 2021 (see [Change Log](##change-log))
+Last updated Sep 2021 (see [Change Log](#change-log))
 
 <a name="context"></a>
 ## Context
