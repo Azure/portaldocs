@@ -177,12 +177,32 @@ To add the Properties view, add the following example to the `properties.tabs` s
         {
             "displayName": "Virtual machine",
             "icon": "MsPortalFx.Base.Images.Polychromatic.VirtualMachine",
+            "action": {
+                "menu": "tags"
+            },
             "description": "This is a virtual machine.",
             "items": [
                 {
-                    "displayName": "Resource name",
-                    "value": "[resources().name]",
-                    "description": "This is the resource name."
+                  "displayName": "Provisioning State",
+                  "value": "[resources().properties.provisioningState]",
+                  "description": "This is provisioning state.",
+                  "valueMapping": [
+                    {
+                      "value": "Succeeded",
+                      "displayName": "Succeeded",
+                      "icon": "MsPortalFx.Base.Images.StatusBadge.Outline.Success"
+                    },
+                    {
+                      "value": "Warning",
+                      "displayName": "Warning",
+                      "icon": "MsPortalFx.Base.Images.StatusBadge.Outline.Warning"
+                    },
+                    {
+                      "value": "Failed",
+                      "displayName": "Failed",
+                      "icon": "MsPortalFx.Base.Images.StatusBadge.Outline.Failed"
+                    }
+                  ]
                 },
                 {
                     "displayName": "Computer name",
@@ -235,6 +255,13 @@ To add the Properties view, add the following example to the `properties.tabs` s
                                 "resId": "[resources().id]"
                             }
                         }
+                    }
+                },
+                {
+                    "displayName": "Open a menu",
+                    "value": "Tags",
+                    "action": {
+                        "menu": "tags"
                     }
                 }
             ]
@@ -468,6 +495,115 @@ Example for resources() data source, the output for resources().resources must b
 ```
 Example
 ![alt-text](../media/portalfx-cuid/DataBrowseTab.png "DataBrowse tab")
+
+Example for icon and link support.
+
+```
+{
+	"kind": "DataBrowse",
+	"displayName": "Data browse",
+	"ariaLabel": "testing",
+	"data": [
+		{
+			"name": "resourceName1",
+			"id": "/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/{provider}/{resourceType}/{resourceName}",
+			"status": "Succeeded",
+			"menu": "tags",
+			"urlText": "Azure portal",
+			"urlAction": {
+				"url": "https://azure.microsoft.com/"
+			},
+			"parameters": {
+				"title": "resourceName1"
+			}
+		},
+		{
+			"name": "resourceName2",
+			"id": "/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/{provider}/{resourceType}/{resourceName}",
+			"status": "Warning",
+			"menu": "properties",
+			"urlText": "Microsoft",
+			"urlAction": {
+				"url": "https://www.microsoft.com/en-us/"
+			},
+			"parameters": {
+				"title": "resourceName2"
+			}
+		},
+		{
+			"name": "resourceName3",
+			"id": "/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/{provider}/{resourceType}/{resourceName}",
+			"status": "Failed",
+			"menu": "locks",
+			"urlText": "Github",
+			"urlAction": {
+				"url": "https://github.com/"
+			},
+			"parameters": {
+				"title": "resourceName3"
+			}
+		}
+	],
+	"columns": [
+		{
+			"displayName": "Name",
+			"name": "name",
+			"action": {
+				"resourceId": "[$item.id]"
+			}
+		},
+		{
+			"displayName": "Status",
+			"name": "status",
+			"valueMapping": [
+				{
+					"value": "Succeeded",
+					"displayName": "Succeeded",
+					"icon": "MsPortalFx.Base.Images.StatusBadge.Outline.Success"
+				},
+				{
+					"value": "Warning",
+					"displayName": "Warning",
+					"icon": "MsPortalFx.Base.Images.StatusBadge.Outline.Warning"
+				},
+				{
+					"value": "Failed",
+					"displayName": "Failed",
+					"icon": "MsPortalFx.Base.Images.StatusBadge.Outline.Failed"
+				}
+			]
+		},
+		{
+			"displayName": "Menu",
+			"name": "menu",
+			"action": {
+				"menu": "[$item.menu]"
+			}
+		},
+		{
+			"displayName": "Url",
+			"name": "urlText",
+			"action": {
+				"url": "[$item.urlAction.url]"
+			}
+		},
+		{
+			"displayName": "Blade",
+			"name": "name",
+			"action": {
+				"blade": {
+					"name": "A blade name",
+					"extension": "An extension name",
+					"parameters": "[$item.parameters]",
+					"inContextPane": true
+				}
+			}
+		}
+	]
+}
+```
+Example
+![alt-text](../media/portalfx-cuid/DataBrowseTab2.png "DataBrowse tab 2")
 
 <a name="declarative-resource-overview-experience-configuring-views-information"></a>
 #### Information
