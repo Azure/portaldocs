@@ -21,7 +21,6 @@
 * [Portal Telemetry Overview](portalfx-telemetry.md#portal-telemetry-overview)
     * [Logging](portalfx-telemetry.md#logging)
     * [Available Power BI Dashboards](portalfx-telemetry.md#available-power-bi-dashboards)
-    * [Collecting Feedback From Your Users](portalfx-telemetry.md#collecting-feedback-from-your-users)
 
 * [How to verify live Telemetry](portalfx-telemetry-live-telemetry.md#how-to-verify-live-telemetry)
     * [Using Console Logs](portalfx-telemetry-live-telemetry.md#using-console-logs)
