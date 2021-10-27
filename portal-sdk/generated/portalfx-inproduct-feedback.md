@@ -13,7 +13,7 @@ The survey consists of two questions that are always prefixed with:
 1. How difficult or easy was it...
 1. How valuable was...
 
-English strings are validated to ensure questions are formatted correctly.  Each question is then followed by a rating scale which the user must complete before submitting the feedback.  Users my also choose to provide additional comments.
+English strings are validated to ensure questions are formatted correctly.  Each question is then followed by a rating scale which the user must complete before submitting the feedback.  Users may also choose to provide additional comments.
 
 <a name="in-product-feedback-what-s-in-the-survey-example"></a>
 ### Example
