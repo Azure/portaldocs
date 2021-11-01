@@ -3,6 +3,9 @@
 * To ask a question about breaking changes [use this](https://aka.ms/ask/ibiza-breaking-change)  
 
 
+## 8.248.0.5
+<table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=10981484'>10981484</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=10981484'>Add telemetry for CopyableLabel's onClick event</a><p>No description available for this breaking change.</p></td></tr></table>
+
 ## 8.218.0.5
 <table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=10955536'>10955536</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=10955536'>Include the Microsoft.IdentityModel.S2S as one of the external packages shipped with the Microsoft.Portal.Security.AadCore nuget package.</a><p></p></td></tr></table>
 
