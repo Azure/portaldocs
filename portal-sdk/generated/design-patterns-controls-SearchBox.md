@@ -76,6 +76,8 @@ Use a SearchBox without a parent container when it is not restricted to a certai
 <a name="developer-tips-and-tricks"></a>
 ### Developer tips and tricks
 
+* Developers must use the "update" callback option to indicate to screen readers how many search results were found. Only return an empty array from said callback when there are no results.
+
 
 
 <a name="developer-tips-and-tricks-interactive-control-and-sample-source-code"></a>
@@ -91,7 +93,7 @@ Go to the playground site to use the latest control and get source code for your
 <a name="related-info"></a>
 ### Related info
 
-* <a href="https://www.figma.com/file/Bwn8rmUOYtnPRwA3JoQTBn/Azure-Portal-Toolkit?node-id=3492%3A393913" target="_blank">SearchBox in Azure Portal Toolkit (Figma)</a> 
+* <a href="https://www.figma.com/file/Bwn8rmUOYtnPRwA3JoQTBn/Azure-Portal-Toolkit?node-id=3492%3A393913" target="_blank">SearchBox in Azure Portal Toolkit (Figma)</a>
 
 * [Azure design guidance](http://aka.ms/portalfx/design)
 
