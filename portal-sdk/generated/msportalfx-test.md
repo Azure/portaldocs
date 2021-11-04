@@ -717,6 +717,7 @@ These values are mutable to allow test writers to set the values in cases where 
 import TestExtension from "./TestExtension";
 import Feature from "./Feature";
 import BrowserResolution from "./BrowserResolution";
+import SilentAuthConfig from "./SilentAuthConfig";
 import Timeout from "./Timeout";
 
 export class PortalContextBase {
@@ -771,6 +772,17 @@ export class PortalContextBase {
      * Password of the user used to sign in to the Portal.
      */
     signInPassword?: string = null;
+    /**
+     * The set of features to enable while navigating within the Portal.
+     */
+    /**
+     * Boolean indicating if silent auth should used to sign in to the Portal.
+     */
+    useSilentAuthLogin?: boolean = false;
+    /**
+     * Configuration for silent auth
+     */
+    silentAuthConfig?: SilentAuthConfig;
     /**
      * The set of features to enable while navigating within the Portal.
      */
