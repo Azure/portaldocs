@@ -259,10 +259,7 @@ describe("Resource Keys Blade Tests", () => {
         "moduleResolution": "node",
         "lib": [
             "dom",
-            "es2015.promise",
-            "es2015.iterable",
-            "es5",
-            "scripthost"
+            "ES2018"
         ],
         "target": "es5",
         "paths": {
