@@ -86,7 +86,7 @@ const engineDisplacement = FxDropDown.create<string>(container, {
         viewModel: {
             createNew: ClientResources.createNew,
             onClick: () => {
-                container.openContextPane(BladeReferences.forBlade("CreateDisplacementItemBlade").createReference({
+                void container.openContextPane(BladeReferences.forBlade("CreateDisplacementItemBlade").createReference({
                     parameters: { label: ClientResources.engineDisplacementColumn },
                     onClosed: (reason, data) => {
                         if (reason === BladeClosedReason.ChildClosedSelf) {
@@ -187,7 +187,7 @@ const onCreateButtonClick = () => {
             // This should only occur if there was a network issue when trying to call ARM, since validation has already succeeded.
             showError(MsPortalFx.getLogFriendlyMessage(err), () => {
                 // Display the arm errors blade with results from arm
-                container.openContextPane(this.context.provisioning.getArmErrorsBladeReference({
+                void container.openContextPane(this.context.provisioning.getArmErrorsBladeReference({
                     errors: err,
                     subscriptionId: this._subscription().subscriptionId,
                     troubleshootingLinks: [TemplateBlade.DoesProvisioning.TroubleshootingLinks.CommonDeploymentErrors, TemplateBlade.DoesProvisioning.TroubleshootingLinks.CreateArmTemplateDocs],

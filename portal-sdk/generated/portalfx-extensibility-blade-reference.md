@@ -10,7 +10,7 @@ here [top-blades-opening-and-closing.md](top-blades-opening-and-closing.md).
 
 // open the "control" menu item in the resource menu for a specific resource
 const resourceId = "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/web1";
-this._container.openBlade(BladeReferences.forExtension("HubsExtension").forMenuBlade("ResourceMenuBlade", "control").createReference({ parameters: { id: resourceId } }));
+void this._container.openBlade(BladeReferences.forExtension("HubsExtension").forMenuBlade("ResourceMenuBlade", "control").createReference({ parameters: { id: resourceId } }));
 
 ```
 

@@ -60,7 +60,7 @@ The portal SDK also generates strongly typed blade references for menu blades.  
 
 // open the "control" menu item in the resource menu for a specific resource
 const resourceId = "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/web1";
-this._container.openBlade(BladeReferences.forExtension("HubsExtension").forMenuBlade("ResourceMenuBlade", "control").createReference({ parameters: { id: resourceId } }));
+void this._container.openBlade(BladeReferences.forExtension("HubsExtension").forMenuBlade("ResourceMenuBlade", "control").createReference({ parameters: { id: resourceId } }));
 
 ```
 
@@ -81,7 +81,7 @@ const menuBladeReference = BladeReferences.forExtension("HubsExtension").forMenu
 // when the resource menu blade is opened -
 // 1. the 'control' menu item will be selected
 // 2. the 'VirtualServerControlBlade' will be opened as the menu blade content
-this._container.openBlade(menuBladeReference);
+void this._container.openBlade(menuBladeReference);
 
 ```
 
