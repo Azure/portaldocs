@@ -552,7 +552,7 @@ module BrowseColumns {
    }
 }
 
-function getPrinterMenu(resourceId: string, dataContext: DataContext): FxBase.PromiseV<FxAssets.ResourceMenuConfig> {
+function getPrinterMenu(resourceId: string, dataContext: DataContext): MsPortalFx.Base.PromiseV<FxAssets.ResourceMenuConfig> {
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // EXAMPLE : Providing static menu items for a kind of resource.
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -644,7 +644,7 @@ export class PrinterViewModel
     *
     * @return A promise which will be resolved with the browse config.
     */
-   public getBrowseConfig(): FxBase.PromiseV<FxAssets.BrowseConfig> {
+   public getBrowseConfig(): MsPortalFx.Base.PromiseV<FxAssets.BrowseConfig> {
        // This sample shows how to include additional columns for the printer resource and sets one pre-defined
        // column and one custom column as the default columns. This ensures that without customization, these
        // columns will appear in the browse grid.
@@ -721,7 +721,7 @@ export class PrinterViewModel
     * @param refresh Optionally specify if the supplemental data needs to be refreshed for the specified resource IDs.
     * @return A promise which will be resolved when data is ready to be streamed.
     */
-   public getSupplementalData(resourceIds: string[], columns: string[], refresh?: boolean): FxBase.Promise {
+   public getSupplementalData(resourceIds: string[], columns: string[], refresh?: boolean): MsPortalFx.Base.Promise {
        return processSupplementalData(resourceIds, columns, this._updateMap, this.supplementalDataStream, this._dataContext.printerData, (printer) => {
            // ***
            // THIS IS FOR TESTING ONLY, DO NOT INCLUDE THIS IN PRODUCTION CODE.
@@ -753,7 +753,7 @@ export class PrinterViewModel
     * @param resourceInfo The resource ID for the menus.
     * @return A promise which will be resolved with the resource menu configuration.
     */
-   public getResourceMenuConfig(resourceId: string): FxBase.PromiseV<FxAssets.ResourceMenuConfig> {
+   public getResourceMenuConfig(resourceId: string): MsPortalFx.Base.PromiseV<FxAssets.ResourceMenuConfig> {
        const armId = ArmId.parse(resourceId, true);
        executeInDevelopmentModeOnly(() => {
            const resourceType = armId.resourceType.toLowerCase();

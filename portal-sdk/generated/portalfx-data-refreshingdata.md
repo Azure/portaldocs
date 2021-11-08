@@ -100,7 +100,7 @@ As server data changes, there are scenario where the extension should *take expl
 
 ```typescript
 
-public updateRobot(robot: Robot): FxBase.PromiseV<any> {
+public updateRobot(robot: Robot): MsPortalFx.Base.PromiseV<any> {
     return FxBaseNet.ajax({
         uri: RobotData._apiRoot + robot.name(),
         type: "PUT",
@@ -155,7 +155,7 @@ As mentioned above, this method will issue an AJAX call (either using the '`supp
 
 ```typescript
 
-public updateRobot(robot: Robot): FxBase.PromiseV<any> {
+public updateRobot(robot: Robot): MsPortalFx.Base.PromiseV<any> {
     return FxBaseNet.ajax({
         uri: RobotData._apiRoot + robot.name(),
         type: "PUT",
@@ -244,7 +244,7 @@ In some scenarios, AJAX calls to the server to refresh cached data can be *avoid
 
 ```typescript
 
-public createRobot(robot: Robot): FxBase.PromiseV<any> {
+public createRobot(robot: Robot): MsPortalFx.Base.PromiseV<any> {
     return FxBaseNet.ajax({
         uri: RobotData._apiRoot,
         type: "POST",
@@ -271,7 +271,7 @@ public createRobot(robot: Robot): FxBase.PromiseV<any> {
 
 ```typescript
 
-public deleteRobot(robot: Robot): FxBase.PromiseV<any> {
+public deleteRobot(robot: Robot): MsPortalFx.Base.PromiseV<any> {
     return FxBaseNet.ajax({
         uri: RobotData._apiRoot + robot.name(),
         type: "DELETE",
@@ -306,7 +306,7 @@ Now, when the server data for a given cache entry *has been entirely deleted*, t
 
 ```typescript
 
-public deleteComputer(computer: Computer): FxBase.PromiseV<any> {
+public deleteComputer(computer: Computer): MsPortalFx.Base.PromiseV<any> {
     return FxBaseNet.ajax({
         uri: ComputerData._apiRoot + computer.name(),
         type: "DELETE",
