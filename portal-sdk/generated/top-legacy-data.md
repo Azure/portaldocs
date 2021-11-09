@@ -241,7 +241,7 @@ As is standard practice we'll call the view's `fetch` method on the blade's `onI
 /**
  * Invoked when the blade's inputs change
  */
-public onInputsSet(): MsPortalFx.Base.Promise {
+public onInputsSet(): Promise<any> {
     return this._websitesQueryView.fetch({ runningStatus: this.runningStatus.value() });
 }
 
@@ -294,7 +294,7 @@ Then in the `onInputsSet` we call `fetch` passing the ID of the website we want 
 /**
  * Invoked when the blade's inputs change.
  */
-public onInputsSet(inputs: Def.BrowseDetailViewModel.InputsContract): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: Def.BrowseDetailViewModel.InputsContract): Promise<any> {
     return this._websiteEntityView.fetch(inputs.currentItemId);
 }
 
@@ -466,7 +466,7 @@ this._websiteEntityView = dataContext.websiteEntities.createView(container);
 /**
  * Invoked when the blade's inputs change
  */
-public onInputsSet(): MsPortalFx.Base.Promise {
+public onInputsSet(): Promise<any> {
     return this._websitesQueryView.fetch({ runningStatus: this.runningStatus.value() });
 }
 
@@ -840,7 +840,7 @@ Creating a DataView does not result in a data load operation from the server. Th
 `\Client\Data\MasterDetailBrowse\ViewModels\MasterViewModels.ts`
 
 ```ts
-public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: any): Promise<any> {
     return this._websitesQueryView.fetch({ runningStatus: inputs.filterRunningStatus.value });
 }
 ```
@@ -1260,7 +1260,7 @@ As server data changes, there are scenario where the extension should *take expl
 
 ```typescript
 
-public updateRobot(robot: Robot): MsPortalFx.Base.PromiseV<any> {
+public updateRobot(robot: Robot): Promise<any> {
     return FxBaseNet.ajax({
         uri: RobotData._apiRoot + robot.name(),
         type: "PUT",
@@ -1293,7 +1293,7 @@ class RefreshCommand implements MsPortalFx.ViewModels.Commands.Command<void> {
         this._websiteView = websiteView;
     }
 
-    public execute(): MsPortalFx.Base.Promise {
+    public execute(): Promise<any> {
         return this._websiteView.refresh();
     }
 ```
@@ -1315,7 +1315,7 @@ As mentioned above, this method will issue an AJAX call (either using the '`supp
 
 ```typescript
 
-public updateRobot(robot: Robot): MsPortalFx.Base.PromiseV<any> {
+public updateRobot(robot: Robot): Promise<any> {
     return FxBaseNet.ajax({
         uri: RobotData._apiRoot + robot.name(),
         type: "PUT",
@@ -1404,7 +1404,7 @@ In some scenarios, AJAX calls to the server to refresh cached data can be *avoid
 
 ```typescript
 
-public createRobot(robot: Robot): MsPortalFx.Base.PromiseV<any> {
+public createRobot(robot: Robot): Promise<any> {
     return FxBaseNet.ajax({
         uri: RobotData._apiRoot,
         type: "POST",
@@ -1431,7 +1431,7 @@ public createRobot(robot: Robot): MsPortalFx.Base.PromiseV<any> {
 
 ```typescript
 
-public deleteRobot(robot: Robot): MsPortalFx.Base.PromiseV<any> {
+public deleteRobot(robot: Robot): Promise<any> {
     return FxBaseNet.ajax({
         uri: RobotData._apiRoot + robot.name(),
         type: "DELETE",
@@ -1466,7 +1466,7 @@ Now, when the server data for a given cache entry *has been entirely deleted*, t
 
 ```typescript
 
-public deleteComputer(computer: Computer): MsPortalFx.Base.PromiseV<any> {
+public deleteComputer(computer: Computer): Promise<any> {
     return FxBaseNet.ajax({
         uri: ComputerData._apiRoot + computer.name(),
         type: "DELETE",
@@ -1548,7 +1548,7 @@ this.productsCache = new MsPortalFx.Data.QueryCache<SamplesExtension.DataModels.
             suppliedQueryView: MsPortalFx.Data.QueryView<SamplesExtension.DataModels.Product, ProductQueryParams>,
             query: ProductQueryParams,
             reset: boolean,
-            filter: string): MsPortalFx.Base.Promise => {
+            filter: string): Promise<any> => {
 
             var token = reset ? "" :
                 (suppliedQueryView.metadata() ?
@@ -1624,7 +1624,7 @@ constructor(container: MsPortalFx.ViewModels.PartContainerContract,
 }
 
 
-public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: any): Promise<any> {
     return this._sequentialDataNavigator.setQuery({ categoryId: inputs.categoryId });
 }
 ```
@@ -1652,7 +1652,7 @@ var productsCache = new MsPortalFx.Data.QueryCache<SamplesExtension.DataModels.P
             query: ProductPageableQueryParams,
             skip: number,
             take: number,
-            filter: string): MsPortalFx.Base.Promise => {
+            filter: string): Promise<any> => {
 
                 return suppliedQueryView.fetch({ skip: skip.toString(), take: take.toString(), categoryId: query.categoryId });
         }
@@ -1723,7 +1723,7 @@ constructor(container: MsPortalFx.ViewModels.PartContainerContract,
         ko.observable(ClientResources.nobodyInDatabase);
 }
 
-public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: any): Promise<any> {
     return this._pageableDataNavigator.setQuery({ categoryId: inputs.categoryId });
 }
 ```

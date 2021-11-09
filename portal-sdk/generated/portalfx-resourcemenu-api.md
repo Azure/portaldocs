@@ -4,7 +4,7 @@
 
 ```ts
 import * as FxMenuBlade from "Fx/Composition/MenuBlade";
- 
+
 declare module MsPortalFx.Assets {
     /**
      * The resource information for the resource menu.
@@ -114,7 +114,7 @@ declare module MsPortalFx.Assets {
          * @param resourceInfo The resource ID and resource|resource group for the menus.
          * @return A promise which will be resolved with the resource menu configuration.
          */
-        getMenuConfig(resourceInfo: ResourceInformation): FxBase.PromiseV<ResourceMenuConfig>;
+        getMenuConfig(resourceInfo: ResourceInformation): Promise<ResourceMenuConfig>;
     }
 }
 

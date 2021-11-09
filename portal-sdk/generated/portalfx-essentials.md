@@ -156,7 +156,7 @@ Static properties are displayed at the top of the right-hand column of the Essen
 In some cases, the extension only knows to add additional properties once it has examined the loaded resource data.  Once the data has loaded, the extension adds these properties to the Essentials panel using the `MsPortalFx.ViewModels.Parts.ResourceSummary.ViewModel2.setDynamicProperties` method:
 
 ```ts
-public onInputsSet(inputs: Def.InputsContract, settings: Def.SettingsContract): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: Def.InputsContract, settings: Def.SettingsContract): Promise<any> {
 
     return super.onInputsSet(inputs, settings).then(() => {
         return this._engineView.fetch(inputs.resourceId).then(() => {
@@ -197,7 +197,7 @@ Dynamic properties are displayed at the bottom of the right-hand column of the E
 ### (Advanced) Customizing the layout of properties
 
 In certain advanced scenarios, the extension may need to customize the layout of properties beyond just defining the right-hand column properties.  This is not recommended for most scenarios, as per-extension customization can easily violate the guidelines described [here](design-patterns-resource-manage.md#essentials-panel), either today or if the guidelines are revised in the future.  For those scenarios where it is necessary to customize beyond the defaults, this can be done using the `MsPortalFx.ViewModels.Parts.ResourceSummary.Options2.layout` option.  Here, the extension can control which properties are shown as well as property ordering/placement in the left- and right-hand columns.  Consult the relevant doc comments in MsPortalFx.d.ts for details.
-	
+
 <a name="essentials-panel-settings"></a>
 ### Settings
 
@@ -249,4 +249,3 @@ Resources support simple role based access via Azure Active Directory. Most reso
 ![Tags](../media/portalfx-essentials/tags.png)
 
 Tags provide a simple way for developers to organize their resources with lightweight key/value pairs. Most resources support tags out of the box.
-

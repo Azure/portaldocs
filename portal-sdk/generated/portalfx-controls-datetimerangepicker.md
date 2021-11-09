@@ -44,7 +44,7 @@ var dateTimeRangePickerVM = DateTimeRangePicker.create(container, {
     startDateTimeEnabledRange: new MsPortalFx.DateUtil.DateTimeRange(new Date(2016, 1, 1, 0, 0, 0), new Date(2017, 1, 1, 0, 0, 0)),
     endDateTimeEnabledRange: new MsPortalFx.DateUtil.DateTimeRange(new Date(2017, 1, 1, 0, 0, 0), new Date(2018, 1, 1, 0, 0, 0)),
     validations: [
-        new MsPortalFx.ViewModels.CustomValidation("", <any>((value: MsPortalFx.DateUtil.DateTimeRange): MsPortalFx.Base.PromiseV<MsPortalFx.ViewModels.ValidationResult> => {
+        new MsPortalFx.ViewModels.CustomValidation("", <any>((value: MsPortalFx.DateUtil.DateTimeRange): Promise<MsPortalFx.ViewModels.ValidationResult> => {
             return Q({
                 valid: value.startDateTime() <= value.endDateTime(),
                 message: "Start date/time has to be before end date/time"

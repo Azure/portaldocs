@@ -137,7 +137,7 @@ saveCommand.command = {
         const editScopeDirty = editScope ? editScope.dirty() : false;
         return !this._saving() && editScopeDirty;
     }),
-    execute: (): MsPortalFx.Base.Promise => {
+    execute: (): Promise<any> => {
         return this._editScopeView.editScope().saveChanges();
     },
 };
@@ -153,7 +153,7 @@ discardCommand.command = {
         const editScopeDirty = editScope ? editScope.dirty() : false;
         return !this._saving() && editScopeDirty;
     }),
-    execute: (): MsPortalFx.Base.Promise => {
+    execute: (): Promise<any> => {
         this._editScopeView.editScope().revertAll();
         return null;
     },

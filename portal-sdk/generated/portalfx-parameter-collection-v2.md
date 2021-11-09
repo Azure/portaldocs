@@ -125,12 +125,12 @@ The framework provides base classes and PDL templates for the UI elements you ne
 
 <a name="parameter-collection-base-classes-forms"></a>
 ## Forms
-Form view models should extend `MsPortalFx.ViewModels.ParameterCollectionV2.Form<T>`.  
+Form view models should extend `MsPortalFx.ViewModels.ParameterCollectionV2.Form<T>`.
 Use the `azurefx:CreateStepFormBlade` PDL template to represent that in your PDL.
 
 <a name="parameter-collection-base-classes-wizards"></a>
 ## Wizards
-Wizard view models should extend `MsPortalFx.ViewModels.ParameterCollectionV2.Wizard<T>`.  
+Wizard view models should extend `MsPortalFx.ViewModels.ParameterCollectionV2.Wizard<T>`.
 Use the `azurefx:CreateWizardBlade` PDL template to represent that in your PDL.
 
 _**More UI elements will be listed here.**_
@@ -200,13 +200,13 @@ export class MyCollector
      * @param dataModel The editable copy of the editScope data model.
      * @param providerId The id of the provider sending back the output parameters.
      * @param outputs The outputs received from the provider.
-     * @return A JQuery promise resolved with an array of validation errors, if any.
+     * @return A promise resolved with an array of validation errors, if any.
      */
     public validateOutputParameters(
         dataModel: CollectorDataModel, // Typed to the data model tied to your UI element.
         providerId: string,
         outputParameters: MsPortalFx.ViewModels.ParameterCollectionV2.OutputParameters)
-        : MsPortalFx.Base.PromiseV<MsPortalFx.ViewModels.ParameterCollectionV2.ParameterCollectionError[]> {=
+        : Promise<MsPortalFx.ViewModels.ParameterCollectionV2.ParameterCollectionError[]> {=
         switch (providerId) {
             case "aProvider":
                 // Create an instance of the provider's data model from the output parameters
@@ -295,7 +295,7 @@ export class MyProvider implements MsPortalFx.ViewModels.ParameterCollectionV2.R
         inputParameters: MsPortalFx.ViewModels.ParameterCollectionV2.InputParameters,
         inputMetadata: MsPortalFx.ViewModels.ParameterCollectionV2.InputMetadata,
         options: MsPortalFx.ViewModels.ParameterCollectionV2.ParameterCollectionOptions)
-        : MsPortalFx.Base.PromiseV<MsPortalFx.ViewModels.ParameterCollectionV2.InputParameters> {
+        : Promise<MsPortalFx.ViewModels.ParameterCollectionV2.InputParameters> {
         var deferred = Q.defer<MsPortalFx.ViewModels.ParameterCollectionV2.InputParameters>();
 
         // You can either replace, modify or augment the input parameters passed to the provider.
@@ -364,7 +364,7 @@ export class MyProvisioner implements MsPortalFx.ViewModels.ParameterCollectionV
     public mapOutputsForProvisioning(
         outputParameters: MsPortalFx.ViewModels.ParameterCollectionV2.OutputParameters,
         options: MsPortalFx.ViewModels.ParameterCollectionV2.ParameterCollectionOptions)
-        : MsPortalFx.Base.PromiseV<MsPortalFx.ViewModels.ParameterCollectionV2.OutputParameters> {
+        : Promise<MsPortalFx.ViewModels.ParameterCollectionV2.OutputParameters> {
         var deferred = Q.defer<MsPortalFx.ViewModels.ParameterCollectionV2.OutputParameters>(),
             mappedOutputs: MsPortalFx.ViewModels.ParameterCollectionV2.OutputParameters,
             providerDataModel = MsPortalFx.ViewModels.ParameterCollectionV2.Utilities.parametersToModel<ProviderDataModel>(outputParameters);
@@ -406,7 +406,7 @@ export class MyProvisioner implements MsPortalFx.ViewModels.ParameterCollectionV
     public executeCustomProvisioning(
         outputParameters: MsPortalFx.ViewModels.ParameterCollectionV2.OutputParameters,
         options: MsPortalFx.ViewModels.ParameterCollectionV2.ParameterCollectionOptions)
-        : MsPortalFx.Base.PromiseV<any> {
+        : Promise<any> {
         var deferred = Q.defer(),
             providerDataModel = MsPortalFx.ViewModels.ParameterCollectionV2.Utilities.parametersToModel<ProviderDataModel>(outputParameters);
 

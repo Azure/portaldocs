@@ -371,7 +371,7 @@ export class OpenBladeApiSamplesViewModel
     /**
      * onInputsSet is invoked when the template blade receives new parameters
      */
-    public onInputsSet(): MsPortalFx.Base.Promise {
+    public onInputsSet(): Promise<any> {
         // fetch data for the grid sample
         return this._view.fetch("");
     }

@@ -192,7 +192,7 @@ As is standard practice we'll call the view's `fetch` method on the blade's `onI
 /**
  * Invoked when the blade's inputs change
  */
-public onInputsSet(): MsPortalFx.Base.Promise {
+public onInputsSet(): Promise<any> {
     return this._websitesQueryView.fetch({ runningStatus: this.runningStatus.value() });
 }
 
@@ -245,7 +245,7 @@ Then in the `onInputsSet` we call `fetch` passing the ID of the website we want 
 /**
  * Invoked when the blade's inputs change.
  */
-public onInputsSet(inputs: Def.BrowseDetailViewModel.InputsContract): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: Def.BrowseDetailViewModel.InputsContract): Promise<any> {
     return this._websiteEntityView.fetch(inputs.currentItemId);
 }
 

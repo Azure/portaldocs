@@ -66,9 +66,9 @@ Each of these methods implements a different interface with a different function
 
 |Value|Interface|Method signature|
 |-|-|-|-|
-|`NoResource`|`MsPortalFx.Assets.ResourceMenuWithNoResourceContract`|`getResourceMenuConfig(resourceId: string, menuContext?: string): MsPortalFx.Base.PromiseV<MsPortalFx.Assets.ResourceMenuConfig>`|
-|`ProvidedByResourceMenu`|`MsPortalFx.Assets.ResourceMenuWithCallerSuppliedResourceContract`|`getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation, menuContext?: string): MsPortalFx.Base.PromiseV<MsPortalFx.Assets.ResourceMenuConfig>`|
-|`ReturnedByExtension`|`MsPortalFx.Assets.ResourceMenuWithExtensionProvidedResourceContract`|`getResourceAndMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInfo, menuContext?: string): MsPortalFx.Base.PromiseV<MsPortalFx.Assets.ExtensionSuppliedResourceInfo>`|
+|`NoResource`|`MsPortalFx.Assets.ResourceMenuWithNoResourceContract`|`getResourceMenuConfig(resourceId: string, menuContext?: string): Promise<MsPortalFx.Assets.ResourceMenuConfig>`|
+|`ProvidedByResourceMenu`|`MsPortalFx.Assets.ResourceMenuWithCallerSuppliedResourceContract`|`getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation, menuContext?: string): Promise<MsPortalFx.Assets.ResourceMenuConfig>`|
+|`ReturnedByExtension`|`MsPortalFx.Assets.ResourceMenuWithExtensionProvidedResourceContract`|`getResourceAndMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInfo, menuContext?: string): Promise<MsPortalFx.Assets.ExtensionSuppliedResourceInfo>`|
 
 How to pick which option to use?
 
@@ -134,19 +134,19 @@ The next step in creating a ResourceMenu is to add the appropriate method using 
 The methods are named `getResourceMenuConfig`, `getMenuConfig` or `getResourceAndMenuConfig` and uses the following signature.  For a full list of the APIs and interfaces, see [portalfx-resourcemenu-api.md](portalfx-resourcemenu-api.md).
 
 ```ts
-public getResourceMenuConfig(resourceId: string): MsPortalFx.Base.PromiseV<MsPortalFx.Assets.ResourceMenuConfig> {
+public getResourceMenuConfig(resourceId: string): Promise<MsPortalFx.Assets.ResourceMenuConfig> {
     return Q({});
 }
 ```
 
 ```ts
-public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): MsPortalFx.Base.PromiseV<MsPortalFx.Assets.ResourceMenuConfig> {
+public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): Promise<MsPortalFx.Assets.ResourceMenuConfig> {
     return Q({});
 }
 ```
 
 ```ts
-public getResourceAndMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInfo): MsPortalFx.Base.PromiseV<MsPortalFx.Assets.ExtensionSuppliedResourceInfo> {
+public getResourceAndMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInfo): Promise<MsPortalFx.Assets.ExtensionSuppliedResourceInfo> {
     return Q({});
 }
 ```
@@ -241,7 +241,7 @@ The following options are available on the `options` property.
 In this example, the resource contains an item with the ID 'overview' and has also onboarded to extension Support, as specified in [top-blades-settings.md#audit-logs](top-blades-settings.md#audit-logs). This support automatically makes the export template, locks, RBAC, Activity Log, new support request, and tags available to the extension.
 
 ```ts
-public getResourceMenuConfig(resourceId: string): MsPortalFx.Base.PromiseV<MsPortalFx.Assets.ResourceMenuConfig> {
+public getResourceMenuConfig(resourceId: string): Promise<MsPortalFx.Assets.ResourceMenuConfig> {
     return Q(
         <MsPortalFx.Assets.ResourceMenuConfig>{
             defaultItemId: "overview",
@@ -310,7 +310,7 @@ import * as ClientResources from "ClientResources";
 import * as FxMenuBlade from "MsPortalFx/Composition/MenuBlade";
 import * as BladeReferences from "../../../_generated/BladeReferences";
 
-public getResourceMenuConfig(resourceId: string): MsPortalFx.Base.PromiseV<MsPortalFx.Assets.ResourceMenuConfig> {
+public getResourceMenuConfig(resourceId: string): Promise<MsPortalFx.Assets.ResourceMenuConfig> {
     return Q(
         <MsPortalFx.Assets.ResourceMenuConfig>{
             defaultItemId: "overview",
@@ -348,7 +348,7 @@ import * as ClientResources from "ClientResources";
 import * as FxMenuBlade from "MsPortalFx/Composition/MenuBlade";
 import { BladeReferences } from "Fx/Composition";
 
-public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): MsPortalFx.Base.PromiseV<MsPortalFx.Assets.ResourceMenuConfig> {
+public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): Promise<MsPortalFx.Assets.ResourceMenuConfig> {
     return Q(
         <MsPortalFx.Assets.ResourceMenuConfig>{
             defaultItemId: "overview",
@@ -403,7 +403,7 @@ export class MyResourceBlade
         subtitle: ko.observable<string>(),
     };
 
-    public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
+    public onInputsSet(inputs: any): Promise<any> {
         return someAsyncCall().then(data => {
             this.menuContent.title(data.title);
             this.menuContent.subtitle(data.subtitle);
@@ -552,7 +552,7 @@ module BrowseColumns {
    }
 }
 
-function getPrinterMenu(resourceId: string, dataContext: DataContext): MsPortalFx.Base.PromiseV<FxAssets.ResourceMenuConfig> {
+function getPrinterMenu(resourceId: string, dataContext: DataContext): Promise<FxAssets.ResourceMenuConfig> {
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // EXAMPLE : Providing static menu items for a kind of resource.
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -644,7 +644,7 @@ export class PrinterViewModel
     *
     * @return A promise which will be resolved with the browse config.
     */
-   public getBrowseConfig(): MsPortalFx.Base.PromiseV<FxAssets.BrowseConfig> {
+   public getBrowseConfig(): Promise<FxAssets.BrowseConfig> {
        // This sample shows how to include additional columns for the printer resource and sets one pre-defined
        // column and one custom column as the default columns. This ensures that without customization, these
        // columns will appear in the browse grid.
@@ -721,7 +721,7 @@ export class PrinterViewModel
     * @param refresh Optionally specify if the supplemental data needs to be refreshed for the specified resource IDs.
     * @return A promise which will be resolved when data is ready to be streamed.
     */
-   public getSupplementalData(resourceIds: string[], columns: string[], refresh?: boolean): MsPortalFx.Base.Promise {
+   public getSupplementalData(resourceIds: string[], columns: string[], refresh?: boolean): Promise<any> {
        return processSupplementalData(resourceIds, columns, this._updateMap, this.supplementalDataStream, this._dataContext.printerData, (printer) => {
            // ***
            // THIS IS FOR TESTING ONLY, DO NOT INCLUDE THIS IN PRODUCTION CODE.
@@ -753,7 +753,7 @@ export class PrinterViewModel
     * @param resourceInfo The resource ID for the menus.
     * @return A promise which will be resolved with the resource menu configuration.
     */
-   public getResourceMenuConfig(resourceId: string): MsPortalFx.Base.PromiseV<FxAssets.ResourceMenuConfig> {
+   public getResourceMenuConfig(resourceId: string): Promise<FxAssets.ResourceMenuConfig> {
        const armId = ArmId.parse(resourceId, true);
        executeInDevelopmentModeOnly(() => {
            const resourceType = armId.resourceType.toLowerCase();

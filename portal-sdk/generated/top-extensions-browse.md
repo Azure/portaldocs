@@ -3084,7 +3084,7 @@ Now, create the asset view-model class that implements the `getBrowseConfig()` f
 ```ts
 class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.BookViewModel.Contract {
 
-    public getBrowseConfig(): PromiseV<MsPortalFx.Assets.BrowseConfig> {
+    public getBrowseConfig(): Promise<MsPortalFx.Assets.BrowseConfig> {
         ...
     }
 }
@@ -3103,7 +3103,7 @@ To specify which columns to show by default, save the column ids to `BrowseConfi
 ```ts
 class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.BookViewModel.Contract {
 
-    public getBrowseConfig(): PromiseV<MsPortalFx.Assets.BrowseConfig> {
+    public getBrowseConfig(): Promise<MsPortalFx.Assets.BrowseConfig> {
         return Q.resolve({
             // columns the user will be able to choose to display
             columns: [
@@ -3161,11 +3161,11 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
 
     public supplementalDataStream = ko.observableArray<MsPortalFx.Assets.SupplementalData>([]);
 
-    public getBrowseConfig(): PromiseV<MsPortalFx.Assets.BrowseConfig> {
+    public getBrowseConfig(): Promise<MsPortalFx.Assets.BrowseConfig> {
         ...
     }
 
-    public getSupplementalData(resourceIds: string[], columns: string[]): Promise {
+    public getSupplementalData(resourceIds: string[], columns: string[]): Promise<any> {
         ...
     }
 }
@@ -3187,7 +3187,7 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
 
     ...
 
-    public getSupplementalData(resourceIds: string[], columns: string[]): Promise {
+    public getSupplementalData(resourceIds: string[], columns: string[]): Promise<any> {
         // NOTE: Do not create the view in the constructor. Initialize here to create only when needed.
         this._view = this._view || this._dataContext.bookQuery.createView(this._container);
 
@@ -3238,7 +3238,7 @@ If you need to display an informational message and/or link above the list of re
 ```ts
 class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.BookViewModel.Contract {
 
-    public getBrowseConfig(): PromiseV<MsPortalFx.Assets.BrowseConfig> {
+    public getBrowseConfig(): Promise<MsPortalFx.Assets.BrowseConfig> {
         return Q.resolve({
             infoBox: {
                 image: MsPortalFx.Base.Images.Info(),
@@ -3276,7 +3276,7 @@ Context menu commands in Browse must take a single `id` input parameter that is 
 ```ts
 class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.BookViewModel.Contract {
 
-    public getBrowseConfig(): PromiseV<MsPortalFx.Assets.BrowseConfig> {
+    public getBrowseConfig(): Promise<MsPortalFx.Assets.BrowseConfig> {
         return Q.resolve({
             // NOTE: Extension (commandGroupOwner) only required if from another extension
             contextMenu: {

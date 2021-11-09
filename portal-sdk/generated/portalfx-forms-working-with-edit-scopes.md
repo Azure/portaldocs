@@ -2,7 +2,7 @@
 <a name="working-with-edit-scopes"></a>
 ## Working with Edit Scopes
 
-[Watch the Working with Edit Scopes Video](/portal-sdk/generated/index-videos.md#working-with-editscope) 
+[Watch the Working with Edit Scopes Video](/portal-sdk/generated/index-videos.md#working-with-editscope)
 
 (For quick answers to frequently-asked questions on EditScope, see the [EditScope FAQ](portalfx-forms-edit-scope-faq.md).)
 
@@ -71,7 +71,7 @@ constructor(container: MsPortalFx.ViewModels.PartContainerContract,
 
 ```ts
 // update the editScopeView with a new id
-public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: any): Promise<any> {
     // Acquires edit scope seeded with an item with id currentItemId.
     return this._editScopeView.fetchForExistingData(inputs.editScopeId, inputs.currentItemId);
 }
