@@ -5,9 +5,7 @@
         * [Logging telemetry to ExtTelemetry table](#portal-telemetry-overview-logging-logging-telemetry-to-exttelemetry-table)
         * [Logging errors/warnings to ExtEvents table](#portal-telemetry-overview-logging-logging-errors-warnings-to-extevents-table)
     * [Available Power BI Dashboards](#portal-telemetry-overview-available-power-bi-dashboards)
-    * [Collecting Feedback From Your Users](#portal-telemetry-overview-collecting-feedback-from-your-users)
-        * [Resource Deleted Survey](#portal-telemetry-overview-collecting-feedback-from-your-users-resource-deleted-survey)
-        * [Questions?](#portal-telemetry-overview-collecting-feedback-from-your-users-questions)
+        * [Questions?](#portal-telemetry-overview-available-power-bi-dashboards-questions)
 
 
 <a name="portal-telemetry-overview"></a>
@@ -130,24 +128,7 @@ Following are some of the dashboards that we support. If you do not have access 
 | Create Telemetry Docs | [portalfx-telemetry-create.md](portalfx-telemetry-create.md) |
 | How to analyze client errors | [portalfx-telemetry-extension-errors.md](portalfx-telemetry-extension-errors.md) |
 
-<a name="portal-telemetry-overview-collecting-feedback-from-your-users"></a>
-## Collecting Feedback From Your Users
-
-In February 2016 we introduced a standardized pane for collecting user feedback. We currently expose one method to extension developers.
-
-<a name="portal-telemetry-overview-collecting-feedback-from-your-users-resource-deleted-survey"></a>
-### Resource Deleted Survey
-
-To ask a user why they deleted a resource use the `openResourceDeletedFeedbackPane` method:
-
-```
-  import * as FxFeedback from "Fx/Feedback";
-  FxFeedback.openResourceDeletedFeedbackPane("displayNameOfTheDeletedResource", optionalObjectWithAnyAdditionalDataYouWantToLog);
-```
-
-Call this method after a user starts the deletion process for a resource. Shell will open the feedback pane with a standardized survey. The name of the resource you pass to the method will be shown to the user in the survey. Responses to this survey are logged to the telemetry tables. If the feedback pane is already open calls to this method will be no-ops.
-
-<a name="portal-telemetry-overview-collecting-feedback-from-your-users-questions"></a>
+<a name="portal-telemetry-overview-available-power-bi-dashboards-questions"></a>
 ### Questions?
 
 Read more about [Kusto query language](https://kusto.azurewebsites.net/docs/queryLanguage/query_language.html).
