@@ -1,7 +1,6 @@
 ﻿# Page with tables
 Most web pages and portals surface items in tables to show lists of items that can be searched, sorted and compared.
-
-Last updated Oct 2021 (see [change logs](#change-logs))
+Last updated Nov 2021 (see [change logs](#change-logs))
 
 <a name="context"></a>
 ## Context
@@ -42,22 +41,56 @@ Grids are used for surfacing a tables of objects to provide meaningful data on e
 
 <a name="anatomy"></a>
 ## Anatomy
-<div style="max-width:800px">
-<img alttext=" " src="../media/design-patterns-page-grid/grid-anatomy.png"  />
-</div>
 
+There are two types of grids in a page: grid as an entire page, grid as a section of page.
+
+In a grid as an entire page, the commands for a grid are usually in the page-level command bar that is common in Azure.
+<div style="max-width:800px">
+<img alttext=" " src="../media/design-patterns-page-grid/grid-in-whole-page.png"  />
+</div>
 A grid can contain:
-1.  Column header
-2.  Column sorter
-3.  Checkbox
-4.  Iconography
-5.  Context menu (ellipsis)
-6.  Scrollbar or pagination
+
+1. Grid command
+2. Grid filter
+3. Record count (optional)
+4. Grouping and view option (optional)
+5. Column header
+6. Column sorter
+7. Checkbox
+8. Iconography
+9. Context menu (ellipsis)
+10. Scrollbar or pagination
+
+In grid as an section of a page, if the page does not have a command bar (like in the create wizards), the command bar for the grid should be just above the grid and the grid filters.
+<div style="max-width:800px">
+<img alttext=" " src="../media/design-patterns-page-grid/grid-in-create.png"  />
+</div>
+A grid can contain:
+
+1. Grid command
+2. Column header
+3. Column sorter
+4. Checkbox
+
+In a grid as section of a page, if a grid is substantially separated from the top of the page (like in the overview pages where the essentials control pushes any grids lower in the page), the command bar for the grid should be just above the grid and the grid filters.
+<div style="max-width:800px">
+<img alttext=" " src="../media/design-patterns-page-grid/grid-in-overview.png"  />
+</div>
+A grid can contain:
+
+1. Page command (not part of grid)
+2. Grid command
+3. Grid filter
+4. Column header
+5. Column sorter
+6. Iconography
+
 <a name="behaviors"></a>
 ## Behaviors
 <a name="behaviors-bulk-commanding-multi-select"></a>
 ### Bulk commanding (multi-select)
 A user can select one or more items using the leftmost column, then choose a command from the command bar above to perform actions like Remove or Delete. This pattern is ideal for scenarios when a user wants to perform a single action on many list items.
+
 <div style="max-width:400px">
 <img alttext="Bulk commanding" src="../media/design-patterns-page-grid/Bulk-Commanding.png"  />
 </div>
@@ -125,9 +158,9 @@ Developers can use the following information to get started implementing this pa
 <a name="for-developers-change-logs"></a>
 ## Change logs
 
-<a name="for-developers-change-logs-oct-2021"></a>
-### Oct 2021
-* Add empty grid info
+<a name="for-developers-change-logs-nov-2021"></a>
+### Nov 2021
+* Added guideline for command above grid
 
 <a name="for-developers-change-logs-mar-2021"></a>
 ### Mar 2021

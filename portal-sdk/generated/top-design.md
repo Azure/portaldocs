@@ -35,7 +35,7 @@ UX to manage the full lifecycle of Azure resources.
 ### Page design patterns
 Page layouts for common Azure scenarios including guidance on where commands, tabs, fields and buttons should be placed
 
-* [Overview pages](design-patterns-page-overview.md) provide get started, overview, configuration, monitoring and other information for an Azure service
+* [Service overview](design-patterns-page-overview.md) provides get started, overview, configuration, monitoring and other information for an Azure service
 
 * [Responsive pages](design-patterns-page-responsive-design.md)
 

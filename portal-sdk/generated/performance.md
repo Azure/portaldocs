@@ -3,11 +3,13 @@
     * [Blade performance](#performance-overview-blade-performance)
         * [Lighthouse](#performance-overview-blade-performance-lighthouse)
         * [BladeFullReady](#performance-overview-blade-performance-bladefullready)
+        * [Network requests](#performance-overview-blade-performance-network-requests)
     * [Part performance](#performance-overview-part-performance)
     * [How to assess your performance](#performance-overview-how-to-assess-your-performance)
         * [Extension-loading](#performance-overview-how-to-assess-your-performance-extension-loading)
         * [Lighthouse query](#performance-overview-how-to-assess-your-performance-lighthouse-query)
         * [BladeFullReady query](#performance-overview-how-to-assess-your-performance-bladefullready-query)
+        * [Network requests query](#performance-overview-how-to-assess-your-performance-network-requests-query)
         * [Part](#performance-overview-how-to-assess-your-performance-part)
 * [Performance Frequently Asked Questions (FAQ)](#performance-frequently-asked-questions-faq)
     * [My Extension 'load' is above the bar, what should I do](#performance-frequently-asked-questions-faq-my-extension-load-is-above-the-bar-what-should-i-do)
@@ -108,6 +110,15 @@ For an additional breakdown of the time spent you can inspect a native performan
 
 If your blade is a FrameBlade or AppBlade there is an additional initialization message from your iframe to your viewmodel which is also tracked, see the samples extension [framepage.js](https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FAcceptanceTests%2FExtensions%2FSamplesExtension%2FExtension%2FContent%2FScripts%2Fframepage.js&version=GBproduction&_a=contents) for an example of what messages are required.
 
+<a name="performance-overview-blade-performance-network-requests"></a>
+### Network requests
+
+> This KPI is only held for interactive network requests. Interactive is defined as after initial load.
+
+The goal of the network request tracking is to proxy customer task or interaction performance.
+
+This time is strictly measuring from the start to the end of the request as processed by the client. This is to best represent what the customer is experiencing.
+
 <a name="performance-overview-part-performance"></a>
 ## Part performance
 
@@ -191,7 +202,7 @@ The subtle difference with the standard `BladeFullReady` marker is that if the b
 For example, a blade takes 2000ms to complete its `BladeFullReady` and 2000ms to return its `getMenuConfig`.
 It is only loaded once (1) in the menu blade out of its 10 loads. Its overall reported FullDuration would be 2200ms.
 
-BladePerformance will return a table with the following columns
+BladePerformance will return a table with the following columns:
 
 - FullBladeName, Extension, BladeName
   - Blade/Extension identifiers
@@ -212,6 +223,34 @@ BladePerformance will return a table with the following columns
   - All no-pdl and template blades are locked, pdl blades can be made locked by setting the locked property to true
 - FullDuration50, 80, 95, 99
   - The time it takes for the `BladeFullReady` + (`PctOfMenuLoads` * the `getMenuConfig` to resolve)
+
+<a name="performance-overview-how-to-assess-your-performance-network-requests-query"></a>
+### Network requests query
+
+[database('Framework').InteractiveNetworkPerformance(ago(1d), now(), "Extension/YOUR_EXTENSION_NAME/Blade/YOUR_BLADE_NAME")](https://dataexplorer.azure.com/clusters/azportalpartner/databases/Framework?query=H4sIAAAAAAAAA0tJLElMSixO1VB3K0rMTS3PL8pW19TzzCtJLUpMLsksS/VLLQEJBqQWpeUX5SbmJadqJKbnaximaOoo5OWXawApJdeKktS84sz8PP1I/9CgeNeIEFe/YE9/v3g/R19XfaecxJRUiIyTj6OLK1hUSRMAZejGz3oAAAA=)
+
+Update or remove the BladeName filter to match your needs, only use your extension name or only scope to a single blade.
+
+InteractiveNetworkPerformance will return a table with the following columns:
+
+- Date
+  - End date for the rolling 7 days calculation
+- Extenion, BladeName
+  - Extension/Blade identifier
+- Name
+  - Identifier for the network request
+- Occurrences
+  - Number of times the request was issued (Note: Batch requests are expanded from 1 to N, increasing the occurrences count by N vs 1)
+- Requests
+  - Number of unique requests (Note: Batched requests count as 1)
+- BladeInstances
+  - Total number of unique blades
+- UniqueCustomers
+  - Total number of unique customers
+- 50th, 80th, 95th, 99th
+  - The percentile duration time recorded for the given request
+- KPI Classification
+  - The KPI is measured against the 95th percentile duration - Green: <= 1s, Yellow: <= 2s, and Red: > 2s
 
 <a name="performance-overview-how-to-assess-your-performance-part"></a>
 ### Part

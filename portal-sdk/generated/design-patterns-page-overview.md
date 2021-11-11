@@ -1,5 +1,5 @@
-<a name="overview-page"></a>
-# Overview Page
+<a name="service-overview"></a>
+# Service overview
 
 Last updated Feb 2021 (see [change logs](#change-logs)) 
 
@@ -7,22 +7,22 @@ Enable users to quickly and easily understand what value an *Azure service* offe
 
 To view the design guideline for overview page of an *Azure resource*, please refer to [manage a resource design pattern](design-patterns-resource-manage.md)
 
-<a name="overview-page-context"></a>
+<a name="service-overview-context"></a>
 ## Context
 
 As users navigate the portal, they open services and expect information on how to use the service to their benefit. 
 
-<a name="overview-page-problem"></a>
+<a name="service-overview-problem"></a>
 ## Problem
 
 New services are brought online in Azure while new features are added to existing services. Whether encountering a new or familiar service, users need to quickly understand the purpose of services so that they can easily get more value from Azure. 
 
-<a name="overview-page-solution"></a>
+<a name="service-overview-solution"></a>
 ## Solution
 
 The overview page is the home page for an Azure service. The overview page provides the purpose, top actions and key information so that users can quickly get value from Azure. 
 
-<a name="overview-page-solution-also-known-as"></a>
+<a name="service-overview-solution-also-known-as"></a>
 ### Also known as
 
 - Landing page 
@@ -30,17 +30,17 @@ The overview page is the home page for an Azure service. The overview page provi
 - Service home page 
 - Getting started 
 
-<a name="overview-page-examples"></a>
+<a name="service-overview-examples"></a>
 ## Examples
 
-<a name="overview-page-examples-example-images"></a>
+<a name="service-overview-examples-example-images"></a>
 ### Example images
 
 <div style="max-width:800px">
 <img alttext="" src="../media/design-patterns-page-overview/monitor-example.png"  />
 </div>
 
-<a name="overview-page-examples-example-uses"></a>
+<a name="service-overview-examples-example-uses"></a>
 ### Example uses
 
 <ul> 
@@ -48,12 +48,12 @@ The overview page is the home page for an Azure service. The overview page provi
 <li><a href="https://ms.portal.azure.com/#blade/Microsoft_Azure_CustomerHub/MyCustomersBladeV2/overview" target="_blank">My Customer – Azure Lighthouse</a></li> 
 </ul> 
 
-<a name="overview-page-use-when"></a>
+<a name="service-overview-use-when"></a>
 ## Use when
 
 Use the overview page pattern when you are designing the home page for an Azure service.
 
-<a name="overview-page-anatomy"></a>
+<a name="service-overview-anatomy"></a>
 ## Anatomy
 
 <div style="max-width:800px">
@@ -76,17 +76,17 @@ An overview page of Azure service has the following features:
 
 4. Cardless card 
 
-<a name="overview-page-behavior"></a>
+<a name="service-overview-behavior"></a>
 ## Behavior
 
 If the service has more than one menu page, a left menu bar will be shown to navigate between different menu pages. 
 
-<a name="overview-page-behavior-tabs"></a>
+<a name="service-overview-behavior-tabs"></a>
 ### Tabs
 
 Tabs at the top of the page allow for extensibility of the design and provide access to other overview page contents. It is required to have a “Get started” tab in the most left and other tabs. Tabs will be shown if the service has 2 or more tabs, and it will not be shown if there is only one tab. 
 
-<a name="overview-page-behavior-tabs-get-started-tab"></a>
+<a name="service-overview-behavior-tabs-get-started-tab"></a>
 #### Get started tab
 
 <div style="max-width:800px">
@@ -101,14 +101,14 @@ Tabs at the top of the page allow for extensibility of the design and provide ac
 
 The Get Started design can be used in the first menu "Overview" or in a non-menu overview page, not in any other menu item.
 
-<a name="overview-page-behavior-tabs-other-tabs"></a>
+<a name="service-overview-behavior-tabs-other-tabs"></a>
 #### Other tabs
 
 There is known usage of other tabs in Azure such as Tutorials, What’s new (view [Monitor]( https://portal.azure.com/?feature.customportal=false#blade/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/overview) for reference). 
 
 Currently there is not enough usage of these other tabs to establish a guideline. Azure Portal will keep track of this usage and will add this to the guideline once there is enough usage. If you want to have any recommendations about other tabs for overview page of Azure service, please contact our team [Azure Portal UXA](mailto:UXATL@microsoft.com).
 
-<a name="overview-page-do"></a>
+<a name="service-overview-do"></a>
 ## Do
 
 * Use concise action-oriented, value-centric language to describe your offering 
@@ -125,7 +125,7 @@ Currently there is not enough usage of these other tabs to establish a guideline
 
 * Ensure your overview page designs can be rendered within the performance bar 
 
-<a name="overview-page-don-t"></a>
+<a name="service-overview-don-t"></a>
 ## Don&#39;t
 
 * Don't assume the user will know anything about your service 
@@ -138,52 +138,52 @@ Currently there is not enough usage of these other tabs to establish a guideline
 
 * Don't include more than 3 cards with illustrations. Determine the top 3 scenarios for the customer to get started with your service. 
 
-<a name="overview-page-related-design-guidelines"></a>
+<a name="service-overview-related-design-guidelines"></a>
 ## Related design guidelines
 
 * [Azure Design Template ](https://www.figma.com/file/SkCj1C9nh5lZTuIz0uhcY2/Azure-Portal-Pattern-Templates?node-id=466%3A14670)
 * [Design guidelines](top-design.md)
 * [Manage a resource](design-patterns-resource-create.md) 
 
-<a name="overview-page-research-and-usability"></a>
+<a name="service-overview-research-and-usability"></a>
 ## Research and usability
 
 <!-- Links to the research for the solution --> 
 
-<a name="overview-page-telemetry"></a>
+<a name="service-overview-telemetry"></a>
 ## Telemetry
 
 <!-- Links to portal telemetry showing the solution usage --> 
 
-<a name="overview-page-for-developers"></a>
+<a name="service-overview-for-developers"></a>
 ## For developers
 
 Developers can use the following information to get started implementing this pattern 
 
-<a name="overview-page-for-developers-tips-and-tricks"></a>
+<a name="service-overview-for-developers-tips-and-tricks"></a>
 ### Tips and tricks
 
 <!-- Bulleted list of tips and tricks for developers --> 
 
-<a name="overview-page-for-developers-related-documentation"></a>
+<a name="service-overview-for-developers-related-documentation"></a>
 ### Related documentation
 
 <!-- Links to related developer docs --> 
 
-<a name="overview-page-change-logs"></a>
+<a name="service-overview-change-logs"></a>
 ## Change logs
 
-<a name="overview-page-change-logs-feb-2021"></a>
+<a name="service-overview-change-logs-feb-2021"></a>
 ### Feb 2021
 
 * Added link to manage a resource pattern and updated anatomy 
 
-<a name="overview-page-change-logs-sep-2019"></a>
+<a name="service-overview-change-logs-sep-2019"></a>
 ### Sep 2019
 
 * Revised and add content for page overview 
 
-<a name="overview-page-change-logs-jul-2019"></a>
+<a name="service-overview-change-logs-jul-2019"></a>
 ### Jul 2019
 
 * Published 
