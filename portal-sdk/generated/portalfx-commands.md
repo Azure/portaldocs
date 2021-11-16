@@ -204,9 +204,9 @@ export class BlockContactCommand extends MsPortalFx.ViewModels.Command {
     /**
      * Invoked when the Commands input properties change.
      */
-    public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
+    public onInputsSet(inputs: any): Promise<any> {
         this._id(inputs.id);
-        return null; // No need to load anything
+        return Promise.resolve(); // No need to load anything
     }
     ...
 ```

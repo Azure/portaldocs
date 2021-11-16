@@ -188,7 +188,7 @@ The complete list of supported options that can be supplied to ParameterProvider
 
 	@return The desired initial edit scope data.
 
-- **mapIncomingDataForEditScopeAsync?(dataFromCollector: TResult): Base.PromiseV<TEditScope>**
+- **mapIncomingDataForEditScopeAsync?(dataFromCollector: TResult): Promise<TEditScope>**
 
 	An asynchronous callback that supplies the initial data for the provider's edit scope.
 	This callback is mandatory, and must account for the possibility of the

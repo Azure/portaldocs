@@ -109,7 +109,7 @@ always-auth=true
     "nconf": "0.10.0",
     "requirejs": "2.3.6",
     "sinon": "7.2.3",
-    "typescript": "~4.2.4"
+    "typescript": "~4.4.4"
   }
 }
 
@@ -259,10 +259,7 @@ describe("Resource Keys Blade Tests", () => {
         "moduleResolution": "node",
         "lib": [
             "dom",
-            "es2015.promise",
-            "es2015.iterable",
-            "es5",
-            "scripthost"
+            "ES2018"
         ],
         "target": "es5",
         "paths": {

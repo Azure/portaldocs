@@ -20,7 +20,7 @@ Creating a DataView does not result in a data load operation from the server. Th
 `\Client\Data\MasterDetailBrowse\ViewModels\MasterViewModels.ts`
 
 ```ts
-public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: any): Promise<any> {
     return this._websitesQueryView.fetch({ runningStatus: inputs.filterRunningStatus.value });
 }
 ```

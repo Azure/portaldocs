@@ -230,7 +230,7 @@ change over time as AAD evolves. Do not make hard dependencies on claims and nev
 call Graph to get required user information.
 
 ```ts
-MsPortalFx.Base.Security.getUserInfo() : PromiseV<MsPortalFx.Base.Security.UserInfo>
+MsPortalFx.Base.Security.getUserInfo() : Promise<MsPortalFx.Base.Security.UserInfo>
 
 interface UserInfo {
     email: string;          // Guest accounts not homed in the current directory will have a UPN and not a valid email address

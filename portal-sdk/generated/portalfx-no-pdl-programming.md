@@ -326,11 +326,11 @@ public onInitialize() {
     public { container, model, parameters } = this.context;
     public view = model.websites.createView(container);
 
-    // Returns MsPortalFx.Base.PromiseV and not the required Q.Promise<any>.
+    // Returns Promise and not the required Q.Promise<any>.
     return view.fetch(parameters.websiteId).then(...);
 }
 ```
-Here, our FX data-loading APIs return an old `MsPortalFx.Base.PromiseV` type that is not compatible with the `Q.Promise` type expected for `onInitialize`.  To workaround this shortcoming of the FX data-loading APIs, until these APIs are revised you'll do:
+Here, our FX data-loading APIs return an old `Promise` type that is not compatible with the `Q.Promise` type expected for `onInitialize`.  To workaround this shortcoming of the FX data-loading APIs, until these APIs are revised you'll do:
 ```
     ...
     return Q(view.fetch(...)).then(...);

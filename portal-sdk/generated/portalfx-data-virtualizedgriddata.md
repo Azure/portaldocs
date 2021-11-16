@@ -29,7 +29,7 @@ this.productsCache = new MsPortalFx.Data.QueryCache<SamplesExtension.DataModels.
             suppliedQueryView: MsPortalFx.Data.QueryView<SamplesExtension.DataModels.Product, ProductQueryParams>,
             query: ProductQueryParams,
             reset: boolean,
-            filter: string): MsPortalFx.Base.Promise => {
+            filter: string): Promise<any> => {
 
             var token = reset ? "" :
                 (suppliedQueryView.metadata() ?
@@ -105,7 +105,7 @@ constructor(container: MsPortalFx.ViewModels.PartContainerContract,
 }
 
 
-public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: any): Promise<any> {
     return this._sequentialDataNavigator.setQuery({ categoryId: inputs.categoryId });
 }
 ```
@@ -133,7 +133,7 @@ var productsCache = new MsPortalFx.Data.QueryCache<SamplesExtension.DataModels.P
             query: ProductPageableQueryParams,
             skip: number,
             take: number,
-            filter: string): MsPortalFx.Base.Promise => {
+            filter: string): Promise<any> => {
 
                 return suppliedQueryView.fetch({ skip: skip.toString(), take: take.toString(), categoryId: query.categoryId });
         }
@@ -204,7 +204,7 @@ constructor(container: MsPortalFx.ViewModels.PartContainerContract,
         ko.observable(ClientResources.nobodyInDatabase);
 }
 
-public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: any): Promise<any> {
     return this._pageableDataNavigator.setQuery({ categoryId: inputs.categoryId });
 }
 ```

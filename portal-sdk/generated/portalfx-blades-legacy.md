@@ -390,10 +390,10 @@ export class BladePropertiesBladeViewModel extends MsPortalFx.ViewModels.Blade {
     /**
      * When the temperature in F is passed in, trigger the computed to calculate it in C
      */
-    public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
+    public onInputsSet(inputs: any): Promise<any> {
         this._tempInFahrenheit(inputs.tempInFahrenheit);
         this.title(SamplesExtension.Resources.Strings.bladePropertiesBladeTitle + " - " + inputs.tempInFahrenheit + " deg F");
-        return null;
+        return Promise.resolve();
     }
 }
 ```

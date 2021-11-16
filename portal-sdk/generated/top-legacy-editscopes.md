@@ -379,7 +379,7 @@ constructor(container: MsPortalFx.ViewModels.PartContainerContract, dataContext:
 /**
  * Invoked when the Part's inputs change.
  */
-public onInputsSet(inputs: Def.DetailPartViewModel.InputsContract): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: Def.DetailPartViewModel.InputsContract): Promise<any> {
     // Acquires edit scope seeded with an item with id currentItemId.
     return this._editScopeView.fetchForExistingData(inputs.editScopeId, inputs.currentItemId);
 }
@@ -629,7 +629,7 @@ saveCommand.command = {
         const editScopeDirty = editScope ? editScope.dirty() : false;
         return !this._saving() && editScopeDirty;
     }),
-    execute: (): FxBase.Promise => {
+    execute: (): Promise<any> => {
         return this._editScopeView.editScope().saveChanges();
     },
 };
@@ -645,7 +645,7 @@ discardCommand.command = {
         const editScopeDirty = editScope ? editScope.dirty() : false;
         return !this._saving() && editScopeDirty;
     }),
-    execute: (): FxBase.Promise => {
+    execute: (): Promise<any> => {
         this._editScopeView.editScope().revertAll();
         return null;
     },

@@ -89,8 +89,8 @@ Use the following three steps to create a template blade.
             this.url = ko.observable<string>("https://portal.azure.com");
         }
 
-        public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
-            return null;
+        public onInputsSet(inputs: any): Promise<any> {
+            return Promise.resolve();
         }
     }
 
@@ -140,8 +140,8 @@ Ibiza provides an extensive controls library that can be used in the HTML templa
             });
         }
 
-        public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
-            return null;
+        public onInputsSet(inputs: any): Promise<any> {
+            return Promise.resolve();
         }
     }
     ```
@@ -190,10 +190,10 @@ Blades can receive input parameters that are part of the signature for the blade
             });
         }
 
-        public onInputsSet(inputs: Def.InputsContract): MsPortalFx.Base.Promise {
+        public onInputsSet(inputs: Def.InputsContract): Promise<any> {
             // write the input property to the console
             console.log(inputs.id);
-            return null;
+            return Promise.resolve();
         }
     }
     ```
@@ -251,8 +251,8 @@ The working copy of the sample in the Dogfood environment is located at  [https:
             this.commandBar.setItems( [ button ] );
         }
 
-        public onInputsSet(inputs: Def.InputsContract): MsPortalFx.Base.Promise {
-            return null;
+        public onInputsSet(inputs: Def.InputsContract): Promise<any> {
+            return Promise.resolve();
         }
     }
     ```
@@ -306,8 +306,8 @@ Blades can display buttons that are docked at the base of the blade.  The follow
                 };
             }
 
-            public onInputsSet(inputs: Def.InputsContract): MsPortalFx.Base.Promise {
-                return null;
+            public onInputsSet(inputs: Def.InputsContract): Promise<any> {
+                return Promise.resolve();
             }
         }
     ```

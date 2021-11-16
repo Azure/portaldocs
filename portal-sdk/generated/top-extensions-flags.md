@@ -317,8 +317,6 @@ The following are the feature flags that are invoked with the syntax: `feature.<
 
 **feature.internalonly**:  Shows or hides the **Preview** banner in the top-left.  A value of `true` shows the banner,  and a value of `false` hides it.
 
-**feature.irissurfacename**:  Defines the surface name to use when querying IRIS.
-
 **feature.multicloud**: Enables multicloud mode. Reserved for team use.
 
 **feature.nativeperf**:  Exposes native performance markers within the profile traces, which allows you to accurately match portal telemetry markers to the profile. The main use case is when profiling your extension/blade performance locally. Native performance markers will show up in the browser's performance profiling tool.

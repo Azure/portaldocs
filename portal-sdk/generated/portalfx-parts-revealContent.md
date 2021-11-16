@@ -13,7 +13,7 @@ As a Part loads, by default, the user is presented with a *blocking* loading ind
 By default, the lifetime of this *blocking* loading indicator is controlled by the promise returned from the Part's `onInputsSet` method:
 
 ```ts
-public onInputsSet(inputs: Def.InputsContract): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: Def.InputsContract): Promise<any> {
 	// When this promise is resolved, the loading indicator is removed.
     return this._view.fetch(inputs.websiteId);
 }
@@ -39,7 +39,7 @@ Depending on the nature of your Part, you will call `container.revealContent()`:
 * from your Part view model's `constructor` *or*
 * from your Part view model's `onInputsSet` function:
     * in a '.then(() => ...)' callback, once *essential data* has loaded
-    * in 'onInputsSet' directly, before initiating data-loading    
+    * in 'onInputsSet' directly, before initiating data-loading
 
 You'll call `container.revealContent()` from your view model's `constructor` in scenarios where the Part has interesting content to display *even before any data is loaded*.  An example of this would be a chart that can show its X and Y-axis immediately:
 
@@ -54,7 +54,7 @@ export class BarChartPartViewModel implements Def.BarChartPartViewModel.Contract
 
         // Configure the chart view model (incomplete as shown).
         this.barChartVM.yAxis.showGridLines(true);
-		
+
 		container.revealContent();
 	}
 }
@@ -111,7 +111,7 @@ It is important that loading indicators are consistently applied across the Part
 ```ts
 public onInputsSet(inputs: MyPartInputs): Promise {
     this._view.fetch(inputs.resourceId);
-    
+
     // DO NOT DO THIS!  Removes all loading indicators.
     // Your Part will look broken while the `fetch` above completes.
     return Q();

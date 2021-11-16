@@ -527,7 +527,7 @@ constructor(container: PartContainerContract) {
     });
 }
 
-public onInputsSet(inputs: Inputs, settings: Def.SettingsContract): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: Inputs, settings: Def.SettingsContract): Promise<any> {
 
     // Any changes to the Part's Configuration values (see 'updateValues' above) will cause 'onInputsSet' to be called with the
     // new inputs/settings values.
@@ -706,7 +706,7 @@ Globally-defined parts can not specify constant bindings, but the flow is mostly
 The following code demonstrates how to process explicitly-versioned inputs, in addition to the version of the parts that existed previous to the addition of explicit versioning support.
 
 ```javascript
-public onInputsSet(inputs: Def.InputsContract, settings: Def.SettingsContract): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: Def.InputsContract, settings: Def.SettingsContract): Promise<any> {
         var name: string;
         if (inputs.version === "2") {  // this block explicitly handles version 2, which is the latest
             name = inputs.name;
@@ -726,7 +726,7 @@ public onInputsSet(inputs: Def.InputsContract, settings: Def.SettingsContract): 
 The same technique can be used for part settings as in the following example.
 
 ```javascript
-public onInputsSet(inputs: Def.InputsContract, settings: Def.SettingsContract): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: Def.InputsContract, settings: Def.SettingsContract): Promise<any> {
         var someSetting: string;
         if (settings.version === "2") {  // this block explicitly handles version 2, which is the latest
             someSetting = settings.someSetting;
@@ -763,7 +763,7 @@ export class DocumentCountUsagePartViewModel extends MsPortalFx.ViewModels.Parts
         container.noDataMessage(ClientResources.tileRemoved);
     }
 
-    public onInputsSet(inputs: any): MsPortalFx.Base.Promise {
+    public onInputsSet(inputs: any): Promise<any> {
         return Q();
     }
 }
@@ -875,7 +875,7 @@ As a Part loads, by default, the user is presented with a *blocking* loading ind
 By default, the lifetime of this *blocking* loading indicator is controlled by the promise returned from the Part's `onInputsSet` method:
 
 ```ts
-public onInputsSet(inputs: Def.InputsContract): MsPortalFx.Base.Promise {
+public onInputsSet(inputs: Def.InputsContract): Promise<any> {
 	// When this promise is resolved, the loading indicator is removed.
     return this._view.fetch(inputs.websiteId);
 }
@@ -901,7 +901,7 @@ Depending on the nature of your Part, you will call `container.revealContent()`:
 * from your Part view model's `constructor` *or*
 * from your Part view model's `onInputsSet` function:
     * in a '.then(() => ...)' callback, once *essential data* has loaded
-    * in 'onInputsSet' directly, before initiating data-loading    
+    * in 'onInputsSet' directly, before initiating data-loading
 
 You'll call `container.revealContent()` from your view model's `constructor` in scenarios where the Part has interesting content to display *even before any data is loaded*.  An example of this would be a chart that can show its X and Y-axis immediately:
 
@@ -916,7 +916,7 @@ export class BarChartPartViewModel implements Def.BarChartPartViewModel.Contract
 
         // Configure the chart view model (incomplete as shown).
         this.barChartVM.yAxis.showGridLines(true);
-		
+
 		container.revealContent();
 	}
 }
@@ -973,7 +973,7 @@ It is important that loading indicators are consistently applied across the Part
 ```ts
 public onInputsSet(inputs: MyPartInputs): Promise {
     this._view.fetch(inputs.resourceId);
-    
+
     // DO NOT DO THIS!  Removes all loading indicators.
     // Your Part will look broken while the `fetch` above completes.
     return Q();

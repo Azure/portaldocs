@@ -150,7 +150,7 @@ this._websiteEntityView = dataContext.websiteEntities.createView(container);
 /**
  * Invoked when the blade's inputs change
  */
-public onInputsSet(): MsPortalFx.Base.Promise {
+public onInputsSet(): Promise<any> {
     return this._websitesQueryView.fetch({ runningStatus: this.runningStatus.value() });
 }
 

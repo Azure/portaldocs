@@ -278,7 +278,7 @@ export class OpenBladeApiSamplesViewModel
         });
 
         this._onCallbackFxclickClick = () => {
-            this._container.openBlade(BladeReferences.forBlade("OpenBladeApiChildBlade").createReference());
+            void this._container.openBlade(BladeReferences.forBlade("OpenBladeApiChildBlade").createReference());
             incrementDynamicFxclickClickCount(this.dynamicFxclickClickCount)();
         };
 
@@ -304,7 +304,7 @@ export class OpenBladeApiSamplesViewModel
         this.dynamicFxclickText = ko.observable(Resources.dynamicFxclickCallbackText);
 
         this.onOpenChildBladeLinkClick = () => {
-            this._container.openBlade(BladeReferences.forBlade("OpenBladeApiChildBlade").createReference());
+            void this._container.openBlade(BladeReferences.forBlade("OpenBladeApiChildBlade").createReference());
         };
 
         this.onOpenChildBladeLinkClickWithBladeLink = {
@@ -371,7 +371,7 @@ export class OpenBladeApiSamplesViewModel
     /**
      * onInputsSet is invoked when the template blade receives new parameters
      */
-    public onInputsSet(): MsPortalFx.Base.Promise {
+    public onInputsSet(): Promise<any> {
         // fetch data for the grid sample
         return this._view.fetch("");
     }
@@ -391,7 +391,7 @@ export class OpenBladeApiSamplesViewModel
         // If the promise result is true the blade was sucessfully opened.
         // If the promise is false the blade could not be opened.
         // This can happen for example if a different blade is open with edits and the user doesn't want to lose their changes
-        openBladePromise.then((result) => {
+        void openBladePromise.then((result) => {
             this.bladeOpened(result);
         });
     }
@@ -407,18 +407,18 @@ export class OpenBladeApiSamplesViewModel
 
         const openContextBladePromise = this._container.openContextPane(BladeReferences.forBlade("OpenBladeApiChildBlade").createReference({ onClosed: onBladeClosed }));
 
-        openContextBladePromise.then((result) => {
+        void openContextBladePromise.then((result) => {
             this.contextBladeOpened(result);
         });
     }
 
     public onContextAppBladeButtonClick() {
         /* Opens an AppBlade in the context menu (additional sample) */
-        this._container.openContextPane(BladeReferences.forBlade("AppBlade").createReference());
+        void this._container.openContextPane(BladeReferences.forBlade("AppBlade").createReference());
     }
 
     public onRowClick(item: Person) {
-        this._container.openBlade(BladeReferences.forBlade("PersonBlade").createReference({
+        void this._container.openBlade(BladeReferences.forBlade("PersonBlade").createReference({
             parameters: { ssnId: item.ssnId() },
         }));
     }
@@ -427,7 +427,7 @@ export class OpenBladeApiSamplesViewModel
         //bladeReference#resourceMenuBlade
         // open the "control" menu item in the resource menu for a specific resource
         const resourceId = "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/web1";
-        this._container.openBlade(BladeReferences.forExtension("HubsExtension").forMenuBlade("ResourceMenuBlade", "control").createReference({ parameters: { id: resourceId } }));
+        void this._container.openBlade(BladeReferences.forExtension("HubsExtension").forMenuBlade("ResourceMenuBlade", "control").createReference({ parameters: { id: resourceId } }));
         //bladeReference#resourceMenuBlade
     }
 
@@ -444,14 +444,14 @@ export class OpenBladeApiSamplesViewModel
         // when the resource menu blade is opened -
         // 1. the 'control' menu item will be selected
         // 2. the 'VirtualServerControlBlade' will be opened as the menu blade content
-        this._container.openBlade(menuBladeReference);
+        void this._container.openBlade(menuBladeReference);
         //bladeReference#resourceMenuBladeWithOverride
     }
 
     private _initializeHotSpotSample(container: BladeContainer) {
         this.hotspot = new (HotspotViewModel as any)(container, {
             onClick: () => {
-                container.openBlade(BladeReferences.forBlade("OpenBladeApiChildBlade").createReference());
+                void container.openBlade(BladeReferences.forBlade("OpenBladeApiChildBlade").createReference());
             },
         });
     }

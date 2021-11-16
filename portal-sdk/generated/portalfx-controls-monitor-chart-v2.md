@@ -124,7 +124,7 @@ export class MonitorChartTestBladeViewModel {
     }
 
     public onInputsSet(inputs: any): Q.Promise<void> {
-        return null;
+        return Q();
     }
 }
 ```
