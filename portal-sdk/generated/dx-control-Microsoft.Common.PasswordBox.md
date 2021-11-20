@@ -1,16 +1,19 @@
 <a name="microsoft-common-passwordbox"></a>
 # Microsoft.Common.PasswordBox
 * [Microsoft.Common.PasswordBox](#microsoft-common-passwordbox)
-    * [Properties Section](#microsoft-common-passwordbox-properties-section)
+    * [Definitions:](#microsoft-common-passwordbox-definitions)
 
-<a name="microsoft-common-passwordbox-properties-section"></a>
-## Properties Section
+<a name="microsoft-common-passwordbox-definitions"></a>
+## Definitions:
+<a name="microsoft-common-passwordbox-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:heavy_check_mark:|
-|toolTip|:negative_squared_cross_mark:|
-|constraints|:negative_squared_cross_mark:|
-|options|:negative_squared_cross_mark:|
-|visible|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|label|True|
+|toolTip|False|
+|constraints|False|
+|options|False|
+|visible|False|
+|fx.feature|False|

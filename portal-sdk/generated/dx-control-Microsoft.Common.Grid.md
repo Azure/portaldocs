@@ -1,17 +1,20 @@
 <a name="microsoft-common-grid"></a>
 # Microsoft.Common.Grid
 * [Microsoft.Common.Grid](#microsoft-common-grid)
-    * [Properties Section](#microsoft-common-grid-properties-section)
+    * [Definitions:](#microsoft-common-grid-definitions)
 
-<a name="microsoft-common-grid-properties-section"></a>
-## Properties Section
+<a name="microsoft-common-grid-definitions"></a>
+## Definitions:
+<a name="microsoft-common-grid-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:heavy_check_mark:|
-|defaultValue|:negative_squared_cross_mark:|
-|addBlade|:heavy_check_mark:|
-|editBlade|:negative_squared_cross_mark:|
-|constraints|:heavy_check_mark:|
-|visible|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|label|True|
+|defaultValue|False|
+|addBlade|True|
+|editBlade|False|
+|constraints|True|
+|visible|False|
+|fx.feature|False|

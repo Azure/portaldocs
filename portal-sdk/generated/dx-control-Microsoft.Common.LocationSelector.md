@@ -1,17 +1,20 @@
 <a name="microsoft-common-locationselector"></a>
 # Microsoft.Common.LocationSelector
 * [Microsoft.Common.LocationSelector](#microsoft-common-locationselector)
-    * [Properties Section](#microsoft-common-locationselector-properties-section)
+    * [Definitions:](#microsoft-common-locationselector-definitions)
 
-<a name="microsoft-common-locationselector-properties-section"></a>
-## Properties Section
+<a name="microsoft-common-locationselector-definitions"></a>
+## Definitions:
+<a name="microsoft-common-locationselector-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|visible|:negative_squared_cross_mark:|
-|label|:heavy_check_mark:|
-|toolTip|:negative_squared_cross_mark:|
-|scope|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|resourceTypes|:negative_squared_cross_mark:|
-|allowedValues|:negative_squared_cross_mark:|
+|name|True|
+|visible|False|
+|fx.feature|False|
+|label|True|
+|toolTip|False|
+|scope|True|
+|type|True|
+|resourceTypes|False|
+|allowedValues|False|

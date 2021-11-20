@@ -1,15 +1,18 @@
 <a name="microsoft-solutions-bladeinvokecontrol"></a>
 # Microsoft.Solutions.BladeInvokeControl
 * [Microsoft.Solutions.BladeInvokeControl](#microsoft-solutions-bladeinvokecontrol)
-    * [Properties Section](#microsoft-solutions-bladeinvokecontrol-properties-section)
+    * [Definitions:](#microsoft-solutions-bladeinvokecontrol-definitions)
 
-<a name="microsoft-solutions-bladeinvokecontrol-properties-section"></a>
-## Properties Section
+<a name="microsoft-solutions-bladeinvokecontrol-definitions"></a>
+## Definitions:
+<a name="microsoft-solutions-bladeinvokecontrol-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|openBladeStatus|:heavy_check_mark:|
-|bladeReference|:heavy_check_mark:|
-|defaultValue|:negative_squared_cross_mark:|
-|transforms|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|openBladeStatus|True|
+|bladeReference|True|
+|defaultValue|False|
+|transforms|False|
+|fx.feature|False|

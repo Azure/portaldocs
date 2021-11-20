@@ -1,15 +1,18 @@
 <a name="microsoft-keyvault-keyvaultcertificateselector"></a>
 # Microsoft.KeyVault.KeyVaultCertificateSelector
 * [Microsoft.KeyVault.KeyVaultCertificateSelector](#microsoft-keyvault-keyvaultcertificateselector)
-    * [Properties Section](#microsoft-keyvault-keyvaultcertificateselector-properties-section)
+    * [Definitions:](#microsoft-keyvault-keyvaultcertificateselector-definitions)
 
-<a name="microsoft-keyvault-keyvaultcertificateselector-properties-section"></a>
-## Properties Section
+<a name="microsoft-keyvault-keyvaultcertificateselector-definitions"></a>
+## Definitions:
+<a name="microsoft-keyvault-keyvaultcertificateselector-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:heavy_check_mark:|
-|toolTip|:negative_squared_cross_mark:|
-|scope|:heavy_check_mark:|
-|visible|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|label|True|
+|toolTip|False|
+|scope|True|
+|visible|False|
+|fx.feature|False|

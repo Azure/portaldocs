@@ -1,15 +1,18 @@
 <a name="microsoft-common-editablegrid"></a>
 # Microsoft.Common.EditableGrid
 * [Microsoft.Common.EditableGrid](#microsoft-common-editablegrid)
-    * [Properties Section](#microsoft-common-editablegrid-properties-section)
+    * [Definitions:](#microsoft-common-editablegrid-definitions)
 
-<a name="microsoft-common-editablegrid-properties-section"></a>
-## Properties Section
+<a name="microsoft-common-editablegrid-definitions"></a>
+## Definitions:
+<a name="microsoft-common-editablegrid-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:heavy_check_mark:|
-|ariaLabel|:heavy_check_mark:|
-|constraints|:heavy_check_mark:|
-|visible|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|label|True|
+|ariaLabel|True|
+|constraints|True|
+|visible|False|
+|fx.feature|False|

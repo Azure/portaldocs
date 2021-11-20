@@ -1,18 +1,21 @@
 <a name="microsoft-storage-multistorageaccountcombo"></a>
 # Microsoft.Storage.MultiStorageAccountCombo
 * [Microsoft.Storage.MultiStorageAccountCombo](#microsoft-storage-multistorageaccountcombo)
-    * [Properties Section](#microsoft-storage-multistorageaccountcombo-properties-section)
+    * [Definitions:](#microsoft-storage-multistorageaccountcombo-definitions)
 
-<a name="microsoft-storage-multistorageaccountcombo-properties-section"></a>
-## Properties Section
+<a name="microsoft-storage-multistorageaccountcombo-definitions"></a>
+## Definitions:
+<a name="microsoft-storage-multistorageaccountcombo-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:heavy_check_mark:|
-|toolTip|:negative_squared_cross_mark:|
-|defaultValue|:negative_squared_cross_mark:|
-|constraints|:negative_squared_cross_mark:|
-|count|:heavy_check_mark:|
-|visible|:negative_squared_cross_mark:|
-|scope|:heavy_check_mark:|
+|name|True|
+|type|True|
+|label|True|
+|toolTip|False|
+|defaultValue|False|
+|constraints|False|
+|count|True|
+|visible|False|
+|scope|True|
+|fx.feature|False|

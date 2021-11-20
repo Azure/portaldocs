@@ -1,17 +1,20 @@
 <a name="microsoft-common-serviceprincipalselector"></a>
 # Microsoft.Common.ServicePrincipalSelector
 * [Microsoft.Common.ServicePrincipalSelector](#microsoft-common-serviceprincipalselector)
-    * [Properties Section](#microsoft-common-serviceprincipalselector-properties-section)
+    * [Definitions:](#microsoft-common-serviceprincipalselector-definitions)
 
-<a name="microsoft-common-serviceprincipalselector-properties-section"></a>
-## Properties Section
+<a name="microsoft-common-serviceprincipalselector-definitions"></a>
+## Definitions:
+<a name="microsoft-common-serviceprincipalselector-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:negative_squared_cross_mark:|
-|toolTip|:negative_squared_cross_mark:|
-|defaultValue|:negative_squared_cross_mark:|
-|visible|:negative_squared_cross_mark:|
-|options|:negative_squared_cross_mark:|
-|constraints|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|label|False|
+|toolTip|False|
+|defaultValue|False|
+|visible|False|
+|options|False|
+|constraints|False|
+|fx.feature|False|

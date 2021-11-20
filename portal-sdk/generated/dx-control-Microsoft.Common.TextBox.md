@@ -1,20 +1,23 @@
 <a name="microsoft-common-textbox"></a>
 # Microsoft.Common.TextBox
 * [Microsoft.Common.TextBox](#microsoft-common-textbox)
-    * [Properties Section](#microsoft-common-textbox-properties-section)
+    * [Definitions:](#microsoft-common-textbox-definitions)
 
-<a name="microsoft-common-textbox-properties-section"></a>
-## Properties Section
+<a name="microsoft-common-textbox-definitions"></a>
+## Definitions:
+<a name="microsoft-common-textbox-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:heavy_check_mark:|
-|subLabel|:negative_squared_cross_mark:|
-|defaultValue|:negative_squared_cross_mark:|
-|placeholder|:negative_squared_cross_mark:|
-|toolTip|:negative_squared_cross_mark:|
-|constraints|:negative_squared_cross_mark:|
-|visible|:negative_squared_cross_mark:|
-|multiLine|:negative_squared_cross_mark:|
-|readOnly|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|label|True|
+|subLabel|False|
+|defaultValue|False|
+|placeholder|False|
+|toolTip|False|
+|constraints|False|
+|visible|False|
+|multiLine|False|
+|readOnly|False|
+|fx.feature|False|

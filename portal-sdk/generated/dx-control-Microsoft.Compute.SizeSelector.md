@@ -1,21 +1,24 @@
 <a name="microsoft-compute-sizeselector"></a>
 # Microsoft.Compute.SizeSelector
 * [Microsoft.Compute.SizeSelector](#microsoft-compute-sizeselector)
-    * [Properties Section](#microsoft-compute-sizeselector-properties-section)
+    * [Definitions:](#microsoft-compute-sizeselector-definitions)
 
-<a name="microsoft-compute-sizeselector-properties-section"></a>
-## Properties Section
+<a name="microsoft-compute-sizeselector-definitions"></a>
+## Definitions:
+<a name="microsoft-compute-sizeselector-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:heavy_check_mark:|
-|toolTip|:negative_squared_cross_mark:|
-|recommendedSizes|:heavy_check_mark:|
-|constraints|:negative_squared_cross_mark:|
-|options|:negative_squared_cross_mark:|
-|osPlatform|:heavy_check_mark:|
-|imageReference|:negative_squared_cross_mark:|
-|count|:negative_squared_cross_mark:|
-|visible|:negative_squared_cross_mark:|
-|scope|:heavy_check_mark:|
+|name|True|
+|type|True|
+|label|True|
+|toolTip|False|
+|recommendedSizes|True|
+|constraints|False|
+|options|False|
+|osPlatform|True|
+|imageReference|False|
+|count|False|
+|visible|False|
+|scope|True|
+|fx.feature|False|

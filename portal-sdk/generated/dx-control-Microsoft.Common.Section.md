@@ -1,14 +1,17 @@
 <a name="microsoft-common-section"></a>
 # Microsoft.Common.Section
 * [Microsoft.Common.Section](#microsoft-common-section)
-    * [Properties Section](#microsoft-common-section-properties-section)
+    * [Definitions:](#microsoft-common-section-definitions)
 
-<a name="microsoft-common-section-properties-section"></a>
-## Properties Section
+<a name="microsoft-common-section-definitions"></a>
+## Definitions:
+<a name="microsoft-common-section-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:heavy_check_mark:|
-|elements|:heavy_check_mark:|
-|visible|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|label|True|
+|elements|True|
+|visible|False|
+|fx.feature|False|

@@ -1,15 +1,18 @@
 <a name="microsoft-common-checkbox"></a>
 # Microsoft.Common.CheckBox
 * [Microsoft.Common.CheckBox](#microsoft-common-checkbox)
-    * [Properties Section](#microsoft-common-checkbox-properties-section)
+    * [Definitions:](#microsoft-common-checkbox-definitions)
 
-<a name="microsoft-common-checkbox-properties-section"></a>
-## Properties Section
+<a name="microsoft-common-checkbox-definitions"></a>
+## Definitions:
+<a name="microsoft-common-checkbox-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:heavy_check_mark:|
-|toolTip|:negative_squared_cross_mark:|
-|constraints|:negative_squared_cross_mark:|
-|visible|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|label|True|
+|toolTip|False|
+|constraints|False|
+|visible|False|
+|fx.feature|False|

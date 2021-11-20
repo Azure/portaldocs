@@ -1,23 +1,26 @@
 <a name="microsoft-common-dropdown"></a>
 # Microsoft.Common.DropDown
 * [Microsoft.Common.DropDown](#microsoft-common-dropdown)
-    * [Properties Section](#microsoft-common-dropdown-properties-section)
+    * [Definitions:](#microsoft-common-dropdown-definitions)
 
-<a name="microsoft-common-dropdown-properties-section"></a>
-## Properties Section
+<a name="microsoft-common-dropdown-definitions"></a>
+## Definitions:
+<a name="microsoft-common-dropdown-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:heavy_check_mark:|
-|defaultValue|:negative_squared_cross_mark:|
-|placeholder|:negative_squared_cross_mark:|
-|toolTip|:negative_squared_cross_mark:|
-|multiselect|:negative_squared_cross_mark:|
-|selectAll|:negative_squared_cross_mark:|
-|filter|:negative_squared_cross_mark:|
-|filterPlaceholder|:negative_squared_cross_mark:|
-|multiLine|:negative_squared_cross_mark:|
-|defaultDescription|:negative_squared_cross_mark:|
-|constraints|:heavy_check_mark:|
-|visible|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|label|True|
+|defaultValue|False|
+|placeholder|False|
+|toolTip|False|
+|multiselect|False|
+|selectAll|False|
+|filter|False|
+|filterPlaceholder|False|
+|multiLine|False|
+|defaultDescription|False|
+|constraints|True|
+|visible|False|
+|fx.feature|False|

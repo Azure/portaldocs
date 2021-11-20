@@ -1,15 +1,18 @@
 <a name="microsoft-common-tagsbyresource"></a>
 # Microsoft.Common.TagsByResource
 * [Microsoft.Common.TagsByResource](#microsoft-common-tagsbyresource)
-    * [Properties Section](#microsoft-common-tagsbyresource-properties-section)
+    * [Definitions:](#microsoft-common-tagsbyresource-definitions)
 
-<a name="microsoft-common-tagsbyresource-properties-section"></a>
-## Properties Section
+<a name="microsoft-common-tagsbyresource-definitions"></a>
+## Definitions:
+<a name="microsoft-common-tagsbyresource-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:negative_squared_cross_mark:|
-|resources|:heavy_check_mark:|
-|constraints|:negative_squared_cross_mark:|
-|visible|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|label|False|
+|resources|True|
+|constraints|False|
+|visible|False|
+|fx.feature|False|

@@ -1,16 +1,19 @@
 <a name="microsoft-managedidentity-identityselector"></a>
 # Microsoft.ManagedIdentity.IdentitySelector
 * [Microsoft.ManagedIdentity.IdentitySelector](#microsoft-managedidentity-identityselector)
-    * [Properties Section](#microsoft-managedidentity-identityselector-properties-section)
+    * [Definitions:](#microsoft-managedidentity-identityselector-definitions)
 
-<a name="microsoft-managedidentity-identityselector-properties-section"></a>
-## Properties Section
+<a name="microsoft-managedidentity-identityselector-definitions"></a>
+## Definitions:
+<a name="microsoft-managedidentity-identityselector-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:heavy_check_mark:|
-|toolTip|:negative_squared_cross_mark:|
-|defaultValue|:negative_squared_cross_mark:|
-|options|:negative_squared_cross_mark:|
-|visible|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|label|True|
+|toolTip|False|
+|defaultValue|False|
+|options|False|
+|visible|False|
+|fx.feature|False|
