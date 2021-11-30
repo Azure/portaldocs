@@ -62,9 +62,9 @@ After installing Node.js can either `scaffold an @microsoft/azureportal-test pro
     npm install @microsoft/azureportal-test
     ```
 
-1. Next copy the provided **tsconfig.json** and **package.json** files from the **node_modules/@microsoft/azureportal-test/typescript** folder (there are other files there as well but you can ignore those) to your test root directory.
-    1. The provided **package.json** file is used to help jumpstart the example below by installing dependencies and creating a basic environment for running tests.
-    1. Note the **typings.json** file and **typings** package dependency from previous versions is no longer needed and has been removed.  You may need to update the typescript imports when you remove them, see the below Write a test example for how to import @microsoft/azureportal-test.
+1. Next copy the provided **tsconfig.json** and **example_package.json** files from the **node_modules/@microsoft/azureportal-test/templates** folder to your test root directory.
+    1. Rename provided **example_package.json** to **package.json**.  The file is used to help jumpstart the example below by installing dependencies and creating a basic environment for running tests.
+    1. If you are upgrading from an older test framework version, note the **typings.json** file and **typings** package dependency from previous versions is no longer needed and has been removed.  You may need to update the typescript imports when you remove them, see the below Write a test example for how to import @microsoft/azureportal-test.
 
 1. In the **package.json** file, update the @microsoft/azureportal-test version to the latest version.  Also update the Chromedriver version to match the version of Chrome you have installed.
 
