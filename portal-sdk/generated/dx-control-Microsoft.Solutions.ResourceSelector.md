@@ -1,17 +1,20 @@
 <a name="microsoft-solutions-resourceselector"></a>
 # Microsoft.Solutions.ResourceSelector
 * [Microsoft.Solutions.ResourceSelector](#microsoft-solutions-resourceselector)
-    * [Properties Section](#microsoft-solutions-resourceselector-properties-section)
+    * [Definitions:](#microsoft-solutions-resourceselector-definitions)
 
-<a name="microsoft-solutions-resourceselector-properties-section"></a>
-## Properties Section
+<a name="microsoft-solutions-resourceselector-definitions"></a>
+## Definitions:
+<a name="microsoft-solutions-resourceselector-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|label|:heavy_check_mark:|
-|toolTip|:negative_squared_cross_mark:|
-|resourceType|:heavy_check_mark:|
-|constraints|:negative_squared_cross_mark:|
-|visible|:negative_squared_cross_mark:|
-|scope|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|label|True|
+|toolTip|False|
+|resourceType|True|
+|constraints|False|
+|visible|False|
+|scope|False|
+|fx.feature|False|

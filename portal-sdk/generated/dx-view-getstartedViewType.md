@@ -8,18 +8,22 @@
 ## Sections
 | Name | Required | Description
 | ---|:--:|:--:|
-|kind|:heavy_check_mark:|
-|export|:negative_squared_cross_mark:|
-|parameters|:negative_squared_cross_mark:|
-|resources|:negative_squared_cross_mark:|
-|dataSources|:negative_squared_cross_mark:|
-|messages|:negative_squared_cross_mark:|
-|essentials|:negative_squared_cross_mark:|
-|commands|:negative_squared_cross_mark:|
-|properties|:negative_squared_cross_mark:|
+|kind|True|
+|export|False|
+|parameters|False|
+|resources|False|
+|dataSources|False|
+|messages|False|
+|essentials|False|
+|commands|False|
+|properties|False|
+|fx.feature|False|
 <a name="getstartedviewtype-properties-section"></a>
 ## Properties Section
+<a name="getstartedviewtype-properties-section-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|title|:heavy_check_mark:|
-|tabs|:heavy_check_mark:|
+|title|True|
+|tabs|True|
+|fx.feature|False|

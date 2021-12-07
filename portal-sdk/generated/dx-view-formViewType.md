@@ -11,39 +11,48 @@
 ## Sections
 | Name | Required | Description
 | ---|:--:|:--:|
-|kind|:heavy_check_mark:|
-|export|:negative_squared_cross_mark:|
-|parameters|:negative_squared_cross_mark:|
-|resources|:negative_squared_cross_mark:|
-|dataSources|:negative_squared_cross_mark:|
-|commands|:negative_squared_cross_mark:|
-|properties|:heavy_check_mark:|
-|outputs|:negative_squared_cross_mark:|
+|kind|True|
+|export|False|
+|parameters|False|
+|resources|False|
+|dataSources|False|
+|commands|False|
+|properties|True|
+|outputs|False|
+|fx.feature|False|
 <a name="formviewtype-properties-section"></a>
 ## Properties Section
-Options:
 <a name="formviewtype-properties-section-option-1"></a>
 ### Option 1
+<a name="formviewtype-properties-section-option-1-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|isWizard|:negative_squared_cross_mark:|
-|title|:heavy_check_mark:|
-|steps|:heavy_check_mark:|
-|deployment|:heavy_check_mark:|
+|isWizard|False|
+|title|True|
+|steps|True|
+|deployment|True|
+|fx.feature|False|
 <a name="formviewtype-properties-section-option-2"></a>
 ### Option 2
+<a name="formviewtype-properties-section-option-2-an-object-with-the-following-properties-1"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|isWizard|:negative_squared_cross_mark:|
-|title|:heavy_check_mark:|
-|primaryButtonLabel|:negative_squared_cross_mark:|
-|steps|:heavy_check_mark:|
-|armRequest|:heavy_check_mark:|
+|isWizard|False|
+|title|True|
+|primaryButtonLabel|False|
+|steps|True|
+|armRequest|True|
+|fx.feature|False|
 <a name="formviewtype-properties-section-option-3"></a>
 ### Option 3
+<a name="formviewtype-properties-section-option-3-an-object-with-the-following-properties-2"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|isWizard|:negative_squared_cross_mark:|
-|title|:heavy_check_mark:|
-|primaryButtonLabel|:negative_squared_cross_mark:|
-|steps|:heavy_check_mark:|
+|isWizard|False|
+|title|True|
+|primaryButtonLabel|False|
+|steps|True|
+|fx.feature|False|

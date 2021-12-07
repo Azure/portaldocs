@@ -225,6 +225,6 @@ Here is the UIDefinition.json from our example -
 ### Step 5: Deployment sequence
 
 1. Once you have made the required changes and have tested locally by side-loading your extension, first deploy your new extension with the changes. If you publish the new gallery package first, your experience will break in Production.
-2. Once the new extension has been deployed in all 5 production changes, go ahead and publish the new gallery package. You can find instructions on publishing a new gallery package [here](index-gallery.md#new-process).
+2. Once the new extension has been deployed in all 5 production changes, go ahead and publish the new gallery package. You can find instructions on publishing a new gallery package [here](/gallery-sdk/generated/index-gallery.md#new-process).
 
 **Congratulations! You now have a compliant, full screen create in the Azure Portal.**

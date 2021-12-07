@@ -1,13 +1,16 @@
 <a name="microsoft-solutions-armapicontrol"></a>
 # Microsoft.Solutions.ArmApiControl
 * [Microsoft.Solutions.ArmApiControl](#microsoft-solutions-armapicontrol)
-    * [Properties Section](#microsoft-solutions-armapicontrol-properties-section)
+    * [Definitions:](#microsoft-solutions-armapicontrol-definitions)
 
-<a name="microsoft-solutions-armapicontrol-properties-section"></a>
-## Properties Section
+<a name="microsoft-solutions-armapicontrol-definitions"></a>
+## Definitions:
+<a name="microsoft-solutions-armapicontrol-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|condition|:negative_squared_cross_mark:|
-|request|:heavy_check_mark:|
+|name|True|
+|type|True|
+|condition|False|
+|request|True|
+|fx.feature|False|

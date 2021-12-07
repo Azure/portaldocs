@@ -1,13 +1,16 @@
 <a name="microsoft-common-textblock"></a>
 # Microsoft.Common.TextBlock
 * [Microsoft.Common.TextBlock](#microsoft-common-textblock)
-    * [Properties Section](#microsoft-common-textblock-properties-section)
+    * [Definitions:](#microsoft-common-textblock-definitions)
 
-<a name="microsoft-common-textblock-properties-section"></a>
-## Properties Section
+<a name="microsoft-common-textblock-definitions"></a>
+## Definitions:
+<a name="microsoft-common-textblock-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|options|:heavy_check_mark:|
-|visible|:negative_squared_cross_mark:|
+|name|True|
+|type|True|
+|options|True|
+|visible|False|
+|fx.feature|False|

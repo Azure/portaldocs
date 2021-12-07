@@ -1,15 +1,18 @@
 <a name="microsoft-common-resourcegroupselector"></a>
 # Microsoft.Common.ResourceGroupSelector
 * [Microsoft.Common.ResourceGroupSelector](#microsoft-common-resourcegroupselector)
-    * [Properties Section](#microsoft-common-resourcegroupselector-properties-section)
+    * [Definitions:](#microsoft-common-resourcegroupselector-definitions)
 
-<a name="microsoft-common-resourcegroupselector-properties-section"></a>
-## Properties Section
+<a name="microsoft-common-resourcegroupselector-definitions"></a>
+## Definitions:
+<a name="microsoft-common-resourcegroupselector-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|visible|:negative_squared_cross_mark:|
-|scope|:heavy_check_mark:|
-|type|:heavy_check_mark:|
-|allowedMode|:negative_squared_cross_mark:|
-|constraints|:negative_squared_cross_mark:|
+|name|True|
+|visible|False|
+|fx.feature|False|
+|scope|True|
+|type|True|
+|allowedMode|False|
+|constraints|False|

@@ -1,14 +1,17 @@
 <a name="microsoft-common-subscriptionselector"></a>
 # Microsoft.Common.SubscriptionSelector
 * [Microsoft.Common.SubscriptionSelector](#microsoft-common-subscriptionselector)
-    * [Properties Section](#microsoft-common-subscriptionselector-properties-section)
+    * [Definitions:](#microsoft-common-subscriptionselector-definitions)
 
-<a name="microsoft-common-subscriptionselector-properties-section"></a>
-## Properties Section
+<a name="microsoft-common-subscriptionselector-definitions"></a>
+## Definitions:
+<a name="microsoft-common-subscriptionselector-definitions-an-object-with-the-following-properties"></a>
+##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|:heavy_check_mark:|
-|visible|:negative_squared_cross_mark:|
-|type|:heavy_check_mark:|
-|resourceProviders|:negative_squared_cross_mark:|
-|constraints|:negative_squared_cross_mark:|
+|name|True|
+|visible|False|
+|fx.feature|False|
+|type|True|
+|resourceProviders|False|
+|constraints|False|

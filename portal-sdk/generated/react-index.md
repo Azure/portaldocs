@@ -34,7 +34,7 @@
     * [Getting Support](#reactviews-getting-support)
         * [Stack overflow](#reactviews-getting-support-stack-overflow)
         * [Teams](#reactviews-getting-support-teams)
-        * [User voice](#reactviews-getting-support-user-voice)
+        * [Filing requests](#reactviews-getting-support-filing-requests)
         * [Filing bugs](#reactviews-getting-support-filing-bugs)
         * [Office hours](#reactviews-getting-support-office-hours)
     * [Contribution](#reactviews-contribution)
@@ -477,9 +477,7 @@ and something breaks it is likely our response will be to remove the plugin and 
 React dev tools via browser extension does not currently work with ReactViews, due to limitations around IFrames. Instead, we have included the dev tools built into each IFrame. To use them, ensure you have loaded the portal with
 `clientoptimizations=bundle` or `clientoptimizations=false`, click within the experience and use the shortcut `ctrl + alt + t`. The dev tools should show up, if you see yellow boxes, your focus was likely set outside of the ReactView.
 
-More improvements are still being worked on in this space, including resize. If you have suggestions, please submit them on [User Voice](#user-voice).
-
-> Note: React dev tools is currently not supported in IE.
+More improvements are still being worked on in this space, including resize. If you have suggestions, please submit them using our [filing requests](#filing-requests) process.
 
 <a name="reactviews-additional-features-localization"></a>
 ### Localization
@@ -500,9 +498,10 @@ However, if you wish to access the theme directly in a react component there is 
 Top-level ReactView blades that use decorators can access the theme, but won't be updated when the user changes the fluent theme.
 
 To ensure that a component re-renders when the theme is changed, any component that directly accesses the theme should:
-* be a child component of the top-level ReactView blade
-* be a functional component that uses fluent's [useTheme](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider#usetheme) hook OR
-* use fluent's [ThemeContext.Consumer](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider#themecontextconsumer)
+
+- be a child component of the top-level ReactView blade
+- be a functional component that uses fluent's [useTheme](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider#usetheme) hook OR
+- use fluent's [ThemeContext.Consumer](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider#themecontextconsumer)
 
 <a name="reactviews-additional-features-localstorage-and-sessionstorage"></a>
 ### LocalStorage and SessionStorage
@@ -532,10 +531,10 @@ gets the right attention.
 Feel free to engage the Azure Portal - React development community and ReactView development team on our [Teams channel][React Teams link].
 If your posting issues or common questions please use Stack overflow first.
 
-<a name="reactviews-getting-support-user-voice"></a>
-### User voice
+<a name="reactviews-getting-support-filing-requests"></a>
+### Filing requests
 
-For any feature requests file the suggestion/request on our [User Voice][React UserVoice]. Mark the suggestion with either `ibiza-react`, if the
+For any feature requests file the suggestion/request via [https://aka.ms/portalfx/reactrequest][React Request]. Mark the suggestion with either `ibiza-react`, if the
 request is generic, or `ibiza-react-controls`, if the request is for specific components additions or features.
 
 Feel free to cross-post the idea to the ReactView Teams channel to get more awareness.
@@ -652,7 +651,7 @@ The main difference is unlike the Knockout offering there is no container like c
 
 ReactViews currently only support authoring blade-like experiences. There is no part development support currently.
 
-[React UserVoice]: https://aka.ms/portalfx/request/react
+[React Request]: https://aka.ms/portalfx/reactrequest
 [React Bug]: https://aka.ms/portalfx/reactbug
 [React Teams link]: https://aka.ms/portalfx/reactteam
 [React StackOverflow]: https://aka.ms/portalfx/ask/react
