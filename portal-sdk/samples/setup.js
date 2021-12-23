@@ -161,7 +161,7 @@ async function generateNpmPAT() {
             console.log(`Installing 'vsts-npm-auth'...`);
             await exec(`npm install -g vsts-npm-auth --registry https://registry.npmjs.org`);
         }
-        const generatePAT = "vsts-npm-auth -F -R -E 525600 -C .npmrc";
+        const generatePAT = "vsts-npm-auth -F -R -E 129600 -C .npmrc";
         console.log(`generating a readonly PAT using vsts-npm-auth...${os_1.EOL}If prompted to login, use your @microsoft.com account to authenticate against Azure Dev Ops.`);
         await exec(generatePAT);
     }
@@ -490,7 +490,7 @@ async function oneTimeConfigurationSteps() {
         - set the default npm registry (copy and paste below line to command prompt)
             npm config set registry ${registry}
         - generate a readonly PAT using vsts-npm-auth (copy and paste below line to command prompt)
-            vsts-npm-auth -F -R -E 525600 -C .npmrc
+            vsts-npm-auth -F -R -E 129600 -C .npmrc
     8. rerun this "setup.js" file`;
     const nonWindowsNPMAuthPATHInstruction = `Manual Instruction: Just as NuGet needed the credential provider npm requires a PAT for auth. Which can be configured as follows.
     1. Connect to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal
