@@ -938,7 +938,11 @@ import testFx from '@microsoft/azureportal-test';
 
         //change the value to initiate validation
         await this.element(By.className(tabClass)).click();
-        await this.primaryEngine.sendKeys(nameTxt + webdriver.Key.TAB);
+        const tabKey = runAutomationSync(
+            (wd) => { return wd.Key.TAB; },
+            () => { throw new Error("Not Implemented."); }
+        );
+        await this.primaryEngine.sendKeys(nameTxt + tabKey);
         //wait for the control to reach the valid state
         await this.primaryEngine.waitOnValidationState(testFx.Constants.ControlValidationState.valid);
 ...
