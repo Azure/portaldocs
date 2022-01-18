@@ -200,6 +200,10 @@ The manifest file contains all of the metadata for your gallery item. For a visu
            isDefault: true|false */
         { "name": "string", "type": "string", "path": "string", "isDefault": true } // max of 128 characters
     ],
+    "keywords": [
+    	"Keyword1",
+	"Keyword2"
+    ],
     "icons": {
         // see: https://auxdocs.azurewebsites.net/en-us/documentation/articles/gallery-items
         "small": "string", // path to image file
