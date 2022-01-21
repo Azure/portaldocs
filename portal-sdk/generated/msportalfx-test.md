@@ -609,7 +609,7 @@ Sometimes it is useful to get the result of the currently running test, for exam
             return testSupport.GatherTestFailureDetails(this.currentTest.title);
         }
     });
-
+    
 ```
 
 One thing to watch out for in typescript is how lambda functions, "() => {}", behave.  Lambda functions (also called "fat arrow" sometimes) in Typescript capture the "this" variable from the surrounding context.  This can cause problems when trying to access Mocha's current test state.  See [arrow functions](https://basarat.gitbooks.io/typescript/content/docs/arrow-functions.html) for details.
@@ -637,7 +637,7 @@ import testFx from '@microsoft/azureportal-test';
             return testSupport.GatherTestFailureDetails(this.currentTest.title);
         }
     });
-
+    
 ```
 
 <a name="microsoft-azureportal-test-debugging-how-to-capture-browser-console-output"></a>
@@ -652,7 +652,7 @@ import testFx from '@microsoft/azureportal-test';
         await testFx.portal.goHome();
         const logs = await testFx.portal.getBrowserLogs(LogLevel.All);
         assert.ok(logs.length > 0, "Expected to collect at least one log.");
-
+        
 ```
 
 
@@ -720,32 +720,57 @@ import BrowserResolution from "./BrowserResolution";
 import SilentAuthConfig from "./SilentAuthConfig";
 import Timeout from "./Timeout";
 
+export class AutomationConfiguration {
+    /**
+     * The name of the browser being used; should be one of {chrome}
+     */
+    browserName: string;
+
+    /**
+     * Chrome-specific supported capabilities.
+     */
+    chromeOptions: {
+        /**
+         * List of command-line arguments to use when starting Chrome.
+         */
+        args: string[];
+    };
+
+    /**
+     * The desired starting browser's resolution in pixels.
+     */
+    browserResolution: BrowserResolution;
+}
+
+export class PlaywrightConfiguration {
+    /**
+     * The name of the browser being used
+     */
+    browser: "chrome" | "firefox" | "webkit";
+
+    /**
+     * Browser launch option (https://playwright.dev/docs/api/class-browsertype#browser-type-launch)
+     */
+    options: Object;
+
+    /**
+     * The desired starting browser's resolution in pixels.
+     */
+    resolution: BrowserResolution;
+}
+
 export class PortalContextBase {
+    /**
+     * The set of setting for playwright browser automation.
+     */
+    playwright: PlaywrightConfiguration = null;
+
     /**
      * The set of capabilities enabled in the webdriver session.
      * For a list of available capabilities, see https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities
      */
-    capabilities: {
-        /**
-         * The name of the browser being used; should be one of {chrome}
-         */
-        browserName: string;
+    capabilities: AutomationConfiguration = null;
 
-        /**
-         * Chrome-specific supported capabilities.
-         */
-        chromeOptions: {
-            /**
-             * List of command-line arguments to use when starting Chrome.
-             */
-            args: string[];
-        };
-
-        /**
-         * The desired starting browser's resolution in pixels.
-         */
-        browserResolution: BrowserResolution;
-    } = null;
     /**
      * The browserstack url the tests should run on.
      * This field needs to be set if the tests are meant to run on browserstack
