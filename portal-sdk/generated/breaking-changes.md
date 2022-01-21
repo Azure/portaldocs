@@ -3,6 +3,9 @@
 * To ask a question about breaking changes [use this](https://aka.ms/ask/ibiza-breaking-change)  
 
 
+## 9.49.0.5
+<table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=12804917'>12804917</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=12804917'>Remove SVGo nupkg from within Tools nupkg</a><p> </div><div><br> </div><div>The SVGo NUPKG was included inside the Microsoft.Portal.Tools NUPKG, as well as the unpacked version. </div><div><br> </div><div>As of this change, only the unpacked (loose) version of SVGo is included in the Microsoft.Portal.Tools NUPKG. The targets files used by the SDK do not use the packed version of SVGo (only the loose version). </div><div><br> </div><div></p></td></tr></table>
+
 ## 9.31.0.5
 <table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=12375340'>12375340</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=12375340'>[Notifications] Update Modal Template to Align with Fluent UI</a><p></span><br> </div><div><span style="font-family:&quot;Segoe UI&quot;, sans-serif;font-size:14.6667px;display:inline !important;">**Expected Errors**</span> </div><div><font face="Segoe UI, sans-serif"><span style="font-size:14.6667px;">No error expected. This is an addition of a new field to an existing API.</span></font> </div><div><br> </div><div></p></td></tr></table>
 
