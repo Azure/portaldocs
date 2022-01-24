@@ -240,6 +240,7 @@ The following options are available on the `options` property.
 | `enableSupportResourceHealth` | Check resource for common health issues (e.g. connectivity) and recommend fixes. |Yes | No |
 | `enableSupportTroubleshootV2` | Troubleshoot possible availability/reliability issues (e.g. connectivity). | Yes | No |
 | `enableTags`                  | Tag resource with key/value pairs to group/organize related resources. RP must support PATCH operations to update tags. Does not support classic resources. | Yes | Resources, resource groups, subscriptions |
+| `enableWorkbooks`             | Adds workbooks item to your resource menu.  If your resource supports either logs or metrics or both, consider turning this on in your resource as well. See [link here](https://aka.ms/azmonwog) for more onboarding instructions, for creating workbook templates, etc. | No | No |
 | `showAppInsightsFirst`        | View Application Insights monitoring. `enableAppInsights` must be set to `true`. | No  | No |
 
 In this example, the resource contains an item with the ID 'overview' and has also onboarded to extension Support, as specified in [top-blades-settings.md#audit-logs](top-blades-settings.md#audit-logs). This support automatically makes the export template, locks, RBAC, Activity Log, new support request, and tags available to the extension.
