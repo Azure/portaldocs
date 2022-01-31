@@ -34,6 +34,8 @@
     - [Column Icons](#column-icons)
       - [Valid Icons for a `Status` Column](#valid-icons-for-a-status-column)
     - [Possible Summary Visualizations](#possible-summary-visualizations)
+    - [Controlling column visibility via per-environment configuration](#controlling-column-visibility-via-per-environment-configuration)
+      - [Testing your column manually](#testing-your-column-manually)
     - [Default columns](#default-columns)
     - [Exclude columns](#exclude-columns)
     - [Default filters](#default-filters)
@@ -327,6 +329,14 @@ HideAssetType,HideInstance | Hide the asset type from left navigation AND hides 
 
 *Importantly*, if HideInstances is used on an asset type, using resource type-specific browse will show those instances in that browse.
 
+<div style="margin-bottom: 20px; background-color: #fff; border: 1px solid transparent; border-radius: 4px; -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%); box-shadow: 0 1px 1px rgb(0 0 0 / 5%); border-color: rgba(251,162,37,.3);">
+<p style="background-color: rgba(251,162,37,.3);
+    border-color: rgba(251,162,37,.3); color: #e14329; padding: 5px">**IMPORTANT**</p>
+<div style="padding: 0 15px 10px; color: black;">
+When providing `assettypeoptions` in a configuration JSON file, values are not merged from per-environment configuration files with the values in the default.json file, even if the `assettypeoptions` is not defined in the per-environment. If, as an example, there is a portal.azure.com.json file, then `assettypeoptions` must be defined in that file as well as the default.json file and when using portal.azure.com only the values from portal.azure.com.json will be used. If the per-environment JSON file does not exist for the environment, then the default.json file value will be used.
+</div>
+</div>
+
 The case of empty string strips off any visibility options provided in PDL. The options are applied to the asset type, essentially replacing the options in PDL.
 
 As mentioned above, visibility of instances with a specific resource kind can also be controlled if the kind is specified in the PDL:
@@ -384,10 +394,10 @@ For the desired environment append the following feature flags.
 ```
 
 For example:
-https://rc.portal.azure.com/?microsoft_azure_compute_assettypes={"VirtualMachine":{"options":""}}&microsoft_azure_compute=true&feature.canmodifyextensions=true
+https://rc.portal.azure.com/?microsoft_azure_compute_assettypeoptions={"VirtualMachine":{"options":""}}&microsoft_azure_compute=true&feature.canmodifyextensions=true
 
 or testing the hiding of an asset can be achieved with:
-https://rc.portal.azure.com/?microsoft_azure_compute_assettypes={"VirtualMachine":{"options":"HideAssetType"}}&microsoft_azure_compute=true&feature.canmodifyextensions=true
+https://rc.portal.azure.com/?microsoft_azure_compute_assettypeoptions={"VirtualMachine":{"options":"HideAssetType"}}&microsoft_azure_compute=true&feature.canmodifyextensions=true
 
 <a name="start-with-asset-type-definition-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-how-the-options-are-applied-from-pdl-from-the-config-json-file-and-from-the-url"></a>
 #### How the options are applied from PDL, from the config JSON file and from the URL
@@ -692,6 +702,15 @@ ShowAssetType,ShowInstance | Show the asset type in left navigation AND shows an
 
 Importantly, if HideInstances is used on a kind, using resource type-specific browse with a kind filter will show those
 instances in that browse.
+
+<div style="margin-bottom: 20px; background-color: #fff; border: 1px solid transparent; border-radius: 4px; -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%); box-shadow: 0 1px 1px rgb(0 0 0 / 5%); border-color: rgba(251,162,37,.3);">
+<p style="background-color: rgba(251,162,37,.3);
+    border-color: rgba(251,162,37,.3); color: #e14329; padding: 5px">**IMPORTANT**</p>
+<div style="padding: 0 15px 10px; color: black;">
+When providing `assettypeoptions` in a configuration JSON file, values are not merged from per-environment configuration files with the values in the default.json file, even if the `assettypeoptions` is not defined in the per-environment. If, as an example, there is a portal.azure.com.json file, then `assettypeoptions` must be defined in that file as well as the default.json file and when using portal.azure.com only the values from portal.azure.com.json will be used. If the per-environment JSON file does not exist for the environment, then the default.json file value will be used.
+</div>
+</div>
+
 
 <a name="start-with-asset-type-definition-defining-your-asset-type-choosing-asset-type-and-kind-visibility-options"></a>
 ### Choosing Asset Type and Kind Visibility Options
@@ -1193,6 +1212,49 @@ where type == 'microsoft.web/sites'
 | Default | All possible visualizations excluding `Map` |
 | DefaultWithMap | All possible visualizations including `Map` |
 
+<a name="browse-with-azure-resource-graph-pdl-definition-controlling-column-visibility-via-per-environment-configuration"></a>
+### Controlling column visibility via per-environment configuration
+
+There can be a case where for a particular environment, a column will not be valid or have a useable value. A specific feature behind a column may not be available or a linked resource might not be implemented or featured for a particular environment (like national clouds). To handle this case, browse columns can be hidden using a per-environment configuration JSON file. When a column is hidden, it is completely removed from the asset type at runtime. It will be removed from the default columns, optional columns, default filters and the status column. It will also be removed from the resource hover card. It will appear to browse as if the column does not exist in the PDL. The configuration JSON files have a 'showargcolumns' property which is a dictionary of asset type name to an inner dictionary of column name to a boolean value. Setting a column to `false` will hide the column effectively removing it.
+
+For example, if the `special` column is not available in hosted.portal.azure.com, the following can be added to the hosted.portal.azure.com.json configuration file to hide that column:
+
+```jsonc
+{
+  "showargcolumns": {
+    "YOUR_ASSET_NAME": { "special": false },
+    "YOUR_SECOND_ASSET_NAME": { "anothercolumn": false, "thirdcolumn": false }
+  }
+}
+```
+
+As can be seen, columns where the visibility is not affected do not need to be specified in the `showargcolumns`, only those being hidden should be specified with a value of `false`. Shown for the second asset type, multiple columns can be hidden by specifying more than one for the asset type.
+
+<div style="margin-bottom: 20px; background-color: #fff; border: 1px solid transparent; border-radius: 4px; -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%); box-shadow: 0 1px 1px rgb(0 0 0 / 5%); border-color: rgba(251,162,37,.3);">
+<p style="background-color: rgba(251,162,37,.3);
+    border-color: rgba(251,162,37,.3); color: #e14329; padding: 5px">**IMPORTANT**</p>
+<div style="padding: 0 15px 10px; color: black;">
+When providing `showargcolumns` in a configuration JSON file, values are not merged from per-environment configuration files with the values in the default.json file, even if the `showargcolumns` is not defined in the per-environment. If, as an example, there is a portal.azure.com.json file, then `showargcolumns` must be defined in that file as well as the default.json file and when using portal.azure.com only the values from portal.azure.com.json will be used. If the per-environment JSON file does not exist for the environment, then the default.json file value will be used.
+</div>
+</div>
+
+<a name="browse-with-azure-resource-graph-pdl-definition-controlling-column-visibility-via-per-environment-configuration-testing-your-column-manually"></a>
+#### Testing your column manually
+
+To test enable your column (or hide it) for testing purposes, you can use the URL to override the configuration behavior.
+
+For the desired environment append the following feature flags.
+
+```txt
+    ?microsoft_azure_mynewextension_showargcolumns={"YOUR_ASSET_NAME":{"special":true},"YOUR_SECOND_ASSET_NAME":{"fourthcolumn":false}}
+```
+
+For example to turn a hidden column on:
+https://rc.portal.azure.com/?microsoft_azure_compute_showargcolumns={"VirtualMachine":{"osdisk":true}}&feature.canmodifyextensions=true
+
+or to turn an existing column off:
+https://rc.portal.azure.com/?microsoft_azure_compute_showargcolumns={"VirtualMachine":{"osdisk":false}}&feature.canmodifyextensions=true
+
 <a name="browse-with-azure-resource-graph-pdl-definition-default-columns"></a>
 ### Default columns
 
@@ -1417,6 +1479,14 @@ the option to 'Force' to give customers the best experience possible.
 It is important to note that if a query is added to the asset type's browse, then the default option will be different due to how we onboarded
 ARG browse and partner extension asset types. Once the query is added, the default becomes 'AllowOptIn', it is advised that you change this to
 'Force' to ensure your asset type is using ARG.
+
+<div style="margin-bottom: 20px; background-color: #fff; border: 1px solid transparent; border-radius: 4px; -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%); box-shadow: 0 1px 1px rgb(0 0 0 / 5%); border-color: rgba(251,162,37,.3);">
+<p style="background-color: rgba(251,162,37,.3);
+    border-color: rgba(251,162,37,.3); color: #e14329; padding: 5px">**IMPORTANT**</p>
+<div style="padding: 0 15px 10px; color: black;">
+When providing `argbrowseoptions` in a configuration JSON file, values are not merged from per-environment configuration files with the values in the default.json file, even if the `argbrowseoptions` is not defined in the per-environment. If, as an example, there is a portal.azure.com.json file, then `argbrowseoptions` must be defined in that file as well as the default.json file and when using portal.azure.com only the values from portal.azure.com.json will be used. If the per-environment JSON file does not exist for the environment, then the default.json file value will be used.
+</div>
+</div>
 
 To test each variation or to test when side loading you can use:
 
