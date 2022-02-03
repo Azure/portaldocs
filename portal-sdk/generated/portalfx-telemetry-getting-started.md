@@ -90,7 +90,7 @@ Please note that Kusto is shared capacity system. As such, we have to reserve th
 <a name="getting-started-programmatic-access-onboarding-request-form"></a>
 ### Onboarding Request Form
 ---
-1. Have you emailed [Ibiza Telemetry](mailto:ibiza-telemetry@microsoft.com) to discuss the percieved gap between our standard offerings and your needs?
+1. Have you emailed [Ibiza Telemetry](mailto:ibiza-telemetry@microsoft.com) to discuss the perceived gap between our standard offerings and your needs?
 
 1. What is your team name?
 
