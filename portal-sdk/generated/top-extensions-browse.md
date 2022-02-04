@@ -908,6 +908,13 @@ Firstly you'll need to craft a [KQL query](#kql-query) which represents all poss
 | Kind | kind | FxColumns.Kind | 100fr |
 | Tags | tags | FxColumns.Tags | 100fr |
 
+**NOTE:** to avoid maintaining this list and to ensure your asset type will automatically get new framework columns, it is advisable to use the `[FxColumns]` 
+placeholder in your final project statement:
+
+```kql
+project [FxColumns], ...your columns here
+```
+
 <a name="browse-with-azure-resource-graph-kql-query"></a>
 ## KQL Query
 
@@ -921,7 +928,7 @@ Given the framework columns are required we can use the below as a starting poin
 
 ```kql
 where type =~ 'microsoft.web/sites'
-| project name,resourceGroup,kind,location,id,type,subscriptionId,tags
+| project [FxColumns]
 ```
 
 That query is the bare minimum required to populate ARG browse.
@@ -941,7 +948,7 @@ where type =~ 'microsoft.web/sites'
     state == 'stopped', 'Stopped',
     state == 'running', 'Running',
     'Other')
-| project name,resourceGroup,kind,location,id,type,subscriptionId,tags,status
+| project [FxColumns]
 ```
 
 As an example the below query can be used to replicate the 'App Services' ARM based browse experience in ARG.
@@ -969,8 +976,7 @@ where type =~ 'microsoft.web/sites'
     kind contains 'api', 'Api App',
     kind contains 'functionapp', 'Function App',
     'Web App')
-| project name,resourceGroup,kind,location,id,type,subscriptionId,tags,
-          appServicePlanId,pricingTier,status,appType
+| project [FxColumns],appServicePlanId,pricingTier,status,appType
 ```
 
 <a name="browse-with-azure-resource-graph-pdl-definition"></a>
@@ -1020,8 +1026,7 @@ where type == 'microsoft.web/sites'
     kind contains 'functionapp',
     '{{Resource appType.functionapp, Module=BrowseResources}}',
     '{{Resource appType.webapp, Module=BrowseResources}}')
-| project name,resourceGroup,kind,location,id,type,subscriptionId,tags
-, appServicePlanId, pricingTier, status, appType
+| project [FxColumns], appServicePlanId, pricingTier, status, appType
 ```
 
 <a name="browse-with-azure-resource-graph-pdl-definition-adding-custom-columns"></a>
@@ -1179,7 +1184,7 @@ where type == 'microsoft.web/sites'
     state == 'stopped', {{Icon StatusBadge.Stopped}},
     state == 'running', {{Icon StatusBadge.Success}},
     {{Icon StatusBadge.None}})
-| project name,resourceGroup,kind,location,id,type,subscriptionId,tags,status,statusIcon
+| project [FxColumns],status,statusIcon
 ```
 
 <a name="browse-with-azure-resource-graph-pdl-definition-column-icons-valid-icons-for-a-status-column"></a>
@@ -2628,7 +2633,7 @@ Query:
 resources
 | where type =~ 'microsoft.test/originalresources'
 // ...
-| project id, name, type, location, subscriptionId, resourceGroup, kind, tags, status, statusIcon, technology
+| project [FxColumns], status, statusIcon, technology
 ```
 
 ### Step One - Add the Merged Resource Type
@@ -2684,7 +2689,7 @@ Updated Query:
 resources
 | where type =~ ('microsoft.test/originalresources', 'microsoft.test/newresources')
 // ...
-| project id, name, type, location, subscriptionId, resourceGroup, kind, tags, status, statusIcon, technology
+| project [FxColumns], status, statusIcon, technology
 ```
 
 Using the 'in' operator is an efficient way to check for multiple resource types.  If the columns need to be generated from different properties, be sure to use the `extend` operator in the query to ensure valid values are used from both or if properties are only available from one resource type, it is advisable to `extend` null into the column when appropriate.
@@ -2931,7 +2936,7 @@ OperatingSystem.kml:
 ```kusto
 resources
 | where type in~ ('microsoft.os/servers','microsoft.os/instances')
-| project id, name, type, location, subscriptionId, resourceGroup, kind, tags
+| project [FxColumns]
 ```
 
 OperationSystemServer.kml:
@@ -2939,7 +2944,7 @@ OperationSystemServer.kml:
 ```kusto
 resources
 | where type =~ 'microsoft.os/servers'
-| project id, name, type, location, subscriptionId, resourceGroup, kind, tags
+| project [FxColumns]
 ```
 
 OperationSystemInstance.kml:
@@ -2947,7 +2952,7 @@ OperationSystemInstance.kml:
 ```kusto
 resources
 | where type =~ 'microsoft.os/instances'
-| project id, name, type, location, subscriptionId, resourceGroup, kind, tags
+| project [FxColumns]
 ```
 
 # Curating browse assets
