@@ -806,6 +806,7 @@ Example apCliConfig.json configuration providing a custom list of files:
 {
     "updateCmdFiles": ["./src/Default/Extension.UnitTest/package.json", "./src/Default/Extension/packages.config", "./src/Default/Extension/Extension.csproj"],
 }
+```
 
 Example apCliConfig.json configuration providing a custom glob pattern
 ```json
@@ -972,15 +973,15 @@ The ap CLI is built by the Azure portal team for the extension developer communi
 - What are the IDE specific installs required for Visual Studio?
     Install Visual Studio 2019 Professional or Enterprise from [https://visualstudio.microsoft.com/downloads/](https://visualstudio.microsoft.com/downloads/).
 
-      * Select the following workloads from the *workloads* tab:
+     * Select the following workloads from the *workloads* tab:
         * Node.js development
         * ASP.NET and web development
-
-      ![alt-text](../media/top-extensions-install-software/vs2019_workloads.png "Selecting VS 2019 workloads")
-
-      * Select .NET Framework 4.7.2 SDK and targeting pack from the *Individual components* tab:
-
-      ![alt-text](../media/top-extensions-install-software/vs2019_components.png "Selecting VS 2019 components")
+        
+          ![alt-text](../media/top-extensions-install-software/vs2019_workloads.png "Selecting VS 2019 workloads")
+     
+     * Select .NET Framework 4.7.2 SDK and targeting pack from the *Individual components* tab:
+     
+       ![alt-text](../media/top-extensions-install-software/vs2019_components.png "Selecting VS 2019 components")
 
 - How can CloudTest access internal Azure DevOps feed?
 
