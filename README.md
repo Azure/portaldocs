@@ -135,6 +135,12 @@ The primary UI building block is a called a blade. A blade is like a page. It ge
 
 [Ask a question about blades on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-blades-parts)
 
+### Generated Views
+
+Save development time by making use of auto-generated declarative blades in your extension. If you've properly onboarded your extension, resource provider and API specs with Azure Portal, we may have blades already generated on your behalf. Please browse the GeneratedExtension repo [here](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views) to add blades to your extension.
+
+Look for your extension and drill into the respective api-version folder. Here you will find blades you can directly reference or copy and edit within your extension repo. 
+
 ### Parts
 
 If you want your experience to have a presence on Azure dashboards then you will want to build parts (a.k.a. tiles).
