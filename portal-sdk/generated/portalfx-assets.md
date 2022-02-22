@@ -193,7 +193,10 @@ For the desired environment append the following feature flags.
 ```
 
 For example:
-https://rc.portal.azure.com/?microsoft_azure_compute_assettypes={"VirtualMachine":{"options":""}}&microsoft_azure_compute=true&feature.canmodifyextensions=true
+https://rc.portal.azure.com/?microsoft_azure_compute_assettypeoptions={"VirtualMachine":{"options":""}}&microsoft_azure_compute=true&feature.canmodifyextensions=true
+
+or testing the hiding of an asset can be achieved with:
+https://rc.portal.azure.com/?microsoft_azure_compute_assettypeoptions={"VirtualMachine":{"options":"HideAssetType"}}&microsoft_azure_compute=true&feature.canmodifyextensions=true
 
 <a name="assets-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-how-the-options-are-applied-from-pdl-from-the-config-json-file-and-from-the-url"></a>
 ##### How the options are applied from PDL, from the config JSON file and from the URL

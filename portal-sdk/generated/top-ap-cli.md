@@ -558,6 +558,7 @@ Property | Description
 nugetRestoreFiles | Optional. An explicitly collection of files e.g ./foo.sln and ./bar.csproj to perform NuGet restore against.
 npmInstallPackageJsonFiles | Optional. An explicitly collection of package.json *.sln and *.csproj to perform NuGet restore against.
 restoreInParallel | Optional. Run npm install and NuGet restore in parallel.
+restoreNpmViaCi | Optional. Use `npm ci` instead of `npm install` when restoring NPM packages.
 
 Example apCliConfig.json configuration:
 ```json

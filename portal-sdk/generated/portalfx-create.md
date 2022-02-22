@@ -408,6 +408,7 @@ The provisioning context has a policy validation factory useful for determining 
 
 // Create a validation to place in the subscription dropdown
 // Policy checks will not be run until all required values are set
+// eslint-disable-next-line deprecation/deprecation
 const subPolicyValidation = !isFeatureEnabled("PolicyAwareControls") && primaryEnginePolicyFactory.createFieldValidation<FxSubscriptionDropDown.Subscription>({
     // The buildResourceDetails functions passed in to this `policyFactory` instance with the `createFieldValidation`
     // are run sequentially in order of creation to build the policy request
@@ -428,6 +429,7 @@ Similarly with the ResourceGroupDropDown you can build the resource and even mod
 ```typescript
 
 // create another policy validation from the factory
+// eslint-disable-next-line deprecation/deprecation
 const rgPolicyValidation = !isFeatureEnabled("PolicyAwareControls") && primaryEnginePolicyFactory.createFieldValidation<FxResourceGroupDropDown.Value>({
     // This will be run after the previously run buildResourceDetails
     buildResourceDetails: (resourceDetails, val) => {
@@ -454,14 +456,18 @@ Your create experience might deploy multiple resources, and you may have fields 
 // factory for each resource we're creating (if they have any different properties) before creating field validations with pending
 // fields. This allows us to maintain the previous resource detail reducers from the subscription and resource group dropdowns.
 // Optionally, you can not copy over the buildResourceDetails, and recreate the policy reducers from the beginning.
+// eslint-disable-next-line deprecation/deprecation
 const secondaryEnginePolicyFactory = primaryEnginePolicyFactory.createChildFactory({ copyBuildResourceDetails: true });
+// eslint-disable-next-line deprecation/deprecation
 const backupEnginePolicyFactory = primaryEnginePolicyFactory.createChildFactory({ copyBuildResourceDetails: true });
 
 const fetchedValues = ko.observableArray<FxLocationDropDown.Location>();
+// eslint-disable-next-line deprecation/deprecation
 const createLocationFieldValidation = (factory: PolicyValidationFactory) => {
     // This factory can also take multiple potential values.
     // This is useful only for values within the resourceContent as only
     // they can have pending fields
+    // eslint-disable-next-line deprecation/deprecation
     return factory.createFieldValidation<FxLocationDropDown.Location>({
         pendingValues: {
             // The potential field to be set by the string values e.g. resourceDetails.resourceContent.location = "location"
@@ -495,6 +501,7 @@ Tags are also able to validate against policies with a different method of creat
 
 // In some policy validations, you won't know what fields you're going to validate until the control defines it.
 // In that case use the pendingValuesGenerator
+// eslint-disable-next-line deprecation/deprecation
 const createTagFieldValidation = (factory: PolicyValidationFactory) => factory.createFieldValidation<FxTags.TaggedResource[]>({
     buildResourceDetails: (details, taggedResources) => {
         let resourceTypeVal = resourceType;
@@ -556,6 +563,7 @@ Lastly we set the validations on the controls which set properties on separate r
 ```typescript
 
 // Here we are able to run policy validations across our different resources being created
+// eslint-disable-next-line deprecation/deprecation
 const createNameFieldValidation = (policyValidationFactory: PolicyValidationFactory) => policyValidationFactory.createFieldValidation<string>({
     buildResourceDetails: (details, value) => {
         details.resourceContent.name = value;
