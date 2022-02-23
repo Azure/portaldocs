@@ -137,9 +137,11 @@ The primary UI building block is a called a blade. A blade is like a page. It ge
 
 ### Generated Views
 
-Save development time by making use of auto-generated declarative blades in your extension. If you've properly onboarded your extension, resource provider and API specs with Azure Portal, we may have blades already generated on your behalf. Please browse the GeneratedExtension repo [here](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views) to add blades to your extension.
+Save development time by making use of auto-generated declarative blades in your extension. If your resource provider has already published a REST API spec with Azure Portal (check here: ()), we may have asset types and initial blades already generated for your resource types. Please browse the GeneratedExtension repo [here](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views) to try within your extension.
 
-Look for your extension and drill into the respective api-version folder. Here you will find blades you can directly reference or copy and edit within your extension repo. 
+Look for your resource provider name and drill into the respective api-version folder. Here you will find assets & blade definitions that you can copy into your extension repo. 
+
+If you have any questions regarding generated experience, please contact dxportalteam@microsoft.com
 
 ### Parts
 
