@@ -41,6 +41,7 @@
     * [Internal Technical Details](#reactviews-internal-technical-details)
         * [Prewarming the IFrames](#reactviews-internal-technical-details-prewarming-the-iframes)
         * [Scaffolding](#reactviews-internal-technical-details-scaffolding)
+        * [Functional components](#reactviews-internal-technical-details-functional-components)
     * [Frequently asked questions (FAQ)](#reactviews-frequently-asked-questions-faq)
         * [Do I still need to follow the previous UX best practices](#reactviews-frequently-asked-questions-faq-do-i-still-need-to-follow-the-previous-ux-best-practices)
         * [Can I include Knockout controls inside of a ReactView](#reactviews-frequently-asked-questions-faq-can-i-include-knockout-controls-inside-of-a-reactview)
@@ -594,6 +595,13 @@ we are able to prevent any other extension's experience from impacting yours.
 
 Because we own the frame, we are able to setup scaffolding for both theming and consistency. Additionally, since the code for the theme is actually shipped from the portal, we can issue updates to the theme without requiring
 extensions to manually update the package to receive them. This ensures that the customer sees consistent theming across all ReactViews, and reduces the differences between a Knockout base experience and a React one.
+
+<a name="reactviews-internal-technical-details-functional-components"></a>
+### Functional components
+
+Functional components are some of the more common components that will come across while working in React. These are simply JavaScript functions. We can create a functional component to React by writing a JavaScript function. These functions may or may not receive data as parameters. In the functional Components, the return value is the JSX code to render to the DOM tree.
+
+Portal now supports the development of the ReactViews using functional components rather than decorated class based components. [Learn more](react-guides-root-functional-components.md).
 
 <a name="reactviews-frequently-asked-questions-faq"></a>
 ## Frequently asked questions (FAQ)

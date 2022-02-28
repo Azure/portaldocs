@@ -33,22 +33,16 @@ Next create an empty file in your ReactView folder, and name it `GettingStarted.
 
 <a name="creating-a-new-reactview-experience-add-boilerplate"></a>
 ## Add Boilerplate
-
-Every ReactView needs a root component with a decorator on it. This results in boilerplate that looks like this:
+Every ReactView needs an exported [root functional component](react-guides-root-functional-components.md) or a class based component with a decorator. In this guide we will be creating a ReactView using root functional components. This results in boilerplate that looks like this:
 
 ```tsx
 import * as React from "react"; // this is needed for all react code, regardless of whether or not it's explicitly referenced
-import * as ReactView from "@microsoft/azureportal-reactview/ReactView"; // this import gives us decorators for initializing and rendering the view
-import { setTitle } from "@microsoft/azureportal-reactview/Az"; // allows us to set the title of the ReactView
+import * as Az from "@microsoft/azureportal-reactview/Az"; // allows us to use Az API to log the data, to set the title of the ReactView etc.
 
-setTitle("Getting Started"); // this can be called anywhere, in production scenarios this should be passed a localized string
+Az.setTitle("Getting Started"); // this can be called anywhere, in production scenarios this should be passed a localized string
 
-@ReactView.ReduxFree.Decorator()
-export class GettingStarted extends React.Component { // a completely empty React class component, needed
-    public render() {
-        return <span>Getting Started</span>;
-    }
-}
+const GettingStarted = () => <span>Getting Started</span>; // a completely empty React component
+export default GettingStarted; // ReactView functional components should be exported by default
 ```
 
 <a name="creating-a-new-reactview-experience-load-the-data"></a>
@@ -61,7 +55,7 @@ module. A simple batch call to get all the resources looks like this:
 import { ArmResource } from "@microsoft/azureportal-reactview/ResourceManagement";
 import { batch } from "@microsoft/azureportal-reactview/Ajax";
 
-function getAllResources() {
+const getAllResources = () => {
     return batch<{ value: ArmResource[] }>({
         uri: "/resources?api-version=2019-10-01",
         type: "GET",
@@ -82,23 +76,43 @@ of the component. The full depth of state is beyond the scope of this guide, you
 For now, we'll define a simple state on the component where the resources we've retrieved from ARM can be accessed:
 
 ```tsx
-interface GettingStartedState { // typing for the state, you can also anonymously declare state within the generic below
-    resources: ArmResource[];
-}
+import { useInitialized } from "@microsoft/azureportal-reactview/ReactView";
 
-@ReactView.ReduxFree.Decorator({
-    viewReady: (state: GettingStartedState) => !!state.resources // now that we load data in our experience, we want to wait to assert ready until we've loaded it
-})
-class GettingStarted extends React.Component<{}, GettingStartedState> { // the first generic is for props, since we don't need any we leave it empty
-    constructor(props: {}) {
-        super(props); // you must call the super and pass the props from the constructor in
+const GettingStarted = () => {
+    // now that we load data in our experience, we want to wait to assert ready until we've loaded it
+    // we use GettingStarted as an ID for the logging purposes
+    // note that decorator based components use viewReady instead
+    const initialize = useInitialized("GettingStarted");
+    const [ resources, setResources ] = React.useState<ArmResource[]>([]); // initialize the state
 
-        this.state = {}; // initialize the state. The synchronous part of the constructor is the only time you can directly set the state
+    // this hook will be called once on the initial render, find out more https://reactjs.org/docs/hooks-effect.html
+    React.useEffect(() => {
+        // even if the component is unmounted, useEffect will try to maintain contact with your data-fetching functions
+        // canceling your useEffect subscription optimizes your app
+        // find out more https://codesnipeet.com/how-to-cancel-all-subscriptions-and-asynchronous-tasks-in-a-useeffect-cleanup-function/
+        let isSubscribed = true;
+
         getAllResources().then(resources => { // call our data loading function from earlier
-            this.setState({resources: resources}); // call this.setState to load our data into the state
+            if (isSubscribed) { // make sure that we're still subscribed to the function
+                setResources(resources); // call the state setter to load our data into the state
+                initialize(); // now we loaded the data and can assert ready
+            }
+        }).catch((error) => { // in the catch block we log the error, and never assert the view ready, thus timing out the blade
+            if (isSubscribed) {
+                Az.log([{
+                    level: Az.LogEntryLevel.Error,
+                    message: error,
+                    area: `GettingStarted.ReactView.tsx-getAllResources`,
+                    timestamp: Date.now(),
+                }]);
+            }
         });
-    }
-}
+
+        return () => {
+            isSubscribed = false; // this is a clean-up callback that will unsubscribe us from the async calls
+        };
+    }, []); // having an empty array as the second argument ensures we run an effect and clean it up only once
+};
 ```
 
 Once the data is available in the component's state, we want to modify our render function to display the data to the user:
@@ -108,18 +122,15 @@ The next step is to render the data so the user can see it, we can do this by le
 ```tsx
 import { List } from "@fluentui/react/lib/List"; // Get the List component, note the direct import rather than importing from index
 
-class GettingStarted extends React.Component<{}, GettingStartedState>  {
-    public render() {
-        if (this.state.resources === undefined) {
-            return <></>; // if we don't have anything to render, we return a React Fragment
-        }
-        return <List
-            items={this.state.resources} // pass in the list of resource objects to render
+const GettingStarted = () => {
+    return (
+        <List
+            items={resources} // pass in the list of resource objects to render
             onRenderCell={(resource) => { // this function gets called for each resource object, and should return a React.Node representation
                 return <span>{resource.name} is in {resource.location}</span>;
             }}
-        >;
-    }
+        />
+    );
 }
 ```
 
@@ -133,43 +144,55 @@ further. We can do this with the `ResourceMetadata` namespace within the `Resour
 import { ArmResource, ResourceMetadata } from "@microsoft/azureportal-reactview/ResourceManagement";
 import { getAllAssetTypes } from "@microsoft/azureportal-reactview/AssetTypes";
 
-interface GettingStartedState {
-    resources: ResourceMetadata[]; // Update the state typing
-}
+const GettingStarted = () => {
+    const initialize = useInitialized("GettingStarted");
+    const [ resources, setResources ] = React.useState<ResourceMetadata[]>([]);
 
-class GettingStarted extends React.Component<{}, GettingStartedState> {
-    constructor(props: {}) {
-        Promise.all([getAllResources(), getAllAssetTypes()]) // parsing ArmResource requires AssetTypes
-        .then(results => {
-            const [armResources, assetTypes] = results; // destructure the returned array
-            const resources = armResources.map(resource => {
-                return ResourceMetadata.parse(resource, assetTypes); // map the resource array to a metadata array
-            });
-            this.setState({ resources: resources });
+    React.useEffect(() => {
+        let isSubscribed = true;
+
+        Promise.all([getAllResources(), getAllAssetTypes()]).then(results => { // parsing ArmResource requires AssetTypes
+            if (isSubscribed) {
+                const [armResources, assetTypes] = results; // destructure the returned array
+                const resources = armResources.map(resource => {
+                    return ResourceMetadata.parse(resource, assetTypes); // map the resource array to a metadata array
+                });
+                setResources(resources);
+                initialize();
+            }
+        }).catch((error) => {
+            if (isSubscribed) {
+                Az.log([{
+                    level: Az.LogEntryLevel.Error,
+                    message: error,
+                    area: "GettingStarted.ReactView.tsx-getAllResources-getAllAssetTypes",
+                    timestamp: Date.now(),
+                }]);
+            }
         });
-    }
-}
+
+        return () => {
+            isSubscribed = false;
+        };
+    }, []);
+};
 ```
 
 We now have to update the render function to accommodate the new shape of the resources, additionally
 we can now render the subscriptionId:
 
 ```tsx
-class GettingStarted extends React.Component<{}, GettingStartedState> {
-    public render() {
-        if (this.state.resources === undefined) {
-            return <></>; // If we don't have anything to render, we return a React Fragment
-        }
-        return <List
-            items={this.state.resources}
+const GettingStarted = () => {
+    return (
+        <List
+            items={resources} // pass in the list of resource objects to render
             onRenderCell={(resource) => { // this function gets called for each resource object, and should return a React.Node representation
-            return <span>{resource.resourceName} is in {resource.resourceLocation} and {resource.armId.subscription}</span>;
+                return <span>{resource.resourceName} is in {resource.resourceLocation} and {resource.armId.subscription}</span>;
             }}
-        />;
-    }
+        />
+    );
 }
 ```
-
 
 <a name="creating-a-new-reactview-experience-adding-icons"></a>
 ## Adding icons
@@ -196,17 +219,14 @@ const onRenderCell = (resource: ResourceMetadata) => {
     </>;
 };
 
-class GettingStarted extends React.Component<{}, GettingStartedState> {
-    public render() {
-        if (this.state.resources === undefined) {
-            return <></>;
-        }
-        return <List
-            items={this.state.resources}
-        /* This refactor cleans our code, and improves performance by preventing rerenders due to redeclaration */
+const GettingStarted = () => {
+    return (
+        <List
+            items={resources}
+            /* This refactor cleans our code, and improves performance by preventing rerenders due to redeclaration */
             onRenderCell={onRenderCell}
-        />;
-    }
+        />
+    );
 }
 ```
 
@@ -214,7 +234,7 @@ Let's also pull the custom styling on the icon into its own CSS class. To do tha
 `mergeStyleSets` from `@fluentui/react`:
 
 ```tsx
-import { mergeStyleSets } from '@fluentui/react/lib/Styling';
+import { mergeStyleSets } from "@fluentui/react/lib/Styling";
 const classNames = mergeStyleSets({
     icon: {
         width: "24px",
@@ -241,7 +261,7 @@ color pallette to help style the card:
 
 ```tsx
 import { Stack, StackItem } from "@fluentui/react/lib/Stack";
-import { mergeStyleSets } from '@fluentui/react/lib/Styling';
+import { mergeStyleSets } from "@fluentui/react/lib/Styling";
 import { useTheme } from "@fluentui/react-theme-provider/lib/useTheme";
 
 const classNames = mergeStyleSets({
@@ -267,48 +287,46 @@ const classNames = mergeStyleSets({
     },
 });
 
-const onRenderCell = (resource: ResourceMetadata) => {
-    /*
-     Here we create a layout that has a left side, big icon and a right side with the three properties listed.
-     To do this, we create a Horizontal stack of 200 px, with the first item being the Icon, and the second
-     being a vertical stack of our three property values.
-    */
-
+const GettingStarted = () => {
     // the useTheme hook allows us to grab the current correct color, and have it update as the portal theme changes
     const backgroundColor = useTheme().semanticColors.bodyStandoutBackground;
-    return <div className={classNames.listRootDiv} styles={{ backgroundColor }}>
-        <Stack horizontal>
-            <StackItem >
-                <FrameworkIcon image={resource.icon} className={classNames.icon} />
-            </StackItem>
-            <StackItem>
-                <Stack>
-                    <StackItem className={classNames.detailsStackItem}>
-                        {resource.resourceName}
+    const onRenderCell = (resource: ResourceMetadata) => {
+        /*
+            Here we create a layout that has a left side, big icon and a right side with the three properties listed.
+            To do this, we create a Horizontal stack of 200 px, with the first item being the Icon, and the second
+            being a vertical stack of our three property values.
+        */
+        return (
+            <div className={classNames.listRootDiv} styles={{ backgroundColor }}>
+                <Stack horizontal>
+                    <StackItem >
+                        <FrameworkIcon image={resource.icon} className={classNames.icon} />
                     </StackItem>
-                    <StackItem className={classNames.detailsStackItem}>
-                        {resource.resourceLocation || "NoRegion"}
-                    </StackItem>
-                    <StackItem className={classNames.detailsStackItem}>
-                        {resource.armId.subscription}
+                    <StackItem>
+                        <Stack>
+                            <StackItem className={classNames.detailsStackItem}>
+                                {resource.resourceName}
+                            </StackItem>
+                            <StackItem className={classNames.detailsStackItem}>
+                                {resource.resourceLocation || "NoRegion"}
+                            </StackItem>
+                            <StackItem className={classNames.detailsStackItem}>
+                                {resource.armId.subscription}
+                            </StackItem>
+                        </Stack>
                     </StackItem>
                 </Stack>
-            </StackItem>
-        </Stack>
-    </div>;
-};
+            </div>
+        );
+    };
 
-export class GettingStarted extends React.Component<{}, GettingStartedState> {
-    public render() {
-        if (this.state.resources === undefined) {
-            return <></>;
-        }
-        return <List
-            items={this.state.resources}
+    return (
+        <List
+            items={resources}
             onRenderCell={onRenderCell}
-            getItemCountForPage={() => this.state.resources?.length} // We add this to render all items
+            getItemCountForPage={() => resources.length} // We add this to render all items
         />;
-    }
+    );
 }
 ```
 
@@ -325,28 +343,29 @@ interface GettingStartedState {
     searchQuery?: string; // add our search string into the state
 }
 
-export class GettingStarted extends React.Component<{}, GettingStartedState> {
-    public render() {
-        if (this.state.resources === undefined) {
-            return <></>;
-        }
-        return <>
+const GettingStarted = () => {
+    const [ resources, setResources ] = React.useState<ResourceMetadata[]>([]);
+    const [ searchQuery, setSearchQuery ] = React.useState<string>("");
+
+    return (
+        <>
             <SearchBox
                 onChange={(_, value) => {
-            /* When the search box changes, set the new value into our new searchQuery state */
-                    this.setState({searchQuery: value.toLowerCase()});
+                    /* When the search box changes, set the new value into our new searchQuery state */
+                    setSearchQuery(value.toLowerCase());
                 }}
             />
             <List
-                items={this.state.resources.filter(i => {
+                items={resources.filter(i => {
                     /* filter the items to only include those that include the searchQuery */
-                    return i.armId.resourceName.toLowerCase().includes(this.state.searchQuery || "")
+                    return i.armId.resourceName.toLowerCase().includes(searchQuery || "")
                 })}
                 onRenderCell={onRenderCell}
-                getItemCountForPage={() => this.state.resources?.length}
+                getItemCountForPage={() => resources.length}
             />
-        </>;
-    }
+        </>
+    );
+}
 ```
 
 Now we have a reasonably functioning searchbox. Let's add another filter for Subscription. This time,
@@ -361,40 +380,39 @@ interface GettingStartedState {
     subscriptionIds?: string[];
 }
 
-export class GettingStarted extends React.Component<{}, GettingStartedState> {
-    render() {
-        if (this.state.resources === undefined) {
-            return <></>;
-        }
-        return <>
+const GettingStarted = () => {
+    const [ resources, setResources ] = React.useState<ResourceMetadata[]>([]);
+    const [ searchQuery, setSearchQuery ] = React.useState<string>("");
+    const [ subscriptionIds, setSubscriptionIds ] = React.useState<string[]>([]);
+
+    return (
+        <>
             <SubscriptionFilter
                 onSubscriptionChange={(subs) => {
                     /* Update the state with the new set of subscriptions */
-                    this.setState({
-                        subscriptionIds: subs.map(i => i.subscriptionId)
-                    });
+                    setSubscriptionIds(subs.map(i => i.subscriptionId));
                 }}
             />
             <SearchBox
                 onChange={(_, value) => {
-                    this.setState({searchQuery: value.toLowerCase()});
+                    /* When the search box changes, set the new value into our new searchQuery state */
+                    setSearchQuery(value.toLowerCase());
                 }}
             />
             <List
-                items={this.state.resources
-                .filter(resource => {
-                    return resource.armId.resourceName.toLowerCase().includes(this.state.searchQuery || "")
-                })
-                .filter((resource => {
-                    /* Add another filter on the set of resources to render, accounting for the possible null ref */
-                    return (this.state.subscriptionIds || []).includes(resource.armId.subscription);
-                }))
-            }
+                items={
+                    resources.filter(resource => {
+                        return resource.armId.resourceName.toLowerCase().includes(searchQuery || "")
+                    }).filter(resource => {
+                        /* Add another filter on the set of resources to render, accounting for the possible null ref */
+                        return subscriptionIds.includes(resource.armId.subscription);
+                    })
+                }
                 onRenderCell={onRenderCell}
-                getItemCountForPage={() => this.state.resources?.length}
+                getItemCountForPage={() => resources.length}
             />
-        </>;
-    }
+        </>
+    );
 }
 ```
 
@@ -405,21 +423,21 @@ If you followed the above steps, we now have a view that has a grid of cards tha
 Here's the full set of code that drives the experience:
 
 ```tsx
-import * as ReactView from "@microsoft/azureportal-reactview/ReactView";
 import * as React from "react";
+import * as Az from "@microsoft/azureportal-reactview/Az";
+import { useInitialized } from "@microsoft/azureportal-reactview/ReactView";
 import { List } from "@fluentui/react/lib/List";
 import { Stack, StackItem } from "@fluentui/react/lib/Stack";
 import { mergeStyleSets } from "@fluentui/react/lib/Styling";
 import { useTheme } from "@fluentui/react-theme-provider/lib/useTheme";
 import { batch } from "@microsoft/azureportal-reactview/Ajax";
-import { setTitle } from "@microsoft/azureportal-reactview/Az";
 import { ResourceMetadata, ArmResource } from "@microsoft/azureportal-reactview/ResourceManagement";
 import { getAllAssetTypes } from "@microsoft/azureportal-reactview/AssetTypes";
 import { FrameworkIcon } from "@microsoft/azureportal-reactview/FrameworkIcon";
 import { SearchBox } from "@fluentui/react/lib/SearchBox";
 import { SubscriptionFilter } from "@microsoft/azureportal-reactview/SubscriptionFilter";
 
-function getAllResources() {
+const getAllResources = () => {
     return batch<{ value: ArmResource[] }>({
         uri: "/resources?api-version=2019-10-01",
         type: "GET",
@@ -427,12 +445,6 @@ function getAllResources() {
     }).then((armResponse) => {
         return armResponse.content.value;
     });
-}
-
-interface GettingStartedState {
-    resources?: ResourceMetadata[];
-    searchQuery?: string;
-    subscriptionIds?: string[];
 }
 
 const classNames = mergeStyleSets({
@@ -457,79 +469,105 @@ const classNames = mergeStyleSets({
     },
 });
 
-const onRenderCell = (resource: ResourceMetadata) => {
+Az.setTitle("Getting Started");
+const GettingStarted = () => {
+    const [ resources, setResources ] = React.useState<ResourceMetadata[]>([]);
+    const [ searchQuery, setSearchQuery ] = React.useState<string>("");
+    const [ subscriptionIds, setSubscriptionIds ] = React.useState<string[]>([]);
+    // now that we load data in our experience, we want to wait to assert ready until we've loaded it
+    // we use GettingStarted as an ID for the logging purposes
+    // note that decorator based components use viewReady instead
+    const initialize = useInitialized("GettingStarted");
+
     const backgroundColor = useTheme().semanticColors.bodyStandoutBackground;
-    return <div className={classNames.listRootDiv} style={{ backgroundColor }} >
-        <Stack horizontal>
-            <StackItem >
-                <FrameworkIcon image={resource.icon} className={classNames.icon} />
-            </StackItem>
-            <StackItem>
-                <Stack>
-                    <StackItem className={classNames.detailsStackItem}>
-                        {resource.resourceName}
+    const onRenderCell = (resource: ResourceMetadata) => {
+        return (
+            <div className={classNames.listRootDiv} style={{ backgroundColor }} >
+                <Stack horizontal>
+                    <StackItem >
+                        <FrameworkIcon image={resource.icon} className={classNames.icon} />
                     </StackItem>
-                    <StackItem className={classNames.detailsStackItem}>
-                        {resource.resourceLocation || "NoRegion"}
-                    </StackItem>
-                    <StackItem className={classNames.detailsStackItem}>
-                        {resource.armId.subscription}
+                    <StackItem>
+                        <Stack>
+                            <StackItem className={classNames.detailsStackItem}>
+                                {resource.resourceName}
+                            </StackItem>
+                            <StackItem className={classNames.detailsStackItem}>
+                                {resource.resourceLocation || "NoRegion"}
+                            </StackItem>
+                            <StackItem className={classNames.detailsStackItem}>
+                                {resource.armId.subscription}
+                            </StackItem>
+                        </Stack>
                     </StackItem>
                 </Stack>
-            </StackItem>
-        </Stack>
-    </div>;
-};
+            </div>
+        );
+    };
 
-@ReactView.ReduxFree.Decorator({
-    viewReady: (state: GettingStartedState) => !!state.resources,
-})
-export class GettingStarted extends React.Component<{}, GettingStartedState> {
-    constructor(props: {}) {
-        super(props);
-        Promise.all([getAllResources(), getAllAssetTypes()])
-            .then(results => {
-                const [armResources, assetTypes] = results;
+    // this hook will be called once on the initial render, find out more https://reactjs.org/docs/hooks-effect.html
+    React.useEffect(() => {
+        // even if the component is unmounted, useEffect will try to maintain contact with your data-fetching functions
+        // canceling your useEffect subscription optimizes your app
+        // find out more https://codesnipeet.com/how-to-cancel-all-subscriptions-and-asynchronous-tasks-in-a-useeffect-cleanup-function/
+        let isSubscribed = true;
+
+        Promise.all([getAllResources(), getAllAssetTypes()]).then(results => { // parsing ArmResource requires AssetTypes
+            if (isSubscribed) { // make sure that we're still subscribed to the function
+                const [armResources, assetTypes] = results; // destructure the returned array
                 const resources = armResources.map(resource => {
-                    return ResourceMetadata.parse(resource, assetTypes);
+                    return ResourceMetadata.parse(resource, assetTypes); // map the resource array to a metadata array
                 });
-                this.setState({ resources });
-            });
-        this.state = {};
-        setTitle("Getting Started");
-    }
-    render() {
-        if (this.state.resources === undefined) {
-            return <></>; // If we don't have anything to render, we return a React Fragment
-        }
-        return <>
+                setResources(resources);
+                initialize();  // now we loaded the data and can assert ready
+            }
+        }).catch((error) => { // in the catch block we log the error, and never assert the view ready, thus timing out the blade
+            if (isSubscribed) {
+                Az.log([{
+                    level: Az.LogEntryLevel.Error,
+                    message: error,
+                    area: "GettingStarted.ReactView.tsx-getAllResources-getAllAssetTypes",
+                    timestamp: Date.now(),
+                }]);
+            }
+        });
+
+        return () => {
+            isSubscribed = false;
+        };
+    }, []);
+
+    return (
+        <>
             <SubscriptionFilter
                 onSubscriptionChange={(subs) => {
-                    this.setState({
-                        subscriptionIds: subs.map(i => i.subscriptionId),
-                    });
+                    /* Update the state with the new set of subscriptions */
+                    setSubscriptionIds(subs.map(i => i.subscriptionId));
                 }}
             />
             <SearchBox
                 onChange={(_, value) => {
-                    this.setState({ searchQuery: value.toLowerCase() });
+                    /* When the search box changes, set the new value into our new searchQuery state */
+                    setSearchQuery(value.toLowerCase());
                 }}
             />
             <List
-                items={this.state.resources
-                    .filter(resource => {
-                        return resource.armId.resourceName.toLowerCase().includes(this.state.searchQuery || "");
+                items={
+                    resources.filter(resource => {
+                        return resource.armId.resourceName.toLowerCase().includes(searchQuery || "");
+                    }).filter(resource => {
+                        /* Add another filter on the set of resources to render, accounting for the possible null ref */
+                        return subscriptionIds.includes(resource.armId.subscription);
                     })
-                    .filter((resource => {
-                        return (this.state.subscriptionIds || []).includes(resource.armId.subscription);
-                    }))
                 }
                 onRenderCell={onRenderCell}
-                getItemCountForPage={() => this.state.resources?.length}
+                getItemCountForPage={() => resources.length}
             />
-        </>;
-    }
-}
+        </>
+    );
+};
+
+export default GettingStarted;
 ```
 
 <a name="creating-a-new-reactview-experience-next-steps"></a>
