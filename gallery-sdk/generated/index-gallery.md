@@ -238,6 +238,10 @@ The manifest file contains all of the metadata for your gallery item. For a visu
         }
     ],
     "screenshots": [ "string" ],
+     "keywords": [ // When searching, you could use keywords to make your product more discoverable
+        "Keyword1",
+        "Keyword2"
+    ],
     "categories": [ "string" ],
     "filters": [
         // type: Country/Region, Subscription, Resources, HideKey, OfferType, OfferCategory

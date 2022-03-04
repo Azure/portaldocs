@@ -1882,6 +1882,12 @@ module MsPortalFxForAsset {
                 readonly blade: string;
 
                 /**
+                 * The flag indicating whether blade supports provisioning or not.
+                 * Defaults to false.
+                 */
+                readonly doesProvisioning?: boolean;
+
+                /**
                  * The extension name for the blade
                  */
                 readonly extension?: string;
@@ -2245,6 +2251,19 @@ import { SvgType } from "Fx/Images";
             },
             bladeReference: {
                 marketplaceItemId: "Microsoft.EngineV3", // Opens marketplace create flow
+            },
+        },
+        {
+            kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
+            id: "OpenProvisioningBladeCommandId",
+            label: ClientResources.AssetCommands.customCreate,
+            icon: {
+                image: SvgType.PowerUp,
+            },
+            bladeReference: {
+                blade: "CreateCustomRobot.ReactView",
+                extension: "SamplesExtension",
+                doesProvisioning: true,
             },
         },
         {

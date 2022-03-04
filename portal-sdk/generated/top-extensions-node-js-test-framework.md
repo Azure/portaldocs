@@ -257,7 +257,7 @@ If the version is incorrect, then you may need to install the correct version, a
 
 <a name="overview-partner-deployment-tests"></a>
 ### Partner Deployment Tests
-The Azure portal team is building support for running internal partner's tests during a Portal deployment.  It is currently in a limited preview for select internal partner teams.  The internal documentation is available at [Partner Deployment Tests](https://eng.ms/docs/cloud-ai-platform/azure/azure-core-compute/bburns-team/azure-portal-ibizafx/azure-portal/testing/portal-partner-deployment-tests.md)
+The Azure portal team is building support for running internal partner's tests during a Portal deployment.  It is currently in a limited preview for select internal partner teams.  The internal documentation is available at [Partner Deployment Tests](https://eng.ms/docs/cloud-ai-platform/azure/azure-core-compute/bburns-team/azure-portal-ibizafx/azure-portal/testing/portal-partner-deployment-tests)
 
 <a name="overview-more-documentation-and-examples"></a>
 ### More Documentation and Examples
