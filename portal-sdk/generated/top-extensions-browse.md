@@ -76,6 +76,11 @@
   - [Providing supplemental data](#providing-supplemental-data)
   - [Adding an informational message/link to ARM browse](#adding-an-informational-messagelink-to-arm-browse)
   - [Adding context menu commands](#adding-context-menu-commands)
+- [Launching Browse Programmatically](#launching-browse-programmatically)
+  - [Built-in Resource Types for Browse](#built-in-resource-types-for-browse)
+  - [Using getBrowseBladeReference() for FX Code Link](#using-getbrowsebladereference-for-fx-code-link)
+  - [Using getBrowseBladeReference() for FX menu blade item](#using-getbrowsebladereference-for-fx-menu-blade-item)
+  - [Using getBrowseBladeReference() for react views code](#using-getbrowsebladereference-for-react-views-code)
 
 <a name="browse"></a>
 # Browse
@@ -908,7 +913,7 @@ Firstly you'll need to craft a [KQL query](#kql-query) which represents all poss
 | Kind | kind | FxColumns.Kind | 100fr |
 | Tags | tags | FxColumns.Tags | 100fr |
 
-**NOTE:** to avoid maintaining this list and to ensure your asset type will automatically get new framework columns, it is advisable to use the `[FxColumns]` 
+**NOTE:** to avoid maintaining this list and to ensure your asset type will automatically get new framework columns, it is advisable to use the `[FxColumns]`
 placeholder in your final project statement:
 
 ```kql
@@ -1281,7 +1286,7 @@ For example `"excludeColumns": ["FxColumns.SubscriptionId", "FxColumns.ResourceG
 <a name="browse-with-azure-resource-graph-pdl-definition-default-filters"></a>
 ### Default filters
 
-By default, 3 filter pills are displayed in your Browse experience: Subscription, Resource Group and Location (unless some of these columns are exclued by `excludeColumns` property).
+By default, 3 filter pills are displayed in your Browse experience: Subscription, Resource Group and Location (unless some of these columns are excluded by `excludeColumns` property).
 If you want to render additional filter pills by default, you can achieve that by specifying `defaultFilters` property.
 `defaultFilters` is an array of column names, accepting only values that are specified in `columns` property.
 
@@ -3386,3 +3391,122 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
 ```
 
 If you need to expose different commands based on some other metadata, you can also specify the the command group in `SupplementalData.contextMenu` in the same way.
+
+
+# Launching Browse Programmatically
+
+There are a few cases where code needs to programmatically open a browse blade. This can be done from a link or button on a blade or as a menu item in a menu blade (TOC).
+Given the complexity of reasoning over the feature flags, the asset type support and changing blade names, it is not advisable to try to guess or hard code the browse
+blade name. Instead, a new API available to both FX code and react views code has been added to call and let the shell determine that best appropriate blade using the
+same logic as the all services menu code.
+
+```ts
+const bladeReference = await getBrowseBladeReference({
+  resourceType: "some resource type here",
+  kind: "some resource type kind here",     // kind is optional
+  inMenu: true,                             // inMenu is optional
+});
+// bladeReference.blade is the name of the blade
+// bladeReference.extension is the name of the extension owning the blade
+// bladeReference.parameters is the default parameters which should be passed to the blade as inputs
+```
+
+The `bladeReference` parameters can be expanded for additional options like an initial view with the filters set appropriately.
+
+## Built-in Resource Types for Browse
+
+The following resource types can be used to launch browse:
+
+| Resource type | Description |
+| - | - |
+| `Microsoft.resources/resources` | Opens browse all resources |
+| `Microsoft.resources/subscriptions/resourcegroups` | Open browse resource groups |
+
+## Using getBrowseBladeReference() for FX Code Link
+
+To use the `getBrowseBladeReference()` API in FX code, first import the function:
+
+```ts
+import { getBrowseBladeReference } from "Fx/ResourceManagement";
+```
+
+Then simply call the API and await the result. If the resource type provided does not have a browse blade, the result will be null:
+
+```ts
+const browseBlade = await getBrowseBladeReference({
+  resourceType: "Microsoft.compute/virtualmachines",
+});
+if (browseBlade) {
+  bladeLink.bladeReference = new PdlBladeReference(
+    bladeReference.blade,
+    bladeReference.extension,
+    {
+      parameters: bladeReference.parameters,
+    });
+}
+```
+
+## Using getBrowseBladeReference() for FX menu blade item
+
+To use the `getBrowseBladeReference()` API in FX code, first import the function:
+
+```ts
+import { getBrowseBladeReference } from "Fx/ResourceManagement";
+```
+
+The when the supplyBladeReference is called for the menu item, return the blade reference.
+
+<div style="margin-bottom: 20px; background-color: #fff; border: 1px solid transparent; border-radius: 4px; -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%); box-shadow: 0 1px 1px rgb(0 0 0 / 5%); border-color: rgba(251,162,37,.3);">
+<p style="background-color: rgba(251,162,37,.3);
+    border-color: rgba(251,162,37,.3); color: #e14329; padding: 5px">**IMPORTANT**</p>
+<div style="padding: 0 15px 10px; color: black;">
+It is important that the `inMenu` option be set to `true` when browse is hosted in a menu blade. This changes the blade name, provides slightly different functionality and
+ensures the proper telemetry is logged.
+</div>
+</div>
+
+```ts
+const browseBlade = await getBrowseBladeReference({
+  resourceType: "Microsoft.compute/virtualmachines",
+  inMenu: true,
+});
+
+//... later in menu creation:
+    items: [
+        {
+            id: "browsevms",
+            displayText: ClientResources.Browse.launchBrowseVmsText,
+            icon: null,
+            supplyBladeReference: () => new PdlBladeReference(
+              bladeReference.blade,
+              bladeReference.extension,
+              {
+                parameters: bladeReference.parameters,
+              }),
+        },
+```
+
+## Using getBrowseBladeReference() for react views code
+
+To use the `getBrowseBladeReference()` API in react view code, first import the function:
+
+```ts
+import { getBrowseBladeReference } from "@microsoft/azureportal-reactview/ResourceManagement";
+```
+
+Then simple call the API when a browse blade reference is need to open a browse blade:
+
+```ts
+const browseBlade = await getBrowseBladeReference({
+  resourceType: "Microsoft.compute/virtualmachines",
+});
+
+//... later to open the blade:
+return (
+  <>
+    <BladeLink
+      bladeReference={browseBlade}
+    >{ClientResources.Browse.launchBrowseBladeText}</BladeLink>
+  </>
+);
+```
