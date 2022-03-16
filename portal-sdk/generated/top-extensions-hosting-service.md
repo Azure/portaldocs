@@ -53,7 +53,7 @@ For example this is the customized configuration for playground extension in Cor
 ```xml
 <PropertyGroup>
     <HostingServiceCreateDeploymentArtifacts>$(IsOfficialBuild)</HostingServiceCreateDeploymentArtifacts>
-    <HostingServiceRoutePrefix>[YourExtensionNameInHostingService]<</HostingServiceRoutePrefix>
+    <HostingServiceRoutePrefix>[YourExtensionNameInHostingService]</HostingServiceRoutePrefix>
 </PropertyGroup>
  ```
 `[YourExtensionNameInHostingService]` should be replaced by an alphanumeric string that will be used when registering the extension in the hosting service. This string will be used to create the extension host name as well. Once the extension is registered in the hosting service, this value should not be changed.
