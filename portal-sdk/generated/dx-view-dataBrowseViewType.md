@@ -1,6 +1,6 @@
 <a name="databrowseviewtype"></a>
-# dataBrowseViewType
-* [dataBrowseViewType](#databrowseviewtype)
+# DataBrowseViewType
+* [DataBrowseViewType](#databrowseviewtype)
     * [Sections](#databrowseviewtype-sections)
     * [Properties Section](#databrowseviewtype-properties-section)
 

@@ -550,7 +550,7 @@ our Stack overflow (process documented above). If you're certain this is a frame
 <a name="reactviews-getting-support-office-hours"></a>
 ### Office hours
 
-Every Tuesday and Thursday 1100 - 1200 Pacific time, we host by appointment office hours.
+Every Tuesday and Thursday 1100 - 1130 and 1400 - 1430 Pacific time, we host by appointment office hours.
 Feel free to schedule a session!
 
 [https://aka.ms/portalfx/react/officehours](https://aka.ms/portalfx/react/officehours)

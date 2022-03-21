@@ -1,6 +1,6 @@
 <a name="getstartedviewtype"></a>
-# getstartedViewType
-* [getstartedViewType](#getstartedviewtype)
+# GetstartedViewType
+* [GetstartedViewType](#getstartedviewtype)
     * [Sections](#getstartedviewtype-sections)
     * [Properties Section](#getstartedviewtype-properties-section)
 

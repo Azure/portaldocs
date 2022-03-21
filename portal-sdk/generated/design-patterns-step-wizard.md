@@ -1,7 +1,7 @@
 <a name="step-wizard"></a>
 # Step Wizard
 
-Last updated Dec 2020 (see [change logs](#change-logs))
+Last updated Mar 2022 (see [change logs](#change-logs))
 
 The Step Wizard pattern provides guidelines for a set of sequential steps to perform a task. This pattern is not recommended for Azure resource creation, refer to [Create a Resource pattern](design-patterns-resource-create.md).
 
@@ -129,6 +129,7 @@ Developers can use the following information to get started implementing this pa
 
 <a name="step-wizard-for-developers-tips-and-tricks"></a>
 ### Tips and tricks
+* MsPortalFx Wizard view-models are now obsolete and cannot be used anymore; however, one could emulate the same design with the [Fx TabControl](https://ms.portal.azure.com/?Microsoft_Azure_Playground=mpac#blade/Microsoft_Azure_Playground/ControlsIndexBlade/TabControl_create_Playground)
 * Set a maximimum width of 700px for the page area that contains input fields
 * Set the spacing between the items in the footer is 12px
 * To show the labels and input field on the same line, include your controls in a Section and set the leftLabelPosition option to true
@@ -145,6 +146,10 @@ Developers can use the following information to get started implementing this pa
 
 <a name="step-wizard-change-logs"></a>
 ## Change logs
+
+<a name="step-wizard-change-logs-mar-2022"></a>
+### Mar 2022
+* Updated dev tips after the obsoletion of MsPortalFx Wizard view-models 
 
 <a name="step-wizard-change-logs-dec-2020"></a>
 ### Dec 2020

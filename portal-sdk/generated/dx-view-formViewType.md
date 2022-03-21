@@ -1,6 +1,6 @@
 <a name="formviewtype"></a>
-# formViewType
-* [formViewType](#formviewtype)
+# FormViewType
+* [FormViewType](#formviewtype)
     * [Sections](#formviewtype-sections)
     * [Properties Section](#formviewtype-properties-section)
         * [Option 1](#formviewtype-properties-section-option-1)

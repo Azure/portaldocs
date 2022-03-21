@@ -1,6 +1,6 @@
 <a name="apiexplorerviewtype"></a>
-# apiExplorerViewType
-* [apiExplorerViewType](#apiexplorerviewtype)
+# ApiExplorerViewType
+* [ApiExplorerViewType](#apiexplorerviewtype)
     * [Sections](#apiexplorerviewtype-sections)
     * [Properties Section](#apiexplorerviewtype-properties-section)
 

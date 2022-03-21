@@ -1,6 +1,6 @@
 <a name="markdownviewtype"></a>
-# markdownViewType
-* [markdownViewType](#markdownviewtype)
+# MarkdownViewType
+* [MarkdownViewType](#markdownviewtype)
     * [Sections](#markdownviewtype-sections)
     * [Properties Section](#markdownviewtype-properties-section)
 

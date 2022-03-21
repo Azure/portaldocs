@@ -1,6 +1,6 @@
 <a name="galleryviewtype"></a>
-# galleryViewType
-* [galleryViewType](#galleryviewtype)
+# GalleryViewType
+* [GalleryViewType](#galleryviewtype)
     * [Sections](#galleryviewtype-sections)
     * [Properties Section](#galleryviewtype-properties-section)
         * [Option 1](#galleryviewtype-properties-section-option-1)

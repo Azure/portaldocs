@@ -1,6 +1,6 @@
 <a name="propertiesviewtype"></a>
-# propertiesViewType
-* [propertiesViewType](#propertiesviewtype)
+# PropertiesViewType
+* [PropertiesViewType](#propertiesviewtype)
     * [Sections](#propertiesviewtype-sections)
     * [Properties Section](#propertiesviewtype-properties-section)
 
