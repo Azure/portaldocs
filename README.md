@@ -79,7 +79,7 @@ Azure portal extension development is supported on Windows Server 2012 R2, and W
 
 * [Running your extension locally (a.k.a. sideloading)](/portal-sdk/generated/top-extensions-sideloading.md)
 
-* [Add Azure auto-generated views & asset definitions into your extension](/portal-sdk/generated/top-extensions-autogeneration.md)
+* [Add auto-generated views & asset definitions into your extension](/portal-sdk/generated/top-extensions-autogeneration.md)
 
 ### Azure Portal Extension Developer CLI
 
@@ -135,13 +135,13 @@ The primary UI building block is a called a blade. A blade is like a page. It ge
 
 [Ask a question about blades on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-blades-parts)
 
-### Generated Views
+### UX Auto Generation
 
-Save development time by making use of auto-generated resources in your extension. If your resource provider has published Azure REST API specs in ARM  [(check here)](https://github.com/Azure/azure-rest-api-specs), we likely have asset types and blade definitions already generated for your resource types. Please [browse the GeneratedExtension repo ](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views) to get started.
+Save development time by making use of auto-generated artifacts in your extension. If your resource provider has published their Azure REST API specs [(check here)](https://github.com/Azure/azure-rest-api-specs), we likely have asset definitions and views already generated for your resource types. Please [browse the GeneratedExtension repo ](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views) to get started.
 
-In the GeneratedExtension repo, look for the name of your resource provider and drill into the respective api-version folder. Here you will find asset & views that you can copy into your extension repo. Make adjustments and ship these files with your extension.
+In the [GeneratedExtension repo](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views), look for the name of your resource provider and drill into the respective api-version folder. Here you will find asset definitions and views that you can copy into your extension repo. Make adjustments and ship these files with your extension.
 
-If you have any questions regarding generated experience, please contact dxportalteam@microsoft.com
+[Learn more about UX Auto Generation here](/portal-sdk/generated/top-extensions-autogeneration.md). If you have any questions regarding generated experience, please contact dxportalteam@microsoft.com
 
 ### Parts
 
