@@ -255,9 +255,9 @@ If you run into a compilation error with `node.d.ts`, verify that you are using 
 
 If the version is incorrect, then you may need to install the correct version, adjust your path variables or directly call the correct version of `tsc.exe`.
 
-<a name="overview-partner-deployment-tests"></a>
-### Partner Deployment Tests
-The Azure portal team is building support for running internal partner's tests during a Portal deployment.  It is currently in a limited preview for select internal partner teams.  The internal documentation is available at [Partner Deployment Tests](https://eng.ms/docs/cloud-ai-platform/azure/azure-core-compute/bburns-team/azure-portal-ibizafx/azure-portal/testing/portal-partner-deployment-tests)
+<a name="overview-portal-partner-deployment-tests"></a>
+### Portal Partner Deployment Tests
+The Azure portal team is building support for running internal partner's tests during a Portal deployment.  It is currently in a limited preview for select internal partner teams.  The internal documentation is available at [Portal Partner Deployment Tests](https://eng.ms/docs/cloud-ai-platform/azure-core/azure-management-and-platforms/control-plane-bburns/azure-portal-framework-ibizafx/azure-portal-team/deployment/azuredevops/portal-partner-deployment-tests)
 
 <a name="overview-more-documentation-and-examples"></a>
 ### More Documentation and Examples
