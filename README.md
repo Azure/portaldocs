@@ -137,7 +137,7 @@ The primary UI building block is a called a blade. A blade is like a page. It ge
 
 ### UX Auto Generation
 
-Save development time by making use of auto-generated artifacts in your extension. If your resource provider has published their Azure REST API specs [(check here)](https://github.com/Azure/azure-rest-api-specs), we likely have asset definitions and views already generated for your resource types. Please [browse the GeneratedExtension repo ](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views) to get started.
+Save development time by making use of auto-generated artifacts in your extension. If your resource provider has published Azure REST API specs [(check here)](https://github.com/Azure/azure-rest-api-specs), we likely have asset definitions and views already generated for your resource types. Please [browse the GeneratedExtension repo ](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views) to get started.
 
 In the [GeneratedExtension repo](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views), look for the name of your resource provider and drill into the respective api-version folder. Here you will find asset definitions and views that you can copy into your extension repo. Make adjustments and ship these files with your extension.
 
