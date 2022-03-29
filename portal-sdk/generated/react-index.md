@@ -11,6 +11,7 @@
         * [Creating a new ReactView experience](#reactviews-guides-creating-a-new-reactview-experience)
         * [Unit testing a ReactView](#reactviews-guides-unit-testing-a-reactview)
         * [End to end testing a ReactView](#reactviews-guides-end-to-end-testing-a-reactview)
+        * [Using root functional components](#reactviews-guides-using-root-functional-components)
         * [Migrating Knockout controls to React components](#reactviews-guides-migrating-knockout-controls-to-react-components)
     * [Libraries Explained](#reactviews-libraries-explained)
         * [Redux and React-Redux](#reactviews-libraries-explained-redux-and-react-redux)
@@ -41,7 +42,6 @@
     * [Internal Technical Details](#reactviews-internal-technical-details)
         * [Prewarming the IFrames](#reactviews-internal-technical-details-prewarming-the-iframes)
         * [Scaffolding](#reactviews-internal-technical-details-scaffolding)
-        * [Functional components](#reactviews-internal-technical-details-functional-components)
     * [Frequently asked questions (FAQ)](#reactviews-frequently-asked-questions-faq)
         * [Do I still need to follow the previous UX best practices](#reactviews-frequently-asked-questions-faq-do-i-still-need-to-follow-the-previous-ux-best-practices)
         * [Can I include Knockout controls inside of a ReactView](#reactviews-frequently-asked-questions-faq-can-i-include-knockout-controls-inside-of-a-reactview)
@@ -49,7 +49,6 @@
         * [My call is failing due to cors errors](#reactviews-frequently-asked-questions-faq-my-call-is-failing-due-to-cors-errors)
         * [Why not build my own React experience in a frame](#reactviews-frequently-asked-questions-faq-why-not-build-my-own-react-experience-in-a-frame)
     * [Known Gaps](#reactviews-known-gaps)
-        * [Root components are required to be class components](#reactviews-known-gaps-root-components-are-required-to-be-class-components)
         * [Charting component](#reactviews-known-gaps-charting-component)
         * [Form authoring](#reactviews-known-gaps-form-authoring)
         * [Parts](#reactviews-known-gaps-parts)
@@ -118,6 +117,13 @@ Otherwise, if you are on a traditional extension this guide will onboard you to 
 End to end testing a ReactView utilizes the Azure portal's supported end to end test framework [@microsoft/azureportal-test](top-extensions-node-js-test-framework.md).
 
 There are some specific ReactView utilities to help under `Index/Views`. See the `@microsoft/azureportal-test` documentation for more.
+
+<a name="reactviews-guides-using-root-functional-components"></a>
+### Using root functional components
+
+Functional components are the modern way of developing components in React. We can create a functional component to React by writing a JavaScript function. These functions may or may not receive data as parameters. In the functional components, the return value is the JSX code to render to the DOM tree.
+
+We recommend using functional components rather than decorated class based components for developing a ReactView. [Learn more](react-guides-root-functional-components.md).
 
 <a name="reactviews-guides-migrating-knockout-controls-to-react-components"></a>
 ### Migrating Knockout controls to React components
@@ -596,13 +602,6 @@ we are able to prevent any other extension's experience from impacting yours.
 Because we own the frame, we are able to setup scaffolding for both theming and consistency. Additionally, since the code for the theme is actually shipped from the portal, we can issue updates to the theme without requiring
 extensions to manually update the package to receive them. This ensures that the customer sees consistent theming across all ReactViews, and reduces the differences between a Knockout base experience and a React one.
 
-<a name="reactviews-internal-technical-details-functional-components"></a>
-### Functional components
-
-Functional components are some of the more common components that will come across while working in React. These are simply JavaScript functions. We can create a functional component to React by writing a JavaScript function. These functions may or may not receive data as parameters. In the functional Components, the return value is the JSX code to render to the DOM tree.
-
-Portal now supports the development of the ReactViews using functional components rather than decorated class based components. [Learn more](react-guides-root-functional-components.md).
-
 <a name="reactviews-frequently-asked-questions-faq"></a>
 ## Frequently asked questions (FAQ)
 
@@ -634,12 +633,6 @@ Traditionally, teams that wanted to build with more modern tools in the Portal u
 
 <a name="reactviews-known-gaps"></a>
 ## Known Gaps
-
-<a name="reactviews-known-gaps-root-components-are-required-to-be-class-components"></a>
-### Root components are required to be class components
-
-Unfortunately a class component is required in order to make use of the decorators today.
-In the future we may be able to provide an alternative path.
 
 <a name="reactviews-known-gaps-charting-component"></a>
 ### Charting component

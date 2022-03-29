@@ -12,10 +12,10 @@
         * [Network requests query](#performance-overview-how-to-assess-your-performance-network-requests-query)
         * [Part](#performance-overview-how-to-assess-your-performance-part)
 * [Performance Frequently Asked Questions (FAQ)](#performance-frequently-asked-questions-faq)
-    * [My Extension 'load' is above the bar, what should I do](#performance-frequently-asked-questions-faq-my-extension-load-is-above-the-bar-what-should-i-do)
-    * [My Lighthouse score is below the bar, what should I do](#performance-frequently-asked-questions-faq-my-lighthouse-score-is-below-the-bar-what-should-i-do)
-    * [My Blade 'FullReady' is above the bar, what should I do](#performance-frequently-asked-questions-faq-my-blade-fullready-is-above-the-bar-what-should-i-do)
-    * [My Part 'Ready' is above the bar, what should I do](#performance-frequently-asked-questions-faq-my-part-ready-is-above-the-bar-what-should-i-do)
+    * [My Extension 'load' is above the bar. What should I do?](#performance-frequently-asked-questions-faq-my-extension-load-is-above-the-bar-what-should-i-do)
+    * [My Lighthouse score is below the bar. What should I do?](#performance-frequently-asked-questions-faq-my-lighthouse-score-is-below-the-bar-what-should-i-do)
+    * [My Blade 'FullReady' is above the bar. What should I do?](#performance-frequently-asked-questions-faq-my-blade-fullready-is-above-the-bar-what-should-i-do)
+    * [My Part 'Ready' is above the bar. What should I do?](#performance-frequently-asked-questions-faq-my-part-ready-is-above-the-bar-what-should-i-do)
     * [Performance office hours](#performance-frequently-asked-questions-faq-performance-office-hours)
 
 
@@ -45,24 +45,27 @@ If the user were to browse away from your experience and browse back before your
 <a name="performance-overview-blade-performance"></a>
 ## Blade performance
 
-Depending on the authoring model blade performance is measured by either the Lighthouse metrics or BladeFullReady.
+Depending on the authoring model, blade performance is measured by either the Lighthouse metrics or BladeFullReady.
 
 <a name="performance-overview-blade-performance-lighthouse"></a>
 ### Lighthouse
 
 Lighthouse performance score is a weighted average of the metric scores ranging from 0 - 100. (> 90 being a good score).
 
-> The Portal team does not have specific metric goals. The goal is achieve a lighthouse score > 90 @ 5th percentile.
+> The Portal team does not set goals for each discrete metric. Rather, the goal is achieve a Lighthouse score > 90 @ 5th percentile.
 
-The scores are an industry standard focused on user-centric metrics;
+Lighthouse is a de facto industry standard, composed of multiple, user-centric metrics:
 
-- [First Contentful Paint (FCP)](https://web.dev/fcp/)
-- [Largest Contentful Paint (LCP)](https://web.dev/lcp/)
-- [Time to Interactive (TTI)](https://web.dev/tti/)
-- [Total Blocking Time (TBT)](https://web.dev/tbt/)
-- [Cumulative Layout Shift (CLS)](https://web.dev/cls/)
-- [~~Speed Index (SI)~~](https://web.dev/si/)
-  - __Speed Index is not include in the Azure portal calculations due to the nature of the metric__
+| Aspect | Metric | Units |
+| ------ | ------ | ----- |
+| How fast to render initial content (static and shimmers)? | [First Contentful Paint (FCP)](https://web.dev/fcp/) | Seconds from t<sub>0</sub> |
+| How fast to render main content (loaded data)? | [Largest Contentful Paint (LCP)](https://web.dev/lcp/) | Seconds from t<sub>0</sub> |
+| Does UI shift during rendering? | [Cumulative Layout Shift (CLS)](https://web.dev/cls/) | Custom units |
+| When is the UI responsive to user interaction? | [Time to Interactive (TTI)](https://web.dev/tti/) | Seconds from t<sub>0</sub> |
+| Is the UI ever unresponsive to user interaction? | [Total Blocking Time (TBT)](https://web.dev/tbt/) | Seconds (absolute) |
+| <Not implemented, lab-only measurement> | [~~Speed Index (SI)~~](https://web.dev/si/) | Custom units |
+
+Note: __Speed Index is not include in the Azure portal calculations because it is intrinsically a lab-measured metric__
 
 The metrics are weighted slightly different to the standard Lighthouse calculations due to the lack of the 6th (SI) metric.
 
@@ -79,11 +82,11 @@ The per page (view or blade) lighthouse score is a 5th percentile calculation of
 You can see all lighthouse scores for the last 7 days here: https://aka.ms/portalfx/kusto/lighthouse
 
 <a name="performance-overview-blade-performance-lighthouse-why-lighthouse"></a>
-#### Why lighthouse
+#### Why Lighthouse?
 
-The lighthouse approach is an evolution on the previous portal's performance measures.
-When assessing page (view or blade) performance, performance can be broken down in to various stages; capturing the page's total loading time, the customer's perceived loading time, UI stability, and more..
-It becomes extremely difficult to have a single metric that captures everything and BladeFullReady only captures the initial page's loading time as deemed by the extension author.
+The Lighthouse approach is an evolution on the Portal's previous performance measures.
+When assessing page (view or blade) performance, performance can be broken down in to various aspects; capturing the page's total loading time, the customer's perceived loading time, UI stability, and more..
+There is no single metric that captures everything and BladeFullReady only captures the initial page's loading time as deemed by the extension author.
 Moving towards a weighted approach based on various metrics allows us to better represent the various approaches to delivering our customers a 'fast' experience.
 
 <a name="performance-overview-blade-performance-bladefullready"></a>
@@ -272,7 +275,7 @@ PartPerformance will return a table with the following columns:
 # Performance Frequently Asked Questions (FAQ)
 
 <a name="performance-frequently-asked-questions-faq-my-extension-load-is-above-the-bar-what-should-i-do"></a>
-## My Extension &#39;load&#39; is above the bar, what should I do
+## My Extension &#39;load&#39; is above the bar. What should I do?
 
 1. Profile what is happening in your extension load. [Profile your scenario](performance-profiling.md)
 1. Are you using the Portal's ARM token? If no, verify if you can use the Portal's ARM token and if yes, follow: [Using the Portal's ARM token](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-api-authentication)
@@ -284,13 +287,12 @@ PartPerformance will return a table with the following columns:
 1. See our [best practices](performance-best-practices.md)
 
 <a name="performance-frequently-asked-questions-faq-my-lighthouse-score-is-below-the-bar-what-should-i-do"></a>
-## My Lighthouse score is below the bar, what should I do
+## My Lighthouse score is below the bar. What should I do?
 
-1. Assess potential areas for improvement using the `Lighthouse query` above. The areas for improvement will be outlined in the `Lighthouse_Details` column.
-1. Use the lighthouse performance analysis tools to profile your given load.
+See [Improving Lighthouse scores](react-lighthouse-tips.md).
 
 <a name="performance-frequently-asked-questions-faq-my-blade-fullready-is-above-the-bar-what-should-i-do"></a>
-## My Blade &#39;FullReady&#39; is above the bar, what should I do
+## My Blade &#39;FullReady&#39; is above the bar. What should I do?
 
 1. Assess what is happening in your Blades's `onInitialize` (no-PDL) or constructor and `onInputsSet` (PDL). [Profile your scenario](performance-profiling.md)
     1. Can that be optimized?
@@ -306,7 +308,7 @@ PartPerformance will return a table with the following columns:
 1. See our [best practices](performance-best-practices.md)
 
 <a name="performance-frequently-asked-questions-faq-my-part-ready-is-above-the-bar-what-should-i-do"></a>
-## My Part &#39;Ready&#39; is above the bar, what should I do
+## My Part &#39;Ready&#39; is above the bar. What should I do?
 
 1. Assess what is happening in your Part's `onInitialize` (no-PDL) or constructor and `onInputsSet` (PDL), including time taken in any async operations associated with the returned Promise. [Profile your scenario](performance-profiling.md)
     1. Can that be optimized?
