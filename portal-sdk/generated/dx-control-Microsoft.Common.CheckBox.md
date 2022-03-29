@@ -12,6 +12,7 @@
 |name|True|
 |type|True|
 |label|True|
+|defaultValue|False|
 |toolTip|False|
 |constraints|False|
 |visible|False|
