@@ -7,6 +7,54 @@ New react extensions come set up with unit testing support, with the following l
 - [Enzyme](https://enzymejs.github.io/enzyme/)
 - [Testing-Library](https://testing-library.com/docs/react-testing-library/intro)
 
+Existing extensions wanting to add our react framework must provide their own setup for jest and the testing library they wish to choose. For jest specifically, a `jest.config.js` file must be created in order for proper setup. The jest configuration file that we provide for new extensions is as follows and must be adjusted to fit your needs:
+
+const { jestModuleNameMappings } = require("@microsoft/azureportal-reactview/jestModuleNameMappings");
+
+module.exports = {
+    preset: "ts-jest",
+    testEnvironment: "jsdom",
+    rootDir: "../",
+    setupFiles: [
+        "<rootDir>/test-config/globalTestSetup.ts",
+    ],
+    globals: {
+        "ts-jest": {
+            tsConfig: "tsconfig.test.json",
+        },
+    },
+    transform: {
+        "^.+\\.tsx?$": ["ts-jest"],
+        "\\.resx$": "@microsoft/azureportal-reactview/resxTransformer",
+        "ClientResources": "@microsoft/azureportal-reactview/resxTransformer",
+    },
+    coveragePathIgnorePatterns: [".test.tsx", ".test.ts", "globalTestSetup.ts", "testUtils.ts"],
+    coverageProvider: "babel",
+    collectCoverage: true,
+    coverageReporters: [
+        "text",
+        "lcov",
+    ],
+    testMatch: [
+        "<rootDir>/**/__tests__/**/*.(spec|test).[jt]s?(x)",
+        "<rootDir>/*.(spec|test).[tj]s?(x)",
+        "<rootDir>/**/*.(spec|test).[tj]s?(x)",
+    ],
+    testPathIgnorePatterns: ["/node_modules/"],
+    collectCoverageFrom: [
+        "**/*.{ts,tsx}",
+        "!**/node_modules/**",
+    ],
+    snapshotSerializers: ["enzyme-to-json/serializer"],
+    moduleNameMapper: {
+        ...jestModuleNameMappings,
+        "ClientResources": "<rootDir>/../ClientResources.resx",
+    },
+};
+
+
+Full documentation on what each key/value pair means in the configuration file can be found [here.](https://jestjs.io/docs/configuration)
+
 <a name="unit-testing-a-reactview-what-is-jest"></a>
 ## What is Jest
 
@@ -188,9 +236,19 @@ fireEvent.change(
 <a name="unit-testing-a-reactview-running-tests"></a>
 ## Running tests
 
-The package comes with two test commands. These can be found in the `scripts` section of `package.json`
+For new extensions, the react package comes with two test commands. These can be found in the `scripts` section of `package.json`
 - `npm run test`
 - `npm run watchtest` will rerun your tests when file changes are made
+
+For existing extensions, you will need to create these commands yourself. These will look something like:
+```json
+"scripts": {
+  ...
+  "test": "jest -c ./test-config/jest.config.js",
+  "watchtest": "jest test -c ./test-config/jest.config.js --watch",
+  ...
+}
+```
 
 <a name="unit-testing-a-reactview-portal-provided-test-utilites"></a>
 ## Portal provided test utilites
