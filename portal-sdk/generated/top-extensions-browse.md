@@ -33,6 +33,10 @@
     - [Source Units for Number Columns](#source-units-for-number-columns)
     - [Column Icons](#column-icons)
       - [Valid Icons for a `Status` Column](#valid-icons-for-a-status-column)
+    - [`QueryBladeLink` Column Format](#querybladelink-column-format)
+      - [Example snippet of a query to produce a `QueryBladeLink` column](#example-snippet-of-a-query-to-produce-a-querybladelink-column)
+    - [`DeepLink` Column Format](#deeplink-column-format)
+      - [Example snippet of a query to produce a `DeepLink` column](#example-snippet-of-a-query-to-produce-a-deeplink-column)
     - [Possible Summary Visualizations](#possible-summary-visualizations)
     - [Controlling column visibility via per-environment configuration](#controlling-column-visibility-via-per-environment-configuration)
       - [Testing your column manually](#testing-your-column-manually)
@@ -1080,7 +1084,7 @@ DX.json:
 | maximumFractionDigits | Optional precision for a `Number` format column if the column might show fraction digits - often useful when using SourceUnits |
 | blade | Optional blade reference for a `BladeLink` format column to specify the blade to launch when the link is clicked. Required for `BladeLink` format columns |
 | bladeParameterColumn | Optional parameter column for a `BladeLink` format column to specify the parameters for the blade. Required for `BladeLink` format columns.  See note below * |
-| openBladeAsContextPane | Optional boolean to open a `BladeLink` format column blade in the context pane. Default is to open as a blade, use `true` to open in context pane |
+| openBladeAsContextPane | Optional boolean to open a `BladeLink` or `QueryBladeLink` format column blade in the context pane. Default is to open as a blade, use `true` to open in context pane |
 | iconColumn | Optional name of separate column returned by the query for the icon for a `Status` format column. [`See notes about icons below`](###Column%20Icons). Required for `Status` format columns |
 | preventSummary | Optional flag when summary (visualization) of the column should be prevented |
 | columnQueryForSummary | Optional column query for the summarization for this column used for the summary query drilldown |
@@ -1102,6 +1106,8 @@ Note for `BladeParameterColumn`:
 | Number | Number rendering of your column, can use the `SourceUnits` to help formatting (ie, bytes, kilobytes, megabytes) and `MaximumFractionDigits` to format a maximum precision for numbers with a fraction portion |
 | Location | String representation of an ARM location code localized for the user's locale (column should return location ID) |
 | BladeLink | A blade link column which allows the user to launch a blade represented by `Blade` using parameters returned by the `BladeParameterColumn` |
+| QueryBladeLink | A blade link column which allows the user to launch a blade where the text, blade/extension and parameters come from the query ([see below)](#querybladelink-column-format) |
+| DeepLink | A deep link column which allows the user to launch a deep link where the text and link come from the query ([see below)](#deeplink-column-format) |
 | Tenant | String representation of an ARM tenant ID from the display name for the tenant (column should return tenant ID) |
 | Status | String rendering of your column with an icon which is return by `IconColumn`.  Currently only StatusBadge icons are supported (see list below) |
 
@@ -1210,6 +1216,74 @@ where type == 'microsoft.web/sites'
 | StatusBadge.Update | The icon to update |
 | StatusBadge.Upsell | The icon for upsell |
 | StatusBadge.Warning | The warning icon |
+
+<a name="browse-with-azure-resource-graph-pdl-definition-querybladelink-column-format"></a>
+### <code>QueryBladeLink</code> Column Format
+
+The `QueryBladeLink` column format expects the column to be formatted in a specific way. The column must be returned as a `dynamic` from the Kusto query (essentially an object) with the following properties:
+
+| Property | Type | Usage | Description |
+| -- | -- | -- | -- |
+| text | string | required | The text to be displayed for the link in the grid. |
+| blade | string | required | The blade the will be opened by the link when activated. |
+| extension | string | optional | The extension that owns the blade if the blade is not owed by the extension that owns the asset type. |
+| parameters | object | required | The parameters (or inputs) for the blade. |
+
+An important difference between a `QueryBladeLink` column and a `BladeLink` column is that the query link column allows the blade (and extension) to be specified by the query (dynamically) as opposed to being fixed in the definition. The cost of this is that there is no validation of the blade / extension at compile time, so extra care is needed to ensure there are no spelling mistakes or other mistakes that will case a runtime failure. Extra testing and integration tests should be used for validation.
+
+<a name="browse-with-azure-resource-graph-pdl-definition-querybladelink-column-format-example-snippet-of-a-query-to-produce-a-querybladelink-column"></a>
+#### Example snippet of a query to produce a <code>QueryBladeLink</code> column
+
+```kql
+| extend bladeLinkText = case(
+	type =~ "microsoft.compute/virtualmachines", "{{Resource AssetType.launchVm, Module=ClientResources}}",
+	type =~ "microsoft.compute/virtualmachinescalesets", "{{Resource AssetType.launchVmss, Module=ClientResources}}",
+	"{{Resource AssetType.launchGeneric, Module=ClientResources}}")
+| extend bladeLinkBlade = case(
+	type =~ "microsoft.compute/virtualmachines", pack("blade", "VmBlade", "extension", "HubsExtension"),
+	type =~ "microsoft.compute/virtualmachinescalesets", pack("blade", "VmssBlade", "extension", "HubsExtension"),
+	pack("blade", "PropertiesBlade", "extension", "HubsExtension"))
+| extend bladeLinkParameters = case(
+	type =~ "microsoft.compute/virtualmachines", pack("id", id, "sku", tostring(properties.sku)),
+	type =~ "microsoft.compute/virtualmachinescalesets", pack("id", id),
+	pack("id", id))
+| extend bladeLink = pack(
+  "text", bladeLinkText, 
+  "blade", bladeLinkBlade.blade, 
+  "extension", bladeLinkBlade.extension, 
+  "parameters": bladeLinkParameters)
+| project [FxColumns],bladeLink
+```
+
+<a name="browse-with-azure-resource-graph-pdl-definition-deeplink-column-format"></a>
+### <code>DeepLink</code> Column Format
+
+The `DeepLink` column format expects the column to be formatted in a specific way. The column must be returned as a `dynamic` from the Kusto query (essentially an object) with the following properties:
+
+| Property | Type | Usage | Description |
+| -- | -- | -- | -- |
+| text | string | required | The text to be displayed for the link in the grid. |
+| link | string | required | The deep link to be opened when the link is activated (this should include the hash `#` prefix and be appropriately encoded). |
+
+An important difference between a `#blade` `DeepLink` column and `BladeLink` or `QueryBladeLink` column is that the deep link will _clear the current journey_. For this reason, `BladeLink` or `QueryBladeLink` column is almost always more appropriate to use than a `#blade` `DeepLink` column.
+
+<a name="browse-with-azure-resource-graph-pdl-definition-deeplink-column-format-example-snippet-of-a-query-to-produce-a-deeplink-column"></a>
+#### Example snippet of a query to produce a <code>DeepLink</code> column
+
+```kql
+| extend deepLinkText = case(
+	type =~ "microsoft.compute/virtualmachines", "{{Resource AssetType.launchVm, Module=ClientResources}}",
+	type =~ "microsoft.compute/virtualmachinescalesets", "{{Resource AssetType.launchVmss, Module=ClientResources}}",
+	"{{Resource AssetType.launchGeneric, Module=ClientResources}}")
+| extend deepLinkFragment = case(
+	type =~ "microsoft.compute/virtualmachines", strcat("#resource/", url_encode_component(id)),
+	type =~ "microsoft.compute/virtualmachinescalesets", strcat("#blade/Extension/Blade/id/", url_encode_component(id)),
+	strcat("#resource/", url_encode_component(id)))
+| extend deepLink = pack(
+  "text", deepLinkText, 
+  "link", deepLinkFragment)
+| project [FxColumns],deepLink
+```
 
 <a name="browse-with-azure-resource-graph-pdl-definition-possible-summary-visualizations"></a>
 ### Possible Summary Visualizations
@@ -1542,7 +1616,7 @@ DX.json:
 </p>
 </details>
 
-In addition, all columns with the `Format` of `BladeLink` are excluded from summaries.
+In addition, all columns with the `Format` of `BladeLink`, `QueryBladeLink` and `DeepLink` are excluded from summaries.
 
 <a name="browse-with-azure-resource-graph-column-summaries-for-extension-provided-columns-specifying-visualizations-to-show-for-column-summary"></a>
 ### Specifying Visualizations to Show for Column Summary
