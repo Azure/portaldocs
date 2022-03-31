@@ -14,6 +14,7 @@
 * [Performance Frequently Asked Questions (FAQ)](#performance-frequently-asked-questions-faq)
     * [My Extension 'load' is above the bar. What should I do?](#performance-frequently-asked-questions-faq-my-extension-load-is-above-the-bar-what-should-i-do)
     * [My Lighthouse score is below the bar. What should I do?](#performance-frequently-asked-questions-faq-my-lighthouse-score-is-below-the-bar-what-should-i-do)
+    * [My network request is shown as "`[UNNAMED]`". What should I do?](#performance-frequently-asked-questions-faq-my-network-request-is-shown-as-unnamed-what-should-i-do)
     * [My Blade 'FullReady' is above the bar. What should I do?](#performance-frequently-asked-questions-faq-my-blade-fullready-is-above-the-bar-what-should-i-do)
     * [My Part 'Ready' is above the bar. What should I do?](#performance-frequently-asked-questions-faq-my-part-ready-is-above-the-bar-what-should-i-do)
     * [Performance office hours](#performance-frequently-asked-questions-faq-performance-office-hours)
@@ -290,6 +291,11 @@ PartPerformance will return a table with the following columns:
 ## My Lighthouse score is below the bar. What should I do?
 
 See [Improving Lighthouse scores](react-lighthouse-tips.md).
+
+<a name="performance-frequently-asked-questions-faq-my-network-request-is-shown-as-unnamed-what-should-i-do"></a>
+## My network request is shown as &quot;<code>[UNNAMED]</code>&quot;. What should I do?
+
+See [Naming network requests](top-extensions-data-ajax.md#naming-network-requests).
 
 <a name="performance-frequently-asked-questions-faq-my-blade-fullready-is-above-the-bar-what-should-i-do"></a>
 ## My Blade &#39;FullReady&#39; is above the bar. What should I do?

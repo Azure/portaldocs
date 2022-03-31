@@ -47,6 +47,7 @@
 * [Performance Frequently Asked Questions (FAQ)](performance.md#performance-frequently-asked-questions-faq)
     * [My Extension 'load' is above the bar. What should I do?](performance.md#my-extension-load-is-above-the-bar-what-should-i-do)
     * [My Lighthouse score is below the bar. What should I do?](performance.md#my-lighthouse-score-is-below-the-bar-what-should-i-do)
+    * [My network request is shown as "`[UNNAMED]`". What should I do?](performance.md#my-network-request-is-shown-as-unnamed-what-should-i-do)
     * [My Blade 'FullReady' is above the bar. What should I do?](performance.md#my-blade-fullready-is-above-the-bar-what-should-i-do)
     * [My Part 'Ready' is above the bar. What should I do?](performance.md#my-part-ready-is-above-the-bar-what-should-i-do)
     * [Performance office hours](performance.md#performance-office-hours)
