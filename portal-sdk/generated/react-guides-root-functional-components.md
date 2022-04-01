@@ -59,7 +59,7 @@ interface ComponentProps {
     };
 }
 
-const AcceptsParameters = (props: ComponentProps) => {
+const AcceptsParameters: React.FunctionComponent<ComponentProps> = (props) => {
     return <span>{props.parameters.text}</span>;
 }
 
@@ -92,7 +92,7 @@ interface ComponentProps {
     closeView: (data: { text: string }) => void;
 }
 
-const ReturnsData = (props: ComponentProps) => {
+const ReturnsData: React.FunctionComponent<ComponentProps> = (props) => {
     return <ActionButton text={"Close"} onClick={() => props.closeView({ text: "Returned text" })} />;
 };
 
@@ -129,7 +129,7 @@ export class ViewReadySample extends React.Component<{}, ComponentState> {
 ```tsx
 import { useInitialized } from "@microsoft/azureportal-reactview/ReactView";
 
-const ViewReadySample = () => {
+const ViewReadySample: React.FunctionComponent = () => {
     const ready = useInitialized("ViewReadySample"); // useInitialized hook accepts an ID string for the logging purposes
 
     // this hook will be called once on the initial render, find out more https://reactjs.org/docs/hooks-effect.html
@@ -167,7 +167,7 @@ export class ForExportView extends React.Component<{}, {}> {
 ```tsx
 import { withForExport } from "@microsoft/azureportal-reactview/ReactView";
 
-const ForExportView = () => {
+const ForExportView: React.FunctionComponent = () => {
     return <span>{"This view is for export"}</span>;
 };
 
@@ -196,7 +196,7 @@ export class ContextPaneWidthView extends React.Component<{}, {}> {
 ```tsx
 import { withContextPaneWidth, ContextPaneWidth } from "@microsoft/azureportal-reactview/ReactView";
 
-const ContextPaneWidthView = () => {
+const ContextPaneWidthView: React.FunctionComponent = () => {
     return <span>{"This view sets the context pane width."}</span>;
 };
 
@@ -237,7 +237,7 @@ export class ProvisioningView extends React.Component<{}, {}> {
 import { doesProvisioning } from "@microsoft/azureportal-reactview/Provisioning";
 import { withProvisioning } from "@microsoft/azureportal-reactview/ReactView"
 
-const ProvisioningView = () => {
+const ProvisioningView: React.FunctionComponent = () => {
     const provisioning = doesProvisioning();
 
     return <ActionButton text={"Deploy"} onClick={() => {
