@@ -105,7 +105,7 @@ Currently extension, blade and part availability alert run 5, 10 and 15 minutes 
 <a name="availability-what-are-the-alerts-triggering-criteria"></a>
 ### What are the alerts triggering criteria?
 
-Below two tables show different criteria for different alert types and different severities that appliy for any extension, blade and part load in Azure Portal.
+Below two tables show different criteria for different alert types and different severities that apply for any extension, blade, and part load in Azure Portal. The numbers are for per Portal domain name and safe deployment stage.
 
 <a name="availability-what-are-the-alerts-triggering-criteria-sev3"></a>
 #### Sev3:
@@ -149,11 +149,11 @@ Below two tables show different criteria for different alert types and different
     </tbody>
 </table>
 
-> *All Clouds are Public, Fairfax, Mooncake, BlackForest and air-gapped clouds.
+> *All Clouds are Public, Fairfax, Mooncake and air-gapped clouds.
 
-> **Non-public clouds are Fairfax, Mooncake, BlackForest and air-gapped clouds.
+> **Non-public clouds are Fairfax, Mooncake and air-gapped clouds.
 
-For any given monitor window (1, 2, 4, 8, 12 and 24 hours) the following three conditions must be met to fire an alert.
+For any given monitor window (1, 2, 4, 8, 12 and 24 hours) per Portal domain name and safe deployment stage the following three conditions must be met to fire an alert.
 1. total user count >= Min Total User Count
 2. affected user percentage >= Min Affected User Percentage
 3. affected user count >= 3 for 1, 2, 4, 8, 12-hour period and >=4 for 24-hour period
@@ -161,6 +161,8 @@ For any given monitor window (1, 2, 4, 8, 12 and 24 hours) the following three c
 > When alert firing conditions are true for both User Failed At Least Once and User Failed Always, only User Failed Always will be fired.
 
 > When alert firing conditions are true for different monitor windows, only alert on the smallest window will be fired. For example, alerting firing conditions are true for 1-hour lookback window and 2-hour lookback window, alert will fire only on 1-hour lookback window.
+
+> When alert firing conditions are true for different safe deployment stages, only alert for the latter stage will be fired. For example, alerting firing conditions are true for stage 4 and stage 5, alert will fire only for stage 5.
 
 <a name="client-error"></a>
 ## Client Error
@@ -780,7 +782,7 @@ Certificate is used by IcM service to authenticate with the alerting service who
 <a name="route-alerts-to-another-team-in-icm-step-2"></a>
 ### Step 2
 
-Submit and complete a PR to add **IcM connector info** into alerting customization JSON so that alerting service knows what connector is used when sending incidents for that extension. The supported cloud values are Public, BlackForest, Fairfax, Mooncake and air-gapped clouds.
+Submit and complete a PR to add **IcM connector info** into alerting customization JSON so that alerting service knows what connector is used when sending incidents for that extension. The supported cloud values are Public, Fairfax, Mooncake and air-gapped clouds.
 
 If one or more **clouds** are not specified in customization JSON, the IcM incidents will be created and sent to Azure Portal (IbizaFx) team through IbizaFx's custom connector for the cloud instance(s) that're not specified in the extension's customization JSON. And IbizaFx's IcM routing rule auto-routes the incidents to the corresponding service and team in IcM
 
