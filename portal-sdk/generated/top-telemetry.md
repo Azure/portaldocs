@@ -225,8 +225,8 @@ Follows the same format as ClientTelemetry but also includes:
 | Create | ProvisioningStarted, ProvisioningEnded | Triggered when a new deployment started/ended. This event is being logged for both custom and ARM deployments. |
 | Create | CreateDeploymentStart, CreateDeploymentEnd | Triggered only if the deployment is done using the ARM Provisioner provided by Framework. For ARM deployments, the order of the logged events for a deployment is: "ProvisioningStarted", "CreateDeploymentStart", "CreateDeploymentEnd" and "ProvisioningEnded".         Note that "CreateDeploymentStart" and "CreateDeploymentEnd" are only logged if the deployment is accepted by ARM. "CreateDeploymentStart"/"CreateDeploymentEnd" logs contain the correlationId that can be used to search for the deployment's status in ARM. |
 | Side Bar | SideBarItemClicked | When one of the items on the Side Bar (except + or Browse All) is clicked.|
-| Side Bar | SideBarFavorite | When a resource type is marked as a favorite |
-| Side Bar | SideBarUnFavorite | When a resource type is removed as a favorite |
+| Side Bar | AllServicesFavorite | When a resource type is marked as a favorite |
+| Side Bar | AllServicesUnFavorite | When a resource type is removed as a favorite |
 
 <a name="overview-viewing-telemetry-custom-queries-common-queries"></a>
 #### Common queries
