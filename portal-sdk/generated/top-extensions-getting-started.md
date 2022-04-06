@@ -142,7 +142,11 @@ Blades are the main unit of UX that can be built in the Portal. They are pages t
 
 ![alt-text](../media/top-extensions-getting-started/resourcebladecontent.png "resource blade content")
 
-To learn more about all the popular views that can be built by authoring just a JSON file, please refer to [this doc](top-declarative.md)
+To learn more about all the popular views that can be built by authoring just a JSON file, please refer to [this doc](top-declarative.md).
+
+If your resource provider has published Azure REST API specs [(check here)](https://github.com/Azure/azure-rest-api-specs), we likely have views and asset definitions already generated on your behalf. [Browse the GeneratedExtension repo](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views) for generated extension resources under your resource provider & api version. You can copy these generated views, asset definitions and proxyasset definitions into your extension repo & edit and ship them.
+
+[Click here to learn more about UX Auto Generation](top-extensions-autogeneration.md)
 
 If the view you are trying to build is unique and is not one of the standard views that can be built by just authoring a JSON file, you can build your own view using React. You can learn more about React views [here](react-index.md).
 
@@ -150,6 +154,7 @@ If the view you are trying to build is unique and is not one of the standard vie
 ## Next steps
 
 - You are now ready to start developing your Azure Portal extension. Use `ap build` to build your extension, `ap serve` to run the local server, and `ap watch` to watch for changes and enable compile on save. You can learn more about AP CLI commands [here](top-ap-cli.md).
+- You can also add auto-generated dx views and asset definitions into your extension. Learn more [here](top-extensions-autogeneration.md).
 
 <a name="getting-started-with-the-portal-sdk-questions"></a>
 ## Questions?

@@ -273,7 +273,7 @@ const subscriptionDropDown = FxSubscriptionDropDown.create(container, {
     // Optional -> You can pass the gallery item to the subscriptions drop down, and the
     // the subscriptions will be filtered to the ones that can be used to create this
     // gallery item.
-    filterByGalleryItem: provisioning.marketplaceItem.launchingContext.galleryItemId === "" ? undefined : provisioning.marketplaceItem,
+    filterByGalleryItem: this._marketplaceItem,
 });
 
 ```

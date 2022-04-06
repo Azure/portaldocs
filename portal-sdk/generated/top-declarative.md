@@ -10,6 +10,7 @@
         * [Browse as a resource menu item](#declarative-views-supported-declarative-views-browse-as-a-resource-menu-item)
         * [Resource creation](#declarative-views-supported-declarative-views-resource-creation)
         * [Markdown](#declarative-views-supported-declarative-views-markdown)
+    * [Auto Generated views](#declarative-views-auto-generated-views)
     * [Declarative views basics](#declarative-views-declarative-views-basics)
         * [Localization in a declarative extension](#declarative-views-declarative-views-basics-localization-in-a-declarative-extension)
         * [Getting started with a declarative extension](#declarative-views-declarative-views-basics-getting-started-with-a-declarative-extension)
@@ -47,7 +48,7 @@ Declarative supports most popular patterns that are used repeatedly in the Azure
 <a name="declarative-views-supported-declarative-views-all-services-integration"></a>
 ### All services integration
 
-To have a presence in the Azure Portal [All Services menu](https://portal.azure.com/?feature.customportal=false#allservices) and other entry points such as the global search bar in the Portal, an asset has be to defined. This asset can be defined declaratively. An asset represents a service in Azure and most assets map to an ARM resource type. 
+To have a presence in the Azure Portal [All Services menu](https://portal.azure.com/?feature.customportal=false#allservices) and other entry points such as the global search bar in the Portal, an asset has be to defined. This asset can be defined declaratively. An asset represents a service in Azure and most assets map to an ARM resource type.
 
 [Learn more about defining assets in the Azure Portal](declarative-assets.md).
 
@@ -62,7 +63,7 @@ Example of the storage account asset showing up in the Portal's All Services Men
 <a name="declarative-views-supported-declarative-views-browse"></a>
 ### Browse
 
-When Portal users click on the asset described above, they are taken to a browse view. The browse view is a list of all resources of the given resource type. In most cases, this information of all resources for a given resource type comes from [Azure Resource Graph](https://docs.microsoft.com/azure/governance/resource-graph/). Additionally, extension authors can add actions to the command bar to perform operations on a group of resources. 
+When Portal users click on the asset described above, they are taken to a browse view. The browse view is a list of all resources of the given resource type. In most cases, this information of all resources for a given resource type comes from [Azure Resource Graph](https://docs.microsoft.com/azure/governance/resource-graph/). Additionally, extension authors can add actions to the command bar to perform operations on a group of resources.
 
 [Learn more about browse views in the Azure Portal](declarative-assets.md#configuring-browse).
 
@@ -73,7 +74,7 @@ Example of the storage account browse -
 <a name="declarative-views-supported-declarative-views-resource-menu"></a>
 ### Resource menu
 
-When a customer clicks on a particular resource in browse, they are taken to a page specific to that particular resource. A resource menu serves as a table of content for the resource and is present on the left side of the page. The resource menu is a list  of different options available to manage the resource. Authors can add new menu sections and menu items based on the necessary functionality for their resources. Additionally, a few menu items are available to all resources for free such as Activity log, Tags etc. 
+When a customer clicks on a particular resource in browse, they are taken to a page specific to that particular resource. A resource menu serves as a table of content for the resource and is present on the left side of the page. The resource menu is a list  of different options available to manage the resource. Authors can add new menu sections and menu items based on the necessary functionality for their resources. Additionally, a few menu items are available to all resources for free such as Activity log, Tags etc.
 
 [Learn more about configuring the resource menu](declarative-assets.md#configuring-the-resource-menu).
 
@@ -84,7 +85,7 @@ Example of the resource menu for storage accounts -
 <a name="declarative-views-supported-declarative-views-overview"></a>
 ### Overview
 
-For consistency across resources, the first item in the resource menu for all resources should be overview. The overview for a resource contains three sections - 
+For consistency across resources, the first item in the resource menu for all resources should be overview. The overview for a resource contains three sections -
 
 1. **Command bar** - The command bar contains actions that can be performed on a given resource.
 
@@ -103,7 +104,7 @@ Learn more about building the overview view [here](portalfx-declarative-overview
 
 In some scenarios, an asset does not necessarily map to an ARM resource type. In such cases, the best experience for customers may be a landing page/get started experience. A get started experience lays out information for the customer to get started with the service in the form of cards. The get started experience can optionally have a menu. Learn more about get started views in the Azure Portal [here](portalfx-declarative-overview.md#getting-started).
 
-Example of the get started view for the Managed Apps center - 
+Example of the get started view for the Managed Apps center -
 
 ![alt-text](../media/top-declarative/getStartedView.png "Get started experience for the Mananged App center")
 
@@ -112,7 +113,7 @@ Example of the get started view for the Managed Apps center -
 
 There are scenarios when an extension author may want a resource browse experience as a resource menu item. Examples of such scenarios are when a resource has child resources or landing pages that link to a category of resources. We recommend that all browse experiences be powered by [Azure Resource Graph](https://docs.microsoft.com/en-us/azure/governance/resource-graph/) when possible. Learn more about browse as a resource many item in the Azure Portal [here](portalfx-declarative-assets.md#browse-as-a-resource-menu-item).
 
-Example of browse as a resource menu item - 
+Example of browse as a resource menu item -
 
 ![alt-text](../media/top-declarative/browseInResourceMenu.png "Browse as a resource menu item")
 
@@ -121,39 +122,51 @@ Example of browse as a resource menu item -
 
 Creating a resource is an important experience in the Azure Portal. The Azure Portal has a full screen, multi-tabbed pattern for resource creation that it recommends. Learn more about building declarative create experiences [here](portalfx-cuid.md).
 
-Example of a compliant, full screen, multi-tabbed create experience - 
+Example of a compliant, full screen, multi-tabbed create experience -
 
 ![alt-text](../media/top-declarative/create.png "compliant, full screen, multi-tabbed create experience")
 
 <a name="declarative-views-supported-declarative-views-markdown"></a>
 ### Markdown
 
-For simple experiences where an extension author want to display a document/information in the Azure Portal, they can use the markdown view. The markdown view is a simple view that renders markdown on the page. 
+For simple experiences where an extension author want to display a document/information in the Azure Portal, they can use the markdown view. The markdown view is a simple view that renders markdown on the page.
 
-Example of a markdown view - 
+Example of a markdown view -
 
 ![alt-text](../media/top-declarative/markdown.png "Markdown views in the Azure Portal")
 
+
+<a name="declarative-views-auto-generated-views"></a>
+## Auto Generated views
+
+Before you begin authoring your own declarative blades, be sure to check the   [Generated Repo](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views) to grab existing declarative blades auto-generated on your behalf.
+
+If your resource provider has published Azure REST API specs [(check here)](https://github.com/Azure/azure-rest-api-specs), we likely have views and asset definitions already generated.
+
+To get started, [browse the GeneratedExtension repo](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views) & look for the name of your resource provider and drill into the respective api-version folder. Here you will find asset & blade definitions (dx files) that you can copy into your extension repo.
+
+Learn more about UX Auto Generation [here](top-extensions-autogeneration.md)!
+
 <a name="declarative-views-declarative-views-basics"></a>
 ## Declarative views basics
- 
+
 All declarative view JSONs should be compliant with dx.schema.json which is shipped as part of the Portal SDK. This schema drives your authoring experience, declarative views and assets validation during build time for your extension.
- 
+
 <a name="declarative-views-declarative-views-basics-localization-in-a-declarative-extension"></a>
 ### Localization in a declarative extension
- 
+
 Declarative extension support localization on par with native Ibiza extensions. We recommend using resjson for strings to be localized but support both, resjson and resx. Please refer to [this doc](https://aka.ms/locv3) to learn how to do this for your extension based on the build system you are on.
- 
+
 <a name="declarative-views-declarative-views-basics-getting-started-with-a-declarative-extension"></a>
 ### Getting started with a declarative extension
- 
+
 - Perform these [one time configuration steps](top-ap-cli.md#one-time-configuration-steps).
 - We recommend using VS Code, however, if you want to use Visual Studio 2019 see [What are the IDE specific installs required for Visual Studio?](top-ap-cli.md#FAQ)
 - Install the Azure Portal Developer CLI `npm install -g @microsoft/azureportalcli`
 - To snap to a specific version include the version i.e `npm install -g @microsoft/azureportalcli@5.302.64701`.
- 
+
 - For start with a new declarative extension, run the following -
- 
+
 ```
 cd c:\ && mkdir dev && cd dev
 ap new -d -n Microsoft_Azure_FirstExtension -o ./FirstExtension
