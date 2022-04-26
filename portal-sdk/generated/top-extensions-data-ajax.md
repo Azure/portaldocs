@@ -180,6 +180,9 @@ So, based on weekly performance KPI reports you receive or based on examining th
 <a name="naming-network-requests-step-1-identify-in-source-code-where-unnamed-network-requests-are-initiated"></a>
 ### Step 1 - Identify in source code where unnamed network requests are initiated
 
+<a name="naming-network-requests-step-1-identify-in-source-code-where-unnamed-network-requests-are-initiated-option-a-using-fixajaxnames-diagnostic-mode"></a>
+#### Option A - Using &#39;fixajaxnames&#39; diagnostic mode
+
 Here are the steps to take to identify in your source code where unnamed network requests are initiated:
 
 - Navigate to the Portal, including in the query string "?feature.fixajaxnames=true&trace=diagnostics"
@@ -212,10 +215,22 @@ Supply a logical name for the ajax call to '<URL>' for inclusion in telemetry. S
 
 Here, it is quite likely that '`fetchIcons`' is the location where a name would be explicitly supplied.  Here, ultimately, the name needs to be included in the call to the FX '`ajaxExtended`' API, so the intervening functions would also need to updated to translate the name down to the '`ajaxExtended`' FX API call.
 
+<a name="naming-network-requests-step-1-identify-in-source-code-where-unnamed-network-requests-are-initiated-option-b-consulting-scrubbeduri-in-azure-portal-telemetry"></a>
+#### Option B - Consulting &#39;scrubbedUri&#39; in Azure Portal telemetry
+
+If option A above proves difficult for any reason, another option to diagnose unnamed network requests is to make use of the 'scrubbedUri' column in the following query result:
+
+[database('Framework').UnnamedNetworkRequests(ago(1d), now(), "Extension/Microsoft_Intune_DeviceSettings/Blade/DeviceManagementOverviewBlade")](https://dataexplorer.azure.com/clusters/azportalpartner/databases/Framework?query=H4sIAAAAAAAAAyWJwQrCMBAFf0V6aQJi8BdEBQ9VUDyXtXmGoN1gdpv4+VY9DTPjSelGAtPuM42oKT9au7oyz+KP0G844zVBVAyFZNbeLhecqpnR7N4KlpjYdXHISdJd+wPrxOi3KHHABaqRg7jNkzzcP3bEFDCC9VSQS0T93cZ+AITHF22NAAAA)
+
+Here, you should see sigificant duplication in the '`scrubbedUri`' column.  Hopefully, based on the URIs in this column, you'll be able to identify in your source code the location where you issue such network requests.
+
 <a name="naming-network-requests-step-2-update-the-source-code-to-explicitly-specify-a-name-for-the-network-request"></a>
 ### Step 2 - Update the source code to explicitly specify a name for the network request
 
 Now that you've identified where in your source code to explicitly supply a name for a network request, *how* you supply that name will vary based on what AJAX API you're using.
+
+<a name="naming-network-requests-step-2-update-the-source-code-to-explicitly-specify-a-name-for-the-network-request-knockoutjs-blades-parts"></a>
+#### KnockoutJS Blades/Parts
 
 If you're updating a KnockoutJS Blade (PDL, no-PDL), you're almost certainly using the AJAX APIs included in the "`Fx/Ajax`" module (preferred) or the "`MsPortalFx.Base.Net2`" namespace (older).  In any of these cases, you'll update your FX API call to include the "`setTelemetryHeader`" option:
 
@@ -228,6 +243,9 @@ const loadDataFromARM = batch<Resource>({
 });
 
 ```
+
+<a name="naming-network-requests-step-2-update-the-source-code-to-explicitly-specify-a-name-for-the-network-request-reactviews"></a>
+#### ReactViews
 
 If you're updating a ReactView, you're either using an FX API for your network requests or you're using native browser APIs ("`fetch`" or "`XmlHttpRequest`").
 
@@ -249,6 +267,13 @@ fetch(<URL>, {
     }
 });
 ```
+
+<a name="naming-network-requests-step-2-update-the-source-code-to-explicitly-specify-a-name-for-the-network-request-calling-batch-apis"></a>
+#### Calling &#39;batch&#39; APIs
+
+When calling ARM 'batch', the best practice is to use an FX API ('`batch`'/'`batchMultiple`' in "`Fx/Ajax`" for KnockoutJS, in "`@microsoft/azureportal-reactview/Ajax`" for ReactViews), where there is explicit API support for naming individual items in your batch.
+
+When calling MSGraph 'batch', there is no similar FX API support.  In this case, you'll be developing your batch items manually and supplying these as the request body for your MSGraph 'batch' call.  To name each batch item, add the '`x-ms-command-name`' request header to the batch item itself (in ReactViews, using the '`HeaderNames.CommandName`' string-typed constant from "`@microsoft/azureportal-reactview/Ajax`" for the header name).  Then, as long as you're following the approach above when issuing your MsGraph 'batch' request (see [here](#knockoutjs-bladesparts) for KnockoutJS, [here](#reactviews) for ReactViews), your batch items will each carry names in the Portal's "`ClientAjax`" telemetry table.
 
 <a name="naming-network-requests-step-3-verify-in-telemetry"></a>
 ### Step 3 - Verify in telemetry

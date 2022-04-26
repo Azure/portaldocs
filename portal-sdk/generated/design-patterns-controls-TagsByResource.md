@@ -24,6 +24,8 @@ Use the TagsByResource control when assigning tags to resources
 #### Do
 
 * Use the TagsByResource control in the tags tab when creating a resources
+* Blade owners are encoraged to add plain-English explanations about tag requirements before the control to improve user experience. Such as:
+- Tags are name/value pairs that enable you to categorize resources and view consolidated billing by applying the same tag to multiple resources and resource groups. Tag names are case insensitive, but tag values are case sensitive. [Learn more about tags](https://go.microsoft.com/fwLink/?LinkID=822935&clcid=0x9).
 
 <a name="best-practices-don-t"></a>
 #### Don&#39;t

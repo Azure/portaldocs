@@ -82,11 +82,11 @@ Azure portal extension development is supported on Windows Server 2012 R2, and W
 
 * [Get started](/portal-sdk/generated/top-extensions-getting-started.md)
 
-* [Updating the SDK](/portal-sdk/generated/top-extensions-packages.md#updating-your-extension-to-a-newer-version-of-the-sdk)
+* [Updating the SDK](/portal-sdk/generated/top-extensions-packages.md#updating-your-extension-to-a-newer-version-of-the-sdk) or  [Ask an SDK setup question on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-sdkupdate)
 
 * [Running your extension locally (a.k.a. sideloading)](/portal-sdk/generated/top-extensions-sideloading.md)
 
-[Ask an SDK setup question on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-sdkupdate)
+* [Add auto-generated views & asset definitions into your extension](/portal-sdk/generated/top-extensions-autogeneration.md)
 
 <a name="azure-portal-extension-development-documentation-development-guide-azure-portal-extension-developer-cli"></a>
 ### Azure Portal Extension Developer CLI
@@ -144,6 +144,13 @@ The primary UI building block is a called a blade. A blade is like a page. It ge
 * [Blade with tiles](/portal-sdk/generated/top-blades-legacy.md)
 
 [Ask a question about blades on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-blades-parts)
+
+<a name="azure-portal-extension-development-documentation-development-guide-ux-auto-generation-generated-ux"></a>
+### UX Auto Generation (Generated UX)
+
+Save development time by making use of auto-generated artifacts in your extension. If your resource provider has published Azure REST API specs [(check here)](https://github.com/Azure/azure-rest-api-specs), we likely have asset definitions and views already generated for your resource types. Please [browse the GeneratedExtension repo ](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views) for generated views and asset definitions or click link below to get started.
+
+[Learn more about UX Auto Generation here](/portal-sdk/generated/top-extensions-autogeneration.md)
 
 <a name="azure-portal-extension-development-documentation-development-guide-parts"></a>
 ### Parts
