@@ -498,7 +498,7 @@ our recommended library is `luxon` and is what we use within the portal. For num
 
 All fluent and portal provided react components are themed with the fluent azure theme. Additionally, they will
 update when the user changes the current theme in the portal.
-For more detailed documentation of theme usage see fluent's [react-theme-provider](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider) docs
+For more detailed documentation of theme usage see fluent's [react-theme-provider](https://github.com/microsoft/fluentui/tree/7.0/packages/react-theme-provider) docs
 
 However, if you wish to access the theme directly in a react component there is a small gotcha to be aware of:
 
@@ -507,8 +507,8 @@ Top-level ReactView blades that use decorators can access the theme, but won't b
 To ensure that a component re-renders when the theme is changed, any component that directly accesses the theme should:
 
 - be a child component of the top-level ReactView blade
-- be a functional component that uses fluent's [useTheme](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider#usetheme) hook OR
-- use fluent's [ThemeContext.Consumer](https://github.com/microsoft/fluentui/tree/master/packages/react-theme-provider#themecontextconsumer)
+- be a functional component that uses fluent's [useTheme](https://github.com/microsoft/fluentui/tree/7.0/packages/react-theme-provider#usetheme) hook OR
+- use fluent's [ThemeContext.Consumer](https://github.com/microsoft/fluentui/tree/7.0/packages/react-theme-provider#themecontextconsumer)
 
 <a name="reactviews-additional-features-localstorage-and-sessionstorage"></a>
 ### LocalStorage and SessionStorage

@@ -109,6 +109,8 @@ Lastly, if you need to use ARM browse for your resources, once the asset type is
 
 Browse automatically queries the Azure Resource Graph (ARG) or Azure Resource Manager (ARM) for resources of a specific type and displays them in a grid. The performance and experience benefits of moving to utilize the Azure Resource Graph are outlined below and all new tracked resources should be implementing browse with ARG. Follow the instructions outlined here to set up browse for resources and then extend that to use browse using ARG in the section here [Azure Resource Graph](#browse-with-azure-resource-graph). If you already have an asset type using ARM browse, please follow the instructions in the Azure Resource Graph section to upgrade your browse experience today.
 
+If you have an asset type defined in legacy PDL file, please use [this tool](declarative-pdl-migration.md) to migrate it to a declaraitve JSON file as going forward new features will be supported only in declarative JSON.
+
 In this section we will explore the following:
 
 1. Define an asset type in PDL
@@ -1248,9 +1250,9 @@ An important difference between a `QueryBladeLink` column and a `BladeLink` colu
 	type =~ "microsoft.compute/virtualmachinescalesets", pack("id", id),
 	pack("id", id))
 | extend bladeLink = pack(
-  "text", bladeLinkText, 
-  "blade", bladeLinkBlade.blade, 
-  "extension", bladeLinkBlade.extension, 
+  "text", bladeLinkText,
+  "blade", bladeLinkBlade.blade,
+  "extension", bladeLinkBlade.extension,
   "parameters": bladeLinkParameters)
 | project [FxColumns],bladeLink
 ```
@@ -1280,7 +1282,7 @@ An important difference between a `#blade` `DeepLink` column and `BladeLink` or 
 	type =~ "microsoft.compute/virtualmachinescalesets", strcat("#blade/Extension/Blade/id/", url_encode_component(id)),
 	strcat("#resource/", url_encode_component(id)))
 | extend deepLink = pack(
-  "text", deepLinkText, 
+  "text", deepLinkText,
   "link", deepLinkFragment)
 | project [FxColumns],deepLink
 ```
