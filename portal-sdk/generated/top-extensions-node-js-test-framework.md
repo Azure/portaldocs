@@ -1,7 +1,7 @@
 <a name="overview"></a>
 ## Overview
 
-**@microsoft/azureportal-test**, formerly known as msportalfx-test, is an end-to-end test framework that is written in **TypeScript** abd  runs tests against the Microsoft Azure Portal. It tests extension interactions with user behavior, moreso than extension interactions with the Portal.  Its open source contribution model focuses on partner needs instead of internal Portal needs. It is distributed independently from the SDK to allow developers to develop tests in the same language as the extension.
+**@microsoft/azureportal-test**, formerly known as msportalfx-test, is an end-to-end test framework that is written in **TypeScript** and runs tests against the Microsoft Azure Portal. It tests extension interactions with user behavior, moreso than extension interactions with the Portal.  Its open source contribution model focuses on partner needs instead of internal Portal needs. It is distributed independently from the SDK to allow developers to develop tests in the same language as the extension.
 
 The test framework interacts with the Portal as a user would, and helps developers make performant and robust extensions when they decrease breaking changes to partner team CI.
 

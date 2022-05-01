@@ -57,7 +57,7 @@ These SDK features cannot **(yet)** be built with decorators:
 
 This section pulls from a sample that [you can see in the dogfood environment](https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/TemplateBladesBlade/simpleTemplateBlade).
 
-Here is an example of a very simple template blade, represented by a single TpeScript file in your extension project.
+Here is an example of a very simple template blade, represented by a single TypeScript file in your extension project.
 
 ```typescript
 
