@@ -195,7 +195,8 @@ Create a file named `config.json` next to `portaltests.ts`. Paste this in the fi
     "managementEndpoint": "https://management.core.windows.net/",
     "allowUnauthorizedCert": "true",
     "LOGIN_NAME": "<someone@someCompany.com>",
-    "partnerTeamEmail": "partnerEmail@partnerCompany.com"
+    "partnerTeamEmail": "partnerEmail@partnerCompany.com",
+    "AzureEnvironment": < for public use "AzurePublicCloud", for fairfax use "AzureGovernment", for mooncake use "AzureChina", for blackforest use "AzureGermany" >
 }
 ```
 
