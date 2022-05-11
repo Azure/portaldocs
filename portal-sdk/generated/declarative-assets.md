@@ -57,9 +57,6 @@ Below is a sample JSON definition for an asset that opens a browse for ARM resou
       "lowerPlural": "lowerPlural"
     },
     "icon": "MsPortalFx.Base.Images.Logos.MicrosoftSquares",
-    "part": {
-      "builtIn": "ResourcePart"
-    },
     "browse": {
       "type": "ResourceType",
       "query"
@@ -94,9 +91,6 @@ Below is a sample JSON definition for an asset that opens a custom view. When th
     },
     "icon": {
       "file": "../../Content/svg/engine.svg"
-    },
-    "part":{
-      "builtIn": "ResourcePart"
     },
     "browse": {
       "type": "AssetTypeBlade"
@@ -504,9 +498,6 @@ This resource menu can be configured by editing the `menu` object in the `assetT
       "lowerPlural": "lowerPlural"
     },
     "icon": "MsPortalFx.Base.Images.Logos.MicrosoftSquares",
-    "part": {
-      "builtIn": "ResourcePart"
-    },
     "browse": {
       "type": "ResourceType"
     },

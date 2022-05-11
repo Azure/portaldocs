@@ -31,9 +31,6 @@ Add keywords property in your asset type definition.
       "lowerPlural": "lowerPlural"
     },
     "icon": "MsPortalFx.Base.Images.Logos.MicrosoftSquares",
-    "part": {
-      "builtIn": "ResourcePart"
-    },
     "browse": {
       "type": "ResourceType",
       "query"

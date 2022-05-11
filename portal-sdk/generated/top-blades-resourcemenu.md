@@ -642,7 +642,7 @@ export class PrinterViewModel
    /**
     * Gets the browse config.
     *
-    * @return A promise which will be resolved with the browse config.
+    * @returns A promise which will be resolved with the browse config.
     */
    public getBrowseConfig(): Promise<FxAssets.BrowseConfig> {
        // This sample shows how to include additional columns for the printer resource and sets one pre-defined
@@ -719,7 +719,7 @@ export class PrinterViewModel
     * @param resourceIds The array of resource IDs for the supplemental data.
     * @param columns The array of columns for the supplemental data that is required.
     * @param refresh Optionally specify if the supplemental data needs to be refreshed for the specified resource IDs.
-    * @return A promise which will be resolved when data is ready to be streamed.
+    * @returns A promise which will be resolved when data is ready to be streamed.
     */
    public getSupplementalData(resourceIds: string[], columns: string[], refresh?: boolean): Promise<any> {
        return processSupplementalData(resourceIds, columns, this._updateMap, this.supplementalDataStream, this._dataContext.printerData, (printer) => {
@@ -751,7 +751,7 @@ export class PrinterViewModel
     * Gets the resource menu configuration.
     *
     * @param resourceInfo The resource ID for the menus.
-    * @return A promise which will be resolved with the resource menu configuration.
+    * @returns A promise which will be resolved with the resource menu configuration.
     */
    public getResourceMenuConfig(resourceId: string): Promise<FxAssets.ResourceMenuConfig> {
        const armId = ArmId.parse(resourceId, true);

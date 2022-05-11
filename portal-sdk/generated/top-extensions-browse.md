@@ -1946,6 +1946,7 @@ module MsPortalFxForAsset {
 
             /**
              * Decorator for Asset commands
+             *
              * @param options command options
              */
             export function Decorator(options?: CommandOptions) {
