@@ -31,6 +31,10 @@ UX to manage the full lifecycle of Azure resources.
 
 * [Manage a resource](design-patterns-resource-manage.md)
 
+* [Delete a resource](design-patterns-resource-delete.md)
+
+The [Azure Portal Pattern Templates](lihttps://www.figma.com/file/SkCj1C9nh5lZTuIz0uhcY2/?node-id=0%3A1nk) Figma file provides detailed UI/UX design guidance for the patterns listed above.
+
 <a name="design-guidelines-design-patterns-page-design-patterns"></a>
 ### Page design patterns
 Page layouts for common Azure scenarios including guidance on where commands, tabs, fields and buttons should be placed

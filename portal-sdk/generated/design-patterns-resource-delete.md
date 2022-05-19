@@ -566,6 +566,10 @@ The Azure Pattern team has pulled together usage data for delete operations in A
 # Implementation
 Developers can use the following information to get started implementing this pattern:
 
+<a name="implementation-figma-design"></a>
+### Figma Design
+Please refer to the lastest version of the Delete Pattern designs located in the [Azure Portal Pattern Templates](https://www.figma.com/file/SkCj1C9nh5lZTuIz0uhcY2/?node-id=41058%3A136861) Figma file.
+
 <a name="implementation-declarative"></a>
 ### Declarative
 The Azure Pattern team is currently working on declarative views for many of the designs provided in this guidance. We’re targeting August 2022 for the release of declarative views for the Delete Pattern implementation.
