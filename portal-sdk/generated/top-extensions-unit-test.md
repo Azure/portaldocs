@@ -319,7 +319,7 @@ window.fx.environment.armApiVersion = "2014-04-01";
 
 const allTestFiles = [];
 if (window.__karma__) {
-    const TEST_REGEXP = /^\/base\/Extension.UnitTests\/Output\/.*(spec|test)\.js$/i;
+    const TEST_REGEXP = /^\/base\/Extension.UnitTests\/Output\/.*(?:spec|test)\.js$/i;
     // Get a list of all the test files to include
     Object.keys(window.__karma__.files).forEach(function (file) {
         if (TEST_REGEXP.test(file)) {
