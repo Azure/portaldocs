@@ -5,7 +5,7 @@ This section contains a glossary of terms and acronyms that are used in this doc
 
 | Term                              | Meaning |
 | ---                               | --- |
-| AAD                               |  |
+| AAD                               | Azure Active Directory |
 | AMD                               | Asynchronous Module Definition |
 | API                               | Application Programmer Interface |
 | ARM                               | Azure Resource Manager | 
