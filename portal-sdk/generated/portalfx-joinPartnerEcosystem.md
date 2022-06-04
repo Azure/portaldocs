@@ -3,7 +3,7 @@
 
 <!-- docs#jointheecosysytem -->
 
-Join the following groups to stay current on Ibiza product road map, get news on latest features, and receive invites for Ibiza related events.
+Join the following groups to stay current on the Ibiza product road map, get news on latest features, and receive invites for Ibiza related events.
 
 * PMs and Developer Leads should join the `Project Ibiza Partners - PMs`  group [here](https://idweb.microsoft.com/IdentityManagement/aspx/groups/AllGroups.aspx?popupFromClipboard=https%3A%2F%2Fidweb.microsoft.com%2Fidentitymanagement%2Faspx%2FGroups%2FEditGroup.aspx%3Fid%3Dacc725b5-30aa-4336-9c81-1867762bb945%26UOCInitialTabName%3DGroupingMembers).
 

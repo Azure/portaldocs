@@ -3,7 +3,7 @@
  
 <a name="basics"></a>
 ### Basics
-A DropDown is a list in which the selected item is always visible, and the others are visible on demand by clicking a drop-down button. 
+A DropDown is a list in which the selected item is always visible, and the others are visible on demand by clicking a drop-down button.
 
 
 
@@ -19,8 +19,8 @@ To select a **single option** among existing values.  Choose the control best su
 opt in to a single choice.  For example, use a single CheckBox for "I agree" instead of a different control where the user chooses between "I agree" and "I don't agree".
 * **TriStateCheckBox** - can be checked, not checked or partially checked to indicate the checked state of children items in a hierarchy.
 * **DropDown** - a single choice between a large number of options.  The DropDown control is also used on a smaller set of options where the default option is recommended for most users.  The DropDown control can also be used to make multiple selections from a set of options.
-* **OptionsGroup** - No longer recommended.  
-* **RadioButtons** - a single choice between 2-7 equally weighted options.   
+* **OptionsGroup** - No longer recommended.
+* **RadioButtons** - a single choice between 2-7 equally weighted options.
 
 
 
@@ -30,10 +30,10 @@ opt in to a single choice.  For example, use a single CheckBox for "I agree" ins
 DropDowns are used to simplify the design and make a choice within the UI. When closed, only the selected item is visible. When users click the drop-down button, all the options become visible. To change the value, users open the list and click another value or use the arrow keys (up and down) to select a new value.
 
 DropDown offers the following options:
-* Grouping of items 
-* Filtering / Searching 
+* Grouping of items
+* Filtering / Searching
 * Multiselect + Select all
-* HTML formatting of items 
+* HTML formatting of items
 
 <a name="best-practices-do"></a>
 #### Do
@@ -52,6 +52,7 @@ DropDown offers the following options:
 <a name="developer-tips-and-tricks"></a>
 ### Developer tips and tricks
 * For nested DropDown items, i.e. whenever header items are used, Extension developers should make use of the \`ariaLabel\` options in both [simple Item](#blade/Microsoft_Azure_Playground/F_Ctrl_DropDown_Item_I) and [Group item](#blade/Microsoft_Azure_Playground/F_Ctrl_DropDown_Group_I) APIs for all drop-down items to reference the text content of their respective item-headers.
+* \`selectAll\` is not supported with disabled drop-down items.
 
 
 

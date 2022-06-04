@@ -52,31 +52,31 @@ Onboarding a service or developing a Portal extension has three phases: onboardi
 <a name="phase-1-onboarding-kickoff-meeting-who-needs-these-meetings"></a>
 ### Who needs these meetings
 
-* If you have scenarios that do NOT use ARM RP(Resource Provider) or do NOT belong to Azure or need a customized experiences in Portal, you are recommended to setup a meeting a with the Azure portal onboarding team.
+* If you have scenarios that do NOT use an ARM RP(Resource Provider) or do NOT belong to Azure or need a customized experience in the Portal, we recommended you setup a meeting with the Azure portal onboarding team.
 
-* If you are planning to host an internal only service or a 3rd party service or a non-Microsoft owned service, you must schedule a meeting with the onboarding team to get the required approvals and then start onboarding.
+* If you're planning on hosting an internal-only service, a 3rd party service, or a non-Microsoft owned service, you must schedule a meeting with the onboarding team to get the required approvals and then start onboarding.
 
-* If you have scenarios that do NOT require a full fledged extension and plan to surface your existing web interface through Azure portal, you can send a meeting invite to Azure portal onboarding team.
+* If you have scenarios that do NOT require a full-fledged extension, and plan to surface your existing web interface through Azure portal, you can send a meeting invite to the Azure portal onboarding team.
 
-<a name="phase-1-onboarding-kickoff-meeting-before-scheduling-a-meeting-with-onboarding-team"></a>
-### Before scheduling a meeting with onboarding team
+<a name="phase-1-onboarding-kickoff-meeting-before-scheduling-a-meeting-with-the-onboarding-team"></a>
+### Before scheduling a meeting with the onboarding team
 
-* Make sure the person onboarding the extension is part of admins group on the service tree entry where the new portal extension will be created. Ref [EasyStart](https://aka.ms/portalfx/easystart)
+* Make sure the person onboarding the extension is part of the admins group for the service tree entry where the new portal extension will be created. Ref [EasyStart](https://aka.ms/portalfx/easystart)
 
-* Name of the extension must be decided by the service owners and their leadership as appropriate.
+* The name of the extension must be decided by the service owner(s) and their leadership as appropriate.
 
-* IcM service and team are configured in service tree and are visible from the [EasyStart](https://aka.ms/portalfx/easystart)
+* Both the IcM service and team must be configured in service tree and visible from the [EasyStart](https://aka.ms/portalfx/easystart)
 
-* Onboarding requires an email enabled security group as feedback email for the extension and the person onboarding must be part of this group.
+* Onboarding requires an existing "email enabled security group" to serve as a feedback email for the extension, and the person onboarding must be part of this group.
 
-* For each of the environment that you are trying to onboard, a separate storage account and container with anonymous read access permission for blobs and containers must be created in a production subscription and available to use during onboarding.
+* For each of the environments that you're trying to onboard, a separate storage account must be created. The account must have a container with anonymous read access permission for blobs and containers. The account must be attached to a production subscription and available for use during onboarding.
 
-There are lots of docs here. We recommend you send mail to [ibiza-onboarding@microsoft.com](<mailto:ibiza-onboarding@microsoft.com?subject=Kickoff Meeting Request&body=My team would like to meet with you to learn about the Azure onboarding process.>) and request a kickoff meeting. Someone from our team will spend 30 minutes walking through the process at a high level. We can point you in the right direction regarding the latest patterns and practices. We can also answer any questions you have. Finally, we can talk about how the relationship between our teams is managed.
+There are lots of docs here. We recommend you send an email to [ibiza-onboarding@microsoft.com](<mailto:ibiza-onboarding@microsoft.com?subject=Kickoff Meeting Request&body=My team would like to meet with you to learn about the Azure onboarding process.>) and request a kickoff meeting. Someone from our team will spend 30 minutes walking you through the process at a high level. We can point you in the right direction regarding the latest patterns and practices. We can also answer any questions you have. Finally, we can talk about how the relationship between our teams are managed.
 
 <a name="phase-1-onboarding-onboard-with-related-teams"></a>
 ## Onboard with related teams
 
-Onboarding to Azure all up is a big task that spans many teams. The doc you are reading will help you onboard to the portal, but there are many other teams you will need to work with to get your entire service up and running. These include, but are not limited to the following teams.
+Onboarding to Azure is a big task that spans many teams. The doc you're reading will help you onboard to the portal, but there are many other teams you will need to work with to get your entire service up and running. These include, but are not limited to the following:
 
 **NOTE:**  Contact information for these teams is [available here](https://aka.ms/portalfx/onboarding/partners)
 
@@ -102,25 +102,25 @@ Onboarding to Azure all up is a big task that spans many teams. The doc you are 
 
 1. AAD onboarding
 
-   Reach out to AAD onboarding if the new extension service needs special permissions besides just calling your own resource provider servers.  If the extension requires additional built-in support for standard Graph or ARM APIs, submit a partner request at the site located at [https://aka.ms/portalfx/uservoice](https://aka.ms/portalfx/uservoice).
+   Reach out to AAD onboarding if the new extension service needs special permissions besides just calling your own resource provider servers. If the extension requires additional built-in support for standard Graph or ARM APIs, submit a partner request here: [https://aka.ms/portalfx/uservoice](https://aka.ms/portalfx/uservoice).
 
 1. Azure fundamentals and compliance
 
-    The Azure Fundamentals are a set of tenets to which each Azure service is expected to adhere. The Azure Fundamentals program is described in the document located at [https://aka.ms/azurefundamentals](https://aka.ms/azurefundamentals). The document also identifies the stakeholders and contacts for each of the tenets.
+   The Azure Fundamentals are a set of tenets to which each Azure service is expected to adhere. The Azure Fundamentals program is described in the document here: [https://aka.ms/azurefundamentals](https://aka.ms/azurefundamentals). That document also identifies the stakeholders and contacts for each of the tenets.
 
 1. Security and privacy reviews
 
-1. Start the CSS onboarding process with the CSS team at least three months previous to public preview. This process may coincide with the following step. For more information about development phases, see [top-extensions-developmentPhases.md](top-extensions-developmentPhases.md).
+1. Start the CSS onboarding process with the CSS team at least three months prior to public preview. This process may coincide with the following step. For more information about development phases, see [top-extensions-developmentPhases.md](top-extensions-developmentPhases.md).
 
-1. Nearly 70% of Azure users are from outside of the United States. Therefore, it is important to make Azure a globalized product. There are a few requirements under the "Internationalization" criteria that your extension is required to support.  This is the same set of languages that are supported by Azure Portal for GA. For more information about internationalization requirements, see [https://aka.ms/AzureGR](https://aka.ms/AzureGR). For onboarding localization, please reach out to Bruno Lewin and the Internationalization team at <a href="mailto:ibiza-interntnl@microsoft.com?subject=Onboarding localization">Internationalization team</a>.
+1. Nearly 70% of Azure users are from outside of the United States. Therefore, it is important to make Azure a globalized product. There are a few requirements under the "Internationalization" criteria that your extension is required to support. This is the same set of languages that are supported by Azure Portal for GA. For more information about internationalization requirements, see [https://aka.ms/AzureGR](https://aka.ms/AzureGR). For onboarding localization, please reach out to Bruno Lewin and the <a href="mailto:ibiza-interntnl@microsoft.com?subject=Onboarding localization">Internationalization team</a>.
 
-1. Decide on a name and URLs for the extension.  You may need to contact emailing <a href="mailto:ibiza-onboarding@microsoft.com?subject=Name and URLs for new Extension">ibiza-onboarding@microsoft.com</a> to ensure that the name and URL's are unique.
+1. Decide on a name and any URLs for the extension. You may need to contact <a href="mailto:ibiza-onboarding@microsoft.com?subject=Name and URLs for new Extension">ibiza-onboarding@microsoft.com</a> to ensure that the name and URLs are unique.
 
 1. Schedule a UX feasibility review with the Ibiza team UX contact by emailing <a href="mailto:ibiza-onboarding@microsoft.com?subject=Extension Feasibility Review">ibiza-onboarding@microsoft.com</a>.  Many extensions have been made more successful by setting up early design reviews with the Azure Portal team. Taking the time to review the design gives extension owners an opportunity to understand how they can leverage Azure Portal design patterns, and ensure that the desired outcome is feasible.
 
 While the portal team cannot help directly with all of these factors, see [portalfx-extensions-contacts.md](portalfx-extensions-contacts.md) for a list of items with which we can assist you.
 
-For less common scenarios, you might need to do a custom deployment. For example, if the extension needs to reach server services using certificate based authentication, then there should be controller code on the server that our hosting service does not support. You should be very sure that  a custom hosting solution is the correct solution previous to developing one.
+For less common scenarios, you might need to do a custom deployment. For example, if your extension needs to reach server services using certificate-based authentication, then there would be controller code on the server that our hosting service does not support. You should make certain that a custom hosting solution is the correct solution prior to developing one.
 
 
 <a name="phase-1-onboarding-join-dls-and-request-permissions"></a>
@@ -128,7 +128,7 @@ For less common scenarios, you might need to do a custom deployment. For example
 
  
 
-Join the following groups to stay current on Ibiza product road map, get news on latest features, and receive invites for Ibiza related events.
+Join the following groups to stay current on the Ibiza product road map, get news on latest features, and receive invites for Ibiza related events.
 
 * PMs and Developer Leads should join the `Project Ibiza Partners - PMs`  group [here](https://idweb.microsoft.com/IdentityManagement/aspx/groups/AllGroups.aspx?popupFromClipboard=https%3A%2F%2Fidweb.microsoft.com%2Fidentitymanagement%2Faspx%2FGroups%2FEditGroup.aspx%3Fid%3Dacc725b5-30aa-4336-9c81-1867762bb945%26UOCInitialTabName%3DGroupingMembers).
 

@@ -180,7 +180,7 @@ The following procedure describes how to set up the Key Vault that is required b
 
     $end = [System.DateTime]::Now.AddMonths(1)
 
-    $at = New-AzureStorageAccountSasToken -Service Blob -ResourceType Service,Container,Object -Permission "rwl" -Protocol HttpsOnly -StartTime $start -ExpiryTime $end -Context $sctx
+    $at = "sv=2018-03-28&ss=b&srt=sco&sp=rwl&se=2020-05-05T00:00:00Z&spr=https"
 
     $validityPeriod = [System.Timespan]::FromDays(10)
 

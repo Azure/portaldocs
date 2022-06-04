@@ -12,6 +12,7 @@
 | ---|:--:|:--:|
 |kind|True|
 |export|False|
+|contextPaneWidth|False|See [here](dx-enum-contextPaneWidth.md ) for the available options
 |parameters|False|
 |resources|False|
 |dataSources|False|

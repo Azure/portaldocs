@@ -34,8 +34,8 @@ Simply wrapping the text in an Error or FxError will improve the error logging b
 2.	Or, add the error object to the extraData argument (3rd argument, after code):
   - Also good: `Log.error(“I'm really not at liberty to discuss this”, 505, new FxError(“Unable to open the pod-bay doors”))`
 
-<a name="extension-client-errors-how-to-log-errors-best-practices-example-code-snippets"></a>
-#### Example code snippets:
+<a name="extension-client-errors-how-to-log-errors-best-practices-knockout-blades-example-code-snippets"></a>
+#### Knockout Blades - Example code snippets:
 
 *Note: It is not a requirement, but it is strongly recommended that you also use the Portal SDK provided error class called FxError. This error class has additional properties and functionality that will greatly improve not only your errors but also the likelihood that we are able to correctly serialize your custom errors into the standardize format.*
 
@@ -77,6 +77,56 @@ try {
             innerErrors: [err]
         })
     );
+}
+```
+
+<a name="extension-client-errors-how-to-log-errors-best-practices-react-blades-example-code-snippets"></a>
+#### React Blades - Example code snippets:
+
+*Note: It is recommended that you log Javascript built-in Error objects and not add additional properties to them as they will not be serialized or recognized (ignored).*
+
+**Basic logging error**
+
+```typescript
+import * as Az from "./Az";
+Az.log([{
+    timestamp: Date.now(),
+    level: Az.LogEntryLevel.Error,
+    area: "<BladeName>.ReactView",
+    message: new Error("Something bad happened"),
+}]));
+```
+
+**Logging a caught error**
+
+```typescript
+import * as Az from "./Az";
+try {
+    doSomething();
+} catch (err) {
+    Az.log([{
+        timestamp: Date.now(),
+        level: Az.LogEntryLevel.Error,
+        area: "<BladeName>.ReactView",
+        message: err, // You can log the error object as the message and it will be serialized into debug info for telemetry and alerts
+    }]));
+}
+```
+
+**Logging a caught error and providing more context**
+
+```typescript
+import * as Az from "./Az";
+try {
+    doSomething();
+} catch (err) {
+    Az.log([{
+        timestamp: Date.now(),
+        level: Az.LogEntryLevel.Error,
+        area: "<BladeName>.ReactView",
+        message: "doSomething did something bad", // provide specific context information with a string message
+        args: [err] // Add the original error object to the args array and it will be serialized into its debug info for telemetry and alerts
+    }]));
 }
 ```
 

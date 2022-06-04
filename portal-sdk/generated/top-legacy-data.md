@@ -1339,7 +1339,7 @@ The '`refresh`' method is useful when the server data changes are known to be sp
 
 ```typescript
 
-const promises: Q.Promise<void>[] = [];
+const promises: Promise<void>[] = [];
 this.enginesQuery.refresh({}, null);
 MsPortalFx.makeArray(engines).forEach((engine) => {
     promises.push(Q(this.engineEntities.refresh(engine, null)));
