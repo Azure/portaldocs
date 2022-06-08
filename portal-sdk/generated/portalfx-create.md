@@ -112,7 +112,7 @@ private _supplyTemplateDeploymentOptions(): TemplateBlade.DoesProvisioning.Deplo
 ```typescript
 
 return {
-    marketplaceItemId: marketplaceItemId,
+    marketplaceItemId: MsPortalFx.isFeatureEnabled("prodtest") ? prodMarketplaceItemId : testMarketplaceItemId,
     provisioningHash: JSON.stringify(postCreateContent),
     subscriptionId: subscriptionId,
     resourceGroupName: resourceGroupName,
