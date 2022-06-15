@@ -136,7 +136,7 @@ const parameters = {
     adminPassword: this._adminPassword(),
     displacement: this._displacement(),
     location: location.name,
-    rgName: MsPortalFx.isFeatureEnabled("SubscriptionLevel") ? resourceGroupName : undefined,
+    rgName: isFeatureEnabled("SubscriptionLevel") ? resourceGroupName : undefined,
     primaryEngineTags: this._getTagMapForResource(tagResources[0]),
     secondaryEnginesTags: this._getTagMapForResource(tagResources[1]),
 };

@@ -124,7 +124,7 @@ return {
     templateJson: getTemplateJson(),
     // You can override the gallery item's dashboard part when pinning.
     // Here we're doing it based on a feature flag.
-    supplyPartReference: MsPortalFx.isFeatureEnabled("noPinEngine") && (() => {
+    supplyPartReference: isFeatureEnabled("noPinEngine") && (() => {
         return PartReferences.forPart("NotificationsPinnedPart").createReference({ parameters: {} });
     }),
 };
