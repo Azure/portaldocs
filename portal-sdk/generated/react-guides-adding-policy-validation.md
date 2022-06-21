@@ -153,14 +153,13 @@ Then add the validation to the control. Within this component is a callback attr
 }
 <FormLabel displayValue={ClientStrings.Label.region} required
     tooltip={<><span>{ClientStrings.Tooltip.region}</span></>}>
-    <VMPolicyField getUsePolicyField={(usePolicyField) => usePolicyField("location", this.props.locationId)}>
-        <LocationDropdown
-            onLocationChange={this.props.onLocationChange}
-            selectedLocationId={this.props.locationId}
-            subscriptionId={this.props.subscriptionId}
-            customizeLocations={this.props.onCustomizeLocations}
-        />
-    </VMPolicyField>
+    <LocationDropdown
+        onLocationChange={this.props.onLocationChange}
+        selectedLocationId={this.props.locationId}
+        subscriptionId={this.props.subscriptionId}
+        customizeLocations={this.props.onCustomizeLocations}
+    />
+    <VMPolicyField getUsePolicyField={(usePolicyField) => usePolicyField("location", this.props.locationId)} onUpdateValidation={this.props.setLocationValidationMessage} />
 </FormLabel>
 {
     

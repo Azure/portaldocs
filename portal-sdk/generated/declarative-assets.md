@@ -583,7 +583,7 @@ Options| Result
 --- | ---
 HideAssetType | Hides the asset type from the All services left navigation
 HideInstances | Hides any instances of the asset type in browse and global search
-HideAssetType,HideInstance | Hide the asset type from left navigation AND hides any instances in browse and global search
+HideAssetType,HideInstances | Hide the asset type from left navigation AND hides any instances in browse and global search
 *empty string* | This will show the asset type in left navigation AND shows instances in browse and global search
 
 The case of empty string strips off any visibility options provided in the JSON asset definition. The options are applied to the asset type, essentially replacing the options in JSON.

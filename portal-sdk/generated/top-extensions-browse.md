@@ -335,7 +335,7 @@ Options| Result
 --- | ---
 HideAssetType | Hides the asset type from the All services left navigation
 HideInstances | Hides any instances of the asset type in browse all resources and global search
-HideAssetType,HideInstance | Hide the asset type from left navigation AND hides any instances in browse and global search
+HideAssetType,HideInstances | Hide the asset type from left navigation AND hides any instances in browse and global search
 *empty string* | This will show the asset type in left navigation AND shows instances in browse and global search
 
 *Importantly*, if HideInstances is used on an asset type, using resource type-specific browse will show those instances in that browse.
@@ -705,10 +705,10 @@ HideAssetType | Hides any curated kind-based asset type entry from the All servi
 ShowAssetType | Shows any curated kind-based asset type entry in the All services left navigation - used to show a kind where the parent asset type is hiding the asset type (override)
 HideInstances | Hides any instances of the asset type with the kind in browse all resources and global search
 ShowInstances | Shows any instances of the asset type with the kind in browse all resources and global search - used to show instances of a resource with the kind where the parent asset type is hiding instances (override)
-HideAssetType,HideInstance | Hide the asset type from left navigation AND hides any instances in browse and global search
-HideAssetType,ShowInstance | Hide the asset type from left navigation BUT shows any instances in browse and global search
-ShowAssetType,HideInstance | Show the asset type in left navigation BUT hides any instances in browse and global search
-ShowAssetType,ShowInstance | Show the asset type in left navigation AND shows any instances in browse and global search
+HideAssetType,HideInstances | Hide the asset type from left navigation AND hides any instances in browse and global search
+HideAssetType,ShowInstances | Hide the asset type from left navigation BUT shows any instances in browse and global search
+ShowAssetType,HideInstances | Show the asset type in left navigation BUT hides any instances in browse and global search
+ShowAssetType,ShowInstances | Show the asset type in left navigation AND shows any instances in browse and global search
 *empty string* | This will show the asset type in left navigation AND shows instances in browse and global search
 
 Importantly, if HideInstances is used on a kind, using resource type-specific browse with a kind filter will show those
