@@ -1,7 +1,7 @@
 <a name="declarative-resource-overview-experience"></a>
 # Declarative Resource Overview experience
 
-This document will guide you on how to create the Declarative Resource Overview blade. The Declarative Resource Overview blade is is the home page for your resource, which provides the purpose, top actions and key information so that users can quickly get value from your resource.
+This document will guide you on how to create the Declarative Resource Overview blade. The Declarative Resource Overview blade is the home page for your resource, which provides the purpose, top actions and key information so that users can quickly get value from your resource.
 
 The Declarative Resource Overview blade includes the following sections:
 
@@ -14,10 +14,11 @@ The following Views that are supported:
 1. Getting Started
 2. Properties
 3. Monitoring
-4. Recommendations
-5. Tutorials
-6. DataBrowse
-7. Information
+4. Capabilities
+5. Recommendations
+6. Tutorials
+7. DataBrowse
+8. Information
 
 <a name="declarative-resource-overview-experience-getting-started-with-declarative-resource-overview-blade"></a>
 ## Getting started with Declarative Resource Overview blade
@@ -67,10 +68,11 @@ The following views are supported -
 1. [Getting Started](#getting-started)
 2. [Properties](#properties)
 3. [Monitoring](#monitoring)
-4. [Recommendations](#recommendations)
-5. [Tutorials](#tutorials)
-6. [DataBrowse](#data-browse)
-7. [Information](#information)
+4. [Capabilities](#capabilities)
+5. [Recommendations](#recommendations)
+6. [Tutorials](#tutorials)
+7. [DataBrowse](#data-browse)
+8. [Information](#information)
 
 <a name="declarative-resource-overview-experience-configuring-views-getting-started"></a>
 #### Getting Started
@@ -313,6 +315,133 @@ To add the Monitoring view, add the following example to the `properties.tabs` s
 ```
 Example
 ![alt-text](../media/portalfx-cuid/MonitoringTab.png "Monitoring tab")
+
+<a name="declarative-resource-overview-experience-configuring-views-capabilities"></a>
+#### Capabilities
+The Capabilities view is used to highlight valuable features of a resource that are not part of the Get Started or Properties content. Each capability card should correspond to a resource menu item as defined in `actions.menu` property. When user activates (click or keyboard) an unconfigured capability, the card should open a context pane to configure the capability. When a user activates (click or keyboard) a configured capability, the card should navigate to the corresponding menu item.
+
+To add the Capabilities view, add the following example to the `properties.tabs` section in the [Declarative Resource Overview schema](#declarative-resource-overview-schema)
+
+```
+{
+    "kind": "Capabilities",
+    "capabilities": [
+        {
+            "title": "Backup",
+            "icon": "MsPortalFx.Base.Images.Polychromatic.Backup",
+            "description": "Simple and reliable server backup to the cloud",
+            "action": {
+                "menu": "tags"
+            },
+            "status": {
+                "value": "[contains(resources().name, 'test')]",
+                "valueMapping": [
+                    {
+                        "value": "true",
+                        "displayName": "Configured",
+                        "icon": "MsPortalFx.Base.Images.StatusBadge.Success"
+                    },
+                    {
+                        "value": "false",
+                        "displayName": "Not configured",
+                        "icon": "MsPortalFx.Base.Images.StatusBadge.None",
+                        "action": {
+                            "blade": {
+                                "name": "",
+                                "extension": "",
+                                "parameters": {},
+                                "inContextPane": true
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "title": "Disaster recovery",
+            "icon": "MsPortalFx.Base.Images.Polychromatic.SiteRecovery",
+            "description": "Replicate your virtual machine to another Azure region",
+            "action": {
+                "menu": "tags"
+            },
+            "status": {
+                "value": "[not(contains(resources().name, 'test'))]",
+                "valueMapping": [
+                    {
+                        "value": "true",
+                        "displayName": "Configured",
+                        "icon": "MsPortalFx.Base.Images.StatusBadge.Success"
+                    },
+                    {
+                        "value": "false",
+                        "displayName": "Not configured",
+                        "icon": "MsPortalFx.Base.Images.StatusBadge.None",
+                        "action": {
+                            "blade": {
+                                "name": "",
+                                "extension": "",
+                                "parameters": {},
+                                "inContextPane": true
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "title": "Insights",
+            "icon": "MsPortalFx.Base.Images.Polychromatic.Insights",
+            "description": "Enable logs and detailed monitoring capabilities",
+            "action": {
+                "menu": "tags"
+            },
+            "status": {
+                "value": "[resources().properties.test]",
+                "valueMapping": [
+                    {
+                        "value": "present",
+                        "displayName": "Configured",
+                        "icon": "MsPortalFx.Base.Images.StatusBadge.Success"
+                    },
+                    {
+                        "value": "notPresent",
+                        "displayName": "Not configured",
+                        "icon": "MsPortalFx.Base.Images.StatusBadge.None",
+                        "action": {
+                            "blade": {
+                                "name": "",
+                                "extension": "",
+                                "parameters": {},
+                                "inContextPane": true
+                            }
+                        }
+                    },
+                    {
+                        "value": "null",
+                        "displayName": "Error",
+                        "icon": "MsPortalFx.Base.Images.StatusBadge.Error"
+                    },
+                    {
+                        "value": "undefined",
+                        "displayName": "Error",
+                        "icon": "MsPortalFx.Base.Images.StatusBadge.Error"
+                    }
+                ]
+            }
+        },
+        {
+            "title": "Security",
+            "icon": "MsPortalFx.Base.Images.Polychromatic.SslCustomDomains",
+            "description": "Continuously monitor your VM for potential security vulnerabilities",
+            "action": {
+                "menu": "tags"
+            }
+        }
+    ]
+}
+```
+Example
+![alt-text](../media/portalfx-cuid/CapabilitiesTab.png "Capabilities tab")
 
 <a name="declarative-resource-overview-experience-configuring-views-recommendations"></a>
 #### Recommendations
@@ -815,6 +944,7 @@ We support the following custom essential types -
 2. [Action URL](#action-url)
 3. [Action Resource](#action-resource)
 4. [Action Blade](#action-blade)
+5. [Icon Support](#icon-support)
 
 <a name="declarative-resource-overview-experience-configuring-essentials-to-configure-custom-properties-in-essentials-string-content"></a>
 ##### String Content
@@ -875,7 +1005,7 @@ Action Blade allows you to open a blade.  Example json -
 "essentials": {
     "properties": [
         {
-            "displayName": "propertydisplayname4",
+            "displayName": "propertydisplayname",
             "value": "action blade",
             "action": {
                 "blade": {
@@ -884,6 +1014,38 @@ Action Blade allows you to open a blade.  Example json -
                     "parameters": {}
                 }
             }
+        }
+    ]
+}
+```
+<a name="declarative-resource-overview-experience-configuring-essentials-to-configure-custom-properties-in-essentials-icon-support"></a>
+##### Icon Support
+<a name="iconsupport"></a>
+You can add an icon on the left of the value, the icon is changing based on the current value.  Example json -
+
+```
+"essentials": {
+    "properties": [
+        {
+            "displayName": "propertydisplayname",
+            "value": "Succeeded",
+            "valueMapping": [
+                {
+                    "value": "Succeeded",
+                    "displayName": "Succeeded",
+                    "icon": "MsPortalFx.Base.Images.StatusBadge.Outline.Success"
+                },
+                {
+                    "value": "Warning",
+                    "displayName": "Warning",
+                    "icon": "MsPortalFx.Base.Images.StatusBadge.Outline.Warning"
+                },
+                {
+                    "value": "Failed",
+                    "displayName": "Failed",
+                    "icon": "MsPortalFx.Base.Images.StatusBadge.Outline.Failed"
+                }
+            ]
         }
     ]
 }
