@@ -1,0 +1,2 @@
+- In the `resourceType` property, provide the resource provider namespace and resource type name for the resource you wish to show in the list.
+- The `scope` property restricts the available options for the resources. You can restrict the results by location or subscription. To show only resources that match the selection in basics, define the `scope.subscriptionId` and/or `scope.location`. To show all resource, omit `scope` property.

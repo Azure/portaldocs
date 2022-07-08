@@ -2496,6 +2496,76 @@ import { SvgType } from "Fx/Images";
                 },
             ],
         },
+        {
+            kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,
+            visibility: ForAsset.Commands.SelectionCommandVisibility.ResourceHoverCard,
+            id: "ResoruceHoverCardCommand1",
+            label: ClientResources.AssetCommands.resoruceHoverCardCommand1Label,
+            icon: { image: SvgType.PowerUp },
+            definitions: {
+                "microsoft.test/virtualservers": {
+                    uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
+                },
+            },
+            confirmation: {
+                title: ClientResources.AssetCommands.fakeCommandTitle,
+                message: ClientResources.AssetCommands.fakeCommandMessage,
+            },
+        },
+        {
+            kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,
+            visibility: ForAsset.Commands.SelectionCommandVisibility.ResourceHoverCard,
+            id: "ResoruceHoverCardCommand2",
+            label: ClientResources.AssetCommands.resoruceHoverCardCommand2Label,
+            icon: { image: SvgType.PowerUp },
+            definitions: {
+                "microsoft.test/virtualservers": {
+                    uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
+                },
+            },
+            confirmation: {
+                title: ClientResources.AssetCommands.fakeCommandTitle,
+                message: ClientResources.AssetCommands.fakeCommandMessage,
+            },
+        },
+        {
+            kind: ForAsset.Commands.SelectionCommandKind.MenuSelectionCommand,
+            id: "ResoruceHoverCardMenuCommand",
+            label: ClientResources.AssetCommands.resoruceHoverCardMenuCommandLabel,
+            icon: { image: SvgType.PowerUp },
+            commands: [
+                {
+                    kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,
+                    id: "ResoruceHoverCardMenuCommand1",
+                    label: ClientResources.AssetCommands.resoruceHoverCardMenuCommand1Label,
+                    icon: { image: SvgType.PowerUp },
+                    definitions: {
+                        "microsoft.test/virtualservers": {
+                            uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
+                        },
+                    },
+                    confirmation: {
+                        title: ClientResources.AssetCommands.fakeCommandTitle,
+                        message: ClientResources.AssetCommands.fakeCommandMessage,
+                    },
+                },
+                {
+                    kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,
+                    id: "ResoruceHoverCardMenuCommand2",
+                    label: ClientResources.AssetCommands.resoruceHoverCardMenuCommand2Label,
+                    icon: { image: SvgType.PowerUp },
+                    definitions: {
+                        "microsoft.test/virtualservers": {
+                            uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
+                        },
+                    },
+                    confirmation: {
+                        title: ClientResources.AssetCommands.fakeCommandTitle,
+                        message: ClientResources.AssetCommands.fakeCommandMessage,
+                    },
+                },
+            ],
+        },
     ],
 })
 export class VirtualServerCommands {

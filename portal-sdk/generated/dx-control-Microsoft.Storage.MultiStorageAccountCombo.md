@@ -17,5 +17,5 @@
 |constraints|False|
 |count|True|
 |visible|False|
-|scope|True|
+|scope|True|Use scope to define the Subscription, Resource Group name and location that will be applied to control used.
 |fx.feature|False|
