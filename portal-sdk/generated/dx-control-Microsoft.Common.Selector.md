@@ -14,6 +14,7 @@
 |label|True|
 |link|False|
 |keyPath|True|
+|barColor|False|
 |descriptionKeyPath|False|
 |value|True|
 |defaultValue|True|

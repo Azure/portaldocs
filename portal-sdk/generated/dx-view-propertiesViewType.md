@@ -128,26 +128,15 @@ Add Properties definition (see `Properties definition samples` section) to the `
 ## Sections
 | Name | Required | Description
 | ---|:--:|:--:|
-<<<<<<< HEAD
 |kind|True|Enum permitting the value: "Properties".
 |export|False|Enables this resulting blade to be exportable
+|contextPaneWidth|False|See [here](dx-enum-contextPaneWidth.md ) for the available options
 |parameters|False|Defines the parameters that are input to the view. Parameters can be required (key) or optional (optional).
 |resources|False|Specify an array of GET ARM request based on the given Resource Id (`id`) and `apiVersion`. The response can be referenced in Property item values.
 |dataSources|False|Specify an array of GET AAD Resource Graph request based on the given `path`. The response can be referenced in Property item values.
 |essentials|False|Defines Essentials section for Properties view
 |commands|False|Defines Command button for Properties view
 |properties|True|See [here](dx-view-propertiesViewType-properties.md) for more on properties.
-=======
-|kind|True|
-|export|False|
-|contextPaneWidth|False|See [here](dx-enum-contextPaneWidth.md ) for the available options
-|parameters|False|
-|resources|False|
-|dataSources|False|
-|essentials|False|
-|commands|False|
-|properties|True|
->>>>>>> 50e25c0a67a61ce112778eda4c3de7673a6e5516
 |fx.feature|False|
 <a name="propertiesviewtype-properties-section"></a>
 ## Properties Section
