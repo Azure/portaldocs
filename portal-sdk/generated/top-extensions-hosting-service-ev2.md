@@ -126,8 +126,6 @@ In the basic scenario Microsoft.Portal.Tools.targets will generate Ev2 templates
 
     1. Fairfax
 
-    1. Blackforest
-
     1. Mooncake
 
 Note: If using a non standard path for ServiceGroupRootReplacements set build property `HostingServiceEv2ServiceGroupRootReplacementsFilePath` to the non standard location.  This already defaults toDefaults to `$(MSBuildProjectDirectory)\ServiceGroupRootReplacements.json`.

@@ -1,7 +1,7 @@
 <a name="availability"></a>
 # Availability
 
-The alerts can be configured for extension availability, blade availability and part availability on different environments including national clouds. 
+The alerts can be configured for extension availability, blade availability and part availability on different environments including national clouds.
 
 <a name="availability-configuration"></a>
 ## Configuration
@@ -38,7 +38,7 @@ At a high level you define;
             "clientError": [...], // Optional. Add it when you want to enable client error alerts.
             "create": [...], // Optional. Add it when you want to enable create alerts.
             "performance": [...] // Optional. Add it when you want to enable performance alerts.
-            
+
         },
         {
             "environment": ["ms.portal.azure.com"],
@@ -65,12 +65,12 @@ Per each of those, you can define a set of criteria like the below.
 <a name="availability-configuration-what-is-environment"></a>
 ### What is environment?
 
-"environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com 
+"environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com
 or any other legit portal domain name, a.k.a., national cloud domain names are supported too. Mutiple values can be set for an "environment" property.
 
 <a name="availability-configuration-what-is-enabled"></a>
 ### What is enabled?
-"enabled" property is used to enable (when "enabled" is true) or disable ("enabled" is false) alerts on various level 
+"enabled" property is used to enable (when "enabled" is true) or disable ("enabled" is false) alerts on various level
 depending on where it's located in customization json. For details, see comments of "enabled" property in json snippet.
 
 You can define N number of criteria like the below.
@@ -113,8 +113,8 @@ This is the minimum number of unique users who have to encountered a failure bef
 <a name="availability-configuration-what-is-namepath"></a>
 ### What is namePath?
 
-This only applies to blades or parts and defines what blades or parts to alert on, you can either use an asterisk("*") sign to include 
-all the blades or parts within your extension or specify a list of full blade or part names to alert on. The minAvailability, minFailureCount and minFailureUserCount specified in critiera are for individual blades or parts. 
+This only applies to blades or parts and defines what blades or parts to alert on, you can either use an asterisk("*") sign to include
+all the blades or parts within your extension or specify a list of full blade or part names to alert on. The minAvailability, minFailureCount and minFailureUserCount specified in critiera are for individual blades or parts.
 
 <a name="availability-configuration-what-is-exclusion"></a>
 ### What is exclusion?
@@ -125,27 +125,27 @@ This only applies to blades or parts and defines what blades or parts you wish t
 ### What is safeDeploymentStage?
 
 Safe deployment stage can be "0", "1", "2", or "3". Each stage has a batch of regions. It does not support asterisk("*") sign.
-Safe deployment stage is optional. If you don't specify the safe deployment stage property in critera, when alerting calculates availability, failureCount and failureUserCount, it does not take safe deployment stage into consideration. So you won't have availability, failureCount and failureUserCount per safe deployment stage. For such a case, minAvailability, minFailureCount and minFailureUserCount specified in critiera are for all(combined, overall) the safe deployment stages. 
+Safe deployment stage is optional. If you don't specify the safe deployment stage property in critera, when alerting calculates availability, failureCount and failureUserCount, it does not take safe deployment stage into consideration. So you won't have availability, failureCount and failureUserCount per safe deployment stage. For such a case, minAvailability, minFailureCount and minFailureUserCount specified in critiera are for all(combined, overall) the safe deployment stages.
 For the complete list of safe deployment stages and their regions, go to [https://aka.ms/portalfx/alerting/safe-deployment-stage][safe-deployment-stage]
 
 <a name="availability-configuration-what-is-datacentercode"></a>
 ### What is datacenterCode?
 
 Datacenter code can be "`*`", "AM", "BY", etc. "`*`" represents all Azure Portal Production regions.
-Datacenter code is optional. If you don't specify the datacenterCode property in critera, when alerting calculates availability, failureCount and failureUserCount, it does not take datacenter into consideration. So you won't have availability, failureCount and failureUserCount per datacenter. For such a case, minAvailability, minFailureCount and minFailureUserCount specified in critiera are for all(combined, overall) the datacenters. 
+Datacenter code is optional. If you don't specify the datacenterCode property in critera, when alerting calculates availability, failureCount and failureUserCount, it does not take datacenter into consideration. So you won't have availability, failureCount and failureUserCount per datacenter. For such a case, minAvailability, minFailureCount and minFailureUserCount specified in critiera are for all(combined, overall) the datacenters.
 For the complete list of datacenter code names, go to [https://aka.ms/portalfx/alerting/datacenter-code-name][datacenter-code-name]
 
 <a name="availability-configuration-when-do-the-alerts-trigger"></a>
 ### When do the alerts trigger?
 
-Alerts will only trigger for any blade in extension "Your_Extension_Name" except for blades "Extension/Your_Extension_Name/Blade/BladeNameA" and 
-"Extension/Your_Extension_Name/Blade/BladeNameB" and for the blade load on safe deployment stage 3 and datacenter "AM", when all 3 criteria, 
-minAvailability, minFailureCount and minFailureUserCount are met (AND). So the above critical configuration will only fire when 10 or more unique users encounter failures 
+Alerts will only trigger for any blade in extension "Your_Extension_Name" except for blades "Extension/Your_Extension_Name/Blade/BladeNameA" and
+"Extension/Your_Extension_Name/Blade/BladeNameB" and for the blade load on safe deployment stage 3 and datacenter "AM", when all 3 criteria,
+minAvailability, minFailureCount and minFailureUserCount are met (AND). So the above critical configuration will only fire when 10 or more unique users encounter failures
 *AND* there are 10 or more failure occurences *AND* the total availability < 80%, all within the last hour. Only then will a severity 3 alert be opened.
 
 <a name="availability-configuration-is-national-cloud-supported"></a>
 ### Is National Cloud Supported?
-Alerts are supported in national clouds. Specify the national cloud portal domain names in "environment" property. You can use the same criteria for national clouds or different set of criteria.The national cloud domain names are "portal.azure.cn", "portal.azure.us", "portal.microsoftazure.de". You can use any legit national cloud domain name, for instance, "aad.portal.azrue.cn".
+Alerts are supported in national clouds. Specify the national cloud portal domain names in "environment" property. You can use the same criteria for national clouds or different set of criteria.The national cloud domain names are "portal.azure.cn", "portal.azure.us". You can use any legit national cloud domain name, for instance, "aad.portal.azrue.cn".
 ```json
 {
    ...
@@ -155,11 +155,11 @@ Alerts are supported in national clouds. Specify the national cloud portal domai
             ...
         },
         {
-            "environment": ["portal.azure.cn","portal.azure.us", "portal.microsoftazure.de"],
+            "environment": ["portal.azure.cn","portal.azure.us"],
             ...
         },
         {
-            "environment": ["portal.azure.us", "portal.microsoftazure.de"],
+            "environment": ["portal.azure.us"],
             ...
         }
         ...
@@ -198,8 +198,8 @@ Currently they run every 5 minutes assessing the previous hour of data.
 | ----- | -------------- |
 | Availability - Extension | ExtensionLoadAvailability |
 | Availability - Blade | BladeLoadAvailability |
-| Availability - Part | PartLoadAvailability | 
- 
+| Availability - Part | PartLoadAvailability |
+
 <a name="availability-how-do-i-know-my-extension-s-current-customization"></a>
 ## How do I know my extension&#39;s current customization?
 

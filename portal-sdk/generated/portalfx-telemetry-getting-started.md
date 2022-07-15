@@ -26,10 +26,6 @@ Name: AzPortalMC
 - Cloud: Mooncake
 - Data Source: https://azportalmc2.chinaeast2.kusto.chinacloudapi.cn
 
-Name: AzPortalBF
-- Cloud: Black Forest
-- Data Source: https://azportalbf.kusto.cloudapi.de
-
 Name: AzPortalFF
 - Cloud: Fairfax
 - Data Source: https://azportalff.kusto.usgovcloudapi.net

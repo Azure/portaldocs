@@ -205,7 +205,7 @@ The following is an example of a pull request for registering a `Scheduler` exte
 
 As per the safe deployment mandate, all the configuration changes are treated as code changes. Consequently, they use similar deployment processes.
 
-All changes that are checked in to the dev branch will be deployed in the following order: Dogfood -> RC -> MPAC -> PROD-> National Clouds (BlackForest, FairFax, and Mooncake). The table located at in [top-extensions-svc-lvl-agreements.md](top-extensions-svc-lvl-agreements.md) specifies the amount of time allowed to complete the deployment.
+All changes that are checked in to the dev branch will be deployed in the following order: Dogfood -> RC -> MPAC -> PROD-> National Clouds (FairFax, and Mooncake). The table located at in [top-extensions-svc-lvl-agreements.md](top-extensions-svc-lvl-agreements.md) specifies the amount of time allowed to complete the deployment.
 
 <a name="portal-extension-configuration-process-details-expediting-deployment"></a>
 ### Expediting deployment

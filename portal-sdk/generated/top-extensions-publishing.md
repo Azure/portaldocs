@@ -16,7 +16,7 @@ When an extension development team decides to make the extension publicly availa
 
 The Portal is deployed in four different environments: `dev`, `Dogfood`, `MPAC`, and `PROD`. The deployments are from four branches in the Portal repository. Always make code changes to a branch forked out of the Dev branch.  Create  a Pull request to merge the changes into Dev branch. Pull requests are also used to cherry-pick extension configurations from one branch to the next one by updating the configuration files that govern each environment. This document assumes that the extension has been completely developed and tested, and is ready to be moved to the next branch, as specified in [portalfx-extensions-branches.md](portalfx-extensions-branches.md). This document encompasses extension configuration files in the Portal repository; the source code for the extension is out of the scope of this document.
 
-As per the safe deployment mandate, all configuration changes are treated as code changes. Consequently, they use similar deployment processes. Changes that are checked in to the dev branch will be deployed in the following order: **Dogfood** -> **RC** -> **MPAC** -> **PROD** -> National Clouds (**BlackForest**, **FairFax**, and **Mooncake**).  The table in [top-extensions-svc-lvl-agreements.md](top-extensions-svc-lvl-agreements.md) specifies the amount of time allowed to complete the deployment.
+As per the safe deployment mandate, all configuration changes are treated as code changes. Consequently, they use similar deployment processes. Changes that are checked in to the dev branch will be deployed in the following order: **Dogfood** -> **RC** -> **MPAC** -> **PROD** -> National Clouds (**FairFax**, and **Mooncake**).  The table in [top-extensions-svc-lvl-agreements.md](top-extensions-svc-lvl-agreements.md) specifies the amount of time allowed to complete the deployment.
 
 **NOTE**: If the pull requests are not sent in the above specified order of environments, or if the commit message for the extension has changed, then the extension will experience a unit test failure and the changes can be reverted without any notice to the developer.  It is NOT guaranteed that the changes will get merged to top level branches automatically and may require extension owners to manually cherry-pick to top level branches in the order mentioned above.
 
@@ -55,7 +55,7 @@ All the pull requests should be sent first to the dev branch. To add or update o
     git checkout -b myalias/extensionupdate
 
     REM   Commit the staged content. Possible values for this file are:
-    REM     Extensions.dogfood.json, Extensions.prod.json, Extensions.bf.json,
+    REM     Extensions.dogfood.json, Extensions.prod.json,
     REM     and Extensions.ff.json, Extensions.mc.json
     git add <Modified_Extension.*.json_Files>
 

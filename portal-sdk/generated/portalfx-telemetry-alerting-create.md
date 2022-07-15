@@ -54,12 +54,12 @@ At a high level you define;
 <a name="create-configuration-what-is-environment"></a>
 ### What is environment?
 
-"environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com 
+"environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com
 or any other legit portal domain name, a.k.a., national cloud domain names are supported too. Mutiple values can be set for an "environment" property.
 
 <a name="create-configuration-what-is-enabled"></a>
 ### What is enabled?
-"enabled" property is used to enable (when "enabled" is true) or disable ("enabled" is false) alerts on various level 
+"enabled" property is used to enable (when "enabled" is true) or disable ("enabled" is false) alerts on various level
 depending on where it's located in customization json. For details, see "enabled" property in json snippet.
 
 You can define N number of criteria like the below.
@@ -117,7 +117,7 @@ Alerts will only trigger when the following criteria are met.
 
 <a name="create-configuration-is-national-cloud-supported"></a>
 ### Is National Cloud Supported?
-Alerts are supported in national clouds. Specify the national cloud portal domain names in "environment" property. You can use the same criteria for national clouds or different set of criteria.The national cloud domain names are "portal.azure.cn", "portal.azure.us", "portal.microsoftazure.de". You can use any legit national cloud domain name, for instance, "aad.portal.azrue.cn".
+Alerts are supported in national clouds. Specify the national cloud portal domain names in "environment" property. You can use the same criteria for national clouds or different set of criteria.The national cloud domain names are "portal.azure.cn", "portal.azure.us". You can use any legit national cloud domain name, for instance, "aad.portal.azrue.cn".
 ```json
 {
    ...
@@ -127,11 +127,11 @@ Alerts are supported in national clouds. Specify the national cloud portal domai
             ...
         },
         {
-            "environment": ["portal.azure.cn","portal.azure.us", "portal.microsoftazure.de"],
+            "environment": ["portal.azure.cn","portal.azure.us"],
             ...
         },
         {
-            "environment": ["portal.azure.us", "portal.microsoftazure.de"],
+            "environment": ["portal.azure.us"],
             ...
         }
         ...

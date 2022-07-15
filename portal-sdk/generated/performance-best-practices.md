@@ -106,7 +106,7 @@ Please send a pull request to the portal’s config with your change. Unfortunat
 - Make your required changes in the correct files
 - Send the PR and include GuruA and SanSom as the reviewers.
 
-Please make this change in all applicable environments, dogfood, PROD, FF, BF, and MC.
+Please make this change in all applicable environments, dogfood, PROD, FF, and MC.
 The config files follow the naming convention of `Extension.*.json` – where * is the environment.
 
 <a name="performance-best-practices-using-the-portals-arm-token-changes-required"></a>

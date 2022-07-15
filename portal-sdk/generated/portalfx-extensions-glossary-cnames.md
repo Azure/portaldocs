@@ -5,7 +5,6 @@ This section contains a glossary of terms and acronyms that are used in this doc
 
 | Term             | Meaning |
 | ---              | --- |
-| BF               | Black Forest |
 | CNAME            | Canonical Name record. A type of resource record in the Domain Name System (DNS) that specifies that a domain name is an alias for another domain (the 'canonical' domain). |
 | DNS              | Domain name server |
 | FF               | Fairfax |

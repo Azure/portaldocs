@@ -4,7 +4,7 @@
 
 As per the safe deployment mandate, all the configuration changes are treated as code changes. Consequently, they use similar deployment processes.
 
-All changes that are checked in to the dev branch will be deployed in the following order: **Dogfood** -> **RC** -> **MPAC** -> **PROD** -> National Clouds (**FairFax**, **Mooncake** and **BlackForest**).  The following table specifies the amount of time allowed to complete the deployment.
+All changes that are checked in to the dev branch will be deployed in the following order: **Dogfood** -> **RC** -> **MPAC** -> **PROD** -> National Clouds (**FairFax** and **Mooncake**).  The following table specifies the amount of time allowed to complete the deployment.
 
 <a name="framework-sla"></a>
 ## Framework SLA
@@ -17,7 +17,6 @@ All changes that are checked in to the dev branch will be deployed in the follow
 | PROD	      | 5-7 business days |
 | FAIRFAX	  | Prod + 3 business days |
 | MOONCAKE    |	Prod + 6 business days |
-| BLACKFOREST |	Prod + 9 business days |
 
 <a name="hosting-service-sla"></a>
 ## Hosting Service SLA
@@ -29,5 +28,3 @@ All changes that are checked in to the dev branch will be deployed in the follow
 | PROD	      | 5-7 business days |
 | FAIRFAX	  | Prod + 3 business days |
 | MOONCAKE    |	Prod + 6 business days |
-| BLACKFOREST |	Prod + 9 business days |
-

@@ -152,12 +152,6 @@ Here are example for each environment. For now, just add this empty file as an e
     <EmbeddedResource Include="Content\Config\portal.azure.cn.json" />
     ```
 
-1. **Blackforest:** (portal.microsoftazure.de) - Configration file name should be `portal.microsoftazure.de.json`
-
-    ```xml
-    <EmbeddedResource Include="Content\Config\portal.microsoftazure.de.json" />
-    ```
-
 1. **Fairfax:** (portal.azure.us) - Configuration file name should be `portal.azure.us.json`.
 
     ```xml
@@ -276,11 +270,6 @@ For national clouds, there are only 2 stages as outlined below -
 - stage1: chinanorth
 - stage2: All other mooncake regions
 
-**Blackforest:**
-
-- stage1: germanynortheast
-- stage2: All other blackforest regions
-
 **Fairfax:**
 
 - stage1: usgovcentral
@@ -324,7 +313,6 @@ Please submit your onboarding request [here](https://mybizaextensionprod.blob.co
 | DOGFOOD     	| 5 days                 	|
 | MPAC        	| 7 days                 	|
 | PROD        	| 12 days                	|
-| BLACKFOREST 	| 15 days                	|
 | FAIRFAX     	| 15 days                	|
 | MOONCAKE    	| 15 days                	|
 

@@ -164,12 +164,6 @@ Here are example for each environment. For now, just add this empty file with a 
     <Content Include="Content\Config\portal.azure.cn.json" />
     ```
 
-1. **Blackforest:** (portal.microsoftazure.de) - Configration file name should be `portal.microsoftazure.de.json`
-
-    ```xml
-    <Content Include="Content\Config\portal.microsoftazure.de.json" />
-    ```
-
 1. **Fairfax:** (portal.azure.us) - Configuration file name should be `portal.azure.us.json`.
 
     ```xml
@@ -306,11 +300,6 @@ For national clouds, there are default stage definition defines only 2 stages as
 - stage1: chinanorth
 - stage2: All other mooncake regions
 
-**Blackforest:**
-
-- stage1: germanynortheast
-- stage2: All other blackforest regions
-
 **Fairfax:**
 
 - stage1: usgovcentral
@@ -359,7 +348,6 @@ Please submit your onboarding request [here](https://mybizaextensionprod.blob.co
 | DOGFOOD     	| 5 days                 	|
 | MPAC        	| 7 days                 	|
 | PROD        	| 12 days                	|
-| BLACKFOREST 	| 15 days                	|
 | FAIRFAX     	| 15 days                	|
 | MOONCAKE    	| 15 days                	|
 
@@ -431,7 +419,6 @@ The versions available in the Hosting Service can be seen by going to the follow
 | DOGFOOD     	| [https://hosting.onecloud.azure-test.net/api/diagnostics](https://hosting.onecloud.azure-test.net/api/diagnostics)             	|
 | MPAC        	| [https://ms.hosting.portal.azure.net/api/diagnostics](https://ms.hosting.portal.azure.net/api/diagnostics)                     	|
 | PROD        	| [https://hosting.portal.azure.net/api/diagnostics](https://hosting.portal.azure.net/api/diagnostics)                           	|
-| BLACKFOREST 	| [https://hosting.azure-api.de/api/diagnostics](https://hosting.azure-api.de/api/diagnostics)                                   	|
 | FAIRFAX     	| [https://hosting.azureportal.usgovcloudapi.net/api/diagnostics](https://hosting.azureportal.usgovcloudapi.net/api/diagnostics) 	|
 | MOONCAKE    	| [https://hosting.azureportal.chinacloudapi.cn/api/diagnostics](https://hosting.azureportal.chinacloudapi.cn/api/diagnostics)   	|
 

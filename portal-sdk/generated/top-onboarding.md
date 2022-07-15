@@ -280,7 +280,7 @@ Please review the following required and optional fields for Portal extension.
 * **Sovereign clouds must always use respective cloud storage account** from the corresponding cloud subscription. **Eg: Fairfax storage account must be created in Fairfax subscription**.
 
 * Create **separate storage account for each environment**
-eg: Dogfood, Prod, Mooncake, Fairfax and BlackForest
+eg: Dogfood, Prod, Mooncake and Fairfax
 
 * **Create a container** under the storage account with **anonymous read access**.
 

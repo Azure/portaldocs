@@ -196,7 +196,6 @@ Argument | alias | Description
 --- | --- | ---
 --name | --n | Optional. The extension name in portal registration or extensions hosting service name to emit the diagnostics for.
 --production | --prod | Optional. Emits the diagnostics from production cloud.
---blackforest | --bf | Optional. Emits the diagnostics from blackforest cloud.
 --fairfax | --ff | Optional. Emits the diagnostics from fairfax cloud.
 --mooncake | --mc | Optional. Emits the diagnostics from mooncake cloud.
 --dogfood | --df | Optional. Emits the diagnostics from dogfood cloud.
@@ -205,7 +204,7 @@ Argument | alias | Description
 <a name="cli-overview-command-reference-ap-diag-example-usage-1"></a>
 #### Example Usage
 
-Emits the diagnostics for the extension within the current working directory from all 6 clouds (production, blackforest, fairfax, mooncake, dogfood, mpac). When you run `ap diag`, you get the `getExtensionNameInPortalRegistration` as a default extension name from `./devServerConfig.json`
+Emits the diagnostics for the extension within the current working directory from all 6 clouds (production, fairfax, mooncake, dogfood, mpac). When you run `ap diag`, you get the `getExtensionNameInPortalRegistration` as a default extension name from `./devServerConfig.json`
 
 ```
 ap diag

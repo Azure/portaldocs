@@ -80,7 +80,6 @@ Cloud        |Type     |AllowedParentFrame
 -------------|---------|------------------
 Public       |National |portal.azure.com
 China        |National |portal.azure.cn
-Germany      |National |portal.microsoftazure.de
 US Government|National |portal.azure.us
 Fujitsu A5   |Community|fujitsu.portal.azure.com
 

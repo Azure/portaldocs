@@ -203,7 +203,6 @@ To get started in a sovereign cloud, talk to the Azure Global Ecosystems team or
 | Cloud          | Portal domain            | Extension domain        | More information |
 |----------------|--------------------------|-------------------------|------------------|
 | (Public Azure) | portal.azure.com         | *.ext.azure.com         |       (N/A)      |
-| Blackforest    | portal.microsoftazure.de | *.ext.microsoftazure.de | [Blackforest wiki](https://aka.ms/blackforest) |
 | Mooncake       | portal.azure.cn          | *.ext.azure.cn          | [Mooncake wiki](https://aka.ms/mooncake/)    |
 | Fairfax        | portal.azure.us          | *.ext.azure.us          | [Fairfax wiki](https://aka.ms/fairfax/)     |
 
@@ -216,9 +215,9 @@ To get started in a sovereign cloud, talk to the Azure Global Ecosystems team or
 When you deploy your extension to a different cloud, you must explicitly allow the portal in that cloud to load your extension.
 This is controlled in your config. Look for a setting called `Microsoft.Portal.Framework.FrameworkConfiguration.AllowedParentFrame`. It should be a JSON array of domains that can load your extension (i.e. list of portal domains for a given cloud).
 
-E.g. for Blackforest you might have this in your CSCFG:
+E.g. for Mooncake you might have this in your CSCFG:
 ```
-<add key="Microsoft.Portal.Framework.FrameworkConfiguration.AllowedParentFrame" value="['portal.microsoftazure.de']" />
+<add key="Microsoft.Portal.Framework.FrameworkConfiguration.AllowedParentFrame" value="['portal.microsoftazure.cn']" />
 ```
 
 If you don't set it correctly, the browser will refuse to load your extension with an error in the console similar to `Refused to display (extension URL) in a frame because an ancestor violates the following Content Security Policy directive: (some frame-ancestors URL)`
