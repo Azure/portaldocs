@@ -332,12 +332,12 @@ Don't forget to include context for the meeting, which blade or view you're want
 
 - __When?__  Wednesdays from 13:00 to 16:00
 - __Where?__ Teams meeting
-- __Contacts:__ Sean Watson (sewatson)
+- __Contacts:__ Azure Portal Performance Office Hours (apperfofficehours)
 - __Goals__
   - Help extensions to meet the performance bar
   - Help extensions to measure performance
   - Help extensions to understand their current performance status
 - __How to book time__: Send a meeting request with the following
-  - TO: sewatson;
+  - TO: apperfofficehours;
   - Subject: YOUR_EXTENSION_NAME: Azure performance office hours
   - Location: Teams meeting

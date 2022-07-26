@@ -52,11 +52,13 @@ To batch multiple requests as one, use the batch helpers that are located in the
 
 ```typescript
 
+// <docsBatchLoadData>
 const loadDataFromARM = batch<Resource>({
     type: "GET",
     uri: parameters.resourceId,
     setTelemetryHeader: "DataLoadForTemplateBlade",
 });
+// </docsBatchLoadData>
 
 ```
 
@@ -165,11 +167,13 @@ For context, here is an example where the developer explicitly supplies a name:
 
 ```typescript
 
+// <docsBatchLoadData>
 const loadDataFromARM = batch<Resource>({
     type: "GET",
     uri: parameters.resourceId,
     setTelemetryHeader: "DataLoadForTemplateBlade",
 });
+// </docsBatchLoadData>
 
 ```
 
@@ -236,11 +240,13 @@ If you're updating a KnockoutJS Blade (PDL, no-PDL), you're almost certainly usi
 
 ```typescript
 
+// <docsBatchLoadData>
 const loadDataFromARM = batch<Resource>({
     type: "GET",
     uri: parameters.resourceId,
     setTelemetryHeader: "DataLoadForTemplateBlade",
 });
+// </docsBatchLoadData>
 
 ```
 
