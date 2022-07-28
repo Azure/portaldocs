@@ -206,27 +206,33 @@ export class SampleFrameBlade {
     // Get the below trusted origins from configuration to include the origin of the portal in
     // which the page needs to be iframe'd.
     let allowedParentFrameAuthorities = ["localhost:55555", "portal.azure.com"];
-
-    // Capture the origin of the parent and validate that it is trusted. If it is not a trusted
-    // origin, then DO NOT setup any listeners and IGNORE messages from the parent/owner window
-    var trustedParentOrigin = getQueryParameter("trustedAuthority");
-    let isTrustedOrigin = (function() {
-        let trustedAuthority = (trustedParentOrigin.split("//")[1] || "").toLowerCase();
-
-        return allowedParentFrameAuthorities.some(function(origin) {
-            // Verify that the requested trusted authority is either an allowed origin or is a
-            // subdomain of an allowed origin.
-            return origin === trustedAuthority
-                || (trustedAuthority.indexOf("." + origin) === trustedAuthority - origin - 1);
+    let trustedParentOrigin = (function () {
+        // Capture the client session ID to use to correlate user actions and events within this client session.
+        let sessionId = location.hash.substr(1);
+        // Parse query string
+        let parentOriginFromQueryString = (new URLSearchParams(window.location.search)).get("trustedAuthority") || "";
+        let parentTrustedAuthority = (parentOriginFromQueryString.split("//")[1] || "").toLowerCase();
+        let isTrustedOrigin = allowedParentFrameAuthorities.some(function (allowedOrigin) {
+            // Verify that the requested trusted authority is an allowed origin.
+            if (allowedOrigin === parentTrustedAuthority) {
+                return true;
+            }
+            // Verify that the requested trusted authority is a subdomain of an allowed origin.
+            let subdomainSuffix = "." + allowedOrigin; // Eg. ".portal.azure.com"
+            return parentTrustedAuthority.length > subdomainSuffix.length && parentTrustedAuthority.slice(-subdomainSuffix.length) === subdomainSuffix;
         });
-    })();
 
-    // TODO: Uncomment below code to prevent untrusted origins from accessing the site.
-    // if (!isTrustedOrigin) {
-    //     var errorMessage = "The origin '" + trustedParentOrigin + "' is not trusted.";
-    //     console.error(sessionId, errorMessage);
-    //     throw new Error(errorMessage);
-    // }
+        if (!isTrustedOrigin) {
+            // Allow localhost for testing/development scenarios.
+            if (parentTrustedAuthority.indexOf("localhost:") !== 0) {
+                let errorMessage = "The origin '" + parentTrustedAuthority + "' is not trusted.";
+                global.console.error(errorMessage + " Session: " + sessionId);
+                throw new Error(errorMessage);
+            }
+        }
+
+        return parentOriginFromQueryString;
+    })();
 
     // ---------------------------------------------------------------------------------------------
     // -------------------------------- Handshake Code with Portal ---------------------------------
