@@ -112,7 +112,9 @@ Onboarding to Azure is a big task that spans many teams. The doc you're reading 
 
 1. Start the CSS onboarding process with the CSS team at least three months prior to public preview. This process may coincide with the following step. For more information about development phases, see [top-extensions-developmentPhases.md](top-extensions-developmentPhases.md).
 
-1. Nearly 70% of Azure users are from outside of the United States. Therefore, it is important to make Azure a globalized product. There are a few requirements under the "Internationalization" criteria that your extension is required to support. This is the same set of languages that are supported by Azure Portal for GA. For more information about internationalization requirements, see [https://aka.ms/AzureGR](https://aka.ms/AzureGR). For onboarding localization, please reach out to Bruno Lewin and the <a href="mailto:ibiza-interntnl@microsoft.com?subject=Onboarding localization">Internationalization team</a>.
+1. Nearly 70% of Azure users are from outside of the United States. Therefore, it is important to make Azure a globalized product. There are a few requirements under the "Internationalization" criteria that your extension is required to support. For more information about internationalization, Global Readiness requirements, see https://aka.ms/AzureGR. Please reach out through Contact -> Contact CELA Global Readiness team through https://aka.ms/GRWeb for inquire.
+
+1. To get your service localized to Azure Portal languages, see more information at https://aka.ms/AzureLoc in this doc set. For localization enablement questions and Localization platform onboarding request, please follow procedures outlined at [https://aka.ms/AllAboutLoc](https://aka.ms/AllAboutLoc).
 
 1. Decide on a name and any URLs for the extension. You may need to contact <a href="mailto:ibiza-onboarding@microsoft.com?subject=Name and URLs for new Extension">ibiza-onboarding@microsoft.com</a> to ensure that the name and URLs are unique.
 
