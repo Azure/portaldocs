@@ -109,10 +109,34 @@ Below two tables show different criteria for different alert types and different
 
 <a name="availability-what-are-the-alerts-triggering-criteria-sev3"></a>
 #### Sev3:
-| Alert Type | Cloud | Min Total User Count | Min Affected User Percentage |
-| ----- | ----- | ----- | ----- |
-| Failed At Least Once | All Clouds* | 10 | 7% |
-| Failed Always | All Clouds* | 10 | 5% |
+<table>
+    <thead>
+        <tr>
+            <th>Alert Type</th>
+            <th>Cloud</th>
+            <th>Min Total User Count</th>
+            <th>Min Affected User Percentage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Failed At Least Once</td>
+            <td>All Clouds*</td>
+            <td>10</td>
+            <td>10%</td>
+        </tr>
+        <tr>
+            <td rowspan=2>Failed Always</td>
+            <td rowspan=2>All Clouds*</td>
+            <td>10</td>
+            <td>10%</td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>5%</td>
+        </tr>
+    </tbody>
+</table>
 
 <a name="availability-what-are-the-alerts-triggering-criteria-sev2"></a>
 #### Sev2:
@@ -129,22 +153,31 @@ Below two tables show different criteria for different alert types and different
         <tr>
             <td rowspan=2>Failed At Least Once</td>
             <td>Public</td>
-            <td>50</td>
+            <td>25</td>
             <td rowspan=2>50%</td>
         </tr>
         <tr>
             <td>Non-Public Clouds**</td>
-            <td>25</td>
+            <td>10</td>
         </tr>
         <tr>
-            <td rowspan=2>Failed Always</td>
-            <td>Public</td>
+            <td rowspan=4>Failed Always</td>
+            <td rowspan=2>Public</td>
+            <td>25</td>
+            <td>50%</td>
+        </tr>
+        <tr>
             <td>50</td>
-            <td rowspan=2>25%</td>
+            <td>25%</td>
         </tr>
         <tr>
-            <td>Non-Public Clouds**</td>
-            <td>25</td>
+            <td rowspan=2>Non-Public Clouds**</td>
+            <td>10</td>
+            <td>50%</td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>25%</td>
         </tr>
     </tbody>
 </table>

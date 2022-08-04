@@ -130,6 +130,7 @@ Add Properties definition (see `Properties definition samples` section) to the `
 |parameters|False|Defines the parameters that are input to the view.  Parameters can be required (key) or optional (optional).
 |resources|False|Specify an array of GET ARM request based on the given Resource Id (`id`) and `apiVersion`. The response can be referenced in Property item values.
 |dataSources|False|Specify an array of GET AAD Resource Graph request based on the given `path`. The response can be referenced in Property item values.
+|messages|False|
 |essentials|False|Defined Essentials section for Monitoring view
 |commands|False|Defined Command button for Monitoring view
 |properties|True|See [here](dx-view-monitoringViewType-properties.md) for more on properties.

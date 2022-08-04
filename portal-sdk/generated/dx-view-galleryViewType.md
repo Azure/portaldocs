@@ -16,6 +16,7 @@
 |parameters|False|
 |resources|False|
 |dataSources|False|
+|messages|False|
 |essentials|False|
 |commands|False|
 |properties|False|

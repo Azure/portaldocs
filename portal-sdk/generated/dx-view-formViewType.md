@@ -17,6 +17,7 @@
 |parameters|False|
 |resources|False|
 |dataSources|False|
+|messages|False|
 |commands|False|
 |properties|True|
 |outputs|False|

@@ -71,7 +71,7 @@ The marketplace offers users a consistent way to browse and search the set of cu
 In the browser that has the portal and your side loaded extension, go to the marketplace by:
 
 1. Clicking `+ Create a resource`
-1. Then, click `See all`.
+1. Then, click `See more in Marketplace`.
 
 	![alt-text](../media/top-extensions-getting-started/marketplace1.png "marketplace create resource see all link")
 
