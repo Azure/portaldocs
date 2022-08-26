@@ -13,10 +13,12 @@
 |type|True|
 |label|True|
 |link|False|
+|toolTip|False|
 |keyPath|True|
 |barColor|False|
 |descriptionKeyPath|False|
 |value|True|
+|constraints|False|
 |defaultValue|True|
 |valueMapping|False|
 |visible|False|

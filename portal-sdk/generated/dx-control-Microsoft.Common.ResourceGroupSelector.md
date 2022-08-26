@@ -15,4 +15,5 @@
 |scope|True|
 |type|True|
 |allowedMode|False|
+|allowExisting|False|
 |constraints|False|
