@@ -2434,7 +2434,7 @@ import { SvgType } from "Fx/Images";
             },
             definitions: {
                 "microsoft.test/virtualservers": {
-                    uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
+                    uri: "{resourceid}?skipserver=false&api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
                 },
             },
             confirmation: {
@@ -2748,6 +2748,23 @@ In the environment config, you can specify this command id for one of your layou
         }
     }
 ```
+### Configuring api-versions for extensible commands performing ARM bulk operations
+
+Extension authors can supply api-versions per cloud/environment for their ARM bulk commands. Specify the map of command id and respective api-version to be used in the config file e.g. default.json
+
+```jsonc
+    {
+        "assetTypeExtensibleCommandsApiVersions": {
+          "VirtualServer": {
+            "Microsoft.Test/virtualservers": {
+              "BulkStart": "2022-08-01-preview"
+            }
+          }
+        }
+    }
+```
+
+Portal will ignore the default api-version specified in the command definition and honor the versions found in the above map while executing ARM bulk commands.
 
 # Merging Resource Types and Kinds
 

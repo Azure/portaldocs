@@ -9,7 +9,7 @@ The metrics are reported as part of an executive summary every Friday. Extension
 * [Reliability](#reliability)
 * [Usability](#usability)
 * [Accessibility](#accessibility)
-* [Localization](#localization)
+* [Internationalization](#Internationalization)
 * [Create Success Rate](#create-success-rate)
 * [Resource move](#resource-move)
 
@@ -82,10 +82,12 @@ The accessibility bar is similar to the usability bar, and every service must me
 
 For more information about accessibility, see [portalfx-accessibility.md](portalfx-accessibility.md).
 
-<a name="production-ready-metrics-and-quality-metrics-localization"></a>
-### Localization
+<a name="production-ready-metrics-and-quality-metrics-internationalization"></a>
+### Internationalization
+Nearly 70% of Azure users are from outside of the United States. Therefore, it is important to make Azure a globalized product. There are a few requirements under the "Internationalization" criteria that your extension is required to support. For more information about internationalization, Global Readiness requirements, see https://aka.ms/AzureGR. Please reach out through Contact -> Contact CELA Global Readiness team on https://aka.ms/GRWeb for inquire.
 
-Nearly 70% of Azure users are from outside of the United States. Therefore, it is important to make Azure a globalized product. There are a few requirements under the "Internationalization" criteria that your service is required to support.  This is the same set of languages that are supported by Azure Portal for GA. For more information about internationalization requirements, see [https://aka.ms/AzureGR](https://aka.ms/AzureGR). For onboarding localization, please reach out to Bruno Lewin and the Internationalization team at <a href="mailto:ibiza-interntnl@microsoft.com?subject=Onboarding localization">Internationalization team</a>.
+
+To get your service localized to Azure Portal languages, see more information at https://aka.ms/AzureLoc in this doc set. For localization enablement questions and Localization platform onboarding request, please follow procedures outlined at [https://aka.ms/AllAboutLoc](https://aka.ms/AllAboutLoc).
 
 <a name="production-ready-metrics-and-quality-metrics-create-success-rate"></a>
 ### Create Success Rate

@@ -27,7 +27,9 @@ The display language will be one of the 19 languages below. All extensions are r
 | Swedish               	| sv           	|
 | Turkish               	| tr           	|
 
-For more information about internationalization requirements for your extension and the process to get the extension localized see [https://aka.ms/AzureGR](https://aka.ms/AzureGR). For onboarding localization, please reach out to the [DevRel Global Experiences Localization team](mailto:drlocprodpm@microsoft.com).
+For more information about internationalization, Global Readiness requirements, see https://aka.ms/AzureGR. Please reach out through Contact -> Contact CELA Global Readiness team on https://aka.ms/GRWeb for inquire.
+
+For localization enablement questions and Localization platform onboarding request, please follow procedures outlined at [https://aka.ms/AllAboutLoc](https://aka.ms/AllAboutLoc).
 
 <a name="localization-localizing-build"></a>
 ### Localizing build
