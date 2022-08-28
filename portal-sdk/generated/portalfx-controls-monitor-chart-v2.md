@@ -123,8 +123,8 @@ export class MonitorChartTestBladeViewModel {
     constructor(container: Blade.Container, initialState: any, dataContext: any) {
     }
 
-    public onInputsSet(inputs: any): Q.Promise<void> {
-        return Q();
+    public onInputsSet(inputs: any): Promise<void> {
+        return Promise.resolve();
     }
 }
 ```

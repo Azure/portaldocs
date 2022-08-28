@@ -46,7 +46,7 @@ return Batch.batch({
  * @param settings The settings to use to call batch.
  * @return A promise for the batch call.
  */
-export function batch<T>(settings: BatchSettings, serverAuthority?: string): Q.Promise<BatchResponseItem<T>>
+export function batch<T>(settings: BatchSettings, serverAuthority?: string): Promise<BatchResponseItem<T>>
 
 /**
  * The request options.

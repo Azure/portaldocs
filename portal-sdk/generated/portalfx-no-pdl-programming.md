@@ -317,26 +317,6 @@ Argument of type 'typeof TestTemplateBlade' is not assignable to parameter of ty
       Type '() => void' is not assignable to type '() => Promise<any>'.
         Type 'void' is not assignable to type 'Promise<any>'.
 ```
-<a name="defining-blades-and-parts-using-typescript-decorators-a-k-a-no-pdl-no-pdl-faq-why-can-t-i-return-my-data-loading-promise-directly-from-oninitialize"></a>
-#### Why can&#39;t I return my data-loading Promise directly from &#39;onInitialize&#39;
-
-Extensions will see compile errors when then attempt to return from `onInitialize` the result of a call to `queryView.fetch(...)`, `entityView.fetch(...)`, `Base.Net.ajax2(...)`:
-```
-public onInitialize() {
-    public { container, model, parameters } = this.context;
-    public view = model.websites.createView(container);
-
-    // Returns Promise and not the required Q.Promise<any>.
-    return view.fetch(parameters.websiteId).then(...);
-}
-```
-Here, our FX data-loading APIs return an old `Promise` type that is not compatible with the `Q.Promise` type expected for `onInitialize`.  To workaround this shortcoming of the FX data-loading APIs, until these APIs are revised you'll do:
-```
-    ...
-    return Q(view.fetch(...)).then(...);
-    ...
-```
-This application of `Q(...)` simply coerces your data-loading Promise into the return type expected for `onInitialize`.
 
 <a name="defining-blades-and-parts-using-typescript-decorators-a-k-a-no-pdl-no-pdl-faq-i-don-t-understand-the-typescript-compilation-error-i-m-getting-around-my-no-pdl-blade-part-and-there-are-lots-of-them-what-should-i-do-here"></a>
 #### I don&#39;t understand the TypeScript compilation error I&#39;m getting around my no-PDL Blade/Part.  And there are lots of them.  What should I do here?

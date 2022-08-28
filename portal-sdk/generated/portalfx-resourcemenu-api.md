@@ -191,7 +191,7 @@ declare module "Fx/Composition/Selectable" {
          *
          * @return A promise that returns a blade reference that describes the blade to open.  This value cannot be null or undefined.
          */
-        supplyBladeReferenceAsync?: () => Q.Promise<TBladeReference>;
+        supplyBladeReferenceAsync?: () => Promise<TBladeReference>;
     }
 }
 ```
