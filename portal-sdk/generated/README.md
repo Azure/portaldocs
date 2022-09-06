@@ -242,7 +242,7 @@ Many experiences require the user to enter data into a form. The Ibiza controls 
 
 * [Notifications](/portal-sdk/generated/top-extensions-notifications.md)
 
-* [Iris Notifications](/portal-sdk/generated/portalfx-notifictions-iris.md)
+* [Iris Notifications](/portal-sdk/generated/portalfx-notifications-iris.md)
 
 <a name="azure-portal-extension-development-documentation-development-guide-loading-and-managing-data"></a>
 ### Loading and managing data
