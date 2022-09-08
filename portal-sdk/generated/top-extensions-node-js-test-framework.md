@@ -177,6 +177,16 @@ Create a file named `config.json` next to `portaltests.ts`. Paste this in the fi
 
 ```js
 {
+    "playwright": {
+        "browser": "chrome",
+        "resolution": {
+            "width": 1280,
+            "height": 960
+        },
+        "options": {
+            "headless": false
+        }
+    },
     "capabilities": {
         "browserName": "chrome",
         "chromeOptions": {
@@ -196,7 +206,8 @@ Create a file named `config.json` next to `portaltests.ts`. Paste this in the fi
     "allowUnauthorizedCert": "true",
     "LOGIN_NAME": "<someone@someCompany.com>",
     "partnerTeamEmail": "partnerEmail@partnerCompany.com",
-    "AzureEnvironment": < for public use "AzurePublicCloud", for fairfax use "AzureGovernment", for mooncake use "AzureChina" >
+    "AzureEnvironment": < for public use "AzurePublicCloud", for fairfax use "AzureGovernment", for mooncake use "AzureChina" >,
+    "browserAutomation": < to run tests under Playwright use "playwright", to run tests under Selenium use "webdriver" >
 }
 ```
 
@@ -214,6 +225,86 @@ It is required to specify a team email (**the one used when you registered the e
 1. Assigning the team name to `partnerTeamEmail` configuration value in config.json file.
 2. Setting the partnerTeamEmail environment variable by running either `set partnerTeamEmail "partnerEmail@partnerCompany.com"` if you want to set that variable **ONLY** for the current command prompt or `setx partnerTeamEmail "partnerEmail@partnerCompany.com"` if you'd like to propagate that variable for all the future command prompts.
 3. If a test is run via VSCode, set the `--partnerTeamEmail` args for the appropriate configuration in .vscode/launch.json file, e.g. `"--partnerTeamEmail", "partnerEmail@partnerCompany.com"`.
+
+<a name="overview-playwright-automation"></a>
+### Playwright automation
+
+Besides Selenium WebDriver, @microsoft/azureportal-test framework now supports [Playwright](https://playwright.dev/) test automation library. We recommend using Playwright over Selenium as it is faster and more reliable. Note that you may encounter bugs or unexpected behavior while using Playwright as we are still working on improving the stability. Also, @microsoft/azureportal-test framework does not support accessibility testing under Playwright; that functionality is coming soon. So, whether you are only starting to write your tests or you want to migrate from Selenium to Playwright, here are the steps to start using Playwright:
+
+1. Set `playwright` parameter in `config.json`:
+    ```json
+    "playwright": {
+        "browser": "chrome",
+        "resolution": {
+            "width": 1280,
+            "height": 960
+        },
+        "options": {
+            "headless": false
+        }
+    }
+    ```
+    To see all the available options that can be passed to Playwright, see [Playwright browser launch documentation](https://playwright.dev/docs/api/class-browsertype#browser-type-launch).
+
+1. There are two ways to make tests run using Playwright:
+   - By default, test framework uses Selenium automation. To enable Playwright, set `browserAutomation` parameter to `playwright` in `config.json`:
+
+    ```json
+    "browserAutomation": "playwright"
+    ```
+    It's also possible to explicitly set `browserAutomation` to `webdriver` to make sure your tests run using Selenium.
+
+   - In your test code, use `testFx.BrowserAutomation.setAutomation()` in one of the clauses that runs before a test case (i.e. `before`, `beforeAll`, `beforeEach`):
+
+    ```ts
+    before(async () => {
+        await testFx.BrowserAutomation.setAutomation(testFx.BrowserAutomationType.Playwright);
+    });
+    ```
+    It is recommended to use the first method unless you have some tests that are consistently failing using Playwright automation. When using the second method, note that the automation will be set only for that test file. That means that if you are running several test files in one go (i.e. via `.mocharc` or using `grep`), when `portal` class is being initialized at the beginning of each test file execution, it will set automation to either what is set as `browserAutomation` in `config.json` or will default to Selenium. Also, if you have several test suites/cases in one test file, using the second method will set the automation for the rest of the test cases in all test suites after it.
+
+1. If you are using `testFx.portal.getDriver()` and `testFx.portal.hasDriver()`, replace them with `testFx.portal.getBrowser()` and `testFx.portal.hasBrowser()` respectively, e.g.:
+
+    ```ts
+    const activeElement = await testFx.portal.getBrowser().getActiveElement();
+    ```
+
+1. If you are using xpath locator queries that start with `.//` prefix, replace that prefix with `testFx.Locators.By.currentNodeXPathPrefix()`:
+
+    ```ts
+    const listViewGallery = testFx.portal.element(testFx.Locators.By.xpath(`${testFx.Locators.By.currentNodeXPathPrefix()}div[contains(@class, 'fxc-listView-gallery')]`));
+    ```
+
+1. If you are using Selenium specific functions, use `testFx.BrowserAutomation.runAutomation()` (or `testFx.BrowserAutomation.runAutomationSync()` for synchronous functions) and create Playwright version of that functionality. Those functions expect callbacks for each automation, and pass automation classes which are optional to use:
+
+    ```ts
+    const dropDownArrow = testFx.portal.element(testFx.Locators.By.className(dropDownArrowClass));
+    await testFx.BrowserAutomation.runAutomation(
+        async (wd) => await wd.executeScript("$(arguments[0]).trigger('mousedown').trigger('mouseup').trigger('click');", dropDownArrow),
+        async () => await dropDownArrow.click()
+    )
+    ```
+
+1. If you are using `testFx.portal.executeScript()` or `testFx.portal.executeAsyncScript()`, you might have to adjust that script and use `testFx.BrowserAutomation.runAutomation()` to distinct two versions of the script.
+   - Remove `return` in Playwright versions of scripts:
+
+    ```ts
+    const result: string = await testFx.BrowserAutomation.runAutomation<string>(
+        async (wd) => await wd.executeScript("return JSON.stringify(FxImpl.getAssetTypeMappingData());"),
+        async (pw) => await pw.executeScript("JSON.stringify(FxImpl.getAssetTypeMappingData())")
+    )
+    ```
+
+   - If script is running on an element, you'd have to run `executeScript` of that element in the Playwright version:
+
+    ```ts
+    const journeyBlade = testFx.portal.element(testFx.Locators.By.className(journeyBladeClass));
+    const result: string = await testFx.BrowserAutomation.runAutomation<string>(
+        async (wd) => await wd.executeScript("return $.contains(arguments[0], document.activeElement)", journeyBlade),
+        async () => await (<testFx.PlaywrightElement>(await journeyBlade.getWebElements())[0]).executeScript("(htmlElem) => $.contains(htmlElem, document.activeElement)")
+    )
+    ```
+    Notice the format of the Playwright version of the script. It's a function with `htmlElem` parameter passed to it, and that parameter is used as the element in the script.
 
 <a name="overview-compile-and-run"></a>
 ### Compile and run
