@@ -141,7 +141,7 @@ return provisioning.deployTemplate(this._supplyTemplateDeploymentOptions())
 ```typescript
 
 const provisioningPromise = provisioning.deployCustom({
-    provisioningPromise: Q(model.robotData.createRobot(newRobot)).then(() => {
+    provisioningPromise: model.robotData.createRobot(newRobot).then(() => {
         // Close blade, notification will update when creation is complete
         container.closeCurrentBlade();
         // Adding some extra wait time to make the operation seem longer.

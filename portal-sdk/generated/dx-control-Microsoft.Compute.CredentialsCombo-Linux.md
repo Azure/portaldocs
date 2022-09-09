@@ -13,8 +13,10 @@
 |type|True|
 |label|True|
 |toolTip|False|
+|defaultValue|False|
 |constraints|False|
 |options|False|
 |osPlatform|True|
 |visible|False|
+|scope|False|Use scope to define the Subscription, Resource Group name and location that will be applied to control used.
 |fx.feature|False|

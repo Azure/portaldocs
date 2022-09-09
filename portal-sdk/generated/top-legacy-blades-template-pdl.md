@@ -376,7 +376,7 @@ constructor(container: FxCompositionBlade.Container) {
     let isTranslucent = true;
 
     const op = () => {
-        const operation = Q.defer<any>();
+        const operation = Fx.defer<any>();
         const shieldType = isTranslucent ? translucent : opaque;
         container.operations.add(operation.promise, { blockUi: true, shieldType: shieldType });
 

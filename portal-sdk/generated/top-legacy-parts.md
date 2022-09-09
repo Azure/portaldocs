@@ -263,7 +263,7 @@ const hotSpotSelectable = new FxViewModels.Selectable({
     selectedValue: bladeSelection,
 });
 hotSpotSelectable.getDefaultSelection = () => {
-    return Q(bladeSelection);
+    return Promise.resolve(bladeSelection);
 };
 this.configureHotSpot.selectable = hotSpotSelectable;
 this.configOnDropSelectable = hotSpotSelectable;
@@ -477,7 +477,7 @@ constructor(container: PartContainerContract) {
         selectedValue: bladeSelection,
     });
     hotSpotSelectable.getDefaultSelection = () => {
-        return Q(bladeSelection);
+        return Promise.resolve(bladeSelection);
     };
     this.configureHotSpot.selectable = hotSpotSelectable;
     this.configOnDropSelectable = hotSpotSelectable;

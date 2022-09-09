@@ -182,9 +182,9 @@ The '`refresh`' method is useful when the server data changes are known to be sp
 const promises: Promise<void>[] = [];
 this.enginesQuery.refresh({}, null);
 MsPortalFx.makeArray(engines).forEach((engine) => {
-    promises.push(Q(this.engineEntities.refresh(engine, null)));
+    promises.push(Promise.resolve(this.engineEntities.refresh(engine, null)));
 });
-return Q.all(promises);
+return Promise.all(promises);
 
 ```
 
