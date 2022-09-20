@@ -275,7 +275,7 @@ function getPrinterMenu(resourceId: string, dataContext: DataContext): Promise<F
        }
    });
 
-   return Q(menuConfig);
+   return Promise.resolve(menuConfig);
 }
 
 /**
@@ -308,7 +308,7 @@ export class PrinterViewModel
        this._dataContext = dataContext;
        this._updateMap = Object.create(null);
        const updateId = dataContext.printerData.registerUpdate<{ columns: string[] }>(this._updateMap, (resourceId, data) => {
-           return Q(this.getSupplementalData([resourceId], data.columns)).then(MsPortalFx.noop);
+           return this.getSupplementalData([resourceId], data.columns).then(MsPortalFx.noop);
        });
        container.registerForDispose(() => {
            dataContext.printerData.unregisterUpdate(updateId);
@@ -328,7 +328,7 @@ export class PrinterViewModel
        // NOTE that since the browse is resource type-based, the icon, resource name will be prepended at the start
        // of the columns and subscription will be appended at the end of the columns. Those three columns must not be
        // included in the custom config.
-       return Q.resolve({
+       return Promise.resolve({
            columns: [
                // Column for the model using a custom column.
                {
@@ -441,7 +441,7 @@ export class PrinterViewModel
            armId.resourceType.toLowerCase() === entityResourceType) {
            return getPrinterMenu(resourceId, this._dataContext);
        }
-       return Q(null);
+       return Promise.resolve(null);
    }
 }
 
