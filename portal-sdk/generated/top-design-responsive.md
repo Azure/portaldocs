@@ -495,6 +495,8 @@ Be careful of pinned UI within your iframe that may get really constrained at sm
 <a name="responsive-design-with-ibiza-sdk-annotate-content-as-responsive"></a>
 ## Annotate content as responsive
 
+>__Note:__: The annotation is deprecated and everything is marked as reflowReady as of October 2022.
+
 Once the content is deemed ready, the content owner has to signal to the framework that it should be rendered in a responsive container. This can be done in one of two ways.
 
 >__Note:__ The annotation works post SDK 1153.
@@ -502,12 +504,16 @@ Once the content is deemed ready, the content owner has to signal to the framewo
 <a name="responsive-design-with-ibiza-sdk-annotate-content-as-responsive-content-level-reflowready-flag"></a>
 ### Content level <code>reflowReady</code> flag
 
+>__Note:__: The annotation is deprecated and everything is marked as reflowReady as of October 2022.
+
 When the content is ready to be fully flexible, mark the content as `reflowReady`. The flag usage differs depending on the type of content.
 
 >**Note:** The content level flag also turns on a rule that enforces the removal of any content width explicitly set on non-context pane content. If this is too much noise, consider the `reflowReadyDefault` flag, which doesn't have this enforcement enabled yet. Context pane width is exempt because it applies the maximum width constraint of the pane when rendered in a large enough resolution.
 
 <a name="responsive-design-with-ibiza-sdk-annotate-content-as-responsive-content-level-reflowready-flag-for-pdl-content"></a>
 #### For PDL content
+
+>__Note:__: The annotation is deprecated and everything is marked as reflowReady as of October 2022.
 
 Annotate `reflowReady` on the declaration of the blade as an attribute.
 
@@ -533,6 +539,8 @@ Annotate `reflowReady` on the declaration of the blade as an attribute.
 <a name="responsive-design-with-ibiza-sdk-annotate-content-as-responsive-content-level-reflowready-flag-for-typescript-content"></a>
 #### For TypeScript content
 
+>__Note:__: The annotation is deprecated and everything is marked as reflowReady as of October 2022.
+
 Annotate `reflowReady` on the decorator as an additional option on the declaration.
 
 ```typescript
@@ -553,6 +561,8 @@ export class TemplateBladeWithReflowReadyTrue {
 
 <a name="responsive-design-with-ibiza-sdk-annotate-content-as-responsive-extension-wide-reflowreadydefault-flag"></a>
 ### Extension wide <code>reflowReadyDefault</code> flag
+
+>__Note:__: The annotation is deprecated and everything is marked as reflowReady as of October 2022.
 
 The `reflowReadyDefault` flag sets the default value of the content level `reflowReady` flag. For existing extension this is set to `false`, while all future new extensions have this flag set to `true`. If a significant portion of the content of the extension is ready for responsive rendering, consider changing this flag value instead of each individual content.
 

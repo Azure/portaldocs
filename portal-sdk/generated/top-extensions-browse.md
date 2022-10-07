@@ -2672,8 +2672,8 @@ Portal now supports experimenting with asset type commands in browse command bar
 
 1. Extension authors can create an Experiment in Control Tower with a value that overrides their default browse commands.
    - The variable name has to be a well-known string that uniquely identifies the asset type. The format should be of the form described below:
-BrowseCommands-ExtensionNameAssetTypeName The variable name should start with `BrowseCommands-` followed by extension name and asset type name without any underscores. e.g. this would translate to `BrowseCommands-MicrosoftAzureComputeVirtualMachines` for Virtual Machine resource type.
-   - The variable must be created under `AzurePortal` namespace.
+BrowseCommands-ExtensionNameAssetTypeName. The variable name should start with `BrowseCommands-` followed by extension name and asset type name without any underscores. e.g. this would translate to `BrowseCommands-MicrosoftAzureComputeVirtualMachines` for Virtual Machine resource type.
+   - The variable must be created under the `AzurePortal` prefix (which is the default namespace / prefix).
    - In the Control Tower, the value for above variable must be set to one of the keys of the map defined in step 2. which will determine the flight/progression user will see in the current session.
 i.e."commandBarLayout1" or "commandBarLayout2" or "commandBarLayout3"
    - Extension authors must choose HubsExtension as the value for Extension filter while setting up the experiment.[Configuring your experiment in Control Tower](https://microsoft.sharepoint.com/teams/Ibizaexperimentation/SitePages/Experiment-configuration,-start,-and-management.aspx).
@@ -2705,7 +2705,7 @@ i.e."commandBarLayout1" or "commandBarLayout2" or "commandBarLayout3"
 
 If you want to verify the command bar layout for a specific treatment variable value, it can be tested with query strings:
 ```txt
-      ?exp.AzurePortal.BrowseCommands-MicrosoftAzureComputeVirtualMachines=commandBarLayout1
+      ?exp.AzurePortal_BrowseCommands-MicrosoftAzureComputeVirtualMachines=commandBarLayout1
 ```
 More info can be found here: (https://microsoft.sharepoint.com/teams/Ibizaexperimentation/SitePages/Code-integration-for-A-B-testing.aspx)
 

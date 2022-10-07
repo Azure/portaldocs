@@ -17,9 +17,9 @@
 <a name="accessibility"></a>
 # Accessibility
 
-Accessibility is about making the portal usable by everyone. There are many resources available at Microsoft to help on guidance, testing, and reporting. For terseness, this document assumes basic knowledge on the topic. Please refer to the [Microsoft Accessibility resources website](aka.ms/enable) for details if needed.
+Accessibility is about making the portal usable by everyone. There are many resources available at Microsoft to help on guidance, testing, and reporting. For terseness, this document assumes basic knowledge on the topic. Please refer to the [Microsoft Accessibility resources website](https://aka.ms/enable) for details if needed.
 
-This document focuses on how the framework enables content owner to implement accessible UI, and how to address bugs that are filed from the accessibility testing team.
+This document focuses on how the framework enables content owners to implement accessible UI, and how to address bugs that are filed from the accessibility testing team.
 
 <a name="accessibility-what-the-framework-provides"></a>
 ## What the framework provides
@@ -29,19 +29,19 @@ This document focuses on how the framework enables content owner to implement ac
 
 In Knockout and React views, the framework provides reusable and accessible controls. The documentation of each framework covers how to use the APIs of each control to maximize the accessible exposure. Note that controls have specific supported usage scenarios. Guidance is published in the documentation about those scenarios.
 
->**NOTE**: Using controls in non-supported scenarios are to be ensure accessible by content owners.
+>**Note**: Using controls in non-supported scenarios is to be ensured accessible by content owners.
 
 <a name="accessibility-what-the-framework-provides-declarative-views"></a>
 ### Declarative views
 
-The Declarative views are fully supported as accessible.
+Declarative views are fully supported as accessible.
 
 <a name="accessibility-what-the-framework-provides-portal-theming"></a>
 ### Portal theming
 
 All portal themes, including high contrast emulations, are accessible. Refer to the Knockout and React views documentation on how to adapt to themeing changes.
 
->**NOTE**: The high contrast themes of the portal are emulations of the actual Windows High Contrast Mode (WHCM). To ensure proper behavior, please test conformance using Microsoft Edge with WHCM turned on.
+>**Note**: The high contrast themes of the portal are emulations of the actual Windows High Contrast Mode (WHCM). To ensure proper behavior, please test conformance using Microsoft Edge with WHCM turned on.
 
 <a name="accessibility-what-the-framework-provides-keyboard-access"></a>
 ### Keyboard access
@@ -50,7 +50,7 @@ The portal framework manages focus on navigation. Interactive elements, includin
 
 In Knockout views, content owners can add special interactivity via the `fxclick` API. The `fxclick` API will add the proper keyboard binding support based on the element calculated role.
 
->**NOTE**: While the `fxclick` API will manage tabbability, it will not manage accessible role and attributes. Content owners should ensure they either use a proper semantic element like `button` or assign a `role` attribute, while also managing any relevant `aria-*` attributes for that role.
+>**Note**: While the `fxclick` API will manage tabbability, it will not manage accessible role and attributes. Content owners should ensure they either use a proper semantic element like `button` or assign a `role` attribute, while also managing any relevant `aria-*` attributes for that role.
 
 <a name="accessibility-what-the-framework-provides-focus-management"></a>
 ### Focus management
@@ -92,7 +92,7 @@ Determine the extension owner, and add a comment to the bug discussion to that e
 
 *Is the bug related to using a screen reader?*
 
-The bug should contain description that this was tested with specific combinations. The supported combinations are Mozilla Firefox with NVDA, Google Chrome with JAWS, and Microsoft Edge with Narrator. Any other combinations are invalid. The bug should also state which combinations fail and which do not fail. If there are successful combinations, while one fails, this is usually an indication the issues is external to the browser/screen reader combo. Proceed with the additional questions below for completeness. You may resolve the bug as external to the tooling afterward.
+The bug should contain description that this was tested with specific combinations. The supported combinations are Mozilla Firefox with NVDA, Google Chrome with JAWS, and Microsoft Edge with Windows Narrator. Any other combinations are invalid. The bug should also state which combinations fail and which do not fail. If there are successful combinations, while one fails, this is usually an indication the issues is external to the browser/screen reader combo. Proceed with the additional questions below for completeness. You may resolve the bug as external to the tooling afterward.
 
 *Is the bug related to using portal SDK controls or UI elements?*
 
@@ -110,5 +110,5 @@ There are many answers available for accessibility on Ibiza that can be searched
 <a name="accessibility-testing-content-for-accessibility-compliance"></a>
 ## Testing content for accessibility compliance
 
-The test framework `msportalfx-test` supports regression testing that matches the automated check done with the Accessibility Insights tool. Refer to the documentation of the test framework on usage. Content should also add any additional tests they may need to cover their compliance level.
+The test framework `msportalfx-test` supports regression testing that matches the automated check done with the Accessibility Insights tool. Refer to the documentation of the test framework on usage. Content owners should also add any additional tests they may need to cover their compliance level.
 
