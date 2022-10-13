@@ -14,7 +14,15 @@ The portal framework offers "Blade redirect" APIs that make introducing a new Bl
 A "Blade redirect" is developed alongside the new/replacement Blade, and the way the "Blade redirect" is expressed varies according to the programming model chosen for the new Blade.
 
 **NOTE** - When developing the new/replacement Blade, the API signature for blade<sub>new</sub> must be compatible with blade<sub>old</sub>. That is, both old and new Blade must accept same-named parameters and each parameter must be of the same type.
-
+<a name="redirects-blade-redirects-package-version-requirements"></a>
+### <strong>Package Version Requirements</strong>
+The following packages with minimum versions are needed to use blade redirects and its functionality including flighting capabilities:
+- Portal SDK: 10.154
+	- allows general use of blade redirects
+	- more on how to update Portal SDK packages for your extension at [Updating Azure Portal SDK packages](./top-extensions-packages.md#updating-your-extension-to-a-newer-version-of-the-sdk)
+- @microsoft/azureportal-reactview: ^1.84.0
+	- allows usage of blade redirects decorator for ReactViews
+	- more on how to update the  @microsoft/azureportal-reactview node package at [Install Azure Portal ReactView package](./react-guides-onboarding-an-existing-extension.md#install-the-packages)
 <a name="redirects-blade-redirects-sample-api-usage"></a>
 ### Sample API usage
 
@@ -119,11 +127,11 @@ You'll create your experiment using the [ExP experimentation Platform](http://ak
 
 For an experiment that controls the application of a Blade redirect, you'll do a couple of things differently than you would when creating an experiment covering some new UI feature from your team.  First, when you specify an 'experimentation group' for your experiment, you'll specify '/AzurePortal/HubsExtension' rather than the group that contains your team's other experiments.
 
-!['/AzurePortal/HubsExtension' as experimentation group](.\images\redirectImages\ControlTowerExPCreate.png "Experiment Creation")
+!['/AzurePortal/HubsExtension' as experimentation group](../media/portalfx-redirects/ControlTowerExPCreate.png "Experiment Creation")
 
 Your experiment will stage the application of your Blade redirect by controlling the value of a feature variable (also known as 'feature gate').  The feature variable you'll use for your experiment here must be named as follows: '`RedirectBlade-{sourceExtensionName}-{sourceBladeName}`'.
 
-![Control Tower](.\images\redirectImages\ControlTowerExP.png "Flight variable definitions")
+![Control Tower](../media/portalfx-redirects/ControlTowerExP.png "Flight variable definitions")
 
 To further illustrate, for the scenario treated by the examples above, the feature variable (feature gate) must be named '`RedirectBlade-LegacyExtension-LegacyBlade`'.
 
