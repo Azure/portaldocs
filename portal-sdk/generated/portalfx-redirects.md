@@ -135,6 +135,9 @@ Your experiment will stage the application of your Blade redirect by controlling
 
 To further illustrate, for the scenario treated by the examples above, the feature variable (feature gate) must be named '`RedirectBlade-LegacyExtension-LegacyBlade`'.
 
+
+**`IMPORTANT`** During the Experiment Progression Setup, It is very important to make sure to add the **'`Hubs and Shell`'**  for the `'Extension'` Traffic Filter as shown below, without this filter the experiment variables cannot be used by Portal SDK to apply the blade redirection
+![Progression Setup](../media/portalfx-redirects/ProgressionSetup.png "Progression Setup")
 <a name="redirects-validation"></a>
 ## Validation
 

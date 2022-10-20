@@ -129,7 +129,7 @@ describe("Resource Group Tests", function () {
     it("Can open create resource group blade", async () => {
         const createResourceGroupURI = "create/Microsoft.ResourceGroup";
 
-        const myblade = await testFx.portal.openBlade(
+        const createBlade = await testFx.portal.openBlade(
             createResourceGroupURI,
             testFx.PortalFxResources.hubsExtension.resourceGroups.createTitle
         );

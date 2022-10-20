@@ -22,6 +22,7 @@
 * [Extension Client Errors](portalfx-telemetry-extension-errors.md#extension-client-errors)
     * [How to log errors](portalfx-telemetry-extension-errors.md#how-to-log-errors)
     * [How to analyze client errors](portalfx-telemetry-extension-errors.md#how-to-analyze-client-errors)
+    * [References](portalfx-telemetry-extension-errors.md#references)
 
 * [Create Telemetry](portalfx-telemetry-create.md#create-telemetry)
     * [Create Flow Telemetry Dashboards](portalfx-telemetry-create.md#create-flow-telemetry-dashboards)

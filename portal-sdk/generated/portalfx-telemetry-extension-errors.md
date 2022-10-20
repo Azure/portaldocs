@@ -1,49 +1,99 @@
 <a name="extension-client-errors"></a>
 # Extension Client Errors
 
-What we refer to as Client Errors are essentially any JavaScript (“client side”) error which is either thrown (but uncaught) or logged directly using the Portal SDK provided logging methods.
+What we refer to as 'Client Errors' are essentially any JavaScript (“client side”) error which is either thrown (but uncaught) or logged directly using the Portal SDK provided logging methods.
 
-<a name="extension-client-errors-how-to-log-errors"></a>
-## How to log errors
+Errors thrown by extension code are logged to Kusto cluster `azportalpartner` database `AzurePortal` table `ExtEvents`.
 
-Uncaught errors from your extension are automatically bubbled up to the top-level Portal global error handler and then routed to the Kusto ExtEvents table (example query below).
+For every error, we capture the error information and serialize it to a [Standardized Error Schema format](https://github.com/Azure/portaldocs/blob/main/portal-sdk/generated/portalfx-telemetry-extension-errors.md#standardized-error-schema) which is available in the `json` column of the `ExtEvents` table.
 
-[Open in Kusto Web Explorer](https://dataexplorer.azure.com/clusters/azportalpartner/databases/AzurePortal?query=H4sIAAAAAAAAA02QwUoDQQyG74W+Q+hpF8rW9l4P4oqCQrHrA8TddDY4nRmTrK3gwztDBZvDf8mf74O0Z2u/KJjOZz9wGkkIdkI9K3V8pL3hMcEtoIvVeqznM8iDYQAqN885PWy3sIHVCjgM3KORAolEgQoVYkpRlQawCCeUwMFdQVAIy/niRXdRDP3DublDpeae0YWoxr02bYG9UsoFkkUROR/f0f9ZxgzyJMsr/RR6nNxol8a/LkSrnrQjtU7wcOC+mpSk+070yMGWIPQ55eWbcF0XT+5D5uW41MuHDD8I1je/jImCxjYBAAA=)
+[Open in Kusto Web Explorer](https://dataexplorer.azure.com/clusters/azportalpartner/databases/AzurePortal?query=H4sIAAAAAAAAA21OMU4DQRDr8wqXe9KKJPRHFwkkCiSOCiE0unMum3C7y8yGBInHs0cKCpjCmpE9tjfnsvlgLLb4wmlHJR6UfTB2YeJjkSnjBjImt941C9SROIDzx33FN7QtrrFcIsQh9FJooGpSODGknJMZB5SEk2gMcfz1iKm4O+topVPZbkPvjkbtPjNvQyweyvdjJZ80NM0cUPWo9hUu8to3a9qzL38ae/BcGC2k6CFK8ejTQI+JZjLW5dKxRRY1vu4tRTdD87x6ufrhPOb7H0WNLXIg1qtvg9mS9DoBAAA=)
 
 ```sql
 ExtEvents
 | where PreciseTimeStamp > ago(1h)
     and eventLevel == 2 // indicates error (as oppossed to warning)
-    and area == "MsPortalFx.Base.Diagnostics.ErrorReporter" // global error handler, indicates uncaught error
     and not(IsTestTraffic(userTypeHint, requestUri)) // not test traffic
+| project PreciseTimeStamp, extension, area, code, message, error = parse_json(json)[0].error, json = parse_json(json)
+| take 10
 ```
 
+<a name="extension-client-errors-how-to-log-errors"></a>
+## How to log errors
+
+**Uncaught errors**
+
+Uncaught errors from your extension are automatically bubbled up to the top-level Portal global error handler and then routed to the Kusto ExtEvents table.
+
+**Caught errors**
+
 To log your own runtime client errors, you can can log your caught runtime error using the [Log.Error API](https://github.com/Azure/portaldocs/blob/dev/portal-sdk/generated/portalfx-telemetry.md#logging-errorswarnings-to-extevents-table).
+
+**Log.Error API Reference**
+
+```typescript
+/**
+ * Log error information.
+ *
+ * @param entry <Error | string> The message to log.
+ * @param code <number> The message code.
+ * @param restArgs <any[]> Extra information to log with the message.
+*/
+error(entry: LogMessage, code?: number, ...restArgs: any[]): void;
+```
+
+**Log.Error API Example Usage:**
+
+```typescript
+var log = new MsPortalFx.Base.Diagnostics.Log("fileName_or_codeArea");
+log.error(errorOrString, code, restArgs);
+```
+
+If an error object is passed in either the `errorOrString` or `restArgs` arguments (you can pass any number of arguments after code and then they all be included as `restArgs`), then we will automatically serialize the error object to the `json` column.
+
+Any **none** error objects which are passed as arguments will also be included in `restArgs`, but will be output **'as-is'** to the `json` column.
+
+Note: ExtEvents `json` column is output type is `dynamic` and the format is an array of json object, where each object is an argument that was passed as `restArgs` to the `log.Error` api.
+
+<a name="extension-client-errors-how-to-log-errors-standardized-error-schema"></a>
+### Standardized Error Schema
+
+*Note: Your extension's client errors which are logged following best practices will be serialized into the standardized schema into the JSON column of the ExtEvents table.*
+
+- schemaVersion: (Portal use only) Version of schema applied
+- extractionType: (Portal use only) The error extraction method used based on the determined error type.
+- message: A description of the error if one is available or has been set.
+- name: An unlocalized error identifier which represents the type of error if one is available or has been set.
+- innerError: The schema representation of the inner error that caused this error if one is available or has been set.
+- stack: The stack property that provides a trace of which functions were called if available.
+- data: Information associated with the error that can be proxied if available.
+- httpStatusCode: The HTTP status code for errors relating to network calls if one is available.
+- blade: The blade context for the blade which logged the error.
 
 <a name="extension-client-errors-how-to-log-errors-best-practices"></a>
 ### Best practices
 
-To ensure that the error information from the caught error is correctly captured and serialized to your extension client error logs in ExtEvents, please ensure to satisfy atleast one of the follow requirements:
+To ensure that the error information from the caught error is correctly captured and serialized to your extension client error logs in `ExtEvents`, please ensure to satisfy at least one of the following requirements:
 
 1. Log the error object instead of just a string message
-  - Bad: `Log.error(“Hello Hal, do you read me?”)`
+  - Bad: `Log.error(“Unable to open the pod-bay doors”)`
   - Good: `Log.error(new FxError(“Unable to open the pod-bay doors”))`
 
-Simply wrapping the text in an Error or FxError will improve the error logging by injecting additional properties such as the stack and allow the error information to be serialized into the JSON column of the ExtEvents table using our standardized schema.
+Simply wrapping the text in an `Error` or `FxError` will improve the error logging by injecting additional properties such as the stack and allow the error information to be serialized into the `JSON` column of the `ExtEvents` table using our standardized schema.
 
 2.	Or, add the error object to the extraData argument (3rd argument, after code):
-  - Also good: `Log.error(“I'm really not at liberty to discuss this”, 505, new FxError(“Unable to open the pod-bay doors”))`
+  - Also good: `Log.error(“Unable to open the pod-bay doors”, 401, new FxError(“User not authorized to open pod-bay doors”))`
 
-<a name="extension-client-errors-how-to-log-errors-best-practices-knockout-blades-example-code-snippets"></a>
-#### Knockout Blades - Example code snippets:
+<a name="extension-client-errors-how-to-log-errors-knockout-blades-example-code-snippets"></a>
+### Knockout Blades - Example code snippets:
 
-*Note: It is not a requirement, but it is strongly recommended that you also use the Portal SDK provided error class called FxError. This error class has additional properties and functionality that will greatly improve not only your errors but also the likelihood that we are able to correctly serialize your custom errors into the standardize format.*
+*Note: It is not a requirement, but it is strongly recommended that you also use the Portal SDK provided error class called FxError. This error class has additional properties and functionality that will greatly improve not only your errors but also the likelihood that we are able to correctly serialize your custom errors into the standardized format.*
 
 **Basic**
 
 ```typescript
 import { FxError } from "Fx/Errors";
-const Log = new MsPortalFx.Base.Diagnostics.Log("Microsoft_Azure_<ExtensionName>");
+const Log = new MsPortalFx.Base.Diagnostics.Log("fileName_or_codeArea");
 Log.error(new FxError(`Something bad happened`));
 ```
 
@@ -51,7 +101,7 @@ Log.error(new FxError(`Something bad happened`));
 
 ```typescript
 import { FxError } from "Fx/Errors";
-const Log = new MsPortalFx.Base.Diagnostics.Log("Microsoft_Azure_<ExtensionName>");
+const Log = new MsPortalFx.Base.Diagnostics.Log("fileName_or_codeArea");
 try {
     doSomething();
 } catch (err) {
@@ -66,7 +116,7 @@ try {
 
 ```typescript
 import { FxError } from "Fx/Errors";
-const Log = new MsPortalFx.Base.Diagnostics.Log("Microsoft_Azure_<ExtensionName>");
+const Log = new MsPortalFx.Base.Diagnostics.Log("fileName_or_codeArea");
 try {
     doSomething();
 } catch (err) {
@@ -80,10 +130,10 @@ try {
 }
 ```
 
-<a name="extension-client-errors-how-to-log-errors-best-practices-react-blades-example-code-snippets"></a>
-#### React Blades - Example code snippets:
+<a name="extension-client-errors-how-to-log-errors-react-blades-example-code-snippets"></a>
+### React Blades - Example code snippets:
 
-*Note: It is recommended that you log Javascript built-in Error objects and not add additional properties to them as they will not be serialized or recognized (ignored).*
+*Note: It is recommended that you log Javascript built-in Error objects. Any additional properties added to them will not be serialized or recognized and will be ignored.*
 
 **Basic logging error**
 
@@ -129,33 +179,6 @@ try {
     }]));
 }
 ```
-
-<a name="extension-client-errors-how-to-log-errors-best-practices-references"></a>
-#### References
-
-**Standardized Error Schema:**
-
-*Note: Your extension's client errors which are logged following best practices will be serialized into the standardized schema into the JSON column of the ExtEvents table.*
-
-- schemaVersion: (Portal use only) Version of schema applied
-- extractionType: (Portal use only) The error extraction method used based on the determined error type.
-- message: A description of the error if one is available or has been set.
-- name: An unlocalized error identifier which represents the type of error if one is available or has been set.
-- innerError: The schema representation of the inner error that caused this error if one is available or has been set.
-- stack: The stack property that provides a trace of which functions were called if available.
-- data: Information associated with the error that can be proxied if available.
-- httpStatusCode: The HTTP status code for errors relating to network calls if one is available.
-
-**Client Error Global Error Handler Code Lookup Table:**
-
-*Note: Your extension's client errors which are uncaught will be caught by the global error handler. This is a reference for the number value used in the code column of the ExtEvents table.*
-
-| code | text |
-|---|---|
-| 1 | UnhandledPromise |
-| 2 | WindowOnError |
-| 3 | LastError |
-| 4 | NoisyError |
 
 <a name="extension-client-errors-how-to-analyze-client-errors"></a>
 ## How to analyze client errors
@@ -222,10 +245,25 @@ Query hints:
 
 Another useful chart is the "Last 24 Hours Error Summary", which shows the errors thrown by the an extension aggregated for the last 24 hours.
 
-**NOTE:** We aggregate the error messages by omitting the text which is within double quotes (") or single quotes ('). We consider those parts to be the dynamic part of the message (e.g. an id, a timestamp etc.). For example, a message like [Could not find part "PartName1"] will be treated as [Could not find part ""]. Please use this format for all the logged error messages, if you want them to be aggregated by our queries.
+**NOTE:** We aggregate the error messages by omitting the text which is within double quotes (") or single quotes ('). We consider those parts to be the dynamic part of the message (e.g. an id, a timestamp, etc.). For example, a message like [Could not find part "PartName1"] will be treated as [Could not find part ""]. Please use this format for all the logged error messages if you want them to be aggregated by our queries.
 
 <a name="extension-client-errors-how-to-analyze-client-errors-additional-information"></a>
 ### Additional information
 
 - All time stamps shown in this dashboard are UTC time stamps.
-- Currently, we refresh automatically the dashboard 8 times a day (the maximum number of scheduled refreshes allowed by PowerBI), during working hours: 8:00 AM, 9:30 AM, 11:00 AM, 12:30 PM, 2:00 PM, 3:30 PM, 5:00 PM and 6:30 PM (Pacific Time).
+- Currently, we automatically refresh the dashboard 8 times per day (the maximum number of scheduled refreshes allowed by PowerBI), during working hours: 8:00 AM, 9:30 AM, 11:00 AM, 12:30 PM, 2:00 PM, 3:30 PM, 5:00 PM and 6:30 PM (Pacific Time).
+
+<a name="extension-client-errors-references"></a>
+## References
+
+<a name="extension-client-errors-references-client-error-global-error-handler-code-lookup-table"></a>
+### Client Error Global Error Handler Code Lookup Table
+
+*Note: Your extension's client errors which are uncaught will be caught by the global error handler. This is a reference for the number value used in the code column of the ExtEvents table.*
+
+| code | text |
+|---|---|
+| 1 | UnhandledPromise |
+| 2 | WindowOnError |
+| 3 | LastError |
+| 4 | NoisyError |

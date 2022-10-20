@@ -9,8 +9,8 @@
 ##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|name|True|
-|visible|False|
+|name|True|Name of the instance.
+|visible|False|When visible is evaluated to *true* then the control will be displayed, otherwise it will be hidden.  Default value is **true**.
 |fx.feature|False|
-|type|True|
-|constraints|False|
+|type|True|Enum permitting the value: "Microsoft.Common.TenantSelector"
+|constraints|False|The <code>constraints</code> object has two properties: <code>items</code> and <code>minItems</code>.<br><br>1) <code>constraints.items</code> <br><br>2) <code>constraints.minItems</code> represents the minimum number of items in <code>constraints.items</code> and is set to 1 by default.

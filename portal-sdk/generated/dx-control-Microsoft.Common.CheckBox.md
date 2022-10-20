@@ -23,7 +23,7 @@ When you set required to **true**, the user must select the checkbox. If the use
 |name|True|Name of the instance.
 |type|True|Enum permitting the value: "Microsoft.Common.CheckBox".
 |label|True|Display text for the control
-|defaultValue|False|Default value, set `true` for Checkbox to be `checked` upon loading the control. If not set, the defaultValue is set to `false` (un-checked)
+|defaultValue|False|Default value, set `true` for Checkbox to be `checked` upon loading the control. If not set, the defaultValue is set to `false` (un-checked). Default value also supports re-setting the default value if `defaultValue.resetTrigger` is evaluated as **true**.
 |toolTip|False|Display text when hovered over the tooltip icon
 |constraints|False|See [here](dx-control-Microsoft.Common.CheckBox-constraints.md) for more on constraints.
 |visible|False|When visible is evaluated to *true* then the control will be displayed, otherwise it will be hidden.  Default value is **true**.

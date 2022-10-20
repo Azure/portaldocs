@@ -126,13 +126,13 @@ Add Properties definition (see `Properties definition samples` section) to the `
 | Name | Required | Description
 | ---|:--:|:--:|
 |kind|True|Enum permitting the value: "Monitoring".
-|export|False|Enables this resulting blade to be exportable
-|parameters|False|Defines the parameters that are input to the view.  Parameters can be required (key) or optional (optional).
-|resources|False|Specify an array of GET ARM request based on the given Resource Id (`id`) and `apiVersion`. The response can be referenced in Property item values.
-|dataSources|False|Specify an array of GET AAD Resource Graph request based on the given `path`. The response can be referenced in Property item values.
-|messages|False|
-|essentials|False|Defined Essentials section for Monitoring view
-|commands|False|Defined Command button for Monitoring view
+|export|False|Designation for blade sharing across extensions. If set to `true` then it is available to be used by other extensions.
+|parameters|False|Defines the parameters to be passed into a declarative blade, that then can be accessed using the parameters function. See [View parameters](dx-viewTypeParameters.md) for more.
+|resources|False|The resources section takes an ARM resource id and apiVersion, which in turn makes a ARM GET request to retrieve the resource details. You can use the resources() function to retrieve the resource payload at runtime.
+|dataSources|False|Supports Graph API. Use it to pre-load graph API before the view is rendered. See [here](dx-viewTypeDataSources.md) for **dataSources** property.
+|messages|False|Display a banner at the top of the view. See [here](dx-enum-viewTypeMessages-items-kind.md) for details.
+|essentials|False|Defines Essentials section for the view
+|commands|False|The commands section defines the Commands in the command bar.See [here](dx-viewTypeCommands.md) for **commands** property.
 |properties|True|See [here](dx-view-monitoringViewType-properties.md) for more on properties.
 |fx.feature|False|
 <a name="monitoringviewtype-properties-section"></a>
