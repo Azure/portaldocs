@@ -17,12 +17,13 @@
 |ariaLabel|False|label of the command used for screen reader users.
 |tooltip|False|tooltip of the command
 |icon|False|Icon to display with the command
-|confirmation|True|Confirmation message box that appears when clicking command
+|confirmation|False|Confirmation message box that appears when clicking command
 |definition|True|See [here](dx-viewDeleteCommand-properties-definition.md) for more on definition.
 |fx.feature|False|
 <a name="viewtypecommands-viewdeletecommand-ui-sample"></a>
 ## UI Sample
 ![alt-text](../media/dx/commands/viewDeleteCommand.png "viewDeleteCommand UI")  
+![alt-text](../media/dx/commands/viewDeleteCommandWithDependentResources.png "view deleteCommand with dependent resources UI")  
 <a name="viewtypecommands-viewdeletecommand-sample-snippet"></a>
 ## Sample Snippet
   
@@ -45,7 +46,16 @@ Use: View Commands
         },
         "message": {
         "property": "deleteResourceMessage"
-        }
+        },
+        "dependentResources": [
+            {
+                "apiVersion": "2021-02-01-preview",
+                "resourceType": "Microsoft.Network/networkSecurityPerimeters/profiles/accessRules",
+                "icon": {
+                    "file": "../../Content/SVG/PerimeterAccessRules.svg"
+                }
+            }
+        ]
     },
     "definition": {
         "apiVersion": "2014-04-01"
