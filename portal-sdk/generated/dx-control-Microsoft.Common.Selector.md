@@ -48,8 +48,8 @@ The Selector component enables a user to select items defined by using BladeInvo
 |fx.feature|False|
 <a name="microsoft-common-selector-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/controls/Microsoft.Common.Selector-default.png "default selector UI")  
-![alt-text](../media/dx/controls/Microsoft.Common.Selector-withBladeInvokeControl.png "After picking data from BladeInvokeControl UI")  
+![alt-text](../media/dx/controls/Microsoft.Common.Selector-default.png "default selector UI")
+![alt-text](../media/dx/controls/Microsoft.Common.Selector-withBladeInvokeControl.png "After picking data from BladeInvokeControl UI")
 <a name="microsoft-common-selector-sample-snippet"></a>
 ## Sample Snippet
   ## Example for Microsoft.Common.Selector

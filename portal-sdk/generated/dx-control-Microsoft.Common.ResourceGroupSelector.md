@@ -31,7 +31,7 @@ Use it only for advanced scenarios. For a consistent experience, use the [Resour
 |constraints|False|See [here](dx-resourceConstraints-validations.md) for more on constraints.
 <a name="microsoft-common-resourcegroupselector-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/controls/Microsoft.Common.ResourceGroupSelector.png "Default UI")  
+![alt-text](../media/dx/controls/Microsoft.Common.ResourceGroupSelector.png "Default UI")
 <a name="microsoft-common-resourcegroupselector-sample-snippet"></a>
 ## Sample Snippet
 

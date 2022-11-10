@@ -97,7 +97,7 @@ For the 'Generate new key-pair' scenario, when the user clicks on the 'Create' b
 <figure>
     <img src = "../media/dx/controls/microsoft-compute-credentialscombo-linux-key-modaldialog.png" style = "width: 100% ">
 </figure>
- 
+
 <a name="microsoft-compute-credentialscombo-linux-definitions"></a>
 ## Definitions:
 <a name="microsoft-compute-credentialscombo-linux-definitions-an-object-with-the-following-properties"></a>
@@ -128,8 +128,8 @@ For the 'Generate new key-pair' scenario, when the user clicks on the 'Create' b
 |fx.feature|False|
 <a name="microsoft-compute-credentialscombo-linux-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/controls/microsoft-compute-credentialscombo-linux-password.png "For Linux with password selected, users see")  
-![alt-text](../media/dx/controls/microsoft-compute-credentialscombo-linux-key.png "For Linux with SSH public key selected, users see")  
+![alt-text](../media/dx/controls/microsoft-compute-credentialscombo-linux-password.png "For Linux with password selected, users see")
+![alt-text](../media/dx/controls/microsoft-compute-credentialscombo-linux-key.png "For Linux with SSH public key selected, users see")
 <a name="microsoft-compute-credentialscombo-linux-sample-snippet"></a>
 ## Sample Snippet
 
