@@ -1,23 +1,33 @@
 <a name="formviewtype"></a>
 # FormViewType
+
 * [FormViewType](#formviewtype)
-    * [Description](#formviewtype-description)
-    * [Sections](#formviewtype-sections)
-    * [Properties Section](#formviewtype-properties-section)
-        * [Option 1](#formviewtype-properties-section-option-1)
-        * [Option 2](#formviewtype-properties-section-option-2)
-        * [Option 3](#formviewtype-properties-section-option-3)
-    * [UI Sample](#formviewtype-ui-sample)
-    * [Sample Snippet](#formviewtype-sample-snippet)
-        * [formViewType details](#formviewtype-sample-snippet-formviewtype-details)
-        * [Top level resource create scenario](#formviewtype-sample-snippet-top-level-resource-create-scenario)
-        * [Executing ARM request (command) for a resource](#formviewtype-sample-snippet-executing-arm-request-command-for-a-resource)
+  * [Description](#formviewtype-description)
+  * [Sections](#formviewtype-sections)
+  * [Properties Section](#formviewtype-properties-section)
+    * [Option 1](#formviewtype-properties-section-option-1)
+    * [Option 2](#formviewtype-properties-section-option-2)
+    * [Option 3](#formviewtype-properties-section-option-3)
+  * [UI Sample](#formviewtype-ui-sample)
+  * [Sample Snippet](#formviewtype-sample-snippet)
+    * [formViewType details](#formviewtype-sample-snippet-formviewtype-details)
+    * [Top level resource create scenario](#formviewtype-sample-snippet-top-level-resource-create-scenario)
+    * [Executing ARM request (command) for a resource](#formviewtype-sample-snippet-executing-arm-request-command-for-a-resource)
 
 <a name="formviewtype-description"></a>
 ## Description
-The declarative form view lets you author a form in the portal. Form view can be used as a full screen blade, or in a context pane. A form view can be used for the following three scenarios - <br /><br />1. Deploy an ARM template (Option 1 in the Properties section below) <br />2. Perform an ARM call (Option 2 in the Properties section below) <br />3. Return a list of output to the caller blade. (Option 3 in the Properties section below) <br /><br />Form view supports tabbed forms, sequential forms (wizards) and simple forms without tabs. When used to deploy an ARM template, it provides the last review and create tab and the post-create experience automatically. You can specify form parameters, resources, title as on any other blade. Forms is a more advanced, newer version of CreateUiDefinition with significant additional capabilities.
+
+The declarative form view lets you author a form in the portal. Form view can be used as a full screen blade, or in a context pane. A form view can be used for the following three scenarios:
+
+1. Deploy an ARM template (Option 1 in the Properties section below).
+1. Perform an ARM call (Option 2 in the Properties section below).
+1. Return a list of output to the caller blade. (Option 3 in the Properties section below).
+
+Form view supports tabbed forms, sequential forms (wizards) and simple forms without tabs. When used to deploy an ARM template, it provides the last review and create tab and the post-create experience automatically. You can specify form parameters, resources, title as on any other blade. Forms is a more advanced, newer version of CreateUiDefinition with significant additional capabilities.
+
 <a name="formviewtype-sections"></a>
 ## Sections
+
 | Name | Required | Description
 | ---|:--:|:--:|
 |kind|True|Enum permitting the value: "Form"
@@ -31,12 +41,16 @@ The declarative form view lets you author a form in the portal. Form view can be
 |properties|True|The properties section defines the form that needs to be rendered. The tabs needed, the controls in each tab etc. are defined in the properties section.
 |outputs|False|Outputs to return a property bag back to the caller blade.
 |fx.feature|False|
+
 <a name="formviewtype-properties-section"></a>
 ## Properties Section
+
 <a name="formviewtype-properties-section-option-1"></a>
 ### Option 1
+
 <a name="formviewtype-properties-section-option-1-an-object-with-the-following-properties"></a>
 ##### An object with the following properties
+
 | Name | Required | Description
 | ---|:--:|:--:|
 |isWizard|False|If true, each step needs to be validated before moving on to next step.
@@ -44,10 +58,13 @@ The declarative form view lets you author a form in the portal. Form view can be
 |steps|True|To customize step(s) of the Form View. See [here](dx-view-formViewType-properties-formSteps.md) for **steps** property.
 |deployment|True|Please include resourceScope control into first step/first element in your form steps. Specify deployment kind and needed properties, also references to the resourceScope control, set all deployment parameters, supply relative path to your deployment template. See [here](dx-view-formViewType-properties-formDeployment.md) for **deployment** property.
 |fx.feature|False|
+
 <a name="formviewtype-properties-section-option-2"></a>
 ### Option 2
+
 <a name="formviewtype-properties-section-option-2-an-object-with-the-following-properties-1"></a>
 ##### An object with the following properties
+
 | Name | Required | Description
 | ---|:--:|:--:|
 |isWizard|False|If true, each step needs to be validated before moving on to next step.
@@ -56,10 +73,13 @@ The declarative form view lets you author a form in the portal. Form view can be
 |steps|True|To customize tab(s) of the Form View. See [here](dx-view-formViewType-properties-formSteps-formStepsWithoutResourceScope.md) for **steps** property.
 |armRequest|True|See [here](dx-view-formViewType-properties-formArmRequest.md) for **armRequest** property.
 |fx.feature|False|
+
 <a name="formviewtype-properties-section-option-3"></a>
 ### Option 3
+
 <a name="formviewtype-properties-section-option-3-an-object-with-the-following-properties-2"></a>
 ##### An object with the following properties
+
 | Name | Required | Description
 | ---|:--:|:--:|
 |isWizard|False|If true, each step needs to be validated before moving on to next step.
@@ -67,12 +87,15 @@ The declarative form view lets you author a form in the portal. Form view can be
 |primaryButtonLabel|False|Customize primary button display name that is used to start deployment
 |steps|True|To customize tab(s) of the Form View. See [here](dx-view-formViewType-properties-formSteps-formStepsWithoutResourceScope.md) for **steps** property.
 |fx.feature|False|
+
 <a name="formviewtype-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/views/formViewType.png "form view UI")  
+
+![alt-text](../media/dx/views/formViewType.png "form view UI")
+
 <a name="formviewtype-sample-snippet"></a>
 ## Sample Snippet
-  
+
 <a name="formviewtype-sample-snippet-formviewtype-details"></a>
 ### formViewType details
 
@@ -81,99 +104,99 @@ The declarative form view lets you author a form in the portal. Form view can be
 
 ``` json
 {
-    "$schema": "<relative path to dx.schema.json>",
-    "view": {
-        "kind": "Form",
-		"dataSources": [
-			{
-			"kind": "graph",
-			"name": "graph",
-			"path": "v1.0/me?$select=displayName,id,mail"
-			}
-		],
-		"resources": [
+  "$schema": "<relative path to dx.schema.json>",
+  "view": {
+    "kind": "Form",
+    "dataSources": [
+      {
+        "kind": "graph",
+        "name": "graph",
+        "path": "v1.0/me?$select=displayName,id,mail"
+      }
+    ],
+    "resources": [
+      {
+        "id": "/subscriptions/7b216101-32eb-4063-aaa3-78a58a87ffb1/resourceGroups/testRG1/providers/Microsoft.Compute/virtualMachines/test1VM",
+        "apiVersion": "2017-03-30"
+      }
+    ],
+    "commands": [
+      {
+        "kind": "RefreshCommand",
+        "id": "refreshCommandId",
+        "displayName": "refreshCommand",
+        "icon": "MsPortalFx.Base.Images.Refresh"
+      }
+    ],
+    "properties": {
+      "title": "Test Form View",
+      "steps": [
+        {
+          "name": "basics",
+          "label": "Basics",
+          "elements": [
             {
-                "id": "/subscriptions/7b216101-32eb-4063-aaa3-78a58a87ffb1/resourceGroups/testRG1/providers/Microsoft.Compute/virtualMachines/test1VM",
-                "apiVersion": "2017-03-30"
+              "name": "resourceScope",
+              "type": "Microsoft.Common.ResourceScope"
+            },
+            {
+              "name": "textBoxUsingDataSource",
+              "type": "Microsoft.Common.TextBox",
+              "label": "text box with DataSource",
+              "placeholder": "",
+              "defaultValue": "[dataSources('graph').displayName]",
+              "toolTip": "Use only allowed characters",
+              "constraints": {
+                "required": true,
+                "regex": "^[a-z0-9A-Z]{1,30}$",
+                "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
+              },
+              "visible": true
+            },
+            {
+              "name": "textBoxUsingResource",
+              "type": "Microsoft.Common.TextBox",
+              "label": "text box with Resource",
+              "placeholder": "",
+              "defaultValue": "[resources().name]",
+              "toolTip": "Use only allowed characters",
+              "constraints": {
+                "required": true,
+                "regex": "^[a-z0-9A-Z]{1,30}$",
+                "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
+              },
+              "visible": true
             }
-        ],
-		"commands": [
-			{
-				"kind": "RefreshCommand",
-				"id": "refreshCommandId",
-				"displayName": "refreshCommand",
-				"icon": "MsPortalFx.Base.Images.Refresh"
-			}
-		],
-        "properties": {
-            "title": "Test Form View",
-            "steps": [
-                {
-                    "name": "basics",
-                    "label": "Basics",
-                    "elements": [
-                        {
-                            "name": "resourceScope",
-                            "type": "Microsoft.Common.ResourceScope"
-                        },
-						{
-							"name": "textBoxUsingDataSource",
-							"type": "Microsoft.Common.TextBox",
-							"label": "text box with DataSource",
-							"placeholder": "",
-							"defaultValue": "[dataSources('graph').displayName]",
-							"toolTip": "Use only allowed characters",
-							"constraints": {
-								"required": true,
-								"regex": "^[a-z0-9A-Z]{1,30}$",
-								"validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
-							},
-							"visible": true
-						},
-						{
-							"name": "textBoxUsingResource",
-							"type": "Microsoft.Common.TextBox",
-							"label": "text box with Resource",
-							"placeholder": "",
-							"defaultValue": "[resources().name]",
-							"toolTip": "Use only allowed characters",
-							"constraints": {
-								"required": true,
-								"regex": "^[a-z0-9A-Z]{1,30}$",
-								"validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
-							},
-							"visible": true
-						}
-                    ]
-                },
-                {
-                    "name": "tags",
-                    "label": "Tags",
-                    "elements": [
-                        {
-                            "name": "tagsByResource",
-                            "type": "Microsoft.Common.TagsByResource",
-                            "resources": [
-                                "Microsoft.Storage/storageAccounts",
-                                "Microsoft.Compute/virtualMachines"
-                            ]
-                        }
-                    ]
-                }
-            ],
-            "deployment": {
-                "parameters": {
-                    "tagsByResource": "[steps('tags').tagsByResource]"
-                },
-                "kind": "ResourceGroup",
-                "location": "[steps('basics').resourceScope.location.name]",
-                "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]",
-                "template": {
-                    "file": "<ARM deployment template relative path>"
-                }
+          ]
+        },
+        {
+          "name": "tags",
+          "label": "Tags",
+          "elements": [
+            {
+              "name": "tagsByResource",
+              "type": "Microsoft.Common.TagsByResource",
+              "resources": [
+                "Microsoft.Storage/storageAccounts",
+                "Microsoft.Compute/virtualMachines"
+              ]
             }
+          ]
         }
+      ],
+      "deployment": {
+        "parameters": {
+          "tagsByResource": "[steps('tags').tagsByResource]"
+        },
+        "kind": "ResourceGroup",
+        "location": "[steps('basics').resourceScope.location.name]",
+        "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]",
+        "template": {
+          "file": "<ARM deployment template relative path>"
+        }
+      }
     }
+  }
 }
 ```
 
@@ -189,7 +212,6 @@ In deployment element specify deployment kind and needed properties, also refere
 Sample: FormBladeCreate.Dx.jsonc
 
 ```json
-
 {
   "$schema": "../../../Definitions/dx.schema.json",
   "view": {
@@ -290,6 +312,7 @@ This allows a sequence of custom blade to open (as context blade) on user click 
     }
 }
 ```
+
 <a name="formviewtype-sample-snippet-top-level-resource-create-scenario-child-resources-create-scenario"></a>
 #### Child resources create scenario
 
@@ -301,36 +324,35 @@ Form takes resourceId in parameters, specifies apiversion in resources, passes p
 
 ```json
 {
-    "$schema": "../../../Definitions/dx.schema.json",
-    "view": {
-        "kind": "Form",
-        "parameters": [
-            {
-                "name": "id",
-                "type": "key"
-            }
-        ],
-        "resources": [
-            {
-                "id": "[parameters('id')]",
-                "apiVersion": "2020-03-01-preview"
-            }
-        ],
-        "steps": [
-        ],
-        "deployment": {
-            "kind": "ResourceGroup",
-            "resourceGroupId": "[resources().resourceGroupId]",        
-            "parameters": {
-                "name": "[steps('step1').textbox]",
-                "location": "[resources().location]",
-                "omsLogAnalyticsWorkspaceName": "[resources().name]"
-            },
-            "template": {
-                "file": "./SavedSearchDeploymentTemplate.json"
-            }
-        }
+  "$schema": "../../../Definitions/dx.schema.json",
+  "view": {
+    "kind": "Form",
+    "parameters": [
+      {
+        "name": "id",
+        "type": "key"
+      }
+    ],
+    "resources": [
+      {
+        "id": "[parameters('id')]",
+        "apiVersion": "2020-03-01-preview"
+      }
+    ],
+    "steps": [],
+    "deployment": {
+      "kind": "ResourceGroup",
+      "resourceGroupId": "[resources().resourceGroupId]",        
+          "parameters": {
+        "name": "[steps('step1').textbox]",
+        "location": "[resources().location]",
+        "omsLogAnalyticsWorkspaceName": "[resources().name]"
+      },
+      "template": {
+        "file": "./SavedSearchDeploymentTemplate.json"
+      }
     }
+  }
 }
 ```
 
@@ -340,25 +362,26 @@ Sample:
 
 ```json
 {
-    "$schema": "../../Definitions/dx.schema.json",
-    "stringSource": "Resources/MyAssetStrings.resjson",
-    "proxyAssetType": {
-        "name": "MyDxChildResource",
-        "resourceType": {
-        "name": "Microsoft.OperationalInsights/Workspaces/savedSearches",
-        "apiVersion": "2020-03-01-preview"
+  "$schema": "../../Definitions/dx.schema.json",
+  "stringSource": "Resources/MyAssetStrings.resjson",
+  "proxyAssetType": {
+    "name": "MyDxChildResource",
+    "resourceType": {
+      "name": "Microsoft.OperationalInsights/Workspaces/savedSearches",
+      "apiVersion": "2020-03-01-preview"
     },
-    "displayNames": {
-    },
+    "displayNames": {},
     "icon": "MsPortalFx.Base.Images.Polychromatic.Dashboard", 
     "create": {
-        "blade": {
+      "blade": {
         "name": "SavedSearchCreate_Dx",
         "parameters": {
-        "id": "{resourceId}"
+          "id": "{resourceId}"
         }
+      }
     }
-},
+  }
+}
 ```
 
 <a name="formviewtype-sample-snippet-executing-arm-request-command-for-a-resource"></a>
@@ -406,32 +429,33 @@ FormBladeArmRequest.Dx.json:
   }
 }
 ```
+
 Command:
 
 If you parent blade is a declarative blade: add the below into commands section.
 
 ```json
-      {
-        "icon": "MsPortalFx.Base.Images.ArrowUp",
-        "id": "formarmrequestCommand",
-        "kind": "OpenBladeCommand",
-        "displayName": {
-          "property": "formArmRequest"
-        },
-        "blade": {
-          "name": "FormBladeArmRequest_Dx",
-          "inContextPane": true,
-          "parameters": {
-            "id": "[parameters('id')]"
-          }
-        }
-      },
+{
+  "icon": "MsPortalFx.Base.Images.ArrowUp",
+  "id": "formarmrequestCommand",
+  "kind": "OpenBladeCommand",
+  "displayName": {
+    "property": "formArmRequest"
+  },
+  "blade": {
+    "name": "FormBladeArmRequest_Dx",
+    "inContextPane": true,
+    "parameters": {
+      "id": "[parameters('id')]"
+    }
+  }
+}
 ```
+
 From SDK 7.4.0.5 you may customize primary button label(optional) in view properties. Default label is “Submit”.
 
 ```json
 "properties": {
-    "primaryButtonLabel": "Execute ARM request",
+  "primaryButtonLabel": "Execute ARM request",
 }
 ```
-
