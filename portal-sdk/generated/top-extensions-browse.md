@@ -1788,511 +1788,2427 @@ These are the currently supported command types:
 
 ```typescript
 
-import { SvgType } from "Fx/Images";
-import { CommandVisibility } from "Fx/Assets";
-export = MsPortalFxForAsset;
-
-module MsPortalFxForAsset {
-    export module ForAsset {
-        export module Commands {
-            /**
-             * Command kinds.
-             */
-            export const enum CommandKind {
-                /**
-                 * Kind for the open blade commands.
-                 */
-                OpenBladeCommand,
-
-                /**
-                 * Kind for the menu command.
-                 */
-                MenuCommand,
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "proxyAssetType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayNames": {
+          "$ref": "#/definitions/displayNames"
+        },
+        "description": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "keywords": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "part": {
+          "$ref": "#/definitions/partReference"
+        },
+        "blade": {
+          "$ref": "#/definitions/bladeReference"
+        },
+        "create": {
+          "$ref": "#/definitions/createReference"
+        },
+        "postCreateBlade": {
+          "$ref": "#/definitions/bladeReferenceWithFlighting"
+        },
+        "permissions": {
+          "$ref": "#/definitions/permissionsList"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "preview": {
+          "type": "boolean"
+        },
+        "viewModel": {
+          "$ref": "#/definitions/viewModelReference"
+        },
+        "links": {
+          "$ref": "#/definitions/assetTypeLinks"
+        },
+        "resourceType": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "apiVersion": {
+              "type": "string"
             }
-
-            /**
-             * Selection Command kinds.
-             */
-            export const enum SelectionCommandKind {
-                /**
-                 * Kind for the open blade commands that require selection.
-                 */
-                OpenBladeSelectionCommand,
-
-                /**
-                 * Kind for the ARM commands.
-                 */
-                ArmCommand,
-
-                /**
-                 * Kind for the selection based menu command.
-                 */
-                MenuSelectionCommand,
+          },
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "apiVersion"
+          ]
+        },
+        "menu": {
+          "$ref": "#/definitions/assetTypeMenu"
+        },
+        "browse": {
+          "type": "object",
+          "properties": {
+            "defaultColumns": {
+              "$ref": "#/definitions/assetTypeBrowseDefaultColumns"
+            },
+            "defaultFilters": {
+              "$ref": "#/definitions/assetTypeBrowseDefaultColumns"
+            },
+            "excludeColumns": {
+              "$ref": "#/definitions/assetTypeBrowseExcludeColumns"
+            },
+            "customConfig": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "useSupplementalData": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "columns": {
+              "$ref": "#/definitions/assetTypeBrowseColumns"
+            },
+            "infoBox": {
+              "$ref": "#/definitions/assetTypeBrowseInfoBox"
+            },
+            "summaryStatusColumn": {
+              "type": "string"
+            },
+            "commands": {
+              "$ref": "#/definitions/assetTypeBrowseCommands"
+            },
+            "selectionCommands": {
+              "$ref": "#/definitions/assetTypeBrowseSelectionCommands"
             }
-
-            /**
-             * Visibility options for selection menu commands.
-             */
-            export const enum SelectionMenuCommandVisibility {
-                /**
-                 * Allows a command to be hidden by default.
-                 *
-                 * NOTE: This is useful if you are experimenting with command bar layout and wish to only show a command via experimentation.
-                 */
-                HiddenByDefault = CommandVisibility.HiddenByDefault,
-
-                /**
-                 * Allows a command to appear on browse toolbar.
-                 */
-                BrowseToolbar = CommandVisibility.BrowseToolbar,
-
-                /**
-                 * Allows a command to appear on resource hover card.
-                 */
-                ResourceHoverCard = CommandVisibility.ResourceHoverCard,
-            }
-
-            /**
-             * Visibility options for selection commands.
-             */
-            export const enum SelectionCommandVisibility {
-                /**
-                 * Allows a command to be hidden by default.
-                 *
-                 * NOTE: This is useful if you are experimenting with command bar layout and wish to only show a command via experimentation.
-                 */
-                HiddenByDefault = CommandVisibility.HiddenByDefault,
-
-                /**
-                 * Allows a command to appear on browse toolbar.
-                 */
-                BrowseToolbar = CommandVisibility.BrowseToolbar,
-
-                /**
-                 * Allows a command to appear in browse context menu.
-                 *
-                 * NOTE: Only selection based commands with minSelection === 1 support this option.
-                 *       Menu commands do not support this option.
-                 */
-                BrowseContextMenu = CommandVisibility.BrowseContextMenu,
-
-                /**
-                 * Allows a command to appear on resource hover card.
-                 */
-                ResourceHoverCard = CommandVisibility.ResourceHoverCard,
-            }
-
-            /**
-             * Visibility options for non selection commands.
-             */
-            export const enum NonSelectionCommandVisibility {
-                /**
-                 * Allows a command to be hidden by default.
-                 *
-                 * NOTE: This is useful if you are experimenting with command bar layout and wish to only show a command via experimentation.
-                 */
-                HiddenByDefault = CommandVisibility.HiddenByDefault,
-
-                /**
-                 * Allows a command to appear on browse toolbar.
-                 */
-                BrowseToolbar = CommandVisibility.BrowseToolbar,
-
-                /**
-                 * Allows a command to appear on empty browse view.
-                 */
-                BrowseEmptyView = CommandVisibility.BrowseEmptyView,
-
-                /**
-                 * Allows a command to replace default "create" button on a service hover card.
-                 *
-                 * NOTE: Only one command with this flag is supported per asset type.
-                 */
-                ServiceHoverCard = CommandVisibility.ServiceHoverCard,
-            }
-
-            /**
-             * Defines the options that are passed to the command decorator.
-             */
-            export interface CommandOptions {
-                /**
-                 * The asset type that the commands are associated with.
-                 */
-                readonly assetType: string;
-
-                /**
-                 * The list of commands which do no require resource selection.
-                 */
-                readonly commands?: ReadonlyArray<Command>;
-
-                /**
-                 * The list of commands which require selection.
-                 */
-                readonly selectionCommands?: ReadonlyArray<SelectionCommand>;
-            }
-
-            /**
-             * Constrains the @ForAsset.Commands decorator so that it can be applied only to classes implementing 'Contract'.
-             */
-            export interface Contract {
-            }
-
-            /**
-             * Constrains the @Commands decorator so that it can be applied only to classes implementing 'Contract'.
-             */
-            export interface CommandsClass {
-                new(...args: any[]): Contract;
-            }
-
-            /**
-             * Decorator for Asset commands
-             *
-             * @param options command options
-             */
-            export function Decorator(options?: CommandOptions) {
-                return function (commandsClass: CommandsClass) {
-                };
-            }
-
-            /**
-             * The blade reference options for open blade command.
-             */
-            export interface BladeReference {
-                /**
-                 * The blade name.
-                 */
-                readonly blade: string;
-
-                /**
-                 * The flag indicating whether blade supports provisioning or not.
-                 * Defaults to false.
-                 */
-                readonly doesProvisioning?: boolean;
-
-                /**
-                 * The extension name for the blade
-                 */
-                readonly extension?: string;
-
-                /**
-                 * The flag indicating whether blade needs to be opened as a context pane.
-                 * Defaults to false.
-                 */
-                readonly inContextPane?: boolean;
-
-                /**
-                 * The blade parameters.
-                 *
-                 * NOTE: Blades that require list of resourceIds in the parameters, should specify {resourceIds} as the parameter value.
-                 * Fx will replace the {resourceIds} value with currently selected resource Ids at runtime.
-                 */
-                readonly parameters?: ReadonlyStringMap<any>;
-            }
-
-            /**
-             * The marketplace blade reference
-             */
-            export interface MarketplaceBladeReference {
-                /**
-                 * The marketplaceItemId to open a create flow.
-                 */
-                readonly marketplaceItemId?: string;
-            }
-
-            /**
-             * Interface for Open blade commands.
-             */
-            export interface OpenBladeCommand extends CommonCommandBase<CommandKind.OpenBladeCommand> {
-                /**
-                 * The blade reference.
-                 * Either a reference to the blade or the marketpkace item id which opens the create flow needs to be specified.
-                 */
-                readonly bladeReference: BladeReference | MarketplaceBladeReference;
-            }
-
-            /**
-             * The interface for resource selection for commands.
-             */
-            export interface RequiresSelection {
-                /**
-                 * The resource selection for commands.
-                 * Default selection is max allowed selection supported by browse grid.
-                 */
-                readonly selection?: Selection;
-            }
-
-            /**
-             * The interface for command execution confirmation options.
-             */
-            export interface ConfirmationOptions {
-                /**
-                 * The confirmation dialog title to show before execution of the command.
-                 */
-                readonly title: string;
-
-                /**
-                 * The confirmation dialog message to show before execution of the bulk command.
-                 */
-                readonly message: string;
-
-                /**
-                 * The confirmation text input.
-                 * User needs to enter this text in order to confirm command execution.
-                 */
-                readonly explicitConfirmationText?: string;
-            }
-
-            /**
-             * The interface for commands that require user confirmation.
-             */
-            export interface ConfirmationCommandBase {
-                /**
-                 * The command execution confirmation options.
-                 */
-                readonly confirmation: ConfirmationOptions;
-            }
-
-            /**
-             * The interface for ARM command definition.
-             */
-            export interface ArmCommandDefinition {
-                /**
-                 * Http method POST/DELETE/PATCH etc. By default POST will be used.
-                 */
-                readonly httpMethodType?: string;
-
-                /**
-                 * ARM uri for the command operation.
-                 * Uri should be a relative uri with the fixed format - {resourceid}/optionalOperationName?api-version.
-                 * Example: "{resourceid}?api-version=2018-09-01-preview
-                 */
-                readonly uri: string;
-
-                /**
-                 * ARM command operation can be long running operation. asyncOperation property specifies how to poll the status for completion of long running operation.
-                 */
-                readonly asyncOperation?: AsyncOperationOptions;
-
-                /**
-                 * Optional list of resource-specific ARM error codes that should be retried for HttpStatusCode.BadRequest(400).
-                 *
-                 * By default, Fx retries below codes:
-                 *     Retry for transient errors with Http status codes: HttpStatusCode.InternalServerError(500), HttpStatusCode.BadGateway(502), HttpStatusCode.ServiceUnavailable(503), HttpStatusCode.GatewayTimeout(504)
-                 *     Retry for ARM conflict/throttle errors with status codes: HttpStatusCode.TooManyRequests(409), HttpStatusCode.Conflict(429)
-                 * In addition to these, there could be resource-specific errors that need to be retried for HttpStatusCode.BadRequest(400).
-                 * If this list is specified, Fx will parse ARM error codes for HttpStatusCode.BadRequest(400) requests and retry in addition to above retries.
-                 *
-                 * Example: ["PublicIpAddressCannotBeDeleted", "InuseNetworkSecurityGroupCannotBeDeleted"]
-                 */
-                readonly retryableArmCodes?: ReadonlyArray<string>;
-
-                /**
-                 * Optional list of resource-specific ARM error codes that shouldn't be retried.
-                 * This helps optimize network calls and improve bulk operation performance.
-                 *
-                 * By default, Fx won't issue retry for below code regardless of HTTP status code:
-                 *    "ScopeLocked"
-                 * In addition to this Arm error code, there could be resource-specific error codes that shouldn't be retried.
-                 * If this list is specified, Fx will ignore the above mentioned list and only honor this list of Arm codes that shouldn't be retried.
-                 *
-                 * Example: ["ScopeLocked"]
-                 */
-                readonly nonRetryableArmCodes?: ReadonlyArray<string>;
-            }
-
-            /**
-             * Optional Arm command configs to describe how long running ARM operations needs to be polled and results processed.
-             */
-            export interface AsyncOperationOptions {
-                /**
-                 * By default when http Accepted (202) status code is received, the Location header will be looked up for polling uri to get the status of long running operation.
-                 * A different response header can be specified with the pollingHeaderOverride value.
-                 */
-                readonly pollingHeaderOverride?: string;
-
-                /**
-                 * A property path to look for status in the response body.
-                 * By default 'status' property will be looked up to see if it has "Succeeded", "Failed", "InProgress" or "Canceled".
-                 */
-                readonly statusPath?: string;
-            }
-
-            /**
-             * The interface for ARM commands.
-             * These commands honor default selection which is FullPage.
-             */
-            export interface ArmCommand extends CommonCommandBase<SelectionCommandKind.ArmCommand>, ConfirmationCommandBase {
-                /**
-                 * The map of ARM bulk command definitions per resource type.
-                 *
-                 * NOTE: A command may delete multiple types of resources e.g. browse for merged resource types.
-                 * In such cases, ARM command definition can be specified for each resource type.
-                 */
-                readonly definitions: ReadonlyStringMap<ArmCommandDefinition>;
-
-                /**
-                 * The flag indicating whether to launch Fx bulk delete confirmation blade for delete operations.
-                 */
-                readonly isDelete?: boolean;
-            }
-
-            /**
-             * The interface for open blade commands that require resource selection.
-             */
-            export interface OpenBladeSelectionCommand extends CommonCommandBase<SelectionCommandKind.OpenBladeSelectionCommand>, RequiresSelection {
-                /**
-                 * The blade reference.
-                 */
-                readonly bladeReference: BladeReference;
-            }
-
-            /**
-             * The interface for menu command item display customizations.
-             */
-            export interface MenuItemCustomCommandOptions {
-                /**
-                 * The command content.
-                 *
-                 * Customizes rendering of menu command item @see `Toolbar.ToolbarItems.MenuItemCustomButtonOptions` for more details.
-                 */
-                readonly content?: string;
-            }
-
-            /**
-             * The interface for commands to specify visibility options.
-             *
-             * NOTE: Only applies to top level commands. i.e. Individual items in menu commands can't specify visibility options.
-             */
-            export interface SelectionCommandVisibilityOptions {
-                /**
-                 * The command visibility options.
-                 * Specify one or more options in the format: `SelectionCommandVisibility.BrowseToolbar | SelectionCommandVisibility.BrowseContextMenu`.
-                 */
-                readonly visibility?: SelectionCommandVisibility;
-            }
-
-            /**
-             * The interface for commands to specify visibility options.
-             *
-             * NOTE: Only applies to top level commands. i.e. Individual items in menu commands can't specify visibility options.
-             */
-            export interface NonSelectionCommandVisibilityOptions {
-                /**
-                 * The command visibility options.
-                 * Specify one or more options in the format: `NonSelectionCommandVisibility.BrowseToolbar | NonSelectionCommandVisibility.BrowseEmptyView`.
-                 */
-                readonly visibility?: NonSelectionCommandVisibility;
-            }
-
-            /**
-             * The interface for commands to specify visibility options.
-             *
-             * NOTE: Only applies to top level commands. i.e. Individual items in menu commands can't specify visibility options.
-             */
-            export interface SelectionMenuCommandVisibilityOptions {
-                /**
-                 * The command visibility options.
-                 */
-                readonly visibility?: SelectionMenuCommandVisibility;
-            }
-
-            /**
-             * The interface for selection based menu command.
-             */
-            export interface MenuSelectionCommand extends CommonCommandBase<SelectionCommandKind.MenuSelectionCommand>, RequiresSelection {
-                /**
-                 * The list of commands.
-                 */
-                readonly commands: ReadonlyArray<OpenBladeSelectionCommand & MenuItemCustomCommandOptions | ArmCommand>; //If a new command type is supported in future, it'll be added to this list depending on whether it needs to be supported in the menu list.
-            }
-
-            /**
-             * The interface for menu command.
-             */
-            export interface MenuCommand extends CommonCommandBase<CommandKind.MenuCommand> {
-                /**
-                 * The list of commands.
-                 */
-                readonly commands: ReadonlyArray<OpenBladeCommand & MenuItemCustomCommandOptions>;
-            }
-
-            /**
-             * The interface for commands that require resource selection.
-             */
-            export type SelectionCommand = OpenBladeSelectionCommand & SelectionCommandVisibilityOptions | ArmCommand & SelectionCommandVisibilityOptions | MenuSelectionCommand & SelectionMenuCommandVisibilityOptions;
-
-            /**
-             * The interface for command.
-             */
-            export type Command = OpenBladeCommand & NonSelectionCommandVisibilityOptions | MenuCommand & NonSelectionCommandVisibilityOptions;
-
-            /**
-             * The interface for command selection.
-             */
-            export interface Selection {
-                /**
-                 * The maximum number of selected resources supported by the command operation.
-                 */
-                readonly maxSelectedItems?: number;
-
-                /**
-                 * The minimum number of selected resources supported by the command operation.
-                 */
-                readonly minSelectedItems?: number;
-
-                /**
-                 * The message shown when user tries to select more than supported items by the command operation.
-                 */
-                readonly disabledMessage: string;
-            }
-
-            /**
-             * The interface for common command properties.
-             */
-            export interface CommonCommandBase<TKind extends CommandKind | SelectionCommandKind> {
-                /**
-                 * The command kind.
-                 */
-                readonly kind: TKind;
-
-                /**
-                 * The command Id.
-                 */
-                readonly id: string;
-
-                /**
-                 * The command label.
-                 */
-                readonly label: string;
-
-                /**
-                 * The command icon.
-                 */
-                readonly icon: (
-                    {
-                        /**
-                         * URI to the image element.
-                         */
-                        path: string;
-                    } | {
-                        /**
-                         * References a built-in SVG element.
-                         */
-                        image: SvgType;
-                    });
-
-                /**
-                 * The command tooltip.
-                 */
-                readonly tooltip?: string;
-
-                /**
-                 * The command aria label.
-                 */
-                readonly ariaLabel?: string;
-            }
+          },
+          "additionalProperties": false,
+          "required": []
         }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ]
+    },
+    "assetType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayNames": {
+          "$ref": "#/definitions/displayNames"
+        },
+        "description": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "keywords": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "useResourceMenu": {
+          "type": "boolean"
+        },
+        "useStaticResourceMenuOverview": {
+          "type": "boolean"
+        },
+        "extensionSuppliesResourceForResourceMenu": {
+          "type": "boolean"
+        },
+        "part": {
+          "$ref": "#/definitions/partReference"
+        },
+        "blade": {
+          "$ref": "#/definitions/bladeReference"
+        },
+        "create": {
+          "$ref": "#/definitions/createReference"
+        },
+        "postCreateBlade": {
+          "$ref": "#/definitions/bladeReferenceWithFlighting"
+        },
+        "permissions": {
+          "$ref": "#/definitions/permissionsList"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "preview": {
+          "type": "boolean"
+        },
+        "viewModel": {
+          "$ref": "#/definitions/viewModelReference"
+        },
+        "links": {
+          "$ref": "#/definitions/assetTypeLinks"
+        },
+        "resourceType": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "apiVersion": {
+              "type": "string"
+            },
+            "topLevelResourceTypeAlias": {
+              "type": "string"
+            },
+            "topLevelTenantAlias": {
+              "type": "string"
+            },
+            "routingType": {
+              "$generateDocTemplate": "enum-assetType-resourceType-routingType",
+              "type": "string",
+              "enum": [
+                "Default",
+                "Tenant",
+                "Extension",
+                "ProviderProxy"
+              ]
+            },
+            "routingFilters": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "$generateDocTemplate": "enum-assetType-resourceType-routingFilters",
+                "enum": [
+                  "Text",
+                  "ResourceGroup",
+                  "Location"
+                ]
+              }
+            },
+            "kinds": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/resourceTypeKindWithCommands"
+                  },
+                  {
+                    "$ref": "#/definitions/resourceTypeMergedKind"
+                  },
+                  {
+                    "$ref": "#/definitions/resourceTypeGroupedKind"
+                  }
+                ]
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "apiVersion"
+          ]
+        },
+        "resourceMenu": {
+          "$ref": "#/definitions/assetTypeResourceMenu"
+        },
+        "menu": {
+          "$ref": "#/definitions/assetTypeMenu"
+        },
+        "staticOverview": {
+          "$ref": "#/definitions/staticOverview"
+        },
+        "browse": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "ResourceType"
+                  ]
+                },
+                "query": {
+                  "$ref": "#/definitions/queryReference"
+                },
+                "defaultColumns": {
+                  "$ref": "#/definitions/assetTypeBrowseDefaultColumns"
+                },
+                "defaultFilters": {
+                  "$ref": "#/definitions/assetTypeBrowseDefaultColumns"
+                },
+                "excludeColumns": {
+                  "$ref": "#/definitions/assetTypeBrowseExcludeColumns"
+                },
+                "customConfig": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "useSupplementalData": {
+                          "type": "boolean"
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "columns": {
+                  "$ref": "#/definitions/assetTypeBrowseColumns"
+                },
+                "infoBox": {
+                  "$ref": "#/definitions/assetTypeBrowseInfoBox"
+                },
+                "summaryStatusColumn": {
+                  "type": "string"
+                },
+                "browseParentResourceType": {
+                  "type": "string"
+                },
+                "mergedResourceTypes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "kind": {
+                        "type": "string"
+                      },
+                      "selected": {
+                        "type": "boolean"
+                      },
+                      "additionalKinds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "commands": {
+                  "$ref": "#/definitions/assetTypeBrowseCommands"
+                },
+                "selectionCommands": {
+                  "$ref": "#/definitions/assetTypeBrowseSelectionCommands"
+                },
+                "deepLink": {
+                  "type": "string"
+                },
+                "requiresRdfe": {
+                  "type": "boolean"
+                },
+                "requiresCoAdmin": {
+                  "type": "boolean"
+                },
+                "featureCards": {
+                  "$ref": "#/definitions/assetTypeBrowseFeatureCards",
+                  "$propertyDescription": "feature cards for the browse"
+                },
+                "__bypassArmBrowseCheck": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "type"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "AssetTypeBlade"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "ServiceLink"
+                  ]
+                },
+                "linkUri": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        },
+        "service": {
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "menuBlade": {
+              "$ref": "#/definitions/bladeReference"
+            },
+            "menuItemId": {
+              "type": "string"
+            }
+          }
+        },
+        "propertyProvider": {
+          "type": "object",
+          "properties": {
+            "serviceViewModel": {
+              "$ref": "#/definitions/viewModelReference"
+            }
+          }
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "$generateDocTemplate": "enum-browse-options",
+            "enum": [
+              "NoOptions",
+              "HideAssetType",
+              "HideInstances",
+              "ShowAssetType",
+              "ShowInstances"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ]
+    },
+    "resourceTypeMergedKind": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "commands": {
+          "$ref": "#/definitions/assetTypeBrowseCommands"
+        },
+        "selectionCommands": {
+          "$ref": "#/definitions/assetTypeBrowseSelectionCommands"
+        },
+        "mergedKinds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/resourceTypeKind"
+          }
+        }
+      }
+    },
+    "resourceTypeKind": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "default": {
+          "type": "boolean"
+        },
+        "preview": {
+          "type": "boolean"
+        },
+        "displayNames": {
+          "$ref": "#/definitions/displayNames"
+        },
+        "keywords": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "useResourceMenu": {
+          "type": "boolean"
+        },
+        "part": {
+          "$ref": "#/definitions/partReference"
+        },
+        "blade": {
+          "$ref": "#/definitions/bladeReference"
+        },
+        "create": {
+          "$ref": "#/definitions/createKindReference"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$generateDocTemplate": "enum-resourceTypeKind-options",
+            "type": "string",
+            "enum": [
+              "NoOptions",
+              "HideAssetType",
+              "HideInstances",
+              "ShowAssetType",
+              "ShowInstances"
+            ]
+          }
+        },
+        "staticOverview": {
+          "$ref": "#/definitions/staticOverview"
+        },
+        "service": {
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "menuBlade": {
+              "$ref": "#/definitions/bladeReference"
+            },
+            "menuItemId": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "resourceTypeKindWithCommands": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "default": {
+          "type": "boolean"
+        },
+        "preview": {
+          "type": "boolean"
+        },
+        "displayNames": {
+          "$ref": "#/definitions/displayNames"
+        },
+        "keywords": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "useResourceMenu": {
+          "type": "boolean"
+        },
+        "part": {
+          "$ref": "#/definitions/partReference"
+        },
+        "blade": {
+          "$ref": "#/definitions/bladeReference"
+        },
+        "create": {
+          "$ref": "#/definitions/createKindReference"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$generateDocTemplate": "enum-resourceTypeKind-options",
+            "type": "string",
+            "enum": [
+              "NoOptions",
+              "HideAssetType",
+              "HideInstances",
+              "ShowAssetType",
+              "ShowInstances"
+            ]
+          }
+        },
+        "staticOverview": {
+          "$ref": "#/definitions/staticOverview"
+        },
+        "service": {
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "menuBlade": {
+              "$ref": "#/definitions/bladeReference"
+            },
+            "menuItemId": {
+              "type": "string"
+            }
+          }
+        },
+        "commands": {
+          "$ref": "#/definitions/assetTypeBrowseCommands"
+        },
+        "selectionCommands": {
+          "$ref": "#/definitions/assetTypeBrowseSelectionCommands"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "resourceTypeGroupedKind": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayNames": {
+          "$ref": "#/definitions/displayNames"
+        },
+        "keywords": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "groupedKinds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "service": {
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            }
+          }
+        }
+      },
+      "required": [
+        "name",
+        "groupedKinds"
+      ]
+    },
+    "queryReference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "file"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "useDefault": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "useDefault"
+          ]
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "assetTypeBrowseDefaultColumns": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$generateDocTemplate": "enum-assetTypeBrowseDefaultColumns",
+            "type": "string",
+            "enum": [
+              "FxColumns.Kind",
+              "FxColumns.ResourceGroup",
+              "FxColumns.Location",
+              "FxColumns.LocationId",
+              "FxColumns.ResourceId",
+              "FxColumns.ResourceGroupId",
+              "FxColumns.ResourceType",
+              "FxColumns.Subscription",
+              "FxColumns.SubscriptionId",
+              "FxColumns.AssetType",
+              "FxColumns.Tags"
+            ]
+          },
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "assetTypeBrowseExcludeColumns": {
+      "type": "array",
+      "items": {
+        "$generateDocTemplate": "enum-assetTypeBrowseExcludeColumns",
+        "enum": [
+          "FxColumns.ResourceGroup",
+          "FxColumns.Location",
+          "FxColumns.SubscriptionId",
+          "FxColumns.Tags"
+        ]
+      }
+    },
+    "assetTypeBrowseColumns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "$ref": "dx.schema.common.json#/definitions/stringResource"
+          },
+          "displayName": {
+            "$ref": "dx.schema.common.json#/definitions/stringResource"
+          },
+          "lowerDisplayName": {
+            "$ref": "dx.schema.common.json#/definitions/stringResource"
+          },
+          "format": {
+            "type": "string",
+            "$generateDocTemplate": "enum-assetTypeBrowseColumns-format",
+            "enum": [
+              "NoFormat",
+              "String",
+              "Resource",
+              "Date",
+              "Number",
+              "Location",
+              "BladeLink",
+              "Tenant",
+              "Status",
+              "DeepLink",
+              "QueryBladeLink"
+            ]
+          },
+          "width": {
+            "type": "string"
+          },
+          "sortColumn": {
+            "type": "string"
+          },
+          "sourceUnits": {
+            "$ref": "#/definitions/propertySourceUnits"
+          },
+          "maximumFractionDigits": {
+            "type": "number"
+          },
+          "blade": {
+            "$ref": "#/definitions/bladeReference"
+          },
+          "bladeParameterColumn": {
+            "type": "string"
+          },
+          "openBladeAsContextPane": {
+            "type": "boolean"
+          },
+          "iconColumn": {
+            "type": "string"
+          },
+          "preventSummary": {
+            "type": "boolean"
+          },
+          "columnQueryForSummary": {
+            "$ref": "#/definitions/queryReference"
+          },
+          "summaryQuery": {
+            "$ref": "#/definitions/queryReference"
+          },
+          "summaryColumn": {
+            "type": "string"
+          },
+          "summaryVisualizations": {
+            "oneOf": [
+              {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "Map",
+                    "BarChart",
+                    "DonutChart",
+                    "Grid"
+                  ]
+                }
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "Default",
+                  "DefaultWithMap"
+                ]
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "displayName",
+          "format"
+        ]
+      }
+    },
+    "assetTypeBrowseInfoBox": {
+      "type": "object",
+      "properties": {
+        "display": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "style": {
+          "type": "string",
+          "$generateDocTemplate": "enum-assetTypeBrowseInfoBox-style",
+          "enum": [
+            "Default",
+            "Info",
+            "Upsell",
+            "Success",
+            "Warning",
+            "Error"
+          ]
+        },
+        "link": {
+          "$ref": "#/definitions/assetTypeBrowseInfoBoxLinkTarget"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "blade": {
+          "$ref": "#/definitions/assetTypeBrowseInfoBoxBladeReferenceTarget"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "display",
+        "style"
+      ]
+    },
+    "assetTypeBrowseInfoBoxLinkTarget": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "uri"
+      ]
+    },
+    "assetTypeBrowseInfoBoxBladeReferenceTarget": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "extension": {
+          "type": "string"
+        },
+        "openInContextPane": {
+          "type": "boolean"
+        },
+        "openAsSubJourney": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "assetTypeBrowseCommands": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/staticCommandKinds"
+          },
+          {
+            "$ref": "#/definitions/commandBase"
+          },
+          {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/assetOpenBladeCommand"
+              },
+              {
+                "$ref": "#/definitions/assetOpenMarketplaceCommand"
+              },
+              {
+                "$ref": "#/definitions/assetMenuCommand"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "assetTypeBrowseSelectionCommands": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/selectionCommandKinds"
+          },
+          {
+            "$ref": "#/definitions/commandBase"
+          },
+          {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/assetOpenBladeSelectionCommand"
+              },
+              {
+                "$ref": "#/definitions/assetMenuSelectionCommand"
+              },
+              {
+                "$ref": "#/definitions/assetArmSelectionCommand"
+              },
+              {
+                "$ref": "#/definitions/assetDeleteSelectionCommand"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "assetTypeBrowseFeatureCards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "$propertyDescription": "id of the feature card"
+          },
+          "extension": {
+            "type": "string",
+            "$propertyDescription": "extension that owns the feature card"
+          },
+          "enabled": {
+            "type": [
+              "boolean",
+              "string"
+            ],
+            "$propertyDescription": "enabled boolean or experiment name of the feature card"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "extension",
+          "enabled"
+        ]
+      }
+    },
+    "assetTypeMenu": {
+      "$comment": "*DontExcludeFeature*",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "overview": {
+              "$ref": "#/definitions/resourceMenuItem"
+            },
+            "groups": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/resourceMenuItemGroup"
+                  },
+                  {
+                    "$ref": "#/definitions/resourceMenuItemGroupBuiltin"
+                  }
+                ]
+              }
+            },
+            "options": {
+              "type": "object",
+              "properties": {
+                "enableExportTemplate": {
+                  "type": "boolean"
+                },
+                "enableRbac": {
+                  "type": "boolean"
+                },
+                "enableSupportHelpRequest": {
+                  "type": "boolean"
+                },
+                "enableSupportTroubleshoot": {
+                  "type": "boolean"
+                },
+                "enableSupportTroubleshootV2": {
+                  "type": "boolean"
+                },
+                "enableSupportResourceHealth": {
+                  "type": "boolean"
+                },
+                "enableSupportEventLogs": {
+                  "type": "boolean"
+                },
+                "enableTags": {
+                  "type": "boolean"
+                },
+                "enableProperties": {
+                  "type": "boolean"
+                },
+                "enableAlerts": {
+                  "type": "boolean"
+                },
+                "enableDiagnostics": {
+                  "type": "boolean"
+                },
+                "enableMetrics": {
+                  "type": "boolean"
+                },
+                "enableLogAnalytics": {
+                  "type": "boolean"
+                },
+                "enableLogSearch": {
+                  "type": "boolean"
+                },
+                "enableLocks": {
+                  "type": "boolean"
+                },
+                "enableSupportResourceAdvisor": {
+                  "type": "boolean"
+                },
+                "enableEventGridPublisher": {
+                  "type": "boolean"
+                },
+                "enableWorkbooks": {
+                  "type": "boolean"
+                },
+                "enableLogs": {
+                  "type": "boolean"
+                },
+                "enableInsights": {
+                  "type": "boolean"
+                },
+                "disableAutomationTasks": {
+                  "type": "boolean"
+                },
+                "disableResourceExplorer": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "overview"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "groups": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/assetMenuItemGroup"
+                  }
+                ]
+              }
+            },
+            "options": {
+              "type": "object",
+              "properties": {
+                "showSearch": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "groups"
+          ]
+        }
+      ]
+    },
+    "assetTypeResourceMenu": {
+      "type": "object",
+      "properties": {
+        "staticOverview": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/staticOverview"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "resourceProvidedBy": {
+          "$generateDocTemplate": "enum-assetTypeResourceMenu-resourceProvidedBy",
+          "type": "string",
+          "enum": [
+            "ProvidedByResourceMenu",
+            "ReturnedByExtension",
+            "NoResource"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "resourceProvidedBy"
+      ]
+    },
+    "assetTypeLinks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "$ref": "dx.schema.common.json#/definitions/stringResource"
+          },
+          "uri": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "uri"
+        ]
+      }
+    },
+    "staticCommandKinds": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "$generateDocTemplate": "enum-staticCommandKinds-kind",
+          "enum": [
+            "OpenBladeCommand",
+            "OpenMarketplaceCommand",
+            "MenuCommand"
+          ]
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "selectionCommandKinds": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$generateDocTemplate": "enum-selectionCommandKinds-kind",
+          "type": "string",
+          "enum": [
+            "OpenBladeSelectionCommand",
+            "ArmSelectionCommand",
+            "MenuSelectionCommand",
+            "DeleteSelectionCommand"
+          ]
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "viewCommandKinds": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$generateDocTemplate": "enum-viewCommandKinds-kind",
+          "type": "string",
+          "enum": [
+            "OpenBladeCommand",
+            "OpenMarketplaceCommand",
+            "MenuCommand",
+            "ArmCommand",
+            "DeleteCommand",
+            "MoveCommand",
+            "RefreshCommand"
+          ]
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "commandBase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "ariaLabel": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "tooltip": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        }
+      },
+      "required": [
+        "id",
+        "displayName",
+        "icon"
+      ]
+    },
+    "assetOpenBladeCommand": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "OpenBladeCommand"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "ariaLabel": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "tooltip": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "blade": {
+          "$ref": "#/definitions/bladeReferenceWithContextPane"
+        },
+        "disabled": {
+          "type": [
+            "string",
+            "boolean"
+          ]
+        },
+        "visibility": {
+          "$ref": "dx.schema.common.json#/definitions/assetNonSelectionCommandVisibility"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "blade"
+      ]
+    },
+    "assetOpenBladeCommandWithContent": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "OpenBladeCommand"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "ariaLabel": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "tooltip": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "content": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "blade": {
+          "$ref": "#/definitions/bladeReferenceWithContextPane"
+        },
+        "visibility": {
+          "$ref": "dx.schema.common.json#/definitions/assetNonSelectionCommandVisibility"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "blade"
+      ]
+    },
+    "assetSelectionCommandVisibility": {
+      "type": "array",
+      "items": {
+        "$generateDocTemplate": "enum-assetSelectionCommandVisibility",
+        "type": "string",
+        "enum": [
+          "HiddenByDefault",
+          "BrowseToolbar",
+          "BrowseContextMenu",
+          "ResourceHoverCard"
+        ]
+      }
+    },
+    "assetOpenBladeSelectionCommand": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "OpenBladeSelectionCommand"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "ariaLabel": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "tooltip": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "selection": {
+          "$ref": "#/definitions/commandSelection"
+        },
+        "blade": {
+          "$ref": "#/definitions/bladeReferenceWithContextPane"
+        },
+        "disabled": {
+          "type": [
+            "string",
+            "boolean"
+          ]
+        },
+        "visibility": {
+          "$ref": "#/definitions/assetSelectionCommandVisibility"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "blade"
+      ]
+    },
+    "assetOpenBladeSelectionCommandWithContent": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "OpenBladeSelectionCommand"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "ariaLabel": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "content": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "tooltip": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "selection": {
+          "$ref": "#/definitions/commandSelection"
+        },
+        "blade": {
+          "$ref": "#/definitions/bladeReferenceWithContextPane"
+        },
+        "visibility": {
+          "$ref": "#/definitions/assetSelectionCommandVisibility"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "blade"
+      ]
+    },
+    "assetOpenMarketplaceCommand": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "OpenMarketplaceCommand"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "ariaLabel": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "tooltip": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "marketplaceItemId": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": [
+            "string",
+            "boolean"
+          ]
+        },
+        "visibility": {
+          "$ref": "dx.schema.common.json#/definitions/assetNonSelectionCommandVisibility"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "marketplaceItemId"
+      ]
+    },
+    "assetOpenMarketplaceCommandWithContent": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "OpenMarketplaceCommand"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "ariaLabel": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "content": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "tooltip": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "marketplaceItemId": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": [
+            "string",
+            "boolean"
+          ]
+        },
+        "visibility": {
+          "$ref": "dx.schema.common.json#/definitions/assetNonSelectionCommandVisibility"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "marketplaceItemId"
+      ]
+    },
+    "assetMenuCommand": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "MenuCommand"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "ariaLabel": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "visibility": {
+          "$ref": "dx.schema.common.json#/definitions/assetNonSelectionCommandVisibility"
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "OpenBladeCommand",
+                      "OpenMarketplaceCommand"
+                    ]
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              },
+              {
+                "$ref": "#/definitions/commandBase"
+              },
+              {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/assetOpenBladeCommandWithContent"
+                  },
+                  {
+                    "$ref": "#/definitions/assetOpenMarketplaceCommandWithContent"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "commands"
+      ]
+    },
+    "assetMenuSelectionCommand": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "MenuSelectionCommand"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "ariaLabel": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "tooltip": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "selection": {
+          "$ref": "#/definitions/commandSelection"
+        },
+        "visibility": {
+          "$ref": "#/definitions/assetSelectionCommandVisibility"
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "$generateDocTemplate": "enum-assetMenuSelectionCommand-commands-kind",
+                    "type": "string",
+                    "enum": [
+                      "OpenBladeSelectionCommand",
+                      "ArmSelectionCommand",
+                      "DeleteSelectionCommand"
+                    ]
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              },
+              {
+                "$ref": "#/definitions/commandBase"
+              },
+              {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/assetOpenBladeSelectionCommandWithContent"
+                  },
+                  {
+                    "$ref": "#/definitions/assetArmSelectionCommand"
+                  },
+                  {
+                    "$ref": "#/definitions/assetDeleteSelectionCommand"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "commands"
+      ]
+    },
+    "assetArmSelectionCommand": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "ArmSelectionCommand"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "tooltip": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "ariaLabel": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "disabled": {
+          "type": [
+            "string",
+            "boolean"
+          ]
+        },
+        "visibility": {
+          "$ref": "#/definitions/assetSelectionCommandVisibility"
+        },
+        "confirmation": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "message": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            }
+          },
+          "required": [
+            "title",
+            "message"
+          ],
+          "additionalProperties": false
+        },
+        "definitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "resourceType": {
+                "type": "string"
+              },
+              "httpMethod": {
+                "type": "string",
+                "enum": [
+                  "post"
+                ]
+              },
+              "uri": {
+                "type": "string"
+              },
+              "retryableArmCodes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "nonRetryableArmCodes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "asyncOperation": {
+                "$ref": "#/definitions/commandAsyncOperation"
+              }
+            },
+            "required": [
+              "uri"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "displayName",
+        "definitions"
+      ]
+    },
+    "assetDeleteSelectionCommand": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "DeleteSelectionCommand"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "ariaLabel": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "tooltip": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "icon": {
+          "$ref": "dx.schema.common.json#/definitions/iconReference"
+        },
+        "visibility": {
+          "$ref": "#/definitions/assetSelectionCommandVisibility"
+        },
+        "confirmation": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "message": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "explicitConfirmationText": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            }
+          },
+          "required": [
+            "title",
+            "message"
+          ],
+          "additionalProperties": false
+        },
+        "definitions": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "resourceType": {
+                    "type": "string"
+                  },
+                  "apiVersion": {
+                    "type": "string"
+                  },
+                  "retryableArmCodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "nonRetryableArmCodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "asyncOperation": {
+                    "$ref": "#/definitions/commandAsyncOperation"
+                  }
+                },
+                "required": [
+                  "apiVersion"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "resourceType": {
+                    "type": "string"
+                  },
+                  "uri": {
+                    "type": "string"
+                  },
+                  "retryableArmCodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "nonRetryableArmCodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "asyncOperation": {
+                    "$ref": "#/definitions/commandAsyncOperation"
+                  }
+                },
+                "required": [
+                  "uri"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "displayName",
+        "confirmation",
+        "definitions"
+      ]
+    },
+    "commandAsyncOperation": {
+      "type": "object",
+      "properties": {
+        "pollingHeaderOverride": {
+          "type": "string"
+        },
+        "statusPath": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "commandSelection": {
+      "type": "object",
+      "properties": {
+        "maxSelectedItems": {
+          "type": "integer"
+        },
+        "minSelectedItems": {
+          "type": "integer"
+        },
+        "disabledMessage": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        }
+      },
+      "additionalProperties": false
+    },
+    "displayNames": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "singular": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "plural": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "lowerSingular": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "lowerPlural": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "singular",
+            "plural",
+            "lowerSingular",
+            "lowerPlural"
+          ]
+        },
+        {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        }
+      ]
+    },
+    "partReference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "builtIn": {
+              "type": "string",
+              "enum": [
+                "ResourcePart"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "builtIn"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "partType": {
+              "type": "string"
+            },
+            "extension": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "partType"
+          ]
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "bladeReference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "extension": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name"
+          ]
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "bladeReferenceWithParameters": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "extension": {
+              "type": "string"
+            },
+            "parameters": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name"
+          ]
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "bladeReferenceWithFullScreen": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "extension": {
+              "type": "string"
+            },
+            "parameters": {
+              "type": "object"
+            },
+            "inFullScreen": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name"
+          ]
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "bladeReferenceWithContextPane": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "extension": {
+              "type": "string"
+            },
+            "parameters": {
+              "type": "object"
+            },
+            "inContextPane": {
+              "type": "boolean"
+            },
+            "doesProvisioning": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name"
+          ]
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "bladeReferenceWithFlighting": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "extension": {
+              "type": "string"
+            },
+            "useFlighting": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name"
+          ]
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "createReference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "blade": {
+              "$ref": "#/definitions/bladeReferenceWithParameters"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "blade"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marketplacePackageId": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "marketplacePackageId"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marketplaceMenuItemId": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "marketplaceMenuItemId"
+          ]
+        }
+      ]
+    },
+    "createKindReference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "marketplacePackageId": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "marketplacePackageId"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marketplaceMenuItemId": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "marketplaceMenuItemId"
+          ]
+        }
+      ]
+    },
+    "permissionsList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "action"
+        ]
+      }
+    },
+    "viewModelReference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "module": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name"
+          ]
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "staticOverview": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "keywords": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        }
+      },
+      "additionalProperties": false
+    },
+    "resourceMenuItem": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "displayName": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "keywords": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "icon": {
+              "$ref": "dx.schema.common.json#/definitions/iconReference"
+            },
+            "tooltip": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "blade": {
+              "$ref": "#/definitions/bladeReferenceWithParameters"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "displayName",
+            "blade"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "displayName": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "keywords": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "icon": {
+              "$ref": "dx.schema.common.json#/definitions/iconReference"
+            },
+            "tooltip": {
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
+            },
+            "browse": {
+              "$comment": "*ExcludeFeature*",
+              "type": "object",
+              "properties": {
+                "resourceType": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "resourceType"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "displayName",
+            "browse"
+          ]
+        }
+      ]
+    },
+    "assetMenuItemGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "keywords": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/resourceMenuItem"
+          }
+        },
+        "elevated": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "items"
+      ]
+    },
+    "resourceMenuItemGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "keywords": {
+          "$ref": "dx.schema.common.json#/definitions/stringResource"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/resourceMenuItem"
+          }
+        },
+        "elevated": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "displayName",
+        "items"
+      ]
+    },
+    "resourceMenuItemGroupBuiltin": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/resourceMenuItem"
+          }
+        },
+        "referenceId": {
+          "$generateDocTemplate": "enum-resourceMenuItemGroupBuiltin-referenceId",
+          "type": "string",
+          "enum": [
+            "management",
+            "support",
+            "quickaccess",
+            "monitoring"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "referenceId",
+        "items"
+      ]
+    },
+    "propertySourceUnits": {
+      "$generateDocTemplate": "enum-propertySourceUnits",
+      "type": "string",
+      "enum": [
+        "None",
+        "Percentage",
+        "Bytes",
+        "Kilobytes",
+        "Megabytes",
+        "Gigabytes",
+        "Terabytes",
+        "Petabytes",
+        "BytesPerDay",
+        "BytesPerHour",
+        "BytesPerMinute",
+        "BytesPerSecond",
+        "KilobytesPerSecond",
+        "MegabytesPerSecond",
+        "GigabytesPerSecond",
+        "TerabytesPerSecond",
+        "PetabytesPerSecond",
+        "Count",
+        "Thousand",
+        "Million",
+        "Billion",
+        "Trillion",
+        "MicroSeconds",
+        "MilliSeconds",
+        "Seconds",
+        "Minutes",
+        "Hours",
+        "Days",
+        "CountPerDay",
+        "CountPerHour",
+        "CountPerMinute",
+        "CountPerSecond",
+        "ThousandPerSecond",
+        "MillionPerSecond",
+        "BillionPerSecond",
+        "TrillionPerSecond",
+        "Bytes_SI",
+        "Kilobytes_SI",
+        "Megabytes_SI",
+        "Gigabytes_SI",
+        "Terabytes_SI",
+        "Petabytes_SI",
+        "BytesPerDay_SI",
+        "BytesPerHour_SI",
+        "BytesPerMinute_SI",
+        "BytesPerSecond_SI",
+        "KilobytesPerSecond_SI",
+        "MegabytesPerSecond_SI",
+        "GigabytesPerSecond_SI",
+        "TerabytesPerSecond_SI",
+        "PetabytesPerSecond_SI"
+      ]
+    },
+    "assetTypeDocument": {
+      "type": "object",
+      "$comment": "*ExcludeFeatureRecursive*",
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "area": {
+          "type": "string"
+        },
+        "modulePath": {
+          "type": "string"
+        },
+        "stringSource": {
+          "type": "string"
+        },
+        "assetType": {
+          "$ref": "#/definitions/assetType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "proxyAssetTypeDocument": {
+      "type": "object",
+      "$comment": "*ExcludeFeatureRecursive*",
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "area": {
+          "type": "string"
+        },
+        "modulePath": {
+          "type": "string"
+        },
+        "stringSource": {
+          "type": "string"
+        },
+        "proxyAssetType": {
+          "$ref": "#/definitions/proxyAssetType"
+        }
+      },
+      "additionalProperties": false
     }
+  }
 }
 
 
@@ -2302,273 +4218,214 @@ Here is a sample of defining various asset commands, represented by a single Typ
 
 ```typescript
 
-import { ForAsset } from "Fx/Assets/Decorators";
-import * as ClientResources from "ClientResources";
-import { AssetTypeNames } from "_generated/ExtensionDefinition";
-import { SvgType } from "Fx/Images";
+{
+    "$schema": "../../../Definitions/dx.schema.json",
+    "area": "ResourceTypes",
 
-@ForAsset.Commands.Decorator({
-    assetType: AssetTypeNames.virtualServer, // Asset type name associated with commands
-    commands: [ // Generic commands that do not require resource selection
-        {
-            kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
-            id: "OpenBladeCommandId",  // Unique identifier used for controlling visibility of commands
-            label: ClientResources.AssetCommands.openBlade,
-            ariaLabel: ClientResources.AssetCommands.openBlade,
-            icon: {
-                image: SvgType.AddTile,
-            },
-            bladeReference: {
-                blade: "SimpleTemplateBlade",
-                extension: "SamplesExtension", // An optional extension name, however, must be provided when opening a blade from a different extension
-                inContextPane: true, // An optional property to open the pane in context pane
-            },
+    // ----------------------------------------------------------------------------------------------------------------
+    // The following example shows you how to integrate with resource types without sub-types and use the resource menu
+    // blade without using a resource.
+    //
+    // This asset type represents an insurance policy instance.
+    //
+    // An asset type represents an asset object in the system independent of other objects in the system. It represents
+    // a singular class of objects distinctively but without connection to other objects.
+    //
+    // This asset type includes a resource type which represents an insurance policy instance in the resource map.
+    //
+    // A resource type represents an asset specifically in a resource map where the connections between objects is
+    // important. It represents a way to map resources in a resource map to the underlying assets in the system.
+    //
+    // It includes the resource map icons which are used in the resource map control.
+    //
+    // Insurance policy is a "concrete" asset type, there are specializations of the asset type (kinds).
+    // ----------------------------------------------------------------------------------------------------------------
+
+    "assetType": {
+        "name": "InsurancePolicy",
+        "displayNames": { "property": "AssetTypeNames.InsurancePolicy", "module": "../../ClientResources" },
+        "viewModel": { "name": "InsurancePolicyViewModel", "module": "./AssetType/InsurancePolicy" },
+        "part": "InsurancePolicyTile",
+        "blade": "InsurancePolicyBlade",
+        "icon": { "file": "../../Svg/InsurancePolicies/insurancepolicy.svg" },
+        "create": { "marketplacePackageId": "Microsoft/insurance" },
+        "postCreateBlade": {
+            "name": "CustomDeploymentOverviewBlade"
         },
-        {
-            kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
-            id: "OpenCreateCommandId",
-            label: ClientResources.AssetCommands.openCreate,
-            icon: {
-                image: SvgType.Cubes,
-            },
-            bladeReference: {
-                marketplaceItemId: "Microsoft.EngineV3", // Opens marketplace create flow
-            },
-        },
-        {
-            kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
-            id: "OpenProvisioningBladeCommandId",
-            label: ClientResources.AssetCommands.customCreate,
-            icon: {
-                image: SvgType.PowerUp,
-            },
-            bladeReference: {
-                blade: "CreateCustomRobot.ReactView",
-                extension: "SamplesExtension",
-                doesProvisioning: true,
-            },
-        },
-        {
-            kind: ForAsset.Commands.CommandKind.MenuCommand,
-            id: "MenuCommand",
-            label: ClientResources.AssetCommands.menuCommand,
-            icon: {
-                image: SvgType.PolyResourceLinked,
-            },
-            commands: [
+        "browse": {
+            "type": "ResourceType",
+            "query": { "file": "./InsurancePolicyQuery.kml" },
+            "defaultColumns": ["items", "deductible", "coverage"],
+            "columns": [
                 {
-                    kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
-                    id: "OpenBladeCommand1",
-                    label: ClientResources.AssetCommands.openBlade1,
-                    icon: {
-                        image: SvgType.AzureQuickstart,
+                    "name": "items",
+                    "displayName": { "property": "Columns.InsurancePolicy.items", "module": "../../ClientResources" },
+                    "description": { "property": "Columns.InsurancePolicy.itemsDescription", "module": "../../ClientResources" },
+                    "format": "BladeLink",
+                    "width": "90fr",
+                    "blade": {
+                        "extension": "HubsExtension",
+                        "name": "ResourceMenuBlade"
                     },
-                    content: ClientResources.infoBalloonContent, // Adds the subtitle property for the menu command item.
-                    bladeReference: {
-                        blade: "SimpleTemplateBlade",
-                    },
+                    "bladeParameterColumn": "launchItemsBladeParameters"
                 },
                 {
-                    kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
-                    id: "OpenBladeCommand2",
-                    label: ClientResources.AssetCommands.openBlade2,
-                    icon: {
-                        image: SvgType.QuickStartPoly,
-                    },
-                    bladeReference: {
-                        blade: "DiTemplateBlade",
-                    },
+                    "name": "deductible",
+                    "displayName": { "property": "Columns.InsurancePolicy.deductible", "module": "../../ClientResources" },
+                    "description": { "property": "Columns.InsurancePolicy.deductibleDescription", "module": "../../ClientResources" },
+                    "format": "String",
+                    "width": "90fr"
                 },
+                {
+                    "name": "coverage",
+                    "displayName": { "property": "Columns.InsurancePolicy.coverage", "module": "../../ClientResources" },
+                    "description": { "property": "Columns.InsurancePolicy.coverageDescription", "module": "../../ClientResources" },
+                    "format": "String",
+                    "width": "80fr"
+                }
             ],
-            visibility:
-                ForAsset.Commands.NonSelectionCommandVisibility.BrowseToolbar |
-                ForAsset.Commands.NonSelectionCommandVisibility.BrowseEmptyView |
-                ForAsset.Commands.NonSelectionCommandVisibility.ServiceHoverCard,
-        },
-        {
-            kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
-            id: "OpenBladeCommandIdV2",  // Unique identifier used for controlling visibility of commands
-            label: ClientResources.AssetCommands.openBlade,
-            ariaLabel: ClientResources.AssetCommands.openBlade,
-            icon: {
-                image: SvgType.AddTile,
-            },
-            bladeReference: {
-                blade: "SimpleTemplateBlade",
-                extension: "SamplesExtension", // An optional extension name, however, must be provided when opening a blade from a different extension
-                inContextPane: true, // An optional property to open the pane in context pane
-            },
-            visibility: ForAsset.Commands.NonSelectionCommandVisibility.HiddenByDefault,  // Hide this command by defualt in all environments. Can be enabled via experiementation config for certain users.
-        },
-    ],
-    selectionCommands: [ // Commands that require resource selection
-        {
-            kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,  // Executes ARM bulk operations
-            id: "BulkDelete",
-            label: ClientResources.AssetCommands.delete,
-            icon: {
-                image: SvgType.Delete,
-            },
-            definitions: {
-                "microsoft.test/virtualservers": {
-                    httpMethodType: "DELETE",
-                    uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
-                    asyncOperation: {
-                        pollingHeaderOverride: "Azure-AsyncOperation",
-                    },
-                },
-            },
-            isDelete: true,  // Launches the default bulk delete confirmation blade provided by Fx on user click
-            confirmation: {
-                title: ClientResources.AssetCommands.confirmDeleteTitle,
-                message: ClientResources.AssetCommands.confirmDeleteMessage,
-            },
-            visibility: ForAsset.Commands.SelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.SelectionCommandVisibility.BrowseContextMenu | ForAsset.Commands.SelectionCommandVisibility.ResourceHoverCard, // Show this command on browse toolbar and browse context menu.
-        },
-        {
-            kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,  // Executes ARM bulk operations
-            id: "BulkStart",
-            label: ClientResources.AssetCommands.start,
-            icon: {
-                image: SvgType.Start,
-            },
-            definitions: {
-                "microsoft.test/virtualservers": {
-                    uri: "{resourceid}?skipserver=false&api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
-                },
-            },
-            confirmation: {
-                title: ClientResources.AssetCommands.confirmStartTitle,
-                message: ClientResources.AssetCommands.confirmStartMessage,
-            },
-        },
-        {
-            kind: ForAsset.Commands.SelectionCommandKind.OpenBladeSelectionCommand,
-            id: "SelectionBasedOpenBladeCommand1",
-            label: ClientResources.AssetCommands.openBlade2,
-            icon: {
-                image: SvgType.Attachment,
-            },
-            bladeReference: {
-                blade: "SimpleTemplateBlade",
-            },
-            selection: {
-                maxSelectedItems: 3,
-                minSelectedItems: 3,
-                disabledMessage: ClientResources.AssetCommands.disabledMessage,
-            },
-        },
-        {
-            kind: ForAsset.Commands.SelectionCommandKind.MenuSelectionCommand,
-            id: "SelectionBasedMenuCommand",
-            label: ClientResources.AssetCommands.openBlade,
-            icon: {
-                image: SvgType.PolyResourceLinked,
-            },
-            selection: {
-                maxSelectedItems: 3,
-                minSelectedItems: 2,
-                disabledMessage: ClientResources.AssetCommands.disabledMessage,
-            },
-            commands: [
+            "commands": [
                 {
-                    kind: ForAsset.Commands.SelectionCommandKind.OpenBladeSelectionCommand,
-                    id: "SelectionBasedOpenBladeCommand",
-                    label: ClientResources.AssetCommands.openBlade1,
-                    icon: {
-                        image: SvgType.AzureQuickstart,
+                    "kind": "OpenBladeCommand",
+                    "id": "openCreateCommandId",
+                    "displayName": { "property": "Commands.Camera.newCameraWithPreset", "module": "../../ClientResources" },
+                    "icon": "MsPortalFx.Base.Images.Move",
+                    "blade": {
+                      "name": "CreateCustomRobot.ReactView",
+                      "extension": "SamplesExtension",
+                      "doesProvisioning": true
                     },
-                    content: ClientResources.infoBalloonContent, // Adds the subtitle property for the menu command item.
-                    bladeReference: {
-                        blade: "SimpleTemplateBlade",
-                    },
-                },
-                {
-                    kind: ForAsset.Commands.SelectionCommandKind.OpenBladeSelectionCommand,
-                    id: "SelectionBasedOpenBladeCommand",
-                    label: ClientResources.AssetCommands.openBlade2,
-                    icon: {
-                        image: SvgType.QuickStartPoly,
-                    },
-                    bladeReference: {
-                        blade: "DiTemplateBlade",
-                    },
-                },
+                    "visibility": ["ServiceHoverCard", "BrowseToolbar"]
+                }
             ],
-        },
-        {
-            kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,
-            visibility: ForAsset.Commands.SelectionCommandVisibility.ResourceHoverCard,
-            id: "ResoruceHoverCardCommand1",
-            label: ClientResources.AssetCommands.resoruceHoverCardCommand1Label,
-            icon: { image: SvgType.PowerUp },
-            definitions: {
-                "microsoft.test/virtualservers": {
-                    uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
+            "selectionCommands": [{
+                "kind": "ArmSelectionCommand",
+                "id": "deleteCommand",
+                "displayName": { "property": "Commands.Camera.delete", "module": "../../ClientResources" },
+                "icon": "MsPortalFx.Base.Images.Delete",
+                "confirmation": {
+                    "message": { "property": "Commands.Camera.deleteConfirmationMessage", "module": "../../ClientResources"},
+                    "title": { "property": "Commands.Camera.deleteConfirmationTitle", "module": "../../ClientResources"}
                 },
-            },
-            confirmation: {
-                title: ClientResources.AssetCommands.fakeCommandTitle,
-                message: ClientResources.AssetCommands.fakeCommandMessage,
-            },
-        },
-        {
-            kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,
-            visibility: ForAsset.Commands.SelectionCommandVisibility.ResourceHoverCard,
-            id: "ResoruceHoverCardCommand2",
-            label: ClientResources.AssetCommands.resoruceHoverCardCommand2Label,
-            icon: { image: SvgType.PowerUp },
-            definitions: {
-                "microsoft.test/virtualservers": {
-                    uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
-                },
-            },
-            confirmation: {
-                title: ClientResources.AssetCommands.fakeCommandTitle,
-                message: ClientResources.AssetCommands.fakeCommandMessage,
-            },
-        },
-        {
-            kind: ForAsset.Commands.SelectionCommandKind.MenuSelectionCommand,
-            id: "ResoruceHoverCardMenuCommand",
-            label: ClientResources.AssetCommands.resoruceHoverCardMenuCommandLabel,
-            icon: { image: SvgType.PowerUp },
-            commands: [
-                {
-                    kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,
-                    id: "ResoruceHoverCardMenuCommand1",
-                    label: ClientResources.AssetCommands.resoruceHoverCardMenuCommand1Label,
-                    icon: { image: SvgType.PowerUp },
-                    definitions: {
-                        "microsoft.test/virtualservers": {
-                            uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
+                "definitions": [
+                    {
+                        "resourceType": "\"microsoft.test/insurancepolicies\"",
+                        "uri": "{resourceid}/start?api-version=2019-07-01",
+                        "asyncOperation": {
+                          "pollingHeaderOverride": "Azure-AsyncOperation"
                         },
-                    },
-                    confirmation: {
-                        title: ClientResources.AssetCommands.fakeCommandTitle,
-                        message: ClientResources.AssetCommands.fakeCommandMessage,
-                    },
+                        "retryableArmCodes": [],
+                        "nonRetryableArmCodes": []
+                    }
+                ]
+            }]
+        },
+        "resourceType": {
+            "name": "Microsoft.Test/insurancepolicies",
+            "apiVersion": "2021-11-15",
+            "kinds": [
+                {
+                    "name": "camera",
+                    "displayNames": { "property": "AssetTypeNames.InsurancePolicy.Camera", "module": "../../ClientResources" },
+                    "icon": { "file": "../../Svg/InsurancePolicies/camera.svg" },
+                    // Example of extensible commands on simple kinds
+                    "commands": [
+                        {
+                            "kind": "OpenBladeCommand",
+                            "id": "openCreateCommandId",
+                            "displayName": { "property": "Commands.Camera.newCameraWithPreset", "module": "../../ClientResources" },
+                            "icon": "MsPortalFx.Base.Images.Globe",
+                            "blade": {
+                              "name": "CreateCustomRobot.ReactView",
+                              "extension": "SamplesExtension",
+                              "doesProvisioning": true
+                            }
+                        }
+                    ],
+                    "selectionCommands": [{
+                        "kind": "ArmSelectionCommand",
+                        "id": "deleteCommand",
+                        "displayName": { "property": "Commands.Camera.delete", "module": "../../ClientResources" },
+                        "icon": "MsPortalFx.Base.Images.Delete",
+                        "confirmation": {
+                            "message": { "property": "Commands.Camera.deleteConfirmationMessage", "module": "../../ClientResources"},
+                            "title": { "property": "Commands.Camera.deleteConfirmationTitle", "module": "../../ClientResources"}
+                        },
+                        "definitions": [
+                            {
+                                "resourceType": "\"microsoft.test/insurancepolicies\"",
+                                "uri": "{resourceid}/start?api-version=2019-07-01",
+                                "asyncOperation": {
+                                  "pollingHeaderOverride": "Azure-AsyncOperation"
+                                },
+                                "retryableArmCodes": [],
+                                "nonRetryableArmCodes": []
+                            }
+                        ]
+                    }]
                 },
                 {
-                    kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,
-                    id: "ResoruceHoverCardMenuCommand2",
-                    label: ClientResources.AssetCommands.resoruceHoverCardMenuCommand2Label,
-                    icon: { image: SvgType.PowerUp },
-                    definitions: {
-                        "microsoft.test/virtualservers": {
-                            uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
-                        },
-                    },
-                    confirmation: {
-                        title: ClientResources.AssetCommands.fakeCommandTitle,
-                        message: ClientResources.AssetCommands.fakeCommandMessage,
-                    },
+                    "name": "car",
+                    "displayNames": { "property": "AssetTypeNames.InsurancePolicy.Car", "module": "../../ClientResources" },
+                    "icon": { "file": "../../Svg/InsurancePolicies/car.svg" }
                 },
-            ],
+                {
+                    "name": "merged-kind",
+                    // Example of extensible commands on merged kinds
+                    "selectionCommands": [{
+                        "kind": "ArmSelectionCommand",
+                        "id": "deleteSelectionCommand",
+                        "displayName": { "property": "Commands.Camera.delete", "module": "../../ClientResources" },
+                        "icon": "MsPortalFx.Base.Images.Delete",
+                        "confirmation": {
+                            "message": { "property": "Commands.Camera.deleteConfirmationMessage", "module": "../../ClientResources"},
+                            "title": { "property": "Commands.Camera.deleteConfirmationTitle", "module": "../../ClientResources"}
+                        },
+                        "definitions": [
+                            {
+                                "resourceType": "\"microsoft.test/insurancepolicies\"",
+                                "uri": "{resourceid}/start?api-version=2019-07-01",
+                                "asyncOperation": {
+                                  "pollingHeaderOverride": "Azure-AsyncOperation"
+                                },
+                                "retryableArmCodes": [],
+                                "nonRetryableArmCodes": []
+                            }
+                        ]
+                    }],
+                    "commands": [
+                        {
+                            "kind": "OpenBladeCommand",
+                            "id": "openCreateCommandId",
+                            "displayName": { "property": "Commands.Camera.newCameraWithPreset", "module": "../../ClientResources" },
+                            "icon": "MsPortalFx.Base.Images.Clock",
+                            "blade": {
+                              "name": "CreateCustomRobot.ReactView",
+                              "extension": "SamplesExtension",
+                              "doesProvisioning": true
+                            }
+                        }
+                    ],
+                    "mergedKinds": [
+                        {
+                            "name": "car,mercedez",
+                            "displayNames": { "property": "AssetTypeNames.InsurancePolicy.Car", "module": "../../ClientResources" },
+                            "icon": { "file": "../../Svg/InsurancePolicies/car.svg" }
+                        },
+                        {
+                            "name": "car,tesla",
+                            "displayNames": { "property": "AssetTypeNames.InsurancePolicy.Car", "module": "../../ClientResources" },
+                            "icon": { "file": "../../Svg/InsurancePolicies/car.svg" }
+                        }
+                    ]
+                }
+            ]
         },
-    ],
-})
-export class VirtualServerCommands {
+        "resourceMenu": {
+            "resourceProvidedBy": "ProvidedByResourceMenu",
+            "staticOverview": true
+        }
+    }
 }
 
 
@@ -2621,31 +4478,27 @@ Portal now allows extension authors to integrate their extensible commands acros
 You can use `visibility` property on the command to specify areas in portal where the given command needs to be shown.
 Here's a sample of a command that uses `visibility` property which states that the command should appear on browse toolbar, context menu and resource hover card:
 
-```typescript
-
+```json
     {
-        kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,  // Executes ARM bulk operations
-        id: "BulkDelete",
-        label: ClientResources.AssetCommands.delete,
-        icon: {
-            image: SvgType.Delete,
+        "kind": "ArmSelectionCommand",   // Executes ARM bulk operations
+        "id": "BulkDelete",
+        "displayName": { "property": "Commands.Camera.delete", "module": "../../ClientResources" },
+        "icon": "MsPortalFx.Base.Images.Delete",
+        "confirmation": {
+            "message": { "property": "Commands.Camera.deleteConfirmationMessage", "module": "../../ClientResources"},
+            "title": { "property": "Commands.Camera.deleteConfirmationTitle", "module": "../../ClientResources"}
         },
-        definitions: {
-            "microsoft.test/virtualservers": {
-                httpMethodType: "DELETE",
-                uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
-                asyncOperation: {
-                    pollingHeaderOverride: "Azure-AsyncOperation",
+        "definitions": [
+            {
+                "resourceType": "\"microsoft.test/insurancepolicies\"",
+                "uri": "{resourceid}/start?api-version=2019-07-01",      // The fixed format that starts with {resourceid}
+                "asyncOperation": {
+                  "pollingHeaderOverride": "Azure-AsyncOperation"
                 },
-            },
-        },
-        isDelete: true,  // Launches the default bulk delete confirmation blade provided by Fx on user click
-        confirmation: {
-            title: ClientResources.AssetCommands.confirmDeleteTitle,
-            message: ClientResources.AssetCommands.confirmDeleteMessage,
-        },
-        visibility: ForAsset.Commands.SelectionCommandVisibility.BrowseToolbar | ForAsset.Commands.SelectionCommandVisibility.BrowseContextMenu | ForAsset.Commands.SelectionCommandVisibility.ResourceHoverCard, // Show this command on browse toolbar, browse context menu and resource hover card.
-    },
+            }
+        ],
+        "visibility": ["BrowseToolbar", "ResourceHoverCard", "BrowseContextMenu"]   // Show this command on browse toolbar, browse context menu and resource hover card.
+    }
 ```
 
 <a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-controlling-the-visibility-of-your-commands-criteria"></a>
@@ -2714,22 +4567,19 @@ More info can be found here: (https://microsoft.sharepoint.com/teams/Ibizaexperi
 
 If you are looking to enable a new command in browse command bar only for certain users and want to hide it by default for rest of the users in all environments, use `HiddenByDefault` visibility option when you define the command in your decorator. This visibility option will hide a given command across all areas where extensible commands are integrated such as browse context menu, hover cards and empty browse view.
 
-```typescript
+```json
     {
-        kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
-        id: "OpenBladeCommandIdV2",  // Unique identifier used for controlling visibility of commands
-        label: ClientResources.AssetCommands.openBlade,
-        ariaLabel: ClientResources.AssetCommands.openBlade,
-        icon: {
-            image: SvgType.AddTile,
+        "kind": "OpenBladeCommand",
+        "id": "OpenBladeCommandIdV2",   // Unique identifier used for controlling visibility of commands
+        "displayName": { "property": "Commands.Camera.newCameraWithPreset", "module": "../../ClientResources" },
+        "icon": "MsPortalFx.Base.Images.Move",
+        "blade": {
+          "name": "CreateCustomRobot.ReactView",
+          "extension": "SamplesExtension",
+          "doesProvisioning": true
         },
-        bladeReference: {
-            blade: "SimpleTemplateBlade",
-            extension: "SamplesExtension", // An optional extension name, however, must be provided when opening a blade from a different extension
-            inContextPane: true, // An optional property to open the pane in context pane
-        },
-        visibility: ForAsset.Commands.NonSelectionCommandVisibility.HiddenByDefault  // Hide this command by default in all environments. Can be enabled via experimentation config for certain users.
-    },
+        "visibility": ["HiddenByDefault"]    // Hide this command by default in all environments. Can be enabled via experimentation config for certain users.
+    }
 ```
 
 In the environment config, you can specify this command id for one of your layouts and users hitting the flight with that experiment will only see the new command in browse command bar. e.g:
@@ -2765,6 +4615,134 @@ Extension authors can supply api-versions per cloud/environment for their ARM bu
 ```
 
 Portal will ignore the default api-version specified in the command definition and honor the versions found in the above map while executing ARM bulk commands.
+
+### Support extensible commands for kinds
+
+Extension authors can now supply specific extensible commands targetted towards resources/browse views that support specific kinds. Similar to asset type commands, `commands` and `selectionCommands` properties are now supported at individual `kind` objects.
+Kind level commands are only displayed in the browse toolbar when browse view with kind property is launched. Kind level commands are also integrated with other areas where kind specific resources are displayed such as Empty browse, resource hover cards and context menu, etc.
+When a combined view of all kinds is launched, only extensible commands at the asset Type level (if specified any) are shown. Kind specific commands are shown in the context menu of individual resource in the browse grid.
+
+Example of extensible commands on simple kinds:
+
+```json
+    {
+      "assetType": {
+          "name": "InsurancePolicy",
+          "resourceType": {
+              "name": "Microsoft.Test/insurancepolicies",
+              "apiVersion": "2021-11-15",
+              "kinds": [
+                  {
+                      "name": "camera",
+                      "displayNames": { "property": "AssetTypeNames.InsurancePolicy.Camera", "module": "../../ClientResources" },
+                      "icon": { "file": "../../Svg/InsurancePolicies/camera.svg" },
+                      // Example of extensible commands on simple kinds
+                      "commands": [
+                          {
+                              "kind": "OpenBladeCommand",
+                              "id": "openCreateCommandId",
+                              "displayName": { "property": "Commands.Camera.newCameraWithPreset", "module": "../../ClientResources" },
+                              "icon": "MsPortalFx.Base.Images.Globe",
+                              "blade": {
+                                "name": "CreateCustomRobot.ReactView",
+                                "extension": "SamplesExtension",
+                                "doesProvisioning": true
+                              }
+                          }
+                      ],
+                      "selectionCommands": [{
+                          "kind": "ArmSelectionCommand",
+                          "id": "deleteCommand",
+                          "displayName": { "property": "Commands.Camera.delete", "module": "../../ClientResources" },
+                          "icon": "MsPortalFx.Base.Images.Delete",
+                          "confirmation": {
+                              "message": { "property": "Commands.Camera.deleteConfirmationMessage", "module": "../../ClientResources"},
+                              "title": { "property": "Commands.Camera.deleteConfirmationTitle", "module": "../../ClientResources"}
+                          },
+                          "definitions": [
+                              {
+                                  "resourceType": "\"microsoft.test/insurancepolicies\"",
+                                  "uri": "{resourceid}/start?api-version=2019-07-01",
+                                  "asyncOperation": {
+                                    "pollingHeaderOverride": "Azure-AsyncOperation"
+                                  },
+                                  "retryableArmCodes": [],
+                                  "nonRetryableArmCodes": []
+                              }
+                          ]
+                      }],
+                  }
+              ]
+          }
+      }
+    }
+```
+
+Example of extensible commands on merged kinds:
+
+```json
+    {
+      "assetType": {
+          "name": "InsurancePolicy",
+          "resourceType": {
+              "name": "Microsoft.Test/insurancepolicies",
+              "apiVersion": "2021-11-15",
+              "kinds": [
+                {
+                    "name": "merged-kind",
+                    // Example of extensible commands on merged kinds
+                    "selectionCommands": [{
+                        "kind": "ArmSelectionCommand",
+                        "id": "deleteSelectionCommand",
+                        "displayName": { "property": "Commands.Camera.delete", "module": "../../ClientResources" },
+                        "icon": "MsPortalFx.Base.Images.Delete",
+                        "confirmation": {
+                            "message": { "property": "Commands.Camera.deleteConfirmationMessage", "module": "../../ClientResources"},
+                            "title": { "property": "Commands.Camera.deleteConfirmationTitle", "module": "../../ClientResources"}
+                        },
+                        "definitions": [
+                            {
+                                "resourceType": "\"microsoft.test/insurancepolicies\"",
+                                "uri": "{resourceid}/start?api-version=2019-07-01",
+                                "asyncOperation": {
+                                  "pollingHeaderOverride": "Azure-AsyncOperation"
+                                },
+                                "retryableArmCodes": [],
+                                "nonRetryableArmCodes": []
+                            }
+                        ]
+                    }],
+                    "commands": [
+                        {
+                            "kind": "OpenBladeCommand",
+                            "id": "openCreateCommandId",
+                            "displayName": { "property": "Commands.Camera.newCameraWithPreset", "module": "../../ClientResources" },
+                            "icon": "MsPortalFx.Base.Images.Clock",
+                            "blade": {
+                              "name": "CreateCustomRobot.ReactView",
+                              "extension": "SamplesExtension",
+                              "doesProvisioning": true
+                            }
+                        }
+                    ],
+                    "mergedKinds": [
+                        {
+                            "name": "car,mercedez",
+                            "displayNames": { "property": "AssetTypeNames.InsurancePolicy.Car", "module": "../../ClientResources" },
+                            "icon": { "file": "../../Svg/InsurancePolicies/car.svg" }
+                        },
+                        {
+                            "name": "car,tesla",
+                            "displayNames": { "property": "AssetTypeNames.InsurancePolicy.Car", "module": "../../ClientResources" },
+                            "icon": { "file": "../../Svg/InsurancePolicies/car.svg" }
+                        },
+                    ]
+                }
+              ]
+          }
+      }
+    }
+```
 
 # Merging Resource Types and Kinds
 

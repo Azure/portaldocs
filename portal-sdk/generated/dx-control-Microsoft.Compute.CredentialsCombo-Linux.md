@@ -97,39 +97,28 @@ For the 'Generate new key-pair' scenario, when the user clicks on the 'Create' b
 <figure>
     <img src = "../media/dx/controls/microsoft-compute-credentialscombo-linux-key-modaldialog.png" style = "width: 100% ">
 </figure>
-
+ 
 <a name="microsoft-compute-credentialscombo-linux-definitions"></a>
 ## Definitions:
 <a name="microsoft-compute-credentialscombo-linux-definitions-an-object-with-the-following-properties"></a>
 ##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-<<<<<<< HEAD
 |name|True|Name of the instance
 |type|True|Enum permitting the value "Microsoft.Compute.CredentialsCombo"
 |label|True|Specifies label for the authenticaionType option picker, password textbox as well as the SSH public key textbox (refer to the UI sample section below).
 |toolTip|False|Specifies the tooltip properties for the authenticaionType option picker, password textbox as well as teh SSH public key textbox (refer to the UI sample section below).
+|defaultValue|False|
 |constraints|False|
 |options|False|<br>1) If <code>options.hideConfirmation</code> is set to true, then the second text box for confirming the user's password is hidden. The default value is false.<br>2) If <code>options.hidePassword</code> is set to true, then the option to use password authentication is hidden. The default value is false.
 |osPlatform|True|Must be "Linux"
 |visible|False|When visible is evaluated to *true* then the control will be displayed, otherwise it will be hidden.  Default value is **true**.
-=======
-|name|True|
-|type|True|
-|label|True|
-|toolTip|False|
-|defaultValue|False|
-|constraints|False|
-|options|False|
-|osPlatform|True|
-|visible|False|
 |scope|False|Use scope to define the Subscription, Resource Group name and location that will be applied to control used.
->>>>>>> dev
 |fx.feature|False|
 <a name="microsoft-compute-credentialscombo-linux-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/controls/microsoft-compute-credentialscombo-linux-password.png "For Linux with password selected, users see")
-![alt-text](../media/dx/controls/microsoft-compute-credentialscombo-linux-key.png "For Linux with SSH public key selected, users see")
+![alt-text](../media/dx/controls/microsoft-compute-credentialscombo-linux-password.png "For Linux with password selected, users see")  
+![alt-text](../media/dx/controls/microsoft-compute-credentialscombo-linux-key.png "For Linux with SSH public key selected, users see")  
 <a name="microsoft-compute-credentialscombo-linux-sample-snippet"></a>
 ## Sample Snippet
 

@@ -72,7 +72,6 @@
 
 * [Resource moves](portalfx-resourcemove.md#resource-moves)
 
-* [Pricing Tier](portalfx-extension-pricing-tier.md#pricing-tier)
 
 
 <a name="debugging"></a>

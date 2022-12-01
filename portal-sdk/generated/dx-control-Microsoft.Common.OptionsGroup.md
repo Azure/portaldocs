@@ -26,6 +26,7 @@ The OptionsGroup control lets users select one option from two or more choices. 
 |name|True|The name of the instance
 |type|True|Enum permitting the value: "Microsoft.Common.OptionsGroup"
 |label|True|Display label text for the control
+|infoMessages|False|The infoMessages are displayed below the control as inline messages. The infoMessages object has three properties: <code>style</code>, <code>text</code>, and <code>uri</code>. <code>infoMessages.style</code> and <code>infoMessages.text</code> are required values, while <code>infoMessages.uri</code> is not required. <br><br>1) <code>infoMessages.style</code> defines the style of the info message. Allowed values are **Info**, and **Warning**. <br><br>2) <code>infoMessages.text</code> defines the display text for the info message. <br><br>3) <code>infoMessages.uri</code> defines the resource to link to. 
 |defaultValue|False|Default value can be defined as a static value or dynamic (functions) that maps to the `constraints.allowedValues`. Default value also supports re-setting the default value if `defaultValue.resetTrigger` is evaluated as **true**.
 |toolTip|False|Displays tooltip for the control
 |constraints|True|`constraints.allowedValues` must have at least one item. To emulate a value not being required, add an item with a label and value of "" (empty string) to `constraints.allowedValues`. See [here](dx-optionsgroupConstraints-allowedValues.md) for more on constraints.
@@ -34,6 +35,7 @@ The OptionsGroup control lets users select one option from two or more choices. 
 <a name="microsoft-common-optionsgroup-ui-sample"></a>
 ## UI Sample
 ![alt-text](../media/dx/controls/Microsoft.Common.OptionsGroup.png "UI Sample")  
+![alt-text](../media/dx/controls/Microsoft.Common.OptionsGroupWithInfoMessages.png "OptionsGroup with info messages")  
 <a name="microsoft-common-optionsgroup-sample-snippet"></a>
 ## Sample Snippet
 

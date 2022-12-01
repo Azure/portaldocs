@@ -26,7 +26,7 @@ You can control the behavior and features of the editor via initialization `opti
 /**
 * ViewModel class for the editor sample.
 */
-export class SampleEditorViewModel extends MsPortalFx.ViewModels.Controls.Documents.Editor.ViewModel { // eslint-disable-line deprecation/deprecation
+export class SampleEditorViewModel extends ObsoleteEditorViewModel { // eslint-disable-line deprecation/deprecation
    /**
     * Editor view model constructor.
     */
@@ -59,7 +59,7 @@ export class SampleEditorViewModel extends MsPortalFx.ViewModels.Controls.Docume
            };
 
        // Initialize the editor with the above content and options, as well as set the type to be JavaScript.
-       super(lifetimeManager, MsPortalFx.ViewModels.Controls.Documents.Editor.ContentType.JavaScript, content, options);
+       super(lifetimeManager, ObsoleteEditor.ContentType.JavaScript, content, options);
    }
 }
 

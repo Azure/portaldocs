@@ -23,7 +23,6 @@ Use it only for advanced scenarios. For a consistent experience, use the [Resour
 |name|True|Name of the instance.
 |visible|False|When visible is evaluated to *true* then the control will be displayed, otherwise it will be hidden.  Default value is **true**.
 |fx.feature|False|
-<<<<<<< HEAD
 |scope|True|Scope is defined using the subscriptionId property.
 |type|True|Enum permitting the value: "Microsoft.Common.ResourceGroupSelector"
 |allowedMode|False|Can be "CreateNew", "UseExisting" or "Both"."UseExisting" mode hides "Create new" for resource group and removes region in the basics tab.
@@ -31,7 +30,7 @@ Use it only for advanced scenarios. For a consistent experience, use the [Resour
 |constraints|False|See [here](dx-resourceConstraints-validations.md) for more on constraints.
 <a name="microsoft-common-resourcegroupselector-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/controls/Microsoft.Common.ResourceGroupSelector.png "Default UI")
+![alt-text](../media/dx/controls/Microsoft.Common.ResourceGroupSelector.png "Default UI")  
 <a name="microsoft-common-resourcegroupselector-sample-snippet"></a>
 ## Sample Snippet
 
@@ -95,10 +94,3 @@ interface ResourceGroup {
     }
 ```
 
-=======
-|scope|True|
-|type|True|
-|allowedMode|False|
-|allowExisting|False|
-|constraints|False|
->>>>>>> dev

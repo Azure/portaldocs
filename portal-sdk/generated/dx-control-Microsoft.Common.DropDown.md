@@ -70,6 +70,7 @@ For nested DropDown items, i.e. whenever header items are used, Extension develo
 |name|True|Name of the instance
 |type|True|Enum permitting the value:"Microsoft.Common.DropDown".
 |label|True|Display name for an instance
+|infoMessages|False|The infoMessages are displayed below the control as inline messages. The infoMessages object has three properties: <code>style</code>, <code>text</code>, and <code>uri</code>. <code>infoMessages.style</code> and <code>infoMessages.text</code> are required values, while <code>infoMessages.uri</code> is not required. <br><br>1) <code>infoMessages.style</code> defines the style of the info message. Allowed values are **Info**, and **Warning**. <br><br>2) <code>infoMessages.text</code> defines the display text for the info message. <br><br>3) <code>infoMessages.uri</code> defines the resource to link to. 
 |defaultValue|False|Default value shown in the DropDown. If specified, the default value must be a label presented in constraints.allowedValues.If not specified, the first item in constraints.allowedValues is selected. The default value is null. Default value also supports re-setting the default value if `defaultValue.resetTrigger` is evaluated as **true**.
 |placeholder|False|Helper text that disappears when user begins editing. If placeholder and defaultValue are both defined, the defaultValue takes precedence and is shown.
 |toolTip|False|To display text about the element when the mouse cursor is hovered over the information symbol.
@@ -89,6 +90,7 @@ For nested DropDown items, i.e. whenever header items are used, Extension develo
 ![alt-text](../media/dx/controls/Microsoft.Common.DropDown-multiSelectSingleItem.png "multi select single item DropDown")  
 ![alt-text](../media/dx/controls/Microsoft.Common.DropDown-multiSelectDescription.png "DropDown with items with descriptions")  
 ![alt-text](../media/dx/controls/Microsoft.Common.DropDown-filter.png "DropDown with filter option")  
+![alt-text](../media/dx/controls/Microsoft.Common.DropDown-InfoMessages.png "DropDown with info messages")  
 <a name="microsoft-common-dropdown-sample-snippet"></a>
 ## Sample Snippet
   

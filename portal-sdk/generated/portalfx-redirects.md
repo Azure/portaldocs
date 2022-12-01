@@ -125,9 +125,7 @@ Once you've developed your Blade redirect using the '`useFlighting`' option, you
 
 You'll create your experiment using the [ExP experimentation Platform](http://aka.ms/exp).  Learn more about experiment creation and onboarding for Azure Portal at [Ibiza ExP Documentation](https://aka.ms/IbizaExperimentation).
 
-For an experiment that controls the application of a Blade redirect, you'll do a couple of things differently than you would when creating an experiment covering some new UI feature from your team.  First, when you specify an 'experimentation group' for your experiment, you'll specify '/AzurePortal/HubsExtension' rather than the group that contains your team's other experiments.
-
-!['/AzurePortal/HubsExtension' as experimentation group](../media/portalfx-redirects/ControlTowerExPCreate.png "Experiment Creation")
+For an experiment that controls the application of a Blade redirect, First, you'll create an experiment specifying your Extension 'experimentation group' as the management group in the Ibiza tenant that the Ibiza Experimentation team set up for your extension. For example, "AzurePortal/Samples."
 
 Your experiment will stage the application of your Blade redirect by controlling the value of a feature variable (also known as 'feature gate').  The feature variable you'll use for your experiment here must be named as follows: '`RedirectBlade-{sourceExtensionName}-{sourceBladeName}`'.
 

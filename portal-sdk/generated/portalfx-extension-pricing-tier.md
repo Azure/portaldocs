@@ -1,48 +1,7 @@
-* [Pricing Tier](#pricing-tier)
-    * [Consuming the Spec Picker Blade](#pricing-tier-consuming-the-spec-picker-blade)
-    * [Spec Picker Blade](#pricing-tier-spec-picker-blade)
-    * [Sample Spec Data](#pricing-tier-sample-spec-data)
+* [Spec Picker Blade](#spec-picker-blade)
+* [Sample Spec Data](#sample-spec-data)
 
-<a name="pricing-tier"></a>
-## Pricing Tier
-<a name="pricing-tier-consuming-the-spec-picker-blade"></a>
-### Consuming the Spec Picker Blade
-The spec picker has a three controls (dropdown, infobox, and selector) for getting the data from the spec picker blades. The best way is to use the Spec Picker dropdown in your create blades.
-
-```typescript
-
-const initialSpecData: FxSpecPicker.InitialData = {
-    selectedSpecId: "A0",
-    entityId: "",
-    recommendedSpecIds: ["small_basic", "large_standard"],
-    recentSpecIds: ["large_basic", "medium_basic"],
-    selectRecommendedView: false,
-    subscriptionId: "subscriptionId",
-    regionId: "regionId",
-    options: { test: "DirectEA" },
-    disabledSpecs: [
-        {
-            specId: "medium_standard",
-            message: ClientResources.robotPricingTierLauncherDisabledSpecMessage,
-            helpBalloonMessage: ClientResources.robotPricingTierLauncherDisabledSpecHelpBalloonMessage,
-            helpBalloonLinkText: ClientResources.robotPricingTierLauncherDisabledSpecLinkText,
-            helpBalloonLinkUri: ClientResources.robotPricingTierLauncherDisabledSpecLinkUri,
-        },
-    ],
-};
-
-const specsDropDown = new (FxSpecsDropDown as any)(container, { // #12469622: remove this before deleting Fx/Specs/DropDown
-    initialData: ko.observable(initialSpecData),
-    specPickerExtender: new BillingSpecPickerV3Extender(container),
-    // Make sure to use a blade reference factory, DynamicBladeReferences do not work with no pdl
-    pricingBladeReference: BladeReferences.forBlade("BillingSpecPickerV3"),
-    validations: ko.observableArray([new Validations.Required()]),
-    contextPane: true,
-});
-
-```
-
-<a name="pricing-tier-spec-picker-blade"></a>
+<a name="spec-picker-blade"></a>
 ### Spec Picker Blade
 To create a pricing tier blade you'll need to first create the blade in pdl using the `SpecPickerV3` template,
 ```xml
@@ -194,7 +153,7 @@ this._specDataView.fetch({}).then(
 
 The data in here will have the information that will be shown on the specs and as well as the `ResourceMap` information used to look up pricing from billing.
 
-<a name="pricing-tier-sample-spec-data"></a>
+<a name="sample-spec-data"></a>
 ### Sample Spec Data
 Sample Spec
 ```typescript

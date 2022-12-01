@@ -16,7 +16,6 @@ The Selector component enables a user to select items defined by using BladeInvo
 ##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-<<<<<<< HEAD
 |name|True|Name of the instance.
 |type|True|Enum permitting the value: "Microsoft.Common.Selector"
 |label|True|Display name of the instance.
@@ -26,30 +25,15 @@ The Selector component enables a user to select items defined by using BladeInvo
 |barColor|False|Customize the barColor by supplying a valid Hex Color code. Ex. #7fba00
 |descriptionKeyPath|False|KeyPath to display data in the description section from <code>value</code> property of Selector control
 |value|True|When using the BladeInvokeControl, it would be the output of the BladeInvokeControl
-|constraints|False|If `constraints.required` is evaluated to `true`, then it requires user to select at least one item to validate successfully. The default value is `false`.
+|constraints|False|
 |defaultValue|True|default value of the selectorControl. DefaultValue should contain keyPath and DescriptionKeyPath(Optional). Default value also supports re-setting the default value if `defaultValue.resetTrigger` is evaluated as **true**.
 |valueMapping|False|Value Mapping of output value
 |visible|False|Specify the visibility of the element. Value can be a boolean or an expression(string)
-=======
-|name|True|
-|type|True|
-|label|True|
-|link|False|
-|toolTip|False|
-|keyPath|True|
-|barColor|False|
-|descriptionKeyPath|False|
-|value|True|
-|constraints|False|
-|defaultValue|True|
-|valueMapping|False|
-|visible|False|
->>>>>>> dev
 |fx.feature|False|
 <a name="microsoft-common-selector-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/controls/Microsoft.Common.Selector-default.png "default selector UI")
-![alt-text](../media/dx/controls/Microsoft.Common.Selector-withBladeInvokeControl.png "After picking data from BladeInvokeControl UI")
+![alt-text](../media/dx/controls/Microsoft.Common.Selector-default.png "default selector UI")  
+![alt-text](../media/dx/controls/Microsoft.Common.Selector-withBladeInvokeControl.png "After picking data from BladeInvokeControl UI")  
 <a name="microsoft-common-selector-sample-snippet"></a>
 ## Sample Snippet
   ## Example for Microsoft.Common.Selector

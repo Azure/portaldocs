@@ -98,6 +98,7 @@ Use the TextBox so the user can enter a line of text
 |type|True|Enum permitting the value: "Microsoft.Common.TextBox"
 |label|True|Display name for an instance
 |subLabel|False|Display text below the textbox.  This text is right-aligned with the textbox.
+|infoMessages|False|The infoMessages are displayed below the control as inline messages. The infoMessages object has three properties: <code>style</code>, <code>text</code>, and <code>uri</code>. <code>infoMessages.style</code> and <code>infoMessages.text</code> are required values, while <code>infoMessages.uri</code> is not required. <br><br>1) <code>infoMessages.style</code> defines the style of the info message. Allowed values are **Info**, and **Warning**. <br><br>2) <code>infoMessages.text</code> defines the display text for the info message. <br><br>3) <code>infoMessages.uri</code> defines the resource to link to. 
 |defaultValue|False|Default value shown in the TextBox. Default value also supports re-setting the default value if `defaultValue.resetTrigger` is evaluated as **true**.
 |placeholder|False|A help text that disappears when the user begins editing. If the placeholder and defaultValue are both defined, the defaultValue takes precedence and is shown.
 |toolTip|False|To display text about the element when the mouse cursor is hovered over the information symbol.
@@ -110,6 +111,7 @@ Use the TextBox so the user can enter a line of text
 ## UI Sample
 ![alt-text](../media/dx/controls/Microsoft.Common.TextBox-singleLine.png "single line text box UI")  
 ![alt-text](../media/dx/controls/Microsoft.Common.TextBox-multiLine.png "multi line text box UI")  
+![alt-text](../media/dx/controls/Microsoft.Compute.TextBoxWithInfoMessages.png "TextBox with info messages")  
 <a name="microsoft-common-textbox-guidance-sample-snippet"></a>
 ## Sample Snippet
   

@@ -111,8 +111,8 @@ After installation, NuGet packages that are used for development can be viewed i
 
 | Package | Purpose |
 | ------- | ------- |
-| [Microsoft.Azure.Gallery.AzureGalleryUtility](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Azure.Gallery.AzureGalleryUtility&protocolType=NuGet&version=5.1.0.19) | Contains tools to package, upload and update gallery items in the Azure Portal marketplace.|
-| [Microsoft.Azure.Gallery.Common](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Azure.Gallery.Common&protocolType=NuGet&version=5.1.0.19) | Common packages used by Microsoft.Azure.Gallery.AzureGalleryUtility|
+| [Microsoft.Azure.Gallery.AzureGalleryUtility](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Azure.Gallery.AzureGalleryUtility&protocolType=NuGet&version=13.1.214935) | Contains tools to package, upload and update gallery items in the Azure Portal marketplace.|
+| [Microsoft.Azure.Gallery.Common](https://msazure.visualstudio.com/One/_packaging?_a=package&feed=AzurePortal&package=Microsoft.Azure.Gallery.Common&protocolType=NuGet&version=13.1.214935) | Common packages used by Microsoft.Azure.Gallery.AzureGalleryUtility|
 
 <a name="azure-portal-sdk-packages-package-references-testing"></a>
 ### Testing

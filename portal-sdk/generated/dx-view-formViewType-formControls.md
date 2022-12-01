@@ -29,6 +29,7 @@
 - [Microsoft.Storage.StorageAccountSelector](dx-control-Microsoft.Storage.StorageAccountSelector.md)
 - [Microsoft.Storage.StorageBlobSelector](dx-control-Microsoft.Storage.StorageBlobSelector.md)
 - [Microsoft.Common.ServicePrincipalSelector](dx-control-Microsoft.Common.ServicePrincipalSelector.md)
+- [Microsoft.Common.ServicePrincipalV2Selector](dx-control-Microsoft.Common.ServicePrincipalV2Selector.md)
 - [Microsoft.Solutions.GraphApiControl](dx-control-Microsoft.Solutions.GraphApiControl.md)
 - [Microsoft.Common.TenantSelector](dx-control-Microsoft.Common.TenantSelector.md)
 - [Microsoft.Common.ManagementGroupSelector](dx-control-Microsoft.Common.ManagementGroupSelector.md)

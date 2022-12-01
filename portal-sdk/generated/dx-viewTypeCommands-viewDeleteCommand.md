@@ -22,8 +22,8 @@
 |fx.feature|False|
 <a name="viewtypecommands-viewdeletecommand-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/commands/viewDeleteCommand.png "viewDeleteCommand UI")
-![alt-text](../media/dx/commands/viewDeleteCommandWithDependentResources.png "view deleteCommand with dependent resources UI")
+![alt-text](../media/dx/commands/viewDeleteCommand.png "viewDeleteCommand UI")  
+![alt-text](../media/dx/commands/viewDeleteCommandWithDependentResources.png "view deleteCommand with dependent resources UI")  
 <a name="viewtypecommands-viewdeletecommand-sample-snippet"></a>
 ## Sample Snippet
   
