@@ -13,8 +13,7 @@
 ##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
-|$propertyDescription|False|
-|name|True|
+|name|True|Name of this instance
 |kind|True|Enum permitting the value: "graph"
 |path|True|Specify path for request
 |fx.feature|False|

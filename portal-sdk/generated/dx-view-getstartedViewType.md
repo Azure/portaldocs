@@ -75,8 +75,7 @@ The `essentials` section defines what is rendered in Essentials.  The `commands`
 ## Sections
 | Name | Required | Description
 | ---|:--:|:--:|
-|$propertyDescription|False|
-|kind|True|
+|kind|True|Enum permitting the value: "GetStarted".
 |export|False|Designation for blade sharing across extensions. If set to `true` then it is available to be used by other extensions.
 |contextPaneWidth|False|See [here](dx-enum-contextPaneWidth.md ) for the available options
 |parameters|False|Defines the parameters to be passed into a declarative blade, that then can be accessed using the parameters function. See [View parameters](dx-viewTypeParameters.md) for more.
