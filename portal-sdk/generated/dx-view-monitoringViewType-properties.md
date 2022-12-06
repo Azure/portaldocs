@@ -10,5 +10,5 @@
 | Name | Required | Description
 | ---|:--:|:--:|
 |title|True|Display title text for the Monitoring view
-|charts|True|Defines the array of Monitoring view charts which contain charts and metrics.
+|charts|True|Defines the array of Monitoring view charts which contain charts and metrics. See [here](dx-getstarted-MonitoringTab-charts.md) for more on charts.
 |fx.feature|False|

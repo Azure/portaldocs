@@ -66,6 +66,7 @@ The `essentials` section defines what is rendered in Essentials.  The `commands`
 - [Getting Started](dx-getstarted-GetStartedTab.md)
 - [Properties](dx-getstarted-PropertiesTab.md)
 - [Monitoring](dx-getstarted-MonitoringTab.md)
+- [Capabilities](dx-getstarted-CapabilitiesTab.md)
 - [Recommendations](dx-getstarted-RecommendationsTab.md)
 - [Tutorials](dx-getstarted-TutorialsTab.md)
 - [DataBrowse](dx-getstarted-DataBrowseTab.md)
@@ -93,7 +94,7 @@ The `essentials` section defines what is rendered in Essentials.  The `commands`
 | Name | Required | Description
 | ---|:--:|:--:|
 |title|True|Title of the GetStarted Tab
-|tabs|True|See [List of Supported Tabs](#list-of-supported-tabs)
+|tabs|True|See [List of Supported Tabs](dx-view-getstartedViewType-guidance.md#list-of-supported-tabs)
 |fx.feature|False|
 <a name="getstartedviewtype-ui-sample"></a>
 ## UI Sample

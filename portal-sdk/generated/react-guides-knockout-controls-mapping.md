@@ -61,6 +61,7 @@ Currently (*) charting is a known parity gap, we're working to provide a common 
 | NumericTextBox         | Fx/Controls/NumericTextBox                    | [FluentUI TextField][FluentUI TextField], with a custom mask                                                                                                   |
 | OAuthButton            | Fx/Controls/OAuthButton                       | Not applicable                                                                                                                                                 |
 | OptionsGroup           | Fx/Controls/OptionsGroup                      | [FluentUI ChoiceGroup][FluentUI ChoiceGroup]                                                                                                                   |
+| Pager                  | Fx/Controls/Pager                             | [AzurePortal-ReactView Pager][AzurePortal-ReactView Pager]                                                                                                     |
 | PasswordBox            | Fx/Controls/PasswordBox                       | [FluentUI TextField][FluentUI TextField]                                                                                                                       |
 | Pill                   | Fx/Controls/Pill                              | [AzurePortal-ReactView Pills][AzurePortal-ReactView Pills]                                                                                                     |
 | PillCollection         | Fx/Controls/PillCollection                    | [AzurePortal-ReactView PillCollection][AzurePortal-ReactView PillCollection]                                                                                   |
@@ -125,14 +126,15 @@ Currently (*) charting is a known parity gap, we're working to provide a common 
 [AzurePortal-ReactView Footer]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FFooter.tsx
 [AzurePortal-ReactView FrameworkIcon]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FFrameworkIcon.tsx
 [AzurePortal-ReactView LocationDropdown]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FLocationDropdown.tsx
+[AzurePortal-ReactView Pager]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=/src/SDK/Framework.ReactView/azureportal-reactview/src/Pager.tsx
+[AzurePortal-ReactView Pills]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=/src/SDK/Framework.ReactView/azureportal-reactview/src/Pill.tsx
+[AzurePortal-ReactView PillCollection]: hhttps://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=/src/SDK/Framework.ReactView/azureportal-reactview/src/PillCollection.tsx
 [AzurePortal-ReactView ResourceGroupDropdown]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FResourceGroupDropdown.tsx
 [AzurePortal-ReactView StatusBar]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FStatusBar.tsx
 [AzurePortal-ReactView SubscriptionDropdown]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FSubscriptionDropdown.tsx
 [AzurePortal-ReactView SubscriptionFilter]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FSubscriptionFilter.tsx
 [AzurePortal-ReactView Summary]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FSummary.tsx
 [AzurePortal-ReactView TagsByResource]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FFramework.ReactView%2Fazureportal-reactview%2Fsrc%2FTagsByResource.tsx
-[AzurePortal-ReactView Pills]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=/src/SDK/Framework.ReactView/azureportal-reactview/src/Pill.tsx
-[AzurePortal-ReactView PillCollection]: hhttps://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=/src/SDK/Framework.ReactView/azureportal-reactview/src/PillCollection.tsx
 
 [D3 Sample]: https://msazure.visualstudio.com/One/_git/AzureUX-SamplesExtension?path=%2Fsrc%2FExtension%2FClient%2FReact%2FViews%2FCustomDependencies%2FD3.ReactView.tsx
 [DurationPicker Sample]: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FControls%2FDurationPicker.ReactView.tsx

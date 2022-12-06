@@ -50,6 +50,7 @@ The `essentials` section defines what is rendered in Essentials.  The `commands`
 - [Getting Started](dx-getstarted-GetStartedTab.md)
 - [Properties](dx-getstarted-PropertiesTab.md)
 - [Monitoring](dx-getstarted-MonitoringTab.md)
+- [Capabilities](dx-getstarted-CapabilitiesTab.md)
 - [Recommendations](dx-getstarted-RecommendationsTab.md)
 - [Tutorials](dx-getstarted-TutorialsTab.md)
 - [DataBrowse](dx-getstarted-DataBrowseTab.md)

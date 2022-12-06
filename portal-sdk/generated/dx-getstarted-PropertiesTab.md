@@ -122,7 +122,7 @@ Add Properties definition (see `Properties definition samples` section) to the `
     ]
 }
 ```
- 
+
 <a name="getstarted-propertiestab-definitions"></a>
 ## Definitions:
 <a name="getstarted-propertiestab-definitions-an-object-with-the-following-properties"></a>
@@ -130,12 +130,12 @@ Add Properties definition (see `Properties definition samples` section) to the `
 | Name | Required | Description
 | ---|:--:|:--:|
 |kind|True|Enum permitting the value: "Properties".
-|groups|True|Defines the array of property view groups which contain property view items.
+|groups|True|Defines the array of property view groups which contain property view items. See [here](dx-getstarted-PropertiesTab-groups.md) for more.
 |default|False|If default is true, then set this tab as default tab. Only the first tab with valid default value will be set as default.
 |fx.feature|False|
 <a name="getstarted-propertiestab-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/views/propertiesViewType-tab.png "UI Sample")  
+![alt-text](../media/dx/views/propertiesViewType-tab.png "UI Sample")
 <a name="getstarted-propertiestab-sample-snippet"></a>
 ## Sample Snippet
   ## Properties definition samples
@@ -209,7 +209,7 @@ The `dataSources` is an array of Resource Graph GET Request, which are executed 
         "path": "v1.0/me?$select=displayName,id,mail"
     }
 ],
-```json
+```
 
 Example of referencing the response of the Resource Graph Request
 

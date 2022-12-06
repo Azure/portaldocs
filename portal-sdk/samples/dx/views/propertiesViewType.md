@@ -65,7 +65,7 @@ The `dataSources` is an array of Resource Graph GET Request, which are executed 
         "path": "v1.0/me?$select=displayName,id,mail"
     }
 ],
-```json
+```
 
 Example of referencing the response of the Resource Graph Request
 
