@@ -27,7 +27,7 @@ Metrics can be defined as such
 And the `id` and `aggregationType` must match what is available in Azure Monitor's `Metric` and `Aggregation`
 
 ![alt-text](../media/portalfx-cuid/MetricsMonitoring.png "Declarative Resource Overview")
-
+ 
 <a name="getstarted-monitoringtab-definitions"></a>
 ## Definitions:
 <a name="getstarted-monitoringtab-definitions-an-object-with-the-following-properties"></a>
@@ -35,12 +35,12 @@ And the `id` and `aggregationType` must match what is available in Azure Monitor
 | Name | Required | Description
 | ---|:--:|:--:|
 |kind|True|Enum permitting the value: "Monitoring".
-|charts|True|See [here](dx-getstarted-MonitoringTab-charts.md) for more on charts.
+|charts|True|See [here](dx-getstarted-MonitoringTab-charts.md) for more on charts
 |default|False|If default is true, then set this tab as default tab. Only the first tab with valid default value will be set as default.
 |fx.feature|False|
 <a name="getstarted-monitoringtab-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/views/MonitoringTab.png )
+![alt-text](../media/dx/views/MonitoringTab.png )  
 <a name="getstarted-monitoringtab-sample-snippet"></a>
 ## Sample Snippet
   To add the Monitoring view, add the following example to the properties.tabs section in the [Declarative Resource Overview schema](portalfx-declarative-overview.md#declarative-resource-overview-schema)

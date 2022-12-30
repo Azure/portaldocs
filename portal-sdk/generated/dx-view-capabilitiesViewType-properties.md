@@ -10,5 +10,5 @@
 | Name | Required | Description
 | ---|:--:|:--:|
 |title|True|Display title text for the Capabilities view
-|capabilities|True|See [here](dx-getstarted-CapabilitiesTab-capabilities.md) for more on capabilities.
+|capabilities|True|Defines the array of Capabilities tiles.
 |fx.feature|False|

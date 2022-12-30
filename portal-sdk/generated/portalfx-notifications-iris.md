@@ -48,31 +48,31 @@ A data contract has been defined between Iris and Portal for notification conten
 /**
  * The notification status.
  */
-export enum NotificationStatus {
+ export enum NotificationStatus {
     /**
-     * An information notification
+     * An Information notification
      */
-    Information,
+    Information = 0,
 
     /**
-     * A warning notification
+     * A Warning notification
      */
-    Warning,
+    Warning = 1,
 
     /**
-     * An error notification
+     * An Error notification
      */
-    Error,
+    Error = 2,
 
     /**
-     * An in progress notification
+     * An InProgress notification
      */
-    InProgress,
+    InProgress = 3,
 
     /**
-     * A success notification
+     * A Success notification
      */
-    Success,
+    Success = 4,
 }
 
 ```
@@ -106,7 +106,8 @@ export const enum ToastDuration {
     Suppress = 3,
 
     /**
-     * Modal toast notification. By default this option won't be allowed unless white listed. If you need to onboard a modal notification, please contact the Portal team.
+     * Modal toast notification. By default this option won't be allowed unless white listed.
+     * If you need to onboard a modal notification, please contact the Portal team.
      */
     Modal = 4,
 }

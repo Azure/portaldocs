@@ -94,7 +94,7 @@ The `essentials` section defines what is rendered in Essentials.  The `commands`
 | Name | Required | Description
 | ---|:--:|:--:|
 |title|True|Title of the GetStarted Tab
-|tabs|True|See [List of Supported Tabs](dx-view-getstartedViewType-guidance.md#list-of-supported-tabs)
+|tabs|True|See [List of Supported Tabs](#list-of-supported-tabs)
 |fx.feature|False|
 <a name="getstartedviewtype-ui-sample"></a>
 ## UI Sample
