@@ -109,7 +109,7 @@ always-auth=true
     "nconf": "0.10.0",
     "requirejs": "2.3.6",
     "sinon": "7.2.3",
-    "typescript": "~4.9.3"
+    "typescript": "~4.9.4"
   }
 }
 
