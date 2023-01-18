@@ -1043,7 +1043,7 @@ Windows:
     If not present you can add the items to your path as follows:
     1. WindowsKey + R
     1. `rundll32.exe sysdm.cpl,EditEnvironmentVariables`
-    1. In the dialog click `Edit` on the `Path` variable and add (note paths may vary depending on your environment and msbuiuld version)
+    1. In the dialog click `Edit` on the `Path` variable and add (note paths may vary depending on your environment and msbuild version)
         - for npm `C:\Users\youralias\AppData\Roaming\npm`
         - for NuGet and cred provider `C:\Users\youralias\.nuget`
         - for msbuild `C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\bin`
