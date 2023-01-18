@@ -241,7 +241,7 @@ _Note on stage1:_ This used to be a stage for Central US EUAP, but since the por
 
 **`$customStageDefinition`:** The hosting service provides a default rollout stages as described above. If those do not meet your requirements, you can modify them by supplying a custom stage definition file for your extension. To tell the hosting service that it should use a custom stage definition for your extension, set this property to true in your `config.json` file.
 
-Once this property is set to true, the hosting service will expect that a json file with the name `stagedefinintion.json` exists in your storage account, and will try to fetch it.
+Once this property is set to true, the hosting service will expect that a json file with the name `stagedefinition.json` exists in your storage account, and will try to fetch it.
 
 For example, https://mybizaextensionprod.blob.core.windows.net/extension/stagedefinition.json
 
