@@ -5,7 +5,7 @@
     "type": "Microsoft.Common.DropDown",
     "label": "Example drop down",
     "placeholder": "",
-    "defaultValue": "Value two",
+    "defaultValue": ["Value two"],
     "toolTip": "",
     "multiselect": true,
     "selectAll": true,

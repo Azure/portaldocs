@@ -100,7 +100,7 @@ For nested DropDown items, i.e. whenever header items are used, Extension develo
     "type": "Microsoft.Common.DropDown",
     "label": "Example drop down",
     "placeholder": "",
-    "defaultValue": "Value two",
+    "defaultValue": ["Value two"],
     "toolTip": "",
     "multiselect": true,
     "selectAll": true,

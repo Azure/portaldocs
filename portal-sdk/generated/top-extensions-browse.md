@@ -4567,7 +4567,7 @@ More info can be found here: (https://microsoft.sharepoint.com/teams/Ibizaexperi
 
 If you are looking to enable a new command in browse command bar only for certain users and want to hide it by default for rest of the users in all environments, use `HiddenByDefault` visibility option when you define the command in your decorator. This visibility option will hide a given command across all areas where extensible commands are integrated such as browse context menu, hover cards and empty browse view.
 
-```json
+```jsonc
     {
         "kind": "OpenBladeCommand",
         "id": "OpenBladeCommandIdV2",   // Unique identifier used for controlling visibility of commands
@@ -4619,12 +4619,14 @@ Portal will ignore the default api-version specified in the command definition a
 ### Support extensible commands for kinds
 
 Extension authors can now supply specific extensible commands targetted towards resources/browse views that support specific kinds. Similar to asset type commands, `commands` and `selectionCommands` properties are now supported at individual `kind` objects.
-Kind level commands are only displayed in the browse toolbar when browse view with kind property is launched. Kind level commands are also integrated with other areas where kind specific resources are displayed such as Empty browse, resource hover cards and context menu, etc.
+Kind level commands are displayed in the browse toolbar only when browse view with kind property is launched. They are also integrated with other areas where kind specific resources are displayed such as Empty browse, resource hover cards and context menu, etc.
 When a combined view of all kinds is launched, only extensible commands at the asset Type level (if specified any) are shown. Kind specific commands are shown in the context menu of individual resource in the browse grid.
+
+Note: When a browse view with kind property is launched and if there are no kind level commands specified, asset type level commands are shown (if any specified).
 
 Example of extensible commands on simple kinds:
 
-```json
+```jsonc
     {
       "assetType": {
           "name": "InsurancePolicy",
@@ -4680,7 +4682,7 @@ Example of extensible commands on simple kinds:
 
 Example of extensible commands on merged kinds:
 
-```json
+```jsonc
     {
       "assetType": {
           "name": "InsurancePolicy",
