@@ -46,6 +46,27 @@ public async onInitialize() {
                             return BladeReferences.forBlade("ControlsMenuBladeContentAreaBlade").createReference();
                         },
                     },
+                    {
+                        id: "tabMenu",
+                        displayText: BladeClientResources.tabMenuBladeTitle,
+                        icon: null,
+                        tabItems: [
+                            {
+                                id: "tabMenu0",
+                                displayText: BladeClientResources.tabMenuBlade0Title,
+                                supplyBladeReference: () => {
+                                    return BladeReferences.forBlade("TabContentAreaBlade0").createReference();
+                                },
+                            },
+                            {
+                                id: "tabMenu1",
+                                displayText: BladeClientResources.tabMenuBlade1Title,
+                                supplyBladeReference: () => {
+                                    return BladeReferences.forBlade("TabContentAreaBlade1").createReference();
+                                },
+                            },
+                        ],
+                    },
                 ],
             },
         ],
