@@ -7,6 +7,7 @@
         * [Option 1](#formviewtype-properties-section-option-1)
         * [Option 2](#formviewtype-properties-section-option-2)
         * [Option 3](#formviewtype-properties-section-option-3)
+        * [Option 4](#formviewtype-properties-section-option-4)
     * [UI Sample](#formviewtype-ui-sample)
     * [Sample Snippet](#formviewtype-sample-snippet)
         * [formViewType details](#formviewtype-sample-snippet-formviewtype-details)
@@ -59,6 +60,18 @@ The declarative form view lets you author a form in the portal. Form view can be
 <a name="formviewtype-properties-section-option-3"></a>
 ### Option 3
 <a name="formviewtype-properties-section-option-3-an-object-with-the-following-properties-2"></a>
+##### An object with the following properties
+| Name | Required | Description
+| ---|:--:|:--:|
+|isWizard|False|If true, each step needs to be validated before moving on to next step.
+|title|True|Title/header of the Form View displayed at the top of page
+|primaryButtonLabel|False|Customize primary button display name that is used to start deployment
+|steps|True|To customize tab(s) of the Form View. See [here](dx-view-formViewType-properties-formSteps-formStepsWithoutResourceScope.md) for **steps** property.
+|cloudShell|True|See [here](dx-view-formViewType-properties-formCloudShell.md) for **cloudShell** property.
+|fx.feature|False|
+<a name="formviewtype-properties-section-option-4"></a>
+### Option 4
+<a name="formviewtype-properties-section-option-4-an-object-with-the-following-properties-3"></a>
 ##### An object with the following properties
 | Name | Required | Description
 | ---|:--:|:--:|
