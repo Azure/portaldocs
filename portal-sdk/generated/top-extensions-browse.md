@@ -89,7 +89,7 @@
 <a name="browse"></a>
 # Browse
 
-The Favorites in the left nav and the 'All services' menu are the primary ways to launch tools and services within the portal. The default favorites are determined by C+E leadership based on the highest grossing services with the most engaged customers. New services will start in the 'All services' menu and, based on those metrics or the number of favorites surpasses other defaults, the list can be updated.
+The Favorites in the left nav and the 'All services' menu are the primary ways to launch tools and services within the portal. The default favorites are determined by C+E leadership based on the highest grossing services with the most engaged customers. New services will start in the 'All services' menu **only if they have been curated into their most relevant subcategory and category** and, based on those metrics or the number of favorites surpasses other defaults, the list can be updated.
 
 <a name="browse-building-browse-experiences"></a>
 ## Building browse experiences
@@ -5218,21 +5218,16 @@ resources
 
 # Curating browse assets
 
-When adding a new 'Asset' to your extension and exposing it through the 'All services' menu, by default it will be grouped in the 'Other' category.
-In order to get your 'Asset' correctly categorized you will need to make a request to the Portal Framework to curate your 'Asset'.
+You must curate your new 'Asset' in order for it to be exposed in the 'All services' menu. By default, your service will not appear in the 'All services' menu until you have submitted a curation work item [here][https://aka.ms/AllServicesCuration] and contacted [ibizafxpm@microsoft.com](mailto:ibizafxpm@microsoft.com) with a link to the work item. 
 
-For the portal to correct curate your 'Asset' we will need the 'ExtensionName' and 'AssetName' as defined in your extension.
-
-Please contact [ibizafxpm@microsoft.com](mailto:ibizafxpm@microsoft.com) with the following template:
-
-Subject: 'Browse curation request - YourAssetName'
-Body:
-
+In order for the portal to correctly curate your 'Asset', we will need the following details:
 - 'ExtensionName - YourExtensionName'
 - 'AssetName - YourAssetName'
 - 'KindName - YourKindName' (If applicable)
 - 'Category - DesiredCategory'
-- 'Portal environment - portal.azure.com (etc...)'
+- 'Subcategory - DesiredSubcategory'
+
+You can review current categories and subcategories [here][https://rc.portal.azure.com/?exp.azureportal_showsubcategories=true#allservices/category/All].
 
 # Providing a Custom Browse Hub
 
