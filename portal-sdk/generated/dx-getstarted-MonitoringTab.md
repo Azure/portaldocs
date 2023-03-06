@@ -24,7 +24,7 @@ Metrics can be defined as such
     }
 }
 ```
-And the `id` and `aggregationType` must match what is available in Azure Monitor's `Metric` and `Aggregation`
+And the `id`, `aggregationType` and `namespace` must match what is available in Azure Monitor's `Metric`, `Aggregation` and `Metric Namespace`
 
 ![alt-text](../media/portalfx-cuid/MetricsMonitoring.png "Declarative Resource Overview")
  
@@ -35,7 +35,7 @@ And the `id` and `aggregationType` must match what is available in Azure Monitor
 | Name | Required | Description
 | ---|:--:|:--:|
 |kind|True|Enum permitting the value: "Monitoring".
-|charts|True|See [here](dx-getstarted-MonitoringTab-charts.md) for more on charts
+|charts|True|Defines the array of Monitoring charts. See [here](dx-getstarted-MonitoringTab-charts.md) for more on charts.
 |default|False|If default is true, then set this tab as default tab. Only the first tab with valid default value will be set as default.
 |fx.feature|False|
 <a name="getstarted-monitoringtab-ui-sample"></a>

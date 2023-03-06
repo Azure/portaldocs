@@ -142,7 +142,7 @@ Add Properties definition (see `Properties definition samples` section) to the `
 | Name | Required | Description
 | ---|:--:|:--:|
 |title|True|Display title text for the Monitoring view
-|charts|True|Defines the array of Monitoring view charts which contain charts and metrics.
+|charts|True|Defines the array of Monitoring charts. See [here](dx-getstarted-MonitoringTab-charts.md) for more on charts.
 |fx.feature|False|
 <a name="monitoringviewtype-ui-sample"></a>
 ## UI Sample

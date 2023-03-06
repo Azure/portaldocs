@@ -10,6 +10,6 @@ Metrics can be defined as such
     }
 }
 ```
-And the `id` and `aggregationType` must match what is available in Azure Monitor's `Metric` and `Aggregation`
+And the `id`, `aggregationType` and `namespace` must match what is available in Azure Monitor's `Metric`, `Aggregation` and `Metric Namespace`
 
 ![alt-text](../media/portalfx-cuid/MetricsMonitoring.png "Declarative Resource Overview")
