@@ -10,10 +10,9 @@ To Convert to FormBlade, place ARM template file path under view.properties.depl
     "kind": "AutogenForm",
     "properties": {
       "title": "Create Dx Ibiza Engine resource",
-      "deployment": {
-        "template": {
-            "file": "../../UiDef/DxExtensionResource/DeploymentTemplate.json"
-        }
+      "kind": "Deployment",
+      "template": {
+        "file": "../../UiDef/DxExtensionResource/DeploymentTemplate.json"
       }
     }
   }
