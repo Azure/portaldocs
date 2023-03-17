@@ -1,10 +1,9 @@
 # Download Portal SDK 
- <br/> Download 11.90.1.1 : Production<br/> Download 11.48.8.1 : Fairfax,Mooncake 
+ <br/> Download Production,Fairfax,Mooncake : SDK version 11.90.0.1 (deployed hotfix 11.90.1.1) 
 
  Each version of the SDK is supported for 120 days. Extensions must upgrade to a newer version of the SDK within 120 days from the release of the SDK version they are currently using as runtime backward compatibility is not supported beyond that.  
 
- **As of SDK 5.0.302.27001 the Portal SDK MSI is no longer shipped** ([for more detail see this video](https://msit.microsoftstream.com/video/cebb1d66-c89c-4d7e-bea7-efc87ddbb1a7?st=3192)). 
-  To update your SDK use [the Azure portal extension developer CLI](https://aka.ms/portalfx/apclidoc) `ap update` command which will update your referenced NuGet packages and node modules for you.
+ To update your SDK use [the Azure portal extension developer CLI](https://aka.ms/portalfx/apclidoc) `ap update` command which will update your referenced NuGet packages and node modules for you.
 
  - Azure Portal NuGet packages and node modules are available at the new [AzurePortal Registry](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal).
  - Breaking changes by version are available at [https://aka.ms/portalfx/breaking](https://aka.ms/portalfx/breaking)
