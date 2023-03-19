@@ -193,7 +193,7 @@ This section contains a glossary of terms and acronyms that are used in this doc
 
 | Term             | Meaning |
 | ---              | --- |
-| big data | Data sets that are very large or very diverse,  including  structured, semi-structured and unstructured datathat may be located in  different sources. The variation in sizes or types of data stores is beyond the ability of traditional databases to capture, manage, and process the data with low-latency.  |
+| big data | Data sets that are very large or very diverse,  including  structured, semi-structured and unstructured data that may be located in  different sources. The variation in sizes or types of data stores is beyond the ability of traditional databases to capture, manage, and process the data with low-latency.  |
 | heterogeneous blade activation | |
 | homogeneous blade activation | |
 | IANA | Internet Assigned Numbers Authority |
