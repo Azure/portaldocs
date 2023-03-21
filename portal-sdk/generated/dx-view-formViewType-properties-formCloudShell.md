@@ -20,11 +20,11 @@
 
 If you need to add a list of cloud shell commands to execute, for example, in bash environment, you need to add commands to your view and reference Form blade that implements Cloud Shell scenario.
 
-Supported shell environments: bash, powershell
+Supported shell environments: bash (with Azure CLI preinstalled), powershell (with Azure PowerShell preinstalled)
 
 Form sample:
 
-Says **cloudShell** as an action, defines **kind** of Cloud Shell environment to execute in, constructs array of **commands** passing **name** of command, and an array of **arguments** (can be optional) that the command expects. An argument is constructed using **property**, and **value** (can be optional) using Form inputs (could be any function, resources(), steps()…)
+Says **cloudShell** as an action, defines **kind** of Cloud Shell environment to execute in, constructs array of **commands** passing **name** of command, and an array of **parameters** (can be optional) that the command expects. A parameter is constructed using **name**, and **value** (can be optional) using Form inputs (could be any function, resources(), steps()…)
 
 FormBladeCloudShell.Dx.json:
 
@@ -37,8 +37,8 @@ FormBladeCloudShell.Dx.json:
             "primaryButtonLabel": "Run Shell Commands",
             "steps": [
                 {
-                    "name": "arguments",
-                    "label": "Cloud Shell arguments",
+                    "name": "parameters",
+                    "label": "Cloud Shell parameters",
                     "elements": [
                         {
                             "name": "name",
@@ -54,18 +54,11 @@ FormBladeCloudShell.Dx.json:
                 "kind": "bash",
                 "commands": [
                     {
-
-                        "name": "az",
-                        "arguments": [
+                        "name": "az resource list",
+                        "parameters": [
                             {
-                                "property": "resource"
-                            },
-                            {
-                                "property": "list"
-                            },
-                            {
-                                "property": "--name ",
-                                "value": "[steps('arguments').name]"
+                                "name": "--name",
+                                "value": "[steps('parameters').name]"
                             }
                         ]
                     }
