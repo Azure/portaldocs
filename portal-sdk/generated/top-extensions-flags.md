@@ -23,6 +23,7 @@ The following table specifies the types of query string flags that are used with
 | Extension Flags | Allow developers to specify features that they maintain. <br>Invoked with `https://portal.azure.com/?<extensionName>_<extensionFlag>=<value>`.   |  [#extension-flags](#extension-flags)  |
 | Shell flags        | Connect the developer's extension to features that are maintained by the Azure Portal team. Shell features do not require changes to the code in the developer's extension.<br> Invoked with  `https://portal.azure.com/?feature.<featureName>=<value>`.   |  [#shell-feature-flags](#shell-feature-flags) |
 
+**Feature flags can be moified by users, so extensions should be wary of using their values directly, specially when using them to construct URLs and making calls to those URLs. Extensions should validate all such uses of feture flag values to prevent injection.**
 
 <!-- The following sentence is from portalfx-domain-based-configuration-pattern.md. -->
   Changing the default feature flags that are sent to the extension requires Shell configuration changes and redeployment.
