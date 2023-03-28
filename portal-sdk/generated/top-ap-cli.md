@@ -984,13 +984,18 @@ The ap CLI is built by the Azure portal team for the extension developer communi
 
 - How can CloudTest access internal Azure DevOps feed?
 
-   **Important Note**: if you would like better integration with  devops internal package feeds, i.e so that you dont need to perform the steps below, then vote for this feature [vote here](https://aka.ms/portalfx/cloudtest/npmauth)
-
-    1. Create a [service account with 2FA exemption](https://www.1eswiki.com/wiki/Service_Accounts).
-    1. This is the [ link to grant the service account access ](https://onebranch.visualstudio.com/OneBranch/_wiki/wikis/OneBranch.wiki/3092/System-Account-Access-to-msazure-ADO-instance-and-SharePoint-Site) to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=connect&feed=AzurePortal .
-    1. Once granted access, after the service account has permission to the AzurePortal Feed, you can [ generate PAT token following this doc ](https://www.1eswiki.com/wiki/Service_Account_Lockdown#Generating_a_PAT_via_the_Command-line).
-    1. Store the PAT token in a keyvault that cloudtest can access.
-    1. If not already base 64 encoded, don't forget to encode the PAT token in base 64 before putting it in .npmrc. more details to[ generate .npmrc with a long lasting PAT here ](https://docs.microsoft.com/en-us/azure/devops/artifacts/npm/npmrc).
+   - **Recommended approach**\
+   When using CloudTest's official [ADO agentless server build ADO pipeline task](https://marketplace.visualstudio.com/items?itemName=asg-cloudtest.asg-cloudtest-servertasks), the active pipeline's build job access token (`SYSTEM_ACCESSTOKEN`) is passed from ADO to CloudTest automatically and then made available to test setup and execution code in the `%VstsAccessToken%` environment variable. Using this token, you can authenticate with your ADO NPM feed during CloudTest runtime.   
+   The main way to consume the `%VstsAccessToken%` is to create a Setup script which alters your `.npmrc` file to inject the user environment variable. One such example of this can be found here: https://paste.microsoft.com/0be0c07a-6599-4f47-89f3-f9cf2e8a021b Inside of the .npmrc file, each ADO NPM feed should have the token appended like so: `//${registryPath}:_authToken=${accessToken}`
+   If you see authentication errors, you may need to change your ADO's [Job authorization scope](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/access-tokens?view=azure-devops&tabs=yaml#job-authorization-scope) settings to 
+   
+   - **Secondary approach**\
+   For cases where CloudTest's API is invoked directly to submit test sessions, the ADO Build Access Token wouldn't be passed and the below steps would need to be used.
+        1. Create a [service account with 2FA exemption](https://www.1eswiki.com/wiki/Service_Accounts).
+        1. This is the [ link to grant the service account access ](https://onebranch.visualstudio.com/OneBranch/_wiki/wikis/OneBranch.wiki/3092/System-Account-Access-to-msazure-ADO-instance-and-SharePoint-Site) to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=connect&feed=AzurePortal .
+        1. Once granted access, after the service account has permission to the AzurePortal Feed, you can [ generate PAT token following this doc ](https://www.1eswiki.com/wiki/Service_Account_Lockdown#Generating_a_PAT_via_the_Command-line).
+        1. Store the PAT token in a KeyVault that CloudTest can access.
+        1. If not already base 64 encoded, don't forget to encode the PAT token in base 64 before putting it in .npmrc. more details to[ generate .npmrc with a long lasting PAT here ](https://docs.microsoft.com/en-us/azure/devops/artifacts/npm/npmrc).
 
 <!-- docs#manualsetup -->
 
