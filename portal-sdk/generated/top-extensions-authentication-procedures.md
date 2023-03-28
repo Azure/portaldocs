@@ -324,7 +324,9 @@ To provide extension authors greater control over the deployment cadence of reso
 
 1. **Prerequisite:** If your extension requires access to a resource other than ARM, you will need to provide an `oAuthClientId` in the [EasyStart Onboarding](https://aka.ms/portalfx/easystart) tool for your extension. If you only need access to ARM, you do not need to define a `resourceAccess` section in your extension's configuration.
 
-2. Add the desired resources to your extension's hosting service configuration.
+2. Go to your extension's 1P app by visiting https://aka.ms/firstpartyportal. Pre-authorize the portal's client ID in that respective cloud with the "user_impersonation" scope. This is required to allow the portal to be able to fetch tokens on behalf of the extension's 1P app. (For quick reference, portal's clientID in fairfax is `c836cbdb-7a5b-44cc-a54f-564b4b486fc6`. Portal's client ID in all other clouds is `c44b4083-3bb0-49c1-b47d-974e53cbdf3c`)
+
+3. Add the desired resources to your extension's hosting service configuration.
    *  In your extension's hosting service configuration(s), add a new `authorization` property with the desired resource access.
        * **Note:** the ARM resource (name: "") is not included. All extensions will now get the portal's ARM access token by default without needing to define it in configuration.
 
@@ -341,10 +343,10 @@ To provide extension authors greater control over the deployment cadence of reso
     }
     ```
 
-3. Deploy your extension with the new configuration changes.
+4. Deploy your extension with the new configuration changes.
    * Your configuration changes must be fully deployed to all stages in order to be detected by the authentication pipeline.
    * **Optional:** Resource access configuration changes can be tested by deploying to a friendly-name stamp. Instructions can be found [below.](#testing-extension-side-authorization-configuration-with-friendly-name-stamps)
-4. Verify your new configuration by requesting a token for each of the resources with access defined using the following methods:
+5. Verify your new configuration by requesting a token for each of the resources with access defined using the following methods:
     * From a blade in your extension.
     * Manually from the developer command prompt:
         * From your browser's developer tools, navigate to the "Console" tab, and select your extension's frame using the dropdown in the header.
@@ -360,6 +362,8 @@ To provide extension authors greater control over the deployment cadence of reso
         1. Open the "Network" tab of your browser's developer tools
 
         2. Locate the call to `/api/DelegationToken` and inspect the response - a successful token request will have status `200` and will include a "Bearer" token in the response body.
+
+6. **Please note:** Especially for extensions migrating their resource access from the Extensions.\*.json files, please be aware that one of the changes this entails is that the extension client ID ('oAuthClientId' property) defined at the extension level in the portal configuration (Extensions.\*.json) file will be used for all token fetches. The new resource access does not allow you to override this 'oAuthClientId' value in any way. It is important to test your new flows and inspect the access tokens used to make the all your extension's resource calls. To see the client ID used to on the requested token, you can grab the token from the authorization header of the request to the target resource, and parse that access token in https://jwt.ms. Then look at the "appId" claim and ensure that it matches the one defined at the extension level in the portal configuration. If you have any questions, feel free to reach out on the Teams channel linked in this doc.
 
 **Before migration**
 
