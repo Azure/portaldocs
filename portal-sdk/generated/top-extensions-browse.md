@@ -2804,6 +2804,9 @@ These are the currently supported command types:
                 "enableInsights": {
                   "type": "boolean"
                 },
+                "enableAutomationApis": {
+                  "type": "boolean"
+                },
                 "disableAutomationTasks": {
                   "type": "boolean"
                 },
