@@ -4,6 +4,10 @@ This is the home page for all documentation related to onboarding, designing, de
 
 Couldn't find what you needed? [Ask about the docs on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-missing-docs).
 
+## Announcements
+
+* [Access to the Portal Dogfood environment will be restricted after April 15, 2023.](/portal-sdk/generated/portalfx-dogfood-simplysecurev2.md)
+
 ## Onboarding a new extension
 
 * [Overview / Get started](/portal-sdk/generated/top-onboarding.md)

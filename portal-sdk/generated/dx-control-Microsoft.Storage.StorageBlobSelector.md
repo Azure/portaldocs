@@ -25,6 +25,7 @@ A control for selecting a blob from an Azure storage account.
 |type|True|Enum permitting the value: "Microsoft.Common.StorageBlobSelector"
 |label|True|Display text for the control
 |toolTip|False|Text to display when hovering over the tooltip icon. Tooltip icon will only be displayed if text is a non-empty value.
+|extendExpirationDate|False|If **true** SAS expiration date will extend to 90 days, otherwise it will default to 8 hours.
 |visible|False|If **true** the control will display, otherwise it will be hidden.
 |options|False|`options.text` is the default value for the selection text
 |constraints|False|`constraints.allowedFileExtensions` specifies the allowed file types.  Defined as an array of file types.
@@ -53,7 +54,8 @@ A control for selecting a blob from an Azure storage account.
     },
     "constraints": {
       "allowedFileExtensions": [ "zip", "cspkg" ]
-    }
+    },
+    "extendExpirationDate": false
   }
 // Enclosing comment
 

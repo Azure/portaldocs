@@ -73,6 +73,7 @@ When testing a CreateUiDefinition, some browsers (like Google Chrome) truncate U
 |constraints|False|The constraints object has two properties: <code>required</code> and <code>accept</code>. <br><br>1) If <code>constraints.required</code> is set to **true**, then file upload becomes required and a red asterisk is displayed next to the control's text in order to signal to users that they cannot proceed unless a file is uploaded. If this property is set to **false**, file upload is not required.<br><br>2) <code>constraints.accept</code> specifies the types of files that are shown in the browser's file dialog. See the [HTML5 specification](https://html.spec.whatwg.org/multipage/input.html#attr-input-accept) for allowed values. The default value is **null**.
 |options|False|The options object has four properties: <code>multiple</code>, <code>uploadMode</code>, <code>openMode</code>, and <code>encoding</code>. <br><br>1) If <code>options.multiple</code> is set to **true**, the user is allowed to select more than one file in the browser's file dialog. The default value is **false**. <br><br>2) This element supports uploading files in two modes based on the value of <code>options.uploadMode</code>. If **file** is specified, the output has the contents of the file as a blob. If **url** is specified, then the file is uploaded to a temporary location, and the output has the URL of the blob. Temporary blobs will be purged after 24 hours. The default value is **file**.<br>Note: An uploaded file is protected. The output URL includes a [SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview?toc=/azure/storage/blobs/toc.json) for accessing the file during deployment. <br><br>3) The value of <code>options.openMode</code> determines how the file is read. If the file is expected to be plain text, specify **text**; else, specify **binary**. The default value is **text**. <br>If <code>options.uploadMode</code> is set to **file** and <code>options.openMode</code> is set to **binary**, the output is base64-encoded. <br><br>4) <code>options.encoding</code> specifies the encoding to use when reading the file. The default value is **UTF-8**, and is used only when <code>options.openMode</code> is set to **text**.
 |scope|True|
+|extendExpirationDate|False|If **true** SAS expiration date will extend to 90 days, otherwise it will default to 8 hours.
 |visible|False|If **true** the control will display, otherwise it will be hidden.
 |fx.feature|False|
 <a name="microsoft-common-fileupload-ui-sample"></a>
@@ -98,6 +99,7 @@ How to specify a FileUpload
     "openMode": "text",
     "encoding": "UTF-8"
 },
+"extendExpirationDate": false,
 "visible": true
 }
 
