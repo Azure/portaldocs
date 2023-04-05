@@ -54,42 +54,84 @@ npm install --save-dev @microsoft/azureportal-reactview-tools
 ## Create your build script
 
 As stated earlier, ReactView assets are generated entirely independently, using both Webpack and TypeScript.
-In order to successfully integrate with the MsPortalFx build pipeline, we provide tools that come with default webpack and typescript configuration.
-This tool is included as part of the `@microsoft/azureportal-reactview-tools` package. There are two ways to consume the build,
-one is using the CLI `reactview-build` which provides a working out of the box solution for most teams. The second option, for advanced scenarios, is to use the Node API.
+In order to successfully integrate with the MsPortalFx build pipeline, we provide tools that come with default webpack and typescript configuration. This tool is included as part of the `@microsoft/azureportal-reactview-tools` package. These instructions assume you are using v1.0.9 or above of the `@microsoft/azureportal-reactview-tools` package.
 
-Your extension is most likely compatible with the CLI if:
+There are two ways to customize the build,
+one is passing command-line arguments to the CLI `reactview-build`. The second option is to add a `reactbuild.config.js` script where you can customize your build using the Node API.
+
+Your extension may not need any customizations if:
 
 - Your ClientResource strings all end in "Resources" (e.g OverviewResources, ClientResources, CreateResources)
 - Your folders nested and setup as described in [Create a folder](#create-a-folder).
 - You don't require any custom Webpack loaders/plugins besides style-loader
 
-You can always migrate from CLI to Node interface easily, migrating back may not work as easily. If you can use the CLI, it is the recommended approach.
-
-Regardless of which method you choose, the first step is to copy the `tsconfig.extension.json` file from the `@microsoft/azureportal-reactview-tools` package. into your new ReactView folder, and rename it to `tsconfig.json`.
+Regardless of how you choose to customize the build, the first step is to copy the `tsconfig.extension.json` file from the `@microsoft/azureportal-reactview-tools` package into your new ReactView folder, and rename it to `tsconfig.json`.
 
 Additionally, let's copy the `HelloWorld.ReactView.tsx` file from [here][HelloWorld ReactView], so we can test our build with it. Don't worry about the contents for now.
 
 [HelloWorld ReactView]: https://msazure.visualstudio.com/One/_git/AzureUX-TemplateExtension?path=%2Fsrc%2FDefault%2FExtension%2FClient%2FReactViews%2FHelloWorld.ReactView.tsx
 
-<a name="onboarding-an-existing-extension-to-reactviews-onboarding-to-cli-based-build"></a>
-## Onboarding to CLI Based Build
+<a name="onboarding-an-existing-extension-to-reactviews-create-your-build-script-setup-your-build-scripts-in-package-json"></a>
+### Setup your build scripts in package.json
 
-Identify the output folder of your existing MsPortalFx base code relative to the ReactView folder.
-It might be something like: `../../Output/Content/Scripts/`, append the current folder structure to that to maintain the shape.
-Within your `package.json` file, add the following script entries, substituting this new directory where appropriate:
+Within your `package.json` file, you should have the following 3 script entries:
 
-```javascript
+```JSON
 {
     "scripts": {
-        "build": "reactview-build --outputDirectory ../../Output/Content/Scripts/ReactViews/",
-        "build:dev": "reactview-build --development --outputDirectory ../../Output/Content/Scripts/ReactViews/",
-        "watch": "reactview-build --watch --development --outputDirectory ../../Output/Content/Scripts/ReactViews/"
+        "build": "reactview-build",
+        "build:dev": "reactview-build --development",
+        "watch": "reactview-build --watch --development"
     }
 }
 ```
 
-After saving the file, running `npm run build` should output:
+<a name="onboarding-an-existing-extension-to-reactviews-create-your-build-script-specify-your-build-output-folder"></a>
+### Specify your build output folder
+
+Identify the output folder of your existing MsPortalFx base code relative to the ReactView folder. If it is anything other than `../../Output/Content/Scripts` then you will need to customize your build.
+
+You can specify a custom output location using a CLI argument OR in a custom build script.
+
+<a name="onboarding-an-existing-extension-to-reactviews-create-your-build-script-specify-your-build-output-folder-option-1-using-cli-arguments"></a>
+#### Option 1. Using CLI arguments
+
+For all 3 script commands in package.json, you can add a `--outputDirectory` argument with the custom location following it. This would look like:
+
+```JSON
+{
+    "scripts": {
+        "build": "reactview-build --outputDirectory ../custom/location/ReactViews",
+        "build:dev": "reactview-build --development --outputDirectory ../custom/location/ReactViews",
+        "watch": "reactview-build --watch --development --outputDirectory ../custom/location/ReactViews"
+    }
+}
+```
+
+Note the disadvantage of the CLI argument approach is that the arguments must be repeated and kept in-sync among all script entries.
+
+<a name="onboarding-an-existing-extension-to-reactviews-create-your-build-script-specify-your-build-output-folder-option-2-using-a-custom-build-script"></a>
+#### Option 2. Using a custom build script
+
+In the same directory as your package.json file, you can create a `reactbuild.config.js` file. This script will be run at the beginning of each build, allowing you to customize the webpack configuration.
+
+At the beginning of the file, you'll add these 2 lines:
+```javascript
+const { getReactViewBuild } = require("@microsoft/azureportal-reactview-tools/webpack.config");
+const builder = getReactViewBuild();
+```
+
+Then you can invoke methods on your builder to customize your build. These customizations will kick in for all of the script commands, allowing you to customize *in addition to* any CLI arguments that were passed in the script.
+
+To set the output directory, you would add the following line to your config file:
+```javascript
+builder.setOutputDirectory("../custom/location/ReactViews");
+```
+
+<a name="onboarding-an-existing-extension-to-reactviews-create-your-build-script-running-the-build"></a>
+### Running the build
+
+After ensuring that your output directory is set correctly, running `npm run build` should output:
 
 ```text
 Starting reactview-build...
@@ -119,47 +161,47 @@ Otherwise, head to the directory was configured, and check if `HelloWorld.ReactV
 
 If the file, is there, everything is working as expected! [Skip to integration](#integrate).
 
-<a name="onboarding-an-existing-extension-to-reactviews-onboarding-to-the-node-api-based-build"></a>
-## Onboarding to the Node API based build
+<a name="onboarding-an-existing-extension-to-reactviews-create-your-build-script-additional-node-api-build-options"></a>
+### Additional Node API build options
 
-If the above steps did not work for you, or you have a custom scenario there is a custom Node API surface that can enable a wider variety of scenarios.
+Below is a list of the APIs you can invoke within your `reactbuild.config.js` script:
 
-To start, make a javascript file called `reactbuild.js` next to your package.json file. Within this file put the following contents:
+- `addExternal`: Add an external entry to the webpack config "externals" property
+- `addFallbacks`: Adds one or more resolve.fallback items, used when normal resolving fails.
+- `addPackageAlias`: Add an alias to webpack (useful for helping webpack work with path configurations in tsconfigs)
+- `addPlugin`: Add a webpack plugin to the webpack config "plugins" property.
+- `addRule`: Adds a module rule to the webpack config
+- `disableVersioningPlugin`: Disables the versioning plugin used for react and fluentui
+- `enableDataFetcher`: Enable data fetcher for performance optimization
+- `enableMonacoEditor`: Sets the languages that the Monaco Editor webpack plugin will support. Must use [react-monaco-editor](https://github.com/react-monaco-editor/react-monaco-editor) package.
+- `enablePathAliasResolver`: Enable auto alias & path resolver
+- `enableResJsonSupport`: Enable resjson support
+- `enableTokenPrefetcher`: Enable custom token prefetcher for performance optimization
+- `profile`: Enable webpack profiling plugin
+- `setDevServerConfigPath`: Sets the devServerConfig path, required for FastRefresh to work.
+- `setDevtool`: Sets Webpack's devtool property. Typically set to an appropriate value based on the presence of the --development CLI argument.
+- `setFluentUIMajorVersion`: Sets major version of FluentUI to use. Default is 8.
+- `setMode`: Sets Webpack's mode. Typically done via the --development CLI argument in the appropriate scripts
+- `setOutputDirectory`: Sets the output directory.
+- `setPublicPath`: Sets the relative public path for webpack loaders
+- `setReactMajorVersion`: Sets major version of React to use. Default is 17.
+- `setStatsFile`: Set path of generated stats file
+- `setTsConfigFile`: Sets tsconfig file used by TypeScript compilation
 
-```javascript
-const path = require("path");
-const reactTools = require("@microsoft/azureportal-reactview-tools/webpack.config");
-const builder = new reactTools.ReactViewBuild(process.cwd(),path.resolve([relative path to your output directory]));
-// customizations here, in this example we've named our Resource files as ending in Strings
-builder.addExternal(/Strings$/);
-// customizations end
-builder.runWebPack(); // pass true in to watch
-```
-
-Apply customizations as needed, we support the following. Most of them have thorough documentation on their site:
-
-- `setMode`: sets Webpack's mode
-- `setDevtool`: set's Webpack's devtool property
-- `addExternal`: add an extern to webpack
-- `addPackageAlias`: add an alias to webpack (useful for helping webpack work with path configurations in tsconfigs)
-
-Most notably, there is the `getConfig` method, that will return the underlying raw webpack configuration.
-If you call this method and make modifications, you are effectively 'voiding the warranty'.
-While this gives a nice path to arbitrary customizations, be aware that if something breaks the portal may not provide support.
-
-Once your customizations have been applied, save the file and add aliases to the `package.json` as needed, something like this.
-You will likely want to enhance your script to take parameters for watch, and development build support:
+Example `reactbuild.config.js`:
 
 ```javascript
-{
-    "scripts": {
-        "build": "node ./buildreact.js"
-    }
-}
-```
+const { getReactViewBuild } = require("@microsoft/azureportal-reactview-tools/webpack.config");
+const builder = getReactViewBuild();
 
-Finally, run `npm run build` and tweak config as needed until no errors are returned, and the `HelloWorld.ReactView.js` file is emitted in the output directory.
-For the most part, the errors are not portal specific and can be solved using your favorite search engine.
+builder.setOutputDirectory("../../Output/Content/Scripts/ReactViews");
+builder.setDevServerConfigPath('../../devServerConfig.json');
+
+builder.addExternal(/Resources$/);
+
+builder.addPackageAlias("react", "./node_modules/react");
+builder.addPackageAlias("react-dom", "./node_modules/react-dom");
+```
 
 <a name="onboarding-an-existing-extension-to-reactviews-integrate"></a>
 ## Integrate

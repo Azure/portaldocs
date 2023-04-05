@@ -942,6 +942,15 @@ The ap CLI is built by the Azure portal team for the extension developer communi
 <a name="cli-overview-faq"></a>
 ## FAQ
 
+- I try to npm install a package and get a ETarget no matching version found for <packagename>
+
+    Why:
+    - ADO packaging has an SLA of 3-6hours before a new package is available in internal feeds - [here is the reference to ADOs SLA Upstream sources overview](https://learn.microsoft.com/en-us/azure/devops/artifacts/concepts/upstream-sources?view=azure-devops#metadata-cached-from-upstream-sources) - Azure Artifacts (search for 3-6 hours, although it references nuget the same sla applies to npm). 
+
+    Solution: 
+    - If you need it faster then the 3-6hr sla ADO have created a self service approach to speed up the ingestion for any given package 
+    - [Search for packages in upstream sources](https://learn.microsoft.com/en-us/azure/devops/artifacts/how-to/search-upstream?view=azure-devops#search-upstream-sources) and `save` it to the [AzurePortal feed](https://msazure.visualstudio.com/One/_artifacts/feed/AzurePortal).
+
 - Do I have to read this document, don't you have a video?
 
     Yes, see the [ap cli video https://aka.ms/portalfx/apcli](https://aka.ms/portalfx/apcli).

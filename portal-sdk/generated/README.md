@@ -8,7 +8,7 @@ Couldn't find what you needed? [Ask about the docs on StackOverflow](https://sta
 <a name="azure-portal-extension-development-documentation-announcements"></a>
 ## Announcements
 
-* [Access to the Portal Dogfood environment will be restricted after April 15, 2023.](/portal-sdk/generated/portalfx-dogfood-simplysecurev2.md)
+* [Access to the Portal Dogfood environment will be restricted after April 15, 2023.](https://aka.ms/portalfx/dogfood-simplysecurev2)
 
 <a name="azure-portal-extension-development-documentation-onboarding-a-new-extension"></a>
 ## Onboarding a new extension

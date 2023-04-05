@@ -6,7 +6,7 @@ Couldn't find what you needed? [Ask about the docs on StackOverflow](https://sta
 
 ## Announcements
 
-* [Access to the Portal Dogfood environment will be restricted after April 15, 2023.](/portal-sdk/generated/portalfx-dogfood-simplysecurev2.md)
+* [Access to the Portal Dogfood environment will be restricted after April 15, 2023.](https://aka.ms/portalfx/dogfood-simplysecurev2)
 
 ## Onboarding a new extension
 
