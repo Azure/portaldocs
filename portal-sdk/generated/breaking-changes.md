@@ -9,9 +9,6 @@
 ## 11.110.0.1
 <table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=7170682'>7170682</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=7170682'>Mark JQuery API as deprecated for extension usage</a><p></p></td></tr></table>
 
-## 11.109.0.1
-<table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=7170682'>7170682</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=7170682'>Mark JQuery API as deprecated for extension usage</a><p>No description available for this breaking change.</p></td></tr></table>
-
 ## 11.97.0.1
 <table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=17237618'>17237618</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=17237618'>[breaking] Add support for opentelemetry metric apis</a><p> </div><div style="box-sizing:border-box;">As part of the migration to the OpenTelemetry framework, the System.Diagnostics.DiagnosticSource package has been added as a dependency.&nbsp; If you see errors during your build related to it missing, please add the nuget package <span style="display:inline !important;"><b>System.Diagnostics.DiagnosticSource</b>&nbsp;</span>at version<b> 7.0.0 </b>or later. </div><div style="box-sizing:border-box;"></p></td></tr></table>
 
