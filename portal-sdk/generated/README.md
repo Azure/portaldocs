@@ -10,6 +10,17 @@ Couldn't find what you needed? [Ask about the docs on StackOverflow](https://sta
 
 * [Access to the Portal Dogfood environment will be restricted after April 15, 2023.](https://aka.ms/portalfx/dogfood-simplysecurev2)
 
+<a name="azure-portal-extension-development-documentation-get-started-with-default-experiences"></a>
+## Get started with Default Experiences
+
+If your resource types have public [Azure Rest API specs](https://github.com/Azure/azure-rest-api-specs), we likely have generated UX for your resource types already.
+
+You can discover default experiences for your resource type in [MS Portal](https://ms.portal.azure.com) through global search. By default, you can expect to see a browse, overview with commands and resource menu to manage the resource instances of your resource types- without any upfront development. If your resource types have public API specs, but you do not see a default experience for these resource instances or if you have additional questions please reach out to: [dxportalteam@microsoft.com](dxportalteam@microsoft.com)
+
+If you want to customize this experience, you must own a portal extension. However, you can save development time by making use of auto-generated artifacts. In the [AzureUX-GeneratedExtension](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views) repo, you can find the generated asset and views that power the default experience for the resource type.
+
+[Learn more about Default Experiences & generated UX](/portal-sdk/generated/top-extensions-autogeneration.md)
+
 <a name="azure-portal-extension-development-documentation-onboarding-a-new-extension"></a>
 ## Onboarding a new extension
 
@@ -149,13 +160,6 @@ The primary UI building block is a called a blade. A blade is like a page. It ge
 * [Blade with tiles](/portal-sdk/generated/top-blades-legacy.md)
 
 [Ask a question about blades on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-blades-parts)
-
-<a name="azure-portal-extension-development-documentation-development-guide-ux-auto-generation-generated-ux"></a>
-### UX Auto Generation (Generated UX)
-
-Save development time by making use of auto-generated artifacts in your extension. If your resource provider has published Azure REST API specs [(check here)](https://github.com/Azure/azure-rest-api-specs), we likely have asset definitions and views already generated for your resource types. Please [browse the GeneratedExtension repo ](https://msazure.visualstudio.com/One/_git/AzureUX-GeneratedExtension?path=/src/views) for generated views and asset definitions or click link below to get started.
-
-[Learn more about UX Auto Generation here](/portal-sdk/generated/top-extensions-autogeneration.md)
 
 <a name="azure-portal-extension-development-documentation-development-guide-parts"></a>
 ### Parts
