@@ -382,6 +382,9 @@ To create packages run the following command.
 
 <a name="gallery-item-specificiations-gallery-package-management-publishing-a-azure-gallery-package-or-deployment-fragment"></a>
 #### Publishing a Azure Gallery Package or Deployment Fragment
+
+**💡Important note: for selfservice uploading packages to Dogfood environment please check our modern documentation [https://aka.ms/sideload-catalog](https://aka.ms/sideload-catalog).** 
+
 In order to publish a gallery package (azpkg) you will run the AzureGallery tool. You can optionally associate a hide key with the package. This key will be required when requesting the item from the gallery service.
 
 To upload the package run the following command.
