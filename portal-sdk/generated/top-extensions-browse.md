@@ -5221,7 +5221,7 @@ resources
 
 # Curating browse assets
 
-You must curate your new 'Asset' in order for it to be exposed in the 'All services' menu. By default, your service will not appear in the 'All services' menu until you have submitted a curation work item [here][https://aka.ms/AllServicesCuration] and contacted [ibizafxpm@microsoft.com](mailto:ibizafxpm@microsoft.com) with a link to the work item. 
+You must curate your new 'Asset' in order for it to be exposed in the 'All services' menu. By default, your service will not appear in the 'All services' menu until you have submitted a curation work item [here](https://aka.ms/AllServicesCuration) and contacted [ibizafxpm@microsoft.com](mailto:ibizafxpm@microsoft.com) with a link to the work item.
 
 In order for the portal to correctly curate your 'Asset', we will need the following details:
 - 'ExtensionName - YourExtensionName'
@@ -5230,7 +5230,7 @@ In order for the portal to correctly curate your 'Asset', we will need the follo
 - 'Category - DesiredCategory'
 - 'Subcategory - DesiredSubcategory'
 
-You can review current categories and subcategories [here][https://rc.portal.azure.com/?exp.azureportal_showsubcategories=true#allservices/category/All].
+You can review current categories and subcategories [here](https://rc.portal.azure.com/?exp.azureportal_showsubcategories=true#allservices/category/All).
 
 # Providing a Custom Browse Hub
 

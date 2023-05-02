@@ -73,6 +73,7 @@
 - MsPortalFx.Base.Images.Log
 - MsPortalFx.Base.Images.Monitoring
 - MsPortalFx.Base.Images.Move
+- MsPortalFx.Base.Images.OpenInMobile
 - MsPortalFx.Base.Images.Paused
 - MsPortalFx.Base.Images.Pending
 - MsPortalFx.Base.Images.Person
