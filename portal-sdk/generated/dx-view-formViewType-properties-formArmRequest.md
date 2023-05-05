@@ -13,6 +13,7 @@
 |method|True|method for Arm Request. See [here](dx-enum-formArmRequest-method.md) for more information on method.
 |path|True|path for Arm Request
 |body|False|body for Arm Request
+|condition|False|Use condition property to control the state of the arm request to be made. Value be an expression or boolean
 |fx.feature|False|
 <a name="view-formviewtype-properties-formarmrequest-sample-snippet"></a>
 ## Sample Snippet
