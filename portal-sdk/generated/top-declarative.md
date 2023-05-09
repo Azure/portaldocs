@@ -111,7 +111,7 @@ Example of the get started view for the Managed Apps center -
 <a name="declarative-views-supported-declarative-views-browse-as-a-resource-menu-item"></a>
 ### Browse as a resource menu item
 
-There are scenarios when an extension author may want a resource browse experience as a resource menu item. Examples of such scenarios are when a resource has child resources or landing pages that link to a category of resources. We recommend that all browse experiences be powered by [Azure Resource Graph](https://docs.microsoft.com/en-us/azure/governance/resource-graph/) when possible. Learn more about browse as a resource many item in the Azure Portal [here](portalfx-declarative-assets.md#browse-as-a-resource-menu-item).
+There are scenarios when an extension author may want a resource browse experience as a resource menu item. Examples of such scenarios are when a resource has child resources or landing pages that link to a category of resources. We recommend that all browse experiences be powered by [Azure Resource Graph](https://docs.microsoft.com/en-us/azure/governance/resource-graph/) when possible. Learn more about browse as a resource menu item in the Azure Portal [here](declarative-assets.md#browse-as-a-resource-menu-item).
 
 Example of browse as a resource menu item -
 
