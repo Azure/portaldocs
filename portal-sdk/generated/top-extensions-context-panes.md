@@ -448,6 +448,10 @@ export class OpenBladeApiSamplesViewModel
         //bladeReference#resourceMenuBladeWithOverride
     }
 
+    public onOpenBladeInPlaceButtonClick() {
+        void this._container.openBlade(BladeReferences.forBlade("OpenBladeApiChildBlade").createReference(), { inPlace: true });
+    }
+
     private _initializeHotSpotSample(container: BladeContainer) {
         this.hotspot = new (HotspotViewModel as any)(container, {
             onClick: () => {
