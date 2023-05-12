@@ -43,7 +43,7 @@ The Azure Portal SDK provides localization support in two different flavors.
 
 1. Resx + Lcl files
 
-Information regarding `lcl` files can be found [here](https://microsoft.sharepoint.com/teams/WAG/EngSys/Implement/OneBranch/Localization.aspx?a=1).
+Information regarding `lcl` files can be found [here](https://onebranch.visualstudio.com/OneBranch/_wiki/wikis/OneBranch.wiki/4573/Localization) (follow links from that page to LocV3 used by CoreXT, then search for 'LCL files').
 
 <a name="localization-consuming-localized-strings-in-typescript"></a>
 ### Consuming localized strings in TypeScript
