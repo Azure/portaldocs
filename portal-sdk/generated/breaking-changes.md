@@ -3,6 +3,9 @@
 * To ask a question about breaking changes [use this](https://aka.ms/ask/ibiza-breaking-change)  
 
 
+## 11.196.0.1
+<table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=22302264'>22302264</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=22302264'>[Iris] Move action metadata to URL params</a><p> No expected breaking for extensions since the Iris API is not used by any extension yet </p></td></tr></table>
+
 ## 11.117.0.1
 <table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=17480199'>17480199</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=17480199'>Add denySettings property to the stack create API</a><p></span> </p><p style="margin:0in;" lang=en-US>&nbsp;Adding an optional property when creating deployment stacks. No expected error for partners. </p><p style="margin:0in;font-size:10.5pt;color:black;" lang=en-US><span style="background:white;"></p></td></tr></table>
 
