@@ -214,7 +214,7 @@ The values listed in the "Extension value" column are recommended values, althou
 | learnRelatedResources	| [https://docs.microsoft.com/en-us/azure/azure-portal/azure-portal-dashboards](https://docs.microsoft.com/en-us/azure/azure-portal/azure-portal-dashboards) | same  |
 | learnSharedDashboard | [https://docs.microsoft.com/en-us/azure/azure-portal/azure-portal-dashboard-share-access](https://docs.microsoft.com/en-us/azure/azure-portal/azure-portal-dashboard-share-access) | same  |
 | manageSupportRequests | #blade/HubsExtension/BrowseServiceBlade/        assetTypeId/Microsoft_Azure_Support_SupportRequest | same |
-| privacyAndTerms | [https://go.microsoft.com/fwLink/?LinkID=522330](https://go.microsoft.com/fwLink/?LinkID=522330)	 | same |
+| privacyAndTerms | [https://go.microsoft.com/fwLink/?LinkID=521839](https://go.microsoft.com/fwLink/?LinkID=521839)	 | same |
 | resourceGroupOverview	| [https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-portal](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-portal) | same  |
 | survey	| [https://go.microsoft.com/fwLink/?LinkID=733278](https://go.microsoft.com/fwLink/?LinkID=733278)  | 	??? Gauge team to follow up on this |
 | joinResearchPanel | [https://www.surveymonkey.com/](https://www.surveymonkey.com/) | same |

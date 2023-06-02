@@ -41,6 +41,7 @@ The ResourceScope control will change based on the scope schema defined in the A
 | ---|:--:|:--:|
 |name|True|Name of the instance.
 |type|True|Enum permitting the  value: "Microsoft.Common.ResourceScope".
+|kind|False|enum "ResourceGroup", "Subscription", "ManagementGroup", "Tenant"
 |globalResource|False|Region to show `Global` if set to `true` and shown in a textbox.  Default is `false`.
 |instanceDetailsLabel|False|Customized text for the instance details section label
 |subscription|False|See [here](dx-resourceScopeControl-resourceScopeSubscription.md) for more on the subscription property

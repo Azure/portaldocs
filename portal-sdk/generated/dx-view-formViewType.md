@@ -78,7 +78,7 @@ The declarative form view lets you author a form in the portal. Form view can be
 |isWizard|False|If true, each step needs to be validated before moving on to next step.
 |title|True|Title/header of the Form View displayed at the top of page
 |primaryButtonLabel|False|Customize primary button display name that is used to start deployment
-|steps|True|To customize tab(s) of the Form View. See [here](dx-view-formViewType-properties-formSteps-formStepsWithoutResourceScope.md) for **steps** property.
+|steps|True|To customize tab(s) of the Form View. See [here](dx-view-formViewType-properties-formSteps.md) for **steps** property.
 |fx.feature|False|
 <a name="formviewtype-ui-sample"></a>
 ## UI Sample

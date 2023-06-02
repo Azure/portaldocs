@@ -13,4 +13,5 @@
 |location|True|Specify location for deployment
 |parameters|True|Specify all deployment parameters
 |template|True|Supply relative path to your deployment template using template.file
+|postCreate|False|Specify all postCreate to allow post deployment customization
 |fx.feature|False|

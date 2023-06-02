@@ -858,6 +858,55 @@ Example apCliConfig.json configuration:
     "tscAlias": "./my/tsc.cmd",
 }
 ```
+###  ap add test
+```
+ap add test <arguments>
+```
+
+Scaffolds the test directory from the Azure portal Template Extension repo.
+
+#### Arguments
+Argument | alias | Description
+--- | --- | ---
+--output | -o | Optional. The output directory to place the specified test folder.
+--extensionE2ETest | --e2e | Scaffolds Extension.E2ETests directory.
+--extensionUnitTest | --ut | Scaffolds Extension.UnitTests directory.
+--reactViewsUnitTest | --rut | Scaffolds ReactViews/test-config directory.
+--cloudTest | --ct | Scaffolds CloudTest directory.
+--extensionRootDir | --erd | Required. Used in tranforming files in the Extension.UnitTests and cloudTest directory to reflect the root name of the extension.
+--subscriptionId | --sid | Required for cloudTest. Subscription id used in creating cloudTest resources.
+--tenantId | --tid | Required for cloudTest if extensionE2ETestDirectory is specified. Tenant id.
+--cloudTestSku | --sku | Cloudtest sku resource name.
+--location | --l | location. Default location is eastus if not specified.
+--extensionE2ETestDirectory | --e2ed | Local existing path to Extension.E2ETests directory.
+--extensionUnitTestDirectory | --utd | Local existing path to Extension.UnitTests directory.
+--reactViewsUnitTestDirectory | --rutd | Local existing path to ReactViews directory.
+--secretName | --sn | keyVault secret name for loging into test account. Only provide this if you are using an existing secret.
+--certificateSubjectName | --csn | Certificate subject name to retrieve secret from keyvault. Only provide this is you are using an existing certificate.
+
+#### Example Usage
+
+Examples scaffolding the test directory to the ./someOtherFolder folder. The first using shorthand, the second longhand.
+This focuses on scaffolding the Extension.E2ETests directory,Extension.UnitTests directory,ReactViews/test-config directory and CloudTest directory from the Azure portal Template Extension repo.
+
+```
+add test --e2e
+add test --extensionE2ETest
+add test --ut
+add test --extensionUnitTest
+add test --rut
+add test --reactViewsUnitTest
+add test -o ./someOtherFolder --e2e
+add test --output ./someOtherFolder --e2e
+add test --ut --erd extensionRootDirectory
+add test --ct --o ./someOtherFolder --tid 12345678 --e2ed ./someOtherFolder/Extension.E2ETests --erd ./someExtensionRootDirectory --sid 11111-2222-4444-5555-12345678
+add test --cloudTest --output ./someOtherFolder --tenantId 12345678 --extensionE2ETestDirectory ./someOtherFolder/Extension.E2ETests --extensionRootDir ./someExtensionRootDirectory --subscriptionId 11111-2222-4444-5555-12345678
+add test --ct --o ./someOtherFolder --tid 12345678 --utd ./someOtherFolder/Extension.UnitTests --erd ./someExtensionRootDirectory --sid 11111-2222-4444-5555-12345678
+add test --cloudTest --output ./someOtherFolder --tenantId 12345678 --extensionUnitTestDirectory ./someOtherFolder/Extension.UnitTests --extensionRootDir ./someExtensionRootDirectory --subscriptionId 11111-2222-4444-5555-12345678
+add test --ct --o ./someOtherFolder --tid 12345678 --rutd ./someOtherFolder/Client/ReactViews --erd ./someExtensionRootDirectory --sid 11111-2222-4444-5555-12345678
+add test --cloudTest --output ./someOtherFolder --tenantId 12345678 --reactViewsUnitTestDirectory ./someOtherFolder/Client/ReactViews  --extensionRootDir ./someExtensionRootDirectory --subscriptionId 11111-2222-4444-5555-12345678
+add test --ct -o ./someOtherFolder --tid 12345678 --e2ed ./someOtherFolder/Extension.E2ETests --utd ./someOtherFolder/Extension.UnitTests --rutd ./someOtherFolder/Client/ReactViews --erd ./someExtensionRootDirectory --sid 11111-2222-4444-5555-12345678 --sn someSecretName --csn someCertificateSubjectname
+```
 
 <a name="cli-overview-extending-the-cli-with-your-teams-own-commands"></a>
 ## Extending the cli with your teams own commands
@@ -945,10 +994,10 @@ The ap CLI is built by the Azure portal team for the extension developer communi
 - I try to npm install a package and get a ETarget no matching version found for <packagename>
 
     Why:
-    - ADO packaging has an SLA of 3-6hours before a new package is available in internal feeds - [here is the reference to ADOs SLA Upstream sources overview](https://learn.microsoft.com/en-us/azure/devops/artifacts/concepts/upstream-sources?view=azure-devops#metadata-cached-from-upstream-sources) - Azure Artifacts (search for 3-6 hours, although it references nuget the same sla applies to npm). 
+    - ADO packaging has an SLA of 3-6hours before a new package is available in internal feeds - [here is the reference to ADOs SLA Upstream sources overview](https://learn.microsoft.com/en-us/azure/devops/artifacts/concepts/upstream-sources?view=azure-devops#metadata-cached-from-upstream-sources) - Azure Artifacts (search for 3-6 hours, although it references nuget the same sla applies to npm).
 
-    Solution: 
-    - If you need it faster then the 3-6hr sla ADO have created a self service approach to speed up the ingestion for any given package 
+    Solution:
+    - If you need it faster then the 3-6hr sla ADO have created a self service approach to speed up the ingestion for any given package
     - [Search for packages in upstream sources](https://learn.microsoft.com/en-us/azure/devops/artifacts/how-to/search-upstream?view=azure-devops#search-upstream-sources) and `save` it to the [AzurePortal feed](https://msazure.visualstudio.com/One/_artifacts/feed/AzurePortal).
 
 - Do I have to read this document, don't you have a video?

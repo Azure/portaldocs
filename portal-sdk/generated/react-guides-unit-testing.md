@@ -45,7 +45,6 @@ module.exports = {
         "**/*.{ts,tsx}",
         "!**/node_modules/**",
     ],
-    snapshotSerializers: ["enzyme-to-json/serializer"],
     moduleNameMapper: {
         ...jestModuleNameMappings,
         "ClientResources": "<rootDir>/../ClientResources.resx",

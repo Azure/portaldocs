@@ -3719,6 +3719,27 @@ These are the currently supported command types:
           ]
         },
         {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "apiExplorer",
+                "overview",
+                "properties"
+              ]
+            },
+            "resourceType": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "resourceType"
+          ]
+        },
+        {
           "type": "string"
         }
       ]
@@ -3741,6 +3762,30 @@ These are the currently supported command types:
           "additionalProperties": false,
           "required": [
             "name"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "apiExplorer",
+                "overview",
+                "properties"
+              ]
+            },
+            "resourceType": {
+              "type": "string"
+            },
+            "parameters": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "resourceType"
           ]
         },
         {
@@ -5221,7 +5266,7 @@ resources
 
 # Curating browse assets
 
-You must curate your new 'Asset' in order for it to be exposed in the 'All services' menu. By default, your service will not appear in the 'All services' menu until you have submitted a curation work item [here](https://aka.ms/AllServicesCuration) and contacted [ibizafxpm@microsoft.com](mailto:ibizafxpm@microsoft.com) with a link to the work item.
+You must curate your new 'Asset' in order for it to be exposed in the 'All services' menu. By default, your service will not appear in the 'All services' menu until you have submitted a curation work item [here](https://aka.ms/AllServicesCuration) and contacted [ibizafxpm@microsoft.com](mailto:ibizafxpm@microsoft.com) with a link to the work item. Please note that curation changes take an order of a few weeks to a month to complete given portal deployment constraints, so please take this into consideration if you have a date to meet.
 
 In order for the portal to correctly curate your 'Asset', we will need the following details:
 - 'ExtensionName - YourExtensionName'

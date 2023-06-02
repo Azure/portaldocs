@@ -207,7 +207,8 @@ Create a file named `config.json` next to `portaltests.ts`. Paste this in the fi
     "LOGIN_NAME": "<someone@someCompany.com>",
     "partnerTeamEmail": "partnerEmail@partnerCompany.com",
     "AzureEnvironment": < for public use "AzurePublicCloud", for fairfax use "AzureGovernment", for mooncake use "AzureChina" >,
-    "browserAutomation": < to run tests under Playwright use "playwright", to run tests under Selenium use "webdriver" >
+    "browserAutomation": < to run tests under Playwright use "playwright", to run tests under Selenium use "webdriver" >,
+    "tenantId": < optional: a tenant id that the tests will navigate to >
 }
 ```
 

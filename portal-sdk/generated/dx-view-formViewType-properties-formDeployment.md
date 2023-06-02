@@ -35,6 +35,7 @@
 |parameters|True|Specify all deployment parameters
 |template|True|Supply relative path to your deployment template using template.file
 |primaryResourceId|False|Specify primary resource id used in deployment
+|postCreate|False|Specify all postCreate to allow post deployment customization
 |fx.feature|False|
 <a name="view-formviewtype-properties-formdeployment-definitions-option-2"></a>
 ### Option 2
@@ -47,6 +48,7 @@
 |location|True|Specify location for deployment
 |parameters|True|Specify all deployment parameters
 |template|True|Supply relative path to your deployment template using template.file
+|postCreate|False|Specify all postCreate to allow post deployment customization
 |fx.feature|False|
 <a name="view-formviewtype-properties-formdeployment-definitions-option-3"></a>
 ### Option 3
@@ -59,6 +61,7 @@
 |location|True|Specify location for deployment
 |parameters|True|Specify all deployment parameters
 |template|True|Supply relative path to your deployment template using template.file
+|postCreate|False|Specify all postCreate to allow post deployment customization
 |fx.feature|False|
 <a name="view-formviewtype-properties-formdeployment-definitions-option-4"></a>
 ### Option 4
@@ -70,4 +73,5 @@
 |location|True|Specify location for deployment
 |parameters|True|Specify all deployment parameters
 |template|True|Supply relative path to your deployment template using template.file
+|postCreate|False|Specify all postCreate to allow post deployment customization
 |fx.feature|False|
