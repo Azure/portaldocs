@@ -876,7 +876,7 @@ The following three examples demonstrate how to use the settings that are associ
 <a name="domain-based-configuration-pull-request"></a>
 ## Pull Request
 
-The pull request should include the definition of the new domain for the environment in which it will run. Remember to add a meaningful description to the PR, and attach information like RDTasks or screenshots. A sample pull request that modifies the Intune curation file to add a new asset type is located at [https://aka.ms/portalfx/intune-pr](https://aka.ms/portalfx/intune-pr). For more information about sending pull requests, see [top-extensions-publishing.md](top-extensions-publishing.md).
+The pull request should include the definition of the new domain for the environment in which it will run. Remember to add a meaningful description to the PR, and attach information like RDTasks or screenshots. A sample pull request that modifies the Intune curation file to add a new asset type is located at [https://aka.ms/portalfx/intune-pr](https://aka.ms/portalfx/intune-pr).
 
  <!--gitdown": "include-file", "file": "../templates/portalfx-extensions-bp-custom-domains.md"} -->
 

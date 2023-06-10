@@ -3725,6 +3725,7 @@ These are the currently supported command types:
               "type": "string",
               "enum": [
                 "apiExplorer",
+                "monitoring",
                 "overview",
                 "properties"
               ]
@@ -3771,6 +3772,7 @@ These are the currently supported command types:
               "type": "string",
               "enum": [
                 "apiExplorer",
+                "monitoring",
                 "overview",
                 "properties"
               ]

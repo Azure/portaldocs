@@ -1,11 +1,21 @@
 
-<a name="c-portal-test-framework"></a>
-# C# Portal Test Framework
+<a name="planned-deprecation-c-portal-test-framework"></a>
+# [PLANNED DEPRECATION] C# Portal Test Framework
 
 > [Choosing the right test Framework](portalfx-choosing-test-framework.md)
 
-<a name="c-portal-test-framework-overview"></a>
-## Overview
+<a name="planned-deprecation-c-portal-test-framework-notice"></a>
+## NOTICE
+
+The C# test framework is on the path to being deprecated.  It is not recommended for partners to use.  Existing users are recommended to migrate to the AzurePortal-Test typescript test framework.  The C# test framework is in maintenance mode and will **only get security fixes** (no more product fixes).
+
+Deprecation timeline:
+- June 2023 - Announcement of planned deprecation.  No more product fixes, only security fixes.
+- Dec 2023 - Microsoft.Portal.TestFramework nuget package will no longer be published.  Microsoft.Portal.TestFramework.CSharp will continue to be published.
+- June 2024 - The C# test framework code will no longer be maintained.  Microsoft.Portal.TestFramework.CSharp will no longer be published.
+
+<a name="planned-deprecation-c-portal-test-framework-planned-deprecation-overview"></a>
+## [PLANNED DEPRECATION] Overview
 
 The C# test framework is a UI test framework built on top of the Selenium Webdriver C# bindings that are described in [https://www.seleniumhq.org/projects/webdriver](https://www.seleniumhq.org/projects/webdriver/).  Its primary goal is testing UI interactions in the Azure Portal.  
 
@@ -26,10 +36,10 @@ This document discusses the following topics.
 
 * * *
 
-<a name="c-portal-test-framework-writing-tests"></a>
-## Writing Tests
+<a name="planned-deprecation-c-portal-test-framework-planned-deprecation-writing-tests"></a>
+## [PLANNED DEPRECATION] Writing Tests
 
-<a name="c-portal-test-framework-writing-tests-prerequisites"></a>
+<a name="planned-deprecation-c-portal-test-framework-planned-deprecation-writing-tests-prerequisites"></a>
 ### Prerequisites
 
 Prerequisites for using the C# test framework are as follows.
@@ -42,7 +52,7 @@ Prerequisites for using the C# test framework are as follows.
 
 * Understanding of the C# programming language
 
-<a name="c-portal-test-framework-writing-tests-getting-started"></a>
+<a name="planned-deprecation-c-portal-test-framework-planned-deprecation-writing-tests-getting-started"></a>
 ### Getting Started
 
 The C# Test framework is distributed as a NuGet package that is available in the Azure Official NuGet  feed [https://msazure.visualstudio.com/DefaultCollection/One/_packaging?feed=Official](https://msazure.visualstudio.com/DefaultCollection/One/_packaging?feed=Official).  There are two primary packages.
@@ -57,7 +67,7 @@ The C# Test framework is distributed as a NuGet package that is available in the
 
     If you are just getting started, it is recommended to use the `Microsoft.Portal.TestFramework` NuGet package because it contains the necessary dependencies.  For more details about the two packages see [#understanding-the-differences-between-the-frameworks](#understanding-the-differences-between-the-frameworks).
 
-<a name="c-portal-test-framework-writing-tests-understanding-the-differences-between-the-frameworks"></a>
+<a name="planned-deprecation-c-portal-test-framework-planned-deprecation-writing-tests-understanding-the-differences-between-the-frameworks"></a>
 ### Understanding the differences between the frameworks
 
 There are some differences between the  `Microsoft.Portal.TestFramework` and `Microsoft.Portal.TestFramework.Csharp`.
@@ -68,7 +78,7 @@ The `Microsoft.Portal.TestFramework` contains a reference to the `Microsoft.Port
 
 **NOTE**: Some external dependencies may require separate downloads, such as ChromeDriver, which match the version of Chrome.
 
-<a name="c-portal-test-framework-creating-the-test-project"></a>
+<a name="planned-deprecation-c-portal-test-framework-creating-the-test-project"></a>
 ## Creating the Test Project
 
 To create a test project that can use the Portal Test Framework, use the following steps.
@@ -108,7 +118,7 @@ To create a test project that can use the Portal Test Framework, use the followi
 
 5. Add a new Unit Test class and start writing your test case.
 
-<a name="c-portal-test-framework-creating-the-test-project-navigating-to-the-portal"></a>
+<a name="planned-deprecation-c-portal-test-framework-creating-the-test-project-navigating-to-the-portal"></a>
 ### Navigating to the Portal
 
 To navigate to the Portal, the extension supplies the Portal's URI.  We recommend setting the value in the `app.config` file as shown in [Creating the Test Project](#creating-the-test-project).  After the extension has the Portal uri, it can use the **WebDriverFactory.Create** method to create an instance of the `WebDriver` object and then use the **PortalAuthentication** class to login and navigate to the Portal in the browser, as in the following example.
@@ -943,18 +953,18 @@ For example, if you want to turn off an old extension and turn on a new one, you
 ```
 
 
-<a name="c-portal-test-framework-contributing-to-csharp-test-framework"></a>
+<a name="planned-deprecation-c-portal-test-framework-contributing-to-csharp-test-framework"></a>
 ## Contributing to CSharp Test Framework
 
 See the CSTestFx contribution guide [here](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx-CSTestFx?path=%2FCONTRIBUTING.md&version=GBmaster&_a=contents)
 
-<a name="c-portal-test-framework-contributing-to-the-microsoft-azureportal-test-framework"></a>
+<a name="planned-deprecation-c-portal-test-framework-contributing-to-the-microsoft-azureportal-test-framework"></a>
 ## Contributing to the @microsoft/azureportal-test framework
 
 See the @microsoft/azureportal-test contribution guide [here](https://aka.ms/portalfx/microsoft-azureportal-test#contributing)
-<a name="c-portal-test-framework-contributing-to-the-microsoft-azureportal-test-framework-troubleshooting"></a>
+<a name="planned-deprecation-c-portal-test-framework-contributing-to-the-microsoft-azureportal-test-framework-troubleshooting"></a>
 ### Troubleshooting
-<a name="c-portal-test-framework-contributing-to-the-microsoft-azureportal-test-framework-troubleshooting-other-issues"></a>
+<a name="planned-deprecation-c-portal-test-framework-contributing-to-the-microsoft-azureportal-test-framework-troubleshooting-other-issues"></a>
 #### Other issues
 
 If issues are encountered while developing the improvement, please search the internal StackOverflow that is located at [http://stackoverflow.microsoft.com](http://stackoverflow.microsoft.com) first.
@@ -965,7 +975,7 @@ If issues are encountered while developing the improvement, please search the in
 
 
 
-<a name="c-portal-test-framework-testing-best-practices"></a>
+<a name="planned-deprecation-c-portal-test-framework-testing-best-practices"></a>
 ## Testing Best Practices
 
 As you write UI based test cases using the Portal Test Framework it is recommended you follow a few best practices to ensure maximum reliability and to get the best value from your tests.

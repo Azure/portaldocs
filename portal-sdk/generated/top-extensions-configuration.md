@@ -1,6 +1,11 @@
 <a name="portal-extension-configuration"></a>
 # Portal Extension Configuration
 
+<a name="portal-extension-configuration-out-of-date"></a>
+## OUT OF DATE
+
+This document is out-of-date and is kept only for archival purposes. Extension registration and configuration is performed using EasyStart - See the instructions at [top-onboarding.md](top-onboarding.md).
+
 <a name="portal-extension-configuration-overview"></a>
 ## Overview
 

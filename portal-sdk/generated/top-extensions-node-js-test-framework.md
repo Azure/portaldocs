@@ -307,6 +307,8 @@ Besides Selenium WebDriver, @microsoft/azureportal-test framework now supports [
     ```
     Notice the format of the Playwright version of the script. It's a function with `htmlElem` parameter passed to it, and that parameter is used as the element in the script.
 
+1. If you encounter error `Error opening Portal: Error: browserType.launch: Executable doesn't exist at`, please run `npx playwright install` **after** installing your test project dependencies.
+
 <a name="overview-compile-and-run"></a>
 ### Compile and run
 

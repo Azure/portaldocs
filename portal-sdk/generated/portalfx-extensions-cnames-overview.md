@@ -17,20 +17,9 @@
 
 The relationship between the environments and the configuration files specified in [portalfx-extensions-branches.md](portalfx-extensions-branches.md).
 
-<a name="dogfood-and-production-cnames"></a>
-## Dogfood and Production CNAMEs
+<a name="legacy-cnames"></a>
+## Legacy CNAMEs
 
-You can create DOGFOOD/PROD CNAMEs using the Azure DNS that is located at
- [https://azure.microsoft.com/en-us/services/dns/](https://azure.microsoft.com/en-us/services/dns/). Its documentation is located at  [https://docs.microsoft.com/en-us/azure/dns/dns-getstarted-portal](https://docs.microsoft.com/en-us/azure/dns/dns-getstarted-portal).  You can also use any DNS hosting system.
+The legacy CNAMEs are not used unless you are self-hosting your extension (not recommended).
 
-The PROD CNAME is used for RC, MPAC, Preview and PROD environments.
-
-<a name="national-cloud-cnames"></a>
-## National Cloud CNAMEs
-
-Create National Cloud CNAMEs using the process specified in each cloud.  For more information, search for "DNS" on their wiki pages, as described in the following table.
-
- | CLOUD        | LOCATION                                                 |
- | ------------ | -------------------------------------------------------- |
- | Fairfax      | [https://aka.ms/fairfax](https://aka.ms/fairfax)         |
- | Mooncake     | [https://aka.ms/mooncake](https://aka.ms/mooncake)       |
+If you are using the Hosting Service (recommended) then the DNS entries will be created on your behalf, automatically.
