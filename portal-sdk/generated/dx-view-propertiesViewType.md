@@ -150,7 +150,7 @@ Add Properties definition (see `Properties definition samples` section) to the `
 |fx.feature|False|
 <a name="propertiesviewtype-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/views/propertiesViewType-tab.png "UI Sample")  
+![alt-text](../media/dx/views/propertiesView.png "UI Sample")  
 <a name="propertiesviewtype-sample-snippet"></a>
 ## Sample Snippet
   ## Properties definition samples

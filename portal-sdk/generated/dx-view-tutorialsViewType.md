@@ -258,4 +258,4 @@ Add Properties definition (see `Properties definition samples` section) to the `
 |fx.feature|False|
 <a name="tutorialsviewtype-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/views/TutorialsTab.png "UI Sample")  
+![alt-text](../media/dx/views/TutorialsView.png "UI Sample")  

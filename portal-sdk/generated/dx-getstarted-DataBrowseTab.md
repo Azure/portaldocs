@@ -20,8 +20,8 @@ The Data Browse view is used to display the array data in a table.
 |default|False|If default is true, then set this tab as default tab. Only the first tab with valid default value will be set as default.
 |fx.feature|False|
 |ariaLabel|True|label of the command used for screen reader users.
-|data|True|Data property accepts an array, and can be static or dynamic. In both cases, the data must map to the columns specified. You can specify a JMES path query in the `transforms` to manage the data.
-|columns|True|Define the column to be shown in the DataBrowse view
+|data|True|Data property accepts an array, and can be static or dynamic. In both cases, the data must map to the columns specified. You can specify a JMES path query in the `transforms` to manage the data. See [here](dx-view-databrowseViewType-data.md) for more information.
+|columns|True|Define the column to be shown in the DataBrowse view. See [here](dx-view-databrowseViewType-columns.md) for more information.
 <a name="getstarted-databrowsetab-ui-sample"></a>
 ## UI Sample
 ![alt-text](../media/dx/views/DataBrowseTab.png "UI Sample")  

@@ -117,4 +117,4 @@ Add Properties definition (see `Properties definition samples` section) in the R
 |fx.feature|False|
 <a name="recommendationsviewtype-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/views/RecommendationsTab.png "UI Sample")  
+![alt-text](../media/dx/views/RecommendationsView.png "UI Sample")  

@@ -1,25 +1,9 @@
-<a name="databrowseviewtype"></a>
-# DataBrowseViewType
-* [DataBrowseViewType](#databrowseviewtype)
-    * [Description](#databrowseviewtype-description)
-    * [Guidance](#databrowseviewtype-guidance)
-        * [As a full screen blade opened from a resource menu](#databrowseviewtype-guidance-as-a-full-screen-blade-opened-from-a-resource-menu)
-        * [As a tab in a resource overview (GetStarted view)](#databrowseviewtype-guidance-as-a-tab-in-a-resource-overview-getstarted-view)
-    * [Sections](#databrowseviewtype-sections)
-    * [Properties Section](#databrowseviewtype-properties-section)
-    * [UI Sample](#databrowseviewtype-ui-sample)
-
-<a name="databrowseviewtype-description"></a>
-## Description
-The Data Browse view is used to display the array data in a table.
-<a name="databrowseviewtype-guidance"></a>
-## Guidance
 DataBrowse view can be configured to display in two ways -
 
 1. As a full screen blade opened from a resource menu
 2. As a tab in a resource overview (GetStarted view)
 
-<a name="databrowseviewtype-guidance-as-a-full-screen-blade-opened-from-a-resource-menu"></a>
+<a name="as-a-full-screen-blade-opened-from-a-resource-menu"></a>
 ### As a full screen blade opened from a resource menu
 
 To add the DataBrowse view to be opened from a resource menu blade, add Properties definition (see `Properties definition samples` section) to the `properties.data` and `properties.columns` as seen in the DataBrowse view schema below.
@@ -207,7 +191,7 @@ To add the DataBrowse view to be opened from a resource menu blade, add Properti
 }
 ```
 
-<a name="databrowseviewtype-guidance-as-a-tab-in-a-resource-overview-getstarted-view"></a>
+<a name="as-a-tab-in-a-resource-overview-getstarted-view"></a>
 ### As a tab in a resource overview (GetStarted view)
 
 To add the DataBrowse view as a tab in a resource overview, add the `DataBrowse Tab` (see example) to the `properties.tabs` section as seen in the Resource Overview (GetStarted) schema below
@@ -242,7 +226,7 @@ To add the DataBrowse view as a tab in a resource overview, add the `DataBrowse 
 }
 ```
 
-<a name="databrowseviewtype-guidance-as-a-tab-in-a-resource-overview-getstarted-view-databrowse-tab-example"></a>
+<a name="as-a-tab-in-a-resource-overview-getstarted-view-databrowse-tab-example"></a>
 #### <code>DataBrowse Tab</code> example
 
 Add Properties definition (see `Properties definition samples` section) to the `properties.data` and `properties.columns` as seen in the DataBrowse tab schema below.
@@ -378,34 +362,3 @@ Add Properties definition (see `Properties definition samples` section) to the `
   ]
 }
 ```
- 
-<a name="databrowseviewtype-sections"></a>
-## Sections
-| Name | Required | Description
-| ---|:--:|:--:|
-|kind|True|Enum permitting the value: "DataBrowse"
-|export|False|Designation for blade sharing across extensions. If set to `true` then it is available to be used by other extensions.
-|contextPaneWidth|False|See [here](dx-enum-contextPaneWidth.md ) for the available options
-|parameters|False|Defines the parameters to be passed into a declarative blade, that then can be accessed using the parameters function. See [View parameters](dx-viewTypeParameters.md) for more.
-|resources|False|The resources section takes an ARM resource id and apiVersion, which in turn makes a ARM GET request to retrieve the resource details. You can use the resources() function to retrieve the resource payload at runtime.
-|dataSources|False|Supports Graph API. Use it to pre-load graph API before the view is rendered. See [here](dx-viewTypeDataSources.md) for **dataSources** property.
-|messages|False|Display a banner at the top of the view. See [here](dx-enum-viewTypeMessages-items-kind.md) for details.
-|essentials|False|Defines Essentials section for the view
-|commands|False|The commands section defines the Commands in the command bar.See [here](dx-viewTypeCommands.md) for **commands** property.
-|properties|True|See [here](dx-view-dataBrowseViewType-properties.md) for more on properties.
-|fx.feature|False|
-<a name="databrowseviewtype-properties-section"></a>
-## Properties Section
-<a name="databrowseviewtype-properties-section-an-object-with-the-following-properties"></a>
-##### An object with the following properties
-| Name | Required | Description
-| ---|:--:|:--:|
-|title|True|Display title text for the DataBrowse view
-|description|False|Display description text for the DataBrowse view
-|fx.feature|False|
-|ariaLabel|True|label of the command used for screen reader users.
-|data|True|Data property accepts an array, and can be static or dynamic. In both cases, the data must map to the columns specified. You can specify a JMES path query in the `transforms` to manage the data. See [here](dx-view-databrowseViewType-data.md) for more information.
-|columns|True|Define the column to be shown in the DataBrowse view. See [here](dx-view-databrowseViewType-columns.md) for more information.
-<a name="databrowseviewtype-ui-sample"></a>
-## UI Sample
-![alt-text](../media/dx/views/DataBrowseView.png "UI Sample")  

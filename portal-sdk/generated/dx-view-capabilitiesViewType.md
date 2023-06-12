@@ -344,4 +344,4 @@ Add Properties definition (see `Properties definition samples` section) to the `
 |fx.feature|False|
 <a name="capabilitiesviewtype-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/views/CapabilitiesTab.png "UI Sample")  
+![alt-text](../media/dx/views/CapabilitiesView.png "UI Sample")  

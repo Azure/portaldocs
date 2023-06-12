@@ -146,4 +146,4 @@ Add Properties definition (see `Properties definition samples` section) to the `
 |fx.feature|False|
 <a name="monitoringviewtype-ui-sample"></a>
 ## UI Sample
-![alt-text](../media/dx/views/MonitoringTab.png "UI Sample")  
+![alt-text](../media/dx/views/MonitoringView.png "UI Sample")  
