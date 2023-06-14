@@ -43,7 +43,7 @@ Below is an example the Declarative Resource Overview blade schema, as defined b
   }
 }
 ```
-The `essentials` section defines what is rendered in Essentials.  The `commands` section defines the Commands in the command bar.  The `properties` section defines the tabbed Views to be rendered (under Essentials).  See below for an illustration.
+The `essentials` section defines what is rendered in Essentials. The `messages` section defines the message in views. Only one message is displayed, the first message item which visible is 'true'. The `commands` section defines the Commands in the command bar. The `properties` section defines the tabbed Views to be rendered (under Essentials).  See below for an illustration.
 
 <a name="getting-started-with-declarative-resource-overview-blade-list-of-supported-tabs"></a>
 ### List of Supported Tabs

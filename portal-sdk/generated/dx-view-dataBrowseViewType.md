@@ -389,7 +389,7 @@ Add Properties definition (see `Properties definition samples` section) to the `
 |parameters|False|Defines the parameters to be passed into a declarative blade, that then can be accessed using the parameters function. See [View parameters](dx-viewTypeParameters.md) for more.
 |resources|False|The resources section takes an ARM resource id and apiVersion, which in turn makes a ARM GET request to retrieve the resource details. You can use the resources() function to retrieve the resource payload at runtime.
 |dataSources|False|Supports Graph API. Use it to pre-load graph API before the view is rendered. See [here](dx-viewTypeDataSources.md) for **dataSources** property.
-|messages|False|Display a banner at the top of the view. See [here](dx-enum-viewTypeMessages-items-kind.md) for details.
+|messages|False|Display a banner at the top of the view. See [here](dx-viewTypeMessages.md) for details.
 |essentials|False|Defines Essentials section for the view
 |commands|False|The commands section defines the Commands in the command bar.See [here](dx-viewTypeCommands.md) for **commands** property.
 |properties|True|See [here](dx-view-dataBrowseViewType-properties.md) for more on properties.

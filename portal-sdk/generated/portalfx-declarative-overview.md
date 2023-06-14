@@ -8,6 +8,7 @@ The Declarative Resource Overview blade includes the following sections:
 1. Command bar - Define actions for your resource
 2. Essentials - Display key properties of your resource
 3. Views - Display key information of your resource
+4. Messages - Display message in response to resource's state
 
 The following Views that are supported:
 
@@ -48,6 +49,7 @@ Below is an example the Declarative Resource Overview blade schema, as defined b
       }
     ],
     "essentials": {},
+    "messages": [],
     "commands": [],
     "properties": {
         "title": "title",
@@ -56,9 +58,10 @@ Below is an example the Declarative Resource Overview blade schema, as defined b
   }
 }
 ```
-The `essentials` section defines what is rendered in Essentials.  The `commands` section defines the Commands in the command bar.  The `properties` section defines the tabbed Views to be rendered (under Essentials).  See below for an illustration.
+The `essentials` section defines what is rendered in Essentials. The `messages` section defines the message in views. Only one message is displayed, the first message item which visible is 'true'. The `commands` section defines the Commands in the command bar.  The `properties` section defines the tabbed Views to be rendered (under Essentials).  See below for an illustration.
 
 ![alt-text](../media/portalfx-cuid/ResourceOverview.png "Declarative Resource Overview")
+![alt-text](../media/portalfx-cuid/Messages.png "Messages")
 
 <a name="declarative-resource-overview-experience-configuring-views"></a>
 ## Configuring views
@@ -734,6 +737,22 @@ Example for icon and link support.
 Example
 ![alt-text](../media/portalfx-cuid/DataBrowseTab2.png "DataBrowse tab 2")
 
+Example for transforms and inputs
+
+```
+{
+    "kind": "DataBrowse",
+    "displayName": "Data browse",
+    "ariaLabel": "testing",
+    "data": {
+        "transforms": "[concat('[', '@.{caching:caching, createOption: createOption, name: name, osType:osType, managedDisk:managedDisk.to_string(@)}', ']')]",
+        "input": "[resources().properties.storageProfile.osDisk]"
+    }
+}
+```
+Example using JMESPath
+![alt-text](../media/portalfx-cuid/DataBrowseTransformsExample.png "DataBrowse transforms")
+
 <a name="declarative-resource-overview-experience-configuring-views-information"></a>
 #### Information
 The Information view allows you to specify an array of actions including URL, Blade and Menu open actions.
@@ -1050,3 +1069,63 @@ You can add an icon on the left of the value, the icon is changing based on the 
     ]
 }
 ```
+<a name="declarative-resource-overview-experience-configuring-messages"></a>
+## Configuring messages
+Messages allows you to display a message in response to resource's state. There are four types of messages: Info, Success, Warning, Error. Only displaying first message which visible is 'true'. It also support uri, blade, resourceId for onClick action.
+
+Since visible is optional, if not specified, it will be treated as true.
+
+Given this example below, if VM is running, the second message item will be displayed, even though third message is also true. We only want to display the first true message item.
+If VM is deallocated, first message item will be displayed.
+If VM is neither deallocated or running, last message item will be displayed.
+```
+"messages": [
+      {
+        "kind": "error",
+        "message": "vm is deallocated",
+        "visible": "[equals(resources('vmInstanceView').properties.instanceView.statuses.1.code, 'PowerState/deallocated')]",
+        "action": {
+          "resourceId": "/subscriptions/415b6834-1801-4f6e-a285-f646ec13fe34/resourceGroups/AzureMobileTest/providers/Microsoft.Network/virtualNetworks/AzureMobileTest-vnet"
+        }
+      },
+      {
+        "kind": "success",
+        "message": "vm is running1",
+        "visible": "[equals(resources('vmInstanceView').properties.instanceView.statuses.1.code, 'PowerState/running')]",
+        "action": {
+          "blade":
+                 {
+                   "name": "AzureMonitoringBrowseBlade",
+                   "extension": "Microsoft_Azure_Monitoring",
+                   "parameters": {
+                     "resId": "[resources().id]"
+                   },
+                   "inContextPane": true
+                 }
+        }
+      },
+      {
+        "kind": "success",
+        "message": "vm is running2",
+        "visible": "[equals(resources('vmInstanceView').properties.instanceView.statuses.1.code, 'PowerState/running')]",
+        "action": {
+          "blade":
+                 {
+                   "name": "AzureMonitoringBrowseBlade",
+                   "extension": "Microsoft_Azure_Monitoring",
+                   "parameters": {
+                     "resId": "[resources().id]"
+                   }
+                 }
+        }
+      },
+      {
+        "kind": "info",
+        "message": "Welcome to our extension! please take a look at our tutorial",
+        "action": {
+          "url": "https://ms.portal.azure.com/"
+        }
+      }
+    ],
+```
+![alt-text](../media/portalfx-cuid/MessagesTypes.png "Messages types")

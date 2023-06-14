@@ -184,3 +184,17 @@ Example for icon and link support.
 	]
 }
 ```
+
+Example for transforms and inputs
+
+```json
+{
+    "kind": "DataBrowse",
+    "displayName": "Data browse",
+    "ariaLabel": "testing",
+    "data": {
+        "transforms": "[concat('[', '@.{caching:caching, createOption: createOption, name: name, osType:osType, managedDisk:managedDisk.to_string(@)}', ']')]",
+        "input": "[resources().properties.storageProfile.osDisk]"
+    }
+}
+```
