@@ -929,7 +929,7 @@ project [FxColumns], ...your columns here
 <a name="browse-with-azure-resource-graph-kql-query"></a>
 ## KQL Query
 
-For those who are not familiar with KQL you can use the public documentation as reference. https://docs.microsoft.com/en-us/azure/kusto/query/
+For those who are not familiar with KQL you can use the public documentation as reference. https://learn.microsoft.com/azure/kusto/query/
 
 Given the framework columns are required we can use the below as a starting point.
 

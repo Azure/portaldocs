@@ -33,7 +33,7 @@ The following table specifies the types of query string flags that are used with
 
 Trace mode flags are associated with code that exists inside the Portal. They can be invoked with the syntax: `https://portal.azure.com/?trace=<settingName>`, or they can be configured externally through the `.config` file.  For example, [https://portal.azure.com/?trace=diagnostics](https://portal.azure.com/?trace=diagnostics) will enable verbose debugging information in the console. The trace mode allows the developer to enable, disable, and filter tracking output.
 
-The information that is displayed in trace mode is associated with debugging, more so than with regular operation of the extension. This information is an addition to standard console errors, and it can be used to monitor application execution and performance in a deployed environment.  The errors that are presented in the console assist in fixing extension issues. For more information about trace modes, see [https://docs.microsoft.com/en-us/dotnet/framework/debug-trace-profile/how-to-create-initialize-and-configure-trace-switches](https://docs.microsoft.com/en-us/dotnet/framework/debug-trace-profile/how-to-create-initialize-and-configure-trace-switches).
+The information that is displayed in trace mode is associated with debugging, more so than with regular operation of the extension. This information is an addition to standard console errors, and it can be used to monitor application execution and performance in a deployed environment.  The errors that are presented in the console assist in fixing extension issues. For more information about trace modes, see [https://learn.microsoft.com/dotnet/framework/debug-trace-profile/how-to-create-initialize-and-configure-trace-switches](https://learn.microsoft.com/dotnet/framework/debug-trace-profile/how-to-create-initialize-and-configure-trace-switches).
 
 Often the errors that are displayed in the console can lead you down the path of fixing your issues. In addition to viewing the standard errors displayed in the console, it's often useful to load the Portal in trace mode.
 
@@ -220,7 +220,7 @@ Flags can be enabled for all users in one or more deployments by using an extens
 <a name="feature-flags-extension-flags-other-feature-flag-services"></a>
 ### Other feature flag services
 
-For more information about extension flags, see [https://docs.microsoft.com/en-us/vsts/articles/phase-features-with-feature-flags](https://docs.microsoft.com/en-us/vsts/articles/phase-features-with-feature-flags).
+For more information about extension flags, see [https://learn.microsoft.com/vsts/articles/phase-features-with-feature-flags](https://learn.microsoft.com/vsts/articles/phase-features-with-feature-flags).
 
 You can ask questions on Stackoverflow with the tag [ibiza](https://stackoverflow.microsoft.com/questions/tagged/ibiza).
 

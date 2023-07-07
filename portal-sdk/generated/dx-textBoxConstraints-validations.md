@@ -31,5 +31,5 @@
 | Name | Required | Description
 | ---|:--:|:--:|
 |message|True|A string to display when the text box's value fails validation.
-|regex|True|JavaScript regular expression pattern. If specified, the text box's value must match the pattern to validate successfully. The default value is null. For more information about regex syntax, see [Regular expression quick reference](https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference).
+|regex|True|JavaScript regular expression pattern. If specified, the text box's value must match the pattern to validate successfully. The default value is null. For more information about regex syntax, see [Regular expression quick reference](https://learn.microsoft.com/dotnet/standard/base-types/regular-expression-language-quick-reference).
 |fx.feature|False|

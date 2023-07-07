@@ -14,7 +14,7 @@
 | Name | Required | Description
 | ---|:--:|:--:|
 |required|False|Value can be a boolean or an expression(string). If true, then the text box must have a value to validate successfully. The default value is false.
-|regex|False|JavaScript regular expression pattern. If specified, the text box's value must match the pattern to validate successfully. The default value is null. For more information about regex syntax, see [Regular expression quick reference](https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference).
+|regex|False|JavaScript regular expression pattern. If specified, the text box's value must match the pattern to validate successfully. The default value is null. For more information about regex syntax, see [Regular expression quick reference](https://learn.microsoft.com/dotnet/standard/base-types/regular-expression-language-quick-reference).
 |validationMessage|False|A string to display when the text box's value fails validation.
 |fx.feature|False|
 <a name="textboxconstraints-definitions-option-2"></a>

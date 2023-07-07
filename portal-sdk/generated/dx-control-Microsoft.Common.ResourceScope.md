@@ -28,10 +28,10 @@ ResourceScope control provides resource scope selectors and resource name field 
 | Tenant | location picker only, deployment will be run within current tenant |
 
 The ResourceScope control will change based on the scope schema defined in the ARM template - these are supported scopes:
-- [Resource Group - Deploy resources to resource groups - Azure Resource Manager | Microsoft Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-resource-group?tabs=azure-cli#schema)
-- [Subscription - Deploy resources to subscription - Azure Resource Manager | Microsoft Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-subscription?tabs=azure-cli#schema)
-- [Management Group - Deploy resources to management group - Azure Resource Manager | Microsoft Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-management-group?tabs=azure-cli#schema)
-- [Tenant - Deploy resources to tenant - Azure Resource Manager | Microsoft Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-tenant?tabs=azure-cli#schema)
+- [Resource Group - Deploy resources to resource groups - Azure Resource Manager | Microsoft Docs](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-to-resource-group?tabs=azure-cli#schema)
+- [Subscription - Deploy resources to subscription - Azure Resource Manager | Microsoft Docs](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-to-subscription?tabs=azure-cli#schema)
+- [Management Group - Deploy resources to management group - Azure Resource Manager | Microsoft Docs](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-to-management-group?tabs=azure-cli#schema)
+- [Tenant - Deploy resources to tenant - Azure Resource Manager | Microsoft Docs](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-to-tenant?tabs=azure-cli#schema)
  
 <a name="microsoft-common-resourcescope-definitions"></a>
 ## Definitions:

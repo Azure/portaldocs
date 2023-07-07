@@ -13,7 +13,7 @@
 A control for gathering tabular input. All fields within the grid are editable and the number of rows may vary.
 <a name="microsoft-common-editablegrid-guidance"></a>
 ## Guidance
-- The only valid controls within the columns array are the [TextBox](https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/microsoft-common-textbox), [OptionsGroup](https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/microsoft-common-optionsgroup), and [DropDown](https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/microsoft-common-dropdown).
+- The only valid controls within the columns array are the [TextBox](https://learn.microsoft.com/azure/azure-resource-manager/managed-applications/microsoft-common-textbox), [OptionsGroup](https://learn.microsoft.com/azure/azure-resource-manager/managed-applications/microsoft-common-optionsgroup), and [DropDown](https://learn.microsoft.com/azure/azure-resource-manager/managed-applications/microsoft-common-dropdown).
 - The `$rowIndex` variable is only valid in expressions contained within children of the grid's columns. It's an integer that represents the element's relative row index and the count begins at one and increments by one. As shown in the schema's `"columns"`: section, the `$rowIndex` is used for validation.
 - When validations are performed using the `$rowIndex` variable, it's possible to get the current row's value by combining the `last()` and `take()` commands.
 

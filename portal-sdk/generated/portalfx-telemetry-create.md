@@ -250,7 +250,7 @@ This function returns the list of Portal Azure service deployment life-cycles, a
 * `PreValidationLogs`
   * Contains the pre-validation logs communicated between ARM, the Portal, and the RP in order of execution.
   * Some extensions may opt out of this check, for which this will be empty.
-  * ARM documentation regarding validation: [https://docs.microsoft.com/en-us/rest/api/resources/Deployments/Validate](https://docs.microsoft.com/en-us/rest/api/resources/Deployments/Validate)
+  * ARM documentation regarding validation: [https://learn.microsoft.com/rest/api/resources/Deployments/Validate](https://learn.microsoft.com/rest/api/resources/Deployments/Validate)
   * **Note**: does not contain the initiated pre-validation log `start`, only contains `Succeeded` and `Failed` logs.
 * `PortalCreateStartTime`
   * Start time of the Portal create.

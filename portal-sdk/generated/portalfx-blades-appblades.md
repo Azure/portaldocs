@@ -36,10 +36,10 @@ When using AppBlade you are responsible for:
         constructor(container: FxViewModels.ContainerContract, initialState: any, dataContext: any) {
 
             super(container, {
-                source: 'https://docs.microsoft.com/'
+                source: 'https://learn.microsoft.com/'
             });
 
-            this.title("docs.microsoft.com");
+            this.title("learn.microsoft.com");
         }
     }
     ```

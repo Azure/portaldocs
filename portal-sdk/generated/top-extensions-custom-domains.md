@@ -211,11 +211,11 @@ The values listed in the "Extension value" column are recommended values, althou
 | createSupportRequest | #create/Microsoft.Support | same |
 | giveFeedback | [https://go.microsoft.com/fwLink/?LinkID=522329](https://go.microsoft.com/fwLink/?LinkID=522329) | [https://go.microsoft.com/fwlink/?linkid=838978](https://go.microsoft.com/fwlink/?linkid=838978) |
 | helpAndSupport | 	#blade/Microsoft_Azure_Support/HelpAndSupportBlade | same |
-| learnRelatedResources	| [https://docs.microsoft.com/en-us/azure/azure-portal/azure-portal-dashboards](https://docs.microsoft.com/en-us/azure/azure-portal/azure-portal-dashboards) | same  |
-| learnSharedDashboard | [https://docs.microsoft.com/en-us/azure/azure-portal/azure-portal-dashboard-share-access](https://docs.microsoft.com/en-us/azure/azure-portal/azure-portal-dashboard-share-access) | same  |
+| learnRelatedResources	| [https://learn.microsoft.com/azure/azure-portal/azure-portal-dashboards](https://learn.microsoft.com/azure/azure-portal/azure-portal-dashboards) | same  |
+| learnSharedDashboard | [https://learn.microsoft.com/azure/azure-portal/azure-portal-dashboard-share-access](https://learn.microsoft.com/azure/azure-portal/azure-portal-dashboard-share-access) | same  |
 | manageSupportRequests | #blade/HubsExtension/BrowseServiceBlade/        assetTypeId/Microsoft_Azure_Support_SupportRequest | same |
 | privacyAndTerms | [https://go.microsoft.com/fwLink/?LinkID=521839](https://go.microsoft.com/fwLink/?LinkID=521839)	 | same |
-| resourceGroupOverview	| [https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-portal](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-portal) | same  |
+| resourceGroupOverview	| [https://learn.microsoft.com/azure/azure-resource-manager/resource-group-portal](https://learn.microsoft.com/azure/azure-resource-manager/resource-group-portal) | same  |
 | survey	| [https://go.microsoft.com/fwLink/?LinkID=733278](https://go.microsoft.com/fwLink/?LinkID=733278)  | 	??? Gauge team to follow up on this |
 | joinResearchPanel | [https://www.surveymonkey.com/](https://www.surveymonkey.com/) | same |
 | learnAzureCli<sup>2</sup> | 	[https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-azure-resource-manager/](https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-azure-resource-manager/)	 | same |

@@ -66,4 +66,4 @@ Navigating to a new extension repeats this process, beginning at triggering the 
 
 **NOTE**: Cookies are not used for authentication.
 
-For more information about OIDC flow, see [https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-openid-connect-code](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-openid-connect-code).
+For more information about OIDC flow, see [https://learn.microsoft.com/azure/active-directory/develop/active-directory-protocols-openid-connect-code](https://learn.microsoft.com/azure/active-directory/develop/active-directory-protocols-openid-connect-code).

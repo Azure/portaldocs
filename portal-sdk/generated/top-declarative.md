@@ -63,7 +63,7 @@ Example of the storage account asset showing up in the Portal's All Services Men
 <a name="declarative-views-supported-declarative-views-browse"></a>
 ### Browse
 
-When Portal users click on the asset described above, they are taken to a browse view. The browse view is a list of all resources of the given resource type. In most cases, this information of all resources for a given resource type comes from [Azure Resource Graph](https://docs.microsoft.com/azure/governance/resource-graph/). Additionally, extension authors can add actions to the command bar to perform operations on a group of resources.
+When Portal users click on the asset described above, they are taken to a browse view. The browse view is a list of all resources of the given resource type. In most cases, this information of all resources for a given resource type comes from [Azure Resource Graph](https://learn.microsoft.com/azure/governance/resource-graph/). Additionally, extension authors can add actions to the command bar to perform operations on a group of resources.
 
 [Learn more about browse views in the Azure Portal](declarative-assets.md#configuring-browse).
 
@@ -111,7 +111,7 @@ Example of the get started view for the Managed Apps center -
 <a name="declarative-views-supported-declarative-views-browse-as-a-resource-menu-item"></a>
 ### Browse as a resource menu item
 
-There are scenarios when an extension author may want a resource browse experience as a resource menu item. Examples of such scenarios are when a resource has child resources or landing pages that link to a category of resources. We recommend that all browse experiences be powered by [Azure Resource Graph](https://docs.microsoft.com/en-us/azure/governance/resource-graph/) when possible. Learn more about browse as a resource many item in the Azure Portal [here](portalfx-declarative-assets.md#browse-as-a-resource-menu-item).
+There are scenarios when an extension author may want a resource browse experience as a resource menu item. Examples of such scenarios are when a resource has child resources or landing pages that link to a category of resources. We recommend that all browse experiences be powered by [Azure Resource Graph](https://learn.microsoft.com/azure/governance/resource-graph/) when possible. Learn more about browse as a resource many item in the Azure Portal [here](portalfx-declarative-assets.md#browse-as-a-resource-menu-item).
 
 Example of browse as a resource menu item -
 

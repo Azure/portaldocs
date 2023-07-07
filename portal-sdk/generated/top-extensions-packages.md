@@ -23,7 +23,7 @@ Updating your extensions version of the Azure Portal SDK simply involves updatin
    * in vs code run `npm run restore` task run
    * update your \*.csproj with references to the new package path where you are referencing them. (this is required as versions are in the folder names).
 1. If you want to update everything and have your \*.csproj automatically updated
-   * run `nuget.exe update ./Extension/packages.config` supplying the path to your package config. NuGet CLI details are [here](https://docs.microsoft.com/en-us/nuget/tools/cli-ref-update)
+   * run `nuget.exe update ./Extension/packages.config` supplying the path to your package config. NuGet CLI details are [here](https://learn.microsoft.com/nuget/tools/cli-ref-update)
 1. Copy over `/Content` files to get latest `*.d.ts` and `*.pde` files.
 1. Build and fix any breaking changes, as described in [Breaking changes](https://aka.ms/portalfx/breaking).
 

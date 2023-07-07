@@ -39,7 +39,7 @@ Assets are defined as JSON objects in your extension. To add a new asset, you ne
 <a name="azure-portal-assets-defining-an-asset-an-asset-that-opens-browse-for-arm-resources"></a>
 ### An asset that opens browse for ARM resources
 
-In this category, when a customer clicks on the asset, they are taken to a browse view. The browse view is a list of all resources of the given ARM resource type. This information of all resources for a given resource type comes from [Azure Resource Graph](https://docs.microsoft.com/azure/governance/resource-graph/). Most assets in the Azure Portal belong to this category such as VMs, Storage accounts etc.
+In this category, when a customer clicks on the asset, they are taken to a browse view. The browse view is a list of all resources of the given ARM resource type. This information of all resources for a given resource type comes from [Azure Resource Graph](https://learn.microsoft.com/azure/governance/resource-graph/). Most assets in the Azure Portal belong to this category such as VMs, Storage accounts etc.
 
 Below is a sample JSON definition for an asset that opens a browse for ARM resources. When the value of `assetType.browse.type` is set to `ResourceType`, this results in an asset that opens browse for ARM resources. In this case, the ARM resource is `Providers.Test/statefulIbizaEngines` and the API version that will be used is `2014-04-01`.
 
@@ -160,7 +160,7 @@ Firstly you'll need to craft a KQL query which represents all possible data for 
 <a name="azure-portal-assets-configuring-browse-crafting-the-arg-query-kql-query"></a>
 #### KQL Query
 
-For those who are not familiar with KQL you can use the public documentation as reference. https://docs.microsoft.com/azure/kusto/query/
+For those who are not familiar with KQL you can use the public documentation as reference. https://learn.microsoft.com/azure/kusto/query/
 
 Given the framework columns are required we can use the below as a starting point.
 

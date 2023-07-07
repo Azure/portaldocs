@@ -1049,7 +1049,7 @@ The ap CLI is built by the Azure portal team for the extension developer communi
     1. This is the [ link to grant the service account access ](https://onebranch.visualstudio.com/OneBranch/_wiki/wikis/OneBranch.wiki/3092/System-Account-Access-to-msazure-ADO-instance-and-SharePoint-Site) to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=connect&feed=AzurePortal .
     1. Once granted access, after the service account has permission to the AzurePortal Feed, you can [ generate PAT token following this doc ](https://www.1eswiki.com/wiki/Service_Account_Lockdown#Generating_a_PAT_via_the_Command-line).
     1. Store the PAT token in a keyvault that cloudtest can access.
-    1. If not already base 64 encoded, don't forget to encode the PAT token in base 64 before putting it in .npmrc. more details to[ generate .npmrc with a long lasting PAT here ](https://docs.microsoft.com/en-us/azure/devops/artifacts/npm/npmrc).
+    1. If not already base 64 encoded, don't forget to encode the PAT token in base 64 before putting it in .npmrc. more details to[ generate .npmrc with a long lasting PAT here ](https://learn.microsoft.com/azure/devops/artifacts/npm/npmrc).
 
 <!-- docs#manualsetup -->
 
@@ -1148,7 +1148,7 @@ The following steps are required to migrate your extension to support cross plat
 A walkthrough of the process is given in the https://aka.ms/portalfx/xplatvideo and a reference to the changeset can be found here https://aka.ms/portalfx/xplatchanges.
 
 1. Update `Extension.csproj` to the new .net core sdk-style project
-    - [Official guidance for porting to dotnet core](https://docs.microsoft.com/en-us/dotnet/core/porting/)
+    - [Official guidance for porting to dotnet core](https://learn.microsoft.com/dotnet/core/porting/)
     - [Example Extension.csproj migration](https://aka.ms/portalfx/xplatchanges)
 1. Update `NuGet.Config` to support restore path in .net core [https://aka.ms/portalfx/xplatchanges/nuget](https://aka.ms/portalfx/xplatchanges/nuget)
 1. Update `devServerConfig.json` to use .net core paths [https://aka.ms/portalfx/xplatchanges/devserverconfig](https://aka.ms/portalfx/xplatchanges/devserverconfig)

@@ -279,7 +279,7 @@ PartPerformance will return a table with the following columns:
 ## My Extension &#39;load&#39; is above the bar. What should I do?
 
 1. Profile what is happening in your extension load. [Profile your scenario](performance-profiling.md)
-1. Are you using the Portal's ARM token? If no, verify if you can use the Portal's ARM token and if yes, follow: [Using the Portal's ARM token](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-api-authentication)
+1. Are you using the Portal's ARM token? If no, verify if you can use the Portal's ARM token and if yes, follow: [Using the Portal's ARM token](https://learn.microsoft.com/azure/azure-resource-manager/resource-manager-api-authentication)
 1. Are you on the hosting service? If no, migrate to the hosting service: [Hosting service documentation](portalfx-extension-hosting-service.md#extension-hosting-service)
     - If you are, have you enabled prewarming?
         - Follow https://aka.ms/portalfx/docs/prewarming to enable prewarming for your extension load.

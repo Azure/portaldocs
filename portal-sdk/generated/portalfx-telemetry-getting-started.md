@@ -251,7 +251,7 @@ Follow either method below to upload the generated certificate
    3. Click 'Upload certificate'
    4. Find and upload your certificate
 2. Powershell
-   1. Install the [Azure Active Directory (MSOnline)](https://docs.microsoft.com/powershell/azure/active-directory/install-msonlinev1) CommandLets if you haven’t already, and open an elevated PowerShell prompt (an elevated shell is required to run New-MsolServicePrincipalCredential (step 3)).
+   1. Install the [Azure Active Directory (MSOnline)](https://learn.microsoft.com/powershell/azure/active-directory/install-msonlinev1) CommandLets if you haven’t already, and open an elevated PowerShell prompt (an elevated shell is required to run New-MsolServicePrincipalCredential (step 3)).
    2. Execute the following code to get the public key from a cert file (feel free to get the public key another way, such as by thumbprint).
 
       ``` powershell

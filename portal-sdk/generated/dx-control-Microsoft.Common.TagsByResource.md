@@ -11,7 +11,7 @@
 
 <a name="microsoft-common-tagsbyresource-description"></a>
 ## Description
-A control for associating [tags](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources?tabs=json) with the resources in a deployment.
+A control for associating [tags](https://learn.microsoft.com/azure/azure-resource-manager/management/tag-resources?tabs=json) with the resources in a deployment.
 <a name="microsoft-common-tagsbyresource-guidance"></a>
 ## Guidance
 It is recommended that the TagsByResource be used in its own `Tags` tab and that the `Tags` tab be the final tab of the Create form. This recommendation is to ensure consistency with the Create pattern for Azure Portal.
@@ -37,7 +37,7 @@ For each resource that can be tagged, assign the tags property to the parameter 
   ...
 ```
 
-- Use the [if](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-logical#if) function when accessing the tagsByResource parameter. It enables you to assign an empty object when no tags are assigned to the given resource type.
+- Use the [if](https://learn.microsoft.com/azure/azure-resource-manager/templates/template-functions-logical#if) function when accessing the tagsByResource parameter. It enables you to assign an empty object when no tags are assigned to the given resource type.
 
 <a name="microsoft-common-tagsbyresource-definitions"></a>
 ## Definitions:

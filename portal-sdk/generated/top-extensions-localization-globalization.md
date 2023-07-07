@@ -100,20 +100,20 @@ This is exposed publically through the module `MsPortalFx/Globalization`. The Gl
 <a name="localization-handling-localization-for-links-to-documentation"></a>
 ### Handling localization for links to documentation
 
-The Azure portal and extensions are making increasing use of links to other sites for documentation, including [docs.microsoft.com](https://docs.microsoft.com/), [azure.microsoft.com](https://azure.microsoft.com/), MS Learn and blogs.
+The Azure portal and extensions are making increasing use of links to other sites for documentation, including [learn.microsoft.com](https://learn.microsoft.com/), [azure.microsoft.com](https://azure.microsoft.com/), MS Learn and blogs.
 
-When linking to docs, use "language neutral" URLs (e.g. "docs.microsoft.com/azure" rather than "docs.microsoft.com/en-us/azure") to ensure non-English users have a good experience whenever the destination site supports this (docs.microsoft.com, azure.microsoft.com and MSLearn support this). If the destination site does not support language detection, you need to adapt the destination URL based on current language.
+When linking to docs, use "language neutral" URLs (e.g. "learn.microsoft.com/azure" rather than "learn.microsoft.com/azure") to ensure non-English users have a good experience whenever the destination site supports this (learn.microsoft.com, azure.microsoft.com and MSLearn support this). If the destination site does not support language detection, you need to adapt the destination URL based on current language.
 
-When sending customers to docs.microsoft.com/azure.microsoft.com/MSLearn, let these external sites figure the customer's language preference. There is no requirement to match the Portal language. Besides being by far the easiest to implement and hard to get wrong, it's also a great customer experience as it allows a customer to have a preference for e.g. seeing Portal in one language and Docs in another.
+When sending customers to learn.microsoft.com/azure.microsoft.com/MSLearn, let these external sites figure the customer's language preference. There is no requirement to match the Portal language. Besides being by far the easiest to implement and hard to get wrong, it's also a great customer experience as it allows a customer to have a preference for e.g. seeing Portal in one language and Docs in another.
 
 Note: This recommendation is specific to links to external sites. When content from a site other than Portal is integrated (via iframe) in the Portal experience, its language should match the portal language.
 
 <a name="localization-handling-localization-for-links-to-documentation-creating-a-link-to-a-doc"></a>
 #### Creating a link to a doc
 
-1. For external links to docs.microsoft.com/azure.microsoft.com/MSLearn always use language-neutral destination URLs as specified above. Once you have this language neutral URL, create a FWLink for the URL you would like to link to using the [URL Manager Tool](https://sftools.trafficmanager.net/am/redirection/home?options=host:go.microsoft.com). Make sure you are using `go.microsoft.com` as the Host when you create this link.
+1. For external links to learn.microsoft.com/azure.microsoft.com/MSLearn always use language-neutral destination URLs as specified above. Once you have this language neutral URL, create a FWLink for the URL you would like to link to using the [URL Manager Tool](https://sftools.trafficmanager.net/am/redirection/home?options=host:go.microsoft.com). Make sure you are using `go.microsoft.com` as the Host when you create this link.
 1. If you own an Azure extension, let your [localization contact](https://aka.ms/AzureGR) know that this content is being linked to in the portal to possibly prioritize localization of the linked content.
-1. Verify that the link works correctly. Inspect the link to ensure they do NOT have hard-coded langugage in them (`docs.microsoft.com/en-us/azure` is bad, `docs.microsoft.com/azure` is good)
+1. Verify that the link works correctly. Inspect the link to ensure they do NOT have hard-coded langugage in them (`learn.microsoft.com/azure` is bad, `learn.microsoft.com/azure` is good)
 1. For FWLink redirects, inspect HTTP traffic and look for hard-coded language during the initial redirect response as shown below.
 
 ![alt-text](../media/top-extensions-localization-globalization/LinkingToDocs.png "Verifying if a FWLink is language neutral")

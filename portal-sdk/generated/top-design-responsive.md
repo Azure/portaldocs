@@ -57,7 +57,7 @@ Be aware of these notable control behaviors:
 <a name="responsive-design-with-ibiza-sdk-responsive-design-techniques"></a>
 ## Responsive design techniques
 
-This "[Responsive design techniques](https://docs.microsoft.com/en-us/windows/uwp/design/layout/responsive-design)" document is part of the Universal Windows Platform apps documentation. The design techniques illustrated within are the same for the web. These techniques were used to implement the responsive updates to the Ibiza portal. Familiarity with these techniques should help guide decisions when updating existing content for responsiveness.
+This "[Responsive design techniques](https://learn.microsoft.com/windows/uwp/design/layout/responsive-design)" document is part of the Universal Windows Platform apps documentation. The design techniques illustrated within are the same for the web. These techniques were used to implement the responsive updates to the Ibiza portal. Familiarity with these techniques should help guide decisions when updating existing content for responsiveness.
 
 ***
 

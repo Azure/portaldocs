@@ -52,7 +52,7 @@ Many Azure users only ever experience subscriptions and resource rroups. Managem
 
 <a name="behaviors-progressive-disclosure-enabling-selection-at-any-level-of-hierarchy"></a>
 ### Progressive disclosure - enabling selection at any level of hierarchy
-For the three dropdowns or selections (Management group, subscription, resource group) The user could, in some instances, not select a full path all the way down to a resource group.  If they stop at a subscription, or some level of management group, the scope picker can support selection of a path at any level of the overall hierarchy. 
+For the three dropdowns or selections (Management group, subscription, resource group) The user could, in some instances, not select a full path all the way down to a resource group.  If they stop at a subscription, or some level of management group, the scope picker can support selection of a path at any level of the overall hierarchy.
 
 <div style="max-width:800px">
 <img alttext="ScopePicker example" src="../media/design-patterns-controls-scopepicker/progressive-disclosure.jpg" />
@@ -97,4 +97,4 @@ https://www.figma.com/file/PASyBiBq72G54ckrtgs86uE7/Azure-Design-Guidelines?node
 
 <a name="related-documentation-and-resources-documentation"></a>
 ## Documentation
-Management groups: https://docs.microsoft.com/en-us/azure/governance/management-groups/
+Management groups: https://learn.microsoft.com/azure/governance/management-groups/

@@ -13,7 +13,7 @@
 Individual control for selecting management group
 <a name="microsoft-common-managementgroupselector-guidance"></a>
 ## Guidance
-Use it only for advanced scenarios. For a consistent experience, use the [Resource scope control](dx-control-Microsoft.Common.ResourceScope.md) wherever possible instead. <p/> To deploy to management group scope, note that the ARM template must be defined with the managementscope schema type - [Deploy resources to management group - Azure Resource Manager | Microsoft Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-management-group?tabs=azure-cli#schema)
+Use it only for advanced scenarios. For a consistent experience, use the [Resource scope control](dx-control-Microsoft.Common.ResourceScope.md) wherever possible instead. <p/> To deploy to management group scope, note that the ARM template must be defined with the managementscope schema type - [Deploy resources to management group - Azure Resource Manager | Microsoft Docs](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-to-management-group?tabs=azure-cli#schema)
 <a name="microsoft-common-managementgroupselector-definitions"></a>
 ## Definitions:
 <a name="microsoft-common-managementgroupselector-definitions-an-object-with-the-following-properties"></a>

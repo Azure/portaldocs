@@ -13,7 +13,7 @@
 Individual scope picker for resource groups, supports creating a new resource group, using an existing one or both
 <a name="microsoft-common-resourcegroupselector-guidance"></a>
 ## Guidance
-Use it only for advanced scenarios. For a consistent experience, use the [Resource scope control](dx-control-Microsoft.Common.ResourceScope.md) wherever possible instead. <p/> To deploy to resourcegroup scope, note that the ARM template must be defined with the resource group schema type - [Deploy resources to resource groups - Azure Resource Manager | Microsoft Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-resource-group?tabs=azure-cli#schema)
+Use it only for advanced scenarios. For a consistent experience, use the [Resource scope control](dx-control-Microsoft.Common.ResourceScope.md) wherever possible instead. <p/> To deploy to resourcegroup scope, note that the ARM template must be defined with the resource group schema type - [Deploy resources to resource groups - Azure Resource Manager | Microsoft Docs](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-to-resource-group?tabs=azure-cli#schema)
 <a name="microsoft-common-resourcegroupselector-definitions"></a>
 ## Definitions:
 <a name="microsoft-common-resourcegroupselector-definitions-an-object-with-the-following-properties"></a>

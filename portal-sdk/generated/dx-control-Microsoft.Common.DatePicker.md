@@ -38,10 +38,10 @@ A control for selecting a date and time value
     "[durationFormat(duration(utcNow(), steps('basics').datePicker), 'dd')]" => "410 days"
     ```
 
-  - [**addHours()**](https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/create-ui-definition-date-functions#addhours)
-  - [**addMinutes()**](https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/create-ui-definition-date-functions#addminutes)
-  - [**addSeconds()**](https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/create-ui-definition-date-functions#addseconds)
-  - [**utcNow()**](https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/create-ui-definition-date-functions#utcnow)
+  - [**addHours()**](https://learn.microsoft.com/azure/azure-resource-manager/managed-applications/create-ui-definition-date-functions#addhours)
+  - [**addMinutes()**](https://learn.microsoft.com/azure/azure-resource-manager/managed-applications/create-ui-definition-date-functions#addminutes)
+  - [**addSeconds()**](https://learn.microsoft.com/azure/azure-resource-manager/managed-applications/create-ui-definition-date-functions#addseconds)
+  - [**utcNow()**](https://learn.microsoft.com/azure/azure-resource-manager/managed-applications/create-ui-definition-date-functions#utcnow)
  
 <a name="microsoft-common-datepicker-definitions"></a>
 ## Definitions:

@@ -21,4 +21,4 @@ For each resource that can be tagged, assign the tags property to the parameter 
   ...
 ```
 
-- Use the [if](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-logical#if) function when accessing the tagsByResource parameter. It enables you to assign an empty object when no tags are assigned to the given resource type.
+- Use the [if](https://learn.microsoft.com/azure/azure-resource-manager/templates/template-functions-logical#if) function when accessing the tagsByResource parameter. It enables you to assign an empty object when no tags are assigned to the given resource type.

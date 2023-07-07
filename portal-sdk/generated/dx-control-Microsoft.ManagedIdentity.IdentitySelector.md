@@ -9,7 +9,7 @@
 
 <a name="microsoft-managedidentity-identityselector-description"></a>
 ## Description
-A control for assigning [managed identities](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview) for a resource in a deployment.
+A control for assigning [managed identities](https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview) for a resource in a deployment.
 <a name="microsoft-managedidentity-identityselector-guidance"></a>
 ## Guidance
 - Use **defaultValue.systemAssignedIdentity** to set an initial value for the system assigned identity options control. The default value is **Off**. The following values are allowed:
