@@ -3,6 +3,9 @@
 * To ask a question about breaking changes [use this](https://aka.ms/ask/ibiza-breaking-change)  
 
 
+## 11.220.0.1
+<table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=24197499'>24197499</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=24197499'>C# Test framework deprecation annoucement</a><p> </div><div><br> </div><div><span>The C# test framework is on the path to being deprecated. &nbsp;It is not recommended for partners to use. &nbsp;Existing users are recommended to migrate to the AzurePortal-Test typescript test framework. &nbsp;The C# test framework is in maintenance mode and will **only get security fixes** (no more product fixes).<br></span><div><br> </div><div>Deprecation timeline:<br> </div><div>- June 2023 - Announcement of planned deprecation. &nbsp;No more product fixes, only security fixes.<br> </div><div>- Dec 2023 - Microsoft.Portal.TestFramework nuget package will no longer be published. &nbsp;Microsoft.Portal.TestFramework.CSharp will continue to be published.<br> </div><span>- June 2024 - The C# test framework code will no longer be maintained. &nbsp;Microsoft.Portal.TestFramework.CSharp will no longer be published.</span><br> </div><div><span><br></span> </div><div><span></p></td></tr></table>
+
 ## 11.196.0.1
 <table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=22302264'>22302264</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=22302264'>[Iris] Move action metadata to URL params</a><p> No expected breaking for extensions since the Iris API is not used by any extension yet </p></td></tr></table>
 
