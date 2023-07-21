@@ -52,7 +52,7 @@ The information associated with each part provides the following information.
 <a name="debugging-an-extension-debug-mode-toggle-optimizations"></a>
 ### Toggle optimizations
 
-Bundling and minification can be enabled or disabled for debugging by using the **clientoptimizations** flag. This flag behaves somewhat like a trace mode flag, in that it does not turn on and off code within an extension, nor does it control requests for other extensions that are used by the extension that is being debugged.  Instead, it turns off bundling and minification of JavaScript to make debugging easier.
+Bundling and minification can be enabled or disabled for debugging by using the **clientOptimizations** flag. This flag behaves somewhat like a trace mode flag, in that it does not turn on and off code within an extension, nor does it control requests for other extensions that are used by the extension that is being debugged.  Instead, it turns off bundling and minification of JavaScript to make debugging easier.
 
 The following modes are available.
 
@@ -65,7 +65,7 @@ The following modes are available.
 
 To set the optimizations mode for the Portal and all extensions, use the following query string.
 
-`https://portal.azure.com/?clientoptimizations=<value>`
+`https://portal.azure.com/?clientOptimizations=<value>`
 
 where
 
@@ -73,7 +73,7 @@ where
 
 To set the optimization mode for a specific extension only, use the following code.
 
-`https://portal.azure.com/?<extensionName>_clientoptimizations=<value>`
+`https://portal.azure.com/?<extensionName>_clientOptimizations=<value>`
 
 where
 

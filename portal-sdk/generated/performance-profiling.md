@@ -4,7 +4,7 @@
 <a name="performance-profiling-how-to-profile-your-scenario"></a>
 ## How to profile your scenario
 
-1. Open a browser and load portal using `https://portal.azure.com/?clientoptimizations=bundle&feature.nativeperf=true​`
+1. Open a browser and load portal using `https://portal.azure.com/?clientOptimizations=bundle&feature.nativeperf=true​`
     - `clientOptimizations=bundle` will allow you to assess which bundles are being downloaded in a user friendly manner
     - `feature.nativeperf=true` will expose native performance markers within your profile traces, allowing you to accurately match portal telemetry markers to the profile
 1. Go to a blank dashboard​

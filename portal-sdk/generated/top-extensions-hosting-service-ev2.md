@@ -330,3 +330,207 @@ Ev2 templates support generating deployment files that do not include a delay be
 ### Friendly name removal
 
 To remove a friendly name, just run an Ev2 deployment with the `Rolloutspec.RemoveFriendlyName.<friendlyName>.json` file.
+
+
+<a name="ev2-integration-with-hosting-service-health-checks"></a>
+### Health Checks
+
+**What is a Health Check**
+
+Health checks determine the health of your service to be either Healthy, Unhealthy, or Unknown. Ev2 templates support generating health checks for SDP and Hotfix deployment files, as well as deployment files that include Last Known Good (LKG). To learn more about health checks, refer to https://ev2docs.azure.net/features/service-artifacts/actions/health-checks/overview.html#how-health-checks-work.
+
+**How to add a Health Check**
+
+Health checks can be specified by adding the object `"MDMHealthResources"` in the corresponding environment in the `ServiceGroupRootReplacements.json` file. `"MDMHealthResources"` is a dictionary that maps deployment type to an array of `resourceType` names that match the Portal provided health checks resourceType's. When adding the list of specified health checks, note that the specified health check must match a `resourceType` in the list of Portal provided health checks. A `FormatException` will get thrown if a health check is specified that is not a supported health check.
+
+**How to Specify the Deployment Type for a Health Check**
+
+ Health checks can be specified for SDP, Hotfix, or both. The deployment types and health check names are not case sensitive.
+
+**Choosing the Duration of the Health Check**
+
+The `"MonitorTimeInMinutes"` is read from the `ServiceGroupRootReplacements.json` file as `"MonitorDuration"` or `"HotfixMonitorDuration"`, depending on the deployment type. If either `"MonitorDuration"` or `"HotfixMonitorDuration"` is not defined, the respective default values `["P1D", "PT6H"]` or `["PT6H"]` will be used.
+
+**How to Specify the Extension Name and Version in Health Checks**
+
+ Health checks are based on `Extension Version`, which is passed in as the `PageVersion`, and `"PortalExtensionName"`, which is defined in the `ServiceGroupRootReplacements.json` file.
+
+**Choosing not to use Health Checks**
+
+ If health checks are not defined in the `ServiceGroupRootReplacements.json` file, SDP and Hotfix deployment files will default to using the "EHSExtension" health check. Similarly, if health checks are only specified for either SDP or Hotfix in the `ServiceGroupRootReplacements.json` file, the missing deployment type will default to using the "EHSExtension" health check. Additionally,
+
+The current list of Portal provided health checks can be found here: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=/src/SDK/tools/Ev2Generator/ServiceGroupRootTemplate/Deploy/SupportedHealthChecks.json.
+
+The following sample ServiceGroupRootReplacement.json file adds the MDMHealthResources dictionary in the **Production** and **Mooncake** environments.
+
+```json
+{
+    "Production": {
+        "ServiceGroupRootReplacementsVersion": 3,
+        "AzureSubscriptionId": "<SubscriptionId>",
+        "CertKeyVaultUri": "https://sometest.vault.azure.net/secrets/PortalHostingServiceDeploymentCertificate",
+        "StorageAccountCredentialsType": "<ConnectionString | AccountKey | SASToken>",
+        "TargetStorageCredentialsKeyVaultUri": "<https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageConnectionString | https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageAccountKey | https://sometest.vault.azure.net/secrets/PortalHostingServiceStorage-SASToken>",
+        "TargetContainerName": "hostingservice",
+        "ContactEmail": "youremail@microsoft.com",
+        "PortalExtensionName": "Microsoft_Azure_Monitoring",
+        "FriendlyNames": [ "friendlyname_1", "friendlyname_2", "friendlyname_3" ],
+        "MDMHealthResources":
+        {
+            "SDP" : [
+                "EHSExtension" ,
+                "Extension_90thLoadTime_LessThan4S_PT30M"
+            ]
+        }
+    },
+    "Mooncake": {
+        "ServiceGroupRootReplacementsVersion": 3,
+        "AzureSubscriptionId": "<SubscriptionId>",
+        "CertKeyVaultUri": "https://sometest.vault.azure.cn/secrets/PortalHostingServiceDeploymentCertificate",
+        "StorageAccountCredentialsType": "<ConnectionString | AccountKey | SASToken>",
+        "TargetStorageCredentialsKeyVaultUri": "<https://sometest.vault.azure.cn/secrets/PortalHostingServiceStorageConnectionString | https://sometest.vault.azure.cn/secrets/PortalHostingServiceStorageAccountKey | https://sometest.vault.azure.cn/secrets/PortalHostingServiceStorage-SASToken>",
+        "TargetContainerName": "hostingservice",
+        "ContactEmail": "youremail@microsoft.com",
+        "PortalExtensionName": "Microsoft_Azure_Monitoring",
+        "FriendlyNames": [ "friendlyname_1", "friendlyname_2", "friendlyname_3" ],
+        "HotfixDeployment": "true",
+        "HotfixMonitorDurations" : [ "PT30M", "P1D" ],
+        "MDMHealthResources":
+        {
+            "Hotfix": [
+                "Blade_99thLoadTime_LessThan4S_PT30M" ,
+                "ExtensionLoad_95PercentSuccessRate_PT30M"
+            ],
+            "SDP" : [
+                "Extension_90thLoadTime_LessThan4S_PT30M" ,
+                "Blade_95thLoadTime_LessThan4S_PT30M",
+                "BladeLoad_90PercentSuccessRate_PT30M"
+            ]
+        }
+    }
+}
+```
+
+**Custom Health Checks (coming soon)**
+
+**What are custom health checks?**
+
+Custom health checks are partner defined health checks that are not part of the Portal provided health checks. Ev2 templates supports generating customized health checks for SDP and Hotfix deployment files, as well as for deployment files that include Last Known Good (LKG) support.
+
+**How to add custom Health Checks**
+
+The custom health check file can be defined by passing in the `HostingServiceEv2CustomHealthChecksDir` parameter. This parameter does not default to anything. Custom health checks can be specified the same way Portal provided health checks are. The array of specified health checks can be a mix of custom health checks and Portal provided health checks. A `FormatException` will get thrown if the specified health check is not a Portal provided or custom health check.
+
+**How to Specify the Extension Name and Version in Custom Health Checks**
+
+Similar to Portal provided health checks, custom health checks are based on `Extension Version`, which is passed in as the `PageVersion`, and `"PortalExtensionName"`, which is defined in the `ServiceGroupRootReplacements.json` file.
+
+**How to Specify the dimensions for Custom Health Checks**
+
+Custom health check dimensions can be defined by adding the `CustomHealthCheckReplacements` dictionary object to the `ServiceGroupRootReplacements.json` file. `CustomHealthCheckReplacements` are used to replace the dimensions in the custom health check file. For more information about Ev2 health checks, refer to https://ev2docs.azure.net/features/service-artifacts/actions/health-checks/geneva-health-check/mdmhealthcheck.html#health-resources.
+
+The following sample custom health check file defines custom health checks from two different monitoring accounts:
+
+```json
+[
+    {
+        "monitoringAccountName": "Account_1",
+        "healthResources": [
+            {
+                "resourceType" : "Custom_1",
+                "dimensions":
+                {
+                    "extension_name" : "{PortalExtensionName}",
+                    "extension_version" : "{ExtensionVersion}",
+                    "dimension1": "{dimension1}",
+                }
+            }
+        ]
+    },
+    {
+        "monitoringAccountName": "Account_2",
+        "healthResources": [
+            {
+                "resourceType" : "Custom_2",
+                "dimensions":
+                {
+                    "dimension1": "{dimension1}",
+                    "dimension2": "{dimension2}",
+                }
+            },
+            {
+                "resourceType" : "Custom_3",
+                "dimensions":
+                {
+                    "dimension1": "{dimension1}",
+                    "dimension2": "{dimension2}",
+                    "dimension3": "{dimension3}"
+                }
+            }
+        ]
+    }
+]
+```
+The following example adds the MDMHealthResources dictionary in the **Production** and **Mooncake** environments with custom health checks from the above example file. Additionally, dimensions from custom health checks are defined.
+
+```json
+{
+    "Production": {
+        "ServiceGroupRootReplacementsVersion": 3,
+        "AzureSubscriptionId": "<SubscriptionId>",
+        "CertKeyVaultUri": "https://sometest.vault.azure.net/secrets/PortalHostingServiceDeploymentCertificate",
+        "StorageAccountCredentialsType": "<ConnectionString | AccountKey | SASToken>",
+        "TargetStorageCredentialsKeyVaultUri": "<https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageConnectionString | https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageAccountKey | https://sometest.vault.azure.net/secrets/PortalHostingServiceStorage-SASToken>",
+        "TargetContainerName": "hostingservice",
+        "ContactEmail": "youremail@microsoft.com",
+        "PortalExtensionName": "Microsoft_Azure_Monitoring",
+        "FriendlyNames": [ "friendlyname_1", "friendlyname_2", "friendlyname_3" ],
+        "MDMHealthResources":
+        {
+            "SDP" : [
+                "EHSExtension" ,
+                "Extension_90thLoadTime_LessThan4S_PT30M",
+                "Custom_1",
+                "Custom_3"
+            ]
+        },
+        "CustomHealthCheckReplacements" :
+        {
+            "dimension1": "1",
+            "dimension2": "2",
+            "dimension3": "3"
+        }
+    },
+    "Mooncake": {
+        "ServiceGroupRootReplacementsVersion": 3,
+        "AzureSubscriptionId": "<SubscriptionId>",
+        "CertKeyVaultUri": "https://sometest.vault.azure.cn/secrets/PortalHostingServiceDeploymentCertificate",
+        "StorageAccountCredentialsType": "<ConnectionString | AccountKey | SASToken>",
+        "TargetStorageCredentialsKeyVaultUri": "<https://sometest.vault.azure.cn/secrets/PortalHostingServiceStorageConnectionString | https://sometest.vault.azure.cn/secrets/PortalHostingServiceStorageAccountKey | https://sometest.vault.azure.cn/secrets/PortalHostingServiceStorage-SASToken>",
+        "TargetContainerName": "hostingservice",
+        "ContactEmail": "youremail@microsoft.com",
+        "PortalExtensionName": "Microsoft_Azure_Monitoring",
+        "FriendlyNames": [ "friendlyname_1", "friendlyname_2", "friendlyname_3" ],
+        "HotfixDeployment": "true",
+        "HotfixMonitorDurations" : [ "PT30M", "P1D" ],
+        "MDMHealthResources":
+        {
+            "Hotfix": [
+                "Custom_2"
+            ],
+            "SDP" : [
+                "Extension_90thLoadTime_LessThan4S_PT30M" ,
+                "Blade_95thLoadTime_LessThan4S_PT30M"
+            ]
+        },
+        "CustomHealthCheckReplacements" :
+        {
+            "dimension1": "a",
+            "dimension2": "b"
+        }
+    }
+}
+```
+In this example ServiceGroupRootReplacement.json file, we are defining replacements for both the **Mooncake** and **Production** environments. In **Production**, we are specifying health checks for SDP deployments. These health checks are a mix of custom health checks and Portal provided health checks. The two custom health checks that are specified (Custom_1 and Custom_3) are defined in the custom health check file. The values for the dimensions (dimension_1, dimension_2, and dimension_3) are specified as '1', '2', and '3' respectively for **Production** deployments. The dimension `extension_name` is specified as 'Microsoft_Azure_Monitoring' as determined in the ServiceGroupRootReplacements.json file under the `PortalExtensionName` parameter. The `extension_version` dimension is configured in your .csproj build file as the value of the GenerateEv2ContentTask parameter `ExtensionPageVersion`.
+
+In **Mooncake**, we are specifying health checks for SDP and Hotfix deployments. The list of health checks for Hotfix contains custom health checks. The custom health check that is specified (Custom_2) is defined in the custom health check file. The values for the dimensions (dimension_1 and dimension_2) are specified as 'a' and 'b' respectively for **Mooncake** deployments.
