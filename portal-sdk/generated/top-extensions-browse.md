@@ -4364,7 +4364,6 @@ Here is a sample of defining various asset commands, represented by a single Typ
 {
     "$schema": "../../../Definitions/dx.schema.json",
     "area": "ResourceTypes",
-
     // ----------------------------------------------------------------------------------------------------------------
     // The following example shows you how to integrate with resource types without sub-types and use the resource menu
     // blade without using a resource.
@@ -4382,28 +4381,48 @@ Here is a sample of defining various asset commands, represented by a single Typ
     // It includes the resource map icons which are used in the resource map control.
     //
     // Insurance policy is a "concrete" asset type, there are specializations of the asset type (kinds).
-    // ----------------------------------------------------------------------------------------------------------------
-
     "assetType": {
         "name": "InsurancePolicy",
-        "displayNames": { "property": "AssetTypeNames.InsurancePolicy", "module": "../../ClientResources" },
-        "viewModel": { "name": "InsurancePolicyViewModel", "module": "./AssetType/InsurancePolicy" },
+        "displayNames": {
+            "property": "AssetTypeNames.InsurancePolicy",
+            "module": "../../ClientResources"
+        },
+        "viewModel": {
+            "name": "InsurancePolicyViewModel",
+            "module": "./AssetType/InsurancePolicy"
+        },
         "part": "InsurancePolicyTile",
         "blade": "InsurancePolicyBlade",
-        "icon": { "file": "../../Svg/InsurancePolicies/insurancepolicy.svg" },
-        "create": { "marketplacePackageId": "Microsoft/insurance" },
+        "icon": {
+            "file": "../../Svg/InsurancePolicies/insurancepolicy.svg"
+        },
+        "create": {
+            "marketplacePackageId": "Microsoft/insurance"
+        },
         "postCreateBlade": {
             "name": "CustomDeploymentOverviewBlade"
         },
         "browse": {
             "type": "ResourceType",
-            "query": { "file": "./InsurancePolicyQuery.kml" },
-            "defaultColumns": ["items", "deductible", "coverage"],
+            "query": {
+                "file": "./InsurancePolicyQuery.kml"
+            },
+            "defaultColumns": [
+                "items",
+                "deductible",
+                "coverage"
+            ],
             "columns": [
                 {
                     "name": "items",
-                    "displayName": { "property": "Columns.InsurancePolicy.items", "module": "../../ClientResources" },
-                    "description": { "property": "Columns.InsurancePolicy.itemsDescription", "module": "../../ClientResources" },
+                    "displayName": {
+                        "property": "Columns.InsurancePolicy.items",
+                        "module": "../../ClientResources"
+                    },
+                    "description": {
+                        "property": "Columns.InsurancePolicy.itemsDescription",
+                        "module": "../../ClientResources"
+                    },
                     "format": "BladeLink",
                     "width": "90fr",
                     "blade": {
@@ -4414,15 +4433,27 @@ Here is a sample of defining various asset commands, represented by a single Typ
                 },
                 {
                     "name": "deductible",
-                    "displayName": { "property": "Columns.InsurancePolicy.deductible", "module": "../../ClientResources" },
-                    "description": { "property": "Columns.InsurancePolicy.deductibleDescription", "module": "../../ClientResources" },
+                    "displayName": {
+                        "property": "Columns.InsurancePolicy.deductible",
+                        "module": "../../ClientResources"
+                    },
+                    "description": {
+                        "property": "Columns.InsurancePolicy.deductibleDescription",
+                        "module": "../../ClientResources"
+                    },
                     "format": "String",
                     "width": "90fr"
                 },
                 {
                     "name": "coverage",
-                    "displayName": { "property": "Columns.InsurancePolicy.coverage", "module": "../../ClientResources" },
-                    "description": { "property": "Columns.InsurancePolicy.coverageDescription", "module": "../../ClientResources" },
+                    "displayName": {
+                        "property": "Columns.InsurancePolicy.coverage",
+                        "module": "../../ClientResources"
+                    },
+                    "description": {
+                        "property": "Columns.InsurancePolicy.coverageDescription",
+                        "module": "../../ClientResources"
+                    },
                     "format": "String",
                     "width": "80fr"
                 }
@@ -4431,37 +4462,54 @@ Here is a sample of defining various asset commands, represented by a single Typ
                 {
                     "kind": "OpenBladeCommand",
                     "id": "openCreateCommandId",
-                    "displayName": { "property": "Commands.Camera.newCameraWithPreset", "module": "../../ClientResources" },
+                    "displayName": {
+                        "property": "Commands.Camera.newCameraWithPreset",
+                        "module": "../../ClientResources"
+                    },
                     "icon": "MsPortalFx.Base.Images.Move",
                     "blade": {
-                      "name": "CreateCustomRobot.ReactView",
-                      "extension": "SamplesExtension",
-                      "doesProvisioning": true
+                        "name": "CreateCustomRobot.ReactView",
+                        "extension": "SamplesExtension",
+                        "doesProvisioning": true
                     },
-                    "visibility": ["ServiceHoverCard", "BrowseToolbar"]
+                    "visibility": [
+                        "ServiceHoverCard",
+                        "BrowseToolbar"
+                    ]
                 }
             ],
-            "selectionCommands": [{
-                "kind": "ArmSelectionCommand",
-                "id": "deleteCommand",
-                "displayName": { "property": "Commands.Camera.delete", "module": "../../ClientResources" },
-                "icon": "MsPortalFx.Base.Images.Delete",
-                "confirmation": {
-                    "message": { "property": "Commands.Camera.deleteConfirmationMessage", "module": "../../ClientResources"},
-                    "title": { "property": "Commands.Camera.deleteConfirmationTitle", "module": "../../ClientResources"}
-                },
-                "definitions": [
-                    {
-                        "resourceType": "\"microsoft.test/insurancepolicies\"",
-                        "uri": "{resourceid}/start?api-version=2019-07-01",
-                        "asyncOperation": {
-                          "pollingHeaderOverride": "Azure-AsyncOperation"
+            "selectionCommands": [
+                {
+                    "kind": "ArmSelectionCommand",
+                    "id": "deleteCommand",
+                    "displayName": {
+                        "property": "Commands.Camera.delete",
+                        "module": "../../ClientResources"
+                    },
+                    "icon": "MsPortalFx.Base.Images.Delete",
+                    "confirmation": {
+                        "message": {
+                            "property": "Commands.Camera.deleteConfirmationMessage",
+                            "module": "../../ClientResources"
                         },
-                        "retryableArmCodes": [],
-                        "nonRetryableArmCodes": []
-                    }
-                ]
-            }]
+                        "title": {
+                            "property": "Commands.Camera.deleteConfirmationTitle",
+                            "module": "../../ClientResources"
+                        }
+                    },
+                    "definitions": [
+                        {
+                            "resourceType": "\"microsoft.test/insurancepolicies\"",
+                            "uri": "{resourceid}/start?api-version=2019-07-01",
+                            "asyncOperation": {
+                                "pollingHeaderOverride": "Azure-AsyncOperation"
+                            },
+                            "retryableArmCodes": [],
+                            "nonRetryableArmCodes": []
+                        }
+                    ]
+                }
+            ]
         },
         "resourceType": {
             "name": "Microsoft.Test/insurancepolicies",
@@ -4469,96 +4517,144 @@ Here is a sample of defining various asset commands, represented by a single Typ
             "kinds": [
                 {
                     "name": "camera",
-                    "displayNames": { "property": "AssetTypeNames.InsurancePolicy.Camera", "module": "../../ClientResources" },
-                    "icon": { "file": "../../Svg/InsurancePolicies/camera.svg" },
+                    "displayNames": {
+                        "property": "AssetTypeNames.InsurancePolicy.Camera",
+                        "module": "../../ClientResources"
+                    },
+                    "icon": {
+                        "file": "../../Svg/InsurancePolicies/camera.svg"
+                    },
                     // Example of extensible commands on simple kinds
                     "commands": [
                         {
                             "kind": "OpenBladeCommand",
                             "id": "openCreateCommandId",
-                            "displayName": { "property": "Commands.Camera.newCameraWithPreset", "module": "../../ClientResources" },
+                            "displayName": {
+                                "property": "Commands.Camera.newCameraWithPreset",
+                                "module": "../../ClientResources"
+                            },
                             "icon": "MsPortalFx.Base.Images.Globe",
                             "blade": {
-                              "name": "CreateCustomRobot.ReactView",
-                              "extension": "SamplesExtension",
-                              "doesProvisioning": true
+                                "name": "CreateCustomRobot.ReactView",
+                                "extension": "SamplesExtension",
+                                "doesProvisioning": true
                             }
                         }
                     ],
-                    "selectionCommands": [{
-                        "kind": "ArmSelectionCommand",
-                        "id": "deleteCommand",
-                        "displayName": { "property": "Commands.Camera.delete", "module": "../../ClientResources" },
-                        "icon": "MsPortalFx.Base.Images.Delete",
-                        "confirmation": {
-                            "message": { "property": "Commands.Camera.deleteConfirmationMessage", "module": "../../ClientResources"},
-                            "title": { "property": "Commands.Camera.deleteConfirmationTitle", "module": "../../ClientResources"}
-                        },
-                        "definitions": [
-                            {
-                                "resourceType": "\"microsoft.test/insurancepolicies\"",
-                                "uri": "{resourceid}/start?api-version=2019-07-01",
-                                "asyncOperation": {
-                                  "pollingHeaderOverride": "Azure-AsyncOperation"
+                    "selectionCommands": [
+                        {
+                            "kind": "ArmSelectionCommand",
+                            "id": "deleteCommand",
+                            "displayName": {
+                                "property": "Commands.Camera.delete",
+                                "module": "../../ClientResources"
+                            },
+                            "icon": "MsPortalFx.Base.Images.Delete",
+                            "confirmation": {
+                                "message": {
+                                    "property": "Commands.Camera.deleteConfirmationMessage",
+                                    "module": "../../ClientResources"
                                 },
-                                "retryableArmCodes": [],
-                                "nonRetryableArmCodes": []
-                            }
-                        ]
-                    }]
+                                "title": {
+                                    "property": "Commands.Camera.deleteConfirmationTitle",
+                                    "module": "../../ClientResources"
+                                }
+                            },
+                            "definitions": [
+                                {
+                                    "resourceType": "\"microsoft.test/insurancepolicies\"",
+                                    "uri": "{resourceid}/start?api-version=2019-07-01",
+                                    "asyncOperation": {
+                                        "pollingHeaderOverride": "Azure-AsyncOperation"
+                                    },
+                                    "retryableArmCodes": [],
+                                    "nonRetryableArmCodes": []
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "name": "car",
-                    "displayNames": { "property": "AssetTypeNames.InsurancePolicy.Car", "module": "../../ClientResources" },
-                    "icon": { "file": "../../Svg/InsurancePolicies/car.svg" }
+                    "displayNames": {
+                        "property": "AssetTypeNames.InsurancePolicy.Car",
+                        "module": "../../ClientResources"
+                    },
+                    "icon": {
+                        "file": "../../Svg/InsurancePolicies/car.svg"
+                    }
                 },
                 {
                     "name": "merged-kind",
                     // Example of extensible commands on merged kinds
-                    "selectionCommands": [{
-                        "kind": "ArmSelectionCommand",
-                        "id": "deleteSelectionCommand",
-                        "displayName": { "property": "Commands.Camera.delete", "module": "../../ClientResources" },
-                        "icon": "MsPortalFx.Base.Images.Delete",
-                        "confirmation": {
-                            "message": { "property": "Commands.Camera.deleteConfirmationMessage", "module": "../../ClientResources"},
-                            "title": { "property": "Commands.Camera.deleteConfirmationTitle", "module": "../../ClientResources"}
-                        },
-                        "definitions": [
-                            {
-                                "resourceType": "\"microsoft.test/insurancepolicies\"",
-                                "uri": "{resourceid}/start?api-version=2019-07-01",
-                                "asyncOperation": {
-                                  "pollingHeaderOverride": "Azure-AsyncOperation"
+                    "selectionCommands": [
+                        {
+                            "kind": "ArmSelectionCommand",
+                            "id": "deleteSelectionCommand",
+                            "displayName": {
+                                "property": "Commands.Camera.delete",
+                                "module": "../../ClientResources"
+                            },
+                            "icon": "MsPortalFx.Base.Images.Delete",
+                            "confirmation": {
+                                "message": {
+                                    "property": "Commands.Camera.deleteConfirmationMessage",
+                                    "module": "../../ClientResources"
                                 },
-                                "retryableArmCodes": [],
-                                "nonRetryableArmCodes": []
-                            }
-                        ]
-                    }],
+                                "title": {
+                                    "property": "Commands.Camera.deleteConfirmationTitle",
+                                    "module": "../../ClientResources"
+                                }
+                            },
+                            "definitions": [
+                                {
+                                    "resourceType": "\"microsoft.test/insurancepolicies\"",
+                                    "uri": "{resourceid}/start?api-version=2019-07-01",
+                                    "asyncOperation": {
+                                        "pollingHeaderOverride": "Azure-AsyncOperation"
+                                    },
+                                    "retryableArmCodes": [],
+                                    "nonRetryableArmCodes": []
+                                }
+                            ]
+                        }
+                    ],
                     "commands": [
                         {
                             "kind": "OpenBladeCommand",
                             "id": "openCreateCommandId",
-                            "displayName": { "property": "Commands.Camera.newCameraWithPreset", "module": "../../ClientResources" },
+                            "displayName": {
+                                "property": "Commands.Camera.newCameraWithPreset",
+                                "module": "../../ClientResources"
+                            },
                             "icon": "MsPortalFx.Base.Images.Clock",
                             "blade": {
-                              "name": "CreateCustomRobot.ReactView",
-                              "extension": "SamplesExtension",
-                              "doesProvisioning": true
+                                "name": "CreateCustomRobot.ReactView",
+                                "extension": "SamplesExtension",
+                                "doesProvisioning": true
                             }
                         }
                     ],
                     "mergedKinds": [
                         {
                             "name": "car,mercedez",
-                            "displayNames": { "property": "AssetTypeNames.InsurancePolicy.Car", "module": "../../ClientResources" },
-                            "icon": { "file": "../../Svg/InsurancePolicies/car.svg" }
+                            "displayNames": {
+                                "property": "AssetTypeNames.InsurancePolicy.Car",
+                                "module": "../../ClientResources"
+                            },
+                            "icon": {
+                                "file": "../../Svg/InsurancePolicies/car.svg"
+                            }
                         },
                         {
                             "name": "car,tesla",
-                            "displayNames": { "property": "AssetTypeNames.InsurancePolicy.Car", "module": "../../ClientResources" },
-                            "icon": { "file": "../../Svg/InsurancePolicies/car.svg" }
+                            "displayNames": {
+                                "property": "AssetTypeNames.InsurancePolicy.Car",
+                                "module": "../../ClientResources"
+                            },
+                            "icon": {
+                                "file": "../../Svg/InsurancePolicies/car.svg"
+                            }
                         }
                     ]
                 }
