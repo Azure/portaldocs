@@ -417,7 +417,7 @@ Make sure to update the "**galleryItemId**" in the URI that you received when yo
 
 <a name="gallery-item-specificiations-gallery-package-management-deleting-a-azure-gallery-package-or-deployment-fragment"></a>
 #### Deleting a Azure Gallery Package or Deployment Fragment
-Deleting Azure Gallery Packages is only supported in the test environments. We will not allow or support deletion of gallery packages in PROD except in rare situations such as a security or legal issue. In order to delete your package run the following command. In order to do this you will be required to run the Geneva Action self service [https://aka.ms/sideload-catalog](https://aka.ms/sideload-catalog).
+Deleting Azure Gallery Packages is only supported in the test environments. We will not allow or support deletion of gallery packages in PROD except in rare situations such as a security or legal issue. In order to do this you will be required to run the Geneva Action self service [https://aka.ms/sideload-catalog](https://aka.ms/sideload-catalog).
 
 
 In order to publish to production, create an ICM on "PFX-MIX-Marketplace Ingestion Experience/Marketplace Publishing" with your gallery package `.azpkg` file to get it published
