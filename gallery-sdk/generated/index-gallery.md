@@ -382,13 +382,7 @@ To create packages run the following command.
 
 <a name="gallery-item-specificiations-gallery-package-management-publishing-a-azure-gallery-package-or-deployment-fragment"></a>
 #### Publishing a Azure Gallery Package or Deployment Fragment
-In order to publish a gallery package (azpkg) you will run the AzureGallery tool. You can optionally associate a hide key with the package. This key will be required when requesting the item from the gallery service.
-
-To upload the package run the following command.
-
-```bat
-> Microsoft.Azure.Gallery.AzureGalleryUtility.exe upload -p ..\path\to\package.azpkg
-```
+In order to publish a gallery package (azpkg) to Dogfood environment, you will run the selfservice uploading Geneva action, please check our modern documentation [https://aka.ms/sideload-catalog](https://aka.ms/sideload-catalog)
 
 Provisioning your package to all the regions and Cache refresh might take up to 30 minutes to show up in Azure Marketplace. You can verify this using a public endpoints:
 ```
@@ -421,36 +415,10 @@ Make sure to update the "**galleryItemId**" in the URI that you received when yo
 
 1. Repeat step 2 but this time send your unmodified package without the version change and hidekey.
 
-<a name="gallery-item-specificiations-gallery-package-management-updating-hide-key-for-azure-gallery-package"></a>
-#### Updating hide key for Azure Gallery Package
-In order to add/update or remove a hide key or subscription filters associated with an item you will run the AzureGallery tool. To remove a hide key you need update the item and specify an empty key.
-
-To update the filters for the a package run the following command.
-
-
-```bat
-> Microsoft.Azure.Gallery.AzureGalleryUtility.exe update -i [Publisher].[Name].[Version] -h [comma-separated hide key list] -sf [comma-separated subscription guid list]
-```
-
 <a name="gallery-item-specificiations-gallery-package-management-deleting-a-azure-gallery-package-or-deployment-fragment"></a>
 #### Deleting a Azure Gallery Package or Deployment Fragment
-Deleting Azure Gallery Packages is only supported in the test environments. We will not allow or support deletion of gallery packages in PROD except in rare situations such as a security or legal issue. In order to delete your package run the following command. In order to do this you will be required to configure the package loader too as noted here.
+Deleting Azure Gallery Packages is only supported in the test environments. We will not allow or support deletion of gallery packages in PROD except in rare situations such as a security or legal issue. In order to delete your package run the following command. In order to do this you will be required to run the Geneva Action self service [https://aka.ms/sideload-catalog](https://aka.ms/sideload-catalog).
 
-To delete a azure gallery package run the following command.
-
-```bat
-> Microsoft.Azure.Gallery.AzureGalleryUtility.exe delete -i [Publisher].[Name].[Version]
-```
-
-<a name="gallery-item-specificiations-gallery-package-management-configuring-the-azure-package-loader-tool"></a>
-#### Configuring the Azure Package Loader Tool
-In order to use the gallery loader you will need to download two test certificates from this [Azure key vault](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/resource/subscriptions/705c43bf-c68a-4e96-b683-77b0aa2dd09e/resourceGroups/GalleryPackageDeployment-RG/providers/Microsoft.KeyVault/vaults/GalleryPackageDeployment/certificates)
-
-Please download both in PFX/PEM format. Install them without a password.
-
-Certificates will be auto rotated every 90 days. You should always download the latest certificates.
-
-If you are a Microsoft FTE and do not have permissions to access the key vault, please join the right groups following instructions [here](../../portal-sdk/generated/top-onboarding.md#join-dls-and-request-permissions). If you are an external partner, request permissions through the Microsoft team you are collaborating with to light up your extension.
 
 In order to publish to production, create an ICM on "PFX-MIX-Marketplace Ingestion Experience/Marketplace Publishing" with your gallery package `.azpkg` file to get it published
 
