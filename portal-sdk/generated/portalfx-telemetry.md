@@ -1,7 +1,6 @@
 * [Portal Telemetry Overview](#portal-telemetry-overview)
     * [Tracked Actions](#portal-telemetry-overview-tracked-actions)
     * [Logging](#portal-telemetry-overview-logging)
-        * [Onboarding to ExtTelemetry/ExtEvents tables](#portal-telemetry-overview-logging-onboarding-to-exttelemetry-extevents-tables)
         * [Logging telemetry to ExtTelemetry table](#portal-telemetry-overview-logging-logging-telemetry-to-exttelemetry-table)
         * [Logging errors/warnings to ExtEvents table](#portal-telemetry-overview-logging-logging-errors-warnings-to-extevents-table)
     * [Available Power BI Dashboards](#portal-telemetry-overview-available-power-bi-dashboards)
@@ -45,42 +44,86 @@ There are two options for collecting telemetry and error/warning logs. You can e
 
 > Information should be collected in a way that that ensures no personally identifiable information (PII) is captured. It is very important for security and compliance reasons that PII data is not sent to telemetry services and you should have practices in place to ensure that this is enforced.
 
-<a name="portal-telemetry-overview-logging-onboarding-to-exttelemetry-extevents-tables"></a>
-### Onboarding to ExtTelemetry/ExtEvents tables
-
-To start using the built-in controller provided by Framework for collecting telemetry and error/warning logs, just add `this.EnablePortalLogging = true;` in the constructor of your extension definition class:
-
-```cs
-  public Definition(ApplicationConfiguration applicationConfiguration)
-  {
-      this.EnablePortalLogging = true;
-  }
-```
-
-You can read [here](portalfx-telemetry-logging.md) more details about using the telemetry controller provided by Framework.
-
 <a name="portal-telemetry-overview-logging-logging-telemetry-to-exttelemetry-table"></a>
 ### Logging telemetry to ExtTelemetry table
 
-You can use the Portal telemetry APIs to log telemetry. However, before you do so you will need to initialize the telemetry service.
-
-```ts
-  // Initialize the telemetry functionality and make it available for use.
-  MsPortalFx.Base.Diagnostics.Telemetry.initialize("ExtensionName", false /* traceBrowserInformation */ );
-```
-
-> Note that you don't need to trace browser information to your particular extension as this data is collected globally. However, if you would like the browser information in your own telemetry store set traceBrowserInformation to true.
-
 To log telemetry, you can call the `trace` method as shown below:
 
+**React:**
+```ts
+import * as Az from "@microsoft/azureportal-reactview/Az";
+Az.Trace([{
+    /**
+     * The timestamp of the event.
+     */
+    timestamp: number;
+    /**
+     * The source of the telemetry data e.g. navigation, blade.
+     */
+    source: string;
+    /**
+     * The action being recorded.
+     */
+    action: string;
+    /**
+     * A modifier for the action.
+     */
+    actionModifier?: string;
+    /**
+     * The elapsed time in milliseconds for the event being recorded (optional).
+     */
+    duration?: number;
+    /**
+     * A name associated with the event or item that was the target of the event (optional).
+     */
+    name?: string;
+    /**
+     * Any additional information for the event being recorded (optional).
+     */
+    data?: any;
+}]);
+```
+
+**Knockout:**
 ```ts
   MsPortalFx.Base.Diagnostics.Telemetry.trace({
-      extension: "Microsoft_Azure_NewExtension",
-      source: "Links",
-      action: "LinkClicked",
-      name: "Recommended",
-      data: {...}
-  });
+        /**
+         * The source of the telemetry data e.g. navigation, blade.
+         */
+        source: string;
+        /**
+         * The action being recorded.
+         */
+        action: string;
+        /**
+         * A modifier for the action (optional).
+         */
+        actionModifier?: string;
+        /**
+         * Any additional information for the event being recorded (optional).
+         */
+        data?: any;
+        /**
+         * The asset type for the telemetry data (optional).
+         */
+        assetType?: string;
+        /**
+         * The elapsed time in milliseconds for the event being recorded (optional).
+         */
+        duration?: number;
+        /**
+         * A name associated with the event or item that was the target of the event (optional).
+         */
+        name?: string;
+        /**
+         * The service tree id, currently it is logged for consumption by SLO (optional)
+         */
+        serviceTreeId?: string;
+        /**
+         * When true increases buffering time of event (optional).
+         */
+        lowPriority?: boolean;
+    });
 ```
 
 Telemetry logs go to ExtTelemetry table, which is available in Kusto in both AzurePortal and AzPtlCosmos databases.
@@ -90,8 +133,44 @@ Please do not stringify `data` and `context` columns when passing them through. 
 <a name="portal-telemetry-overview-logging-logging-errors-warnings-to-extevents-table"></a>
 ### Logging errors/warnings to ExtEvents table
 
-To log errors/warnings, you can call the `error`/`warning` methods as shown below:
+To log errors/warnings, you can call the `log` methods as shown below:
 
+**React:**
+```
+import * as Az from "@microsoft/azureportal-reactview/Az";
+Az.log([{
+    /**
+     * The timestamp of the entry.
+     */
+    timestamp: number;
+    /**
+     * The level for the entry.
+     */
+    level: LogEntryLevel; // Az.LogEntryLevel.Error | Az.LogEntryLevel.Warning
+    /**
+     * The area for the entry.
+     */
+    area: string;
+    /**
+     * The entry type.
+     */
+    entryType?: string;
+    /**
+     * The message to be logged.
+     */
+    message: LogMessage;
+    /**
+     * Any code accompanying error and warning-style log entries.
+     */
+    code?: number;
+    /**
+     * Any additional arguments to be included in the log entry.
+     */
+    args?: ReadonlyArray<any>;
+}])
+```
+
+**Knockout:**
 ```ts
   var log = new MsPortalFx.Base.Diagnostics.Log("logging_area");
   log.warning(errorMessage, code, args);
