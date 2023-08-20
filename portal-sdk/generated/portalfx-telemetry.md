@@ -38,7 +38,11 @@ You can read more [here](portalfx-telemetry-kusto-databases.md) about Kusto and 
 <a name="portal-telemetry-overview-logging"></a>
 ## Logging
 
-Information should be collected in a way that that ensures no personally identifiable information (PII) is captured. It is very important for security and compliance reasons that PII data is not sent to telemetry services and you should have practices in place to ensure that this is enforced.
+There are two options for collecting telemetry and error/warning logs. You can either configure and use the Portal Framework's built-in telemetry services or you can utilize an entirely custom telemetry system.
+
+> We advise you to use the telemetry controller provided by Framework in order to take advantage of the system which is already in place.
+
+> Information should be collected in a way that that ensures no personally identifiable information (PII) is captured. It is very important for security and compliance reasons that PII data is not sent to telemetry services and you should have practices in place to ensure that this is enforced.
 
 <a name="portal-telemetry-overview-logging-logging-telemetry-to-exttelemetry-table"></a>
 ### Logging telemetry to ExtTelemetry table

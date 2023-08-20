@@ -398,6 +398,19 @@ Update your extensions `Content/Config/default.json` to set enablePortalLogging.
 }
 ```
 
+<a name="overview-logging-telemetry-on-hosting-service-legacy-selfhost-approach"></a>
+#### Legacy selfhost approach
+To start using the built-in controller provided by Framework for collecting telemetry and error/warning logs, just add `this.EnablePortalLogging = true;` in the constructor of your extension definition class:
+
+```cs
+  public Definition(ApplicationConfiguration applicationConfiguration)
+  {
+      this.EnablePortalLogging = true;
+  }
+```
+
+You can read [here](portalfx-telemetry-logging.md) more details about using the telemetry controller provided by Framework.
+
 <a name="overview-logging-telemetry-logging-telemetry-to-exttelemetry-table"></a>
 ### Logging telemetry to ExtTelemetry table
 
