@@ -1,5 +1,5 @@
 # Download Portal SDK 
- <br/> Fairfax, Mooncake : SDK version 12.43.0.1 (deployed hotfix 12.43.3.1)<br/> Production : SDK version 12.43.0.1 (deployed hotfix 12.43.2.1) 
+ <br/> Production : SDK version 12.43.0.1 (deployed hotfix 12.43.4.1)<br/> Fairfax, Mooncake : SDK version 12.43.0.1 (deployed hotfix 12.43.3.1) 
 
  Each version of the SDK is supported for 120 days. Extensions must upgrade to a newer version of the SDK within 120 days from the release of the SDK version they are currently using as runtime backward compatibility is not supported beyond that.  
 
