@@ -1253,7 +1253,7 @@ An important difference between a `QueryBladeLink` column and a `BladeLink` colu
   "text", bladeLinkText,
   "blade", bladeLinkBlade.blade,
   "extension", bladeLinkBlade.extension,
-  "parameters": bladeLinkParameters)
+  "parameters", bladeLinkParameters)
 | project [FxColumns],bladeLink
 ```
 

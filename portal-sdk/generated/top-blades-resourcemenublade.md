@@ -65,7 +65,7 @@ There are three options for `ResourceProvidedBy`:
 Each of these methods implements a different interface with a different function and result:
 
 |Value|Interface|Method signature|
-|-|-|-|-|
+|-|-|-|
 |`NoResource`|`MsPortalFx.Assets.ResourceMenuWithNoResourceContract`|`getResourceMenuConfig(resourceId: string, menuContext?: string): Promise<MsPortalFx.Assets.ResourceMenuConfig>`|
 |`ProvidedByResourceMenu`|`MsPortalFx.Assets.ResourceMenuWithCallerSuppliedResourceContract`|`getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation, menuContext?: string): Promise<MsPortalFx.Assets.ResourceMenuConfig>`|
 |`ReturnedByExtension`|`MsPortalFx.Assets.ResourceMenuWithExtensionProvidedResourceContract`|`getResourceAndMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInfo, menuContext?: string): Promise<MsPortalFx.Assets.ExtensionSuppliedResourceInfo>`|
