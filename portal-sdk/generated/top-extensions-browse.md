@@ -4199,7 +4199,8 @@ These are the currently supported command types:
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "displayName": {
           "$ref": "dx.schema.common.json#/definitions/stringResource"
