@@ -362,7 +362,7 @@ public title: KnockoutObservable<string>;
 /**
  * TextBox form field.
  */
-public myTextBox: any;
+public myTextBox: TextBox.Contract;
 
 private _timerHandle: number;
 
@@ -389,10 +389,9 @@ constructor(container: FxCompositionBlade.Container) {
     window.setInterval(op, 5000);
 
     // TextBox
-    const textBoxOptions = {
-        label: ko.observable(ClientResources.formsSampleBasicTextBox),
-    };
-    this.myTextBox = new (TextBox.ViewModel as any)(container, textBoxOptions);
+    this.myTextBox = TextBox.create(container, {
+        label: ClientResources.formsSampleBasicTextBox,
+    });
 }
 
 /**

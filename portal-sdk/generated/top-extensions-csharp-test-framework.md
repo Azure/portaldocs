@@ -17,7 +17,7 @@ Deprecation timeline:
 <a name="planned-deprecation-c-portal-test-framework-planned-deprecation-overview"></a>
 ## [PLANNED DEPRECATION] Overview
 
-The C# test framework is a UI test framework built on top of the Selenium Webdriver C# bindings that are described in [https://www.seleniumhq.org/projects/webdriver](https://www.seleniumhq.org/projects/webdriver/).  Its primary goal is testing UI interactions in the Azure Portal.  
+The C# test framework is a UI test framework built on top of the Selenium Webdriver C# bindings that are described in [https://www.seleniumhq.org/projects/webdriver](https://www.seleniumhq.org/projects/webdriver/).  Its primary goal is testing UI interactions in the Azure Portal.
 
 The C# test framework provides the following.
 
@@ -48,7 +48,7 @@ Prerequisites for using the C# test framework are as follows.
 
 * .NET Framework 4.7.2 or higher
 
-* Visual Studio 2019 or higher, as specified in [What are the IDE specific installs required for Visual Studio?](top-ap-cli.md#FAQ)
+* Visual Studio 2019 or higher, as specified in [What are the IDE specific installs required for Visual Studio?](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#FAQ)
 
 * Understanding of the C# programming language
 
@@ -74,7 +74,7 @@ There are some differences between the  `Microsoft.Portal.TestFramework` and `Mi
 
 The `Microsoft.Portal.TestFramework.CSharp` package contains the core test framework DLLs.  It is updated with the latest code as the Portal is being developed and may contain fixes for test issues that were found after release.  It may also contain code that is not compatible with the deployed version of the Portal.
 
-The `Microsoft.Portal.TestFramework` contains a reference to the `Microsoft.Portal.TestFramework.Csharp` package in addition to dependencies that are required for the C# test framework to run upon initial installation. 
+The `Microsoft.Portal.TestFramework` contains a reference to the `Microsoft.Portal.TestFramework.Csharp` package in addition to dependencies that are required for the C# test framework to run upon initial installation.
 
 **NOTE**: Some external dependencies may require separate downloads, such as ChromeDriver, which match the version of Chrome.
 
@@ -190,7 +190,7 @@ webDriver.Dispose();
 
 ```
 
-### Managing authentication credentials 
+### Managing authentication credentials
 
 While the test framework does not provide any support for managing login credentials, the following are some recommendations.
 
@@ -282,7 +282,7 @@ namespace DocSampleTest
 
 ## Testing Parts and Blades
 
-An extension can find parts on the StartBoard by using the **Portal.StartBoard.FindSinglePartByTitle** method, after you have an instance of the Portal object. The method will give you a an instance of the Part class that you can use to perform actions on the part, like clicking on it.  In the following example, the button whose name is "Samples" is clicked. 
+An extension can find parts on the StartBoard by using the **Portal.StartBoard.FindSinglePartByTitle** method, after you have an instance of the Portal object. The method will give you a an instance of the Part class that you can use to perform actions on the part, like clicking on it.  In the following example, the button whose name is "Samples" is clicked.
 
 ```cs
 var portal = this.NavigateToPortal();
@@ -313,7 +313,7 @@ var errorPart = webDriver.WaitUntil(() => blade.FindElements<Part>()
 									"Could not find a part with a Send Error text.");
 ```
 
-**NOTE**: The **WebDriver.WaitUntil** method is a general and recommended mechanism to ask the **WebDriver** to retry an operation until a condition succeeds. In this instance, the test case waits by polling continually until it finds a part in the blade that contains text that includes the 'Send Error' string. When the part is found, it is returned to the `errorPart` variable; otherwise, if it is not found before the default timeout of 10 seconds, the  method throws an exception that uses the text specified in the last parameter. For more information, see [portalfx-extensions-bp-csharp-test.md#testing-best-practices](portalfx-extensions-bp-csharp-test.md#testing-best-practices). 
+**NOTE**: The **WebDriver.WaitUntil** method is a general and recommended mechanism to ask the **WebDriver** to retry an operation until a condition succeeds. In this instance, the test case waits by polling continually until it finds a part in the blade that contains text that includes the 'Send Error' string. When the part is found, it is returned to the `errorPart` variable; otherwise, if it is not found before the default timeout of 10 seconds, the  method throws an exception that uses the text specified in the last parameter. For more information, see [portalfx-extensions-bp-csharp-test.md#testing-best-practices](portalfx-extensions-bp-csharp-test.md#testing-best-practices).
 
 Classic Selenium **WebDriver** syntax can also be used to find any element based on a **By** selector. For example, the following code finds a single button element within the found part.
 
@@ -936,7 +936,7 @@ Usage is as follows.
 ```
 
 *  This will make every extension disabled by default.
-*  This will enable hubs, which are used by most developers 
+*  This will enable hubs, which are used by most developers
 *  This will enable the specific extension you want to test.
 *  You can add multiple extensions,  like the` HubsExtension=true and MyOtherExtension=true` if you want to test other extensions.
 
@@ -946,7 +946,7 @@ If you want to disable a single extension, you can use the `canmodifyextensions`
 
 `?feature.canmodifyextensions=true&ExtensionNameToDisable=false`
 
-For example, if you want to turn off an old extension and turn on a new one, you can use the following code. 
+For example, if you want to turn off an old extension and turn on a new one, you can use the following code.
 
 ```
 ?feature.canmodifyextensions=true&MyOldExtension=false&MyNewExtension=true

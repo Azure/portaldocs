@@ -1,6 +1,8 @@
 <a name="ev2-integration-with-hosting-service"></a>
 ## Ev2 Integration with hosting service
 
+**NOTE**: The hosting service docs are being migrated to https://eng.ms/docs/products/azure-portal-framework-ibizafx/.
+
 **NOTE**: This section of the document assumes that the reader has reviewed the hosting service document located at [top-extensions-hosting-service.md](top-extensions-hosting-service.md).
 
 **NOTE**: This section is only relevant to extension developers who are using OneBranch VSRM and Ev2 for deployment, or who plan to migrate to OneBranch VSRM and Ev2 for deployment.
@@ -213,11 +215,17 @@ The preceding  configuration will result in a build output as required by Ev2 an
   \buildver.txt
   \Production.RolloutSpec.PT6H.json
   \Production.RolloutSpec.P1D.json
-  \Production.RolloutSpec.stage1.json
-  \Production.RolloutSpec.stage2.json
-  \Production.RolloutSpec.stage3.json
-  \Production.RolloutSpec.stage4.json
-  \Production.RolloutSpec.stage5.json
+  \Production.RolloutSpec.Stage1.json
+  \Production.RolloutSpec.Stage2.json
+  \Production.RolloutSpec.Stage3.json
+  \Production.RolloutSpec.Stage4.json
+  \Production.RolloutSpec.Stage5.json
+  \Production.RolloutSpec.WithHealthCheck.Stage1.json
+  \Production.RolloutSpec.WithHealthCheck.Stage2.json
+  \Production.RolloutSpec.WithHealthCheck.Stage3.json
+  \Production.RolloutSpec.WithHealthCheck.Stage4.json
+  \Production.RolloutSpec.WithHealthCheck.Stage5.json
+  \Production.RolloutSpec.HealthCheckOnly.json
   \Production.RolloutSpec.SetFriendlyName.friendlyname_1.json
   \Production.RolloutSpec.SetFriendlyName.friendlyname_2.json
   \Production.RolloutSpec.SetFriendlyName.friendlyname_3.json
@@ -228,16 +236,23 @@ The preceding  configuration will result in a build output as required by Ev2 an
       \Production\Production.ServiceModel.P1D.json
       \Production\Production.RolloutParameters.PT6H.json
       \Production\Production.RolloutParameters.P1D.json
-      \Production\Production.ServiceModel.stage1.json
-      \Production\Production.ServiceModel.stage2.json
-      \Production\Production.ServiceModel.stage3.json
-      \Production\Production.ServiceModel.stage4.json
-      \Production\Production.ServiceModel.stage5.json
-      \Production\Production.RolloutParameters.stage1.json
-      \Production\Production.RolloutParameters.stage2.json
-      \Production\Production.RolloutParameters.stage3.json
-      \Production\Production.RolloutParameters.stage4.json
-      \Production\Production.RolloutParameters.stage5.json
+      \Production\Production.ServiceModel.Stage1.json
+      \Production\Production.ServiceModel.Stage2.json
+      \Production\Production.ServiceModel.Stage3.json
+      \Production\Production.ServiceModel.Stage4.json
+      \Production\Production.ServiceModel.Stage5.json
+      \Production\Production.ServiceModel.HealthCheckOnly.json
+      \Production\Production.RolloutParameters.Stage1.json
+      \Production\Production.RolloutParameters.Stage2.json
+      \Production\Production.RolloutParameters.Stage3.json
+      \Production\Production.RolloutParameters.Stage4.json
+      \Production\Production.RolloutParameters.Stage5.json
+      \Production\Production.RolloutParameters.HealthCheckOnly.json
+      \Production\Production.RolloutParameters.WithHealthCheck.Stage1.json
+      \Production\Production.RolloutParameters.WithHealthCheck.Stage2.json
+      \Production\Production.RolloutParameters.WithHealthCheck.Stage3.json
+      \Production\Production.RolloutParameters.WithHealthCheck.Stage4.json
+      \Production\Production.RolloutParameters.WithHealthCheck.Stage5.json
       \Production\Production.ServiceModel.SetFriendlyName.friendlyname_1.json
       \Production\Production.ServiceModel.SetFriendlyName.friendlyname_2.json
       \Production\Production.ServiceModel.SetFriendlyName.friendlyname_3.json
@@ -346,6 +361,8 @@ Health checks can be specified by adding the object `"MDMHealthResources"` in th
 **How to Specify the Deployment Type for a Health Check**
 
  Health checks can be specified for SDP, Hotfix, or both. The deployment types and health check names are not case sensitive.
+ Defining health checks for SDP will add the specified health checks to artifacts that follow the naming convention: {Environment}.RolloutParameters.{MonitorDuration}.json, {Environment}.RolloutParameters.HealthCheckOnly.json, {Environment}.RolloutParameters.Stage{Number}.json, or {Environment}.RolloutParameters.SetFriendlyName.{Name}.json. Friendly Name and Stage specific health checks can be further modified. See the documentation below for more information on how to modify health checks for stages and friendly names.
+ Defining health checks for Hotfix will add the specified health checks to artifacts that follow the naming convention {Environment}.RolloutParameters.HotfixDeployment.{MonitorDuration}.json.
 
 **Choosing the Duration of the Health Check**
 
@@ -357,9 +374,35 @@ The `"MonitorTimeInMinutes"` is read from the `ServiceGroupRootReplacements.json
 
 **Choosing not to use Health Checks**
 
- If health checks are not defined in the `ServiceGroupRootReplacements.json` file, SDP and Hotfix deployment files will default to using the "EHSExtension" health check. Similarly, if health checks are only specified for either SDP or Hotfix in the `ServiceGroupRootReplacements.json` file, the missing deployment type will default to using the "EHSExtension" health check. Additionally,
+ If health checks are not defined in the `ServiceGroupRootReplacements.json` file, SDP and Hotfix deployment files will default to using the "EHSExtension" health check. Similarly, if health checks are only specified for either SDP or Hotfix in the `ServiceGroupRootReplacements.json` file, the missing deployment type will default to using the "EHSExtension" health check.
 
-The current list of Portal provided health checks can be found here: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=/src/SDK/tools/Ev2Generator/ServiceGroupRootTemplate/Deploy/SupportedHealthChecks.json.
+**Supported Health Checks**
+The current list of Portal provided health checks can be found here: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=/src/SDK/tools/Ev2Generator/ServiceGroupRootTemplate/Deploy/SupportedHealthChecks.json. Currently, there are 21 supported health checks, including the EHSExtension health check. The description for each health check is as follows:
+
+| Health Check Name | Description |
+| ------------------ | ------- |
+| Blade_90thLoadTime_LessThan4S_PT30M | Checks that the 90th percentile of blade loads are less than 4 seconds. The lookback period is 30 minutes.   |
+| Blade_95thLoadTime_LessThan4S_PT30M | Checks that the 95th percentile of blade loads are less than 4 seconds. The lookback period is 30 minutes.   |
+| Blade_99thLoadTime_LessThan4S_PT30M | Checks that the 99th percentile of blade loads are less than 4 seconds. The lookback period is 30 minutes.   |
+| BladeLoad_90PercentSuccessRate_PT30M | Checks that the success rate of all blade loads is at least 90%. The lookback period is 30 minutes. |
+| BladeLoad_95PercentSuccessRate_PT30M | Checks that the success rate of all blade loads is at least 95%. The lookback period is 30 minutes. |
+| Blade_90thLoadTime_LessThan4S_PT24H | Checks that the 90th percentile of blade loads are less than 4 seconds. The lookback period is 24 hours.
+| Blade_95thLoadTime_LessThan4S_PT24H | Checks that the 95th percentile of blade loads are less than 4 seconds. The lookback period is 24 hours.
+| Blade_99thLoadTime_LessThan4S_PT24H | Checks that the 99th percentile of blade loads are less than 4 seconds. The lookback period is 24 hours.
+| BladeLoad_90PercentSuccessRate_PT24H | Checks that the success rate of all blade loads is at least 90%. The lookback period is 24 hours.
+| BladeLoad_95PercentSuccessRate_PT24H | Checks that the success rate of all blade loads is at least 95%. The lookback period is 24 hours.
+| Extension_90thLoadTime_LessThan4S_PT30M | Checks that the 90th percentile of extension loads are less than 4 seconds. The lookback period is 30 minutes. |
+| Extension_95thLoadTime_LessThan4S_PT30M | Checks that the 95th percentile of extension loads are less than 4 seconds. The lookback period is 30 minutes. |
+| Extension_99thLoadTime_LessThan4S_PT30M | Checks that the 99th percentile of extension loads are less than 4 seconds. The lookback period is 30 minutes. |
+| ExtensionLoad_90PercentSuccessRate_PT30M | Checks that the success rate of all extension loads is at least 90%. The lookback period is 30 minutes. |
+| ExtensionLoad_95PercentSuccessRate_PT30M | Checks that the success rate of all extension loads is at least 95%. The lookback period is 30 minutes. |
+| Extension_90thLoadTime_LessThan4S_PT24H | Checks that the 90th percentile of extension loads are less than 4 seconds. The lookback period is 24 hours.
+| Extension_95thLoadTime_LessThan4S_PT24H | Checks that the 95th percentile of extension loads are less than 4 seconds. The lookback period is 24 hours.
+| Extension_99thLoadTime_LessThan4S_PT24H | Checks that the 99th percentile of extension loads are less than 4 seconds. The lookback period is 24 hours.
+| ExtensionLoad_90PercentSuccessRate_PT24H | Checks that the success rate of all extension loads is at least 90%. The lookback period is 24 hours.
+| ExtensionLoad_95PercentSuccessRate_PT24H | Checks that the success rate of all extension loads is at least 95%. The lookback period is 24 hours.
+| EHSExtension | Checks that the Portal has at least two extensions emitting metrics. The lookback period is 5 minutes. This monitor should always report healthy. |
+
 
 The following sample ServiceGroupRootReplacement.json file adds the MDMHealthResources dictionary in the **Production** and **Mooncake** environments.
 
@@ -411,7 +454,7 @@ The following sample ServiceGroupRootReplacement.json file adds the MDMHealthRes
 }
 ```
 
-**Custom Health Checks (coming soon)**
+**Custom Health Checks**
 
 **What are custom health checks?**
 
@@ -534,3 +577,97 @@ The following example adds the MDMHealthResources dictionary in the **Production
 In this example ServiceGroupRootReplacement.json file, we are defining replacements for both the **Mooncake** and **Production** environments. In **Production**, we are specifying health checks for SDP deployments. These health checks are a mix of custom health checks and Portal provided health checks. The two custom health checks that are specified (Custom_1 and Custom_3) are defined in the custom health check file. The values for the dimensions (dimension_1, dimension_2, and dimension_3) are specified as '1', '2', and '3' respectively for **Production** deployments. The dimension `extension_name` is specified as 'Microsoft_Azure_Monitoring' as determined in the ServiceGroupRootReplacements.json file under the `PortalExtensionName` parameter. The `extension_version` dimension is configured in your .csproj build file as the value of the GenerateEv2ContentTask parameter `ExtensionPageVersion`.
 
 In **Mooncake**, we are specifying health checks for SDP and Hotfix deployments. The list of health checks for Hotfix contains custom health checks. The custom health check that is specified (Custom_2) is defined in the custom health check file. The values for the dimensions (dimension_1 and dimension_2) are specified as 'a' and 'b' respectively for **Mooncake** deployments.
+
+**Health Checks for Stages**
+
+**How to add health checks for all Stages**
+
+As mentioned above, stage health checks can be specified by adding the object `"MDMHealthResources"` in the corresponding environment in the `ServiceGroupRootReplacements.json` file and specifying the wanted health checks under "SDP". Health Checks listed under SDP will be added to all {Environment}.RolloutParameters.Stage{Number}.json files. In the event that "SDP" health checks are defined and Stage specific health checks are defined, the Stage specific health checks will be used. "SDP" health checks are only used for stages in the event that a Stage specific health check has not been defined.
+
+**How to specify a health check for a specific stage**
+
+If you would like to add different health checks for specific stages, that can be done by modifying the `MDMHealthResources` dictionary in the `ServiceGroupRootReplacements.json` file. Simply add a key corresponding to the Stage number (ex. "Stage3") followed by a list of the health checks that should be added to that Stage. These health checks can be Supported Health Checks, Custom Health Checks, or a mix of both (as long as the custom health checks are defined correctly as explained above).
+
+**Choosing not to use Health Checks in Stages**
+
+You will notice that there are two different types of RolloutSpec's corresponding to each unique Environemnt and Stage. These RolloutSpec types are follow the naming convention {Environment}.RolloutSpec.WithHealthCheck.Stage{Number}.json, and {Environment}.RolloutSpec.Stage{Number}.json. The "WithHealthCheck" RolloutSpec include actions that deploy the Extension, and then run the health check. The RolloutSpec without the mention of "HealthCheck" only deploys the Extension. There is also one "HealthCheckOnly" RolloutSpec per environment that does not deploy an Extension and only runs the health check defined under SDP in the `"MDMHealthResources"` dictionary.
+
+**Health Checks for Friendly Names**
+
+**How to add health checks for a Friendly Name**
+
+Friendly Name health checks can be specified by adding the object `"MDMHealthResources"` in the corresponding environment in the `ServiceGroupRootReplacements.json` file and specifying the wanted health checks under "SDP". Health Checks listed under SDP will be added to all {Environment}.RolloutParameters.SetFriendlyName.{Name}.json files. In the event that "SDP" health checks are defined and Friendly Name specific health checks are defined, the Friendly Name specific health checks will be used. "SDP" health checks are only used for friendly names in the event that a Friendly Name specific health check has not been defined.
+
+**How to specify a health check for a specific stage**
+
+If you would like to add different health checks for specific friendly names, that can be done by modifying the `MDMHealthResources` dictionary in the `ServiceGroupRootReplacements.json` file. Simply add a key corresponding to the Friendly Name (ex. "friendlyname_1") followed by a list of the health checks that should be added to that Friendly Name. These health checks can be Supported Health Checks, Custom Health Checks, or a mix of both (as long as the custom health checks are defined correctly as explained above).
+
+**Choosing not to use Health Checks in Stages**
+
+You will notice that there are two different types of RolloutSpec's corresponding to each unique Environemnt and Friendly Name. These RolloutSpec types are follow the naming convention {Environment}.RolloutSpec.WithHealthCheck.SetFriendlyName.{Name}.json, and {Environment}.RolloutSpec.SetFriendlyName.{Name}.json. The "WithHealthCheck" RolloutSpec include actions that deploy the Extension, and then run the health check. The RolloutSpec without the mention of "HealthCheck" only deploys the Extension.
+
+The following example adds the MDMHealthResources dictionary in the **Production** and **Mooncake** environments with Stage specific health checks and Friendly Name specific health checks. The custom health checks are as defined in the previous CustomHealthCheck.json example file.
+
+```json
+{
+    "Production": {
+        "ServiceGroupRootReplacementsVersion": 3,
+        "AzureSubscriptionId": "<SubscriptionId>",
+        "CertKeyVaultUri": "https://sometest.vault.azure.net/secrets/PortalHostingServiceDeploymentCertificate",
+        "StorageAccountCredentialsType": "<ConnectionString | AccountKey | SASToken>",
+        "TargetStorageCredentialsKeyVaultUri": "<https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageConnectionString | https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageAccountKey | https://sometest.vault.azure.net/secrets/PortalHostingServiceStorage-SASToken>",
+        "TargetContainerName": "hostingservice",
+        "ContactEmail": "youremail@microsoft.com",
+        "PortalExtensionName": "Microsoft_Azure_Monitoring",
+        "FriendlyNames": [ "friendlyname_1", "friendlyname_2", "friendlyname_3" ],
+        "MDMHealthResources":
+        {
+            "SDP" : [
+                "EHSExtension" ,
+                "Extension_90thLoadTime_LessThan4S_PT30M",
+                "Custom_1",
+                "Custom_3"
+            ],
+            "Stage1" : ["Custom_1", "EHSExtension"],
+            "Stage2" : ["Extension_90thLoadTime_LessThan4S_PT24H", "Blade_95thLoadTime_LessThan4S_PT30M"],
+            "friendlyname_1" : ["Custom_1", "Extension_90thLoadTime_LessThan4S_PT24H" ]
+        },
+        "CustomHealthCheckReplacements" :
+        {
+            "dimension1": "1",
+            "dimension2": "2",
+            "dimension3": "3"
+        }
+    },
+    "Mooncake": {
+        "ServiceGroupRootReplacementsVersion": 3,
+        "AzureSubscriptionId": "<SubscriptionId>",
+        "CertKeyVaultUri": "https://sometest.vault.azure.cn/secrets/PortalHostingServiceDeploymentCertificate",
+        "StorageAccountCredentialsType": "<ConnectionString | AccountKey | SASToken>",
+        "TargetStorageCredentialsKeyVaultUri": "<https://sometest.vault.azure.cn/secrets/PortalHostingServiceStorageConnectionString | https://sometest.vault.azure.cn/secrets/PortalHostingServiceStorageAccountKey | https://sometest.vault.azure.cn/secrets/PortalHostingServiceStorage-SASToken>",
+        "TargetContainerName": "hostingservice",
+        "ContactEmail": "youremail@microsoft.com",
+        "PortalExtensionName": "Microsoft_Azure_Monitoring",
+        "FriendlyNames": [ "friendlyname_1", "friendlyname_2", "friendlyname_3" ],
+        "HotfixDeployment": "true",
+        "HotfixMonitorDurations" : [ "PT30M", "P1D" ],
+        "MDMHealthResources":
+        {
+            "Hotfix": [
+                "Custom_2"
+            ],
+            "SDP" : [
+                "Extension_90thLoadTime_LessThan4S_PT30M" ,
+                "Blade_95thLoadTime_LessThan4S_PT30M"
+            ],
+            "Stage2" : ["Custom_2", "Blade_95thLoadTime_LessThan4S_PT24H", "EHSExtension"],
+            "friendlyname_3" : ["Custom_2", "Extension_90thLoadTime_LessThan4S_PT24H" ]
+        },
+        "CustomHealthCheckReplacements" :
+        {
+            "dimension1": "a",
+            "dimension2": "b"
+        }
+    }
+}
+```

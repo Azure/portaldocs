@@ -11,31 +11,33 @@ Extensions that currently have PDL assets do not need to manually re-write in JS
 <a name="migration-of-pdl-assets-and-forasset-commands-decorator-to-json-before-running-the-tool"></a>
 ## Before running the tool
 
-Before you use the tool, you will most likely find the following PDL artifacts in your extension - 
+Before you use the tool, you will most likely find the following PDL artifacts in your extension -
 
-1. An extension definition. While the extension definition can exist in any PDL file,it most likely lives in a separate file named `extension.pdl` and has the content below.  
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<Definition xmlns="http://schemas.microsoft.com/aux/2013/pdl">
-  <Extension Name="ToolTest" EntryPointModulePath="Program" />
-</Definition>
-```
+1. An extension definition. While the extension definition can exist in any PDL file,it most likely lives in a separate file named `extension.pdl` and has the content below.
 
-2. Assets. Most extensions have at least one asset. Assets can be defined in any PDL file with the `<AssetType>` tag.
+    ```xml
+    <?xml version="1.0" encoding="utf-8" ?>
+    <Definition xmlns="http://schemas.microsoft.com/aux/2013/pdl">
+      <Extension Name="ToolTest" EntryPointModulePath="Program" />
+    </Definition>
+    ```
 
-3. `@ForAsset.Commands.Decorator`. This typescript decorator is used to define commands in browse for an asset and can live in an .ts file.
+1. Assets. Most extensions have at least one asset. Assets can be defined in any PDL file with the `<AssetType>` tag.
+
+1. `@ForAsset.Commands.Decorator`. This typescript decorator is used to define commands in browse for an asset and can live in an .ts file.
 
 <a name="migration-of-pdl-assets-and-forasset-commands-decorator-to-json-using-the-tool"></a>
 ## Using the tool
 
 **Step 1** : Update the SDK to version 8.230.0.5 or higher and ensure you have a successful build.
 
-**Step 2** : Add the following to the csproj - 
+**Step 2** : Add the following to the csproj -
 
 ```xml
 <ConvertAssetsToDx>true</ConvertAssetsToDx>
 ```
-**Step 3** : Build the extension. If everything goes well, you will see a single error that looks like this - 
+
+**Step 3** : Build the extension. If everything goes well, you will see a single error that looks like this -
 
 ![alt-text](../media/declarative-pdl-migration/errorWhenToolRuns.png "Error when tool runs and converts PDL to JSON successfully")
 
@@ -43,7 +45,7 @@ You will observe that the tool has removed extension and asset definition PDL fr
 
 ![alt-text](../media/declarative-pdl-migration/changesToFiles.png "Changes to files after the tool runs")
 
-In the above example, `ToolTest.dx.json` contains the extension definition and `MyResource.dx.json` contains the asset definition. The extension definition in JSON looks like this  - 
+In the above example, `ToolTest.dx.json` contains the extension definition and `MyResource.dx.json` contains the asset definition. The extension definition in JSON looks like this  -
 
 ```json
 {
@@ -53,6 +55,7 @@ In the above example, `ToolTest.dx.json` contains the extension definition and `
   }
 }
 ```
+
 There is a good reason for the tool to throw an error even when it successfully converts the PDL to JSON. When you build your extension, the tooling compiles the PDL, converts it to JSON, re-compiles the converted JSON, compares the compiled PDL to the compiled JSON and then subsequently errors out. The reason it errors out is because this multi-compile flow shouldn't be part of the build process and should be a one-time step at dev time only.
 
 If the tool is unable to convert some PDL to JSON, you will see a warning like the one below. Please report such issues to dxportalteam@microsoft.com.

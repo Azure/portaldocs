@@ -35,7 +35,6 @@ import AjaxMock from "../../../../Mock/AjaxMock";
 
 // import references to blades that are opened by these samples
 import * as Resources from "ClientResources";
-import { ViewModel as HotspotViewModel } from "Fx/Controls/HotSpot";
 
 import Def = ViewModelDefinitions.V1$$Navigation.OpenBladeApiSamplesViewModel;
 import BladeContainer = FxCompositionBlade.Container;
@@ -44,6 +43,11 @@ import QueryView = MsPortalFx.Data.QueryView;
 
 // Data type used in the grid sample
 export { Person } from "DataModels/Person";
+
+// OBSOLETE API IMPORTS
+import * as FxObsoleteHotSpot from "Fx/Controls/HotSpot";
+const ObsoleteHotSpot: any = FxObsoleteHotSpot;
+type ObsoleteHotSpotViewModel = any;
 
 /**
  * Const function which produces a callback
@@ -210,7 +214,7 @@ export class OpenBladeApiSamplesViewModel
     /**
      * Hotspot view model
      */
-    public hotspot: any;
+    public hotspot: ObsoleteHotSpotViewModel;
 
     public grid: Grid.ViewModel<Person, Person>;
 
@@ -453,7 +457,7 @@ export class OpenBladeApiSamplesViewModel
     }
 
     private _initializeHotSpotSample(container: BladeContainer) {
-        this.hotspot = new (HotspotViewModel as any)(container, {
+        this.hotspot = new ObsoleteHotSpot.ViewModel(container, {
             onClick: () => {
                 void container.openBlade(BladeReferences.forBlade("OpenBladeApiChildBlade").createReference());
             },

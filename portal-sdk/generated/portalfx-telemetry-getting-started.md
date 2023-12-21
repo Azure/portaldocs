@@ -46,7 +46,7 @@ All Azure Employees should have access to our Kusto Clusters. Permissions are gr
 Though permissions are granted through these top-level groups, you may not join them directly. In order to acquire the permissions granted from these groups, you must join a group that inherits from one. This group is your team's group.
 
 1. Visit [https://aka.ms/standardaccess](https://aka.ms/standardaccess)
-1. On the standard access page you will find a table of team projects 'Active ​Azure  Team Projects'
+1. On the standard access page you will find a table of team projects 'Active Azure  Team Projects'
 1. Search the table for your team's group (if you are unware of which group to join ask your colleagues)
 1. Once you have found the correct group join that group via [aka.ms/myaccess](https://aka.ms/myaccess) or reach out to team's support alias for further help.
 1. Ensure your request has been approved. If you have been denied for any reason please follow up with the group support alias.

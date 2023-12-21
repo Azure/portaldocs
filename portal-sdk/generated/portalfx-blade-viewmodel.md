@@ -40,7 +40,7 @@ For reference here are the properties we'll put on the blade view model to creat
 /**
  * Textbox control containing the user's name.
  */
-public nameTextBox: any;
+public nameTextBox: TextBox.Contract;
 
 /**
  * Observable containing either a numeric textbox or a textbox.
@@ -97,9 +97,9 @@ Here's what our blade view model constructor looks like:
 
 this._view = dataContext.personData.peopleEntities.createView(container);
 
-this.nameTextBox = new (TextBox.ViewModel as any)(container, {
+this.nameTextBox = TextBox.create(container, {
     readOnly: true,
-    label: ko.observable("Name"),
+    label: "Name",
 });
 
 this.smartPhone = ko.observable();
@@ -183,10 +183,10 @@ return this._view.fetch(inputs.id).then(() => {
     // otherwise leave it empty
     const smartPhone = person.smartPhone();
     if (smartPhone) {
-        const textBox = new (TextBox.ViewModel as any)(this._container, {
+        const textBox = TextBox.create(this._container, {
             readOnly: true,
-            label: ko.observable("Smart phone"),
-            defaultValue: ko.observable(smartPhone),
+            label: "Smart phone",
+            value: smartPhone,
         });
         this.smartPhone(textBox);
     }

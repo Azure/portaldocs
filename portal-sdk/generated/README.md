@@ -94,7 +94,7 @@ Azure portal extension development is supported on Windows Server 2012 R2, and W
 
 * [Breaking changes](/portal-sdk/generated/breaking-changes.md)
 
-* [Install the CLI](/portal-sdk/generated/top-ap-cli.md#setup-and-installation)
+* [Install the CLI](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#setup-and-installation)
 
 * [Get started](/portal-sdk/generated/top-extensions-getting-started.md)
 
@@ -109,25 +109,25 @@ Azure portal extension development is supported on Windows Server 2012 R2, and W
 
 The Azure portal extension developer CLI, namely `ap`, is the foundational tool used for all inner dev/test loop actions during extension development and includes commands such as new, restore, build, serve, start, release, lint, run test, watch and update.
 
-* [CLI Overview](/portal-sdk/generated/top-ap-cli.md#cli-overview)
+* [CLI Overview](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#cli-overview)
 
-* [Setup and Installation](/portal-sdk/generated/top-ap-cli.md#setup-and-installation)
+* [Setup and Installation](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#setup-and-installation)
 
-* [Basic Workflows](/portal-sdk/generated/top-ap-cli.md#basic-workflows)
+* [Basic Workflows](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#basic-workflows)
 
-* [Command Reference](/portal-sdk/generated/top-ap-cli.md#command-reference)
+* [Command Reference](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#command-reference)
 
-* [Linting directly within VS Code](/portal-sdk/generated/top-ap-cli.md#linting-directly-within-vscode)
+* [Linting directly within VS Code](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#linting-directly-within-vscode)
 
-* [Customizing Lint Rules](/portal-sdk/generated/top-ap-cli.md#customizing-lint-rules)
+* [Customizing Lint Rules](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#customizing-lint-rules)
 
-* [Extending the cli with your teams own commands](/portal-sdk/generated/top-ap-cli.md#extending-the-cli-with-your-teams-own-commands)
+* [Extending the cli with your teams own commands](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#extending-the-cli-with-your-teams-own-commands)
 
-* [Overriding the behavior of existing commands](/portal-sdk/generated/top-ap-cli.md#overriding-the-behavior-of-existing-commands)
+* [Overriding the behavior of existing commands](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#overriding-the-behavior-of-existing-commands)
 
-* [Contributions and Feedback](/portal-sdk/generated/top-ap-cli.md#contributions-and-feedback)
+* [Contributions and Feedback](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#contributions-and-feedback)
 
-* [FAQ](/portal-sdk/generated/top-ap-cli.md#faq)
+* [FAQ](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#faq)
 
 <a name="azure-portal-extension-development-documentation-development-guide-samples"></a>
 ### Samples

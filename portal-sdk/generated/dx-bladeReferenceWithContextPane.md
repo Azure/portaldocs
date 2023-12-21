@@ -21,6 +21,7 @@ open a blade in context pane
 |extension|False|Extension of the blade
 |parameters|False|Parameters of the blade
 |inContextPane|False|Specify opening blade in context pane. If false, open blade in full screen.
+|doesProvisioning|False|Specify whether to open this blade as Provisioning blade
 |fx.feature|False|
 <a name="bladereferencewithcontextpane-definitions-option-2"></a>
 ### Option 2

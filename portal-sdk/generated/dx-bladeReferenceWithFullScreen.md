@@ -17,6 +17,7 @@
 |extension|False|Extension name
 |parameters|False|Parameters for configuring blade
 |inFullScreen|False|Specify whether to display this blade as contextPane or in full screen
+|doesProvisioning|False|Specify whether to open this blade as Provisioning blade
 |fx.feature|False|
 <a name="bladereferencewithfullscreen-definitions-option-2"></a>
 ### Option 2

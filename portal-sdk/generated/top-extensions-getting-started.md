@@ -22,8 +22,8 @@ The Azure Portal SDK includes everything you need to build extensions for the po
 <a name="getting-started-with-the-portal-sdk-installing-the-azure-portal-sdk"></a>
 ## Installing the Azure Portal SDK
 
-- Perform the [one time configuration steps](top-ap-cli.md#one-time-configuration-steps)
-- [Optional] if using Visual Studio 2019 see [What are the IDE specific installs required for Visual Studio?](top-ap-cli.md#FAQ)
+- Perform the [one time configuration steps](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#one-time-configuration-steps)
+- [Optional] if using Visual Studio 2019 see [What are the IDE specific installs required for Visual Studio?](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#FAQ)
 
 <a name="getting-started-with-the-portal-sdk-creating-and-running-an-extension"></a>
 ## Creating and running an Extension
@@ -153,7 +153,7 @@ If the view you are trying to build is unique and is not one of the standard vie
 <a name="getting-started-with-the-portal-sdk-next-steps"></a>
 ## Next steps
 
-- You are now ready to start developing your Azure Portal extension. Use `ap build` to build your extension, `ap serve` to run the local server, and `ap watch` to watch for changes and enable compile on save. You can learn more about AP CLI commands [here](top-ap-cli.md).
+- You are now ready to start developing your Azure Portal extension. Use `ap build` to build your extension, `ap serve` to run the local server, and `ap watch` to watch for changes and enable compile on save. You can learn more about AP CLI commands [here](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli).
 - You can also add auto-generated dx views and asset definitions into your extension. Learn more [here](top-extensions-autogeneration.md).
 
 <a name="getting-started-with-the-portal-sdk-questions"></a>

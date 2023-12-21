@@ -410,7 +410,7 @@ In the `EditScopeAccessor`, the form field `ViewModel` constructor accepts an `E
 
  ```typescript
 
-this.textBoxSimpleAccessor = new (MsPortalFx.ViewModels.Forms.TextBox.ViewModel as any)(
+this.textBoxSimpleAccessor = new ObsoleteTextBox.ViewModel(
     container,
     this,
     this.createEditScopeAccessor<string>((data) => { return data.state; }),
@@ -422,7 +422,7 @@ this.textBoxSimpleAccessor = new (MsPortalFx.ViewModels.Forms.TextBox.ViewModel 
 
  ```typescript
 
-this.textBoxReadWriteAccessor = new (MsPortalFx.ViewModels.Forms.TextBox.ViewModel as any)(
+this.textBoxReadWriteAccessor = new ObsoleteTextBox.ViewModel(
     container,
     this,
     this.createEditScopeAccessor<string>(<MsPortalFx.ViewModels.Forms.EditScopeAccessors.Options<FormIntegratedFormData.FormIntegratedFormData, string>>{
@@ -444,7 +444,7 @@ The string-typed path methodology can be used instead of the `EditScopeAccessor`
 
  ```typescript
 
-this.textBoxViewModel = new (MsPortalFx.ViewModels.Forms.TextBox.ViewModel as any)(container, this, "name", textBoxOptions);
+this.textBoxViewModel = new ObsoleteTextBox.ViewModel(container, this, "name", textBoxOptions);
 
 ```
 
@@ -584,7 +584,7 @@ This form displays one textbox that allows the user to edit the name of the webs
 
  ```typescript
 
-const websiteName = new (TextBox.ViewModel as any)(
+const websiteName = new ObsoleteTextBox.ViewModel(
     this._ltm,
     this._form,
     this._form.createEditScopeAccessor(data => data.name),
@@ -619,7 +619,7 @@ The commands also keep themselves disabled during save operations by using a `_s
  ```typescript
 
 // set up save command
-const saveCommand = new Toolbars.CommandButton();
+const saveCommand = new Toolbars.CommandButton(); // eslint-disable-line deprecation/deprecation
 saveCommand.label(ClientResources.saveText);
 saveCommand.icon(FxBase.Images.Save());
 saveCommand.command = {
@@ -635,7 +635,7 @@ saveCommand.command = {
 };
 
 // set up discard command
-const discardCommand = new Toolbars.CommandButton();
+const discardCommand = new Toolbars.CommandButton(); // eslint-disable-line deprecation/deprecation
 discardCommand.label(ClientResources.discardText);
 discardCommand.icon(MsPortalFx.Base.Images.Delete());
 discardCommand.command = {
@@ -651,7 +651,7 @@ discardCommand.command = {
     },
 };
 
-this.commandBar = new Toolbars.Toolbar(this._ltm);
+this.commandBar = new Toolbars.Toolbar(this._ltm); // eslint-disable-line deprecation/deprecation
 this.commandBar.setItems([saveCommand, discardCommand]);
 
 ```

@@ -182,9 +182,12 @@ const onCreateButtonClick = () => {
                     bladeInstanceId: instanceId,
                 },
             });
+            // The provisioner will handle closing the blade. Do not close it manually, especially before confirmation that your deployment has been provisioned.
+            // Closing the blade explicitly/manually can cause provisioning to fail to be initiated.
         })
         .catch(err => {
             // This should only occur if there was a network issue when trying to call ARM, since validation has already succeeded.
+            // However, you should handle any sort of errors (connection, server errors etc.) should they arrise and display them to the customer.
             showError(MsPortalFx.getLogFriendlyMessage(err), () => {
                 // Display the arm errors blade with results from arm
                 void container.openContextPane(this.context.provisioning.getArmErrorsBladeReference({

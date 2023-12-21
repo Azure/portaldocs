@@ -14,19 +14,19 @@ Self-served onboarding using ServiceTree will be the only onboarding process req
 <a name="self-served-onboarding-using-servicetree-highlights"></a>
 ## Highlights
 
-1) Azure portal onboarding self-served using the service tree​
+1) Azure portal onboarding self-served using the service tree
 
-2) Partners won't be required to update any configuration files in Azure portal repositories.​
+2) Partners won't be required to update any configuration files in Azure portal repositories.
 
- 3) No more pull requests for onboarding unless otherwise required in special cases​
+ 3) No more pull requests for onboarding unless otherwise required in special cases
 
- 4) Partners can onboard to the Azure portal using service tree as soon as they are ready OR along with​
+ 4) Partners can onboard to the Azure portal using service tree as soon as they are ready OR along with
 
-    1) Ring Onboarding​
+    1) Ring Onboarding
     2) ARM RP
     3) Tech Support
 
- 5) Portal team will pull the configuration from service and deploy the configuration to all clouds​
+ 5) Portal team will pull the configuration from service and deploy the configuration to all clouds
 
 <a name="self-served-onboarding-using-servicetree-onboarding-requirements"></a>
 ## Onboarding Requirements

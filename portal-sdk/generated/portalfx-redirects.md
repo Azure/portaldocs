@@ -153,6 +153,8 @@ Each of these stages follows the same process:
 1. Verify that blade<sub>new</sub> is rendered
 1. Additionally, if your redirect specifies '`useFlighting`', you can explicitly simulate the scenario where a customer is not assigned to your flight:
     1. In the Portal URL include the query string '`&exp.RedirectBlade-{sourceExtensionName}-{sourceBladeName}=false`' to force your session to be excluded from the flight
+		- NOTE: if the extension name'`{sourceExtensionName}`' or blade name '`{sourceBladeName}`' contains an underscore you will need to add the prefix '`azureportal_`' to your experiment variable query string
+			- In this case your experiment variable query string should be '`&exp.azureportal_RedirectBlade-{sourceExtensionName}-{sourceBladeName}=false`'
 	1. Navigate to blade<sub>old</sub> in the Portal as a customer would
 	1. Verify that blade<sub>old</sub> is rendered
 

@@ -134,9 +134,9 @@ implements ParameterProviderForm.Contract {
  */
 public parameterProvider: MsPortalFx.ViewModels.ParameterProvider<ServerConfig, ProviderModels.ServerFormData>;
 
-public serverIdentifierTextBox: any;
+public serverIdentifierTextBox: ObsoleteTextBoxViewModel;
 
-public fixedStorageSlider: any;
+public fixedStorageSlider: ObsoleteSliderViewModel;
 
 /**
  * Constructs an instance of ParameterProviderFormPartViewModel.
@@ -168,8 +168,8 @@ constructor(container: MsPortalFx.ViewModels.PartContainerContract, _mock: AjaxM
 
     // Use the form to edit the edit scope set up by the provider
     this.editScope = this.parameterProvider.editScope;
-    this.serverIdentifierTextBox = new (MsPortalFx.ViewModels.Forms.TextBox.ViewModel as any)(container, this, "serverIdentifier");
-    this.fixedStorageSlider = new (MsPortalFx.ViewModels.Forms.Slider.ViewModel as any)(container, this, "fixedStorageGigabytes", { min: ko.observable(50), max: ko.observable(1000), showStepMarkers: ko.observable(false) });
+    this.serverIdentifierTextBox = new ObsoleteTextBox.ViewModel(container, this, "serverIdentifier");
+    this.fixedStorageSlider = new ObsoleteSlider.ViewModel(container, this, "fixedStorageGigabytes", { min: ko.observable(50), max: ko.observable(1000), showStepMarkers: ko.observable(false) });
 }
 
 ```

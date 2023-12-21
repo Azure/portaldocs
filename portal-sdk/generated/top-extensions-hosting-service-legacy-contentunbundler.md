@@ -2,6 +2,8 @@
 <a name="legacy-contentunbundler-step-by-step"></a>
 ## Legacy ContentUnbundler step-by-step
 
+**NOTE**: The hosting service docs are being migrated to <https://eng.ms/docs/products/azure-portal-framework-ibizafx/>.
+
 **ContentUnbundler is no longer supported** , for migration instructions please see [https://aka.ms/portalfx/removecuvideo](https://aka.ms/portalfx/removecuvideo).
 
 <a name="legacy-contentunbundler-step-by-step-step-by-step-onboarding"></a>

@@ -1,9 +1,6 @@
-* [Localization / Globalization](#localization-globalization)
-
+"gitdown": "contents", "maxLevel": 2
 
 <a name="localization-globalization"></a>
 # Localization / Globalization
-* [Understanding Localization](portalfx-localization.md#understanding-localization)
-
-* [Globalization API](portalfx-globalization.md#globalization-api)
-
+"gitdown": "include-headings", "file": "../templates/portalfx-localization.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-globalization.md"

@@ -1,7 +1,7 @@
 <a name="contacts"></a>
 ## Contacts
-   
-For assistance with the prerequisites for onboarding Management UI, contact the following people.  
+
+For assistance with the prerequisites for onboarding Management UI, contact the following people.
 
 If the following table is not current, please send a pull request to update the contact list. For more information on how to send a pull request, see [top-extensions-publishing.md](top-extensions-publishing.md).
 
@@ -24,9 +24,9 @@ If the following table is not current, please send a pull request to update the 
 | Third Party Applications (External partners)  | Santhosh Somayajula;  Adam Abdelhamed; Leon Welicki |                                            | <a href="mailto:ibiza-onboarding@microsoft.com?subject=Third Party Applications (External partners)">ibiza-onboarding@microsoft.com</a>  |
 | Performance                                   | Sean Watson                                         |                                            | <a href="mailto:ibiza-perf@microsoft.com?subject=Performance">ibiza-perf@microsoft.com</a>  |
 | Pull requests                                 |                                                     |                                            | <a href="mailto:ibizafxpm@microsoft.com?subject=Pull requests">ibizafxpm@microsoft.com</a>  |
-| Registration for internal extensions          |                                                     |                                            | <a href="mailto:ibizafxpm@microsoft.com?subject=Registration for internal extensions">ibizafxpm@microsoft.com</a>  | 
-| Quality Essentials                            |                                                     |                                            | <a href="mailto:Get1CS@microsoft.com​?subject=Quality Essentials">Get1CS@microsoft.com​</a> |
+| Registration for internal extensions          |                                                     |                                            | <a href="mailto:ibizafxpm@microsoft.com?subject=Registration for internal extensions">ibizafxpm@microsoft.com</a>  |
+| Quality Essentials                            |                                                     |                                            | <a href="mailto:Get1CS@microsoft.com?subject=Quality Essentials">Get1CS@microsoft.com</a> |
 | Reliability                                   | Sean Watson                                         |                                            | <a href="mailto:ibiza-reliability@microsoft.com?subject=Reliability">ibiza-reliability@microsoft.com</a>  |
 | Resource Move                                 | Balbir Singh                                        |                                            | <a href="mailto:ibiza-resourceMove@microsoft.com?subject=Resource Move">ibiza-resourceMove@microsoft.com</a>  |
 | Usability	                                    |                                                     | Joe Hallock; Mariah Jackson                | <a href="mailto:ibiza-usability@microsoft.com?subject=Usability">ibiza-usability@microsoft.com</a>  |
-| UX feasibility review                         | Santhosh Somayajula                                 |                                            | <a href="mailto:ibiza-onboarding@microsoft.com?subject=UX feasibility review">ibiza-onboarding@microsoft.com</a>  | 
+| UX feasibility review                         | Santhosh Somayajula                                 |                                            | <a href="mailto:ibiza-onboarding@microsoft.com?subject=UX feasibility review">ibiza-onboarding@microsoft.com</a>  |

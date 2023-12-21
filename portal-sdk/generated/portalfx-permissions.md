@@ -338,12 +338,12 @@ In some cases, you may need to check access in TypeScript. A few examples includ
 To check access via PDL, call the `hasPermission()` API:
 
 ```ts
-MsPortalFx.Extension.hasPermission(​
-    resourceUri, ​
-    [ExtensionDefinition.Assets.Robot.Permissions.read]​
-).then((hasAccess) => { ​
-    if (!hasAccess) { container.unauthorized(); return; }​
-    /* do awesome stuff */ ​
+MsPortalFx.Extension.hasPermission(
+    resourceUri,
+    [ExtensionDefinition.Assets.Robot.Permissions.read]
+).then((hasAccess) => {
+    if (!hasAccess) { container.unauthorized(); return; }
+    /* do awesome stuff */
 });
 ```
 
@@ -359,8 +359,8 @@ Note that you can also reference the permission definition from TypeScript in th
 Before adding any UI that requires access to RDFE, be sure to check RDFE access (e.g. service and co-admin) by checking for "rdfe" permission. TypeScript would look like the following, as an example:
 
 ```ts
-MsPortalFx.Extension.hasPermission(​resourceUri, ​["rdfe"]​).then((hasAccess) => { ​
-    if (!hasAccess) { container.unauthorized(); return; }​
-    /* do awesome stuff */ ​
+MsPortalFx.Extension.hasPermission(resourceUri, ["rdfe"]).then((hasAccess) => {
+    if (!hasAccess) { container.unauthorized(); return; }
+    /* do awesome stuff */
 });
 ```

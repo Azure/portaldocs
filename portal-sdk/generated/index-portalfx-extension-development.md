@@ -1,99 +1,56 @@
-* [Development](#development)
-    * [Getting Started](#development-getting-started)
-    * [Common scenarios](#development-common-scenarios)
-    * [Basic Concepts](#development-basic-concepts)
-    * [Authentication](#development-authentication)
-    * [Resource management](#development-resource-management)
-    * [Debugging](#development-debugging)
-    * [Other](#development-other)
-
+"gitdown": "contents", "maxLevel": 2
 
 <a name="development"></a>
 # Development
 
 <a name="development-getting-started"></a>
 ## Getting Started
-
-* [Getting Started with the Portal SDK](top-extensions-getting-started.md#getting-started-with-the-portal-sdk)
-    * [Installing the Azure Portal SDK](top-extensions-getting-started.md#installing-the-azure-portal-sdk)
-    * [Creating and running an Extension](top-extensions-getting-started.md#creating-and-running-an-extension)
-    * [Exploring the Extension](top-extensions-getting-started.md#exploring-the-extension)
-    * [Next steps](top-extensions-getting-started.md#next-steps)
-    * [Questions?](top-extensions-getting-started.md#questions)
-    * [FAQ:](top-extensions-getting-started.md#faq)
-
-* [Samples extension](portalfx-sample-extensions.md#samples-extension)
-
+"gitdown": "include-headings", "file": "../templates/portalfx-howitworks.md"
+"gitdown": "include-headings", "file": "../templates/top-extensions-getting-started.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-sample-extensions.md"
 
 <a name="development-common-scenarios"></a>
 ## Common scenarios
-* [Building browse experiences](portalfx-browse.md#building-browse-experiences)
-
-* [Building create experiences](portalfx-create.md#building-create-experiences)
-* [Building custom create forms](portalfx-create.md#building-custom-create-forms)
-
+"gitdown": "include-headings", "file": "../templates/portalfx-browse.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-create.md"
 
 <a name="development-basic-concepts"></a>
 ## Basic Concepts
-* [UI Concepts](portalfx-ui-concepts.md#ui-concepts)
-
-* [Defining Blades and Parts using TypeScript decorators (a.k.a. 'no-PDL')](portalfx-no-pdl-programming.md#defining-blades-and-parts-using-typescript-decorators-a-k-a-no-pdl)
-
-
-
-* [Developing Forms](portalfx-forms.md#developing-forms)
-    * [FAQ](portalfx-forms.md#faq)
-
-
+"gitdown": "include-headings", "file": "../templates/portalfx-ui-concepts.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-no-pdl-programming.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-parts.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-blades.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-forms.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-controls.md"
 
 <a name="development-authentication"></a>
 ## Authentication
-* [Calling ARM](portalfx-authentication.md#calling-arm)
-* [Calling alternate resources](portalfx-authentication.md#calling-alternate-resources)
-
-
-* [Introduction to Parameter Collection](portalfx-parameter-collection-overview.md#introduction-to-parameter-collection)
-    * [Roles](portalfx-parameter-collection-overview.md#roles)
-    * [Implementation](portalfx-parameter-collection-overview.md#implementation)
-    * [More details](portalfx-parameter-collection-overview.md#more-details)
-
-* [ARM APIs](portalfx-provisioning-arm.md#arm-apis)
-
+"gitdown": "include-headings", "file": "../templates/portalfx-authentication.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-data.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-parameter-collection-overview.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-provisioning-arm.md"
 
 <a name="development-resource-management"></a>
 ## Resource management
-* [Assets](portalfx-assets.md#assets)
-
-* [ARM APIs](portalfx-provisioning-arm.md#arm-apis)
-
-* [Essentials panel](portalfx-essentials.md#essentials-panel)
-
-
-* [Defining permissions and checking access](portalfx-permissions.md#defining-permissions-and-checking-access)
-
-* [Notifications](portalfx-notifications.md#notifications)
-
-* [Subscriptions](portalfx-subscriptions.md#subscriptions)
-
-* [Resource Tags](portalfx-tags.md#resource-tags)
-
-* [Resource moves](portalfx-resourcemove.md#resource-moves)
-
-
+"gitdown": "include-headings", "file": "../templates/portalfx-assets.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-provisioning-arm.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-essentials.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-resourcemenu.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-permissions.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-notifications.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-subscriptions.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-tags.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-resourcemove.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-extension-pricing-tier.md"
 
 <a name="development-debugging"></a>
 ## Debugging
-
-* [Debugging extension load failures](portalfx-debugging-extension-load-failures.md#debugging-extension-load-failures)
-
-
+"gitdown": "include-headings", "file": "../templates/portalfx-debugging.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-debugging-extension-load-failures.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-testinprod.md"
 
 <a name="development-other"></a>
 ## Other
-* [PDL Binding Quick Reference](portalfx-binding-reference.md#pdl-binding-quick-reference)
-
-* [Understanding the blade view model](portalfx-blade-viewmodel.md#understanding-the-blade-view-model)
-    * [Blade initialization](portalfx-blade-viewmodel.md#blade-initialization)
-
-
-
+"gitdown": "include-headings", "file": "../templates/portalfx-binding-reference.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-blade-viewmodel.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-load-configuration.md"

@@ -1,11 +1,7 @@
-* [Portal Test Frameworks](#portal-test-frameworks)
-
+"gitdown": "contents", "maxLevel": 2
 
 <a name="portal-test-frameworks"></a>
 # Portal Test Frameworks
-* [Choosing the right test Framework](portalfx-choosing-test-framework.md#choosing-the-right-test-framework)
-
-
-* [Overview](top-extensions-node-js-test-framework.md#overview)
-* [Questions?](top-extensions-node-js-test-framework.md#questions)
-
+"gitdown": "include-headings", "file": "../templates/portalfx-choosing-test-framework.md"
+"gitdown": "include-headings", "file": "../templates/portalfx-test.md"
+"gitdown": "include-headings", "file": "../templates/top-extensions-node-js-test-framework.md"

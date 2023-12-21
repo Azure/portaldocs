@@ -15,15 +15,15 @@ Azure portal onboarding process is updated and teams looking to onboard new exte
 
 * Azure portal onboarding is now available through [EasyStart Onboarding](https://aka.ms/portalfx/easystart).
 
-* Azure portal onboarding is self-served using the service tree​ metadata
+* Azure portal onboarding is self-served using the service tree metadata
 
-* Partners won't be required to update any configuration files in Azure portal repositories.​
+* Partners won't be required to update any configuration files in Azure portal repositories.
 
 * No need to raise pull requests or cherry-picking changes across different branches for onboarding or updating configuration.
 
 * Partners can onboard to the Azure portal using Easy Start experience that will update the corresponding service tree database.
 
-* Portal team will pull the configuration from service tree and deploy the configuration to all clouds​ and across all portal and hosting service branches
+* Portal team will pull the configuration from service tree and deploy the configuration to all clouds and across all portal and hosting service branches
 
 * Any manual updates to the Azure portal configuration using pull requests will be discarded or overridden by our automation pipeline.
 
@@ -235,7 +235,7 @@ Please review the following required and optional fields for Portal extension.
 #### <strong>Extension Name</strong>
 
 * Enter a unique Extension Name as per **naming convention "Microsoft_Azure_ExtensionName"**.
-* Please **check with Marketing team or your leadership team** before deciding a name and onboard to Azure portal.​
+* Please **check with Marketing team or your leadership team** before deciding a name and onboard to Azure portal.
 * Extension Name **cannot be renamed**.
 * Extension Name **must be common across all clouds**
 * Extension Name is shown in the URL and get stamped in user settings when accessing specific resource types.

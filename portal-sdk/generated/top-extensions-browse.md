@@ -1909,7 +1909,9 @@ These are the currently supported command types:
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[a-zA-Z_$][a-zA-Z0-9_$]*$",
+          "minLength": 1
         },
         "displayNames": {
           "$ref": "#/definitions/displayNames"
@@ -1969,7 +1971,8 @@ These are the currently supported command types:
               "type": "string"
             },
             "topLevelTenantAlias": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             },
             "routingType": {
               "$generateDocTemplate": "enum-assetType-resourceType-routingType",
@@ -3953,7 +3956,8 @@ These are the currently supported command types:
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z_$][a-zA-Z0-9_$]*$"
           },
           "action": {
             "type": "string"
@@ -4008,7 +4012,8 @@ These are the currently supported command types:
           "type": "object",
           "properties": {
             "id": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             },
             "displayName": {
               "$ref": "dx.schema.common.json#/definitions/stringResource"
@@ -4037,7 +4042,8 @@ These are the currently supported command types:
           "type": "object",
           "properties": {
             "id": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             },
             "displayName": {
               "$ref": "dx.schema.common.json#/definitions/stringResource"
@@ -4056,7 +4062,8 @@ These are the currently supported command types:
               "type": "object",
               "properties": {
                 "resourceType": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 1
                 }
               },
               "required": [
@@ -4076,7 +4083,8 @@ These are the currently supported command types:
           "type": "object",
           "properties": {
             "id": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             },
             "displayName": {
               "$ref": "dx.schema.common.json#/stringResource"

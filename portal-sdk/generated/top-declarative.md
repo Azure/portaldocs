@@ -160,8 +160,8 @@ Declarative extension support localization on par with native Ibiza extensions. 
 <a name="declarative-views-declarative-views-basics-getting-started-with-a-declarative-extension"></a>
 ### Getting started with a declarative extension
 
-- Perform these [one time configuration steps](top-ap-cli.md#one-time-configuration-steps).
-- We recommend using VS Code, however, if you want to use Visual Studio 2019 see [What are the IDE specific installs required for Visual Studio?](top-ap-cli.md#FAQ)
+- Perform these [one time configuration steps](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#one-time-configuration-steps).
+- We recommend using VS Code, however, if you want to use Visual Studio 2019 see [What are the IDE specific installs required for Visual Studio?](https://eng.ms/docs/products/azure-portal-framework-ibizafx/development/ap-cli#FAQ)
 - Install the Azure Portal Developer CLI `npm install -g @microsoft/azureportalcli`
 - To snap to a specific version include the version i.e `npm install -g @microsoft/azureportalcli@5.302.64701`.
 

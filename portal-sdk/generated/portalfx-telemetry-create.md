@@ -9,6 +9,7 @@
         * [Examples](#create-telemetry-create-flow-functions-examples-1)
         * [`GetCreateFunnelByDay`](#create-telemetry-create-flow-functions-getcreatefunnelbyday)
         * [`GetCombinedCreateFunnel`](#create-telemetry-create-flow-functions-getcombinedcreatefunnel)
+    * [Scenario: Analyzing User Tab Interactions on Create Blades for Abandoned Create Flows](#create-telemetry-scenario-analyzing-user-tab-interactions-on-create-blades-for-abandoned-create-flows)
 
 
 <a name="create-telemetry"></a>
@@ -699,3 +700,63 @@ This functions calculates the overall create funnel KPIs for the Portal.
   * The total number of creates which were aborted due to a commerce error.
 * `Unknown`
   * The total number of creates which do not have a known result.
+
+<a name="create-telemetry-scenario-analyzing-user-tab-interactions-on-create-blades-for-abandoned-create-flows"></a>
+## Scenario: Analyzing User Tab Interactions on Create Blades for Abandoned Create Flows
+
+In various applications and platforms, users initiate create by opening create blades, fill in information on different tabs, and then hit the 'create' button to initialize the deployment. This guide will help you analyze user interactions on these create blades to identify abandoned create flows — those cases where users open a create blade but never initialize the deployment.
+
+This guide focuses on the common use case of analyzing user interaction on create blades for abandoned create flows. The goal is to determine where users stop in the process of creating a resource and how to aggregate metrics regarding these abandoned flows. By following these steps, you can gain valuable insights into user behavior and improve user experiences on your create blades.
+
+1. **Identifying All Create Flows That Were Started:**
+To identify all 'create flows' that were initiated but may not have been completed, it's essential to understand that all 'create' information is consolidated into a 'flow' with a unique 'telemetryId'. Create flow telemetry data is made available in the `AzPtlCosmos.CreateFlowsEnriched` or via the `AzPtlCosmos.getCreateFlows()` function. Detailed documentation available [here](#GetCreateFlows).
+
+2. **Identifying Users Who Started but Did Not Complete Deployment:**
+Users who initiated the deployment but did not complete it will have an "ExecutionStatus" column with value of "Abandoned" in the telemetry data. This information helps you identify users who started but did not finish the deployment process.
+
+3. **Tracking Steps of Wizards and UI Interaction Telemetry:**
+It's important to note that steps within wizards and other UI interaction telemetry are considered general telemetry. You can access this data from either the `AzurePortal.ClientTelemetry` table (for Framework-logged telemetry) or the `AzurePortal.ExtTelemetry` table (for Extension-logged telemetry).
+
+4. **Joining Interaction Telemetry with Create Flows:**
+To correlate interaction telemetry with create flows, you can use the 'bladeInstanceId.' In the `AzPtlCosmos.CreateFlowsEnriched` table, the 'Context' column contains `Context.Blade.bladeInstanceId`. In `AzurePortal.[Client|Ext]Telemetry`, the 'context' column contains `context.Blade.instanceId`. You would need to extract the common ID portion and use it to join these sources together (i.e. `Blade_<id>_0_1`).
+
+5. **Tab Information:**
+Information about tabs is stored in `ClientTelemetry` and is automatically logged by the Azure Portal Framework with actions such as "TabOpened" and "TabClosed."
+
+For a detailed example and insights into aggregating metrics, you can refer to the provided Kusto query. This query demonstrates how to fetch 'Create' telemetry and 'TabOpened' telemetry, extract the common blade instance id from both sources, join them together, and calculate useful metrics.
+
+Execute in [[Web](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fdataexplorer.azure.com%2Fclusters%2Fazportalpartner%2Fdatabases%2FAzurePortal%3Fquery%3DH4sIAAAAAAAAA61VTW%2FTQBC951eMfMGGNGk%2BLhwsUUqReiISEUggVK29k2SLvWvtjpu64sczu04TxwkIoeYSZfbNe%2FPxdiMFiUw4jKOrpwUV18aVxkXJ6NqiIPxYmK270VblG5SDX7DdoEVYWMyVw6Uq8TOJsoIMaYuoY3AkLJmVFE0s1iaeyiSB0agfnnA4gfEYPhj9iqB2CLRBYGECpkZNwNAhtDXAyhcBG%2FGAIPwBmBVILESzL%2BjmkVA7ZTSkKURfMXOK0O2jEQgt4X0hJAbAVVV9RvugcmQo%2F2h1vswCIvKF4SO3VSB%2F7yjGmT%2FrCGJeE8e5f6pdy5qxitEoI4ZV1txjThDSbjUPQOd4K1MmtCKn%2BF0UxO7i71cX38TF0%2BXF2x9vkmgIkyEQz8EqvY7JyEaLUuXxtdHEqckoZI16rAnnNBWaVdwmtsPdSYXRhgRQuwxQElbWlLCjPc%2B6b1Y5bQjLipq4L8yYe6M0%2FFRapkprtPEA%2BMPyIb5VtAkFKBby1fgdERZYItkGGlPDVmgKObLjxNriwlgShXdiodgRy%2BekgH1RJx4xOlNbntBGuD8aqQv5fyt1RXeD8S5aiuxThcFFLSLkyZcyUn5sJHVY5b96Jj%2FyzIHgqKG%2FWSYBbrXvNdYWXlY5qNg4FKzRXvmiCOUcXNPxkvPvhbHS7a0EK2MBRb4B8XwfIQ9L8c%2BI13EmgHOhQazXFtf%2BjQnvD7OrvKUS3ERhDPt67RkH%2Bz2w0fExJV9jZ6zeu8konPk74eqyFFY9IYSptAvlzU4g5fnVmtQqbonSSTI8xkxPMdM%2BZnaKmfUx81PMPBlkzcnoO%2BUGhqXhe3dUMp%2FHh8BO6Bg27cOmZ2GzPmx2Fjbvw%2BansOf24uSwnHNUdwu0%2Fi8ltYyWfmemzgqMe7Dk9eTyctwJDmGa%2FAYwV%2BbSHQcAAA%3D%3D&data=05%7C01%7Casgar%40microsoft.com%7C74c8ec27bc0c4c6529ec08dbc6970df1%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638322124312128552%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=qQ341HICxPLZ5YGqus6vjnC2C2j98rk%2FrqPeGEySAdQ%3D&reserved=0)] [[Desktop](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fazportalpartner.kusto.windows.net%2FAzurePortal%3Fquery%3DH4sIAAAAAAAAA61VTW%2FTQBC951eMfMGGNGk%2BLhwsUUqReiISEUggVK29k2SLvWvtjpu64sczu04TxwkIoeYSZfbNe%2FPxdiMFiUw4jKOrpwUV18aVxkXJ6NqiIPxYmK270VblG5SDX7DdoEVYWMyVw6Uq8TOJsoIMaYuoY3AkLJmVFE0s1iaeyiSB0agfnnA4gfEYPhj9iqB2CLRBYGECpkZNwNAhtDXAyhcBG%2FGAIPwBmBVILESzL%2BjmkVA7ZTSkKURfMXOK0O2jEQgt4X0hJAbAVVV9RvugcmQo%2F2h1vswCIvKF4SO3VSB%2F7yjGmT%2FrCGJeE8e5f6pdy5qxitEoI4ZV1txjThDSbjUPQOd4K1MmtCKn%2BF0UxO7i71cX38TF0%2BXF2x9vkmgIkyEQz8EqvY7JyEaLUuXxtdHEqckoZI16rAnnNBWaVdwmtsPdSYXRhgRQuwxQElbWlLCjPc%2B6b1Y5bQjLipq4L8yYe6M0%2FFRapkprtPEA%2BMPyIb5VtAkFKBby1fgdERZYItkGGlPDVmgKObLjxNriwlgShXdiodgRy%2BekgH1RJx4xOlNbntBGuD8aqQv5fyt1RXeD8S5aiuxThcFFLSLkyZcyUn5sJHVY5b96Jj%2FyzIHgqKG%2FWSYBbrXvNdYWXlY5qNg4FKzRXvmiCOUcXNPxkvPvhbHS7a0EK2MBRb4B8XwfIQ9L8c%2BI13EmgHOhQazXFtf%2BjQnvD7OrvKUS3ERhDPt67RkH%2Bz2w0fExJV9jZ6zeu8konPk74eqyFFY9IYSptAvlzU4g5fnVmtQqbonSSTI8xkxPMdM%2BZnaKmfUx81PMPBlkzcnoO%2BUGhqXhe3dUMp%2FHh8BO6Bg27cOmZ2GzPmx2Fjbvw%2BansOf24uSwnHNUdwu0%2Fi8ltYyWfmemzgqMe7Dk9eTyctwJDmGa%2FAYwV%2BbSHQcAAA%3D%3D%26web%3D0&data=05%7C01%7Casgar%40microsoft.com%7C74c8ec27bc0c4c6529ec08dbc6970df1%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638322124312128552%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=QNT%2Fow2pQ0szRlp0Zs08%2BgAikBO8zjKsrFu7e8g7q9E%3D&reserved=0)] [cluster('azportalpartner.kusto.windows.net').database('AzurePortal')]
+```csl
+database("AzPtlCosmos").CreateFlowsEnriched
+| where PreciseTimeStamp between(startofday(ago(2d)) .. startofday(ago(1d))) // Don't use the most recent day, Create flows have a day of delay
+| where Extension == "WebsitesExtension" and Blade == "AppServiceWebAppCreateV3Blade" // example extension/blade
+| where ExecutionStatus == "Abandoned" // Filter to only abandoned creates
+| project bladeInstanceId=extract(@"Blade_([A-Za-z0-9]+)", 1, tostring(todynamic(Context).Blade.bladeInstanceId), typeof(string)) // extract the blade instance id from Context.Blade.bladeInstanceId
+| where isnotempty(bladeInstanceId)
+| join kind=inner(
+    // join with the interaction telemetry you want
+    database("AzurePortal").ClientTelemetry
+    | where PreciseTimeStamp between(startofday(ago(2d)) .. startofday(ago(1d))) // match these dates with above
+    | where source has "WebsitesExtension" and source has "AppServiceWebAppCreateV3Blade" // example extension/blade
+    | where action == "TabOpened"
+    | extend bladeInstanceId=extract(@"Blade_([A-Za-z0-9]+)", 1, tostring(todynamic(context).Blade.instanceId)) // extract the blade instance id from context.Blade.instanceId
+    | where isnotempty(bladeInstanceId)
+) on bladeInstanceId
+// at this point you have all the telemetry interactions records you want for each abandoned createflow
+// so you can aggregate the metrics you are looking for
+| extend index=toint(todynamic(data).index)
+| summarize
+    OpenedTab1 = countif(index==1),
+    OpenedTab2 = countif(index==2),
+    OpenedTab3 = countif(index==3),
+    OpenedTab4 = countif(index==4)
+by bladeInstanceId
+| summarize
+    TotalOpenedTab1 = sum(OpenedTab1),
+    TotalOpenedTab2 = sum(OpenedTab2),
+    TotalOpenedTab3 = sum(OpenedTab3),
+    TotalOpenedTab4 = sum(OpenedTab4),
+    TotalOpened = count()
+| extend
+    TotalOpenedTab4_Percent=round(todouble(TotalOpenedTab4)*100/TotalOpened, 2)
+```
