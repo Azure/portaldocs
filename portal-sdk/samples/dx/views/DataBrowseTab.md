@@ -1,4 +1,4 @@
-To add the DataBrowse view, add the following example to the properties.tabs section in the [Declarative Resource Overview schema](../../../portalfx-declarative-overview.md#declarative-resource-overview-schema)
+To add the DataBrowse view, add the following example to the properties.tabs section in the [Declarative Resource Overview schema](../../../generated/portalfx-declarative-overview.md#declarative-resource-overview-schema)
 
 
 Example for static array data source.
