@@ -4087,16 +4087,16 @@ These are the currently supported command types:
               "minLength": 1
             },
             "displayName": {
-              "$ref": "dx.schema.common.json#/stringResource"
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
             },
             "keywords": {
-              "$ref": "dx.schema.common.json#/stringResource"
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
             },
             "icon": {
-              "$ref": "dx.schema.common.json#/iconReference"
+              "$ref": "dx.schema.common.json#/definitions/iconReference"
             },
             "tooltip": {
-              "$ref": "dx.schema.common.json#/stringResource"
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
             },
             "tabItems": {
               "type": "array",
@@ -4124,10 +4124,10 @@ These are the currently supported command types:
               "type": "string"
             },
             "displayName": {
-              "$ref": "dx.schema.common.json#/stringResource"
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
             },
             "keywords": {
-              "$ref": "dx.schema.common.json#/stringResource"
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
             },
             "blade": {
               "$ref": "#/definitions/bladeReferenceWithParameters"
@@ -4147,10 +4147,10 @@ These are the currently supported command types:
               "type": "string"
             },
             "displayName": {
-              "$ref": "dx.schema.common.json#/stringResource"
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
             },
             "keywords": {
-              "$ref": "dx.schema.common.json#/stringResource"
+              "$ref": "dx.schema.common.json#/definitions/stringResource"
             },
             "browse": {
               "$comment": "*ExcludeFeature*",
