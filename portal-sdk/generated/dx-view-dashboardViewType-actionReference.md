@@ -14,7 +14,7 @@
 | Name | Required | Description
 | ---|:--:|:--:|
 |type|True|Enum permitting the value: "uri"
-|url|True|The URI that will be opened
+|uri|True|The URI that will be opened
 |displayName|True|Display name for the link
 |fx.feature|False|
 <a name="view-dashboardviewtype-actionreference-definitions-option-2"></a>
