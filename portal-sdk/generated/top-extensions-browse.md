@@ -2726,6 +2726,7 @@ These are the currently supported command types:
       "$comment": "*DontExcludeFeature*",
       "anyOf": [
         {
+          "$comment": "*IncludeAfec*",
           "type": "object",
           "properties": {
             "overview": {
@@ -2745,6 +2746,7 @@ These are the currently supported command types:
               }
             },
             "options": {
+              "$comment": "*IncludeAfec*",
               "type": "object",
               "properties": {
                 "enableExportTemplate": {
@@ -2827,6 +2829,7 @@ These are the currently supported command types:
         },
         {
           "type": "object",
+          "$comment": "*IncludeAfec*",
           "properties": {
             "groups": {
               "type": "array",
@@ -2839,6 +2842,7 @@ These are the currently supported command types:
               }
             },
             "options": {
+              "$comment": "*IncludeAfec*",
               "type": "object",
               "properties": {
                 "showSearch": {
@@ -4009,6 +4013,7 @@ These are the currently supported command types:
     "resourceMenuItem": {
       "anyOf": [
         {
+          "$comment": "*IncludeAfec*",
           "type": "object",
           "properties": {
             "id": {
@@ -4039,6 +4044,7 @@ These are the currently supported command types:
           ]
         },
         {
+          "$comment": "*IncludeAfec*",
           "type": "object",
           "properties": {
             "id": {
@@ -4080,6 +4086,7 @@ These are the currently supported command types:
           ]
         },
         {
+          "$comment": "*IncludeAfec*",
           "type": "object",
           "properties": {
             "id": {
@@ -4118,6 +4125,7 @@ These are the currently supported command types:
     "tabMenuItem": {
       "anyOf": [
         {
+          "$comment": "*IncludeAfec*",
           "type": "object",
           "properties": {
             "id": {
@@ -4141,6 +4149,7 @@ These are the currently supported command types:
           ]
         },
         {
+          "$comment": "*IncludeAfec*",
           "type": "object",
           "properties": {
             "id": {
@@ -4176,6 +4185,7 @@ These are the currently supported command types:
       ]
     },
     "assetMenuItemGroup": {
+      "$comment": "*IncludeAfec*",
       "type": "object",
       "properties": {
         "id": {
@@ -4204,6 +4214,7 @@ These are the currently supported command types:
       ]
     },
     "resourceMenuItemGroup": {
+      "$comment": "*IncludeAfec*",
       "type": "object",
       "properties": {
         "id": {
@@ -4234,6 +4245,7 @@ These are the currently supported command types:
       ]
     },
     "resourceMenuItemGroupBuiltin": {
+      "$comment": "*IncludeAfec*",
       "type": "object",
       "properties": {
         "items": {
