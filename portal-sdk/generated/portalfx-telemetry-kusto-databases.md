@@ -92,7 +92,7 @@ This field gives the actual time of the event according to the client's clock (w
 #### Data
 The Data field is the most dynamic field in telemetry. It is a JSON object with no set structure. They often contain information specific to a particular Action.
 
-Below is an example of the <b>Data</b> filed for <b>Action</b> "ProvisioningStarted"
+Below is an example of the **Data** filed for **Action** "ProvisioningStarted"
 
 ```json
 	{

@@ -102,7 +102,7 @@ The entire gallery in the portal is driven by the gallery service. The gallery s
 <a name="gallery-overview-new-process"></a>
 ## New Process
 
-Starting <b>1st May 2019</b>, Gallery is switching the process of publishing to Azure Production. Packages would only be received via ICM for making updates to Azure Production Clouds. If you publish a product to Microsoft Azure directly without going through Cloud Partner Portal, these changes impact you.
+Starting **1st May 2019**, Gallery is switching the process of publishing to Azure Production. Packages would only be received via ICM for making updates to Azure Production Clouds. If you publish a product to Microsoft Azure directly without going through Cloud Partner Portal, these changes impact you.
 
 <a name="gallery-overview-new-process-package-update-slas"></a>
 ### Package Update SLAs
