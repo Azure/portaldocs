@@ -1,7 +1,7 @@
+**NOTE**: The hosting service docs are being migrated to <https://eng.ms/docs/products/azure-portal-framework-ibizafx/deployments/top-extensions-hosting-service>. This document may be out of date.
+
 <a name="extension-hosting-service"></a>
 ## Extension Hosting Service
-
-**NOTE**: The hosting service docs are being migrated to <https://eng.ms/docs/products/azure-portal-framework-ibizafx/>.
 
 Teams deploying UI for extensions with the self-host model typically have to invest significant time upfront to onboard to MDS, setup compliant deployments across all data centers, configure CDN, storage, and implement caching optimizations in their extension. The cost of setting up and maintaining this infrastructure can be high. By leveraging the extension hosting service, extension developers can host their extension UI in all data centers without investing heavily in the deployment infrastructure. This is the primary reason more than 50% of the extensions have decided to migrate from legacy DIY deployment to extension hosting service.
 

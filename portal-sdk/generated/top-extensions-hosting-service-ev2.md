@@ -1,7 +1,7 @@
+**NOTE**: The hosting service docs are being migrated to <https://eng.ms/docs/products/azure-portal-framework-ibizafx/deployments/top-extensions-hosting-service-ev2> This document may be out of date.
+
 <a name="ev2-integration-with-hosting-service"></a>
 ## Ev2 Integration with hosting service
-
-**NOTE**: The hosting service docs are being migrated to https://eng.ms/docs/products/azure-portal-framework-ibizafx/.
 
 **NOTE**: This section of the document assumes that the reader has reviewed the hosting service document located at [top-extensions-hosting-service.md](top-extensions-hosting-service.md).
 
@@ -349,6 +349,8 @@ To remove a friendly name, just run an Ev2 deployment with the `Rolloutspec.Remo
 
 <a name="ev2-integration-with-hosting-service-health-checks"></a>
 ### Health Checks
+
+**NOTE**: The health check docs are being migrated to <https://eng.ms/docs/products/azure-portal-framework-ibizafx/deployments/health-checks>. This document may be out of date.
 
 **What is a Health Check**
 
