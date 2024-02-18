@@ -30,7 +30,7 @@ The framework supports loading view models using dependency injection. If you mi
 ```
 
 - Build the extension project
-- Get a copy of the dependency injection migration tool at: [\\\\wimoy-dev\Public\DependencyInjectionMigrator](\\\\wimoy-dev\Public\DependencyInjectionMigrator) and copy it locally. Many thanks to Bryan Wood (v-brwoo@microsoft.com) for improving the tool.
+- Get a copy of the dependency injection migration tool at: [\\\\wimoy-dev\Public\DependencyInjectionMigrator](\\\\wimoy-dev\Public\DependencyInjectionMigrator) and copy it locally. Many thanks to Bryan Wood for improving the tool.
   - Look for the string "ViewModels:" in the build logs and copy and paste the JSON to Extension.json in the dependency injection migration tool.
   - Modify the migration tool source code and put in the path of the folder that contains the TypeScript for your extension
 - Run the tool and migrate your V1 view models.
@@ -40,7 +40,7 @@ The framework supports loading view models using dependency injection. If you mi
     - Delete the initialState second parameter of the viewModel classes
   - The migration tool is based on regex and is not perfect. Review the results and make any necessary adjustments to ensure that it performs those three operations on all V1 viewModels.
   - The removal of the initialState parameter may cause breaks in your code if your code was referencing the parameter. The portal was always passing null for initialState. You can basically remove all uses of initialState.
-  - If the tool outputs anything besides a completion message, send wimoy an email with the message
+  - If the tool outputs anything besides a completion message, send wimoy@microsoft.com and cscro@microsoft.com an email with the message
 - Optionally, remove any parameters in V1 view models that are no longer needed. In the process of doing so, you may end up with some unused DataContext classes too. You can remove them if they are not used by V2 (no-pdl) view models.
 - Find all V2 view models and add the InjectableModel decorator. Refer to the PRs below for examples.
   - You can enumerate all of the V2 view models by going through the code in the following generated folders located at the root of your TypeScript build:
