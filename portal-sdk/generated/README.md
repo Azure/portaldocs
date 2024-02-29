@@ -370,9 +370,9 @@ The Azure portal supports multiple languages and locales. You will need to local
 
 The Azure Portal strives to meet high accessibility standards to ensure the product is accessible to to users of all levels of ability. There is regular testing and a process with SLAs for getting issues addressed quickly.
 
-* [Accessibility guidelines](/portal-sdk/generated/top-extensions-accessibility.md)
+* [Accessibility guidelines](https://eng.ms/docs/products/azure-portal-framework-ibizafx/accessibility/top-extensions-accessibility)
 
-* [Accessibility testing and SLAs](/portal-sdk/generated/top-extensions-accessibility.md#accessibility-planning)
+* [Accessibility testing and SLAs](https://eng.ms/docs/products/azure-portal-framework-ibizafx/accessibility/top-extensions-accessibility#accessibility-planning)
 
 [Ask about accessibility on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-accessibility)
 
