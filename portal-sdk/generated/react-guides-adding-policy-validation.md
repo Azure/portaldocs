@@ -103,7 +103,7 @@ return <Fabric>
                         this.props.setLocationId(locationId);
                         this.props.setLocationName(location && location.displayName || "");
                     }}
-                    onCustomizeLocations={(locs: Common.ResourceManagement.Location[]) => {
+                    onCustomizeLocations={(locs: ResourceManagement.Location[]) => {
                         this.props.setFetchedLocations(locs);
                         return locs;
                     }}
