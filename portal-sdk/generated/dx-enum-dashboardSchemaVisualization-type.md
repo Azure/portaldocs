@@ -15,7 +15,6 @@
 - line
 - multistat
 - pie
-- snapshot
 - scatter
 - table
 - timechart
