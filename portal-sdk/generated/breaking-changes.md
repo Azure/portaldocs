@@ -3,6 +3,15 @@
 * To ask a question about breaking changes [use this](https://aka.ms/ask/ibiza-breaking-change)  
 
 
+## 13.147.0.1
+<table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=24839573'>24839573</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=24839573'>Add support for client metrics from shell and hubs extension</a><p> </div><div><br> </div><div>This is an internal change to a<span style="">dd new FxImpl metrics apis</span> </div><div><br> </div><div></p></td></tr></table>
+
+## 13.145.0.1
+<table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=24839573'>24839573</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=24839573'>Add support for client metrics from shell and hubs extension</a><p> </div><div><br> </div><div>This is an internal change to a<span style="">dd new FxImpl metrics apis</span> </div><div><br> </div><div></p></td></tr></table>
+
+## 13.143.0.1
+<table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=24839573'>24839573</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=24839573'>Add support for client metrics from shell and hubs extension</a><p> </div><div><br> </div><div>This is an internal change to a<span style="">dd new FxImpl metrics apis</span> </div><div><br> </div><div></p></td></tr></table>
+
 ## 13.142.0.1
 <table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=24839573'>24839573</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=24839573'>Add support for client metrics from shell and hubs extension</a><p> </div><div><br> </div><div>This is an internal change to a<span style="">dd new FxImpl metrics apis</span> </div><div><br> </div><div></p></td></tr></table>
 
