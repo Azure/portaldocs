@@ -3,6 +3,9 @@
 * To ask a question about breaking changes [use this](https://aka.ms/ask/ibiza-breaking-change)  
 
 
+## 13.204.0.1
+<table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=25376422'>25376422</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=25376422'>Finish Transpile-only support (no const enums)</a><p><br></span><div><span>ReactViews will no longer be able to access the global &quot;Common&quot; namespace. They have to access it via the corresponding module, like this:<br></span><pre><code><div>import * as Common from &quot;@microsoft/azureportal-reactview/FxReactCommon.Modules&quot;;</div></code></pre><div>or like this:<br> </div><pre><code><div>import { ConsumedExport } from &quot;@microsoft/azureportal-reactview/FxReactCommon.Modules&quot;;<br></div></code></pre><div>It was bad practice to use the global namespace anyway. It was working before, but accidentally and unpredictably.<br> </div><div><span style=""></p></td></tr></table>
+
 ## 13.190.0.1
 <table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=26875511'>26875511</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=26875511'>generate unified rolloutspec</a><p> </div><div><span style="">only added new templates</span> </div><div><span style="display:inline !important;"></p></td></tr></table>
 
