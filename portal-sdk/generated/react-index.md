@@ -475,7 +475,7 @@ and something breaks it is likely our response will be to remove the plugin and 
 ### React Dev Tools
 
 React dev tools via browser extension does not currently work with ReactViews, due to limitations around IFrames. Instead, we have included the dev tools built into each IFrame. To use them, ensure you have loaded the portal with
-`clientoptimizations=bundle` or `clientoptimizations=false`, click within the experience and use the shortcut `ctrl + alt + t`. The dev tools should show up, if you see yellow boxes, your focus was likely set outside of the ReactView.
+`clientoptimizations=bundle` or `clientoptimizations=false`, click within the experience and use the shortcut `ctrl + alt + d`. The dev tools should show up, if you see yellow boxes, your focus was likely set outside of the ReactView.
 
 More improvements are still being worked on in this space, including resize. If you have suggestions, please submit them using our [filing requests](#filing-requests) process.
 
