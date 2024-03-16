@@ -91,7 +91,7 @@ Request the following permissions to stay current on product roadmaps, get news 
 
 * PMs, Developers, and Developer Leads should receive notifications on breaking changes by joining the ```ibizabreak ``` group at  this  link:  [https://idwebelements/GroupManagement.aspx?Group=ibizabreak&Operation=join](https://idwebelements/GroupManagement.aspx?Group=ibizabreak&Operation=join).
 
-* PMs, Developers, and Developer Leads  should join Stackoverflow Forums that are located at [https://stackoverflow.microsoft.com](https://stackoverflow.microsoft.com)  to let us know if you have any questions. Remember to tag questions with ```ibiza``` or related tag.  For more information about the supported tags that are monitored by the Ibiza team, see [portalfx-stackoverflow.md](portalfx-stackoverflow.md).
+* PMs, Developers, and Developer Leads  should join Stackoverflow Forums that are located at [https://stackoverflow.microsoft.com](https://stackoverflow.microsoft.com)  to let us know if you have any questions. Remember to tag questions with ```ibiza``` or related tag.  For more information about the supported tags that are monitored by the Ibiza team, see [portalfx-stackoverflow.md].
 
 * Developers who want to contribute to the Azure documentation or test framework should join groups from the site located at [https://aka.ms/azuregithub](https://aka.ms/azuregithub).
 

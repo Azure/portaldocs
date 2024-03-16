@@ -3,7 +3,7 @@
 
 Extension writers provide their own HTML templates and associated Cascading Style Sheets (CSS) to render and style their experiences. Those files are analyzed at runtime to filter out disallowed HTML tags, attribute names, attribute values, CSS properties, or CSS property values that are known to have potential negative impact on the Portal. This filtering ensures a consistent and sandboxed experience in the Portal. This runtime analysis is often referred to colloquially as "sanitization".
 
-Similar sanitization is also applied to SVG markup provided by the extension. The philosophy around the application of sanitization is to allow extensions access to as much CSS as possible, based on an allowlist of permissible styles. Since the Ibiza team expands this allowlist to suit extension scenarios, developers may encounter items filtered out that are not mentioned in this document. Should this occur, developers should report the issue by using the `ibiza-style` tag on Stack Overflow. For more information, see [portalfx-stackoverflow.md](portalfx-stackoverflow.md).
+Similar sanitization is also applied to SVG markup provided by the extension. The philosophy around the application of sanitization is to allow extensions access to as much CSS as possible, based on an allowlist of permissible styles. Since the Ibiza team expands this allowlist to suit extension scenarios, developers may encounter items filtered out that are not mentioned in this document. Should this occur, developers should report the issue by using the `ibiza-style` tag on Stack Overflow. For more information, see [portalfx-stackoverflow.md].
 
 The criteria that determine whether a CSS property or an HTML element might have a negative impact on the Portal  are as follows:
 

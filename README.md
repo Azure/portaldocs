@@ -6,7 +6,7 @@ Couldn't find what you needed? [Ask about the docs on StackOverflow](https://sta
 
 ## Announcements
 
-* Docs in this github are moved to Engineering Hub [Azure Portal Framework (IbizaFx) Documentation](https://eng.ms/docs/products/azure-portal-framework-ibizafx). If you are the owner of any docs in this github, move it to Engineering Hub. If you view a docs in this github, use the link in Engineering Hub. 
+* Docs in this github are moved to Engineering Hub [Azure Portal Framework (IbizaFx) Documentation](https://eng.ms/docs/products/azure-portal-framework-ibizafx). If you are the owner of any docs in this github, move it to Engineering Hub. If you view a docs in this github, use the link in Engineering Hub.
 
 * [Access to the Portal Dogfood environment will be restricted after April 15, 2023.](https://aka.ms/portalfx/dogfood-simplysecurev2)
 
@@ -70,8 +70,6 @@ Learn how the framework is structured and how it is designed to run in multiple 
 Design patterns provide solutions for common Azure scenarios. By leveraging these patterns, Azure teams will accelerate extension development and provide users with a familiar experience so that users can easily adopt new Azure services. The design guide covers [design toolkits, style guidance](/portal-sdk/generated/top-design.md#design-toolkits-and-resources), [common page layouts](/portal-sdk/generated/top-design.md#page) and [the resource management pattern](/portal-sdk/generated/top-design.md#resource-management).
 
 * [Design guide](https://aka.ms/portalfx/designpatterns)
-
-* [Responsive design guide](/portal-sdk/generated/top-design-responsive.md)
 
 ## Development guide
 
