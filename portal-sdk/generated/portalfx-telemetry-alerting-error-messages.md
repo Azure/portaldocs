@@ -223,7 +223,7 @@ Currently error percentage alerts run every 15 minutes and error message alerts 
 ## How do I onboard?
 
 1. Submit and complete a Pull Request in [Alerting Repo][alerting-dev-ops].
-> For non-create alert the customization JSON should be located at products/{YourServiceNameInIcM}/{ExtensionName}.alerting.json. It's recommended to have an owners.txt in the same folder as the customization JSON file. The owners.txt has AAD enabled email alias or/and individual MSFT aliases. Anyone from owners.txt can approve the Pull Request for any changes within that folder or its subfolder.
+> For non-create alert the customization JSON should be located at products/{YourProductName}/{ExtensionName}.alerting.json. It's recommended to have an owners.txt in the same folder as the customization JSON file. The owners.txt has AAD enabled email alias or/and individual MSFT aliases. Anyone from owners.txt can approve the Pull Request for any changes within that folder or its subfolder.
 
 > For create alert the customization JSON should be located at products/IbizaFx/Create/{ExtensionName}.create.alerting.json.
 2. Set up correlation rules in ICM
@@ -249,7 +249,7 @@ Currently error percentage alerts run every 15 minutes and error message alerts 
 <a name="client-error-how-do-i-know-my-extension-s-current-customization"></a>
 ## How do I know my extension&#39;s current customization?
 
-Alerting is running off customization JSONs that live in [Azure Portal Alerting Repo a.k.a. Alerting Repo][alerting-dev-ops]. All the non-create alerts customimzation JSONs are located at products/{YourServiceNameInIcM}/{ExtensionName}.alerting.json. All the create alerts customization JSONs are located at products/IbizaFx/Create/{ExtensionName}.create.alerting.json.
+Alerting is running off customization JSONs that live in [Azure Portal Alerting Repo a.k.a. Alerting Repo][alerting-dev-ops]. All the non-create alerts customimzation JSONs are located at products/{YourProductName}/{ExtensionName}.alerting.json. All the create alerts customization JSONs are located at products/IbizaFx/Create/{ExtensionName}.create.alerting.json.
 
 <a name="client-error-what-happens-if-i-need-to-update-them"></a>
 ## What happens if I need to update them?

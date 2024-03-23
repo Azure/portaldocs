@@ -705,7 +705,7 @@ Currently performance alerts run every 10 minutes assessing the previous 90 minu
 1. Submit and complete a Pull Request in [Azure Portal Alerting Repo a.k.a. Alerting Repo](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx-Alerting).
 > For availability alert refer to [Availability Opted in](#Opted-in)
 
-> For non-create alert the customization JSON should be located at `products/{YourServiceNameInIcM}/{ExtensionName}.alerting.json`. It is recommended to have an `owners.txt` in the same folder as the customization JSON file. The `owners.txt` has AAD enabled email alias or/and individual MSFT aliases. Anyone from `owners.txt` can approve the Pull Request for any changes within that folder or its subfolder. The PR becomes eligible to complete once it gets an approval from `owners.txt` and the merge validation passes.
+> For non-create alert the customization JSON should be located at `products/{YourProductName}/{ExtensionName}.alerting.json`. It is recommended to have an `owners.txt` in the same folder as the customization JSON file. The `owners.txt` has AAD enabled email alias or/and individual MSFT aliases. Anyone from `owners.txt` can approve the Pull Request for any changes within that folder or its subfolder. The PR becomes eligible to complete once it gets an approval from `owners.txt` and the merge validation passes.
 
 > For create alert the customization JSON should be located at `products/IbizaFx/Create/{ExtensionName}.create.alerting.json`. To be eligible to complete the PR need additional approval from Gauge Team Code Reviews or Create PMs.
 
@@ -853,7 +853,7 @@ The last step is to create routing rules to route different IcMs to different te
 <a name="faq-q-how-do-i-know-my-extension-s-current-configuration"></a>
 ### Q: How do I know my extension&#39;s current configuration?
 
-A: Alerting is running off customization JSONs that live in [Alerting Repo](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx-Alerting). All the non-create alerts customimzation JSONs are located at `products/{YourServiceNameInIcM}/{ExtensionName}.alerting.json`. All the create alerts customization JSONs are located at `products/IbizaFx/Create/{ExtensionName}.create.alerting.json`.
+A: Alerting is running off customization JSONs that live in [Alerting Repo](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx-Alerting). All the non-create alerts customimzation JSONs are located at `products/{YourProductName}/{ExtensionName}.alerting.json`. All the create alerts customization JSONs are located at `products/IbizaFx/Create/{ExtensionName}.create.alerting.json`.
 
 <a name="faq-q-what-happens-if-i-need-to-update-my-configuration"></a>
 ### Q: What happens if I need to update my configuration?
