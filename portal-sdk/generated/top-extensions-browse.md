@@ -3488,7 +3488,8 @@ These are the currently supported command types:
       "required": [
         "id",
         "displayName",
-        "definitions"
+        "definitions",
+        "confirmation"
       ]
     },
     "assetDeleteSelectionCommand": {
