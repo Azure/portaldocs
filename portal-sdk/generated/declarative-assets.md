@@ -483,6 +483,7 @@ Example of the resource menu for storage accounts -
 ![alt-text](../media/declarative-assets/resourceMenu.png "Resource menu for a storage account resource")
 
 This resource menu can be configured by editing the `menu` object in the `assetType` JSON object. Here is an example -
+> **NOTE:** In declarative Resource Menu, we support conditional show/hide/replace menu items based on ```portal flag```, ```extension flag```, and ```AFEC flags```. Follow the link here [dx-resourceMenuItems-conditionalSupport.md](dx-resourceMenuItems-conditionalSupport.md)
 
 ```json
 {

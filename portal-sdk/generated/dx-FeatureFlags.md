@@ -1,9 +1,13 @@
 <a name="feature-flag-support-in-declarative"></a>
 # Feature Flag Support in Declarative
-Feature flags are a way to remove or replace parts of the dx json configuration. This is currently supported in both asset menus and anywhere in a dx view.
+
+**NOTE:** For Assets using declarative Resource Menu, we support conditional show/hide/replace menu items based on ```portal flag```, ```extension flag```, and ```AFEC flags```. Follow the link here [dx-resourceMenuItems-conditionalSupport.md](dx-resourceMenuItems-conditionalSupport.md)
+
+Feature flags are a way to remove or replace parts of the dx json configuration. This is currently supported anywhere in a dx view.
+
 You can change the state of these flags with the url:
-<code>https://…?...&{ExtensionName}_{FlagName}={bool/string}</code>
-When only a feature name is specified, the meaning defaults to <code>“includeWhen”: “enabled”</code>
+<code>https://…?...&feature.{ExtensionName}_{FlagName}={bool/string}</code>
+When only a feature name is specified, the meaning defaults to <code>"includeWhen": "enabled"</code>
 ```json
 "essentials": {
     "properties": [
