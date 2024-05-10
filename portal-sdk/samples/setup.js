@@ -535,6 +535,12 @@ async function oneTimeConfigurationSteps() {
             }
             messageBox(`One time configuration steps completed.${os_1.EOL}Running install of ap cli using command 'npm install -g @microsoft/azureportalcli@latest' ...`);
             //spawn install, no need to wait
+            if (os.platform() === "win32") {
+                // https://nodejs.org/en/blog/vulnerability/april-2024-security-releases-2
+                cp.spawn("npm.cmd", ["install", "-g", "@microsoft/azureportalcli@latest"], { shell: true, stdio: "inherit" });
+            } else {
+                cp.spawn("npm", ["install", "-g", "@microsoft/azureportalcli@latest"], { stdio: "inherit" });
+            }
             cp.spawn(os.platform() === "win32" ? "npm.cmd" : "npm", ["install", "-g", "@microsoft/azureportalcli@latest"], { stdio: "inherit" });
         }
         catch (error) {
