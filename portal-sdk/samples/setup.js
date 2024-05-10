@@ -541,7 +541,6 @@ async function oneTimeConfigurationSteps() {
             } else {
                 cp.spawn("npm", ["install", "-g", "@microsoft/azureportalcli@latest"], { stdio: "inherit" });
             }
-            cp.spawn(os.platform() === "win32" ? "npm.cmd" : "npm", ["install", "-g", "@microsoft/azureportalcli@latest"], { stdio: "inherit" });
         }
         catch (error) {
             console.log(error);
