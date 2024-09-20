@@ -535,7 +535,7 @@ async function oneTimeConfigurationSteps() {
             }
             messageBox(`One time configuration steps completed.${os_1.EOL}Running install of ap cli using command 'npm install -g @microsoft/azureportalcli@latest' ...`);
             //spawn install, no need to wait
-            cp.spawn(os.platform() === "win32" ? "npm.cmd" : "npm", ["install", "-g", "@microsoft/azureportalcli@latest"], { stdio: "inherit" });
+            cp.spawn(os.platform() === "win32" ? "npm.cmd" : "npm", ["install", "-g", "@microsoft/azureportalcli@latest"], { stdio: "inherit", shell: true });
         }
         catch (error) {
             console.log(error);
